@@ -1,7 +1,7 @@
 {
-  "name": "Risse S.A. — Heures Machines",
-  "short_name": "Risse Heures",
-  "description": "Suivi des heures machines Risse S.A.",
+  "name": "Risse S.A. — Application",
+  "short_name": "Risse",
+  "description": "Application mobile Risse S.A.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
