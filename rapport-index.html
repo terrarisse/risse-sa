@@ -1,0 +1,3870 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Rapport Journalier — Risse S.A.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B3A6B;
+  --navy-light: #2a4f8a;
+  --teal: #1A7F72;
+  --teal-light: #22a090;
+  --yellow: #F0A500;
+  --yellow-light: #ffb820;
+  --white: #ffffff;
+  --bg: #f4f6f9;
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --text: #1a2340;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --danger: #e53e3e;
+  --success: #1A7F72;
+  --tab-h: 64px;
+  --header-h: 56px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: var(--navy);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  position: relative;
+}
+.app-header .logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.app-header .logo-badge {
+  background: var(--yellow);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+.app-header h1 {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.btn-save-draft {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.btn-save-draft:active { opacity: 0.7; }
+
+/* ── TAB BAR ── */
+.tab-bar {
+  display: flex;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  height: var(--tab-h);
+  flex-shrink: 0;
+  order: 1;
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: var(--text-light);
+  font-size: 9px;
+  font-weight: 500;
+  transition: color 0.15s;
+  position: relative;
+  padding: 4px 0;
+}
+.tab-item .tab-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+.tab-item.active {
+  color: var(--navy);
+}
+.tab-item.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: var(--navy);
+  border-radius: 0 0 3px 3px;
+}
+.tab-item.done .tab-icon::after {
+  content: '✓';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--teal);
+  color: white;
+  font-size: 9px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── SCROLL AREA ── */
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 12px 24px;
+  scroll-behavior: smooth;
+}
+
+/* ── SECTIONS ── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.card-header {
+  background: var(--navy);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-header .icon { font-size: 16px; }
+.card-header h2 {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.card-header .badge {
+  margin-left: auto;
+  background: var(--yellow);
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.card-body { padding: 14px; }
+
+/* ── FORM ELEMENTS ── */
+.form-row {
+  margin-bottom: 12px;
+}
+.form-row:last-child { margin-bottom: 0; }
+label.lbl {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: white;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--navy);
+}
+textarea { resize: none; }
+
+/* ── CHIPS ── */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.chip {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.chip.selected {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+
+/* ── SECTION 1: EN-TÊTE ── */
+.section-badge {
+  background: var(--navy);
+  color: white;
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-badge .num {
+  background: var(--yellow);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.section-badge .info { flex: 1; }
+.section-badge .info strong { color: white; font-size: 15px; display: block; }
+.section-badge .info span { color: rgba(255,255,255,0.65); font-size: 12px; }
+
+/* ── BOUTON AJOUTER LOCATION ── */
+.btn-add-loc {
+  width: 100%;
+  border: 1.5px dashed var(--border);
+  background: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.btn-add-loc:active { background: var(--bg); }
+
+/* ── SECTION 2: MAIN D'OEUVRE — liste plate ── */
+.mo-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 0;
+}
+.mo-row-nom {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mo-row-nom.actif {
+  color: var(--text);
+  font-weight: 700;
+}
+.mo-quick-btn {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mo-quick-btn.jour {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+.mo-quick-btn:active { opacity: 0.7; transform: scale(0.95); }
+
+.btn-add-employe {
+  width: 100%;
+  border: 2px dashed var(--border);
+  background: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-add-employe:active { background: var(--bg); }
+
+/* ── SECTION 3: LOCATION INTERNE — ACCORDÉON ── */
+.accord-group {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.accord-header {
+  display: flex;
+  align-items: center;
+  padding: 13px 14px;
+  cursor: pointer;
+  user-select: none;
+  gap: 10px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.accord-header.open { border-bottom-color: var(--border); }
+.accord-icon { font-size: 18px; flex-shrink: 0; }
+.accord-title { font-size: 14px; font-weight: 700; color: var(--text); flex: 1; }
+.accord-summary {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  background: #e8f5f3;
+  padding: 2px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.accord-summary.empty { color: var(--text-light); background: var(--bg); }
+.accord-chevron {
+  color: var(--text-light);
+  font-size: 13px;
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.accord-header.open .accord-chevron { transform: rotate(180deg); }
+.accord-filled {
+  padding: 0 14px;
+}
+.accord-filled:empty { padding: 0; }
+.accord-filled .loc-item {
+  padding: 8px 10px;
+  margin-bottom: 4px;
+  border-bottom: none;
+}
+.accord-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.accord-body.open { max-height: 9999px; }
+.accord-inner { padding: 8px 14px 12px; }
+
+.loc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+.loc-item:last-child { border-bottom: none; }
+.loc-label { flex: 1; font-size: 14px; color: var(--text); }
+.loc-unit {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.loc-input {
+  width: 72px !important;
+  padding: 7px 8px !important;
+  text-align: center;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  flex-shrink: 0;
+}
+.loc-input:not(:placeholder-shown) {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+/* ── MÉTRÉS CALCULATEUR ── */
+.metre-card {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1.5px solid var(--border);
+}
+.metre-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.metre-desc {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  background: white;
+  outline: none;
+}
+.metre-desc:focus { border-color: var(--navy); }
+.metre-type-btns {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.metre-type-btn {
+  flex: 1;
+  padding: 7px 4px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+}
+.metre-type-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+.metre-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.metre-dim {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 6px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  background: white;
+  outline: none;
+  min-width: 0;
+}
+.metre-dim:focus { border-color: var(--navy); }
+.metre-dim-sep {
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.metre-total {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-top: 1.5px solid var(--border);
+}
+.metre-total-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-right: auto;
+}
+.metre-total-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.metre-total-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.btn-del-metre {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+.metre-sublines { border-top: 1px solid var(--border); }
+.metre-subline {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  background: white;
+}
+.metre-sub-result {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  min-width: 60px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.btn-del-subline {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+.metre-add-sub {
+  padding: 6px 10px;
+  background: white;
+  border-top: 1px solid var(--border);
+}
+.btn-add-subline {
+  background: none;
+  border: 1.5px dashed var(--border);
+  color: var(--teal);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-add-subline:active { background: var(--bg); }
+
+
+/* ── SECTION 4: TRAVAUX ── */
+.metrage-row {
+  display: grid;
+  grid-template-columns: 1fr 72px 90px 36px;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.metrage-row input, .metrage-row select { padding: 8px 10px !important; font-size: 14px !important; }
+.btn-del-row {
+  width: 36px;
+  height: 36px;
+  background: #fff0f0;
+  border: 1px solid #fcc;
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn-del-row:active { opacity: 0.7; }
+.btn-add-row {
+  width: 100%;
+  border: 2px dashed var(--border);
+  background: none;
+  color: var(--teal);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.col-headers {
+  display: grid;
+  grid-template-columns: 1fr 72px 90px 36px;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.col-headers span {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding-left: 2px;
+}
+
+/* ── SECTION 5: FOURNITURES ── */
+.fournit-item {
+  display: grid;
+  grid-template-columns: 1fr 72px 90px 36px;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.fournit-item input, .fournit-item select { padding: 8px 10px !important; font-size: 14px !important; }
+.mat-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-bottom: 8px; }
+.mat-chip {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.mat-chip:active { background: var(--navy); color: white; }
+
+/* ── EXTRAS OPTIONNELS ── */
+.extra-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  cursor: pointer;
+  user-select: none;
+}
+.extra-toggle-row:active { background: var(--bg); }
+.extra-toggle-icon { font-size: 20px; flex-shrink: 0; }
+.extra-toggle-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--text); }
+.extra-toggle-switch {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text-light);
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+}
+.extra-toggle-switch.on {
+  background: var(--teal);
+  color: white;
+  border-color: var(--teal);
+}
+.extra-content { background: var(--bg); }
+
+/* Photos grid */
+.photo-thumb {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--border);
+}
+.photo-thumb img { width:100%; height:100%; object-fit:cover; }
+.photo-thumb .del-photo {
+  position: absolute;
+  top: 3px; right: 3px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px; height: 22px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.bon-thumb {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--border);
+}
+.anno-tool-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.anno-tool-btn.active {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--navy);
+}
+.photo-annotate-btn {
+  position: absolute;
+  bottom: 4px;
+  right: 24px;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  font-size: 13px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+  position: absolute;
+  top: 4px; right: 4px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px; height: 24px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+
+.resume-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+.resume-chip {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.resume-chip.filled { border-color: var(--teal); color: var(--teal); }
+
+/* ── BOTTOM ACTIONS ── */
+.bottom-actions {
+  padding: 12px;
+  background: white;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+}
+.btn-primary {
+  flex: 1;
+  background: var(--navy);
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+.btn-secondary {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* ── MODAL ADD EMPLOYE ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 100;
+  display: none;
+  align-items: flex-end;
+}
+.overlay.open { display: flex; }
+.bottom-sheet {
+  background: white;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  padding: 20px 16px 32px;
+}
+.sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+.sheet-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+.btn-sheet-confirm {
+  width: 100%;
+  background: var(--navy);
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+/* ── FOURNIT-ROW ── */
+.fournit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.fournit-row:last-child { border-bottom: none; }
+.fournit-row-name {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.3;
+  min-width: 0;
+}
+.fournit-row-name.active { font-weight: 700; color: var(--navy); }
+.fournit-row-qty {
+  width: 58px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 4px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  background: white;
+  outline: none;
+  flex-shrink: 0;
+}
+.fournit-row-qty.active { border-color: var(--teal); color: var(--teal); }
+.fournit-row-unit {
+  width: 68px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 3px;
+  font-family: inherit;
+  font-size: 11px;
+  background: white;
+  outline: none;
+  flex-shrink: 0;
+}
+
+
+.prod-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.prod-row:last-child { border-bottom: none; }
+.accord-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 3px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+
+.rapport-export {
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.rapport-export h3 { color: white; font-size: 14px; margin-bottom: 4px; }
+.rapport-export p { color: rgba(255,255,255,0.65); font-size: 12px; margin-bottom: 12px; }
+.export-btns { display: flex; gap: 8px; }
+.btn-export {
+  flex: 1;
+  background: var(--yellow);
+  color: var(--navy);
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.btn-export.ghost {
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
+/* ── HISTORIQUE PAGE ── */
+.histo-page {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.histo-page.open { transform: translateX(0); }
+.histo-header {
+  background: var(--navy);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.btn-back {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.histo-header h2 { color: white; font-size: 15px; font-weight: 600; flex:1; }
+.histo-count { color: rgba(255,255,255,0.65); font-size: 13px; }
+.histo-scroll { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding: 12px; }
+
+.rapport-card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.rapport-card:active { transform: scale(0.98); }
+.rapport-card-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.rapport-card-date {
+  background: var(--navy);
+  color: white;
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.rapport-card-date .day { font-size: 20px; font-weight: 700; line-height: 1; }
+.rapport-card-date .month { font-size: 10px; font-weight: 600; opacity: 0.75; text-transform: uppercase; }
+.rapport-card-info { flex: 1; }
+.rapport-card-info .chantier { font-weight: 700; font-size: 15px; color: var(--text); }
+.rapport-card-info .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.rapport-card-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+.badge-mo {
+  background: var(--teal);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+.rapport-card-chips {
+  display: flex;
+  gap: 6px;
+  padding: 8px 14px;
+  flex-wrap: wrap;
+}
+.rc-chip {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text-muted);
+}
+.rc-chip.green { background: #e8f5f3; color: var(--teal); }
+.rc-chip.blue { background: #e8eef7; color: var(--navy); }
+
+.btn-del-rapport {
+  background: #fff0f0;
+  border: 1px solid #fcc;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.histo-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+.histo-empty .icon { font-size: 48px; margin-bottom: 12px; }
+.histo-empty p { font-size: 14px; }
+
+.corbeille-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1.5px dashed var(--border);
+}
+.corbeille-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rapport-card.deleted {
+  opacity: 0.6;
+  border: 1.5px dashed var(--border);
+  box-shadow: none;
+}
+.btn-restore {
+  background: #e8f5f3;
+  border: 1px solid #a0d4cc;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ── PAGE EDIT RAPPORT ── */
+.edit-page {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.edit-page.open { transform: translateX(0); }
+.edit-header {
+  background: var(--teal);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.edit-header h2 { color: white; font-size: 15px; font-weight: 600; flex:1; }
+.btn-save-edit {
+  background: var(--yellow);
+  border: none;
+  color: var(--navy);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.saved-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--teal);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 20px;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.saved-toast.show { opacity: 1; }
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.info-row:last-child { border-bottom: none; }
+.info-row .k { color: var(--text-muted); }
+.info-row .v { font-weight: 600; color: var(--navy); }
+
+/* ── STEP INDICATOR ── */
+.step-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.step-dot {
+  height: 4px;
+  flex: 1;
+  background: var(--border);
+  border-radius: 2px;
+}
+.step-dot.done { background: var(--teal); }
+.step-dot.active { background: var(--navy); }
+
+/* NAV BTNS */
+.nav-btns { display: flex; gap: 8px; margin-top: 14px; }
+.btn-next {
+  flex: 1;
+  background: var(--navy);
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.btn-prev {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.btn-next:active, .btn-prev:active { opacity: 0.75; }
+
+/* Rapport final preview */
+.preview-section {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.preview-section h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; }
+.preview-section p { font-size: 13px; color: var(--text); line-height: 1.5; }
+.preview-empty { color: var(--text-light); font-style: italic; }
+
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button onclick="window.location.href='../index.html'"
+      style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:16px;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">←</button>
+    <div>
+      <div style="color:white;font-size:16px;font-weight:700;line-height:1.1;" id="header-title">Rapport journalier</div>
+      <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:2px;" id="header-sub">Nouveau rapport</div>
+    </div>
+  </div>
+  <button class="btn-save-draft" onclick="saveDraft()">💾 Brouillon</button>
+</div>
+
+<!-- STEP DOTS -->
+<div class="scroll-area" id="main-scroll">
+
+  <!-- STEP INDICATOR -->
+  <div class="step-bar" id="step-bar">
+    <div class="step-dot active" id="dot-0"></div>
+    <div class="step-dot" id="dot-1"></div>
+    <div class="step-dot" id="dot-2"></div>
+    <div class="step-dot" id="dot-3"></div>
+    <div class="step-dot" id="dot-4"></div>
+    <div class="step-dot" id="dot-5"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SECTION 0 : EN-TÊTE
+  ════════════════════════════════════ -->
+  <div class="section active" id="sec-0">
+
+    <div class="card">
+      <div class="card-body">
+        <div class="form-row">
+          <label class="lbl">📅 Date</label>
+          <input type="date" id="rj-date">
+        </div>
+        <div class="form-row">
+          <label class="lbl">👤 Responsable</label>
+          <input type="text" id="rj-nom" placeholder="Votre nom…">
+          <div class="chips" id="nom-chips" style="margin-top:8px;"></div>
+        </div>
+        <div class="form-row">
+          <label class="lbl">🏗️ Chantier</label>
+          <input type="text" id="rj-chantier" placeholder="Nom du chantier…">
+          <div class="chips" id="chantier-chips" style="margin-top:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn-next" onclick="goSection(1)">Suivant → Main d'œuvre</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SECTION 1 : MAIN D'OEUVRE
+  ════════════════════════════════════ -->
+  <div class="section" id="sec-1">
+
+    <!-- TOTAL JOURNÉE -->
+    <div style="background:var(--navy);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="color:rgba(255,255,255,0.65);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Total journée</div>
+        <div style="display:flex;align-items:baseline;gap:6px;">
+          <span id="mo-total-global" style="color:white;font-size:36px;font-weight:700;line-height:1;">0.00</span>
+          <span style="color:var(--yellow);font-size:15px;font-weight:600;">h</span>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="color:rgba(255,255,255,0.65);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Employés</div>
+        <div style="color:white;font-size:28px;font-weight:700;line-height:1;" id="mo-count-global">0</div>
+      </div>
+    </div>
+
+    <!-- LISTE EMPLOYÉS -->
+    <div class="card">
+      <div class="card-body" id="employes-list"></div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goSection(0)">←</button>
+      <button class="btn-next" onclick="goSection(2)">Suivant → Location</button>
+    </div>
+  </div>
+  <!-- ═══════════════════════════════════
+       SECTION 2 : LOCATION INTERNE
+  ════════════════════════════════════ -->
+  <div class="section" id="sec-2">
+
+    <!-- ZONE SÉLECTION (même principe que fournitures) -->
+    <div id="loc-selection-zone" style="display:none;">
+      <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
+        <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Location interne</span>
+        </div>
+        <div id="loc-sel-list"></div>
+      </div>
+    </div>
+
+    <!-- CATALOGUE LOCATION -->
+    <div class="accord-group" id="accord-vehicules">
+      <div class="accord-header" onclick="toggleAccord('vehicules')">
+        <span class="accord-icon">🚛</span>
+        <span class="accord-title">Véhicules</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-vehicules">
+        <div class="accord-inner" id="loc-vehicules"></div>
+        <div style="padding:0 0 10px;">
+          <button class="btn-add-loc" onclick="openAddLoc('vehicules','🚛')">➕ Ajouter un véhicule</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="accord-group" id="accord-materiel">
+      <div class="accord-header" onclick="toggleAccord('materiel')">
+        <span class="accord-icon">🦺</span>
+        <span class="accord-title">Matériel & Outillage</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-materiel">
+        <div class="accord-inner" id="loc-materiel"></div>
+        <div style="padding:0 0 10px;">
+          <button class="btn-add-loc" onclick="openAddLoc('materiel','🦺')">➕ Ajouter du matériel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="accord-group" id="accord-engins">
+      <div class="accord-header" onclick="toggleAccord('engins')">
+        <span class="accord-icon">🚜</span>
+        <span class="accord-title">Engins</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-engins">
+        <div class="accord-inner" id="loc-engins"></div>
+        <div style="padding:0 0 10px;">
+          <button class="btn-add-loc" onclick="openAddLoc('engins','🚜')">➕ Ajouter un engin</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goSection(1)">←</button>
+      <button class="btn-next" onclick="goSection(3)">Suivant → Travaux</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SECTION 3 : TRAVAUX RÉALISÉS
+  ════════════════════════════════════ -->
+  <div class="section" id="sec-3">
+
+    <!-- Description — toujours visible -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📝</span><h2>Description</h2></div>
+      <div class="card-body">
+        <textarea id="tx-travaux" rows="4" placeholder="Décrire les travaux effectués aujourd'hui…"></textarea>
+      </div>
+    </div>
+
+    <!-- BLOCS OPTIONNELS — apparaissent ici quand activés -->
+    <div id="bloc-metres" style="display:none;">
+      <div class="card">
+        <div class="card-header"><span class="icon">📐</span><h2>Métrés travaux</h2></div>
+        <div class="card-body" style="padding:10px;">
+          <div id="metres-list"></div>
+          <button class="btn-add-row" onclick="addMetreRow()" style="margin-top:6px;">+ Ajouter un métré</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="bloc-photos" style="display:none;">
+      <div class="card">
+        <div class="card-header"><span class="icon">📷</span><h2>Photos du chantier</h2></div>
+        <div class="card-body">
+          <input type="file" id="photo-input-cam" accept="image/*" capture="environment" style="display:none;" onchange="handlePhotos(this)">
+          <input type="file" id="photo-input-gal" accept="image/*" multiple style="display:none;" onchange="handlePhotos(this)">
+          <div style="display:flex;gap:8px;">
+            <button onclick="document.getElementById('photo-input-cam').click()"
+              style="flex:1;border:2px dashed var(--border);background:none;color:var(--teal);font-family:inherit;font-size:13px;font-weight:600;padding:14px 8px;border-radius:var(--radius-sm);cursor:pointer;">
+              📷 Appareil photo
+            </button>
+            <button onclick="document.getElementById('photo-input-gal').click()"
+              style="flex:1;border:2px dashed var(--border);background:none;color:var(--navy);font-family:inherit;font-size:13px;font-weight:600;padding:14px 8px;border-radius:var(--radius-sm);cursor:pointer;">
+              🖼️ Galerie / Fichiers
+            </button>
+          </div>
+          <div id="photos-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bloc-bons" style="display:none;">
+      <div class="card">
+        <div class="card-header"><span class="icon">🧾</span><h2>Bons de livraison</h2></div>
+        <div class="card-body">
+          <input type="file" id="bon-input-cam" accept="image/*" capture="environment" style="display:none;" onchange="handleBons(this)">
+          <input type="file" id="bon-input-gal" accept="image/*,application/pdf" multiple style="display:none;" onchange="handleBons(this)">
+          <div style="display:flex;gap:8px;">
+            <button onclick="document.getElementById('bon-input-cam').click()"
+              style="flex:1;border:2px dashed var(--border);background:none;color:var(--teal);font-family:inherit;font-size:13px;font-weight:600;padding:14px 8px;border-radius:var(--radius-sm);cursor:pointer;">
+              📷 Scanner un bon
+            </button>
+            <button onclick="document.getElementById('bon-input-gal').click()"
+              style="flex:1;border:2px dashed var(--border);background:none;color:var(--navy);font-family:inherit;font-size:13px;font-weight:600;padding:14px 8px;border-radius:var(--radius-sm);cursor:pointer;">
+              📁 Fichiers / PDF
+            </button>
+          </div>
+          <div id="bons-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bloc-croquis" style="display:none;">
+      <div class="card">
+        <div class="card-header"><span class="icon">✏️</span><h2>Croquis / Schéma</h2></div>
+        <div class="card-body">
+          <canvas id="sketch-canvas" width="1200" height="700"
+            style="width:100%;height:320px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:white;touch-action:none;cursor:crosshair;display:block;"></canvas>
+          <div style="display:flex;gap:8px;margin-top:10px;align-items:center;">
+            <input type="color" id="sketch-color" value="#1B3A6B" style="width:36px;height:36px;border:none;border-radius:6px;cursor:pointer;flex-shrink:0;">
+            <input type="range" id="sketch-size" min="1" max="20" value="3" style="flex:1;">
+            <button onclick="setSketchEraser()" id="btn-eraser"
+              style="background:var(--bg);border:1.5px solid var(--border);color:var(--text-muted);font-family:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:6px;cursor:pointer;">
+              ◻️ Gomme
+            </button>
+            <button onclick="clearSketch()"
+              style="background:var(--bg);border:1.5px solid var(--border);color:var(--danger);font-family:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:6px;cursor:pointer;">
+              🗑️ Effacer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENU AJOUTER AU RAPPORT — accordéon bleu, fermé par défaut -->
+    <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow);">
+      <div onclick="toggleExtrasMenu()" id="extras-menu-header"
+        style="background:var(--navy);padding:13px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;">
+        <span style="font-size:16px;">➕</span>
+        <span style="color:white;font-size:14px;font-weight:700;flex:1;">Ajouter au rapport</span>
+        <span id="extras-menu-chevron" style="color:rgba(255,255,255,0.6);font-size:13px;transition:transform 0.25s;">▼</span>
+      </div>
+      <div id="extras-menu-body" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:white;">
+        <div class="extra-toggle-row" onclick="toggleExtra('metres')">
+          <span class="extra-toggle-icon">📐</span>
+          <span class="extra-toggle-label">Métrés travaux</span>
+          <span class="extra-toggle-switch" id="sw-metres">OFF</span>
+        </div>
+        <div class="extra-toggle-row" style="border-top:1px solid var(--border);" onclick="toggleExtra('photos')">
+          <span class="extra-toggle-icon">📷</span>
+          <span class="extra-toggle-label">Photos du chantier</span>
+          <span class="extra-toggle-switch" id="sw-photos">OFF</span>
+        </div>
+        <div class="extra-toggle-row" style="border-top:1px solid var(--border);" onclick="toggleExtra('bons')">
+          <span class="extra-toggle-icon">🧾</span>
+          <span class="extra-toggle-label">Bons de livraison</span>
+          <span class="extra-toggle-switch" id="sw-bons">OFF</span>
+        </div>
+        <div class="extra-toggle-row" style="border-top:1px solid var(--border);" onclick="toggleExtra('croquis')">
+          <span class="extra-toggle-icon">✏️</span>
+          <span class="extra-toggle-label">Croquis / Schéma</span>
+          <span class="extra-toggle-switch" id="sw-croquis">OFF</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goSection(2)">←</button>
+      <button class="btn-next" onclick="goSection(4)">Suivant → Fournitures</button>
+    </div>
+  </div>
+
+
+
+  <!-- ═══════════════════════════════════
+       SECTION 4 : FOURNITURES & ÉVACUATIONS
+  ════════════════════════════════════ -->
+  <div class="section" id="sec-4">
+
+    <!-- ZONE SÉLECTION (toujours visible en haut) -->
+    <div id="fournit-selection-zone" style="display:none;">
+      <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
+        <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Fournitures / Évacuations</span>
+        </div>
+        <div id="fournit-sel-list"></div>
+      </div>
+    </div>
+
+    <!-- BARRE RECHERCHE -->
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;display:flex;gap:8px;align-items:center;padding:10px 12px;">
+      <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
+        type="text" placeholder="Rechercher un produit…" id="fournit-search" oninput="fournitSearch(this.value)">
+      <button onclick="fournitClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="fournit-clear">✕</button>
+    </div>
+
+    <!-- CATALOGUE FOURNITURES -->
+    <div id="fournit-catalogue"></div>
+
+    <!-- ÉVACUATIONS -->
+    <div class="accord-group" id="accord-evac">
+      <div class="accord-header" onclick="toggleAccord('evac')">
+        <span class="accord-title">Évacuations</span>
+        <span class="accord-summary empty" id="sum-evac">—</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-evac">
+        <div style="padding:10px 14px;">
+          <div class="col-headers">
+            <span>Matériau</span><span>Qté</span><span>Unité</span><span></span>
+          </div>
+          <div id="evac-list"></div>
+          <button class="btn-add-row" onclick="addFournitRow('evac-list','sum-evac')">+ Ajouter évacuation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RÉCAP + FINALISER -->
+
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goSection(3)">←</button>
+      <button class="btn-next" onclick="goSection(5)" style="background:var(--navy);">Suivant → Rapport</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SECTION 5 : RAPPORTS
+  ════════════════════════════════════ -->
+  <div class="section" id="sec-5">
+
+    <!-- ONGLETS BROUILLON / VALIDÉS -->
+    <div style="display:flex;gap:0;background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;">
+      <button id="rap-tab-brouillon" onclick="showRapTab('brouillon')"
+        style="flex:1;padding:12px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;background:var(--navy);color:white;border-radius:0;">
+        ✏️ Brouillon actuel
+      </button>
+      <button id="rap-tab-valides" onclick="showRapTab('valides')"
+        style="flex:1;padding:12px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;background:var(--bg);color:var(--text-muted);border-radius:0;">
+        ✅ Validés
+      </button>
+    </div>
+
+    <!-- PANNEAU BROUILLON -->
+    <div id="rap-panel-brouillon">
+      <div id="recap-preview"></div>
+      <div style="margin-top:8px;">
+        <button onclick="finaliserRapport()"
+          style="width:100%;background:var(--teal);color:white;border:none;font-family:inherit;font-weight:700;font-size:16px;padding:16px;border-radius:var(--radius-sm);cursor:pointer;">
+          ✅ Valider & Enregistrer
+        </button>
+      </div>
+    </div>
+
+    <!-- PANNEAU VALIDÉS -->
+    <div id="rap-panel-valides" style="display:none;">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;" id="histo-subtitle">30 derniers jours</div>
+      <div id="histo-inline"></div>
+    </div>
+
+  </div>
+
+</div><!-- /scroll-area -->
+
+<!-- BOTTOM TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-item active" onclick="goSection(0)" id="tab-0">
+    <span class="tab-icon">📋</span>
+    En-tête
+  </button>
+  <button class="tab-item" onclick="goSection(1)" id="tab-1">
+    <span class="tab-icon">👷</span>
+    M.O.
+  </button>
+  <button class="tab-item" onclick="goSection(2)" id="tab-2">
+    <span class="tab-icon">🔧</span>
+    Location
+  </button>
+  <button class="tab-item" onclick="goSection(3)" id="tab-3">
+    <span class="tab-icon">🏗️</span>
+    Travaux
+  </button>
+  <button class="tab-item" onclick="goSection(4)" id="tab-4">
+    <span class="tab-icon">📦</span>
+    Fournit.
+  </button>
+  <button class="tab-item" onclick="goSection(5)" id="tab-5" style="position:relative;">
+    <span class="tab-icon">📂</span>
+    Rapports
+    <span id="histo-badge" style="display:none;position:absolute;top:6px;right:6px;background:var(--yellow);color:var(--navy);font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;padding:0 3px;line-height:16px;text-align:center;"></span>
+  </button>
+</div>
+
+<!-- OVERLAY: AJOUTER EMPLOYÉ -->
+<div class="overlay" id="overlay-employe" onclick="closeOverlay(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Ajouter un employé</div>
+    <div class="form-row">
+      <label class="lbl">Nom</label>
+      <input type="text" id="new-employe-nom" placeholder="Prénom Nom…">
+      <div class="chips" style="margin-top:8px;" id="employe-presets"></div>
+    </div>
+    <button class="btn-sheet-confirm" onclick="confirmAddEmploye()">Ajouter ✓</button>
+  </div>
+</div>
+
+<!-- OVERLAY: AJOUTER ÉQUIPEMENT LOCATION -->
+<div class="overlay" id="overlay-loc" onclick="closeOverlay(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="overlay-loc-title">Ajouter un équipement</div>
+    <div class="form-row">
+      <label class="lbl">Nom</label>
+      <input type="text" id="new-loc-nom" placeholder="Ex: Nacelle, Pompe…">
+    </div>
+    <div class="form-row">
+      <label class="lbl">Unité</label>
+      <div class="chips" id="new-loc-unit-chips" style="margin-top:6px;">
+        <button class="chip" onclick="selectLocUnit(this)">h</button>
+        <button class="chip" onclick="selectLocUnit(this)">p/j</button>
+        <button class="chip" onclick="selectLocUnit(this)">pc</button>
+        <button class="chip" onclick="selectLocUnit(this)">ml</button>
+        <button class="chip" onclick="selectLocUnit(this)">km</button>
+      </div>
+      <input type="text" id="new-loc-unit-custom" placeholder="Ou saisir une unité…" style="margin-top:8px;">
+    </div>
+    <button class="btn-sheet-confirm" onclick="confirmAddLoc()">Ajouter ✓</button>
+  </div>
+</div>
+
+<!-- ═══ OVERLAY ANNOTATION ═══ -->
+<div class="overlay" id="annotate-overlay" style="align-items:stretch;flex-direction:column;background:#111;">
+  <!-- Toolbar haut -->
+  <div style="background:#1B3A6B;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <button onclick="closeAnnotate()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:16px;width:36px;height:36px;border-radius:8px;cursor:pointer;">←</button>
+    <span style="color:white;font-weight:700;font-size:14px;flex:1;">Annoter</span>
+    <button onclick="annoUndo()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;">↩ Annuler</button>
+    <button onclick="confirmAnnotate()" style="background:#F0A500;border:none;color:#1B3A6B;font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;">✓ OK</button>
+  </div>
+  <!-- Canvas -->
+  <div style="flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;background:#1a1a1a;padding:8px;">
+    <canvas id="anno-canvas" style="display:block;touch-action:none;max-width:100%;"></canvas>
+  </div>
+  <!-- Toolbar bas — outils -->
+  <div style="background:#1B3A6B;padding:10px 12px;display:flex;align-items:center;gap:6px;flex-shrink:0;overflow-x:auto;">
+    <button class="anno-tool-btn active" onclick="setAnnoTool('stylo',this)" title="Stylo">🖊️</button>
+    <button class="anno-tool-btn" onclick="setAnnoTool('fleche',this)" title="Flèche">➡️</button>
+    <button class="anno-tool-btn" onclick="setAnnoTool('cercle',this)" title="Cercle">⭕</button>
+    <button class="anno-tool-btn" onclick="setAnnoTool('texte',this)" title="Texte">T</button>
+    <div style="width:1px;background:rgba(255,255,255,0.2);height:28px;margin:0 4px;flex-shrink:0;"></div>
+    <input type="color" id="anno-color" value="#e53e3e"
+      oninput="annoColor=this.value"
+      style="width:34px;height:34px;border:2px solid rgba(255,255,255,0.3);border-radius:8px;cursor:pointer;background:none;padding:2px;flex-shrink:0;">
+    <div style="width:1px;background:rgba(255,255,255,0.2);height:28px;margin:0 4px;flex-shrink:0;"></div>
+    <input type="range" id="anno-size" min="1" max="12" value="3"
+      oninput="annoSize=parseInt(this.value)"
+      style="flex:1;min-width:60px;">
+  </div>
+</div>
+
+
+
+
+<!-- ═══ PAGE HISTORIQUE ═══ -->
+<div class="histo-page" id="histo-page">
+  <div class="histo-header">
+    <button class="btn-back" onclick="closeHistorique()">←</button>
+    <h2>📂 Rapports enregistrés</h2>
+    <span class="histo-count" id="histo-count"></span>
+  </div>
+  <div class="histo-scroll" id="histo-scroll">
+    <!-- rempli par JS -->
+  </div>
+</div>
+
+<!-- ═══ PAGE ÉDITION RAPPORT ═══ -->
+<div class="edit-page" id="edit-page">
+  <div class="edit-header">
+    <button class="btn-back" onclick="closeEditPage()" style="background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.25);">←</button>
+    <h2 id="edit-page-title">Modifier le rapport</h2>
+    <button class="btn-save-edit" onclick="saveEditedRapport()">Enregistrer ✓</button>
+  </div>
+  <div class="scroll-area" style="padding:12px;">
+    <!-- EN-TÊTE -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📋</span><h2>En-tête</h2></div>
+      <div class="card-body">
+        <div class="form-row"><label class="lbl">Date</label><input type="date" id="ed-date"></div>
+        <div class="form-row"><label class="lbl">Responsable</label><input type="text" id="ed-nom" placeholder="Nom…"></div>
+        <div class="form-row"><label class="lbl">Chantier</label><input type="text" id="ed-chantier" placeholder="Chantier…"></div>
+        <div class="form-row">
+          <label class="lbl">Météo</label>
+          <div class="chips" id="ed-meteo-chips">
+            <button class="chip" onclick="selectEditChip(this,'ed-meteo')">☀️ Beau</button>
+            <button class="chip" onclick="selectEditChip(this,'ed-meteo')">🌤️ Nuageux</button>
+            <button class="chip" onclick="selectEditChip(this,'ed-meteo')">🌧️ Pluie</button>
+            <button class="chip" onclick="selectEditChip(this,'ed-meteo')">❄️ Froid</button>
+            <button class="chip" onclick="selectEditChip(this,'ed-meteo')">💨 Vent</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- TRAVAUX -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📝</span><h2>Travaux réalisés</h2></div>
+      <div class="card-body">
+        <textarea id="ed-travaux" rows="5" placeholder="Description des travaux…"></textarea>
+      </div>
+    </div>
+    <!-- NOTES -->
+    <div class="card">
+      <div class="card-header"><span class="icon">💬</span><h2>Notes / Remarques</h2></div>
+      <div class="card-body">
+        <textarea id="ed-notes" rows="3" placeholder="Remarques, incidents, divers…"></textarea>
+      </div>
+    </div>
+    <!-- RÉCAP LECTURE SEULE -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📊</span><h2>Récapitulatif</h2></div>
+      <div class="card-body" id="ed-recap"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────
+const STORAGE_KEY = 'rj_draft_v1';
+const NOMS_PRESETS = ['Jonathan','Risse','Maxime','Pierre','André','Thomas'];
+const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport'];
+const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
+const MAT_FOURNITURES = ['Béton','Gravier 4/16','Gravier 0/40','Sable','Tout-venant','Enrobé','Bordures béton','Tuyaux PVC','Grillage','Géotextile','Câble électrique','Plaques acier','Sacs ciment'];
+const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé','Ferraille','Déchets chantier','Boue/sédiments','Bois'];
+
+const LOC_VEHICULES = [
+  {id:'camionnette', label:'Camionnette', unit:'p/j'},
+  {id:'camion-grue', label:'Camion grue', unit:'h'},
+];
+const LOC_MATERIEL = [
+  {id:'outillage-elec', label:'Outillage électrique', unit:'h'},
+  {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h'},
+  {id:'rouleau', label:'Rouleau', unit:'h'},
+  {id:'compresseur', label:'Compresseur', unit:'h'},
+  {id:'generatrice', label:'Génératrice', unit:'h'},
+  {id:'camera', label:'Caméra / Mat. détection', unit:'pc'},
+  {id:'scie', label:'Scie route / murale', unit:'ml'},
+  {id:'karcher', label:'Kärcher', unit:'h'},
+  {id:'carotteuse', label:'Carotteuse', unit:'forages'},
+  {id:'pont-lourd', label:'Déplacements pont lourd', unit:'pc'},
+];
+const LOC_ENGINS = [
+  {id:'mecalac', label:'Mecalac MWR7', unit:'h'},
+  {id:'dumper', label:'Dumper', unit:'h'},
+  {id:'pelle-5t', label:'5 tonnes', unit:'h'},
+  {id:'pelle-3t', label:'3 tonnes', unit:'h'},
+  {id:'pelle-1t5', label:'1.5 tonne', unit:'h'},
+];
+
+let state = {
+  currentSection: 0,
+  employes: [],
+  selectedMeteo: '',
+};
+
+// ─── INIT ──────────────────────────────────────────────────────
+function updateHeader() {
+  const chantier = document.getElementById('rj-chantier').value.trim();
+  const date = document.getElementById('rj-date').value;
+  const titleEl = document.getElementById('header-title');
+  const subEl = document.getElementById('header-sub');
+  titleEl.textContent = chantier || 'Rapport journalier';
+  if (date) {
+    const d = new Date(date + 'T12:00:00');
+    const str = d.toLocaleDateString('fr-CH', {weekday:'long', day:'numeric', month:'long'});
+    subEl.textContent = str.charAt(0).toUpperCase() + str.slice(1);
+  } else {
+    subEl.textContent = 'Nouveau rapport';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  setDefaultDate();
+  buildChantierChips();
+  buildNomChips();
+  buildLocationItems();
+  buildMatChips();
+  loadDraft();
+  renderEmployes();
+  updateHeader();
+  document.getElementById('rj-chantier').addEventListener('input', updateHeader);
+  document.getElementById('rj-date').addEventListener('change', updateHeader);
+});
+
+function setDefaultDate() {
+  const d = document.getElementById('rj-date');
+  d.value = new Date().toISOString().split('T')[0];
+}
+
+function buildChantierChips() {
+  const c = document.getElementById('chantier-chips');
+  CHANTIERS.forEach(ch => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = ch;
+    b.onclick = () => {
+      document.getElementById('rj-chantier').value = ch;
+      c.querySelectorAll('.chip').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+      updateHeader();
+    };
+    c.appendChild(b);
+  });
+}
+
+function buildNomChips() {
+  const c = document.getElementById('nom-chips');
+  NOMS_PRESETS.slice(0,4).forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = n;
+    b.onclick = () => {
+      document.getElementById('rj-nom').value = n;
+      c.querySelectorAll('.chip').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+    };
+    c.appendChild(b);
+  });
+}
+
+function buildLocationItems() {
+  // Charger les équipements custom sauvegardés
+  const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
+  if (ressources.vehicules) LOC_VEHICULES.push(...ressources.vehicules);
+  if (ressources.materiel)  LOC_MATERIEL.push(...ressources.materiel);
+  if (ressources.engins)    LOC_ENGINS.push(...ressources.engins);
+
+  buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
+  buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
+  buildLocGroup('loc-engins',    LOC_ENGINS,    'engins');
+}
+
+// État sélection location : { id: { label, unit, qty } }
+let locSelection = {};
+
+function buildLocGroup(containerId, items, groupKey) {
+  const c = document.getElementById(containerId);
+  items.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'fournit-row';
+    row.style.cursor = 'pointer';
+    row.dataset.id = item.id;
+
+    const isSelected = !!locSelection[item.id];
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
+    nameSpan.textContent = `${item.label} (${item.unit})`;
+    nameSpan.id = `locname-${item.id}`;
+
+    const chk = document.createElement('span');
+    chk.id = `locchk-${item.id}`;
+    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
+    chk.textContent = isSelected ? '✅' : '⬜';
+
+    row.appendChild(nameSpan);
+    row.appendChild(chk);
+    row.onclick = () => toggleLocSelect(item);
+    c.appendChild(row);
+  });
+}
+
+function toggleLocSelect(item) {
+  const isNow = !locSelection[item.id];
+  if (isNow) {
+    locSelection[item.id] = { label: item.label, unit: item.unit, qty: 0 };
+  } else {
+    delete locSelection[item.id];
+  }
+  const nameEl = document.getElementById(`locname-${item.id}`);
+  const chkEl  = document.getElementById(`locchk-${item.id}`);
+  if (nameEl) nameEl.classList.toggle('active', isNow);
+  if (chkEl)  chkEl.textContent = isNow ? '✅' : '⬜';
+  renderLocSelectionZone();
+  autoSaveDraft();
+}
+
+function renderLocSelectionZone() {
+  const zone = document.getElementById('loc-selection-zone');
+  const list = document.getElementById('loc-sel-list');
+  const items = Object.entries(locSelection);
+
+  if (items.length === 0) { zone.style.display = 'none'; return; }
+  zone.style.display = 'block';
+  list.innerHTML = '';
+
+  items.forEach(([id, sel]) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.08);';
+
+    const allItems = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS];
+    const item = allItems.find(i => i.id === id);
+
+    row.innerHTML = `
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
+      <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
+      <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
+      <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
+      <input type="number" placeholder="0" min="0" step="0.5"
+        style="width:50px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:6px 4px;font-family:inherit;font-size:14px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
+        value="${sel.qty > 0 ? sel.qty : ''}">
+      <button class="loc-del" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;padding:2px 4px;flex-shrink:0;">✕</button>
+    `;
+
+    const btnQrt  = row.querySelector('.loc-plus-qrt');
+    const btnHalf = row.querySelector('.loc-plus-half');
+    const btnOne  = row.querySelector('.loc-plus-one');
+    const input   = row.querySelector('input');
+    const btnDel  = row.querySelector('.loc-del');
+
+    const updateQty = (val) => {
+      locSelection[id].qty = Math.round(val * 4) / 4;
+      input.value = locSelection[id].qty > 0 ? locSelection[id].qty : '';
+      autoSaveDraft();
+    };
+    btnQrt.onclick  = () => updateQty((parseFloat(input.value)||0) + 0.25);
+    btnHalf.onclick = () => updateQty((parseFloat(input.value)||0) + 0.5);
+    btnOne.onclick  = () => updateQty((parseFloat(input.value)||0) + 1);
+    input.oninput   = () => { locSelection[id].qty = parseFloat(input.value)||0; autoSaveDraft(); };
+    btnDel.onclick  = () => {
+      delete locSelection[id];
+      const nameEl = document.getElementById(`locname-${id}`);
+      const chkEl  = document.getElementById(`locchk-${id}`);
+      if (nameEl) nameEl.classList.remove('active');
+      if (chkEl)  chkEl.textContent = '⬜';
+      renderLocSelectionZone();
+      autoSaveDraft();
+    };
+
+    list.appendChild(row);
+  });
+}
+
+
+function toggleAccord(key) {
+  const header = document.querySelector(`#accord-${key} .accord-header`);
+  const body   = document.getElementById(`body-${key}`);
+  const isOpen = header.classList.contains('open');
+  header.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+function openAccord(key) {
+  document.querySelector(`#accord-${key} .accord-header`).classList.add('open');
+  document.getElementById(`body-${key}`).classList.add('open');
+}
+
+function updateLocSummary(groupKey) {
+  const groupMap = { vehicules: LOC_VEHICULES, materiel: LOC_MATERIEL, engins: LOC_ENGINS };
+  const items = groupMap[groupKey];
+  const filledZone = document.getElementById(`filled-${groupKey}`);
+  const innerZone  = document.getElementById(`loc-${groupKey}`);
+
+  let filledCount = 0;
+  items.forEach(item => {
+    const input = document.getElementById(`loc-${item.id}`);
+    if (!input) return;
+    const val = input.value;
+    const hasVal = val && parseFloat(val) > 0;
+    const row = document.getElementById(`locrow-${item.id}`);
+    if (!row) return;
+
+    if (hasVal) {
+      // Déplacer dans la zone toujours visible
+      if (row.parentElement !== filledZone) filledZone.appendChild(row);
+      filledCount++;
+    } else {
+      // Remettre dans le body accordéon
+      if (row.parentElement !== innerZone) innerZone.appendChild(row);
+    }
+  });
+
+  const sumEl = document.getElementById(`sum-${groupKey}`);
+  if (filledCount > 0) {
+    sumEl.textContent = `${filledCount} utilisé${filledCount > 1 ? 's' : ''}`;
+    sumEl.classList.remove('empty');
+  } else {
+    sumEl.textContent = '—';
+    sumEl.classList.add('empty');
+  }
+}
+
+function buildMatChips() {
+  // quick-fournitures supprimé — uniquement les évacuations restent
+  buildMatChipGroup('quick-evacuations', MAT_EVACUATIONS, 'evac-list', 'badge-evac');
+}
+
+function buildMatChipGroup(containerId, items, listId, badgeId) {
+  const c = document.getElementById(containerId);
+  if (!c) return; // sécurité si l'élément n'existe pas
+  items.forEach(mat => {
+    const b = document.createElement('button');
+    b.className = 'mat-chip';
+    b.textContent = mat;
+    b.onclick = () => addFournitRowWithMat(listId, badgeId, mat);
+    c.appendChild(b);
+  });
+}
+
+// ─── NAVIGATION ────────────────────────────────────────────────
+function goSection(n) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  document.getElementById(`sec-${n}`).classList.add('active');
+  document.getElementById(`tab-${n}`).classList.add('active');
+  state.currentSection = n;
+  document.getElementById('main-scroll').scrollTop = 0;
+  updateStepBar(n);
+  if (n === 4) { buildFournitCatalogue(); }
+  if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
+}
+
+function updateStepBar(n) {
+  for(let i = 0; i < 6; i++) {
+    const d = document.getElementById(`dot-${i}`);
+    if (d) d.className = 'step-dot' + (i < n ? ' done' : i === n ? ' active' : '');
+  }
+}
+
+// ─── CHIPS HELPERS ─────────────────────────────────────────────
+function selectChip(el, group) {
+  el.closest('.chips, #meteo-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  if (group === 'meteo') state.selectedMeteo = el.textContent;
+}
+
+// ─── EMPLOYÉS ──────────────────────────────────────────────────
+function renderEmployes() {
+  const c = document.getElementById('employes-list');
+  c.innerHTML = '';
+
+  // Total global
+  const total = state.employes.reduce((s,e) => s + parseFloat(e.heures||0), 0);
+  const totEl = document.getElementById('mo-total-global');
+  const cntEl = document.getElementById('mo-count-global');
+  if (totEl) totEl.textContent = total.toFixed(2);
+  if (cntEl) cntEl.textContent = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
+
+  const tous = [...new Set([...NOMS_PRESETS, ...state.employes.map(e=>e.nom)])];
+
+  tous.forEach(nom => {
+    const idx    = state.employes.findIndex(e => e.nom === nom);
+    const heures = idx >= 0 ? parseFloat(state.employes[idx].heures||0) : 0;
+    const actif  = heures > 0;
+
+    const row = document.createElement('div');
+    row.className = 'mo-row';
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'mo-row-nom' + (actif ? ' actif' : '');
+    nameSpan.textContent = nom;
+
+    const btnDemi = document.createElement('button');
+    btnDemi.className = 'mo-quick-btn';
+    btnDemi.textContent = '+4h45';
+    btnDemi.addEventListener('click', () => moAddHeures(nom, 4.75));
+
+    const btnJour = document.createElement('button');
+    btnJour.className = 'mo-quick-btn jour';
+    btnJour.textContent = '+8h45';
+    btnJour.addEventListener('click', () => moAddHeures(nom, 8.75));
+
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.className = 'loc-input';
+    input.placeholder = '—';
+    input.min = 0; input.max = 24; input.step = 0.25;
+    input.value = heures > 0 ? heures : '';
+    input.addEventListener('change', () => moSetHeures(nom, input.value));
+
+    const resetBtn = document.createElement('button');
+    resetBtn.style.cssText = 'background:none;border:none;color:var(--text-light);font-size:16px;cursor:pointer;padding:2px 4px;flex-shrink:0;opacity:' + (actif ? '1' : '0') + ';pointer-events:' + (actif ? 'auto' : 'none') + ';';
+    resetBtn.textContent = '✕';
+    resetBtn.addEventListener('click', () => moSetHeures(nom, 0));
+
+    row.appendChild(nameSpan);
+    row.appendChild(btnDemi);
+    row.appendChild(btnJour);
+    row.appendChild(input);
+    row.appendChild(resetBtn);
+    c.appendChild(row);
+
+    const sep = document.createElement('div');
+    sep.style.cssText = 'height:1px;background:var(--border);margin:0';
+    c.appendChild(sep);
+  });
+
+  // Bouton ajouter
+  const addBtn = document.createElement('button');
+  addBtn.className = 'btn-add-employe';
+  addBtn.style.margin = '10px 0 2px';
+  addBtn.textContent = '➕ Autre employé';
+  addBtn.addEventListener('click', openAddEmploye);
+  c.appendChild(addBtn);
+}
+
+function moAddHeures(nom, val) {
+  let idx = state.employes.findIndex(e => e.nom === nom);
+  if (idx === -1) { state.employes.push({nom, heures: 0}); idx = state.employes.length - 1; }
+  state.employes[idx].heures = Math.min(24, parseFloat(state.employes[idx].heures||0) + val);
+  renderEmployes();
+}
+
+function moSetHeures(nom, val) {
+  const h = parseFloat(val) || 0;
+  let idx = state.employes.findIndex(e => e.nom === nom);
+  if (h === 0 && idx >= 0) {
+    state.employes.splice(idx, 1); // retirer si remis à 0
+  } else {
+    if (idx === -1) { state.employes.push({nom, heures: 0}); idx = state.employes.length - 1; }
+    state.employes[idx].heures = h;
+  }
+  renderEmployes();
+}
+
+
+function openAddEmploye() {
+  const c = document.getElementById('employe-presets');
+  c.innerHTML = '';
+  NOMS_PRESETS.forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = n;
+    b.onclick = () => {
+      document.getElementById('new-employe-nom').value = n;
+      c.querySelectorAll('.chip').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected');
+    };
+    c.appendChild(b);
+  });
+  document.getElementById('new-employe-nom').value = '';
+  document.getElementById('overlay-employe').classList.add('open');
+}
+
+function confirmAddEmploye() {
+  const nom = document.getElementById('new-employe-nom').value.trim();
+  if (!nom) return;
+  state.employes.push({ nom, heures: 0 });
+  renderEmployes();
+  document.getElementById('overlay-employe').classList.remove('open');
+}
+
+function closeOverlay(e) {
+  if (e.target.classList.contains('overlay')) {
+    e.target.classList.remove('open');
+  }
+}
+
+// ─── AJOUT LOCATION ────────────────────────────────────────────
+let currentLocGroup = null;
+
+function openAddLoc(groupKey, icon) {
+  currentLocGroup = groupKey;
+  const titles = { vehicules: `${icon} Ajouter un véhicule`, materiel: `${icon} Ajouter du matériel`, engins: `${icon} Ajouter un engin` };
+  document.getElementById('overlay-loc-title').textContent = titles[groupKey];
+  document.getElementById('new-loc-nom').value = '';
+  document.getElementById('new-loc-unit-custom').value = '';
+  document.querySelectorAll('#new-loc-unit-chips .chip').forEach(c => c.classList.remove('selected'));
+  document.getElementById('overlay-loc').classList.add('open');
+}
+
+function selectLocUnit(el) {
+  document.querySelectorAll('#new-loc-unit-chips .chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('new-loc-unit-custom').value = '';
+}
+
+function confirmAddLoc() {
+  const nom = document.getElementById('new-loc-nom').value.trim();
+  if (!nom) return;
+  const selectedChip = document.querySelector('#new-loc-unit-chips .chip.selected');
+  const unit = selectedChip ? selectedChip.textContent : (document.getElementById('new-loc-unit-custom').value.trim() || 'h');
+  const groupKey = currentLocGroup;
+
+  // Générer un id unique
+  const id = 'custom-' + Date.now();
+  const item = { id, label: nom, unit };
+
+  // Ajouter à la liste en mémoire
+  const groupMap = { vehicules: LOC_VEHICULES, materiel: LOC_MATERIEL, engins: LOC_ENGINS };
+  groupMap[groupKey].push(item);
+
+  // Ajouter la ligne dans l'accordéon
+  const innerZone = document.getElementById(`loc-${groupKey}`);
+  const row = document.createElement('div');
+  row.className = 'loc-item';
+  row.id = `locrow-${id}`;
+  row.innerHTML = `
+    <span class="loc-label">${nom}</span>
+    <span class="loc-unit">${unit}</span>
+    <input type="number" class="loc-input" id="loc-${id}"
+      placeholder="—" min="0" step="0.25"
+      oninput="updateLocSummary('${groupKey}')">
+  `;
+  innerZone.appendChild(row);
+
+  // Sauvegarder dans localStorage Ressources (clé partagée avec app principale)
+  const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
+  if (!ressources[groupKey]) ressources[groupKey] = [];
+  ressources[groupKey].push(item);
+  localStorage.setItem('rv6_loc_custom', JSON.stringify(ressources));
+
+  document.getElementById('overlay-loc').classList.remove('open');
+
+  // Toast confirmation
+  const t = document.getElementById('toast');
+  t.textContent = `✅ "${nom}" ajouté et sauvegardé`;
+  t.classList.add('show');
+  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2500);
+}
+
+// ─── EXTRAS (Métrés / Photos / Bons / Croquis) ────────────────
+const extrasState = { metres: false, photos: false, bons: false, croquis: false };
+const extrasLabels = { metres: '📐 Métrés', photos: '📷 Photos', bons: '🧾 Bons', croquis: '✏️ Croquis' };
+const photosData = [];
+const bonsData = [];
+let extrasMenuOpen = false;
+
+function toggleExtrasMenu() {
+  extrasMenuOpen = !extrasMenuOpen;
+  const body = document.getElementById('extras-menu-body');
+  const chev = document.getElementById('extras-menu-chevron');
+  body.style.maxHeight = extrasMenuOpen ? '400px' : '0';
+  chev.style.transform = extrasMenuOpen ? 'rotate(180deg)' : '';
+}
+
+function toggleExtra(key) {
+  extrasState[key] = !extrasState[key];
+  const sw = document.getElementById(`sw-${key}`);
+  const bloc = document.getElementById(`bloc-${key}`);
+  sw.textContent = extrasState[key] ? 'ON' : 'OFF';
+  sw.classList.toggle('on', extrasState[key]);
+  if (bloc) bloc.style.display = extrasState[key] ? 'block' : 'none';
+  if (key === 'croquis' && extrasState[key]) setTimeout(initSketch, 100);
+}
+
+// ── CROQUIS ──
+let sketchCtx, sketchDrawing = false, sketchLast = null, sketchEraser = false;
+
+function initSketch() {
+  const canvas = document.getElementById('sketch-canvas');
+  if (canvas._init) return;
+  canvas._init = true;
+  sketchCtx = canvas.getContext('2d');
+
+  const getPos = (e) => {
+    const r = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / r.width;
+    const scaleY = canvas.height / r.height;
+    const src = e.touches ? e.touches[0] : e;
+    return { x: (src.clientX - r.left) * scaleX, y: (src.clientY - r.top) * scaleY };
+  };
+
+  const start = (e) => { e.preventDefault(); sketchDrawing = true; sketchLast = getPos(e); };
+  const move  = (e) => {
+    if (!sketchDrawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    const size = parseInt(document.getElementById('sketch-size').value) * 2;
+    if (sketchEraser) {
+      sketchCtx.clearRect(pos.x - size, pos.y - size, size*2, size*2);
+    } else {
+      sketchCtx.beginPath();
+      sketchCtx.moveTo(sketchLast.x, sketchLast.y);
+      sketchCtx.lineTo(pos.x, pos.y);
+      sketchCtx.strokeStyle = document.getElementById('sketch-color').value;
+      sketchCtx.lineWidth = size;
+      sketchCtx.lineCap = 'round';
+      sketchCtx.lineJoin = 'round';
+      sketchCtx.stroke();
+    }
+    sketchLast = pos;
+  };
+  const stop = () => { sketchDrawing = false; sketchLast = null; };
+
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('mousemove', move);
+  canvas.addEventListener('mouseup', stop);
+  canvas.addEventListener('touchstart', start, { passive: false });
+  canvas.addEventListener('touchmove', move,  { passive: false });
+  canvas.addEventListener('touchend', stop);
+}
+
+function setSketchEraser() {
+  sketchEraser = !sketchEraser;
+  const btn = document.getElementById('btn-eraser');
+  btn.style.background = sketchEraser ? 'var(--navy)' : 'var(--bg)';
+  btn.style.color = sketchEraser ? 'white' : 'var(--text-muted)';
+  btn.textContent = sketchEraser ? '✏️ Stylo' : '◻️ Gomme';
+}
+
+function clearSketch() {
+  const canvas = document.getElementById('sketch-canvas');
+  if (sketchCtx) sketchCtx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// ── PHOTOS ──
+// ── COMPRESSION ──
+function compressImage(file, maxPx = 1200, quality = 0.78) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxPx / Math.max(img.width, img.height));
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── PHOTOS ──
+function handlePhotos(input) {
+  const grid = document.getElementById('photos-grid');
+  [...input.files].forEach(async file => {
+    const compressed = await compressImage(file);
+    const idx = photosData.length;
+    photosData.push(compressed);
+    const div = document.createElement('div');
+    div.className = 'photo-thumb';
+    div.id = `photo-${idx}`;
+    div.innerHTML = `
+      <img src="${compressed}" onclick="openAnnotate(${idx},'photo')">
+      <button class="del-photo" onclick="delPhoto(${idx})">✕</button>
+      <div class="photo-annotate-btn" onclick="openAnnotate(${idx},'photo')">✏️</div>
+    `;
+    grid.appendChild(div);
+  });
+  input.value = '';
+}
+function delPhoto(idx) { photosData[idx] = null; document.getElementById(`photo-${idx}`)?.remove(); }
+
+// ── BONS ──
+function handleBons(input) {
+  const grid = document.getElementById('bons-grid');
+  [...input.files].forEach(async file => {
+    const compressed = await compressImage(file, 1600, 0.85);
+    const idx = bonsData.length;
+    bonsData.push(compressed);
+    const div = document.createElement('div');
+    div.className = 'bon-thumb';
+    div.id = `bon-${idx}`;
+    div.innerHTML = `
+      <img src="${compressed}" onclick="openAnnotate(${idx},'bon')">
+      <button class="del-bon" onclick="delBon(${idx})">✕</button>
+      <div class="photo-annotate-btn" onclick="openAnnotate(${idx},'bon')">✏️</div>
+    `;
+    grid.appendChild(div);
+  });
+  input.value = '';
+}
+function delBon(idx) { bonsData[idx] = null; document.getElementById(`bon-${idx}`)?.remove(); }
+
+// ── ÉDITEUR D'ANNOTATION ──
+let annotateIdx = null, annotateType = null;
+let annoCanvas, annoCtx, annoDrawing = false, annoLast = null;
+let annoTool = 'stylo', annoColor = '#e53e3e', annoSize = 3;
+let annoHistory = [];
+
+function openAnnotate(idx, type) {
+  annotateIdx = idx;
+  annotateType = type;
+  const src = type === 'photo' ? photosData[idx] : bonsData[idx];
+  if (!src) return;
+
+  const overlay = document.getElementById('annotate-overlay');
+  overlay.classList.add('open');
+
+  const img = new Image();
+  img.onload = () => {
+    annoCanvas = document.getElementById('anno-canvas');
+    // Adapter la taille du canvas à l'image
+    const maxW = window.innerWidth - 0;
+    const maxH = window.innerHeight - 140;
+    const scale = Math.min(maxW / img.width, maxH / img.height, 1);
+    annoCanvas.width  = Math.round(img.width  * scale);
+    annoCanvas.height = Math.round(img.height * scale);
+    annoCanvas.style.width  = annoCanvas.width  + 'px';
+    annoCanvas.style.height = annoCanvas.height + 'px';
+    annoCtx = annoCanvas.getContext('2d');
+    annoCtx.drawImage(img, 0, 0, annoCanvas.width, annoCanvas.height);
+    annoHistory = [annoCtx.getImageData(0, 0, annoCanvas.width, annoCanvas.height)];
+    initAnnoEvents();
+  };
+  img.src = src;
+}
+
+function initAnnoEvents() {
+  annoCanvas.onmousedown = annoCanvas.ontouchstart = (e) => {
+    e.preventDefault();
+    annoDrawing = true;
+    const p = getAnnoPos(e);
+    annoLast = p;
+    if (annoTool === 'texte') {
+      const txt = prompt('Texte à ajouter :');
+      if (txt) {
+        annoCtx.font = `bold ${14 + annoSize * 2}px DM Sans, sans-serif`;
+        annoCtx.fillStyle = annoColor;
+        annoCtx.fillText(txt, p.x, p.y);
+        saveAnnoHistory();
+      }
+      annoDrawing = false;
+    }
+  };
+  annoCanvas.onmousemove = annoCanvas.ontouchmove = (e) => {
+    if (!annoDrawing || annoTool === 'texte') return;
+    e.preventDefault();
+    const p = getAnnoPos(e);
+    if (annoTool === 'stylo') {
+      annoCtx.beginPath();
+      annoCtx.moveTo(annoLast.x, annoLast.y);
+      annoCtx.lineTo(p.x, p.y);
+      annoCtx.strokeStyle = annoColor;
+      annoCtx.lineWidth = annoSize * 2;
+      annoCtx.lineCap = 'round';
+      annoCtx.lineJoin = 'round';
+      annoCtx.stroke();
+    }
+    annoLast = p;
+  };
+  annoCanvas.onmouseup = annoCanvas.ontouchend = (e) => {
+    if (!annoDrawing) return;
+    annoDrawing = false;
+    const p = annoLast;
+    if (annoTool === 'fleche' || annoTool === 'cercle') {
+      const start = annoHistory[annoHistory.length-1];
+      annoCtx.putImageData(start, 0, 0);
+      const startP = getAnnoStartPos();
+      drawShape(startP, p);
+    }
+    saveAnnoHistory();
+  };
+}
+
+let annoStartPos = null;
+function getAnnoPos(e) {
+  const r = annoCanvas.getBoundingClientRect();
+  const src = e.touches ? e.touches[0] : e;
+  return { x: src.clientX - r.left, y: src.clientY - r.top };
+}
+function getAnnoStartPos() { return annoStartPos; }
+
+// Track start position for shapes
+document.addEventListener('mousedown', e => { if (annoCanvas && e.target === annoCanvas) annoStartPos = getAnnoPos(e); });
+document.addEventListener('touchstart', e => { if (annoCanvas && e.target === annoCanvas) annoStartPos = getAnnoPos(e.touches[0]); }, { passive: false });
+
+function drawShape(from, to) {
+  annoCtx.strokeStyle = annoColor;
+  annoCtx.lineWidth = annoSize * 2;
+  annoCtx.fillStyle = annoColor;
+  if (annoTool === 'fleche') {
+    // Ligne
+    annoCtx.beginPath();
+    annoCtx.moveTo(from.x, from.y);
+    annoCtx.lineTo(to.x, to.y);
+    annoCtx.stroke();
+    // Pointe de flèche
+    const angle = Math.atan2(to.y - from.y, to.x - from.x);
+    const len = 14 + annoSize * 2;
+    annoCtx.beginPath();
+    annoCtx.moveTo(to.x, to.y);
+    annoCtx.lineTo(to.x - len * Math.cos(angle - 0.4), to.y - len * Math.sin(angle - 0.4));
+    annoCtx.lineTo(to.x - len * Math.cos(angle + 0.4), to.y - len * Math.sin(angle + 0.4));
+    annoCtx.closePath();
+    annoCtx.fill();
+  } else if (annoTool === 'cercle') {
+    const rx = Math.abs(to.x - from.x) / 2;
+    const ry = Math.abs(to.y - from.y) / 2;
+    const cx = (from.x + to.x) / 2;
+    const cy = (from.y + to.y) / 2;
+    annoCtx.beginPath();
+    annoCtx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    annoCtx.stroke();
+  }
+}
+
+function saveAnnoHistory() {
+  annoHistory.push(annoCtx.getImageData(0, 0, annoCanvas.width, annoCanvas.height));
+  if (annoHistory.length > 20) annoHistory.shift();
+}
+
+function annoUndo() {
+  if (annoHistory.length <= 1) return;
+  annoHistory.pop();
+  annoCtx.putImageData(annoHistory[annoHistory.length - 1], 0, 0);
+}
+
+function setAnnoTool(tool, btn) {
+  annoTool = tool;
+  document.querySelectorAll('.anno-tool-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function confirmAnnotate() {
+  const data = annoCanvas.toDataURL('image/jpeg', 0.88);
+  if (annotateType === 'photo') {
+    photosData[annotateIdx] = data;
+    const img = document.querySelector(`#photo-${annotateIdx} img`);
+    if (img) img.src = data;
+  } else {
+    bonsData[annotateIdx] = data;
+    const img = document.querySelector(`#bon-${annotateIdx} img`);
+    if (img) img.src = data;
+  }
+  document.getElementById('annotate-overlay').classList.remove('open');
+}
+
+function closeAnnotate() {
+  document.getElementById('annotate-overlay').classList.remove('open');
+}
+
+
+
+
+
+
+let metresCount = 0;
+let subCount = 0;
+const metreTypes = {};
+
+function addMetreRow(data = {}) {
+  const c = document.getElementById('metres-list');
+  const id = ++metresCount;
+  const type = data.type || 'coupe';
+  metreTypes[id] = type;
+
+  const div = document.createElement('div');
+  div.className = 'metre-card';
+  div.id = `mc-${id}`;
+  div.innerHTML = `
+    <div class="metre-card-top">
+      <input class="metre-desc" type="text" placeholder="Description…" value="${data.desc||''}">
+      <button class="btn-del-metre" onclick="delMetreCard('mc-${id}')">✕</button>
+    </div>
+    <div class="metre-type-btns">
+      <button class="metre-type-btn ${type==='coupe'?'active':''}"   onclick="setMetreType(${id},'coupe',this)">📏 Longueur ml</button>
+      <button class="metre-type-btn ${type==='surface'?'active':''}" onclick="setMetreType(${id},'surface',this)">📐 Surface m²</button>
+      <button class="metre-type-btn ${type==='volume'?'active':''}"  onclick="setMetreType(${id},'volume',this)">📦 Volume m³</button>
+    </div>
+    <div class="metre-sublines" id="msubs-${id}"></div>
+    <div class="metre-add-sub">
+      <button class="btn-add-subline" onclick="addMetreSub(${id})">+ ligne</button>
+    </div>
+    <div class="metre-total">
+      <span class="metre-total-label">Total</span>
+      <span class="metre-total-val" id="mt-val-${id}">—</span>
+      <span class="metre-total-unit" id="mt-unit-${id}">${type==='coupe'?'ml':type==='volume'?'m³':'m²'}</span>
+    </div>
+  `;
+  c.appendChild(div);
+
+  // Première sous-ligne
+  if (data.subs?.length) data.subs.forEach(s => addMetreSub(id, s));
+  else addMetreSub(id);
+
+  updateMetreBadge();
+}
+
+function addMetreSub(cardId, data = {}) {
+  const type = metreTypes[cardId] || 'surface';
+  const container = document.getElementById(`msubs-${cardId}`);
+  const sid = ++subCount;
+
+  const row = document.createElement('div');
+  row.className = 'metre-subline';
+  row.id = `msub-${sid}`;
+
+  const inp = (idName, val) =>
+    `<input id="${idName}" type="text" inputmode="decimal" class="metre-dim"
+      placeholder="0.00" value="${val ? fmtInput(val) : ''}"
+      oninput="calcSub(${sid},${cardId})"
+      onblur="fmtInputEl(this); calcSub(${sid},${cardId})"
+      onkeydown="metreNav(event,this)">`;
+
+  let dims = '';
+  if (type === 'coupe') {
+    dims = `
+      <span class="metre-dim-sep" style="font-size:11px">L</span>
+      ${inp(`msl-${sid}`, data.l)}
+      <span class="metre-dim-sep" style="font-size:11px">m</span>
+    `;
+  } else if (type === 'surface') {
+    dims = `
+      <span class="metre-dim-sep" style="font-size:11px">L</span>
+      ${inp(`msl-${sid}`, data.l)}
+      <span class="metre-dim-sep">×</span>
+      ${inp(`msw-${sid}`, data.w)}
+      <span class="metre-dim-sep" style="font-size:11px">m</span>
+    `;
+  } else {
+    dims = `
+      <span class="metre-dim-sep" style="font-size:11px">L</span>
+      ${inp(`msl-${sid}`, data.l)}
+      <span class="metre-dim-sep">×</span>
+      ${inp(`msw-${sid}`, data.w)}
+      <span class="metre-dim-sep">×</span>
+      ${inp(`msh-${sid}`, data.h)}
+      <span class="metre-dim-sep" style="font-size:11px">m</span>
+    `;
+  }
+
+  row.innerHTML = `
+    ${dims}
+    <span class="metre-sub-result" id="msr-${sid}">—</span>
+    <button class="btn-del-subline" onclick="delMetreSub('msub-${sid}',${cardId})">✕</button>
+  `;
+  container.appendChild(row);
+  if (data.l) calcSub(sid, cardId);
+}
+
+// Retourne la valeur formatée (2 déc. min, 3 si saisi)
+function fmtInput(val) {
+  const n = parseFloat(String(val).replace(',', '.'));
+  if (isNaN(n)) return '';
+  const s = String(val).replace(',', '.');
+  const dec = s.includes('.') ? s.split('.')[1].length : 0;
+  return dec >= 3 ? n.toFixed(3) : n.toFixed(2);
+}
+
+// Formate le champ au blur
+function fmtInputEl(input) {
+  const formatted = fmtInput(input.value);
+  if (formatted !== '') input.value = formatted;
+}
+
+// Lecture numérique d'un champ texte
+function dimVal(id) {
+  const el = document.getElementById(id);
+  return el ? parseFloat(el.value.replace(',', '.')) || 0 : 0;
+}
+
+// Navigation clavier entre champs
+function metreNav(e, input) {
+  if (e.key === 'Enter' || e.key === 'Tab') {
+    e.preventDefault();
+    fmtInputEl(input);
+    const allInputs = [...document.querySelectorAll('.metre-dim')];
+    const idx = allInputs.indexOf(input);
+    const next = allInputs[idx + 1];
+    if (next) { next.focus(); next.select(); }
+  }
+  if (e.shiftKey && e.key === 'Tab') {
+    e.preventDefault();
+    fmtInputEl(input);
+    const allInputs = [...document.querySelectorAll('.metre-dim')];
+    const idx = allInputs.indexOf(input);
+    const prev = allInputs[idx - 1];
+    if (prev) { prev.focus(); prev.select(); }
+  }
+}
+
+function calcSub(sid, cardId) {
+  const type = metreTypes[cardId] || 'surface';
+  const l = dimVal(`msl-${sid}`);
+  const w = dimVal(`msw-${sid}`);
+  const h = dimVal(`msh-${sid}`);
+  const unit = type==='coupe'?'ml':type==='volume'?'m³':'m²';
+  let sub = type==='coupe' ? l : type==='surface' ? l*w : l*w*h;
+  const el = document.getElementById(`msr-${sid}`);
+  if (el) el.textContent = sub > 0 ? fmtNum(sub)+' '+unit : '—';
+  calcMetreTotal(cardId);
+}
+
+function calcMetreTotal(cardId) {
+  const type = metreTypes[cardId] || 'surface';
+  let total = 0;
+  document.querySelectorAll(`#msubs-${cardId} .metre-subline`).forEach(row => {
+    const sid = row.id.replace('msub-','');
+    const l = dimVal(`msl-${sid}`);
+    const w = dimVal(`msw-${sid}`);
+    const h = dimVal(`msh-${sid}`);
+    if (type==='coupe')   total += l;
+    if (type==='surface') total += l*w;
+    if (type==='volume')  total += l*w*h;
+  });
+  const el = document.getElementById(`mt-val-${cardId}`);
+  if (el) el.textContent = total > 0 ? fmtNum(total) : '—';
+}
+
+function setMetreType(id, type, btn) {
+  btn.closest('.metre-type-btns').querySelectorAll('.metre-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  metreTypes[id] = type;
+  document.getElementById(`mt-unit-${id}`).textContent = type==='coupe'?'ml':type==='volume'?'m³':'m²';
+  // Vider et recréer une sous-ligne vide
+  const container = document.getElementById(`msubs-${id}`);
+  const count = container.children.length || 1;
+  container.innerHTML = '';
+  for (let i = 0; i < count; i++) addMetreSub(id);
+}
+
+function delMetreSub(rowId, cardId) {
+  const container = document.getElementById(`msubs-${cardId}`);
+  // Garder au moins 1 ligne
+  if (container.children.length <= 1) return;
+  document.getElementById(rowId)?.remove();
+  calcMetreTotal(cardId);
+}
+
+function delMetreCard(id) {
+  document.getElementById(id)?.remove();
+  updateMetreBadge();
+}
+
+function fmtNum(n) {
+  // Toujours au moins 2 décimales, max 3 si nécessaire
+  const s3 = n.toFixed(3);
+  // Si le 3e chiffre après virgule est 0, on affiche 2 décimales
+  return s3.endsWith('0') ? n.toFixed(2) : s3;
+}
+
+function updateMetreBadge() {
+  const badge = document.getElementById('badge-metres');
+  if (badge) badge.textContent = document.getElementById('metres-list')?.children.length || 0;
+}
+
+
+function addFournitRow(listId, badgeId, mat = '') {
+  addFournitRowWithMat(listId, badgeId, mat);
+}
+
+let fournitCount = 0;
+function addFournitRowWithMat(listId, badgeId, mat = '') {
+  const c = document.getElementById(listId);
+  const id = `frl-${++fournitCount}`;
+  const row = document.createElement('div');
+  row.className = 'fournit-item';
+  row.id = id;
+  row.innerHTML = `
+    <input type="text" placeholder="Matériau…" value="${mat}">
+    <input type="number" placeholder="Qté" min="0" step="0.5">
+    <select>${UNITES.map(u=>`<option>${u}</option>`).join('')}</select>
+    <button class="btn-del-row" onclick="delRow('${id}','${badgeId}','${listId}')">✕</button>
+  `;
+  c.appendChild(row);
+  updateBadge(badgeId, listId);
+}
+
+function delRow(rowId, badgeId, listId) {
+  document.getElementById(rowId)?.remove();
+  updateBadge(badgeId, listId);
+}
+
+function updateBadge(badgeId, listId) {
+  const cnt = document.getElementById(listId)?.children.length || 0;
+  const b = document.getElementById(badgeId);
+  if (b) b.textContent = cnt;
+}
+
+// ─── RÉCAP PREVIEW ─────────────────────────────────────────────
+function buildRecapPreview() {
+  const date = document.getElementById('rj-date').value;
+  const nom = document.getElementById('rj-nom').value || '—';
+  const chantier = document.getElementById('rj-chantier').value || '—';
+
+  const totalMO = state.employes.reduce((s,e) => s + parseFloat(e.heures||0), 0);
+  const nEmp = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
+
+  const travaux = document.getElementById('tx-travaux').value || '';
+  const nMetres = document.getElementById('metres-list')?.children.length || 0;
+  const nEvac = document.getElementById('evac-list')?.children.length || 0;
+
+  // Location summary
+  const locFilled = Object.entries(locSelection).filter(([,sel]) => sel.qty > 0);
+
+  // Fournitures catalogue
+  const fournitItems = Object.entries(fournitSelection).filter(([,v]) => v.qty && parseFloat(v.qty) > 0);
+
+  const dateStr = date ? new Date(date + 'T12:00:00').toLocaleDateString('fr-CH', {weekday:'long', day:'numeric', month:'long'}) : '—';
+
+  document.getElementById('recap-preview').innerHTML = `
+    <div class="preview-section">
+      <h4>📋 En-tête</h4>
+      <div class="info-row"><span class="k">Date</span><span class="v">${dateStr}</span></div>
+      <div class="info-row"><span class="k">Responsable</span><span class="v">${nom}</span></div>
+      <div class="info-row"><span class="k">Chantier</span><span class="v">${chantier}</span></div>
+    </div>
+    <div class="preview-section">
+      <h4>👷 Main d'œuvre</h4>
+      ${nEmp === 0 ? '<p class="preview-empty">Aucun employé</p>' :
+        state.employes.filter(e => parseFloat(e.heures||0) > 0).map(e =>
+          `<div class="info-row"><span class="k">${e.nom}</span><span class="v">${parseFloat(e.heures).toFixed(2)} h</span></div>`
+        ).join('') +
+        `<div class="info-row" style="border-top:1.5px solid var(--border);margin-top:4px;padding-top:8px;">
+          <span class="k" style="font-weight:700">Total</span>
+          <span class="v" style="color:var(--teal)">${totalMO.toFixed(2)} h</span>
+        </div>`
+      }
+    </div>
+    <div class="preview-section">
+      <h4>🔧 Location interne</h4>
+      ${locFilled.length === 0 ? '<p class="preview-empty">Aucun équipement</p>' :
+        locFilled.map(([id, sel]) =>
+          `<div class="info-row"><span class="k">${sel.label}</span><span class="v">${sel.qty} ${sel.unit}</span></div>`
+        ).join('')
+      }
+    </div>
+    <div class="preview-section">
+      <h4>🏗️ Travaux réalisés</h4>
+      <p>${travaux || '<span class="preview-empty">Aucune description</span>'}</p>
+      ${nMetres > 0 ? `<p style="margin-top:6px;font-size:12px;color:var(--text-muted);">+ ${nMetres} métré(s)</p>` : ''}
+    </div>
+    <div class="preview-section">
+      <h4>📦 Fournitures</h4>
+      ${fournitItems.length === 0 ? '<p class="preview-empty">Aucune fourniture</p>' :
+        fournitItems.map(([k,v]) =>
+          `<div class="info-row"><span class="k">${v.nom||k.split('|')[1]}</span><span class="v">${v.qty} ${v.unit}</span></div>`
+        ).join('')
+      }
+    </div>
+    ${nEvac > 0 ? `
+    <div class="preview-section">
+      <h4>🚮 Évacuations</h4>
+      <div class="info-row"><span class="k">Évacuations</span><span class="v">${nEvac} article(s)</span></div>
+    </div>` : ''}
+  `;
+}
+
+// ─── DRAFT SAVE/LOAD ────────────────────────────────────────────
+function collectData() {
+  const locData = {};
+  Object.entries(locSelection).forEach(([id, sel]) => {
+    locData[id] = sel.qty > 0 ? String(sel.qty) : '';
+  });
+
+  const metresData = [];
+  document.querySelectorAll('#metres-list .metrage-row').forEach(row => {
+    const inputs = row.querySelectorAll('input, select');
+    metresData.push({ article: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
+  });
+
+  const fournitData = [];
+  document.querySelectorAll('#fournit-list .fournit-item').forEach(row => {
+    const inputs = row.querySelectorAll('input, select');
+    fournitData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
+  });
+
+  const evacData = [];
+  document.querySelectorAll('#evac-list .fournit-item').forEach(row => {
+    const inputs = row.querySelectorAll('input, select');
+    evacData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
+  });
+
+  return {
+    date: document.getElementById('rj-date').value,
+    nom: document.getElementById('rj-nom').value,
+    chantier: document.getElementById('rj-chantier').value,
+    meteo: state.selectedMeteo,
+    employes: state.employes,
+    location: locData,
+    travaux: document.getElementById('tx-travaux').value,
+    metres: metresData,
+    fournitures: fournitData,
+    evacuations: evacData,
+    fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
+      cat: k.split('|')[0], nom: k.split('|')[1], qty: v.qty, unit: v.unit
+    })),
+  };
+}
+
+function showToast(msg, color) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.style.background = color || 'var(--teal)';
+  t.classList.add('show');
+  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; t.style.background = 'var(--teal)'; }, 2500);
+}
+
+function saveDraft() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+  showToast('💾 Brouillon sauvegardé');
+}
+function autoSaveDraft() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
+}
+
+function loadDraft() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  try {
+    const d = JSON.parse(raw);
+    if (d.date) document.getElementById('rj-date').value = d.date;
+    if (d.nom) document.getElementById('rj-nom').value = d.nom;
+    if (d.chantier) document.getElementById('rj-chantier').value = d.chantier;
+    if (d.meteo) state.selectedMeteo = d.meteo;
+    if (d.employes) state.employes = d.employes;
+    if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
+    if (d.location) {
+      Object.entries(d.location).forEach(([k,v]) => {
+        if (!v || parseFloat(v) <= 0) return;
+        const allItems = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS];
+        const item = allItems.find(i => i.id === k);
+        if (item) {
+          locSelection[k] = { label: item.label, unit: item.unit, qty: parseFloat(v) };
+        }
+      });
+      renderLocSelectionZone();
+    }
+    if (d.metres) d.metres.forEach(m => {
+      addMetreRow(m.article);
+      const rows = document.querySelectorAll('#metres-list .metrage-row');
+      const last = rows[rows.length-1];
+      if (last) {
+        const inputs = last.querySelectorAll('input, select');
+        inputs[1].value = m.qte;
+        inputs[2].value = m.unite;
+      }
+    });
+    if (d.fournitures) d.fournitures.forEach(f => {
+      addFournitRowWithMat('fournit-list','badge-fournit', f.mat);
+      const rows = document.querySelectorAll('#fournit-list .fournit-item');
+      const last = rows[rows.length-1];
+      if (last) {
+        const inputs = last.querySelectorAll('input, select');
+        inputs[1].value = f.qte;
+        inputs[2].value = f.unite;
+      }
+    });
+    if (d.evacuations) d.evacuations.forEach(e => {
+      addFournitRowWithMat('evac-list','badge-evac', e.mat);
+      const rows = document.querySelectorAll('#evac-list .fournit-item');
+      const last = rows[rows.length-1];
+      if (last) {
+        const inputs = last.querySelectorAll('input, select');
+        inputs[1].value = e.qte;
+        inputs[2].value = e.unite;
+      }
+    });
+    renderEmployes();
+  } catch(e) { console.warn('Draft load error', e); }
+}
+
+function finaliserRapport() {
+  const data = collectData();
+  const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+  data.id = Date.now();
+  data.savedAt = new Date().toISOString();
+  reports.unshift(data);
+  localStorage.setItem(REPORTS_KEY, JSON.stringify(reports));
+  localStorage.removeItem(STORAGE_KEY);
+  // Refresh badge
+  const badge = document.getElementById('histo-badge');
+  badge.style.display = 'inline-block';
+  badge.textContent = reports.length;
+
+  const t = document.getElementById('toast');
+  t.textContent = '✅ Rapport enregistré!';
+  t.style.background = 'var(--teal)';
+  t.classList.add('show');
+  setTimeout(() => {
+    t.classList.remove('show');
+    t.textContent = '💾 Brouillon sauvegardé';
+    // Basculer sur l'onglet Validés
+    renderHistoriqueInline();
+    showRapTab('valides');
+  }, 1500);
+}
+
+
+// ─── MODULE FOURNITURES ────────────────────────────────────────
+const FOURNIT_CATEGORIES = {"Protection":{"subcats":{"Scotch":["Scotch carossier 15mm","Scotch carossier 19mm","Scotch carossier 25mm","Scotch carossier 30mm","Scotch carossier 38mm","Scotch carossier 50mm","Scotch jaune","Papier de protection","Sicrall"],"Rouleau":["Plastique","Protection Floorliner permafix 1m","Protection Floorliner permafix 2m","Protection statique"]}},"Mortier":{"subcats":{"Mortier":["Weber multi 280","Webermur 920","Weberton 908","Weber ip 14","Weber NO MIX Béton","Holcim Optimo","StoCrete SM","StoCrete TM","Ciment rapide PROMPT","Chape ciment","Chape rapide"]}},"Canalisation PVC":{"subcats":{"PVC Ø 110":["Coude PVC Ø 110 mm 15°","Coude PVC Ø 110 mm 30°","Coude PVC Ø 110 mm 45°","Coude PVC Ø 110 mm 67°","Coude PVC Ø 110 mm 90°","Embranchement Y Ø 110 mm 45°","Embranchement T Ø 110 mm 90°","Bouchon PVC Ø 110 mm","Manchon PVC Ø 110 mm","Tuyau drainage PVC Ø 110 mm 5m","Tuyau PVC Ø 110 mm 5m"],"PVC Ø 125":["Coude PVC Ø 125 mm 45°","Coude PVC Ø 125 mm 90°","Bouchon PVC Ø 125 mm","Tuyau PVC Ø 125 mm 5m","Réduction PVC Ø 125/110 mm"],"PVC Ø 160":["Coude PVC Ø 160 mm 45°","Coude PVC Ø 160 mm 90°","Bouchon PVC Ø 160 mm","Tuyau PVC Ø 160 mm 5m","Réduction PVC Ø 160/110 mm","Réduction PVC Ø 160/125 mm"],"PVC Ø 200":["Coude PVC Ø 200 mm 45°","Bouchon PVC Ø 200 mm","Tuyau PVC Ø 200 mm 5m","Réduction PVC Ø 200/160 mm"],"PVC Ø 250":["Coude PVC Ø 250 mm 45°","Tuyau PVC Ø 250 mm 5m","Réduction PVC Ø 250/200 mm"],"Chambres béton":["Tuyaux béton Ø40 50cm","Tuyaux béton Ø40 100cm","Tuyaux béton Ø60 100cm","Tuyaux béton Ø80 100cm","Couvercle de regard"]}},"Bois":{"subcats":{"Bois":["Latte à tuile 4m","Lambourde 4m","Planche de 15 4m","Plateau raboté 4m","Panneau de coffrage 2m","Panneau de coffrage 2.5m","Poutrelle","Carelet 1m","Carelet 2m","Carelet 3m","Carelet 4m"]}},"Coffrage":{"subcats":{"Distanceur":["Distanceur 100mm","Distanceur 120mm","Distanceur 150mm","Distanceur 180mm","Distanceur 200mm","Distanceur 220mm","Distanceur 250mm","Distanceur 300mm"],"Autres":["Réglette d'espacement","Constri-Taquets","Goutte pendante","Liste d'angle haut de coffrage","Liste d'angle noyée"]}},"Isolation":{"subcats":{"XPS":["XPS 10mm","XPS 20mm","XPS 30mm","XPS 40mm","XPS 50mm","XPS 60mm","XPS 80mm","XPS 100mm","XPS 120mm","XPS 150mm","XPS 200mm"],"EPS":["EPS 10mm","EPS 20mm","EPS 30mm","EPS 40mm","EPS 50mm","EPS 80mm","EPS 100mm","EPS 120mm","EPS 150mm","EPS 200mm"],"Autre":["Bande de rive","Laine de verre","Laine de pierre","Plastimule"]}},"Alba":{"subcats":{"ALBA 40mm":["ALBA 50/100cm","ALBA Hydro 50/100cm"],"ALBA 60mm":["ALBA 50/66cm","ALBA Hydro 50/66cm","ALBA Light 50/66cm"],"ALBA 80mm":["ALBA 50/66cm (80mm)","ALBA Hydro 50/66cm (80mm)"],"ALBA 100mm":["ALBA 50/66cm (100mm)","ALBA Hydro 50/66cm (100mm)","ALBA Light 50/66cm (100mm)"],"Sacs & Colle":["Colle Enduit PF3","FIXIT 160","FIXIT 140"],"Autre":["Brique béton cellulaire 80mm 52/62"]}},"Crépis":{"subcats":{"Treillis":["Treillis d'armature renforcé","Treillis d'armature","Treillis d'angle","Profilé pour enduit"]}},"Pièce PE":{"subcats":{"PE Ø 40":["Tube PE Ø40","Coude PE 45° Ø40","Coude PE 90° Ø40","Manchon à emboîter PE Ø40"],"PE Ø 50":["Tube PE Ø50","Coude PE 45° Ø50","Coude PE 90° Ø50","Manchon à emboîter PE Ø50"],"PE Ø 56":["Tube PE Ø56","Coude PE 45° Ø56","Coude PE 90° Ø56","Embranchement 45° Ø56/56"],"PE Ø 63":["Tube PE Ø63","Coude PE 45° Ø63","Coude PE 90° Ø63","Embranchement 45° Ø63/56"],"PE Ø 75":["Tube PE Ø75","Coude PE 45° Ø75","Coude PE 90° Ø75","Embranchement 88.5° Ø75/75"],"PE Ø 90":["Tube PE Ø90","Coude PE 45° Ø90","Coude PE 90° Ø90","Embranchement 88.5° Ø90/90"],"PE Ø 110":["Tube PE Ø110","Coude PE 45° Ø110","Embranchement 45° Ø110/56","Embranchement 88.5° Ø110/110"],"PE Ø 125+":["Manchon électrique Ø125","Tube SILENTE Ø160","Coude PE 45° SILENTE Ø160","Coude PE 45° Ø200"]}},"Armature":{"subcats":{"Treillis":["K335","K188"],"Firipa":["Cage FIRIPA 90mm","Cage FIRIPA 130mm","Cage FIRIPA 150mm","Cage FIRIPA 180mm","Cage FIRIPA 190mm"],"Pannier":["Pannier avec bout caoutchouc","Pannier sans bout caoutchouc"]}},"Aménagement extérieur":{"subcats":{"Bordure":["Bordure béton 4cm","Bordure béton 6cm","Bordure béton 8cm","Bordure béton 10cm"],"Pavés & Dallage":["Pavés","Pierre naturelle","Dalle de jardin"],"Grille gazon":["Grille gazon 8cm","Grille gazon 6cm","Grille gazon plastique"]}}};
+const FOURNIT_UNITES = ['pc','m','ml','m²','m³','kg','T','L','sac','rouleau','barre','boîte','paquet','forfait'];
+const FOURNIT_CUSTOM_KEY = 'rv6_fournitures_custom_v1';
+
+let fournitSelection = {};
+let fournitCustom = {};
+let fournitAddingCat = null;
+
+function buildFournitCatalogue() {
+  fournitCustom = JSON.parse(localStorage.getItem(FOURNIT_CUSTOM_KEY) || '{}');
+  const container = document.getElementById('fournit-catalogue');
+  if (!container || container.children.length > 0) return;
+  Object.entries(FOURNIT_CATEGORIES).forEach(([catName, catData]) => {
+    container.appendChild(buildFournitAccord(catName, catData, fournitCustom[catName]||[]));
+  });
+}
+
+function buildFournitAccord(catName, catData, extra) {
+  const slug = fslug(catName);
+  const div = document.createElement('div');
+  div.className = 'accord-group';
+  div.style.marginBottom = '10px';
+  div.id = 'fcat-' + slug;
+
+  const header = document.createElement('div');
+  header.className = 'accord-header';
+  header.innerHTML = `
+    <span class="accord-title" style="font-size:14px;">${catName}</span>
+    <span class="accord-count" id="fcnt-${slug}">—</span>
+    <span class="accord-chevron">▼</span>
+  `;
+  const body = document.createElement('div');
+  body.className = 'accord-body';
+  header.onclick = () => { header.classList.toggle('open'); body.classList.toggle('open'); };
+  div.appendChild(header);
+
+  Object.entries(catData.subcats).forEach(([subName, prods]) => {
+    // Label sous-catégorie avec bouton + inline
+    const subDiv = document.createElement('div');
+    subDiv.style.cssText = 'display:flex;align-items:center;background:var(--bg);border-bottom:1px solid var(--border);padding:6px 14px 6px 14px;';
+    subDiv.dataset.subcatLabel = '1';
+    subDiv.innerHTML = `
+      <span style="flex:1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);">${subName}</span>
+      <button style="background:none;border:1.5px dashed var(--border);color:var(--teal);font-family:inherit;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;cursor:pointer;">+ Ajouter</button>
+    `;
+    subDiv.querySelector('button').onclick = () => openFournitAddOverlay(catName, subName);
+    body.appendChild(subDiv);
+    prods.forEach(nom => body.appendChild(buildFournitRow(catName, nom)));
+  });
+
+  // Produits custom (sans sous-cat spécifique)
+  extra.forEach(p => body.appendChild(buildFournitRow(catName, p.nom, p.unit)));
+
+  // Bouton ajouter global en bas
+  const addBtn = document.createElement('button');
+  addBtn.style.cssText = 'width:100%;border:none;border-top:1.5px dashed var(--border);background:none;color:var(--teal);font-family:inherit;font-size:13px;font-weight:600;padding:10px 14px;cursor:pointer;text-align:left;';
+  addBtn.textContent = `+ Ajouter dans "${catName}"`;
+  addBtn.onclick = () => openFournitAddOverlay(catName, null);
+  body.appendChild(addBtn);
+
+  div.appendChild(body);
+  return div;
+}
+
+let _frowId = 0;
+
+function buildFournitRow(catName, nom, defaultUnit) {
+  const key = catName + '|' + nom;
+  const isSelected = !!fournitSelection[key];
+  const uid = ++_frowId; // ID unique garanti
+  const row = document.createElement('div');
+  row.className = 'fournit-row';
+  row.dataset.nom = nom; row.dataset.cat = catName; row.dataset.key = key;
+  row.dataset.uid = uid;
+  row.style.cursor = 'pointer';
+  row.innerHTML = `
+    <span class="fournit-row-name${isSelected?' active':''}" id="fn-${uid}">${nom}</span>
+    <span id="fchk-${uid}" style="font-size:18px;flex-shrink:0;">${isSelected?'✅':'⬜'}</span>
+  `;
+  // Stocker l'uid sur la clé pour retrouver l'élément
+  if (!window._fournitUids) window._fournitUids = {};
+  window._fournitUids[key] = uid;
+  row.onclick = () => toggleFournitSelect(key, catName, nom, defaultUnit||'pc');
+  return row;
+}
+
+function toggleFournitSelect(key, catName, nom, defaultUnit) {
+  if (fournitSelection[key]) {
+    delete fournitSelection[key];
+  } else {
+    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
+  }
+  const isNow = !!fournitSelection[key];
+  // Retrouver les éléments via uid stocké
+  const uid = window._fournitUids?.[key];
+  if (uid) {
+    const nameEl = document.getElementById('fn-' + uid);
+    const chkEl  = document.getElementById('fchk-' + uid);
+    nameEl?.classList.toggle('active', isNow);
+    if (chkEl) chkEl.textContent = isNow ? '✅' : '⬜';
+  }
+  updateFournitCatCount(catName);
+  renderFournitSelectionZone();
+  autoSaveDraft();
+}
+
+function renderFournitSelectionZone() {
+  const zone  = document.getElementById('fournit-selection-zone');
+  const list  = document.getElementById('fournit-sel-list');
+  const count = document.getElementById('fournit-sel-count');
+  const items = Object.entries(fournitSelection);
+
+  if (items.length === 0) { zone.style.display = 'none'; return; }
+  zone.style.display = 'block';
+
+  list.innerHTML = '';
+  items.forEach(([key, sel]) => {
+    const nom  = sel.nom || key.split('|')[1];
+    const cat  = sel.cat || key.split('|')[0];
+    const row  = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.08);';
+    row.innerHTML = `
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nom}</span>
+      <button class="f-plus1" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
+      <input type="number" placeholder="0"
+        style="width:48px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:6px 4px;font-family:inherit;font-size:14px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
+        min="0" step="0.5" value="${sel.qty||''}">
+      <select style="width:62px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 2px;font-family:inherit;font-size:11px;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;">
+        ${FOURNIT_UNITES.map(u=>`<option style="color:var(--text)"${u===(sel.unit||'pc')?' selected':''}>${u}</option>`).join('')}
+      </select>
+      <button class="f-del" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;line-height:1;">✕</button>
+    `;
+    const plusBtn  = row.querySelector('.f-plus1');
+    const qtyInput = row.querySelector('input');
+    const unitSel  = row.querySelector('select');
+    const delBtn   = row.querySelector('.f-del');
+    plusBtn.onclick  = () => { const v = (parseFloat(qtyInput.value)||0) + 1; qtyInput.value = v; setSrv(key, 'qty', String(v)); };
+    qtyInput.oninput = () => setSrv(key, 'qty', qtyInput.value);
+    unitSel.onchange = () => setSrv(key, 'unit', unitSel.value);
+    delBtn.onclick   = () => toggleFournitSelect(key, cat, nom, sel.unit||'pc');
+    list.appendChild(row);
+    list.appendChild(row);
+  });
+}
+
+function setSrv(key, field, val) {
+  if (fournitSelection[key]) { fournitSelection[key][field] = val; autoSaveDraft(); }
+}
+
+function onFournitQty() {}
+function onFournitUnit(key, select) { if (fournitSelection[key]) fournitSelection[key].unit = select.value; }
+
+function updateFournitCatCount(catName) {
+  const count = Object.keys(fournitSelection).filter(k => k.startsWith(catName + '|')).length;
+  const el = document.getElementById('fcnt-' + fslug(catName));
+  if (!el) return;
+  el.textContent = count > 0 ? `${count} sél.` : '—';
+  el.style.background = count > 0 ? '#e8f5f3' : 'var(--bg)';
+  el.style.color = count > 0 ? 'var(--teal)' : 'var(--text-muted)';
+}
+
+function fournitSearch(q) {
+  document.getElementById('fournit-clear').style.display = q ? 'block' : 'none';
+  q = q.toLowerCase().trim();
+
+  if (!q) {
+    // Tout fermer et tout réafficher
+    document.querySelectorAll('#fournit-catalogue .fournit-row').forEach(r => r.style.display = '');
+    document.querySelectorAll('#fournit-catalogue .accord-group').forEach(g => g.style.display = '');
+    document.querySelectorAll('#fournit-catalogue [data-subcat-label]').forEach(s => s.style.display = '');
+    document.querySelectorAll('#fournit-catalogue .accord-header').forEach(h => {
+      h.classList.remove('open');
+      h.nextElementSibling?.classList.remove('open');
+    });
+    return;
+  }
+
+  // Pour chaque accordéon, vérifier si au moins un produit correspond
+  document.querySelectorAll('#fournit-catalogue .accord-group').forEach(group => {
+    const rows = group.querySelectorAll('.fournit-row');
+    let groupHasMatch = false;
+
+    rows.forEach(row => {
+      const match = row.dataset.nom.toLowerCase().includes(q) || row.dataset.cat.toLowerCase().includes(q);
+      row.style.display = match ? '' : 'none';
+      if (match) groupHasMatch = true;
+    });
+
+    // Cacher les labels de sous-cat qui n'ont plus de produits visibles
+    group.querySelectorAll('[data-subcat-label]').forEach(sub => {
+      let next = sub.nextElementSibling;
+      let hasVisible = false;
+      while (next && next.classList.contains('fournit-row')) {
+        if (next.style.display !== 'none') hasVisible = true;
+        next = next.nextElementSibling;
+      }
+      sub.style.display = hasVisible ? '' : 'none';
+    });
+
+    // Cacher le groupe entier si aucun produit ne correspond
+    group.style.display = groupHasMatch ? '' : 'none';
+    if (groupHasMatch) {
+      group.querySelector('.accord-header')?.classList.add('open');
+      group.querySelector('.accord-body')?.classList.add('open');
+    }
+  });
+}
+function fournitClearSearch() { document.getElementById('fournit-search').value = ''; fournitSearch(''); }
+
+function openFournitAddOverlay(catName, subName) {
+  fournitAddingCat = catName;
+  const where = subName ? `"${subName}"` : `"${catName}"`;
+  document.getElementById('fournit-add-title').textContent = `+ Ajouter dans ${where}`;
+  document.getElementById('fournit-new-nom').value = '';
+  const chips = document.getElementById('fournit-new-unit-chips');
+  chips.innerHTML = '';
+  FOURNIT_UNITES.forEach(u => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (u==='pc'?' selected':'');
+    b.textContent = u;
+    b.onclick = () => { chips.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected')); b.classList.add('selected'); };
+    chips.appendChild(b);
+  });
+  document.getElementById('overlay-fournit-add').classList.add('open');
+}
+
+function confirmFournitAdd() {
+  const nom = document.getElementById('fournit-new-nom').value.trim();
+  if (!nom || !fournitAddingCat) return;
+  const unit = document.querySelector('#fournit-new-unit-chips .chip.selected')?.textContent || 'pc';
+  const catName = fournitAddingCat;
+  if (!fournitCustom[catName]) fournitCustom[catName] = [];
+  fournitCustom[catName].push({ nom, unit });
+  localStorage.setItem(FOURNIT_CUSTOM_KEY, JSON.stringify(fournitCustom));
+  const body = document.querySelector('#fcat-' + fslug(catName) + ' .accord-body');
+  const addBtn = body?.querySelector('button');
+  if (addBtn) body.insertBefore(buildFournitRow(catName, nom, unit), addBtn);
+  document.getElementById('overlay-fournit-add').classList.remove('open');
+  const t = document.getElementById('toast');
+  t.textContent = `✅ "${nom}" ajouté`;
+  t.classList.add('show');
+  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2000);
+}
+function closeFournitOverlay(e) { if (e.target.classList.contains('overlay')) e.target.classList.remove('open'); }
+function fslug(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').substring(0,40); }
+
+// Auto-save every 60s
+setInterval(saveDraft, 60000);
+
+function showRapTab(tab) {
+  const isBrouillon = tab === 'brouillon';
+  document.getElementById('rap-panel-brouillon').style.display = isBrouillon ? '' : 'none';
+  document.getElementById('rap-panel-valides').style.display   = isBrouillon ? 'none' : '';
+  const btnB = document.getElementById('rap-tab-brouillon');
+  const btnV = document.getElementById('rap-tab-valides');
+  if (btnB) { btnB.style.background = isBrouillon ? 'var(--navy)' : 'var(--bg)'; btnB.style.color = isBrouillon ? 'white' : 'var(--text-muted)'; }
+  if (btnV) { btnV.style.background = isBrouillon ? 'var(--bg)' : 'var(--teal)'; btnV.style.color = isBrouillon ? 'var(--text-muted)' : 'white'; }
+}
+
+
+const REPORTS_KEY = 'rj_reports_v1';
+const TRASH_KEY   = 'rj_trash_v1';
+const MAX_DAYS    = 30;
+const TRASH_DAYS  = 7;
+
+function getReports() {
+  return JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+}
+function getTrash() {
+  return JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
+}
+function saveReports(arr) {
+  localStorage.setItem(REPORTS_KEY, JSON.stringify(arr));
+}
+function saveTrash(arr) {
+  localStorage.setItem(TRASH_KEY, JSON.stringify(arr));
+}
+
+function purgeOld() {
+  const now = Date.now();
+  // Purge rapports > 30j
+  let reports = getReports().filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
+  saveReports(reports);
+  // Purge corbeille > 7j
+  let trash = getTrash().filter(r => (now - new Date(r.deletedAt).getTime()) < TRASH_DAYS * 86400000);
+  saveTrash(trash);
+}
+
+function openHistorique() { goSection(5); }
+function closeHistorique() { goSection(0); }
+
+function renderHistoriqueInline() {
+  purgeOld();
+  const reports = getReports();
+  const trash   = getTrash();
+  const container = document.getElementById('histo-inline');
+
+  // Badge
+  const badge = document.getElementById('histo-badge');
+  badge.style.display = reports.length > 0 ? 'inline-block' : 'none';
+  badge.textContent = reports.length;
+  const subtitle = document.getElementById('histo-subtitle');
+  if (subtitle) subtitle.textContent = `${reports.length} rapport${reports.length>1?'s':''} · 30 derniers jours`;
+
+  if (reports.length === 0 && trash.length === 0) {
+    container.innerHTML = `<div class="histo-empty"><div class="icon">📭</div><p>Aucun rapport validé</p><p style="margin-top:6px;font-size:12px;">Les rapports validés apparaîtront ici</p></div>`;
+    return;
+  }
+
+  const rows = (arr, style='') => arr.map(([k,v]) =>
+    `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;${style}">
+      <span style="color:var(--text-muted);flex:1;">${k}</span>
+      <span style="font-weight:600;color:var(--text);text-align:right;">${v}</span>
+    </div>`
+  ).join('');
+
+  const section = (icon, title, content) => content ? `
+    <div style="margin-bottom:0;">
+      <div style="background:var(--bg);padding:6px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-top:1px solid var(--border);">${icon} ${title}</div>
+      <div style="padding:4px 14px 8px;">${content}</div>
+    </div>` : '';
+
+  let html = '';
+
+  reports.forEach(r => {
+    const d = new Date((r.date||'') + 'T12:00:00');
+    const dateStr  = d.toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    const day      = d.toLocaleDateString('fr-CH',{day:'2-digit'});
+    const month    = d.toLocaleDateString('fr-CH',{month:'short'});
+    const age      = Math.floor((Date.now()-new Date(r.savedAt).getTime())/86400000);
+    const ageStr   = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
+
+    // MO
+    const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
+    const totalMO   = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
+    const moContent = empActifs.length > 0
+      ? rows(empActifs.map(e=>[e.nom, `${parseFloat(e.heures).toFixed(2)} h`])) +
+        `<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-top:2px solid var(--border);margin-top:2px;">
+          <span style="font-weight:700;color:var(--navy);">Total</span>
+          <span style="font-weight:700;color:var(--teal);">${totalMO.toFixed(2)} h</span>
+        </div>`
+      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune main d\'œuvre</p>';
+
+    // Location
+    const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
+    const locEntries  = Object.entries(r.location||{})
+      .filter(([,v])=>v&&parseFloat(v)>0)
+      .map(([k,v])=>{
+        const item = allLocItems.find(i=>i.id===k);
+        return item ? [item.label, `${v} ${item.unit}`] : [k, v];
+      });
+    const locContent = locEntries.length > 0
+      ? rows(locEntries)
+      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune location</p>';
+
+    // Travaux
+    const travauxContent = r.travaux
+      ? `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.travaux}</p>
+         ${(r.metres||[]).length>0 ? `<div style="margin-top:6px;font-size:12px;font-weight:600;color:var(--text-muted);">+ ${r.metres.length} métré(s)</div>` : ''}`
+      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune description</p>';
+
+    // Fournitures catalogue
+    const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
+    const fournitContent = fournitCat.length > 0
+      ? rows(fournitCat.map(f=>[f.nom||f.cat, `${f.qty} ${f.unit}`]))
+      : null;
+
+    // Évacuations
+    const evacItems = (r.evacuations||[]);
+    const evacContent = evacItems.length > 0
+      ? rows(evacItems.map(e=>[e.mat||'—', `${e.qte} ${e.unite}`]))
+      : null;
+
+    html += `
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
+
+      <!-- EN-TÊTE CARTE -->
+      <div style="background:var(--navy);padding:12px 14px;display:flex;align-items:center;gap:12px;">
+        <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 10px;text-align:center;flex-shrink:0;">
+          <div style="color:white;font-size:22px;font-weight:700;line-height:1;">${day}</div>
+          <div style="color:rgba(255,255,255,0.7);font-size:10px;font-weight:600;text-transform:uppercase;">${month}</div>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="color:white;font-size:16px;font-weight:700;">${r.chantier||'Sans chantier'}</div>
+          <div style="color:rgba(255,255,255,0.65);font-size:12px;margin-top:2px;">${r.nom||'—'}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <button onclick="partagerRapport(event,'${r.id}')"
+            style="background:var(--yellow);border:none;color:var(--navy);font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">⬆️</button>
+          <button onclick="deleteRapportInline(event,'${r.id}')"
+            style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">🗑️</button>
+        </div>
+      </div>
+
+      <!-- SECTIONS DÉTAIL -->
+      ${section('👷','Main d\'œuvre', moContent)}
+      ${section('🔧','Location interne', locContent)}
+      ${section('🏗️','Travaux réalisés', travauxContent)}
+      ${fournitContent ? section('📦','Fournitures', fournitContent) : ''}
+      ${evacContent ? section('🚮','Évacuations', evacContent) : ''}
+      ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.notes}</p>`) : ''}
+
+    </div>`;
+  });
+
+  // Corbeille
+  if (trash.length > 0) {
+    html += `<div style="margin-top:16px;padding-top:16px;border-top:2px dashed var(--border);">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">🗑️ Corbeille (${trash.length}) — suppression dans 7 jours</div>`;
+    trash.forEach(r => {
+      const daysLeft = TRASH_DAYS - Math.floor((Date.now()-new Date(r.deletedAt).getTime())/86400000);
+      const d = new Date((r.date||'')+'T12:00:00');
+      html += `
+      <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:8px;opacity:0.6;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;">
+          <div style="flex:1;">
+            <div style="font-weight:700;font-size:14px;color:var(--text-muted);">${r.chantier||'Sans chantier'}</div>
+            <div style="font-size:12px;color:var(--text-light);">${d.toLocaleDateString('fr-CH')} · Supprimé · encore ${daysLeft}j</div>
+          </div>
+          <button onclick="restoreRapportInline(event,'${r.id}')"
+            style="background:#e8f5f3;border:1px solid #a0d4cc;color:var(--teal);font-size:12px;font-weight:600;font-family:inherit;padding:6px 12px;border-radius:6px;cursor:pointer;">
+            ↩️ Restaurer
+          </button>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function partagerRapport(e, id) {
+  e.stopPropagation();
+  const reports = getReports();
+  const r = reports.find(rep => String(rep.id) === String(id));
+  if (!r) return;
+
+  // Bottom sheet de choix
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:flex;align-items:flex-end;';
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:20px 20px 0 0;width:100%;padding:20px 16px 36px;">
+      <div style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;"></div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Partager le rapport</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">${r.chantier||'Sans chantier'} · ${new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH')}</div>
+      <button id="btn-share-text" style="width:100%;background:var(--navy);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
+        📝 Partager en texte
+      </button>
+      <button id="btn-share-pdf" style="width:100%;background:var(--teal);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
+        📄 Partager en PDF
+      </button>
+    </div>
+  `;
+  overlay.onclick = (ev) => { if (ev.target === overlay) document.body.removeChild(overlay); };
+  document.body.appendChild(overlay);
+
+  document.getElementById('btn-share-text').onclick = () => {
+    document.body.removeChild(overlay);
+    partagerTexte(r);
+  };
+  document.getElementById('btn-share-pdf').onclick = () => {
+    document.body.removeChild(overlay);
+    partagerPDF(r);
+  };
+}
+
+function rapportToTexte(r) {
+  const d = new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
+  const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
+  const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
+  const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
+  const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
+  const evac = (r.evacuations||[]);
+
+  let txt = `📋 RAPPORT JOURNALIER — RISSE S.A.\n`;
+  txt += `${'─'.repeat(35)}\n`;
+  txt += `📅 ${d}\n`;
+  txt += `🏗️ Chantier : ${r.chantier||'—'}\n`;
+  txt += `👤 Responsable : ${r.nom||'—'}\n\n`;
+
+  txt += `👷 MAIN D'ŒUVRE\n`;
+  if (empActifs.length > 0) {
+    empActifs.forEach(e => txt += `  ${e.nom} : ${parseFloat(e.heures).toFixed(2)} h\n`);
+    txt += `  Total : ${totalMO.toFixed(2)} h\n`;
+  } else txt += `  Aucune\n`;
+  txt += '\n';
+
+  txt += `🔧 LOCATION INTERNE\n`;
+  if (locFilled.length > 0) {
+    locFilled.forEach(([k,v]) => {
+      const item = allLocItems.find(i=>i.id===k);
+      txt += `  ${item?.label||k} : ${v} ${item?.unit||''}\n`;
+    });
+  } else txt += `  Aucune\n`;
+  txt += '\n';
+
+  txt += `🏗️ TRAVAUX RÉALISÉS\n`;
+  txt += r.travaux ? `  ${r.travaux}\n` : `  Aucune description\n`;
+  if ((r.metres||[]).length > 0) txt += `  + ${r.metres.length} métré(s)\n`;
+  txt += '\n';
+
+  if (fournitCat.length > 0) {
+    txt += `📦 FOURNITURES\n`;
+    fournitCat.forEach(f => txt += `  ${f.nom||f.cat} : ${f.qty} ${f.unit}\n`);
+    txt += '\n';
+  }
+
+  if (evac.length > 0) {
+    txt += `🚮 ÉVACUATIONS\n`;
+    evac.forEach(e => txt += `  ${e.mat||'—'} : ${e.qte} ${e.unite}\n`);
+    txt += '\n';
+  }
+
+  if (r.notes) txt += `💬 NOTES\n  ${r.notes}\n\n`;
+  txt += `${'─'.repeat(35)}\nRisse S.A.`;
+  return txt;
+}
+
+function partagerTexte(r) {
+  const txt = rapportToTexte(r);
+  if (navigator.share) {
+    navigator.share({ title: `Rapport ${r.chantier} - ${r.date}`, text: txt })
+      .catch(() => copyToClipboard(txt));
+  } else {
+    copyToClipboard(txt);
+  }
+}
+
+function copyToClipboard(txt) {
+  navigator.clipboard?.writeText(txt).then(() => showToast('✅ Copié dans le presse-papiers'))
+    .catch(() => showToast('⚠️ Impossible de copier'));
+}
+
+function partagerPDF(r) {
+  const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
+  const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
+  const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
+  const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
+  const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
+  const evac = (r.evacuations||[]);
+  const d = new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  const rowsHTML = (items) => items.map(([k,v])=>`
+    <tr><td style="padding:5px 8px;color:#555;border-bottom:1px solid #eee;">${k}</td>
+        <td style="padding:5px 8px;font-weight:600;text-align:right;border-bottom:1px solid #eee;">${v}</td></tr>`).join('');
+
+  const section = (icon, title, content) => `
+    <div style="margin-bottom:16px;">
+      <div style="background:#1B3A6B;color:white;padding:6px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">${icon} ${title}</div>
+      <table style="width:100%;border-collapse:collapse;">${content}</table>
+    </div>`;
+
+  const moRows = empActifs.length > 0
+    ? rowsHTML(empActifs.map(e=>[e.nom,`${parseFloat(e.heures).toFixed(2)} h`])) +
+      `<tr><td style="padding:6px 8px;font-weight:700;color:#1B3A6B;">Total</td><td style="padding:6px 8px;font-weight:700;color:#1A7F72;text-align:right;">${totalMO.toFixed(2)} h</td></tr>`
+    : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
+
+  const locRows = locFilled.length > 0
+    ? rowsHTML(locFilled.map(([k,v])=>{ const item=allLocItems.find(i=>i.id===k); return [item?.label||k,`${v} ${item?.unit||''}`]; }))
+    : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>Rapport Journalier - ${r.chantier}</title>
+  <style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#222;}
+  h1{color:#1B3A6B;font-size:20px;margin:0;}
+  .header{background:#1B3A6B;color:white;padding:16px 20px;border-radius:8px;margin-bottom:20px;}
+  .meta{color:rgba(255,255,255,0.75);font-size:13px;margin-top:4px;}
+  table{width:100%;border-collapse:collapse;}
+  p{font-size:13px;line-height:1.6;padding:8px;color:#333;}</style>
+  </head><body>
+  <div class="header">
+    <h1>📋 Rapport Journalier — Risse S.A.</h1>
+    <div class="meta">${d} · ${r.chantier||'—'} · ${r.nom||'—'}</div>
+  </div>
+  ${section('👷','Main d\'œuvre', moRows)}
+  ${section('🔧','Location interne', locRows)}
+  ${section('🏗️','Travaux réalisés',
+    `<tr><td style="padding:8px;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
+    + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} métré(s)</td></tr>`:'')
+  )}
+  ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.nom||f.cat,`${f.qty} ${f.unit}`]))):''}
+  ${evac.length>0?section('🚮','Évacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
+  ${r.notes?section('💬','Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
+  <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — rapport généré le ${new Date().toLocaleDateString('fr-CH')}</p>
+  </body></html>`;
+
+  const win = window.open('', '_blank');
+  if (win) {
+    win.document.write(html);
+    win.document.close();
+    setTimeout(() => win.print(), 500);
+  } else {
+    showToast('⚠️ Autorisez les popups pour générer le PDF');
+  }
+}
+
+function deleteRapportInline(e, id) {
+  e.stopPropagation();
+  let reports = getReports();
+  const idx = reports.findIndex(r => String(r.id) === String(id));
+  if (idx === -1) return;
+  const [removed] = reports.splice(idx, 1);
+  removed.deletedAt = new Date().toISOString();
+  saveReports(reports);
+  const trash = getTrash();
+  trash.unshift(removed);
+  saveTrash(trash);
+  renderHistoriqueInline();
+}
+
+function restoreRapportInline(e, id) {
+  e.stopPropagation();
+  let trash = getTrash();
+  const idx = trash.findIndex(r => String(r.id) === String(id));
+  if (idx === -1) return;
+  const [restored] = trash.splice(idx, 1);
+  delete restored.deletedAt;
+  saveTrash(trash);
+  const reports = getReports();
+  reports.unshift(restored);
+  saveReports(reports);
+  renderHistoriqueInline();
+}
+
+function renderHistorique() {
+  const reports = getReports();
+  const trash   = getTrash();
+  const scroll  = document.getElementById('histo-scroll');
+  const countEl = document.getElementById('histo-count');
+
+  // Update badge
+  const badge = document.getElementById('histo-badge');
+  if (reports.length > 0) {
+    badge.style.display = 'flex';
+    badge.textContent = reports.length;
+  } else {
+    badge.style.display = 'none';
+  }
+
+  countEl.textContent = `${reports.length} rapport${reports.length>1?'s':''}`;
+
+  if (reports.length === 0 && trash.length === 0) {
+    scroll.innerHTML = `
+      <div class="histo-empty">
+        <div class="icon">📭</div>
+        <p>Aucun rapport enregistré</p>
+        <p style="margin-top:6px;font-size:12px;">Validez un rapport pour le retrouver ici</p>
+      </div>`;
+    return;
+  }
+
+  let html = '';
+
+  reports.forEach(r => {
+    const d = new Date(r.date + 'T12:00:00');
+    const day = d.toLocaleDateString('fr-CH',{day:'2-digit'});
+    const month = d.toLocaleDateString('fr-CH',{month:'short'});
+    const weekday = d.toLocaleDateString('fr-CH',{weekday:'short'});
+    const totalMO = (r.employes||[]).reduce((s,e)=>s+parseFloat(e.heures||0),0);
+    const nEmp = (r.employes||[]).length;
+    const nLoc = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
+    const nFournit = (r.fournitures||[]).length;
+    const nEvac = (r.evacuations||[]).length;
+    const age = Math.floor((Date.now() - new Date(r.savedAt).getTime()) / 86400000);
+    const ageStr = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
+
+    html += `
+    <div class="rapport-card" onclick="openEditPage('${r.id}')">
+      <div class="rapport-card-header">
+        <div class="rapport-card-date">
+          <div class="day">${day}</div>
+          <div class="month">${month}</div>
+        </div>
+        <div class="rapport-card-info">
+          <div class="chantier">${r.chantier || 'Sans chantier'}</div>
+          <div class="meta">${weekday} · ${r.nom||'—'} · ${ageStr}</div>
+        </div>
+        <div class="rapport-card-actions">
+          ${totalMO > 0 ? `<span class="badge-mo">${totalMO.toFixed(2)}h MO</span>` : ''}
+          <button class="btn-del-rapport" onclick="deleteRapport(event,'${r.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="rapport-card-chips">
+        ${nEmp>0 ? `<span class="rc-chip blue">👷 ${nEmp} emp.</span>` : ''}
+        ${nLoc>0 ? `<span class="rc-chip blue">🔧 ${nLoc} engin(s)</span>` : ''}
+        ${(r.metres||[]).length>0 ? `<span class="rc-chip green">📐 ${r.metres.length} métré(s)</span>` : ''}
+        ${nFournit>0 ? `<span class="rc-chip green">📦 ${nFournit} fournit.</span>` : ''}
+        ${nEvac>0 ? `<span class="rc-chip green">🚮 ${nEvac} évac.</span>` : ''}
+        ${r.meteo ? `<span class="rc-chip">${r.meteo}</span>` : ''}
+      </div>
+    </div>`;
+  });
+
+  if (trash.length > 0) {
+    html += `
+    <div class="corbeille-section">
+      <div class="corbeille-title">🗑️ Corbeille (${trash.length}) — suppression dans 7 jours</div>`;
+    trash.forEach(r => {
+      const d = new Date(r.date + 'T12:00:00');
+      const day = d.toLocaleDateString('fr-CH',{day:'2-digit'});
+      const month = d.toLocaleDateString('fr-CH',{month:'short'});
+      const daysLeft = TRASH_DAYS - Math.floor((Date.now() - new Date(r.deletedAt).getTime()) / 86400000);
+      html += `
+      <div class="rapport-card deleted">
+        <div class="rapport-card-header">
+          <div class="rapport-card-date" style="background:var(--text-muted)">
+            <div class="day">${day}</div>
+            <div class="month">${month}</div>
+          </div>
+          <div class="rapport-card-info">
+            <div class="chantier" style="color:var(--text-muted)">${r.chantier||'Sans chantier'}</div>
+            <div class="meta">Supprimé · encore ${daysLeft}j</div>
+          </div>
+          <div class="rapport-card-actions">
+            <button class="btn-restore" onclick="restoreRapport(event,'${r.id}')">↩️ Restaurer</button>
+          </div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  scroll.innerHTML = html;
+}
+
+function deleteRapport(e, id) {
+  e.stopPropagation();
+  let reports = getReports();
+  const idx = reports.findIndex(r => String(r.id) === String(id));
+  if (idx === -1) return;
+  const [removed] = reports.splice(idx, 1);
+  removed.deletedAt = new Date().toISOString();
+  saveReports(reports);
+  const trash = getTrash();
+  trash.unshift(removed);
+  saveTrash(trash);
+  renderHistorique();
+}
+
+function restoreRapport(e, id) {
+  e.stopPropagation();
+  let trash = getTrash();
+  const idx = trash.findIndex(r => String(r.id) === String(id));
+  if (idx === -1) return;
+  const [restored] = trash.splice(idx, 1);
+  delete restored.deletedAt;
+  saveTrash(trash);
+  const reports = getReports();
+  reports.unshift(restored);
+  saveReports(reports);
+  renderHistorique();
+}
+
+// ─── EDIT PAGE ─────────────────────────────────────────────────
+let currentEditId = null;
+
+function openEditPage(id) {
+  const reports = getReports();
+  const r = reports.find(rep => String(rep.id) === String(id));
+  if (!r) return;
+  currentEditId = id;
+
+  document.getElementById('ed-date').value = r.date || '';
+  document.getElementById('ed-nom').value = r.nom || '';
+  document.getElementById('ed-chantier').value = r.chantier || '';
+  document.getElementById('ed-travaux').value = r.travaux || '';
+  document.getElementById('ed-notes').value = r.notes || '';
+
+  // Météo chips
+  document.querySelectorAll('#ed-meteo-chips .chip').forEach(c => {
+    c.classList.toggle('selected', c.textContent.trim() === (r.meteo||'').trim());
+  });
+
+  // Titre
+  const d = new Date((r.date||'') + 'T12:00:00');
+  document.getElementById('edit-page-title').textContent =
+    `${r.chantier||'Rapport'} — ${d.toLocaleDateString('fr-CH',{day:'numeric',month:'short'})}`;
+
+  // Récap lecture seule
+  const totalMO = (r.employes||[]).reduce((s,e)=>s+parseFloat(e.heures||0),0);
+  const nLoc = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
+  document.getElementById('ed-recap').innerHTML = `
+    <div class="info-row"><span class="k">👷 MO total</span><span class="v">${totalMO.toFixed(2)} h (${(r.employes||[]).length} pers.)</span></div>
+    <div class="info-row"><span class="k">🔧 Location</span><span class="v">${nLoc} équipement(s)</span></div>
+    <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} ligne(s)</span></div>
+    <div class="info-row"><span class="k">📦 Fournitures</span><span class="v">${(r.fournitures||[]).length} article(s)</span></div>
+    <div class="info-row"><span class="k">🚮 Évacuations</span><span class="v">${(r.evacuations||[]).length} article(s)</span></div>
+  `;
+
+  document.getElementById('edit-page').classList.add('open');
+}
+
+function closeEditPage() {
+  document.getElementById('edit-page').classList.remove('open');
+  currentEditId = null;
+}
+
+function selectEditChip(el, group) {
+  el.closest('.chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function saveEditedRapport() {
+  if (!currentEditId) return;
+  let reports = getReports();
+  const idx = reports.findIndex(r => String(r.id) === String(currentEditId));
+  if (idx === -1) return;
+
+  const meteoChip = document.querySelector('#ed-meteo-chips .chip.selected');
+  reports[idx].date     = document.getElementById('ed-date').value;
+  reports[idx].nom      = document.getElementById('ed-nom').value;
+  reports[idx].chantier = document.getElementById('ed-chantier').value;
+  reports[idx].travaux  = document.getElementById('ed-travaux').value;
+  reports[idx].notes    = document.getElementById('ed-notes').value;
+  reports[idx].meteo    = meteoChip ? meteoChip.textContent.trim() : reports[idx].meteo;
+  reports[idx].editedAt = new Date().toISOString();
+
+  saveReports(reports);
+  closeEditPage();
+  if (state.currentSection === 5) renderHistoriqueInline();
+
+  const t = document.getElementById('toast');
+  t.textContent = '✅ Rapport mis à jour';
+  t.classList.add('show');
+  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2000);
+}
+
+// Mise à jour badge au chargement
+window.addEventListener('DOMContentLoaded', () => {
+  purgeOld();
+  const reports = getReports();
+  const badge = document.getElementById('histo-badge');
+  if (reports.length > 0) {
+    badge.style.display = 'inline-block';
+    badge.textContent = reports.length;
+  }
+});
+</script>
+
+<!-- OVERLAY AJOUT PRODUIT FOURNITURES -->
+<div class="overlay" id="overlay-fournit-add" onclick="closeFournitOverlay(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="fournit-add-title">Ajouter un produit</div>
+    <div class="form-row">
+      <label class="lbl">Nom du produit</label>
+      <input type="text" id="fournit-new-nom" placeholder="Nom…">
+    </div>
+    <div class="form-row">
+      <label class="lbl">Unité</label>
+      <div class="chips" id="fournit-new-unit-chips"></div>
+    </div>
+    <button class="btn-sheet-confirm" onclick="confirmFournitAdd()">Ajouter ✓</button>
+  </div>
+</div>
+
+<div class="saved-toast" id="toast">💾 Brouillon sauvegardé</div>
+
+</body>
+</html>
