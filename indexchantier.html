@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1B3A6B">
+<title>Chantiers — Risse S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A6B;--navy2:#122952;--yellow:#F0A500;--teal:#1A7F72;
+  --red:#E53935;--orange:#E67E22;--green:#2E7D32;
+  --bg:#F4F6FB;--bg2:#EAECF4;--card:#fff;
+  --border:#E0E4EF;--text:#1A2340;--text2:#4A5878;--text3:#9AA3BC;
+  --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
+  --r:14px;--rs:8px;
+  --sh:0 2px 12px rgba(27,58,107,.10);--shm:0 4px 24px rgba(27,58,107,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
+
+/* ── HEADER ── */
+.header{background:var(--navy);padding-top:var(--safe-t);flex-shrink:0;box-shadow:0 2px 14px rgba(0,0,0,.28);}
+.header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;}
+.back-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
+.back-btn:active{background:rgba(255,255,255,.25);}
+.header-titles{flex:1;}
+.header-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px;}
+.header-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.8px;text-transform:uppercase;}
+.header-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;}
+
+/* ── SCROLL ── */
+.scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:16px 14px calc(var(--safe-b)+20px);}
+
+/* ── TOOLBAR ── */
+.toolbar{display:flex;gap:8px;margin-bottom:16px;position:sticky;top:0;z-index:5;background:var(--bg);padding:2px 0 8px;}
+.search-input{flex:1;background:#fff;border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 14px;border-radius:24px;-webkit-appearance:none;transition:border-color .15s;}
+.search-input:focus{outline:none;border-color:var(--navy);}
+.search-input::placeholder{color:var(--text3);}
+.add-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shm);transition:all .15s;}
+.add-fab:active{transform:scale(.92);}
+
+/* ── FILTRES STATUT ── */
+.filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;}
+.filter-row::-webkit-scrollbar{display:none;}
+.filter-chip{flex-shrink:0;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;transition:all .13s;white-space:nowrap;}
+.filter-chip.on{border-color:var(--navy);background:var(--navy);color:#fff;}
+
+/* ── CHANTIER CARD ── */
+.chantier-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:10px;overflow:hidden;cursor:pointer;transition:transform .13s,box-shadow .13s;}
+.chantier-card:active{transform:scale(.98);box-shadow:none;}
+
+.card-top{display:flex;align-items:stretch;gap:0;}
+.card-accent{width:5px;flex-shrink:0;}
+.card-body-wrap{flex:1;padding:13px 14px 13px 12px;min-width:0;}
+.card-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;}
+.card-name{font-size:15px;font-weight:700;color:var(--text);line-height:1.2;}
+.card-status-badge{flex-shrink:0;font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px;}
+.status-actif{background:#E8F5E9;color:#2E7D32;}
+.status-pause{background:#FFF3E0;color:#E67E22;}
+.status-termine{background:#F3F4F6;color:#6B7280;}
+.status-prospect{background:#EEF2FF;color:#3B5BDB;}
+
+.card-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.meta-pill{font-size:10px;font-weight:600;color:var(--text2);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:10px;white-space:nowrap;}
+.meta-pill.accent{color:var(--teal);background:rgba(26,127,114,.06);border-color:rgba(26,127,114,.2);}
+
+.card-bottom{display:flex;align-items:center;justify-content:space-between;}
+.card-client{font-size:11px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.card-arrow{font-size:16px;color:var(--text3);flex-shrink:0;}
+
+/* ── EMPTY ── */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;color:var(--text3);text-align:center;padding:40px 20px;}
+.empty-icon{font-size:52px;margin-bottom:14px;opacity:.5;}
+.empty-txt{font-size:14px;font-weight:600;color:var(--text2);}
+.empty-hint{font-size:12px;margin-top:6px;}
+
+/* ── MODAL AJOUT ── */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:300;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
+.modal-ov.open{display:flex;}
+.modal-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
+.modal-drag{padding:14px 16px 0;}
+.modal-handle{width:36px;height:4px;background:var(--bg2);border-radius:2px;margin:0 auto 14px;}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 16px 14px;border-bottom:1px solid var(--border);}
+.modal-title{font-size:17px;font-weight:700;color:var(--navy);}
+.modal-close{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-body{flex:1;overflow-y:auto;padding:16px;}
+.modal-footer{padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);}
+
+/* ── FORM ── */
+.fsec{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
+.fsec:first-child{margin-top:0;}
+.fsec::after{content:'';flex:1;height:1px;background:var(--border);}
+.field{margin-bottom:10px;}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;padding:11px 13px;border-radius:var(--rs);-webkit-appearance:none;appearance:none;transition:border-color .15s;}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
+.field textarea{min-height:72px;resize:vertical;line-height:1.5;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy);background:#fff;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;padding:13px 18px;border:none;border-radius:var(--rs);cursor:pointer;transition:all .14s;width:100%;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-ghost{background:#fff;color:var(--text2);border:1.5px solid var(--border);}
+.btn-danger{background:#FFF0F0;color:var(--red);border:1.5px solid rgba(229,57,53,.2);}
+.btn-sm{padding:10px 14px;font-size:13px;}
+.mt8{margin-top:8px;}
+
+/* ── COULEURS SÉLECTEUR ── */
+.color-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
+.color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .13s;}
+.color-dot.sel{border-color:var(--navy);transform:scale(1.18);}
+
+/* ── DETAIL SHEET ── */
+.detail-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
+.detail-ov.open{display:flex;}
+.detail-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
+.detail-drag{padding:14px 16px 0;}
+.det-head{padding:0 16px 14px;border-bottom:1px solid var(--border);}
+.det-name{font-size:20px;font-weight:700;color:var(--text);}
+.det-meta{font-size:12px;color:var(--text3);margin-top:3px;}
+.det-body{flex:1;overflow-y:auto;padding:16px;}
+.det-row{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--bg2);}
+.det-row:last-child{border-bottom:none;}
+.det-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;}
+.det-val{font-size:14px;font-weight:600;color:var(--text);text-align:right;max-width:55%;}
+.det-notes{background:var(--bg);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:4px;}
+.det-soon{background:var(--bg);border:1.5px dashed var(--border);border-radius:var(--rs);padding:14px;text-align:center;margin-top:4px;}
+.det-soon-icon{font-size:28px;margin-bottom:6px;}
+.det-soon-txt{font-size:12px;color:var(--text3);font-weight:600;}
+.det-footer{padding:12px 16px calc(12px + var(--safe-b));display:flex;gap:8px;border-top:1px solid var(--border);}
+
+/* ── STATUT COLOR MAP ── */
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:calc(var(--safe-b)+12px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
+    <div class="header-titles">
+      <div class="header-title">Chantiers</div>
+      <div class="header-sub">Risse S.A.</div>
+    </div>
+    <div class="header-count" id="hdrCount">0</div>
+  </div>
+</div>
+
+<!-- SCROLL -->
+<div class="scroll">
+  <div class="toolbar">
+    <input class="search-input" type="search" placeholder="🔍  Rechercher un chantier…" oninput="onSearch(this.value)" autocomplete="off">
+    <button class="add-fab" onclick="openAdd()">＋</button>
+  </div>
+
+  <!-- Filtres statut -->
+  <div class="filter-row" id="filterRow">
+    <div class="filter-chip on" data-filter="tous" onclick="setFilter('tous',this)">Tous</div>
+    <div class="filter-chip" data-filter="actif" onclick="setFilter('actif',this)">🟢 Actif</div>
+    <div class="filter-chip" data-filter="pause" onclick="setFilter('pause',this)">🟡 En pause</div>
+    <div class="filter-chip" data-filter="termine" onclick="setFilter('termine',this)">⬜ Terminé</div>
+    <div class="filter-chip" data-filter="prospect" onclick="setFilter('prospect',this)">🔵 Prospect</div>
+  </div>
+
+  <div id="listContainer"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══ MODAL AJOUT ═══ -->
+<div class="modal-ov" id="modal-add">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr">
+      <div class="modal-title">📁 Nouveau chantier</div>
+      <button class="modal-close" onclick="closeAdd()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="fsec">Identification</div>
+      <div class="field"><label>Nom du chantier *</label><input type="text" id="add-nom" placeholder="Villa Dupont, Route cantonale..." autocomplete="off"></div>
+      <div class="field"><label>Référence / N° dossier</label><input type="text" id="add-ref" placeholder="2024-042" autocomplete="off"></div>
+
+      <div class="fsec">Client & Lieu</div>
+      <div class="field"><label>Client / Maître d'ouvrage</label><input type="text" id="add-client" placeholder="M. et Mme Dupont" autocomplete="off"></div>
+      <div class="field"><label>Adresse / Lieu</label><input type="text" id="add-adresse" placeholder="Rue des Fleurs 12, 1000 Lausanne" autocomplete="off"></div>
+      <div class="field"><label>Commune</label><input type="text" id="add-commune" placeholder="Lausanne" autocomplete="off"></div>
+
+      <div class="fsec">Statut & Dates</div>
+      <div class="field"><label>Statut</label>
+        <select id="add-statut">
+          <option value="actif">🟢 Actif</option>
+          <option value="prospect">🔵 Prospect</option>
+          <option value="pause">🟡 En pause</option>
+          <option value="termine">⬜ Terminé</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Date début</label><input type="date" id="add-debut"></div>
+        <div class="field"><label>Date fin prévue</label><input type="date" id="add-fin"></div>
+      </div>
+
+      <div class="fsec">Informations financières</div>
+      <div class="field-row">
+        <div class="field"><label>Montant devis (CHF)</label><input type="number" id="add-montant" placeholder="45000" min="0" step="100" autocomplete="off"></div>
+        <div class="field"><label>Type de marché</label>
+          <select id="add-marche">
+            <option value="">—</option>
+            <option>Forfait</option>
+            <option>Régie</option>
+            <option>Série de prix</option>
+            <option>Contrat cadre</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fsec">Couleur d'identification</div>
+      <div class="color-row" id="colorPicker"></div>
+
+      <div class="fsec">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="add-notes" placeholder="Accès, contraintes particulières, contacts..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-navy" onclick="saveChantier()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DETAIL SHEET ═══ -->
+<div class="detail-ov" id="detail-ov">
+  <div class="detail-sh">
+    <div class="detail-drag"><div class="modal-handle"></div></div>
+    <div class="det-head">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <div id="det-color-dot" style="width:14px;height:14px;border-radius:50%;flex-shrink:0;"></div>
+        <div class="det-name" id="det-nom"></div>
+        <div id="det-status-badge" class="card-status-badge" style="margin-left:auto;"></div>
+      </div>
+      <div class="det-meta" id="det-meta"></div>
+    </div>
+    <div class="det-body">
+      <div id="det-rows"></div>
+      <!-- Zone "à venir" pour les futures fonctionnalités -->
+      <div class="det-soon" style="margin-top:12px;">
+        <div class="det-soon-icon">🚀</div>
+        <div class="det-soon-txt">Documents, photos, plans et suivi<br>seront disponibles dans une prochaine version</div>
+      </div>
+    </div>
+    <div class="det-footer">
+      <button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteCurrentChantier()">🗑 Supprimer</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeDetail()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// CONFIG
+// ════════════════════════════════════════════
+const KEY = 'rv6_chantiers_v1'; // clé dédiée au module Chantiers (riche)
+// rv6_c = liste simple de noms partagée avec Machines/Rapport (maintenue en sync)
+const KEY_SIMPLE = 'rv6_c';
+
+const COLORS = ['#1B3A6B','#1A7F72','#F0A500','#E53935','#E67E22','#2E7D32','#6C3483','#1565C0','#00838F','#4E342E','#546E7A','#1A2340'];
+
+const STATUS_LABEL = { actif:'Actif', pause:'En pause', termine:'Terminé', prospect:'Prospect' };
+const STATUS_CLASS = { actif:'status-actif', pause:'status-pause', termine:'status-termine', prospect:'status-prospect' };
+
+let currentFilter = 'tous';
+let currentSearch = '';
+let currentDetailId = null;
+let selectedColor = COLORS[0];
+
+// ════════════════════════════════════════════
+// STORAGE
+// ════════════════════════════════════════════
+function load() { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch(e){ return []; } }
+function save(d) {
+  localStorage.setItem(KEY, JSON.stringify(d));
+  // Sync liste simple rv6_c pour les autres modules
+  const simple = d.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
+  localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
+}
+
+// ════════════════════════════════════════════
+// RENDU LISTE
+// ════════════════════════════════════════════
+function renderList() {
+  let data = load();
+  const q = currentSearch.toLowerCase();
+
+  // Filtre statut
+  if (currentFilter !== 'tous') data = data.filter(c => c.statut === currentFilter);
+  // Filtre recherche
+  if (q) data = data.filter(c => Object.values(c).some(v=>String(v).toLowerCase().includes(q)));
+
+  // Tri : actif d'abord, puis par date début desc, puis alphabétique
+  const order = { actif:0, prospect:1, pause:2, termine:3 };
+  data.sort((a,b) => {
+    const so = (order[a.statut]||0) - (order[b.statut]||0);
+    if (so !== 0) return so;
+    if (a.debut && b.debut) return b.debut.localeCompare(a.debut);
+    return a.nom.localeCompare(b.nom);
+  });
+
+  const el = document.getElementById('listContainer');
+  const total = load().length;
+  document.getElementById('hdrCount').textContent = total;
+
+  if (!data.length) {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">📁</div><div class="empty-txt">${q||currentFilter!=='tous'?'Aucun résultat':'Aucun chantier'}</div><div class="empty-hint">${q||currentFilter!=='tous'?'Modifiez les filtres':'Appuyez sur ＋ pour créer le premier'}</div></div>`;
+    return;
+  }
+
+  el.innerHTML = data.map(c => {
+    const color = c.color || COLORS[0];
+    const pills = [];
+    if (c.commune) pills.push({ label: '📍 '+c.commune });
+    if (c.debut) pills.push({ label: fmtDate(c.debut) });
+    if (c.fin) pills.push({ label: '→ '+fmtDate(c.fin) });
+    if (c.montant) pills.push({ label: 'CHF '+Number(c.montant).toLocaleString('fr-CH'), accent: true });
+    if (c.marche) pills.push({ label: c.marche });
+
+    return `
+    <div class="chantier-card" onclick="openDetail('${c.id}')">
+      <div class="card-top">
+        <div class="card-accent" style="background:${color}"></div>
+        <div class="card-body-wrap">
+          <div class="card-title-row">
+            <div class="card-name">${esc(c.nom)}</div>
+            <div class="card-status-badge ${STATUS_CLASS[c.statut]||'status-actif'}">${STATUS_LABEL[c.statut]||'Actif'}</div>
+          </div>
+          ${pills.length?`<div class="card-meta">${pills.map(p=>`<span class="meta-pill${p.accent?' accent':''}">${esc(p.label)}</span>`).join('')}</div>`:''}
+          <div class="card-bottom">
+            <div class="card-client">${esc(c.client||c.ref||'')}</div>
+            <div class="card-arrow">›</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════
+// FILTRES & RECHERCHE
+// ════════════════════════════════════════════
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderList();
+}
+function onSearch(v) { currentSearch = v; renderList(); }
+
+// ════════════════════════════════════════════
+// COULEUR PICKER
+// ════════════════════════════════════════════
+function buildColorPicker() {
+  document.getElementById('colorPicker').innerHTML = COLORS.map(c=>
+    `<div class="color-dot${c===selectedColor?' sel':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`
+  ).join('');
+}
+function selectColor(c) {
+  selectedColor = c;
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.toggle('sel', d.style.background===c||d.style.backgroundColor===c));
+}
+
+// ════════════════════════════════════════════
+// MODAL AJOUT
+// ════════════════════════════════════════════
+function openAdd() {
+  selectedColor = COLORS[0];
+  buildColorPicker();
+  document.getElementById('modal-add').classList.add('open');
+  setTimeout(()=>document.getElementById('add-nom').focus(), 150);
+}
+function closeAdd() {
+  document.getElementById('modal-add').classList.remove('open');
+  // Reset form
+  ['add-nom','add-ref','add-client','add-adresse','add-commune','add-montant','add-notes'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('add-statut').value='actif';
+  document.getElementById('add-marche').value='';
+  document.getElementById('add-debut').value='';
+  document.getElementById('add-fin').value='';
+  selectedColor = COLORS[0];
+}
+
+document.getElementById('modal-add').addEventListener('click',e=>{ if(e.target===document.getElementById('modal-add')) closeAdd(); });
+document.getElementById('add-nom').addEventListener('keydown',e=>{ if(e.key==='Enter') saveChantier(); });
+
+function g(id){ const el=document.getElementById(id); return el?(el.value||'').trim():''; }
+
+function saveChantier() {
+  const nom = g('add-nom');
+  if (!nom) { highlight('add-nom'); return; }
+
+  const item = {
+    id: Date.now().toString(36)+Math.random().toString(36).slice(2,4),
+    nom,
+    ref:      g('add-ref'),
+    client:   g('add-client'),
+    adresse:  g('add-adresse'),
+    commune:  g('add-commune'),
+    statut:   g('add-statut') || 'actif',
+    debut:    g('add-debut'),
+    fin:      g('add-fin'),
+    montant:  g('add-montant'),
+    marche:   g('add-marche'),
+    color:    selectedColor,
+    notes:    g('add-notes'),
+    createdAt: new Date().toISOString(),
+    // Structure pour la suite
+    documents: [],
+    photos:    [],
+    contacts:  [],
+    travaux:   [],
+  };
+
+  const data = [...load(), item];
+  save(data);
+  closeAdd();
+  renderList();
+  showToast('📁 Chantier créé ✓');
+}
+
+function highlight(id) {
+  const el=document.getElementById(id);
+  if(!el) return;
+  el.style.borderColor='var(--red)';
+  el.focus();
+  setTimeout(()=>el.style.borderColor='',2000);
+}
+
+// ════════════════════════════════════════════
+// DETAIL
+// ════════════════════════════════════════════
+function openDetail(id) {
+  const c = load().find(x=>x.id===id);
+  if (!c) return;
+  currentDetailId = id;
+
+  document.getElementById('det-color-dot').style.background = c.color||COLORS[0];
+  document.getElementById('det-nom').textContent = c.nom;
+  document.getElementById('det-status-badge').textContent = STATUS_LABEL[c.statut]||'Actif';
+  document.getElementById('det-status-badge').className = 'card-status-badge '+(STATUS_CLASS[c.statut]||'status-actif');
+  document.getElementById('det-meta').textContent = [c.ref, c.commune].filter(Boolean).join(' · ');
+
+  const rows = [];
+  const add = (l,v) => { if(v) rows.push(`<div class="det-row"><span class="det-label">${l}</span><span class="det-val">${esc(v)}</span></div>`); };
+  add('Client',c.client);
+  add('Adresse',c.adresse);
+  add('Commune',c.commune);
+  add('Référence',c.ref);
+  add('Date début',c.debut?fmtDateLong(c.debut):'');
+  add('Date fin prévue',c.fin?fmtDateLong(c.fin):'');
+  add('Montant devis',c.montant?'CHF '+Number(c.montant).toLocaleString('fr-CH'):'');
+  add('Type de marché',c.marche);
+  const notesHtml = c.notes ? `<div style="margin-top:8px"><div class="det-label" style="margin-bottom:6px">Notes</div><div class="det-notes">${esc(c.notes)}</div></div>` : '';
+  const age = c.createdAt ? `Créé ${Math.floor((Date.now()-new Date(c.createdAt).getTime())/86400000)}j` : '';
+  if (age) add('',age);
+
+  document.getElementById('det-rows').innerHTML = rows.join('') + notesHtml;
+  document.getElementById('detail-ov').classList.add('open');
+}
+function closeDetail() { document.getElementById('detail-ov').classList.remove('open'); }
+document.getElementById('detail-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('detail-ov')) closeDetail(); });
+
+function deleteCurrentChantier() {
+  if (!currentDetailId) return;
+  const data = load().filter(c=>c.id!==currentDetailId);
+  save(data);
+  closeDetail();
+  renderList();
+  showToast('🗑 Chantier supprimé');
+}
+
+// ════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════
+function fmtDate(d) {
+  if (!d) return '';
+  return new Date(d+'T12:00:00').toLocaleDateString('fr-CH',{day:'2-digit',month:'2-digit',year:'2-digit'});
+}
+function fmtDateLong(d) {
+  if (!d) return '';
+  return new Date(d+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+let toastTimer;
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+
+// Migration : si des chantiers existent dans rv6_c (format simple),
+// les importer dans rv6_chantiers_v1 si celui-ci est vide
+function migrateLegacyChantiers() {
+  const existing = load();
+  if (existing.length > 0) return; // déjà des données riches, rien à faire
+  try {
+    const simple = JSON.parse(localStorage.getItem(KEY_SIMPLE) || '[]');
+    if (!simple.length) return;
+    const migrated = simple.map((nom, i) => ({
+      id: 'leg'+i+Date.now().toString(36),
+      nom: typeof nom === 'string' ? nom : (nom.nom||nom.name||String(nom)),
+      statut: 'actif',
+      color: COLORS[i % COLORS.length],
+      documents:[], photos:[], contacts:[], travaux:[],
+      createdAt: new Date().toISOString(),
+    }));
+    save(migrated);
+  } catch(e) {}
+}
+
+migrateLegacyChantiers();
+renderList();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
