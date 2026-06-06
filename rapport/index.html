@@ -1771,37 +1771,83 @@ textarea { resize: none; }
 </div>
 
 <script>
-// ─── DATA ─────────────────────────────────────────────────────
+// ─── DATA DEPUIS RESSOURCES ENTREPRISE ────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
-const NOMS_PRESETS = ['Jonathan','Risse','Maxime','Pierre','André','Thomas'];
-const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport'];
-const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
-const MAT_FOURNITURES = ['Béton','Gravier 4/16','Gravier 0/40','Sable','Tout-venant','Enrobé','Bordures béton','Tuyaux PVC','Grillage','Géotextile','Câble électrique','Plaques acier','Sacs ciment'];
-const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé','Ferraille','Déchets chantier','Boue/sédiments','Bois'];
 
-const LOC_VEHICULES = [
-  {id:'camionnette', label:'Camionnette', unit:'p/j'},
-  {id:'camion-grue', label:'Camion grue', unit:'h'},
-];
-const LOC_MATERIEL = [
-  {id:'outillage-elec', label:'Outillage électrique', unit:'h'},
-  {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h'},
-  {id:'rouleau', label:'Rouleau', unit:'h'},
-  {id:'compresseur', label:'Compresseur', unit:'h'},
-  {id:'generatrice', label:'Génératrice', unit:'h'},
-  {id:'camera', label:'Caméra / Mat. détection', unit:'pc'},
-  {id:'scie', label:'Scie route / murale', unit:'ml'},
-  {id:'karcher', label:'Kärcher', unit:'h'},
-  {id:'carotteuse', label:'Carotteuse', unit:'forages'},
-  {id:'pont-lourd', label:'Déplacements pont lourd', unit:'pc'},
-];
-const LOC_ENGINS = [
-  {id:'mecalac', label:'Mecalac MWR7', unit:'h'},
-  {id:'dumper', label:'Dumper', unit:'h'},
-  {id:'pelle-5t', label:'5 tonnes', unit:'h'},
-  {id:'pelle-3t', label:'3 tonnes', unit:'h'},
-  {id:'pelle-1t5', label:'1.5 tonne', unit:'h'},
-];
+// Lecture dynamique depuis les clés partagées du Hub Ressources
+function getResEquipe() {
+  try { return JSON.parse(localStorage.getItem('rv6_equipe') || '[]'); } catch(e) { return []; }
+}
+function getResChantiers() {
+  try { return JSON.parse(localStorage.getItem('rv6_c') || '[]'); } catch(e) { return []; }
+}
+function getResMachines() {
+  try { return JSON.parse(localStorage.getItem('rv6_m') || '[]'); } catch(e) { return []; }
+}
+function getResVehicules() {
+  try { return JSON.parse(localStorage.getItem('rv6_vehicles') || '[]'); } catch(e) { return []; }
+}
+function getResMateriel() {
+  try { return JSON.parse(localStorage.getItem('rv6_equipment') || '[]'); } catch(e) { return []; }
+}
+
+// Noms des employés depuis Ressources
+function getNomPresets() {
+  const equipe = getResEquipe();
+  return equipe.map(e => e.nom || e.name || '').filter(Boolean);
+}
+let NOMS_PRESETS = [];
+
+// Chantiers depuis Ressources
+function getChantiersForRapport() {
+  const ch = getResChantiers();
+  return ch.map(c => typeof c === 'string' ? c : (c.nom||c.name||c)).filter(Boolean);
+}
+let CHANTIERS = [];
+
+// Équipements location — construits depuis Ressources
+function buildLocFromRessources() {
+  // Engins = machines depuis rv6_m
+  const machines = getResMachines();
+  const locEngins = machines.map(m => ({
+    id: m.id || ('m-' + (m.nom||m.name||'').replace(/\s/g,'_')),
+    label: m.nom || m.name || '—',
+    unit: 'h'
+  }));
+
+  // Véhicules depuis rv6_vehicles
+  const vehicules = getResVehicules();
+  const locVehicules = vehicules.map(v => ({
+    id: v.id || ('v-' + (v.nom||'').replace(/\s/g,'_')),
+    label: v.nom || '—',
+    unit: 'p/j'
+  }));
+
+  // Matériel depuis rv6_equipment
+  const materiel = getResMateriel();
+  const locMateriel = materiel.map(mt => ({
+    id: mt.id || ('mt-' + (mt.nom||'').replace(/\s/g,'_')),
+    label: mt.nom || '—',
+    unit: 'h'
+  }));
+
+  return { locEngins, locVehicules, locMateriel };
+}
+
+// Variables globales (peuplées à l'init)
+let LOC_VEHICULES = [];
+let LOC_MATERIEL  = [];
+let LOC_ENGINS    = [];
+
+const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
+// Matériaux évacuations depuis Ressources (rv6_materials), fallback vide
+function getMatEvacuations() {
+  try {
+    const mats = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
+    return mats.map(m => m.nom || '').filter(Boolean);
+  } catch(e) { return []; }
+}
+const MAT_EVACUATIONS = []; // sera construit dynamiquement
 
 let state = {
   currentSection: 0,
@@ -1826,6 +1872,14 @@ function updateHeader() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  // Charger les données depuis Ressources entreprise
+  NOMS_PRESETS = getNomPresets();
+  CHANTIERS    = getChantiersForRapport();
+  const loc    = buildLocFromRessources();
+  LOC_VEHICULES = loc.locVehicules;
+  LOC_MATERIEL  = loc.locMateriel;
+  LOC_ENGINS    = loc.locEngins;
+
   setDefaultDate();
   buildChantierChips();
   buildNomChips();
@@ -2036,8 +2090,7 @@ function updateLocSummary(groupKey) {
 }
 
 function buildMatChips() {
-  // quick-fournitures supprimé — uniquement les évacuations restent
-  buildMatChipGroup('quick-evacuations', MAT_EVACUATIONS, 'evac-list', 'badge-evac');
+  buildMatChipGroup('quick-evacuations', getMatEvacuations(), 'evac-list', 'badge-evac');
 }
 
 function buildMatChipGroup(containerId, items, listId, badgeId) {
