@@ -288,16 +288,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 
   <!-- ══ PARAMÈTRES ══ -->
   <div id="view-params" class="view">
-    <div class="page-head"><div class="page-title">Paramètres</div><div class="page-sub">Machines, chantiers &amp; types d'entretien</div></div>
-    <div class="ss-block"><div class="ss-t">🚜 Machines</div><div id="pm-machines"></div>
-      <div class="add-box">
-        <div class="fr" style="margin-bottom:9px"><div class="field"><label>Nom</label><input type="text" id="nm-name" placeholder="Ex: Takeuchi TB216"></div><div class="field"><label>Type</label><input type="text" id="nm-type" placeholder="Ex: Minipelle"></div></div>
-        <button class="btn btn-teal btn-sm" onclick="addMachine()">+ Ajouter machine</button>
+    <div class="page-head"><div class="page-title">Paramètres</div><div class="page-sub">Types d'entretien</div></div>
+
+    <!-- Bloc info Ressources -->
+    <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:12px;padding:14px 15px;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;flex-shrink:0;">🗄</div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;color:#1B3A6B;margin-bottom:2px;">Machines &amp; Chantiers</div>
+        <div style="font-size:12px;color:#4A5878;line-height:1.4;">Gérés depuis le module <strong>Ressources entreprise</strong>.</div>
       </div>
+      <a href="../ressources/index.html" style="flex-shrink:0;background:#1B3A6B;color:#fff;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;text-decoration:none;">Ouvrir →</a>
     </div>
-    <div class="ss-block"><div class="ss-t">📍 Chantiers enregistrés</div><div id="pm-chantiers"></div>
+
+    <!-- Machines en lecture seule -->
+    <div class="ss-block"><div class="ss-t">🚜 Machines (lecture seule)</div><div id="pm-machines"></div></div>
+    <div class="ss-block"><div class="ss-t">📍 Chantiers (lecture seule)</div><div id="pm-chantiers"></div></div>
+
+    <!-- Champ caché pour compatibilité JS -->
+    <div style="display:none">
+      <input type="text" id="nc-name">
+      <input type="text" id="nm-name">
+      <input type="text" id="nm-type">
       <div class="add-box">
-        <div class="field" style="margin-bottom:9px"><label>Nom du chantier</label><input type="text" id="nc-name" placeholder="Ex: Villa Dupont..."></div>
+        <div class="field" style="margin-bottom:9px"><label>Nom du chantier</label><input type="text" id="nc-name2" placeholder="Ex: Villa Dupont..."></div>
         <button class="btn btn-teal btn-sm" onclick="addChantier()">+ Ajouter chantier</button>
       </div>
     </div>
@@ -395,12 +408,27 @@ const ALERT_H=15;
 let selCh="", modalChantier="", navStack=[], currentMainView="saisie";
 
 // ── DATA ──
-const defaultMaintTypes=["Graissage","Vidange huile","Remplacement filtres","Vérif. courroies","Vérif. niveaux","Autre"];
-function getMachines(){const s=localStorage.getItem(MK);return s?JSON.parse(s):[{name:"Mecalac MWR7",type:"Pelle sur roues",def:true}];}
+// Types d'entretien : gérés dans Paramètres du module Machines uniquement
+// Machines : lues depuis le module Ressources (rv6_m)
+function getMachines(){
+  try{
+    const s=localStorage.getItem(MK);
+    if(!s) return [];
+    const data=JSON.parse(s);
+    // Compatibilité : le module Ressources stocke {id,nom,type,...}, le module machine utilise {name,type}
+    return data.map(m=>({name:m.nom||m.name||'', type:m.type||'', def:false, id:m.id}));
+  }catch(e){return [];}
+}
 function saveMachines(m){localStorage.setItem(MK,JSON.stringify(m));}
-function getChantiers(){const s=localStorage.getItem(CK);return s?JSON.parse(s):["Dépôt","Intern","Concassage","Biolette","Transport"];}
+// Chantiers : lus depuis rv6_c
+function getChantiers(){
+  try{
+    const s=localStorage.getItem(CK);
+    return s?JSON.parse(s):[];
+  }catch(e){return [];}
+}
 function saveChantiers(c){localStorage.setItem(CK,JSON.stringify(c));}
-function getMaintTypes(){const s=localStorage.getItem(TYPEK);return s?JSON.parse(s):[...defaultMaintTypes];}
+function getMaintTypes(){const s=localStorage.getItem(TYPEK);return s?JSON.parse(s):[];}
 function saveMaintTypes(t){localStorage.setItem(TYPEK,JSON.stringify(t));}
 function getEntries(){const s=localStorage.getItem(SK);if(!s)return[];let e=JSON.parse(s);const c=new Date();c.setDate(c.getDate()-30);e=e.filter(x=>new Date(x.date)>=c);localStorage.setItem(SK,JSON.stringify(e));return e;}
 function saveEntries(e){localStorage.setItem(SK,JSON.stringify(e));}
@@ -469,7 +497,7 @@ function refreshModalMachSel(){const sel=document.getElementById("me-machine");s
 function onMachChange(){prefillStart();saveDraft();}
 
 // ── CHIPS ──
-function refreshChips(){const c=document.getElementById("chips");c.innerHTML="";getChantiers().forEach(ch=>{const b=document.createElement("button");b.className="chip"+(selCh===ch?" on":"");b.textContent=ch;b.type="button";b.onclick=()=>{selCh=(selCh===ch)?"":ch;if(selCh)document.getElementById("inp-ch").value="";refreshChips();saveDraft();};c.appendChild(b);});}
+function refreshChips(){const c=document.getElementById("chips");c.innerHTML="";getChantiers().forEach(ch=>{const name=typeof ch==='string'?ch:(ch.nom||ch.name||String(ch));const b=document.createElement("button");b.className="chip"+(selCh===name?" on":"");b.textContent=name;b.type="button";b.onclick=()=>{selCh=(selCh===name)?"":name;if(selCh)document.getElementById("inp-ch").value="";refreshChips();saveDraft();};c.appendChild(b);});}
 function onFreeCh(){selCh="";refreshChips();saveDraft();}
 
 // ── PREFILL ──
@@ -689,12 +717,23 @@ function emptyTrash(){saveTrash([]);renderTrash();toast("Corbeille vidée");}
 
 // ── PARAMS ──
 function renderParams(){renderParamMachines();renderParamChantiers();renderParamTypes();}
-function renderParamMachines(){document.getElementById("pm-machines").innerHTML=getMachines().map((m,i)=>`<div class="list-item"><span class="li-icon">🚜</span><div class="li-body"><div class="li-name">${m.name}</div><div class="li-sub">${m.type||""}</div></div>${m.def?'<span style="font-size:11px;background:var(--bg2);padding:2px 7px;border-radius:4px;color:var(--text2)">Défaut</span>':`<button class="btn-danger-text" onclick="removeMachine(${i})">Supprimer</button>`}</div>`).join("");}
-function addMachine(){const name=document.getElementById("nm-name").value.trim(),type=document.getElementById("nm-type").value.trim();if(!name){toast("⚠ Entrer un nom");return;}const m=getMachines();if(m.find(x=>x.name.toLowerCase()===name.toLowerCase())){toast("Déjà existante");return;}m.push({name,type,def:false});saveMachines(m);document.getElementById("nm-name").value="";document.getElementById("nm-type").value="";renderParamMachines();refreshMachSel();toast("✓ Machine ajoutée");}
-function removeMachine(i){const m=getMachines();m.splice(i,1);saveMachines(m);renderParamMachines();refreshMachSel();toast("Machine supprimée");}
-function renderParamChantiers(){document.getElementById("pm-chantiers").innerHTML=getChantiers().map((c,i)=>`<div class="list-item"><span class="li-icon">📍</span><div class="li-body"><div class="li-name">${c}</div></div><button class="btn-danger-text" onclick="removeChantier(${i})">Supprimer</button></div>`).join("");}
-function addChantier(){const name=document.getElementById("nc-name").value.trim();if(!name){toast("⚠ Entrer un nom");return;}const ch=getChantiers();if(ch.find(x=>x.toLowerCase()===name.toLowerCase())){toast("Déjà existant");return;}ch.push(name);saveChantiers(ch);document.getElementById("nc-name").value="";renderParamChantiers();refreshChips();toast("✓ Chantier ajouté");}
-function removeChantier(i){const ch=getChantiers();ch.splice(i,1);saveChantiers(ch);renderParamChantiers();refreshChips();toast("Chantier supprimé");}
+function renderParamMachines(){
+  const machines=getMachines();
+  if(!machines.length){
+    document.getElementById("pm-machines").innerHTML='<div style="color:var(--text3);font-size:12px;padding:12px 0;">Aucune machine dans Ressources entreprise.<br>Ajoutez-en depuis le module Ressources.</div>';
+    return;
+  }
+  document.getElementById("pm-machines").innerHTML=machines.map(m=>`<div class="list-item"><span class="li-icon">🚜</span><div class="li-body"><div class="li-name">${m.name}</div><div class="li-sub">${m.type||""}</div></div><span style="font-size:10px;background:var(--bg2);padding:2px 7px;border-radius:4px;color:var(--text2)">Ressources</span></div>`).join("");
+}
+function renderParamChantiers(){
+  const ch=getChantiers();
+  if(!ch.length){
+    document.getElementById("pm-chantiers").innerHTML='<div style="color:var(--text3);font-size:12px;padding:12px 0;">Aucun chantier dans Ressources entreprise.</div>';
+    return;
+  }
+  // Chantiers peut être un tableau de strings ou d'objets
+  document.getElementById("pm-chantiers").innerHTML=ch.map(c=>`<div class="list-item"><span class="li-icon">📍</span><div class="li-body"><div class="li-name">${typeof c==='string'?c:(c.nom||c.name||c)}</div></div><span style="font-size:10px;background:var(--bg2);padding:2px 7px;border-radius:4px;color:var(--text2)">Ressources</span></div>`).join("");
+}
 function renderParamTypes(){document.getElementById("pm-types").innerHTML=getMaintTypes().map((t,i)=>`<div class="list-item"><span class="li-icon">🔧</span><div class="li-body"><div class="li-name">${t}</div></div><button class="btn-danger-text" onclick="removeMaintType(${i})">Supprimer</button></div>`).join("");}
 function addMaintType(){const name=document.getElementById("nt-name").value.trim();if(!name){toast("⚠ Entrer un nom");return;}const t=getMaintTypes();if(t.find(x=>x.toLowerCase()===name.toLowerCase())){toast("Déjà existant");return;}t.push(name);saveMaintTypes(t);document.getElementById("nt-name").value="";renderParamTypes();toast("✓ Type ajouté");}
 function removeMaintType(i){const t=getMaintTypes();t.splice(i,1);saveMaintTypes(t);renderParamTypes();toast("Type supprimé");}
