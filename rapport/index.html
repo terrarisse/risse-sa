@@ -469,6 +469,22 @@ textarea { resize: none; }
   outline: none;
 }
 .metre-desc:focus { border-color: var(--navy); }
+.metre-formule-sel {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  background: var(--bg);
+  outline: none;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+.metre-formule-sel:focus { border-color: var(--navy); }
+
 .metre-type-btns {
   display: flex;
   gap: 4px;
@@ -499,16 +515,17 @@ textarea { resize: none; }
   gap: 6px;
 }
 .metre-dim {
-  flex: 1;
   border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 8px 6px;
+  border-radius: 6px;
+  padding: 6px 2px;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   text-align: center;
   background: white;
   outline: none;
+  width: 0;
+  flex: 1 1 0;
   min-width: 0;
 }
 .metre-dim:focus { border-color: var(--navy); }
@@ -556,9 +573,9 @@ textarea { resize: none; }
 .metre-sublines { border-top: 1px solid var(--border); }
 .metre-subline {
   display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 10px;
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 10px;
   border-bottom: 1px solid var(--border);
   background: white;
 }
@@ -1230,13 +1247,9 @@ textarea { resize: none; }
 <body>
 
 <div class="app-header">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <button onclick="window.location.href='../index.html'"
-      style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:16px;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">←</button>
-    <div>
-      <div style="color:white;font-size:16px;font-weight:700;line-height:1.1;" id="header-title">Rapport journalier</div>
-      <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:2px;" id="header-sub">Nouveau rapport</div>
-    </div>
+  <div>
+    <div style="color:white;font-size:17px;font-weight:700;line-height:1.1;" id="header-title">Rapport journalier</div>
+    <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:2px;" id="header-sub">Nouveau rapport</div>
   </div>
   <button class="btn-save-draft" onclick="saveDraft()">💾 Brouillon</button>
 </div>
@@ -2604,55 +2617,48 @@ function addMetreRow(data = {}) {
 }
 
 function addMetreSub(cardId, data = {}) {
-  const type = metreTypes[cardId] || 'surface';
+  const cardType = metreTypes[cardId] || 'surface';
   const container = document.getElementById(`msubs-${cardId}`);
   const sid = ++subCount;
+  const formule = data.formule || 'rect';
+  subFormules[sid] = formule;
 
   const row = document.createElement('div');
   row.className = 'metre-subline';
   row.id = `msub-${sid}`;
 
-  const inp = (idName, val) =>
-    `<input id="${idName}" type="text" inputmode="decimal" class="metre-dim"
-      placeholder="0.00" value="${val ? fmtInput(val) : ''}"
-      oninput="calcSub(${sid},${cardId})"
-      onblur="fmtInputEl(this); calcSub(${sid},${cardId})"
-      onkeydown="metreNav(event,this)">`;
+  const FORMES_OPTS = {
+    coupe:   ['rect','cercle','demicercle'],
+    surface: ['rect','triangle','trapeze','cercle','demicercle'],
+    volume:  ['rect','triangle','trapeze','cercle','demicercle'],
+  };
+  const FORMES_LABELS = {
+    rect:       { coupe:'—', surface:'□', volume:'□' },
+    triangle:   { coupe:'△', surface:'△', volume:'△' },
+    trapeze:    { coupe:'⬡', surface:'⬡', volume:'⬡' },
+    cercle:     { coupe:'○', surface:'○', volume:'○' },
+    demicercle: { coupe:'◐', surface:'◐', volume:'◐' },
+  };
 
-  let dims = '';
-  if (type === 'coupe') {
-    dims = `
-      <span class="metre-dim-sep" style="font-size:11px">L</span>
-      ${inp(`msl-${sid}`, data.l)}
-      <span class="metre-dim-sep" style="font-size:11px">m</span>
-    `;
-  } else if (type === 'surface') {
-    dims = `
-      <span class="metre-dim-sep" style="font-size:11px">L</span>
-      ${inp(`msl-${sid}`, data.l)}
-      <span class="metre-dim-sep">×</span>
-      ${inp(`msw-${sid}`, data.w)}
-      <span class="metre-dim-sep" style="font-size:11px">m</span>
-    `;
-  } else {
-    dims = `
-      <span class="metre-dim-sep" style="font-size:11px">L</span>
-      ${inp(`msl-${sid}`, data.l)}
-      <span class="metre-dim-sep">×</span>
-      ${inp(`msw-${sid}`, data.w)}
-      <span class="metre-dim-sep">×</span>
-      ${inp(`msh-${sid}`, data.h)}
-      <span class="metre-dim-sep" style="font-size:11px">m</span>
-    `;
-  }
+  const opts = FORMES_OPTS[cardType] || FORMES_OPTS.surface;
+  const label = FORMES_LABELS[formule]?.[cardType] || '□';
+
+  const cycleBtn = `<button id="mfb-${sid}"
+    style="background:var(--navy);border:none;color:white;font-size:13px;font-weight:700;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;font-family:inherit;padding:0;"
+    onclick="cycleFormule(${sid},${cardId})">${label}</button>`;
 
   row.innerHTML = `
-    ${dims}
-    <span class="metre-sub-result" id="msr-${sid}">—</span>
-    <button class="btn-del-subline" onclick="delMetreSub('msub-${sid}',${cardId})">✕</button>
+    <div style="display:flex;align-items:center;gap:4px;flex-wrap:nowrap;width:100%;">
+      ${cycleBtn}
+      <div id="msdims-${sid}" style="display:flex;align-items:center;gap:2px;flex:1;min-width:0;">
+        ${buildSubDims(sid, cardId, cardType, formule, data)}
+      </div>
+      <span class="metre-sub-result" id="msr-${sid}" style="font-size:11px;min-width:44px;text-align:right;flex-shrink:0;">—</span>
+      <button class="btn-del-subline" onclick="delMetreSub('msub-${sid}',${cardId})" style="flex-shrink:0;">✕</button>
+    </div>
   `;
   container.appendChild(row);
-  if (data.l) calcSub(sid, cardId);
+  if (data.l || data.d || data.b1) calcSub(sid, cardId);
 }
 
 // Retourne la valeur formatée (2 déc. min, 3 si saisi)
@@ -2696,33 +2702,112 @@ function metreNav(e, input) {
   }
 }
 
+const subFormules = {};
+
+function buildSubDims(sid, cardId, cardType, formule, data = {}) {
+  const inp = (idName, val, ph) =>
+    `<input id="${idName}" type="text" inputmode="decimal" class="metre-dim"
+      placeholder="${ph}" value="${val ? fmtInput(val) : ''}"
+      oninput="calcSub(${sid},${cardId})"
+      onblur="fmtInputEl(this); calcSub(${sid},${cardId})"
+      onkeydown="metreNav(event,this)">`;
+  const x = `<span class="metre-dim-sep">×</span>`;
+  if (formule === 'cercle' || formule === 'demicercle') {
+    const extra = cardType === 'volume' ? x + inp(`msl-${sid}`, data.l, 'L') : '';
+    return inp(`msd-${sid}`, data.d, 'Ø') + extra;
+  }
+  if (formule === 'triangle') {
+    const extra = cardType === 'volume' ? x + inp(`msl-${sid}`, data.l, 'L') : '';
+    return inp(`msb1-${sid}`, data.b1, 'B') + x + inp(`msh-${sid}`, data.h, 'H') + extra;
+  }
+  if (formule === 'trapeze') {
+    const extra = cardType === 'volume' ? x + inp(`msl-${sid}`, data.l, 'L') : '';
+    return inp(`msb1-${sid}`, data.b1, 'B1') + x + inp(`msb2-${sid}`, data.b2, 'B2') + x + inp(`msh-${sid}`, data.h, 'H') + extra;
+  }
+  if (cardType === 'coupe')   return inp(`msl-${sid}`, data.l, 'L');
+  if (cardType === 'surface') return inp(`msl-${sid}`, data.l, 'L') + x + inp(`msw-${sid}`, data.w, 'l');
+  return inp(`msl-${sid}`, data.l, 'L') + x + inp(`msw-${sid}`, data.w, 'l') + x + inp(`msh-${sid}`, data.h, 'H');
+}
+
+function cycleFormule(sid, cardId) {
+  const cardType = metreTypes[cardId] || 'surface';
+  const opts = {
+    coupe:   ['rect','cercle','demicercle'],
+    surface: ['rect','triangle','trapeze','cercle','demicercle'],
+    volume:  ['rect','triangle','trapeze','cercle','demicercle'],
+  };
+  const labels = {
+    rect: cardType === 'coupe' ? '—' : '□',
+    triangle:'△', trapeze:'⬡', cercle:'○', demicercle:'◐'
+  };
+  const list = opts[cardType] || opts.surface;
+  const cur = subFormules[sid] || 'rect';
+  const next = list[(list.indexOf(cur) + 1) % list.length];
+  subFormules[sid] = next;
+
+  const btn = document.getElementById(`mfb-${sid}`);
+  if (btn) btn.textContent = labels[next] || '□';
+
+  const dimsDiv = document.getElementById(`msdims-${sid}`);
+  if (dimsDiv) dimsDiv.innerHTML = buildSubDims(sid, cardId, cardType, next);
+  calcSub(sid, cardId);
+}
+
+
+function calcSubVal(sid, cardId) {
+  const cardType = metreTypes[cardId] || 'surface';
+  const formule  = subFormules[sid] || 'rect';
+  const l   = dimVal(`msl-${sid}`);
+  const w   = dimVal(`msw-${sid}`);
+  const h   = dimVal(`msh-${sid}`);
+  const b1  = dimVal(`msb1-${sid}`);
+  const b2  = dimVal(`msb2-${sid}`);
+  const d   = dimVal(`msd-${sid}`);
+  const r   = d / 2;
+
+  if (formule === 'cercle') {
+    if (cardType === 'coupe')   return Math.PI * d;
+    if (cardType === 'surface') return Math.PI * r * r;
+    return Math.PI * r * r * l;
+  }
+  if (formule === 'demicercle') {
+    if (cardType === 'coupe')   return (Math.PI * d) / 2 + d;
+    if (cardType === 'surface') return (Math.PI * r * r) / 2;
+    return (Math.PI * r * r) / 2 * l;
+  }
+  if (formule === 'triangle') {
+    if (cardType === 'volume')  return (b1 * h / 2) * l;
+    return b1 * h / 2;
+  }
+  if (formule === 'trapeze') {
+    if (cardType === 'volume')  return ((b1 + b2) / 2 * h) * l;
+    return (b1 + b2) / 2 * h;
+  }
+  if (cardType === 'coupe')   return l;
+  if (cardType === 'surface') return l * w;
+  return l * w * h;
+}
+
 function calcSub(sid, cardId) {
   const type = metreTypes[cardId] || 'surface';
-  const l = dimVal(`msl-${sid}`);
-  const w = dimVal(`msw-${sid}`);
-  const h = dimVal(`msh-${sid}`);
   const unit = type==='coupe'?'ml':type==='volume'?'m³':'m²';
-  let sub = type==='coupe' ? l : type==='surface' ? l*w : l*w*h;
+  const sub = calcSubVal(sid, cardId);
   const el = document.getElementById(`msr-${sid}`);
   if (el) el.textContent = sub > 0 ? fmtNum(sub)+' '+unit : '—';
   calcMetreTotal(cardId);
 }
 
 function calcMetreTotal(cardId) {
-  const type = metreTypes[cardId] || 'surface';
   let total = 0;
   document.querySelectorAll(`#msubs-${cardId} .metre-subline`).forEach(row => {
-    const sid = row.id.replace('msub-','');
-    const l = dimVal(`msl-${sid}`);
-    const w = dimVal(`msw-${sid}`);
-    const h = dimVal(`msh-${sid}`);
-    if (type==='coupe')   total += l;
-    if (type==='surface') total += l*w;
-    if (type==='volume')  total += l*w*h;
+    const sid = parseInt(row.id.replace('msub-',''));
+    total += calcSubVal(sid, cardId);
   });
   const el = document.getElementById(`mt-val-${cardId}`);
   if (el) el.textContent = total > 0 ? fmtNum(total) : '—';
 }
+
+
 
 function setMetreType(id, type, btn) {
   btn.closest('.metre-type-btns').querySelectorAll('.metre-type-btn').forEach(b => b.classList.remove('active'));
@@ -2845,7 +2930,14 @@ function buildRecapPreview() {
     <div class="preview-section">
       <h4>🏗️ Travaux réalisés</h4>
       <p>${travaux || '<span class="preview-empty">Aucune description</span>'}</p>
-      ${nMetres > 0 ? `<p style="margin-top:6px;font-size:12px;color:var(--text-muted);">+ ${nMetres} métré(s)</p>` : ''}
+      ${nMetres > 0 ? (() => {
+        const ms = collectData().metres;
+        return ms.map(m => `
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;">
+            <span style="color:var(--text-muted);">${m.desc||'Métré'} <span style="font-size:11px;">(${(m.subStrings||m.subs||[]).join(' + ')})</span></span>
+            <span style="font-weight:600;">${m.total} ${m.unit}</span>
+          </div>`).join('');
+      })() : ''}
     </div>
     <div class="preview-section">
       <h4>📦 Fournitures</h4>
@@ -2871,9 +2963,24 @@ function collectData() {
   });
 
   const metresData = [];
-  document.querySelectorAll('#metres-list .metrage-row').forEach(row => {
-    const inputs = row.querySelectorAll('input, select');
-    metresData.push({ article: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
+  document.querySelectorAll('#metres-list .metre-card').forEach(card => {
+    const cardId = card.id.replace('mc-','');
+    const desc = card.querySelector('.metre-desc')?.value || '';
+    const type = metreTypes[parseInt(cardId)] || 'coupe';
+    const unit = type === 'coupe' ? 'ml' : type === 'volume' ? 'm³' : 'm²';
+    const totalVal = card.querySelector(`#mt-val-${cardId}`)?.textContent || '—';
+    const subs = [];
+    const subStrings = [];
+    card.querySelectorAll('.metre-subline').forEach(sub => {
+      const sid = sub.id.replace('msub-','');
+      const l = document.getElementById(`msl-${sid}`)?.value || '';
+      const w = document.getElementById(`msw-${sid}`)?.value || '';
+      const h = document.getElementById(`msh-${sid}`)?.value || '';
+      subs.push({ l, w, h });
+      const parts = [l, w, h].filter(v => v);
+      if (parts.length) subStrings.push(parts.join(' × '));
+    });
+    metresData.push({ desc, type, unit, total: totalVal, subs, subStrings });
   });
 
   const fournitData = [];
@@ -2895,9 +3002,11 @@ function collectData() {
     meteo: state.selectedMeteo,
     employes: state.employes,
     location: locData,
+    locSelection: locSelection,
     travaux: document.getElementById('tx-travaux').value,
     metres: metresData,
     fournitures: fournitData,
+    fournitSelection: fournitSelection,
     evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
       cat: k.split('|')[0], nom: k.split('|')[1], qty: v.qty, unit: v.unit
@@ -2927,55 +3036,110 @@ function loadDraft() {
   if (!raw) return;
   try {
     const d = JSON.parse(raw);
-    if (d.date) document.getElementById('rj-date').value = d.date;
-    if (d.nom) document.getElementById('rj-nom').value = d.nom;
+
+    // En-tête
+    if (d.date)    document.getElementById('rj-date').value = d.date;
+    if (d.nom)     document.getElementById('rj-nom').value = d.nom;
     if (d.chantier) document.getElementById('rj-chantier').value = d.chantier;
-    if (d.meteo) state.selectedMeteo = d.meteo;
-    if (d.employes) state.employes = d.employes;
-    if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
-    if (d.location) {
+    if (d.meteo)   state.selectedMeteo = d.meteo;
+
+    // Employés
+    if (d.employes) { state.employes = d.employes; renderEmployes(); }
+
+    // Location — restaurer locSelection
+    if (d.locSelection && Object.keys(d.locSelection).length > 0) {
+      locSelection = d.locSelection;
+      renderLocSelectionZone();
+    } else if (d.location) {
+      // Compatibilité ancienne sauvegarde
       Object.entries(d.location).forEach(([k,v]) => {
         if (!v || parseFloat(v) <= 0) return;
-        const allItems = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS];
-        const item = allItems.find(i => i.id === k);
-        if (item) {
-          locSelection[k] = { label: item.label, unit: item.unit, qty: parseFloat(v) };
-        }
+        const item = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS].find(i => i.id === k);
+        if (item) locSelection[k] = { label: item.label, unit: item.unit, qty: parseFloat(v) };
       });
       renderLocSelectionZone();
     }
-    if (d.metres) d.metres.forEach(m => {
-      addMetreRow(m.article);
-      const rows = document.querySelectorAll('#metres-list .metrage-row');
-      const last = rows[rows.length-1];
-      if (last) {
-        const inputs = last.querySelectorAll('input, select');
-        inputs[1].value = m.qte;
-        inputs[2].value = m.unite;
-      }
-    });
-    if (d.fournitures) d.fournitures.forEach(f => {
-      addFournitRowWithMat('fournit-list','badge-fournit', f.mat);
-      const rows = document.querySelectorAll('#fournit-list .fournit-item');
-      const last = rows[rows.length-1];
-      if (last) {
-        const inputs = last.querySelectorAll('input, select');
-        inputs[1].value = f.qte;
-        inputs[2].value = f.unite;
-      }
-    });
+
+    // Travaux
+    if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
+
+    // Métrés
+    if (d.metres && d.metres.length > 0) {
+      if (!extrasState.metres) toggleExtra('metres');
+      d.metres.forEach(m => addMetreRow({ desc: m.desc, type: m.type, subs: m.subs }));
+    }
+
+    // Fournitures catalogue — restaurer fournitSelection
+    if (d.fournitSelection && Object.keys(d.fournitSelection).length > 0) {
+      fournitSelection = d.fournitSelection;
+      renderFournitSelectionZone();
+    }
+
+    // Évacuations
     if (d.evacuations) d.evacuations.forEach(e => {
-      addFournitRowWithMat('evac-list','badge-evac', e.mat);
+      addFournitRowWithMat('evac-list', 'sum-evac', e.mat);
       const rows = document.querySelectorAll('#evac-list .fournit-item');
       const last = rows[rows.length-1];
       if (last) {
         const inputs = last.querySelectorAll('input, select');
-        inputs[1].value = e.qte;
-        inputs[2].value = e.unite;
+        if (inputs[1]) inputs[1].value = e.qte;
+        if (inputs[2]) inputs[2].value = e.unite;
       }
     });
-    renderEmployes();
+
+    updateHeader();
   } catch(e) { console.warn('Draft load error', e); }
+}
+
+function resetRapport() {
+  // En-tête
+  document.getElementById('rj-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('rj-nom').value = '';
+  document.getElementById('rj-chantier').value = '';
+  state.selectedMeteo = '';
+  // Réinitialiser les chips responsable
+  document.querySelectorAll('.nom-chip').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.chantier-chip').forEach(c => c.classList.remove('active'));
+
+  // Employés
+  state.employes = [];
+  renderEmployes();
+
+  // Location — vider et reconstruire depuis zéro
+  locSelection = {};
+  renderLocSelectionZone();
+  ['loc-vehicules','loc-materiel','loc-engins'].forEach(id => {
+    const c = document.getElementById(id);
+    if (c) c.innerHTML = '';
+  });
+  // Fermer tous les accordéons location
+  ['vehicules','materiel','engins'].forEach(key => {
+    document.querySelector(`#accord-${key} .accord-header`)?.classList.remove('open');
+    document.getElementById(`body-${key}`)?.classList.remove('open');
+  });
+  buildLocationItems();
+
+  // Travaux
+  document.getElementById('tx-travaux').value = '';
+
+  // Métrés — fermer le bloc et vider la liste
+  if (extrasState.metres) toggleExtra('metres');
+  document.getElementById('metres-list').innerHTML = '';
+  metresCount = 0;
+
+  // Fournitures
+  fournitSelection = {};
+  // Vider le catalogue (forcer reconstruction au prochain accès)
+  const cat = document.getElementById('fournit-catalogue');
+  if (cat) cat.innerHTML = '';
+  renderFournitSelectionZone();
+
+  // Évacuations
+  document.getElementById('evac-list').innerHTML = '';
+  const sumEvac = document.getElementById('sum-evac');
+  if (sumEvac) sumEvac.textContent = '—';
+
+  updateHeader();
 }
 
 function finaliserRapport() {
@@ -2986,6 +3150,7 @@ function finaliserRapport() {
   reports.unshift(data);
   localStorage.setItem(REPORTS_KEY, JSON.stringify(reports));
   localStorage.removeItem(STORAGE_KEY);
+  resetRapport();
   // Refresh badge
   const badge = document.getElementById('histo-badge');
   badge.style.display = 'inline-block';
@@ -3362,9 +3527,15 @@ function renderHistoriqueInline() {
       : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune location</p>';
 
     // Travaux
-    const travauxContent = r.travaux
-      ? `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.travaux}</p>
-         ${(r.metres||[]).length>0 ? `<div style="margin-top:6px;font-size:12px;font-weight:600;color:var(--text-muted);">+ ${r.metres.length} métré(s)</div>` : ''}`
+    const metresRows = (r.metres||[]).map(m => `
+      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;">
+        <span style="color:var(--text-muted);">${m.desc||'Métré'} <span style="font-size:11px;">(${(m.subStrings||m.subs||[]).join(' + ')})</span></span>
+        <span style="font-weight:600;color:var(--text);">${m.total} ${m.unit}</span>
+      </div>`).join('');
+
+    const travauxContent = r.travaux || (r.metres||[]).length > 0
+      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;">${r.travaux}</p>` : ''}
+         ${(r.metres||[]).length > 0 ? metresRows : ''}`
       : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune description</p>';
 
     // Fournitures catalogue
@@ -3395,6 +3566,8 @@ function renderHistoriqueInline() {
         <div style="display:flex;flex-direction:column;gap:5px;">
           <button onclick="partagerRapport(event,'${r.id}')"
             style="background:var(--yellow);border:none;color:var(--navy);font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">⬆️</button>
+          <button onclick="modifierRapport(event,'${r.id}')"
+            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">✏️</button>
           <button onclick="deleteRapportInline(event,'${r.id}')"
             style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">🗑️</button>
         </div>
@@ -3414,7 +3587,10 @@ function renderHistoriqueInline() {
   // Corbeille
   if (trash.length > 0) {
     html += `<div style="margin-top:16px;padding-top:16px;border-top:2px dashed var(--border);">
-      <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">🗑️ Corbeille (${trash.length}) — suppression dans 7 jours</div>`;
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">🗑️ Corbeille (${trash.length}) — suppression dans 7 jours</div>
+        <button onclick="viderCorbeille()" style="background:#fee2e2;border:1px solid #fca5a5;color:#dc2626;font-family:inherit;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;">Vider</button>
+      </div>`;
     trash.forEach(r => {
       const daysLeft = TRASH_DAYS - Math.floor((Date.now()-new Date(r.deletedAt).getTime())/86400000);
       const d = new Date((r.date||'')+'T12:00:00');
@@ -3604,6 +3780,79 @@ function partagerPDF(r) {
   }
 }
 
+function modifierRapport(e, id) {
+  e.stopPropagation();
+  const reports = getReports();
+  const r = reports.find(rep => String(rep.id) === String(id));
+  if (!r) return;
+
+  // Confirmation si brouillon en cours
+  const hasDraft = localStorage.getItem(STORAGE_KEY);
+  if (hasDraft) {
+    if (!confirm('Un brouillon est en cours. Le remplacer par ce rapport ?')) return;
+  }
+
+  // Supprimer de la liste des validés
+  const updated = reports.filter(rep => String(rep.id) !== String(id));
+  localStorage.setItem(REPORTS_KEY, JSON.stringify(updated));
+
+  // Remettre à zéro puis charger le rapport dans le brouillon
+  resetRapport();
+
+  // Charger les données du rapport
+  const d = r;
+  if (d.date)    document.getElementById('rj-date').value = d.date;
+  if (d.nom)     document.getElementById('rj-nom').value = d.nom;
+  if (d.chantier) document.getElementById('rj-chantier').value = d.chantier;
+  if (d.employes) { state.employes = d.employes; renderEmployes(); }
+
+  if (d.locSelection && Object.keys(d.locSelection).length > 0) {
+    locSelection = d.locSelection;
+    renderLocSelectionZone();
+  } else if (d.location) {
+    Object.entries(d.location).forEach(([k,v]) => {
+      if (!v || parseFloat(v) <= 0) return;
+      const item = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS].find(i => i.id === k);
+      if (item) locSelection[k] = { label: item.label, unit: item.unit, qty: parseFloat(v) };
+    });
+    renderLocSelectionZone();
+  }
+
+  if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
+
+  if (d.metres && d.metres.length > 0) {
+    if (!extrasState.metres) toggleExtra('metres');
+    d.metres.forEach(m => addMetreRow({ desc: m.desc, type: m.type, subs: m.subs }));
+  }
+
+  if (d.fournitSelection && Object.keys(d.fournitSelection).length > 0) {
+    fournitSelection = d.fournitSelection;
+    renderFournitSelectionZone();
+  }
+
+  if (d.evacuations) d.evacuations.forEach(ev => {
+    addFournitRowWithMat('evac-list', 'sum-evac', ev.mat);
+    const rows = document.querySelectorAll('#evac-list .fournit-item');
+    const last = rows[rows.length-1];
+    if (last) {
+      const inputs = last.querySelectorAll('input, select');
+      if (inputs[1]) inputs[1].value = ev.qte;
+      if (inputs[2]) inputs[2].value = ev.unite;
+    }
+  });
+
+  // Sauvegarder comme brouillon
+  autoSaveDraft();
+  updateHeader();
+
+  // Aller sur brouillon
+  renderHistoriqueInline();
+  showRapTab('brouillon');
+  buildRecapPreview();
+
+  showToast('✏️ Rapport chargé dans le brouillon');
+}
+
 function deleteRapportInline(e, id) {
   e.stopPropagation();
   let reports = getReports();
@@ -3616,6 +3865,33 @@ function deleteRapportInline(e, id) {
   trash.unshift(removed);
   saveTrash(trash);
   renderHistoriqueInline();
+}
+
+function viderCorbeille() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:flex;align-items:flex-end;';
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:20px 20px 0 0;width:100%;padding:20px 16px 36px;">
+      <div style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;"></div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px;">Vider la corbeille</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Les rapports supprimés seront perdus définitivement.</div>
+      <button id="btn-confirm-vider" style="width:100%;background:#dc2626;color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
+        🗑️ Vider définitivement
+      </button>
+      <button id="btn-cancel-vider" style="width:100%;background:var(--bg);color:var(--text-muted);border:none;font-family:inherit;font-weight:600;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
+        Annuler
+      </button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.getElementById('btn-confirm-vider').onclick = () => {
+    localStorage.setItem(TRASH_KEY, '[]');
+    document.body.removeChild(overlay);
+    renderHistoriqueInline();
+    showToast('🗑️ Corbeille vidée');
+  };
+  document.getElementById('btn-cancel-vider').onclick = () => document.body.removeChild(overlay);
+  overlay.onclick = e => { if (e.target === overlay) document.body.removeChild(overlay); };
 }
 
 function restoreRapportInline(e, id) {
@@ -3793,6 +4069,7 @@ function openEditPage(id) {
     <div class="info-row"><span class="k">👷 MO total</span><span class="v">${totalMO.toFixed(2)} h (${(r.employes||[]).length} pers.)</span></div>
     <div class="info-row"><span class="k">🔧 Location</span><span class="v">${nLoc} équipement(s)</span></div>
     <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} ligne(s)</span></div>
+          ${(r.metres||[]).map(m => `<div class="info-row" style="padding-left:20px;"><span class="k" style="color:var(--text-muted);font-size:12px;">${m.article||'—'}</span><span class="v" style="font-size:12px;">${m.qte} ${m.unite}</span></div>`).join('')}
     <div class="info-row"><span class="k">📦 Fournitures</span><span class="v">${(r.fournitures||[]).length} article(s)</span></div>
     <div class="info-row"><span class="k">🚮 Évacuations</span><span class="v">${(r.evacuations||[]).length} article(s)</span></div>
   `;
