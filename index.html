@@ -5,216 +5,806 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Risse S.A.">
 <meta name="theme-color" content="#1B3A6B">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<title>Risse S.A.</title>
+<title>Ressources — Risse S.A.</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#1B3A6B;--navy2:#122952;--yellow:#F0A500;--teal:#1A7F72;
-  --red:#E53935;--orange:#E67E22;--green:#2E7D32;
-  --white:#fff;--bg:#F4F6FB;--bg2:#EAECF4;--card:#fff;
+  --red:#E53935;--green:#2E7D32;
+  --bg:#F4F6FB;--bg2:#EAECF4;--card:#fff;
   --border:#E0E4EF;--text:#1A2340;--text2:#4A5878;--text3:#9AA3BC;
   --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
   --r:14px;--rs:8px;
-  --sh:0 2px 12px rgba(27,58,107,.10);--shm:0 4px 20px rgba(27,58,107,.15);
+  --sh:0 2px 12px rgba(27,58,107,.10);--shm:0 4px 24px rgba(27,58,107,.18);
+  --nb-h:62px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
 
 /* ── HEADER ── */
-.hub-header{background:var(--navy);padding-top:var(--safe-t);flex-shrink:0;box-shadow:0 2px 14px rgba(0,0,0,.28);}
-.hub-top{display:flex;align-items:center;gap:13px;padding:16px 16px 14px;}
-.hub-logo-img{width:48px;height:48px;border-radius:50%;object-fit:contain;background:#fff;border:2px solid rgba(255,255,255,.25);flex-shrink:0;padding:3px;}
-.hub-title{font-size:19px;font-weight:700;color:#fff;letter-spacing:-.3px;line-height:1.15;}
-.hub-sub{font-size:10px;color:rgba(255,255,255,.45);letter-spacing:1.2px;text-transform:uppercase;margin-top:1px;}
-.hub-date-bar{background:rgba(0,0,0,.22);display:flex;justify-content:space-between;align-items:center;padding:7px 16px;border-top:1px solid rgba(255,255,255,.07);}
-.hub-date-txt{font-size:11px;color:rgba(255,255,255,.45);}
+.header{background:var(--navy);padding-top:var(--safe-t);flex-shrink:0;box-shadow:0 2px 14px rgba(0,0,0,.28);z-index:10;}
+.header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;}
+.back-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
+.back-btn:active{background:rgba(255,255,255,.25);}
+.header-titles{flex:1;}
+.header-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px;}
+.header-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.8px;text-transform:uppercase;}
+.header-actions{display:flex;gap:8px;align-items:center;}
+.header-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0;}
+.cat-mgr-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;}
+.cat-mgr-btn:active{background:rgba(255,255,255,.25);}
 
-/* ── SCROLL ── */
-.hub-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:20px 14px calc(var(--safe-b) + 20px);}
+/* ── BOTTOM NAV ── */
+.bottom-nav{height:var(--nb-h);padding-bottom:var(--safe-b);background:#fff;border-top:1px solid var(--border);display:flex;flex-shrink:0;box-shadow:0 -2px 12px rgba(27,58,107,.08);z-index:10;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all .15s;padding:6px 0;position:relative;border:none;background:none;}
+.nav-item.active .nav-label{color:var(--navy);font-weight:700;}
+.nav-item.active::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:32px;height:3px;background:var(--navy);border-radius:0 0 3px 3px;}
+.nav-icon{font-size:20px;}
+.nav-label{font-size:9px;font-weight:500;color:var(--text3);letter-spacing:.2px;}
+.nav-badge{position:absolute;top:4px;right:calc(50% - 20px);background:var(--navy);color:#fff;font-size:8px;font-weight:700;min-width:15px;height:15px;border-radius:8px;padding:0 3px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
 
-/* ── SECTION LABEL ── */
-.sec-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:11px;display:flex;align-items:center;gap:8px;}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+/* ── PAGES ── */
+.pages{flex:1;overflow:hidden;position:relative;}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:12px 14px calc(12px);display:none;}
+.page.active{display:block;}
 
-/* ── MODULES GRID ── */
-.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px;}
+/* ── TOOLBAR ── */
+.toolbar{display:flex;gap:8px;margin-bottom:14px;position:sticky;top:0;z-index:5;background:var(--bg);padding:2px 0 8px;}
+.search-input{flex:1;background:#fff;border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 14px;border-radius:24px;-webkit-appearance:none;transition:border-color .15s;}
+.search-input:focus{outline:none;border-color:var(--navy);}
+.search-input::placeholder{color:var(--text3);}
+.add-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shm);transition:all .15s;}
+.add-fab:active{transform:scale(.92);}
 
-/* ── MOD CARD ACTIF ── */
-.mod-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);padding:16px 8px 13px;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;transition:transform .13s, box-shadow .13s;position:relative;text-decoration:none;}
-.mod-card:active{transform:scale(.95);box-shadow:none;}
-.mod-card.is-active{border-color:var(--navy);border-width:2px;}
-
-/* ── MOD CARD EN DEV ── */
-.mod-card.dev{background:var(--bg);border:1.5px dashed var(--border);box-shadow:none;opacity:.75;cursor:default;}
-.mod-card.dev:active{transform:none;}
-.mod-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
-.mod-name{font-size:11px;font-weight:700;color:var(--text);text-align:center;line-height:1.25;}
-.mod-desc{font-size:9px;color:var(--text3);text-align:center;line-height:1.3;}
-.mod-dev-tag{position:absolute;top:7px;right:7px;background:rgba(240,165,0,.13);border:1px solid rgba(240,165,0,.35);color:var(--yellow);font-size:7px;font-weight:700;padding:1px 5px;border-radius:4px;letter-spacing:.3px;text-transform:uppercase;}
-
-/* ── RESSOURCES CARD ── */
-.res-hub-card{
-  background:#fff;border:2px solid var(--navy);border-radius:var(--r);
-  box-shadow:var(--shm);
-  overflow:hidden;margin-bottom:8px;
-  text-decoration:none;display:block;
-  transition:transform .13s,box-shadow .13s;
+/* ── ACCORDÉON ── */
+.accordion{margin-bottom:10px;}
+.acc-header{
+  background:#fff;border:1px solid var(--border);border-radius:var(--r);
+  display:flex;align-items:center;gap:10px;padding:12px 14px;
+  cursor:pointer;transition:all .15s;user-select:none;
+  box-shadow:var(--sh);
 }
-.res-hub-card:active{transform:scale(.98);box-shadow:var(--sh);}
-.res-hub-header{
-  background:var(--navy);padding:14px 16px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.res-hub-title{font-size:15px;font-weight:700;color:#fff;}
-.res-hub-sub{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;}
-.res-hub-arrow{color:rgba(255,255,255,.7);font-size:20px;}
-.res-hub-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);
-  border-top:1px solid var(--border);
-}
-.res-hub-item{
-  padding:11px 6px;text-align:center;
-  border-right:1px solid var(--border);
-}
-.res-hub-item:last-child{border-right:none;}
-.res-hub-item-icon{font-size:18px;margin-bottom:3px;}
-.res-hub-item-label{font-size:8px;font-weight:600;color:var(--text3);letter-spacing:.3px;}
-.res-hub-item-count{font-size:14px;font-weight:700;color:var(--navy);}
+.acc-header.open{border-radius:var(--r) var(--r) 0 0;border-bottom-color:transparent;box-shadow:none;border-bottom:none;}
+.acc-header:active{background:var(--bg);}
+.acc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.acc-name{flex:1;font-size:14px;font-weight:700;color:var(--text);}
+.acc-count{font-size:11px;font-weight:700;color:var(--text3);background:var(--bg2);padding:2px 8px;border-radius:10px;}
+.acc-chevron{font-size:14px;color:var(--text3);transition:transform .22s;}
+.acc-header.open .acc-chevron{transform:rotate(90deg);}
 
-/* ── FOOTER ── */
-.hub-footer{text-align:center;font-size:10px;color:var(--text3);padding:10px 0 2px;}
+.acc-body{
+  background:#fff;border:1px solid var(--border);border-top:none;
+  border-radius:0 0 var(--r) var(--r);
+  overflow:hidden;
+  max-height:0;transition:max-height .28s ease;
+  box-shadow:var(--sh);
+}
+.acc-body.open{max-height:2000px;}
+.acc-inner{padding:10px 12px 12px;}
+
+/* ── ITEMS DANS ACCORDÉON ── */
+.res-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s;}
+.res-item:last-child{margin-bottom:0;}
+.res-item:active{transform:scale(.98);background:var(--bg2);}
+.res-item-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center;}
+.res-item-body{flex:1;min-width:0;}
+.res-item-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.res-item-sub{font-size:10px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.res-item-price{font-size:12px;font-weight:700;color:var(--teal);white-space:nowrap;flex-shrink:0;}
+.res-item-arrow{color:var(--text3);font-size:14px;flex-shrink:0;}
+
+.acc-empty{text-align:center;padding:16px;color:var(--text3);font-size:12px;}
+.acc-add-inline{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--border);cursor:pointer;transition:background .13s;}
+.acc-add-inline:active{background:var(--bg);}
+.acc-add-inline span{font-size:12px;font-weight:600;color:var(--teal);}
+
+/* Sans catégorie */
+.no-cat-section{margin-bottom:10px;}
+.no-cat-header{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;padding:6px 2px;display:flex;align-items:center;gap:8px;}
+.no-cat-header::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ── PAGE VIDE ── */
+.empty-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:var(--text3);text-align:center;padding:40px 20px;}
+.empty-icon{font-size:48px;margin-bottom:12px;opacity:.6;}
+.empty-txt{font-size:14px;font-weight:600;color:var(--text2);}
+.empty-hint{font-size:12px;margin-top:6px;}
+
+/* ── MODALS ── */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:300;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
+.modal-ov.open{display:flex;}
+.modal-sh{background:#fff;border-radius:22px 22px 0 0;padding:0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
+.modal-drag{padding:14px 16px 0;}
+.modal-handle{width:36px;height:4px;background:var(--bg2);border-radius:2px;margin:0 auto 14px;}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 16px 14px;border-bottom:1px solid var(--border);}
+.modal-title{font-size:17px;font-weight:700;color:var(--navy);}
+.modal-close{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-body{flex:1;overflow-y:auto;padding:16px;}
+.modal-footer{padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);}
+
+/* ── FORM ── */
+.form-sec-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
+.form-sec-label:first-child{margin-top:0;}
+.form-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.field{margin-bottom:10px;}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;padding:11px 13px;border-radius:var(--rs);-webkit-appearance:none;appearance:none;transition:border-color .15s;}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
+.field textarea{min-height:72px;resize:vertical;line-height:1.5;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy);background:#fff;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+/* ── BOUTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;padding:13px 18px;border:none;border-radius:var(--rs);cursor:pointer;transition:all .14s;width:100%;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-ghost{background:#fff;color:var(--text2);border:1.5px solid var(--border);}
+.btn-danger{background:#FFF0F0;color:var(--red);border:1.5px solid rgba(229,57,53,.2);}
+.btn-teal{background:var(--teal);color:#fff;}
+.btn-sm{padding:10px 14px;font-size:13px;}
+.mt8{margin-top:8px;}
+.gap8{display:flex;gap:8px;}
+
+/* ── GESTIONNAIRE CATÉGORIES ── */
+.cat-list-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);}
+.cat-list-item:last-child{border-bottom:none;}
+.cat-color-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.cat-list-name{flex:1;font-size:14px;font-weight:600;color:var(--text);}
+.cat-list-count{font-size:11px;color:var(--text3);}
+.cat-del-btn{background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:4px;border-radius:6px;}
+.cat-del-btn:active{color:var(--red);}
+.cat-add-row{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.cat-add-input{flex:1;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 12px;border-radius:var(--rs);}
+.cat-add-input:focus{outline:none;border-color:var(--navy);}
+.color-picker{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.color-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .13s;}
+.color-swatch.selected{border-color:var(--navy);transform:scale(1.2);}
+
+/* ── DETAIL SHEET ── */
+.detail-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
+.detail-ov.open{display:flex;}
+.detail-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:90vh;display:flex;flex-direction:column;}
+.detail-drag{padding:14px 16px 0;}
+.detail-top{padding:0 16px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);}
+.detail-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.detail-name{font-size:18px;font-weight:700;color:var(--text);}
+.detail-type{font-size:11px;color:var(--text3);margin-top:2px;}
+.detail-body{flex:1;overflow-y:auto;padding:16px;}
+.detail-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--bg2);}
+.detail-row:last-child{border-bottom:none;}
+.detail-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;}
+.detail-val{font-size:14px;font-weight:600;color:var(--text);text-align:right;max-width:60%;}
+.detail-notes{background:var(--bg);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:4px;}
+.detail-footer{padding:12px 16px calc(12px + var(--safe-b));display:flex;gap:8px;border-top:1px solid var(--border);}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--safe-b)+10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 18px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
+.toast{position:fixed;bottom:calc(var(--safe-b) + var(--nb-h) + 10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<div class="hub-header">
-  <div class="hub-top">
-    <img class="hub-logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAYAAACLz2ctAABwR0lEqAABIGJgZ2d3d3YH3t+NqFKCqCgmKgtHJ359TbbYe3y7mbmxsWi0qLzfnj/e87s7Mzs2fPPed8nucsBwcHDg4cHDg4cHBw4ODAQYGDAwcODhwcODhwcODgwMHBgYMDBwcOHBw4cODgwMGBgwMHDg4cHDg4cHDg4MDAgYMDh//h4MB/AQ==" alt="Risse S.A.">
-    <div>
-      <div class="hub-title">Risse S.A.</div>
-      <div class="hub-sub">Gestion de chantier</div>
+<div class="header">
+  <div class="header-inner">
+    <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
+    <div class="header-titles">
+      <div class="header-title" id="hdrTitle">Ressources entreprise</div>
+      <div class="header-sub" id="hdrSub">Risse S.A.</div>
     </div>
-  </div>
-  <div class="hub-date-bar">
-    <span class="hub-date-txt" id="hubDate"></span>
+    <div class="header-actions">
+      <button class="cat-mgr-btn" onclick="openCatMgr()">⊞ Catégories</button>
+      <div class="header-count" id="hdrCount">0</div>
+    </div>
   </div>
 </div>
 
-<!-- SCROLL -->
-<div class="hub-scroll">
-
-  <!-- MODULES -->
-  <div class="sec-label">Modules</div>
-  <div class="modules-grid">
-    <a class="mod-card is-active" href="machine/index.html">
-      <div class="mod-icon" style="background:#EEF2FF;">🚜</div>
-      <div class="mod-name">Machines</div>
-      <div class="mod-desc">Heures & entretiens</div>
-    </a>
-    <a class="mod-card is-active" href="rapport/index.html">
-      <div class="mod-icon" style="background:#F0FDF4;">📋</div>
-      <div class="mod-name">Rapport</div>
-      <div class="mod-desc">Journal quotidien</div>
-    </a>
-    <div class="mod-card dev">
-      <div class="mod-dev-tag">Bientôt</div>
-      <div class="mod-icon" style="background:#FFF7ED;">⏱️</div>
-      <div class="mod-name">Pointage</div>
-      <div class="mod-desc">Heures équipe</div>
-    </div>
-    <div class="mod-card dev">
-      <div class="mod-dev-tag">Bientôt</div>
-      <div class="mod-icon" style="background:#FFF1F2;">📦</div>
-      <div class="mod-name">Stock</div>
-      <div class="mod-desc">Matériaux & seuils</div>
-    </div>
-    <div class="mod-card dev">
-      <div class="mod-dev-tag">Bientôt</div>
-      <div class="mod-icon" style="background:#F0FDFA;">💶</div>
-      <div class="mod-name">Devis</div>
-      <div class="mod-desc">Prix de revient</div>
-    </div>
-    <div class="mod-card dev">
-      <div class="mod-dev-tag">Bientôt</div>
-      <div class="mod-icon" style="background:#FDF4FF;">📁</div>
-      <div class="mod-name">Chantiers</div>
-      <div class="mod-desc">Fiches & docs</div>
-    </div>
-  </div>
-
-  <!-- RESSOURCES ENTREPRISE -->
-  <div class="sec-label">Ressources entreprise</div>
-
-  <a class="res-hub-card" href="ressources/index.html">
-    <div class="res-hub-header">
-      <div>
-        <div class="res-hub-title">🗄 Ressources entreprise</div>
-        <div class="res-hub-sub">Équipe · Machines · Véhicules · Matériel · Matériaux</div>
-      </div>
-      <div class="res-hub-arrow">›</div>
-    </div>
-    <div class="res-hub-grid">
-      <div class="res-hub-item">
-        <div class="res-hub-item-icon">👷</div>
-        <div class="res-hub-item-count" id="cnt-equipe">0</div>
-        <div class="res-hub-item-label">Équipe</div>
-      </div>
-      <div class="res-hub-item">
-        <div class="res-hub-item-icon">🚜</div>
-        <div class="res-hub-item-count" id="cnt-machines">0</div>
-        <div class="res-hub-item-label">Machines</div>
-      </div>
-      <div class="res-hub-item">
-        <div class="res-hub-item-icon">🚛</div>
-        <div class="res-hub-item-count" id="cnt-vehicules">0</div>
-        <div class="res-hub-item-label">Véhicules</div>
-      </div>
-      <div class="res-hub-item">
-        <div class="res-hub-item-icon">🔧</div>
-        <div class="res-hub-item-count" id="cnt-materiel">0</div>
-        <div class="res-hub-item-label">Matériel</div>
-      </div>
-      <div class="res-hub-item">
-        <div class="res-hub-item-icon">🪨</div>
-        <div class="res-hub-item-count" id="cnt-materiaux">0</div>
-        <div class="res-hub-item-label">Matériaux</div>
-      </div>
-    </div>
-  </a>
-
-  <div class="hub-footer">Risse S.A. © 2026</div>
+<!-- PAGES -->
+<div class="pages">
+  <div class="page active" id="page-equipe"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('equipe',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('equipe')">＋</button></div><div id="content-equipe"></div></div>
+  <div class="page" id="page-machines"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('machines',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('machines')">＋</button></div><div id="content-machines"></div></div>
+  <div class="page" id="page-vehicules"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('vehicules',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('vehicules')">＋</button></div><div id="content-vehicules"></div></div>
+  <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
+  <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
 </div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active" data-tab="equipe" onclick="switchTab('equipe')"><span class="nav-icon">👷</span><span class="nav-label">Équipe</span><span class="nav-badge" id="badge-equipe">0</span></button>
+  <button class="nav-item" data-tab="machines" onclick="switchTab('machines')"><span class="nav-icon">🚜</span><span class="nav-label">Machines</span><span class="nav-badge" id="badge-machines">0</span></button>
+  <button class="nav-item" data-tab="vehicules" onclick="switchTab('vehicules')"><span class="nav-icon">🚛</span><span class="nav-label">Véhicules</span><span class="nav-badge" id="badge-vehicules">0</span></button>
+  <button class="nav-item" data-tab="materiel" onclick="switchTab('materiel')"><span class="nav-icon">🔧</span><span class="nav-label">Matériel</span><span class="nav-badge" id="badge-materiel">0</span></button>
+  <button class="nav-item" data-tab="materiaux" onclick="switchTab('materiaux')"><span class="nav-icon">🪨</span><span class="nav-label">Matériaux</span><span class="nav-badge" id="badge-materiaux">0</span></button>
+</nav>
 
 <div class="toast" id="toast"></div>
 
-<script>
-// Date
-const d=new Date();
-const j=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][d.getDay()];
-const m=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][d.getMonth()];
-document.getElementById('hubDate').textContent=`${j} ${d.getDate()} ${m} ${d.getFullYear()}`;
+<!-- ════════════════════════════════════
+     MODAL GESTIONNAIRE CATÉGORIES
+════════════════════════════════════ -->
+<div class="modal-ov" id="modal-catmgr">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr">
+      <div class="modal-title" id="catmgr-title">Catégories</div>
+      <button class="modal-close" onclick="closeCatMgr()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="catmgr-list"></div>
+      <div class="cat-add-row">
+        <input class="cat-add-input" type="text" id="cat-new-name" placeholder="Nouvelle catégorie…" autocomplete="off">
+        <button class="btn btn-teal" style="width:auto;padding:10px 16px;" onclick="addCategory()">＋</button>
+      </div>
+      <div class="color-picker" id="cat-color-picker"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeCatMgr()">Fermer</button>
+    </div>
+  </div>
+</div>
 
-// Compteurs depuis localStorage
-const KEYS={equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
-Object.entries(KEYS).forEach(([s,k])=>{
-  try{
-    const data=JSON.parse(localStorage.getItem(k)||'[]');
-    const el=document.getElementById('cnt-'+s);
-    if(el) el.textContent=data.length;
-  }catch(e){}
+<!-- ════════════════════════════════════
+     MODALS AJOUT ÉLÉMENTS
+════════════════════════════════════ -->
+
+<!-- ÉQUIPE -->
+<div class="modal-ov" id="modal-add-equipe">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title">👷 Nouvel employé</div><button class="modal-close" onclick="closeAdd('equipe')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-sec-label">Catégorie</div>
+      <div class="field"><label>Sous-catégorie</label><select id="eq-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="form-sec-label">Identité</div>
+      <div class="field-row">
+        <div class="field"><label>Prénom</label><input type="text" id="eq-prenom" placeholder="Marc" autocomplete="off"></div>
+        <div class="field"><label>Nom</label><input type="text" id="eq-nom" placeholder="Dupont" autocomplete="off"></div>
+      </div>
+      <div class="field"><label>Rôle / Poste</label><select id="eq-role"><option value="">—</option><option>Chef de chantier</option><option>Conducteur d'engins</option><option>Maçon</option><option>Aide-maçon</option><option>Chauffeur</option><option>Mécanicien</option><option>Ouvrier polyvalent</option><option>Apprenti</option><option>Stagiaire</option><option>Autre</option></select></div>
+      <div class="form-sec-label">Contact</div>
+      <div class="field"><label>Téléphone</label><input type="tel" id="eq-tel" placeholder="+41 79 000 00 00" autocomplete="off"></div>
+      <div class="field"><label>Email</label><input type="email" id="eq-email" placeholder="marc@exemple.ch" autocomplete="off"></div>
+      <div class="form-sec-label">Conditions</div>
+      <div class="field-row">
+        <div class="field"><label>Taux horaire (CHF)</label><input type="number" id="eq-taux" placeholder="35.00" step="0.5" min="0" autocomplete="off"></div>
+        <div class="field"><label>Contrat</label><select id="eq-contrat"><option value="">—</option><option>CDI</option><option>CDD</option><option>Intérim</option><option>Apprentissage</option><option>Stage</option></select></div>
+      </div>
+      <div class="form-sec-label">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="eq-notes" placeholder="Permis EB, certifications…"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('equipe')">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- MACHINES -->
+<div class="modal-ov" id="modal-add-machines">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title">🚜 Nouvelle machine</div><button class="modal-close" onclick="closeAdd('machines')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-sec-label">Catégorie</div>
+      <div class="field"><label>Sous-catégorie</label><select id="ma-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="form-sec-label">Identification</div>
+      <div class="field"><label>Nom / Modèle *</label><input type="text" id="ma-nom" placeholder="Mecalac MWR7" autocomplete="off"></div>
+      <div class="field-row">
+        <div class="field"><label>Type</label><select id="ma-type"><option value="">—</option><option>Pelle sur roues</option><option>Pelle sur chenilles</option><option>Chargeuse</option><option>Bulldozer</option><option>Compacteur</option><option>Grue mobile</option><option>Concasseur</option><option>Finisseur</option><option>Autre</option></select></div>
+        <div class="field"><label>Année</label><input type="number" id="ma-annee" placeholder="2018" min="1980" max="2030" autocomplete="off"></div>
+      </div>
+      <div class="field"><label>N° de série</label><input type="text" id="ma-serie" placeholder="SN-XXXX" autocomplete="off"></div>
+      <div class="form-sec-label">Caractéristiques</div>
+      <div class="field-row">
+        <div class="field"><label>Poids (t)</label><input type="number" id="ma-poids" placeholder="7.5" step="0.1" min="0" autocomplete="off"></div>
+        <div class="field"><label>Puissance (kW)</label><input type="number" id="ma-puissance" placeholder="55" min="0" autocomplete="off"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Heures actuelles</label><input type="number" id="ma-heures" placeholder="1250" min="0" autocomplete="off"></div>
+        <div class="field"><label>Carburant</label><select id="ma-carburant"><option value="">—</option><option>Diesel</option><option>Électrique</option><option>Hybride</option><option>Essence</option></select></div>
+      </div>
+      <div class="form-sec-label">Valeur</div>
+      <div class="field-row">
+        <div class="field"><label>Valeur achat (CHF)</label><input type="number" id="ma-valeur" placeholder="180000" min="0" autocomplete="off"></div>
+        <div class="field"><label>Coût horaire (CHF/h)</label><input type="number" id="ma-cout-h" placeholder="85" step="0.5" min="0" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="ma-notes" placeholder="Entretien tous les 250h…"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('machines')">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- VÉHICULES -->
+<div class="modal-ov" id="modal-add-vehicules">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title">🚛 Nouveau véhicule</div><button class="modal-close" onclick="closeAdd('vehicules')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-sec-label">Catégorie</div>
+      <div class="field"><label>Sous-catégorie</label><select id="vh-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="form-sec-label">Identification</div>
+      <div class="field"><label>Nom / Désignation *</label><input type="text" id="vh-nom" placeholder="Iveco Daily Benne" autocomplete="off"></div>
+      <div class="field-row">
+        <div class="field"><label>Immatriculation</label><input type="text" id="vh-immat" placeholder="VD 123 456" autocomplete="off" style="text-transform:uppercase"></div>
+        <div class="field"><label>Type</label><select id="vh-type"><option value="">—</option><option>Camion benne</option><option>Camion citerne</option><option>Semi-remorque</option><option>Remorque</option><option>Utilitaire</option><option>Voiture</option><option>Pick-up</option><option>Minibus</option><option>Autre</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Marque</label><input type="text" id="vh-marque" placeholder="Iveco" autocomplete="off"></div>
+        <div class="field"><label>Année</label><input type="number" id="vh-annee" placeholder="2020" min="1980" max="2030" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Capacité & Poids</div>
+      <div class="field-row">
+        <div class="field"><label>PMA / PGAC (t)</label><input type="number" id="vh-pma" placeholder="18.0" step="0.5" min="0" autocomplete="off"></div>
+        <div class="field"><label>Charge utile (t)</label><input type="number" id="vh-charge" placeholder="10.0" step="0.5" min="0" autocomplete="off"></div>
+      </div>
+      <div class="field"><label>Volume benne (m³)</label><input type="number" id="vh-volume" placeholder="8.0" step="0.5" min="0" autocomplete="off"></div>
+      <div class="form-sec-label">Coûts</div>
+      <div class="field-row">
+        <div class="field"><label>Coût / jour (CHF)</label><input type="number" id="vh-cout-j" placeholder="350" min="0" autocomplete="off"></div>
+        <div class="field"><label>Coût / km (CHF)</label><input type="number" id="vh-cout-km" placeholder="0.80" step="0.01" min="0" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="vh-notes" placeholder="Contrôle technique valable jusqu'à…"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('vehicules')">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- MATÉRIEL -->
+<div class="modal-ov" id="modal-add-materiel">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title">🔧 Nouveau matériel</div><button class="modal-close" onclick="closeAdd('materiel')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-sec-label">Catégorie</div>
+      <div class="field"><label>Sous-catégorie</label><select id="mt-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="form-sec-label">Identification</div>
+      <div class="field"><label>Nom / Modèle *</label><input type="text" id="mt-nom" placeholder="Marteau-piqueur Hilti TE 70" autocomplete="off"></div>
+      <div class="field-row">
+        <div class="field"><label>Catégorie type</label><select id="mt-type"><option value="">—</option><option>Outillage électroportatif</option><option>Outillage à main</option><option>Levage / élingage</option><option>Compresseur / pneumatique</option><option>Pompe</option><option>Mesure / topographie</option><option>Sécurité</option><option>Échafaudage</option><option>Coffrage</option><option>Soudure</option><option>Autre</option></select></div>
+        <div class="field"><label>Marque</label><input type="text" id="mt-marque" placeholder="Hilti" autocomplete="off"></div>
+      </div>
+      <div class="field"><label>Référence / N° série</label><input type="text" id="mt-ref" placeholder="SN-XXXXX" autocomplete="off"></div>
+      <div class="form-sec-label">Caractéristiques</div>
+      <div class="field-row">
+        <div class="field"><label>Poids (kg)</label><input type="number" id="mt-poids" placeholder="8.5" step="0.1" min="0" autocomplete="off"></div>
+        <div class="field"><label>Puissance (W)</label><input type="number" id="mt-puissance" placeholder="1500" min="0" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Valeur</div>
+      <div class="field-row">
+        <div class="field"><label>Prix achat (CHF)</label><input type="number" id="mt-prix" placeholder="1200" min="0" autocomplete="off"></div>
+        <div class="field"><label>Location /j (CHF)</label><input type="number" id="mt-location" placeholder="75" min="0" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="mt-notes" placeholder="Révision annuelle…"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiel')">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- MATÉRIAUX -->
+<div class="modal-ov" id="modal-add-materiaux">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title">🪨 Nouveau matériau</div><button class="modal-close" onclick="closeAdd('materiaux')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-sec-label">Catégorie</div>
+      <div class="field"><label>Sous-catégorie</label><select id="mx-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="form-sec-label">Identification</div>
+      <div class="field"><label>Nom / Désignation *</label><input type="text" id="mx-nom" placeholder="Béton C25/30" autocomplete="off"></div>
+      <div class="field-row">
+        <div class="field"><label>Famille</label><select id="mx-famille"><option value="">—</option><option>Béton / mortier</option><option>Granulats / graviers</option><option>Sable</option><option>Terre / remblai</option><option>Bitume / enrobé</option><option>Acier / armatures</option><option>Bois / coffrages</option><option>Géotextile</option><option>Tuyaux</option><option>Produits chimiques</option><option>Autre</option></select></div>
+        <div class="field"><label>Unité</label><select id="mx-unite"><option value="">—</option><option>m³</option><option>tonne (t)</option><option>kg</option><option>m²</option><option>ml</option><option>pièce</option><option>litre</option><option>sac</option></select></div>
+      </div>
+      <div class="form-sec-label">Caractéristiques techniques</div>
+      <div class="field-row">
+        <div class="field"><label>Densité (t/m³)</label><input type="number" id="mx-densite" placeholder="2.4" step="0.01" min="0" autocomplete="off"></div>
+        <div class="field"><label>Classe / Résistance</label><input type="text" id="mx-classe" placeholder="C25/30…" autocomplete="off"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Granulométrie</label><input type="text" id="mx-granulo" placeholder="0/32 mm" autocomplete="off"></div>
+        <div class="field"><label>Fournisseur</label><input type="text" id="mx-fournisseur" placeholder="Holcim…" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Prix</div>
+      <div class="field-row">
+        <div class="field"><label>Prix unitaire HT (CHF)</label><input type="number" id="mx-prix" placeholder="95.00" step="0.01" min="0" autocomplete="off"></div>
+        <div class="field"><label>TVA (%)</label><select id="mx-tva"><option value="">—</option><option value="0">0%</option><option value="2.6">2.6%</option><option value="8.1" selected>8.1%</option></select></div>
+      </div>
+      <div class="form-sec-label">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="mx-notes" placeholder="Livraison 48h, camion toupie…"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiaux')">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     DETAIL SHEET
+════════════════════════════════════ -->
+<div class="detail-ov" id="detail-ov">
+  <div class="detail-sh">
+    <div class="detail-drag"><div class="modal-handle"></div></div>
+    <div class="detail-top">
+      <div class="detail-icon" id="det-icon"></div>
+      <div><div class="detail-name" id="det-name"></div><div class="detail-type" id="det-type"></div></div>
+    </div>
+    <div class="detail-body" id="det-body"></div>
+    <div class="detail-footer">
+      <button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteCurrentItem()">🗑 Supprimer</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeDetail()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════ -->
+<script>
+// ── CONFIG ──────────────────────────────────────────────
+const TABS    = ['equipe','machines','vehicules','materiel','materiaux'];
+const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux'};
+const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨'};
+const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB'};
+const KEYS    = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
+const CAT_KEY = 'rv6_res_categories'; // { equipe:[{id,name,color}], machines:[...], ... }
+
+const PALETTE = ['#E53935','#E67E22','#F0A500','#2E7D32','#1A7F72','#1B3A6B','#6C3483','#1565C0','#00838F','#4E342E'];
+
+let currentTab    = 'equipe';
+let currentDetailId      = null;
+let currentDetailSection = null;
+let catMgrTab     = 'equipe';
+let selectedColor = PALETTE[5];
+let openAccordions = {}; // { 'equipe__catid': true }
+let searchFilters  = {};
+
+// ── STORAGE ─────────────────────────────────────────────
+function load(s){ try{ const r=localStorage.getItem(KEYS[s]); return r?JSON.parse(r):[]; }catch(e){ return []; } }
+function save(s,d){ localStorage.setItem(KEYS[s],JSON.stringify(d)); }
+function loadCats(){ try{ const r=localStorage.getItem(CAT_KEY); return r?JSON.parse(r):{equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; }catch(e){ return {equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; } }
+function saveCats(d){ localStorage.setItem(CAT_KEY,JSON.stringify(d)); }
+
+// ── NAVIGATION ──────────────────────────────────────────
+function switchTab(tab){
+  currentTab=tab;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+tab));
+  document.getElementById('hdrTitle').textContent=TITLES[tab];
+  renderContent(tab, searchFilters[tab]||'');
+  updateHeader();
+  const inp=document.querySelector('#page-'+tab+' .search-input');
+  if(inp) inp.value=searchFilters[tab]||'';
+}
+
+function updateHeader(){
+  const cnt=load(currentTab).length;
+  document.getElementById('hdrCount').textContent=cnt;
+  document.getElementById('hdrSub').textContent=TITLES[currentTab];
+}
+
+// ── RENDU ACCORDÉONS ────────────────────────────────────
+function renderContent(section, filter){
+  const items = load(section);
+  const cats  = loadCats()[section]||[];
+  const el    = document.getElementById('content-'+section);
+  const icon  = ICONS[section];
+  const color = COLORS[section];
+  const q     = (filter||'').toLowerCase();
+
+  // Filtrage
+  const filtered = items.filter(item=> !q || Object.values(item).some(v=>String(v).toLowerCase().includes(q)));
+
+  if(!filtered.length && !cats.length){
+    el.innerHTML=`<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
+    return;
+  }
+  if(!filtered.length && q){
+    el.innerHTML=`<div class="empty-page"><div class="empty-icon">🔍</div><div class="empty-txt">Aucun résultat</div><div class="empty-hint">Modifiez la recherche</div></div>`;
+    return;
+  }
+
+  let html='';
+
+  // Grouper par catégorie
+  cats.forEach(cat=>{
+    const catItems = filtered.filter(i=>i.catId===cat.id);
+    const accKey   = section+'__'+cat.id;
+    const isOpen   = openAccordions[accKey]||false;
+    html += renderAccordion(accKey, cat.name, cat.color, catItems, icon, color, section, isOpen);
+  });
+
+  // Sans catégorie
+  const uncatItems = filtered.filter(i=>!i.catId || !cats.find(c=>c.id===i.catId));
+  if(uncatItems.length){
+    const accKey = section+'__none';
+    const isOpen = openAccordions[accKey]||false;
+    html += renderAccordion(accKey, 'Sans catégorie', '#9AA3BC', uncatItems, icon, color, section, isOpen);
+  }
+
+  // Si aucune catégorie créée, liste plate
+  if(!cats.length && uncatItems.length){
+    html = uncatItems.map(item=>renderItemHTML(item, section, icon, color)).join('');
+  }
+
+  el.innerHTML = html || `<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément dans les catégories</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
+}
+
+function renderAccordion(accKey, name, color, items, icon, bgColor, section, isOpen){
+  return `
+  <div class="accordion">
+    <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
+      <div class="acc-dot" style="background:${color}"></div>
+      <div class="acc-name">${esc(name)}</div>
+      <div class="acc-count">${items.length}</div>
+      <div class="acc-chevron">›</div>
+    </div>
+    <div class="acc-body${isOpen?' open':''}" id="acc-body-${accKey}">
+      <div class="acc-inner">
+        ${items.length
+          ? items.map(item=>renderItemHTML(item, section, icon, bgColor)).join('')
+          : `<div class="acc-empty">Aucun élément dans cette catégorie</div>`
+        }
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderItemHTML(item, section, icon, color){
+  const sub  = getSubtitle(section, item);
+  const price= getPrice(section, item);
+  return `
+  <div class="res-item" onclick="openDetail('${section}','${item.id}')">
+    <div class="res-item-icon">${icon}</div>
+    <div class="res-item-body">
+      <div class="res-item-name">${esc(item.nom||'—')}</div>
+      ${sub?`<div class="res-item-sub">${esc(sub)}</div>`:''}
+    </div>
+    ${price?`<div class="res-item-price">${esc(price)}</div>`:''}
+    <div class="res-item-arrow">›</div>
+  </div>`;
+}
+
+// ── TOGGLE ACCORDÉON ────────────────────────────────────
+function toggleAcc(accKey, section){
+  openAccordions[accKey] = !openAccordions[accKey];
+  const header = document.querySelector(`[onclick="toggleAcc('${accKey}','${section}')"]`);
+  const body   = document.getElementById('acc-body-'+accKey);
+  if(header) header.classList.toggle('open', openAccordions[accKey]);
+  if(body)   body.classList.toggle('open', openAccordions[accKey]);
+}
+
+// ── FILTRAGE ────────────────────────────────────────────
+function filterPage(section, val){
+  searchFilters[section]=val;
+  renderContent(section, val);
+}
+
+// ── BADGES ──────────────────────────────────────────────
+function updateBadges(){
+  TABS.forEach(s=>{
+    const b=document.getElementById('badge-'+s);
+    if(b) b.textContent=load(s).length;
+  });
+  updateHeader();
+}
+
+// ── GESTIONNAIRE CATÉGORIES ─────────────────────────────
+function openCatMgr(){
+  catMgrTab = currentTab;
+  renderCatMgr();
+  document.getElementById('modal-catmgr').classList.add('open');
+  selectedColor = PALETTE[5];
+  renderColorPicker();
+}
+function closeCatMgr(){ document.getElementById('modal-catmgr').classList.remove('open'); }
+
+function renderCatMgr(){
+  const cats  = loadCats()[catMgrTab]||[];
+  const items = load(catMgrTab);
+  document.getElementById('catmgr-title').textContent = `Catégories — ${TITLES[catMgrTab]}`;
+
+  if(!cats.length){
+    document.getElementById('catmgr-list').innerHTML=`<div style="color:var(--text3);font-size:13px;text-align:center;padding:16px 0;">Aucune catégorie créée</div>`;
+    return;
+  }
+
+  document.getElementById('catmgr-list').innerHTML = cats.map(cat=>{
+    const cnt = items.filter(i=>i.catId===cat.id).length;
+    return `
+    <div class="cat-list-item">
+      <div class="cat-color-dot" style="background:${cat.color}"></div>
+      <div class="cat-list-name">${esc(cat.name)}</div>
+      <div class="cat-list-count">${cnt} élément${cnt!==1?'s':''}</div>
+      <button class="cat-del-btn" onclick="deleteCategory('${cat.id}')">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function renderColorPicker(){
+  document.getElementById('cat-color-picker').innerHTML = PALETTE.map(c=>
+    `<div class="color-swatch${c===selectedColor?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`
+  ).join('');
+}
+
+function selectColor(c){ selectedColor=c; renderColorPicker(); }
+
+function addCategory(){
+  const inp  = document.getElementById('cat-new-name');
+  const name = inp.value.trim();
+  if(!name) { inp.focus(); inp.style.borderColor='var(--red)'; return; }
+  inp.style.borderColor='';
+
+  const cats = loadCats();
+  if(!cats[catMgrTab]) cats[catMgrTab]=[];
+  const id = 'cat'+Date.now().toString(36);
+  cats[catMgrTab].push({ id, name, color: selectedColor });
+  saveCats(cats);
+
+  inp.value='';
+  renderCatMgr();
+  renderContent(currentTab, searchFilters[currentTab]||'');
+  // Rafraîchir le select dans la modal d'ajout
+  populateCatSelects(catMgrTab);
+  showToast('Catégorie créée ✓');
+}
+
+function deleteCategory(catId){
+  const cats  = loadCats();
+  cats[catMgrTab] = (cats[catMgrTab]||[]).filter(c=>c.id!==catId);
+  saveCats(cats);
+  // Désassigner les éléments
+  const items = load(catMgrTab).map(i=>i.catId===catId?{...i,catId:''}:i);
+  save(catMgrTab, items);
+  renderCatMgr();
+  renderContent(currentTab, searchFilters[currentTab]||'');
+  populateCatSelects(catMgrTab);
+  showToast('Catégorie supprimée');
+}
+
+// ── SELECT CATÉGORIES DANS LES MODALS ───────────────────
+const CAT_SELECT_IDS = {equipe:'eq-cat',machines:'ma-cat',vehicules:'vh-cat',materiel:'mt-cat',materiaux:'mx-cat'};
+
+function populateCatSelects(section){
+  const sel = document.getElementById(CAT_SELECT_IDS[section]);
+  if(!sel) return;
+  const cats = loadCats()[section]||[];
+  const cur  = sel.value;
+  sel.innerHTML = `<option value="">— Sans catégorie —</option>` +
+    cats.map(c=>`<option value="${c.id}"${c.id===cur?' selected':''}>${esc(c.name)}</option>`).join('');
+}
+
+function populateAllCatSelects(){
+  TABS.forEach(s=>populateCatSelects(s));
+}
+
+// ── MODALS AJOUT ────────────────────────────────────────
+function openAdd(section){
+  populateCatSelects(section);
+  document.getElementById('modal-add-'+section).classList.add('open');
+  setTimeout(()=>{ const inp=document.querySelector('#modal-add-'+section+' input'); if(inp) inp.focus(); },150);
+}
+function closeAdd(section){ document.getElementById('modal-add-'+section).classList.remove('open'); }
+
+document.querySelectorAll('.modal-ov').forEach(m=>{
+  m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); });
 });
 
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js').catch(()=>{}); }
+// ── SAUVEGARDE ──────────────────────────────────────────
+function g(id){ const el=document.getElementById(id); return el?(el.value||'').trim():''; }
+
+function saveItem(section){
+  let item = { id: Date.now().toString(36)+Math.random().toString(36).slice(2,5) };
+  let req  = '';
+
+  if(section==='equipe'){
+    const prenom=g('eq-prenom'), nom=g('eq-nom');
+    if(!prenom&&!nom){ highlight('eq-prenom'); return; }
+    item={...item, catId:g('eq-cat'), nom:(prenom+' '+nom).trim(), role:g('eq-role'), tel:g('eq-tel'), email:g('eq-email'), taux:g('eq-taux'), contrat:g('eq-contrat'), notes:g('eq-notes') };
+  } else if(section==='machines'){
+    if(!g('ma-nom')){ highlight('ma-nom'); return; }
+    item={...item, catId:g('ma-cat'), nom:g('ma-nom'), type:g('ma-type'), annee:g('ma-annee'), serie:g('ma-serie'), poids:g('ma-poids'), puissance:g('ma-puissance'), heures:g('ma-heures'), carburant:g('ma-carburant'), valeur:g('ma-valeur'), cout_h:g('ma-cout-h'), notes:g('ma-notes') };
+  } else if(section==='vehicules'){
+    if(!g('vh-nom')){ highlight('vh-nom'); return; }
+    item={...item, catId:g('vh-cat'), nom:g('vh-nom'), immat:g('vh-immat'), type:g('vh-type'), marque:g('vh-marque'), annee:g('vh-annee'), pma:g('vh-pma'), charge:g('vh-charge'), volume:g('vh-volume'), cout_j:g('vh-cout-j'), cout_km:g('vh-cout-km'), notes:g('vh-notes') };
+  } else if(section==='materiel'){
+    if(!g('mt-nom')){ highlight('mt-nom'); return; }
+    item={...item, catId:g('mt-cat'), nom:g('mt-nom'), type:g('mt-type'), marque:g('mt-marque'), ref:g('mt-ref'), poids:g('mt-poids'), puissance:g('mt-puissance'), prix:g('mt-prix'), location:g('mt-location'), notes:g('mt-notes') };
+  } else if(section==='materiaux'){
+    if(!g('mx-nom')){ highlight('mx-nom'); return; }
+    item={...item, catId:g('mx-cat'), nom:g('mx-nom'), famille:g('mx-famille'), unite:g('mx-unite'), densite:g('mx-densite'), classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), tva:g('mx-tva'), notes:g('mx-notes') };
+  }
+
+  const data=[...load(section), item];
+  save(section, data);
+
+  // Reset form
+  document.querySelectorAll(`#modal-add-${section} input, #modal-add-${section} select, #modal-add-${section} textarea`)
+    .forEach(el=>{ el.value=''; el.style.borderColor=''; });
+
+  closeAdd(section);
+  renderContent(section, searchFilters[section]||'');
+  updateBadges();
+  showToast(ICONS[section]+' Enregistré avec succès');
+}
+
+function highlight(id){ const el=document.getElementById(id); if(!el)return; el.style.borderColor='var(--red)'; el.focus(); setTimeout(()=>el.style.borderColor='',2000); }
+
+// ── DETAIL ──────────────────────────────────────────────
+function getSubtitle(s,item){
+  if(s==='equipe') return [item.role,item.contrat].filter(Boolean).join(' · ');
+  if(s==='machines') return [item.type,item.annee].filter(Boolean).join(' · ');
+  if(s==='vehicules') return [item.type,item.immat].filter(Boolean).join(' · ');
+  if(s==='materiel') return [item.type,item.marque].filter(Boolean).join(' · ');
+  if(s==='materiaux') return [item.famille,item.unite].filter(Boolean).join(' · ');
+  return '';
+}
+function getPrice(s,item){
+  if(s==='equipe'&&item.taux)    return 'CHF '+item.taux+'/h';
+  if(s==='machines'&&item.cout_h) return 'CHF '+item.cout_h+'/h';
+  if(s==='vehicules'&&item.cout_j)return 'CHF '+item.cout_j+'/j';
+  if(s==='materiel'&&item.prix)   return 'CHF '+item.prix;
+  if(s==='materiaux'&&item.prix)  return 'CHF '+item.prix+'/'+(item.unite||'u.');
+  return '';
+}
+
+function openDetail(section, id){
+  const item = load(section).find(i=>i.id===id);
+  if(!item) return;
+  currentDetailId=id; currentDetailSection=section;
+
+  const cats = loadCats()[section]||[];
+  const cat  = cats.find(c=>c.id===item.catId);
+
+  document.getElementById('det-icon').textContent=ICONS[section];
+  document.getElementById('det-icon').style.background=COLORS[section];
+  document.getElementById('det-name').textContent=item.nom||'—';
+  document.getElementById('det-type').textContent=
+    [getSubtitle(section,item), cat?'📁 '+cat.name:''].filter(Boolean).join(' · ');
+
+  document.getElementById('det-body').innerHTML = getDetailRows(section,item).map(r=>{
+    if(r.type==='note') return `<div style="margin-top:8px"><div class="detail-label" style="margin-bottom:6px">${r.label}</div><div class="detail-notes">${esc(r.val)}</div></div>`;
+    return `<div class="detail-row"><span class="detail-label">${r.label}</span><span class="detail-val">${esc(r.val)}</span></div>`;
+  }).join('');
+
+  document.getElementById('detail-ov').classList.add('open');
+}
+
+function getDetailRows(s,item){
+  const r=[]; const add=(l,v,t)=>{ if(v) r.push({label:l,val:v,type:t}); };
+  if(s==='equipe'){ add('Rôle',item.role); add('Contrat',item.contrat); add('Téléphone',item.tel); add('Email',item.email); if(item.taux)add('Taux horaire','CHF '+item.taux+'/h'); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.valeur)add("Valeur d'achat",'CHF '+item.valeur); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.pma)add('PMA',item.pma+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.volume)add('Volume',item.volume+' m³'); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.cout_km)add('Coût/km','CHF '+item.cout_km); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='materiel'){ add('Catégorie',item.type); add('Marque',item.marque); add('Référence',item.ref); if(item.poids)add('Poids',item.poids+' kg'); if(item.puissance)add('Puissance',item.puissance+' W'); if(item.prix)add("Prix d'achat",'CHF '+item.prix); if(item.location)add('Location/jour','CHF '+item.location); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='materiaux'){ add('Famille',item.famille); add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.densite)add('Densité',item.densite+' t/m³'); if(item.prix)add('Prix HT','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.tva)add('TVA',item.tva+'%'); if(item.prix&&item.tva){const ttc=(parseFloat(item.prix)*(1+parseFloat(item.tva)/100)).toFixed(2); add('Prix TTC','CHF '+ttc+'/'+(item.unite||'u.')); } if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  return r;
+}
+
+function closeDetail(){ document.getElementById('detail-ov').classList.remove('open'); }
+
+function deleteCurrentItem(){
+  if(!currentDetailId||!currentDetailSection) return;
+  save(currentDetailSection, load(currentDetailSection).filter(i=>i.id!==currentDetailId));
+  closeDetail();
+  renderContent(currentDetailSection, searchFilters[currentDetailSection]||'');
+  updateBadges();
+  showToast('🗑 Élément supprimé');
+}
+
+document.getElementById('detail-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('detail-ov')) closeDetail(); });
+
+// ── TOAST ───────────────────────────────────────────────
+let toastTimer;
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
+
+// ── ESC ─────────────────────────────────────────────────
+function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── ENTRÉE CLAVIER ──────────────────────────────────────
+document.getElementById('cat-new-name').addEventListener('keydown',e=>{ if(e.key==='Enter') addCategory(); });
+
+// ── INIT ────────────────────────────────────────────────
+TABS.forEach(s=>renderContent(s,''));
+updateBadges();
+populateAllCatSelects();
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('../service-worker.js').catch(()=>{}); }
 </script>
 </body>
 </html>
