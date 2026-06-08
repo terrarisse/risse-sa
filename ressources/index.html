@@ -22,7 +22,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
-
+ 
 /* ── HEADER ── */
 .header{background:var(--navy);padding-top:var(--safe-t);flex-shrink:0;box-shadow:0 2px 14px rgba(0,0,0,.28);z-index:10;}
 .header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;}
@@ -35,7 +35,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .header-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0;}
 .cat-mgr-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;}
 .cat-mgr-btn:active{background:rgba(255,255,255,.25);}
-
+ 
 /* ── BOTTOM NAV ── */
 .bottom-nav{height:var(--nb-h);padding-bottom:var(--safe-b);background:#fff;border-top:1px solid var(--border);display:flex;flex-shrink:0;box-shadow:0 -2px 12px rgba(27,58,107,.08);z-index:10;}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all .15s;padding:6px 0;position:relative;border:none;background:none;}
@@ -44,12 +44,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .nav-icon{font-size:20px;}
 .nav-label{font-size:9px;font-weight:500;color:var(--text3);letter-spacing:.2px;}
 .nav-badge{position:absolute;top:4px;right:calc(50% - 20px);background:var(--navy);color:#fff;font-size:8px;font-weight:700;min-width:15px;height:15px;border-radius:8px;padding:0 3px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
-
+ 
 /* ── PAGES ── */
 .pages{flex:1;overflow:hidden;position:relative;}
 .page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:12px 14px calc(12px);display:none;}
 .page.active{display:block;}
-
+ 
 /* ── TOOLBAR ── */
 .toolbar{display:flex;gap:8px;margin-bottom:14px;position:sticky;top:0;z-index:5;background:var(--bg);padding:2px 0 8px;}
 .search-input{flex:1;background:#fff;border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 14px;border-radius:24px;-webkit-appearance:none;transition:border-color .15s;}
@@ -57,7 +57,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .search-input::placeholder{color:var(--text3);}
 .add-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shm);transition:all .15s;}
 .add-fab:active{transform:scale(.92);}
-
+ 
 /* ── ACCORDÉON ── */
 .accordion{margin-bottom:10px;}
 .acc-header{
@@ -73,7 +73,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .acc-count{font-size:11px;font-weight:700;color:var(--text3);background:var(--bg2);padding:2px 8px;border-radius:10px;}
 .acc-chevron{font-size:14px;color:var(--text3);transition:transform .22s;}
 .acc-header.open .acc-chevron{transform:rotate(90deg);}
-
+ 
 .acc-body{
   background:#fff;border:1px solid var(--border);border-top:none;
   border-radius:0 0 var(--r) var(--r);
@@ -83,7 +83,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 }
 .acc-body.open{max-height:2000px;}
 .acc-inner{padding:10px 12px 12px;}
-
+ 
 /* ── ITEMS DANS ACCORDÉON ── */
 .res-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s;}
 .res-item:last-child{margin-bottom:0;}
@@ -94,23 +94,23 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .res-item-sub{font-size:10px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .res-item-price{font-size:12px;font-weight:700;color:var(--teal);white-space:nowrap;flex-shrink:0;}
 .res-item-arrow{color:var(--text3);font-size:14px;flex-shrink:0;}
-
+ 
 .acc-empty{text-align:center;padding:16px;color:var(--text3);font-size:12px;}
 .acc-add-inline{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--border);cursor:pointer;transition:background .13s;}
 .acc-add-inline:active{background:var(--bg);}
 .acc-add-inline span{font-size:12px;font-weight:600;color:var(--teal);}
-
+ 
 /* Sans catégorie */
 .no-cat-section{margin-bottom:10px;}
 .no-cat-header{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;padding:6px 2px;display:flex;align-items:center;gap:8px;}
 .no-cat-header::after{content:'';flex:1;height:1px;background:var(--border);}
-
+ 
 /* ── PAGE VIDE ── */
 .empty-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:var(--text3);text-align:center;padding:40px 20px;}
 .empty-icon{font-size:48px;margin-bottom:12px;opacity:.6;}
 .empty-txt{font-size:14px;font-weight:600;color:var(--text2);}
 .empty-hint{font-size:12px;margin-top:6px;}
-
+ 
 /* ── MODALS ── */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:300;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
 .modal-ov.open{display:flex;}
@@ -122,7 +122,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .modal-close{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .modal-body{flex:1;overflow-y:auto;padding:16px;}
 .modal-footer{padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);}
-
+ 
 /* ── FORM ── */
 .form-sec-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
 .form-sec-label:first-child{margin-top:0;}
@@ -134,7 +134,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .field textarea{min-height:72px;resize:vertical;line-height:1.5;}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy);background:#fff;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-
+ 
 /* ── BOUTONS ── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;padding:13px 18px;border:none;border-radius:var(--rs);cursor:pointer;transition:all .14s;width:100%;}
 .btn:active{transform:scale(.97);}
@@ -145,7 +145,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .btn-sm{padding:10px 14px;font-size:13px;}
 .mt8{margin-top:8px;}
 .gap8{display:flex;gap:8px;}
-
+ 
 /* ── GESTIONNAIRE CATÉGORIES ── */
 .cat-list-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);}
 .cat-list-item:last-child{border-bottom:none;}
@@ -160,7 +160,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .color-picker{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
 .color-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .13s;}
 .color-swatch.selected{border-color:var(--navy);transform:scale(1.2);}
-
+ 
 /* ── DETAIL SHEET ── */
 .detail-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
 .detail-ov.open{display:flex;}
@@ -177,14 +177,43 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .detail-val{font-size:14px;font-weight:600;color:var(--text);text-align:right;max-width:60%;}
 .detail-notes{background:var(--bg);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:4px;}
 .detail-footer{padding:12px 16px calc(12px + var(--safe-b));display:flex;gap:8px;border-top:1px solid var(--border);}
-
+ 
+/* ── PHOTO/ICON UPLOAD ── */
+.media-zone{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.media-preview{width:72px;height:72px;border-radius:var(--r);background:var(--bg);border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;cursor:pointer;transition:border-color .15s;font-size:32px;}
+.media-preview:active{border-color:var(--navy);}
+.media-preview img{width:100%;height:100%;object-fit:cover;}
+.media-btns{display:flex;flex-direction:column;gap:5px;}
+.media-btn{background:none;border:1px solid var(--border);border-radius:var(--rs);padding:6px 12px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .13s;display:flex;align-items:center;gap:4px;}
+.media-btn:active{background:var(--bg);}
+.media-btn-del{color:var(--red);border-color:rgba(229,57,53,.2);}
+.detail-photo{width:100%;border-radius:var(--r);margin-bottom:12px;max-height:200px;object-fit:cover;}
+ 
+/* ── EMOJI PICKER GLOBAL ── */
+.epicker-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:400;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
+.epicker-ov.open{display:flex;}
+.epicker-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:70vh;display:flex;flex-direction:column;}
+.epicker-drag{padding:14px 16px 0;}
+.epicker-search{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:10px 14px;border-radius:24px;margin:0 0 10px;-webkit-appearance:none;}
+.epicker-search:focus{outline:none;border-color:var(--navy);}
+.epicker-cats{display:flex;gap:4px;overflow-x:auto;padding:0 0 8px;scrollbar-width:none;border-bottom:1px solid var(--border);}
+.epicker-cats::-webkit-scrollbar{display:none;}
+.epicker-cat-btn{flex-shrink:0;padding:5px 10px;font-size:11px;font-weight:600;border-radius:16px;border:1px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;white-space:nowrap;}
+.epicker-cat-btn.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+.epicker-grid{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;}
+.epicker-item{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:background .1s;border:1.5px solid transparent;}
+.epicker-item:active{background:var(--bg2);}
+.epicker-item.sel{border-color:var(--navy);background:var(--navy)11;}
+.epicker-footer{padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--border);display:flex;gap:8px;}
+.epicker-none{text-align:center;padding:30px;color:var(--text3);font-size:13px;}
+ 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:calc(var(--safe-b) + var(--nb-h) + 10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
-
+ 
 <!-- HEADER -->
 <div class="header">
   <div class="header-inner">
@@ -199,7 +228,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     </div>
   </div>
 </div>
-
+ 
 <!-- PAGES -->
 <div class="pages">
   <div class="page active" id="page-equipe"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('equipe',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('equipe')">＋</button></div><div id="content-equipe"></div></div>
@@ -208,7 +237,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
   <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
 </div>
-
+ 
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="nav-item active" data-tab="equipe" onclick="switchTab('equipe')"><span class="nav-icon">👷</span><span class="nav-label">Équipe</span><span class="nav-badge" id="badge-equipe">0</span></button>
@@ -217,9 +246,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <button class="nav-item" data-tab="materiel" onclick="switchTab('materiel')"><span class="nav-icon">🔧</span><span class="nav-label">Matériel</span><span class="nav-badge" id="badge-materiel">0</span></button>
   <button class="nav-item" data-tab="materiaux" onclick="switchTab('materiaux')"><span class="nav-icon">🪨</span><span class="nav-label">Matériaux</span><span class="nav-badge" id="badge-materiaux">0</span></button>
 </nav>
-
+ 
 <div class="toast" id="toast"></div>
-
+ 
 <!-- ════════════════════════════════════
      MODAL GESTIONNAIRE CATÉGORIES
 ════════════════════════════════════ -->
@@ -232,59 +261,68 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     </div>
     <div class="modal-body">
       <div id="catmgr-list"></div>
-      <div class="cat-add-row">
-        <input class="cat-add-input" type="text" id="cat-new-name" placeholder="Nouvelle catégorie…" autocomplete="off">
-        <button class="btn btn-teal" style="width:auto;padding:10px 16px;" onclick="addCategory()">＋</button>
+      <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:14px;">
+        <div class="form-sec-label" style="margin-top:0;">Nouvelle catégorie</div>
+        <div class="cat-add-row">
+          <div id="cat-icon-preview" style="width:42px;height:42px;border-radius:var(--rs);background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex-shrink:0;overflow:hidden;" onclick="openEmojiPickerForCat()">＋</div>
+          <input class="cat-add-input" type="text" id="cat-new-name" placeholder="Nom de la catégorie…" autocomplete="off">
+          <button class="btn btn-teal" style="width:auto;padding:10px 16px;flex-shrink:0;" onclick="addCategory()">＋</button>
+        </div>
+        <div style="margin-top:6px;font-size:10px;color:var(--text3);">Tap le carré pour choisir une icône (optionnel)</div>
+        <!-- Couleur -->
+        <div style="margin-top:12px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;">Couleur</div>
+          <div class="color-picker" id="cat-color-picker"></div>
+        </div>
+        <!-- Couleur -->
+        <div style="margin-top:12px;">
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;">Couleur</div>
+          <div class="color-picker" id="cat-color-picker"></div>
+        </div>
       </div>
-      <div class="color-picker" id="cat-color-picker"></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeCatMgr()">Fermer</button>
     </div>
   </div>
 </div>
-
+ 
 <!-- ════════════════════════════════════
      MODALS AJOUT ÉLÉMENTS
 ════════════════════════════════════ -->
-
+ 
 <!-- ÉQUIPE -->
 <div class="modal-ov" id="modal-add-equipe">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr"><div class="modal-title">👷 Nouvel employé</div><button class="modal-close" onclick="closeAdd('equipe')">✕</button></div>
     <div class="modal-body">
-      <div class="form-sec-label">Catégorie</div>
-      <div class="field"><label>Sous-catégorie</label><select id="eq-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="media-zone">
+        <div class="media-preview" id="media-prev-equipe" onclick="triggerPhoto('equipe')">📷</div>
+        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('equipe')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('equipe')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('equipe')" style="display:none" id="media-del-equipe">✕ Supprimer</button></div>
+      </div>
       <div class="form-sec-label">Identité</div>
       <div class="field-row">
-        <div class="field"><label>Prénom</label><input type="text" id="eq-prenom" placeholder="Marc" autocomplete="off"></div>
-        <div class="field"><label>Nom</label><input type="text" id="eq-nom" placeholder="Dupont" autocomplete="off"></div>
+        <div class="field"><label>Prénom</label><input type="text" id="eq-prenom" placeholder="Prénom" autocomplete="off"></div>
+        <div class="field"><label>Nom</label><input type="text" id="eq-nom" placeholder="Nom" autocomplete="off"></div>
       </div>
-      <div class="field"><label>Rôle / Poste</label><select id="eq-role"><option value="">—</option><option>Chef de chantier</option><option>Conducteur d'engins</option><option>Maçon</option><option>Aide-maçon</option><option>Chauffeur</option><option>Mécanicien</option><option>Ouvrier polyvalent</option><option>Apprenti</option><option>Stagiaire</option><option>Autre</option></select></div>
       <div class="form-sec-label">Contact</div>
       <div class="field"><label>Téléphone</label><input type="tel" id="eq-tel" placeholder="+41 79 000 00 00" autocomplete="off"></div>
-      <div class="field"><label>Email</label><input type="email" id="eq-email" placeholder="marc@exemple.ch" autocomplete="off"></div>
-      <div class="form-sec-label">Conditions</div>
-      <div class="field-row">
-        <div class="field"><label>Taux horaire (CHF)</label><input type="number" id="eq-taux" placeholder="35.00" step="0.5" min="0" autocomplete="off"></div>
-        <div class="field"><label>Contrat</label><select id="eq-contrat"><option value="">—</option><option>CDI</option><option>CDD</option><option>Intérim</option><option>Apprentissage</option><option>Stage</option></select></div>
-      </div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="eq-notes" placeholder="Permis EB, certifications…"></textarea></div>
     </div>
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('equipe')">Enregistrer</button></div>
   </div>
 </div>
-
+ 
 <!-- MACHINES -->
 <div class="modal-ov" id="modal-add-machines">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr"><div class="modal-title">🚜 Nouvelle machine</div><button class="modal-close" onclick="closeAdd('machines')">✕</button></div>
     <div class="modal-body">
-      <div class="form-sec-label">Catégorie</div>
-      <div class="field"><label>Sous-catégorie</label><select id="ma-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="media-zone">
+        <div class="media-preview" id="media-prev-machines" onclick="triggerPhoto('machines')">📷</div>
+        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('machines')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('machines')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('machines')" style="display:none" id="media-del-machines">✕ Supprimer</button></div>
+      </div>
       <div class="form-sec-label">Identification</div>
       <div class="field"><label>Nom / Modèle *</label><input type="text" id="ma-nom" placeholder="Mecalac MWR7" autocomplete="off"></div>
       <div class="field-row">
@@ -302,8 +340,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <div class="field"><label>Carburant</label><select id="ma-carburant"><option value="">—</option><option>Diesel</option><option>Électrique</option><option>Hybride</option><option>Essence</option></select></div>
       </div>
       <div class="form-sec-label">Valeur</div>
-      <div class="field-row">
-        <div class="field"><label>Valeur achat (CHF)</label><input type="number" id="ma-valeur" placeholder="180000" min="0" autocomplete="off"></div>
+      <div class="field">
         <div class="field"><label>Coût horaire (CHF/h)</label><input type="number" id="ma-cout-h" placeholder="85" step="0.5" min="0" autocomplete="off"></div>
       </div>
       <div class="form-sec-label">Notes</div>
@@ -312,15 +349,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('machines')">Enregistrer</button></div>
   </div>
 </div>
-
+ 
 <!-- VÉHICULES -->
 <div class="modal-ov" id="modal-add-vehicules">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr"><div class="modal-title">🚛 Nouveau véhicule</div><button class="modal-close" onclick="closeAdd('vehicules')">✕</button></div>
     <div class="modal-body">
-      <div class="form-sec-label">Catégorie</div>
-      <div class="field"><label>Sous-catégorie</label><select id="vh-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="media-zone">
+        <div class="media-preview" id="media-prev-vehicules" onclick="triggerPhoto('vehicules')">📷</div>
+        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('vehicules')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('vehicules')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('vehicules')" style="display:none" id="media-del-vehicules">✕ Supprimer</button></div>
+      </div>
       <div class="form-sec-label">Identification</div>
       <div class="field"><label>Nom / Désignation *</label><input type="text" id="vh-nom" placeholder="Iveco Daily Benne" autocomplete="off"></div>
       <div class="field-row">
@@ -331,16 +370,19 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <div class="field"><label>Marque</label><input type="text" id="vh-marque" placeholder="Iveco" autocomplete="off"></div>
         <div class="field"><label>Année</label><input type="number" id="vh-annee" placeholder="2020" min="1980" max="2030" autocomplete="off"></div>
       </div>
-      <div class="form-sec-label">Capacité & Poids</div>
+      <div class="form-sec-label">Poids & Capacité</div>
       <div class="field-row">
-        <div class="field"><label>PMA / PGAC (t)</label><input type="number" id="vh-pma" placeholder="18.0" step="0.5" min="0" autocomplete="off"></div>
+        <div class="field"><label>Poids véhicule (t)</label><input type="number" id="vh-poids" placeholder="6.5" step="0.1" min="0" autocomplete="off"></div>
         <div class="field"><label>Charge utile (t)</label><input type="number" id="vh-charge" placeholder="10.0" step="0.5" min="0" autocomplete="off"></div>
       </div>
-      <div class="field"><label>Volume benne (m³)</label><input type="number" id="vh-volume" placeholder="8.0" step="0.5" min="0" autocomplete="off"></div>
-      <div class="form-sec-label">Coûts</div>
       <div class="field-row">
+        <div class="field"><label>Poids maximum (t)</label><input type="number" id="vh-pma" placeholder="18.0" step="0.5" min="0" autocomplete="off"></div>
+        <div class="field"><label>Volume pont (m³)</label><input type="number" id="vh-volume" placeholder="8.0" step="0.5" min="0" autocomplete="off"></div>
+      </div>
+      <div class="field"><label>Dimensions (L×l×H)</label><input type="text" id="vh-dimensions" placeholder="6.20 × 2.45 × 2.80 m" autocomplete="off"></div>
+      <div class="form-sec-label">Coûts</div>
+      <div class="field">
         <div class="field"><label>Coût / jour (CHF)</label><input type="number" id="vh-cout-j" placeholder="350" min="0" autocomplete="off"></div>
-        <div class="field"><label>Coût / km (CHF)</label><input type="number" id="vh-cout-km" placeholder="0.80" step="0.01" min="0" autocomplete="off"></div>
       </div>
       <div class="form-sec-label">Notes</div>
       <div class="field"><label>Notes libres</label><textarea id="vh-notes" placeholder="Contrôle technique valable jusqu'à…"></textarea></div>
@@ -348,13 +390,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('vehicules')">Enregistrer</button></div>
   </div>
 </div>
-
+ 
 <!-- MATÉRIEL -->
 <div class="modal-ov" id="modal-add-materiel">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr"><div class="modal-title">🔧 Nouveau matériel</div><button class="modal-close" onclick="closeAdd('materiel')">✕</button></div>
     <div class="modal-body">
+      <div class="media-zone">
+        <div class="media-preview" id="media-prev-materiel" onclick="triggerPhoto('materiel')">📷</div>
+        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('materiel')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('materiel')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('materiel')" style="display:none" id="media-del-materiel">✕ Supprimer</button></div>
+      </div>
       <div class="form-sec-label">Catégorie</div>
       <div class="field"><label>Sous-catégorie</label><select id="mt-cat"><option value="">— Sans catégorie —</option></select></div>
       <div class="form-sec-label">Identification</div>
@@ -380,13 +426,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiel')">Enregistrer</button></div>
   </div>
 </div>
-
+ 
 <!-- MATÉRIAUX -->
 <div class="modal-ov" id="modal-add-materiaux">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr"><div class="modal-title">🪨 Nouveau matériau</div><button class="modal-close" onclick="closeAdd('materiaux')">✕</button></div>
     <div class="modal-body">
+      <div class="media-zone">
+        <div class="media-preview" id="media-prev-materiaux" onclick="triggerPhoto('materiaux')">📷</div>
+        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('materiaux')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('materiaux')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('materiaux')" style="display:none" id="media-del-materiaux">✕ Supprimer</button></div>
+      </div>
       <div class="form-sec-label">Catégorie</div>
       <div class="field"><label>Sous-catégorie</label><select id="mx-cat"><option value="">— Sans catégorie —</option></select></div>
       <div class="form-sec-label">Identification</div>
@@ -415,7 +465,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiaux')">Enregistrer</button></div>
   </div>
 </div>
-
+ 
 <!-- ════════════════════════════════════
      DETAIL SHEET
 ════════════════════════════════════ -->
@@ -428,12 +478,32 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     </div>
     <div class="detail-body" id="det-body"></div>
     <div class="detail-footer">
-      <button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteCurrentItem()">🗑 Supprimer</button>
+      <button class="btn btn-navy btn-sm" style="flex:2" onclick="editCurrentItem()">✏️ Modifier</button>
+      <button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteCurrentItem()">🗑</button>
       <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeDetail()">Fermer</button>
     </div>
   </div>
 </div>
-
+ 
+<!-- Input file partagé pour photos éléments -->
+<input type="file" id="item-photo-input" accept="image/*" style="display:none">
+ 
+<!-- ═══ EMOJI PICKER GLOBAL ═══ -->
+<div class="epicker-ov" id="epicker-ov">
+  <div class="epicker-sh">
+    <div class="epicker-drag"><div class="modal-handle"></div></div>
+    <div style="padding:0 16px;">
+      <input class="epicker-search" type="search" id="epicker-search" placeholder="🔍 Rechercher une icône…" autocomplete="off" oninput="filterEmojis(this.value)">
+      <div class="epicker-cats" id="epicker-cats"></div>
+    </div>
+    <div class="epicker-grid" id="epicker-grid" style="padding:12px 16px;"></div>
+    <div class="epicker-footer">
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="selectEmojiResult('')">Aucune icône</button>
+      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeEmojiPicker()">Annuler</button>
+    </div>
+  </div>
+</div>
+ 
 <!-- ════════════════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════════════ -->
@@ -444,24 +514,69 @@ const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',mat
 const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨'};
 const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB'};
 const KEYS    = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
-const CAT_KEY = 'rv6_res_categories'; // { equipe:[{id,name,color}], machines:[...], ... }
-
+const CAT_KEY = 'rv6_res_categories';
+ 
+// Sections avec sous-catégories actives
+const HAS_CATS = ['materiel','materiaux'];
+ 
 const PALETTE = ['#E53935','#E67E22','#F0A500','#2E7D32','#1A7F72','#1B3A6B','#6C3483','#1565C0','#00838F','#4E342E'];
-
-let currentTab    = 'equipe';
-let currentDetailId      = null;
+ 
+// ── EMOJI DB COMPLET AVEC RECHERCHE ─────────────────────
+const EMOJI_CATS = [
+  {id:'tous',label:'Tous'},
+  {id:'outils',label:'🔧 Outils'},
+  {id:'construction',label:'🏗 Construction'},
+  {id:'vehicules',label:'🚛 Véhicules'},
+  {id:'materiaux',label:'🪨 Matériaux'},
+  {id:'nature',label:'🌿 Nature'},
+  {id:'personnes',label:'👷 Personnes'},
+  {id:'objets',label:'📦 Objets'},
+  {id:'symboles',label:'⚡ Symboles'},
+];
+ 
+const EMOJI_DB = [
+  // Outils
+  {e:'🔧',k:'clé outil réparation',c:'outils'},{e:'🔩',k:'boulon vis fixation',c:'outils'},{e:'🪛',k:'tournevis vis',c:'outils'},{e:'🔨',k:'marteau frappe clou',c:'outils'},{e:'🪚',k:'scie coupe bois',c:'outils'},{e:'⚙️',k:'engrenage mécanique réglage',c:'outils'},{e:'🗜',k:'étau serre pince',c:'outils'},{e:'🪝',k:'crochet levage accroche',c:'outils'},{e:'⛏',k:'pioche terrassement',c:'outils'},{e:'🪓',k:'hache coupe',c:'outils'},{e:'🧰',k:'boîte outils caisse',c:'outils'},{e:'🪣',k:'seau',c:'outils'},{e:'🧲',k:'aimant magnétique',c:'outils'},{e:'🔬',k:'microscope labo analyse',c:'outils'},{e:'📐',k:'équerre angle mesure',c:'outils'},{e:'📏',k:'règle mesure longueur',c:'outils'},{e:'🧭',k:'boussole direction',c:'outils'},{e:'🔑',k:'clé serrure',c:'outils'},{e:'🪤',k:'piège',c:'outils'},{e:'✂️',k:'ciseaux coupe',c:'outils'},{e:'🖊',k:'stylo écrire',c:'outils'},{e:'🪜',k:'échelle hauteur',c:'outils'},{e:'⛓',k:'chaîne maillon',c:'outils'},{e:'🧹',k:'balai nettoyage',c:'outils'},{e:'🧽',k:'éponge nettoyage',c:'outils'},{e:'🪠',k:'ventouse plomberie',c:'outils'},
+  // Construction
+  {e:'🏗',k:'grue chantier construction levage',c:'construction'},{e:'🧱',k:'brique mur maçonnerie',c:'construction'},{e:'🪵',k:'bois planche poutre coffrage',c:'construction'},{e:'🏠',k:'maison villa habitation',c:'construction'},{e:'🏢',k:'immeuble bâtiment bureau',c:'construction'},{e:'🏭',k:'usine industriel',c:'construction'},{e:'🏚',k:'ruine démolition',c:'construction'},{e:'🛖',k:'cabane abri',c:'construction'},{e:'⛺',k:'tente provisoire',c:'construction'},{e:'🏘',k:'quartier lotissement',c:'construction'},{e:'🏛',k:'monument colonne pierre',c:'construction'},{e:'🚧',k:'chantier barrière travaux',c:'construction'},{e:'🛣',k:'route autoroute chaussée',c:'construction'},{e:'🛤',k:'rails chemin fer voie',c:'construction'},{e:'🌉',k:'pont passerelle ouvrage',c:'construction'},{e:'🗼',k:'tour pylône',c:'construction'},{e:'⛲',k:'fontaine eau place',c:'construction'},{e:'🔌',k:'prise électrique branchement',c:'construction'},{e:'💡',k:'ampoule lumière éclairage',c:'construction'},{e:'🚰',k:'robinet eau plomberie',c:'construction'},{e:'🪟',k:'fenêtre vitre',c:'construction'},{e:'🚪',k:'porte entrée',c:'construction'},{e:'🛗',k:'ascenseur monte charge',c:'construction'},{e:'🪞',k:'miroir verre',c:'construction'},{e:'🧲',k:'magnétique métal',c:'construction'},
+  // Véhicules
+  {e:'🚜',k:'tracteur pelle engin chantier',c:'vehicules'},{e:'🚛',k:'camion benne poids lourd transport',c:'vehicules'},{e:'🚚',k:'camion livraison utilitaire',c:'vehicules'},{e:'🛻',k:'pickup benne',c:'vehicules'},{e:'🚗',k:'voiture auto véhicule',c:'vehicules'},{e:'🚐',k:'minibus fourgon van',c:'vehicules'},{e:'🚌',k:'bus transport',c:'vehicules'},{e:'🚑',k:'ambulance urgence',c:'vehicules'},{e:'🚒',k:'pompier incendie',c:'vehicules'},{e:'🏎',k:'course rapide',c:'vehicules'},{e:'🏍',k:'moto deux roues',c:'vehicules'},{e:'🛵',k:'scooter deux roues',c:'vehicules'},{e:'🚲',k:'vélo bicyclette',c:'vehicules'},{e:'🚁',k:'hélicoptère aérien',c:'vehicules'},{e:'✈️',k:'avion vol',c:'vehicules'},{e:'🚢',k:'bateau navire maritime',c:'vehicules'},{e:'⛽',k:'essence carburant diesel station',c:'vehicules'},{e:'🅿️',k:'parking stationnement',c:'vehicules'},{e:'🛞',k:'pneu roue',c:'vehicules'},{e:'⚓',k:'ancre maritime port',c:'vehicules'},
+  // Matériaux
+  {e:'🪨',k:'pierre roche caillou granit',c:'materiaux'},{e:'�ite',k:'',c:''},{e:'🧱',k:'brique bloc béton parpaing',c:'materiaux'},{e:'🪵',k:'bois planche poutre',c:'materiaux'},{e:'🪨',k:'gravier sable agrégat',c:'materiaux'},{e:'💎',k:'cristal pierre précieuse',c:'materiaux'},{e:'🧊',k:'glace gel froid',c:'materiaux'},{e:'🛢',k:'baril fuel huile bitume',c:'materiaux'},{e:'📦',k:'carton emballage palette',c:'materiaux'},{e:'🧴',k:'produit chimique colle',c:'materiaux'},{e:'🧪',k:'tube essai chimie',c:'materiaux'},{e:'💧',k:'eau liquide',c:'materiaux'},{e:'🪫',k:'batterie pile',c:'materiaux'},{e:'🔋',k:'batterie énergie',c:'materiaux'},{e:'⛓',k:'chaîne acier métal fer',c:'materiaux'},{e:'🪢',k:'noeud corde ficelle',c:'materiaux'},{e:'🧲',k:'aimant fer métal',c:'materiaux'},{e:'🪩',k:'boule miroir verre',c:'materiaux'},{e:'🎨',k:'peinture couleur',c:'materiaux'},{e:'🪣',k:'seau ciment mortier',c:'materiaux'},
+  // Nature
+  {e:'🌿',k:'plante herbe vert végétal',c:'nature'},{e:'🌳',k:'arbre forêt',c:'nature'},{e:'🌲',k:'sapin conifère',c:'nature'},{e:'🌾',k:'blé champ agriculture',c:'nature'},{e:'🌊',k:'vague eau mer',c:'nature'},{e:'🏔',k:'montagne alpes',c:'nature'},{e:'⛰',k:'montagne colline',c:'nature'},{e:'🌍',k:'terre globe monde',c:'nature'},{e:'☀️',k:'soleil chaleur',c:'nature'},{e:'🌧',k:'pluie nuage',c:'nature'},{e:'❄️',k:'neige froid hiver gel',c:'nature'},{e:'🔥',k:'feu flamme chaud',c:'nature'},{e:'💨',k:'vent air',c:'nature'},{e:'⚡',k:'éclair électricité foudre',c:'nature'},{e:'🌈',k:'arc en ciel',c:'nature'},{e:'💦',k:'goutte eau pluie',c:'nature'},{e:'🪴',k:'plante pot',c:'nature'},{e:'🌻',k:'fleur tournesol jardin',c:'nature'},{e:'🍂',k:'feuille automne',c:'nature'},{e:'🌱',k:'pousse graine semis',c:'nature'},
+  // Personnes
+  {e:'👷',k:'ouvrier chantier casque',c:'personnes'},{e:'👷‍♂️',k:'ouvrier homme chantier',c:'personnes'},{e:'👷‍♀️',k:'ouvrière femme chantier',c:'personnes'},{e:'🧑‍🔧',k:'mécanicien technicien',c:'personnes'},{e:'🧑‍💼',k:'bureau manager directeur',c:'personnes'},{e:'🧑‍🏫',k:'formateur prof enseignant',c:'personnes'},{e:'🧑‍⚕️',k:'médecin santé docteur',c:'personnes'},{e:'🧑‍🚒',k:'pompier sécurité',c:'personnes'},{e:'👨‍👩‍👦',k:'famille groupe',c:'personnes'},{e:'🤝',k:'poignée main accord contrat',c:'personnes'},{e:'💪',k:'force muscle',c:'personnes'},{e:'👍',k:'ok bien pouce',c:'personnes'},{e:'🙋',k:'main levée personne',c:'personnes'},{e:'🧑‍💻',k:'informatique ordinateur dev',c:'personnes'},{e:'🦺',k:'gilet sécurité haute visibilité',c:'personnes'},{e:'⛑',k:'casque secours',c:'personnes'},{e:'👨‍🏭',k:'ouvrier usine industrie',c:'personnes'},{e:'🧑‍🌾',k:'agriculteur fermier',c:'personnes'},
+  // Objets
+  {e:'📋',k:'presse papier liste rapport',c:'objets'},{e:'📁',k:'dossier fichier',c:'objets'},{e:'📂',k:'dossier ouvert',c:'objets'},{e:'🗂',k:'classeur onglets',c:'objets'},{e:'📑',k:'signet document',c:'objets'},{e:'📄',k:'page document feuille',c:'objets'},{e:'📊',k:'graphique stats statistiques',c:'objets'},{e:'📈',k:'hausse courbe progression',c:'objets'},{e:'🗺',k:'carte plan',c:'objets'},{e:'📷',k:'photo appareil caméra',c:'objets'},{e:'🖨',k:'imprimante print',c:'objets'},{e:'💻',k:'ordinateur portable',c:'objets'},{e:'📱',k:'téléphone mobile smartphone',c:'objets'},{e:'⌚',k:'montre heure temps',c:'objets'},{e:'⏱',k:'chrono minuteur timer',c:'objets'},{e:'📅',k:'calendrier date planning',c:'objets'},{e:'🗓',k:'calendrier agenda',c:'objets'},{e:'🔔',k:'cloche alerte notification',c:'objets'},{e:'📌',k:'punaise épingle',c:'objets'},{e:'🏷',k:'étiquette tag label prix',c:'objets'},{e:'💰',k:'argent sac monnaie',c:'objets'},{e:'💶',k:'euro billet argent',c:'objets'},{e:'🧾',k:'facture ticket reçu',c:'objets'},{e:'📐',k:'équerre angle',c:'objets'},{e:'🗑',k:'poubelle corbeille supprimer',c:'objets'},
+  // Symboles
+  {e:'⚠️',k:'attention danger avertissement',c:'symboles'},{e:'🚫',k:'interdit stop',c:'symboles'},{e:'❌',k:'croix erreur non',c:'symboles'},{e:'✅',k:'validé ok coché',c:'symboles'},{e:'❓',k:'question doute',c:'symboles'},{e:'❗',k:'exclamation important',c:'symboles'},{e:'🔴',k:'rouge cercle stop',c:'symboles'},{e:'🟢',k:'vert cercle ok',c:'symboles'},{e:'🟡',k:'jaune cercle attention',c:'symboles'},{e:'🔵',k:'bleu cercle info',c:'symboles'},{e:'⬜',k:'blanc carré vide',c:'symboles'},{e:'⬛',k:'noir carré plein',c:'symboles'},{e:'♻️',k:'recyclage environnement',c:'symboles'},{e:'☢️',k:'radioactif danger nucléaire',c:'symboles'},{e:'☣️',k:'biologique danger chimique',c:'symboles'},{e:'🏁',k:'drapeau arrivée fin',c:'symboles'},{e:'📍',k:'localisation lieu GPS',c:'symboles'},{e:'🔒',k:'cadenas verrouillé sécurité',c:'symboles'},{e:'🔓',k:'cadenas ouvert',c:'symboles'},{e:'⭐',k:'étoile favori',c:'symboles'},{e:'💯',k:'cent parfait',c:'symboles'},{e:'🔄',k:'rafraîchir recharger boucle',c:'symboles'},{e:'➡️',k:'flèche droite suivant',c:'symboles'},{e:'⬆️',k:'flèche haut monter',c:'symboles'},{e:'⬇️',k:'flèche bas descendre',c:'symboles'},
+].filter(x=>x.e&&x.c); // nettoyage entrées vides
+ 
+let currentTab         = 'equipe';
+let currentDetailId    = null;
 let currentDetailSection = null;
-let catMgrTab     = 'equipe';
-let selectedColor = PALETTE[5];
-let openAccordions = {}; // { 'equipe__catid': true }
-let searchFilters  = {};
-
+let editingId          = null;
+let editingSection     = null;
+let catMgrTab          = 'equipe';
+let selectedColor      = PALETTE[5];
+let selectedEmoji      = '';
+let selectedImage      = '';
+let openAccordions     = {};
+let searchFilters      = {};
+ 
+// Photos et icônes éléments en cours d'édition
+let itemPhotos = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:''};
+let itemIcons  = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:''};
+let photoTargetSection = '';
+let emojiPickerCallback = null;
+ 
 // ── STORAGE ─────────────────────────────────────────────
 function load(s){ try{ const r=localStorage.getItem(KEYS[s]); return r?JSON.parse(r):[]; }catch(e){ return []; } }
 function save(s,d){ localStorage.setItem(KEYS[s],JSON.stringify(d)); }
 function loadCats(){ try{ const r=localStorage.getItem(CAT_KEY); return r?JSON.parse(r):{equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; }catch(e){ return {equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; } }
 function saveCats(d){ localStorage.setItem(CAT_KEY,JSON.stringify(d)); }
-
+ 
 // ── NAVIGATION ──────────────────────────────────────────
 function switchTab(tab){
   currentTab=tab;
@@ -473,25 +588,27 @@ function switchTab(tab){
   const inp=document.querySelector('#page-'+tab+' .search-input');
   if(inp) inp.value=searchFilters[tab]||'';
 }
-
+ 
 function updateHeader(){
   const cnt=load(currentTab).length;
   document.getElementById('hdrCount').textContent=cnt;
   document.getElementById('hdrSub').textContent=TITLES[currentTab];
+  // Bouton catégories visible seulement pour matériel et matériaux
+  const btn=document.querySelector('.cat-mgr-btn');
+  if(btn) btn.style.display=HAS_CATS.includes(currentTab)?'':'none';
 }
-
+ 
 // ── RENDU ACCORDÉONS ────────────────────────────────────
 function renderContent(section, filter){
   const items = load(section);
-  const cats  = loadCats()[section]||[];
+  const cats  = HAS_CATS.includes(section) ? (loadCats()[section]||[]) : [];
   const el    = document.getElementById('content-'+section);
   const icon  = ICONS[section];
   const color = COLORS[section];
   const q     = (filter||'').toLowerCase();
-
-  // Filtrage
+ 
   const filtered = items.filter(item=> !q || Object.values(item).some(v=>String(v).toLowerCase().includes(q)));
-
+ 
   if(!filtered.length && !cats.length){
     el.innerHTML=`<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
     return;
@@ -500,38 +617,100 @@ function renderContent(section, filter){
     el.innerHTML=`<div class="empty-page"><div class="empty-icon">🔍</div><div class="empty-txt">Aucun résultat</div><div class="empty-hint">Modifiez la recherche</div></div>`;
     return;
   }
-
+ 
   let html='';
-
-  // Grouper par catégorie
-  cats.forEach(cat=>{
-    const catItems = filtered.filter(i=>i.catId===cat.id);
-    const accKey   = section+'__'+cat.id;
-    const isOpen   = openAccordions[accKey]||false;
-    html += renderAccordion(accKey, cat.name, cat.color, catItems, icon, color, section, isOpen);
-  });
-
-  // Sans catégorie
-  const uncatItems = filtered.filter(i=>!i.catId || !cats.find(c=>c.id===i.catId));
-  if(uncatItems.length){
-    const accKey = section+'__none';
-    const isOpen = openAccordions[accKey]||false;
-    html += renderAccordion(accKey, 'Sans catégorie', '#9AA3BC', uncatItems, icon, color, section, isOpen);
+ 
+  if(cats.length){
+    cats.forEach(cat=>{
+      const subs = cat.children||[];
+      if(subs.length){
+        // Catégorie avec sous-catégories → accordéons imbriqués
+        const allCatItems = filtered.filter(i=>i.catId===cat.id);
+        const accKey = section+'__'+cat.id;
+        const isOpen = openAccordions[accKey]||false;
+ 
+        // Construire le contenu interne : sous-accordéons + items "général"
+        let innerHtml = '';
+        subs.forEach(sub=>{
+          const subItems = allCatItems.filter(i=>i.subCatId===sub.id);
+          const subKey = section+'__'+cat.id+'__'+sub.id;
+          const subOpen = openAccordions[subKey]||false;
+          innerHtml += `
+          <div style="margin-bottom:6px;">
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:${subOpen?'var(--rs) var(--rs) 0 0':'var(--rs)'};cursor:pointer;user-select:none;" onclick="toggleAcc('${subKey}','${section}')">
+              <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.6;flex-shrink:0;"></div>
+              <div style="flex:1;font-size:12px;font-weight:600;color:var(--text2);">${esc(sub.name)}</div>
+              <div style="font-size:10px;color:var(--text3);font-weight:700;background:var(--bg2);padding:1px 6px;border-radius:8px;">${subItems.length}</div>
+              <div class="acc-chevron" style="${subOpen?'transform:rotate(90deg)':''}">›</div>
+            </div>
+            <div style="max-height:${subOpen?'2000px':'0'};overflow:hidden;transition:max-height .25s ease;border:${subOpen?'1px solid var(--border)':'none'};border-top:none;border-radius:0 0 var(--rs) var(--rs);background:#fff;" id="acc-body-${subKey}">
+              <div style="padding:8px;">
+                ${subItems.length
+                  ? subItems.map(item=>renderItemHTML(item,section,icon,color)).join('')
+                  : `<div class="acc-empty">Aucun élément</div>`}
+              </div>
+            </div>
+          </div>`;
+        });
+        // Items dans la catégorie mais sans sous-catégorie
+        const generalItems = allCatItems.filter(i=>!i.subCatId || !subs.find(s=>s.id===i.subCatId));
+        if(generalItems.length){
+          innerHtml += generalItems.map(item=>renderItemHTML(item,section,icon,color)).join('');
+        }
+ 
+        html += renderAccordionRaw(accKey, cat.name, cat, allCatItems.length, innerHtml, section, isOpen);
+      } else {
+        // Catégorie sans sous-catégories → accordéon simple
+        const catItems = filtered.filter(i=>i.catId===cat.id);
+        const accKey   = section+'__'+cat.id;
+        const isOpen   = openAccordions[accKey]||false;
+        html += renderAccordion(accKey, cat.name, cat, catItems, icon, color, section, isOpen);
+      }
+    });
+    const uncatItems = filtered.filter(i=>!i.catId || !cats.find(c=>c.id===i.catId));
+    if(uncatItems.length){
+      const accKey = section+'__none';
+      const isOpen = openAccordions[accKey]||false;
+      html += renderAccordion(accKey, 'Sans catégorie', {color:'#9AA3BC'}, uncatItems, icon, color, section, isOpen);
+    }
+  } else {
+    html = filtered.map(item=>renderItemHTML(item, section, icon, color)).join('');
   }
-
-  // Si aucune catégorie créée, liste plate
-  if(!cats.length && uncatItems.length){
-    html = uncatItems.map(item=>renderItemHTML(item, section, icon, color)).join('');
-  }
-
-  el.innerHTML = html || `<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément dans les catégories</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
+ 
+  el.innerHTML = html || `<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
 }
-
-function renderAccordion(accKey, name, color, items, icon, bgColor, section, isOpen){
+ 
+// Helper: génère l'indicateur visuel (image > emoji > dot couleur)
+function catIndicatorHTML(image, emoji, color, size){
+  const s = size||28;
+  if(image) return `<div style="width:${s}px;height:${s}px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="${image}" style="width:100%;height:100%;object-fit:cover;"></div>`;
+  if(emoji) return `<div style="width:${s}px;height:${s}px;border-radius:8px;background:${color}22;display:flex;align-items:center;justify-content:center;font-size:${Math.round(s*0.57)}px;flex-shrink:0;">${emoji}</div>`;
+  return `<div class="acc-dot" style="background:${color}"></div>`;
+}
+ 
+// Accordéon avec contenu HTML libre (pour les sous-accordéons)
+function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen){
   return `
   <div class="accordion">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
-      <div class="acc-dot" style="background:${color}"></div>
+      ${catIndicatorHTML(cat.image, cat.emoji, cat.color)}
+      <div class="acc-name">${esc(name)}</div>
+      <div class="acc-count">${count}</div>
+      <div class="acc-chevron">›</div>
+    </div>
+    <div class="acc-body${isOpen?' open':''}" id="acc-body-${accKey}">
+      <div class="acc-inner">
+        ${innerHtml || `<div class="acc-empty">Aucun élément</div>`}
+      </div>
+    </div>
+  </div>`;
+}
+ 
+function renderAccordion(accKey, name, cat, items, icon, bgColor, section, isOpen){
+  return `
+  <div class="accordion">
+    <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
+      ${catIndicatorHTML(cat.image, cat.emoji, cat.color)}
       <div class="acc-name">${esc(name)}</div>
       <div class="acc-count">${items.length}</div>
       <div class="acc-chevron">›</div>
@@ -546,13 +725,21 @@ function renderAccordion(accKey, name, color, items, icon, bgColor, section, isO
     </div>
   </div>`;
 }
-
+ 
 function renderItemHTML(item, section, icon, color){
   const sub  = getSubtitle(section, item);
   const price= getPrice(section, item);
+  let iconHtml = '';
+  if(item.photo){
+    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`;
+  } else if(item.icon){
+    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${item.icon}</div>`;
+  } else if(section !== 'equipe'){
+    iconHtml = `<div class="res-item-icon">${icon}</div>`;
+  }
   return `
   <div class="res-item" onclick="openDetail('${section}','${item.id}')">
-    <div class="res-item-icon">${icon}</div>
+    ${iconHtml}
     <div class="res-item-body">
       <div class="res-item-name">${esc(item.nom||'—')}</div>
       ${sub?`<div class="res-item-sub">${esc(sub)}</div>`:''}
@@ -561,22 +748,20 @@ function renderItemHTML(item, section, icon, color){
     <div class="res-item-arrow">›</div>
   </div>`;
 }
-
+ 
 // ── TOGGLE ACCORDÉON ────────────────────────────────────
 function toggleAcc(accKey, section){
   openAccordions[accKey] = !openAccordions[accKey];
-  const header = document.querySelector(`[onclick="toggleAcc('${accKey}','${section}')"]`);
-  const body   = document.getElementById('acc-body-'+accKey);
-  if(header) header.classList.toggle('open', openAccordions[accKey]);
-  if(body)   body.classList.toggle('open', openAccordions[accKey]);
+  // Re-render pour appliquer l'état correctement (y compris sous-accordéons)
+  renderContent(section, searchFilters[section]||'');
 }
-
+ 
 // ── FILTRAGE ────────────────────────────────────────────
 function filterPage(section, val){
   searchFilters[section]=val;
   renderContent(section, val);
 }
-
+ 
 // ── BADGES ──────────────────────────────────────────────
 function updateBadges(){
   TABS.forEach(s=>{
@@ -585,151 +770,468 @@ function updateBadges(){
   });
   updateHeader();
 }
-
+ 
 // ── GESTIONNAIRE CATÉGORIES ─────────────────────────────
 function openCatMgr(){
   catMgrTab = currentTab;
-  renderCatMgr();
-  document.getElementById('modal-catmgr').classList.add('open');
   selectedColor = PALETTE[5];
+  selectedEmoji = '';
+  selectedImage = '';
+  updateCatIconPreview();
+  renderCatMgr();
   renderColorPicker();
+  document.getElementById('modal-catmgr').classList.add('open');
 }
 function closeCatMgr(){ document.getElementById('modal-catmgr').classList.remove('open'); }
-
+ 
 function renderCatMgr(){
   const cats  = loadCats()[catMgrTab]||[];
   const items = load(catMgrTab);
   document.getElementById('catmgr-title').textContent = `Catégories — ${TITLES[catMgrTab]}`;
-
+ 
   if(!cats.length){
     document.getElementById('catmgr-list').innerHTML=`<div style="color:var(--text3);font-size:13px;text-align:center;padding:16px 0;">Aucune catégorie créée</div>`;
+  } else {
+    document.getElementById('catmgr-list').innerHTML = cats.map(cat=>{
+      const cnt = items.filter(i=>i.catId===cat.id).length;
+      const indicator = catIndicatorHTML(cat.image, cat.emoji, cat.color, 28);
+      const subs = cat.children||[];
+      const subsHtml = subs.length ? subs.map(sub=>{
+        const subCnt = items.filter(i=>i.catId===cat.id && i.subCatId===sub.id).length;
+        return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0 6px 40px;font-size:13px;">
+          <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.5;flex-shrink:0;"></div>
+          <span style="flex:1;color:var(--text2);">${esc(sub.name)}</span>
+          <span style="font-size:10px;color:var(--text3);">${subCnt}</span>
+          <button style="background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:2px;" onclick="deleteSubCategory('${cat.id}','${sub.id}')">✕</button>
+        </div>`;
+      }).join('') : '';
+      // Inline add sub-category
+      const addSubHtml = `<div style="display:flex;align-items:center;gap:6px;padding:4px 0 4px 40px;margin-top:2px;">
+        <input type="text" id="subcat-input-${cat.id}" placeholder="Sous-catégorie…" style="flex:1;font-size:12px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;background:var(--bg);" autocomplete="off" onkeydown="if(event.key==='Enter')addSubCategory('${cat.id}')">
+        <button style="background:var(--teal);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;padding:6px 10px;cursor:pointer;flex-shrink:0;" onclick="addSubCategory('${cat.id}')">＋</button>
+      </div>`;
+      return `
+      <div style="border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;">
+        <div class="cat-list-item" style="border-bottom:none;">
+          ${indicator}
+          <div class="cat-list-name">${esc(cat.name)}</div>
+          <div class="cat-list-count">${cnt}</div>
+          <button class="cat-del-btn" onclick="deleteCategory('${cat.id}')">✕</button>
+        </div>
+        ${subsHtml}
+        ${addSubHtml}
+      </div>`;
+    }).join('');
+  }
+}
+ 
+// ── EMOJI PICKER GLOBAL ─────────────────────────────────
+let epickerCat = 'tous';
+ 
+function openEmojiPicker(callback, currentEmoji){
+  emojiPickerCallback = callback;
+  epickerCat = 'tous';
+  document.getElementById('epicker-search').value = '';
+  renderEmojiPickerCats();
+  renderEmojiPickerGrid('', currentEmoji||'');
+  document.getElementById('epicker-ov').classList.add('open');
+  setTimeout(()=>document.getElementById('epicker-search').focus(), 150);
+}
+ 
+function closeEmojiPicker(){
+  document.getElementById('epicker-ov').classList.remove('open');
+  emojiPickerCallback = null;
+}
+ 
+document.getElementById('epicker-ov').addEventListener('click',e=>{
+  if(e.target===document.getElementById('epicker-ov')) closeEmojiPicker();
+});
+ 
+function renderEmojiPickerCats(){
+  document.getElementById('epicker-cats').innerHTML = EMOJI_CATS.map(c=>
+    `<div class="epicker-cat-btn${c.id===epickerCat?' on':''}" onclick="setEpickerCat('${c.id}')">${c.label}</div>`
+  ).join('');
+}
+ 
+function setEpickerCat(cat){
+  epickerCat = cat;
+  renderEmojiPickerCats();
+  const q = document.getElementById('epicker-search').value;
+  renderEmojiPickerGrid(q);
+}
+ 
+function filterEmojis(q){ renderEmojiPickerGrid(q); }
+ 
+function renderEmojiPickerGrid(q, selEmoji){
+  q = (q||'').toLowerCase();
+  let list = EMOJI_DB;
+  if(epickerCat!=='tous') list = list.filter(x=>x.c===epickerCat);
+  if(q) list = list.filter(x=>x.k.includes(q)||x.e.includes(q));
+  // Dédupliquer par emoji
+  const seen = new Set(); list = list.filter(x=>{ if(seen.has(x.e)) return false; seen.add(x.e); return true; });
+ 
+  if(!list.length){
+    document.getElementById('epicker-grid').innerHTML = '<div class="epicker-none">Aucune icône trouvée</div>';
     return;
   }
-
-  document.getElementById('catmgr-list').innerHTML = cats.map(cat=>{
-    const cnt = items.filter(i=>i.catId===cat.id).length;
-    return `
-    <div class="cat-list-item">
-      <div class="cat-color-dot" style="background:${cat.color}"></div>
-      <div class="cat-list-name">${esc(cat.name)}</div>
-      <div class="cat-list-count">${cnt} élément${cnt!==1?'s':''}</div>
-      <button class="cat-del-btn" onclick="deleteCategory('${cat.id}')">✕</button>
-    </div>`;
-  }).join('');
+  document.getElementById('epicker-grid').innerHTML = list.map(x=>
+    `<div class="epicker-item${x.e===selEmoji?' sel':''}" onclick="selectEmojiResult('${x.e}')">${x.e}</div>`
+  ).join('');
 }
-
+ 
+function selectEmojiResult(emoji){
+  if(emojiPickerCallback) emojiPickerCallback(emoji);
+  closeEmojiPicker();
+}
+ 
+// ── EMOJI PICKER POUR CATÉGORIES ────────────────────────
+function openEmojiPickerForCat(){
+  openEmojiPicker(function(emoji){
+    selectedEmoji = emoji;
+    selectedImage = '';
+    updateCatIconPreview();
+  }, selectedEmoji);
+}
+ 
+function updateCatIconPreview(){
+  const preview = document.getElementById('cat-icon-preview');
+  if(selectedImage){
+    preview.innerHTML = `<img src="${selectedImage}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`;
+  } else if(selectedEmoji){
+    preview.innerHTML = selectedEmoji;
+  } else {
+    preview.innerHTML = '＋';
+  }
+}
+ 
+// ── EMOJI PICKER POUR ÉLÉMENTS ──────────────────────────
+function openEmojiPickerForItem(section){
+  openEmojiPicker(function(emoji){
+    itemIcons[section] = emoji;
+    if(emoji) itemPhotos[section] = ''; // icône prioritaire, enlever photo
+    updateMediaPreview(section);
+  }, itemIcons[section]);
+}
+ 
 function renderColorPicker(){
   document.getElementById('cat-color-picker').innerHTML = PALETTE.map(c=>
     `<div class="color-swatch${c===selectedColor?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`
   ).join('');
 }
-
+ 
 function selectColor(c){ selectedColor=c; renderColorPicker(); }
-
+ 
 function addCategory(){
   const inp  = document.getElementById('cat-new-name');
   const name = inp.value.trim();
   if(!name) { inp.focus(); inp.style.borderColor='var(--red)'; return; }
   inp.style.borderColor='';
-
+ 
   const cats = loadCats();
   if(!cats[catMgrTab]) cats[catMgrTab]=[];
   const id = 'cat'+Date.now().toString(36);
-  cats[catMgrTab].push({ id, name, color: selectedColor });
+  cats[catMgrTab].push({ id, name, color: selectedColor, emoji: selectedEmoji, image: selectedImage });
   saveCats(cats);
-
+ 
+  // Reset
   inp.value='';
+  selectedEmoji='';
+  selectedImage='';
+  updateCatIconPreview();
+ 
   renderCatMgr();
   renderContent(currentTab, searchFilters[currentTab]||'');
-  // Rafraîchir le select dans la modal d'ajout
   populateCatSelects(catMgrTab);
   showToast('Catégorie créée ✓');
 }
-
+ 
 function deleteCategory(catId){
   const cats  = loadCats();
   cats[catMgrTab] = (cats[catMgrTab]||[]).filter(c=>c.id!==catId);
   saveCats(cats);
-  // Désassigner les éléments
-  const items = load(catMgrTab).map(i=>i.catId===catId?{...i,catId:''}:i);
+  const items = load(catMgrTab).map(i=>i.catId===catId?{...i,catId:'',subCatId:''}:i);
   save(catMgrTab, items);
   renderCatMgr();
   renderContent(currentTab, searchFilters[currentTab]||'');
   populateCatSelects(catMgrTab);
   showToast('Catégorie supprimée');
 }
-
-// ── SELECT CATÉGORIES DANS LES MODALS ───────────────────
-const CAT_SELECT_IDS = {equipe:'eq-cat',machines:'ma-cat',vehicules:'vh-cat',materiel:'mt-cat',materiaux:'mx-cat'};
-
+ 
+function addSubCategory(catId){
+  const inp = document.getElementById('subcat-input-'+catId);
+  if(!inp) return;
+  const name = inp.value.trim();
+  if(!name) { inp.style.borderColor='var(--red)'; inp.focus(); return; }
+  inp.style.borderColor='';
+ 
+  const cats = loadCats();
+  const cat = (cats[catMgrTab]||[]).find(c=>c.id===catId);
+  if(!cat) return;
+  if(!cat.children) cat.children=[];
+  cat.children.push({ id:'sub'+Date.now().toString(36), name });
+  saveCats(cats);
+ 
+  inp.value='';
+  renderCatMgr();
+  renderContent(currentTab, searchFilters[currentTab]||'');
+  populateCatSelects(catMgrTab);
+  showToast('Sous-catégorie ajoutée ✓');
+}
+ 
+function deleteSubCategory(catId, subId){
+  const cats = loadCats();
+  const cat = (cats[catMgrTab]||[]).find(c=>c.id===catId);
+  if(!cat || !cat.children) return;
+  cat.children = cat.children.filter(s=>s.id!==subId);
+  saveCats(cats);
+  // Désassigner les éléments de cette sous-catégorie
+  const items = load(catMgrTab).map(i=>i.subCatId===subId?{...i,subCatId:''}:i);
+  save(catMgrTab, items);
+  renderCatMgr();
+  renderContent(currentTab, searchFilters[currentTab]||'');
+  populateCatSelects(catMgrTab);
+  showToast('Sous-catégorie supprimée');
+}
+ 
+// ── SELECT CATÉGORIES (seulement materiel et materiaux) ─
+const CAT_SELECT_IDS = {materiel:'mt-cat', materiaux:'mx-cat'};
+ 
 function populateCatSelects(section){
+  if(!HAS_CATS.includes(section)) return;
   const sel = document.getElementById(CAT_SELECT_IDS[section]);
   if(!sel) return;
   const cats = loadCats()[section]||[];
   const cur  = sel.value;
-  sel.innerHTML = `<option value="">— Sans catégorie —</option>` +
-    cats.map(c=>`<option value="${c.id}"${c.id===cur?' selected':''}>${esc(c.name)}</option>`).join('');
+  let html = `<option value="">— Sans catégorie —</option>`;
+  cats.forEach(c=>{
+    const subs = c.children||[];
+    if(subs.length){
+      html += `<optgroup label="${c.emoji?c.emoji+' ':''}${esc(c.name)}">`;
+      // Option for category itself (without sub)
+      html += `<option value="${c.id}"${c.id===cur?' selected':''}>${c.emoji?c.emoji+' ':''}${esc(c.name)} (général)</option>`;
+      subs.forEach(s=>{
+        const val = c.id+'|'+s.id;
+        html += `<option value="${val}"${val===cur?' selected':''}>&nbsp;&nbsp;↳ ${esc(s.name)}</option>`;
+      });
+      html += `</optgroup>`;
+    } else {
+      html += `<option value="${c.id}"${c.id===cur?' selected':''}>${c.emoji?c.emoji+' ':''}${esc(c.name)}</option>`;
+    }
+  });
+  sel.innerHTML = html;
 }
-
+ 
 function populateAllCatSelects(){
-  TABS.forEach(s=>populateCatSelects(s));
+  HAS_CATS.forEach(s=>populateCatSelects(s));
 }
-
+ 
 // ── MODALS AJOUT ────────────────────────────────────────
 function openAdd(section){
-  populateCatSelects(section);
+  if(HAS_CATS.includes(section)) populateCatSelects(section);
   document.getElementById('modal-add-'+section).classList.add('open');
   setTimeout(()=>{ const inp=document.querySelector('#modal-add-'+section+' input'); if(inp) inp.focus(); },150);
 }
-function closeAdd(section){ document.getElementById('modal-add-'+section).classList.remove('open'); }
-
+function closeAdd(section){
+  document.getElementById('modal-add-'+section).classList.remove('open');
+  if(editingId){ editingId=null; editingSection=null; resetModalTitle(section); }
+  itemPhotos[section]='';
+  itemIcons[section]='';
+  updateMediaPreview(section);
+}
+ 
 document.querySelectorAll('.modal-ov').forEach(m=>{
   m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); });
 });
-
+ 
 // ── SAUVEGARDE ──────────────────────────────────────────
 function g(id){ const el=document.getElementById(id); return el?(el.value||'').trim():''; }
-
+ 
 function saveItem(section){
-  let item = { id: Date.now().toString(36)+Math.random().toString(36).slice(2,5) };
+  let item = { id: editingId || (Date.now().toString(36)+Math.random().toString(36).slice(2,5)) };
   let req  = '';
-
+ 
   if(section==='equipe'){
     const prenom=g('eq-prenom'), nom=g('eq-nom');
     if(!prenom&&!nom){ highlight('eq-prenom'); return; }
-    item={...item, catId:g('eq-cat'), nom:(prenom+' '+nom).trim(), role:g('eq-role'), tel:g('eq-tel'), email:g('eq-email'), taux:g('eq-taux'), contrat:g('eq-contrat'), notes:g('eq-notes') };
+    item={...item, nom:(prenom+' '+nom).trim(), tel:g('eq-tel') };
   } else if(section==='machines'){
     if(!g('ma-nom')){ highlight('ma-nom'); return; }
-    item={...item, catId:g('ma-cat'), nom:g('ma-nom'), type:g('ma-type'), annee:g('ma-annee'), serie:g('ma-serie'), poids:g('ma-poids'), puissance:g('ma-puissance'), heures:g('ma-heures'), carburant:g('ma-carburant'), valeur:g('ma-valeur'), cout_h:g('ma-cout-h'), notes:g('ma-notes') };
+    item={...item, nom:g('ma-nom'), type:g('ma-type'), annee:g('ma-annee'), serie:g('ma-serie'), poids:g('ma-poids'), puissance:g('ma-puissance'), heures:g('ma-heures'), carburant:g('ma-carburant'), cout_h:g('ma-cout-h'), notes:g('ma-notes') };
   } else if(section==='vehicules'){
     if(!g('vh-nom')){ highlight('vh-nom'); return; }
-    item={...item, catId:g('vh-cat'), nom:g('vh-nom'), immat:g('vh-immat'), type:g('vh-type'), marque:g('vh-marque'), annee:g('vh-annee'), pma:g('vh-pma'), charge:g('vh-charge'), volume:g('vh-volume'), cout_j:g('vh-cout-j'), cout_km:g('vh-cout-km'), notes:g('vh-notes') };
+    item={...item, nom:g('vh-nom'), immat:g('vh-immat'), type:g('vh-type'), marque:g('vh-marque'), annee:g('vh-annee'), poids:g('vh-poids'), charge:g('vh-charge'), pma:g('vh-pma'), volume:g('vh-volume'), dimensions:g('vh-dimensions'), cout_j:g('vh-cout-j'), notes:g('vh-notes') };
   } else if(section==='materiel'){
     if(!g('mt-nom')){ highlight('mt-nom'); return; }
-    item={...item, catId:g('mt-cat'), nom:g('mt-nom'), type:g('mt-type'), marque:g('mt-marque'), ref:g('mt-ref'), poids:g('mt-poids'), puissance:g('mt-puissance'), prix:g('mt-prix'), location:g('mt-location'), notes:g('mt-notes') };
+    const catVal = g('mt-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
+    item={...item, catId:cId, subCatId:sId, nom:g('mt-nom'), type:g('mt-type'), marque:g('mt-marque'), ref:g('mt-ref'), poids:g('mt-poids'), puissance:g('mt-puissance'), prix:g('mt-prix'), location:g('mt-location'), notes:g('mt-notes') };
   } else if(section==='materiaux'){
     if(!g('mx-nom')){ highlight('mx-nom'); return; }
-    item={...item, catId:g('mx-cat'), nom:g('mx-nom'), famille:g('mx-famille'), unite:g('mx-unite'), densite:g('mx-densite'), classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), tva:g('mx-tva'), notes:g('mx-notes') };
+    const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
+    item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), famille:g('mx-famille'), unite:g('mx-unite'), densite:g('mx-densite'), classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), tva:g('mx-tva'), notes:g('mx-notes') };
   }
-
-  const data=[...load(section), item];
+ 
+  // Ajouter la photo et l'icône
+  item.photo = itemPhotos[section] || '';
+  item.icon  = itemIcons[section] || '';
+ 
+  let data = load(section);
+  if(editingId){
+    data = data.map(i => i.id === editingId ? item : i);
+  } else {
+    data.push(item);
+  }
   save(section, data);
-
-  // Reset form
+ 
+  // Reset
+  editingId = null;
+  editingSection = null;
+  itemPhotos[section] = '';
+  itemIcons[section] = '';
+  updateMediaPreview(section);
+  resetModalTitle(section);
   document.querySelectorAll(`#modal-add-${section} input, #modal-add-${section} select, #modal-add-${section} textarea`)
     .forEach(el=>{ el.value=''; el.style.borderColor=''; });
-
+ 
   closeAdd(section);
   renderContent(section, searchFilters[section]||'');
   updateBadges();
   showToast(ICONS[section]+' Enregistré avec succès');
 }
-
+ 
+// ── ÉDITION ─────────────────────────────────────────────
+function editCurrentItem(){
+  if(!currentDetailId || !currentDetailSection) return;
+  const section = currentDetailSection;
+  const item = load(section).find(i=>i.id===currentDetailId);
+  if(!item) return;
+ 
+  editingId = item.id;
+  editingSection = section;
+ 
+  closeDetail();
+ 
+  // Pré-remplir le formulaire
+  if(HAS_CATS.includes(section)) populateCatSelects(section);
+  fillForm(section, item);
+ 
+  // Changer le titre du modal
+  const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
+  if(titleEl){
+    const icons = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨'};
+    titleEl.textContent = icons[section]+' Modifier';
+  }
+ 
+  document.getElementById('modal-add-'+section).classList.add('open');
+}
+ 
+function fillForm(s, item){
+  function f(id,val){ const el=document.getElementById(id); if(el) el.value=val||''; }
+ 
+  // Charger la photo et l'icône existantes
+  itemPhotos[s] = item.photo || '';
+  itemIcons[s]  = item.icon || '';
+  updateMediaPreview(s);
+ 
+  if(s==='equipe'){
+    const parts = (item.nom||'').split(' ');
+    f('eq-prenom', parts[0]||'');
+    f('eq-nom', parts.slice(1).join(' ')||'');
+    f('eq-tel', item.tel);
+  }
+  if(s==='machines'){
+    f('ma-nom',item.nom); f('ma-type',item.type); f('ma-annee',item.annee);
+    f('ma-serie',item.serie); f('ma-poids',item.poids); f('ma-puissance',item.puissance);
+    f('ma-heures',item.heures); f('ma-carburant',item.carburant);
+    f('ma-cout-h',item.cout_h); f('ma-notes',item.notes);
+  }
+  if(s==='vehicules'){
+    f('vh-nom',item.nom); f('vh-immat',item.immat); f('vh-type',item.type);
+    f('vh-marque',item.marque); f('vh-annee',item.annee); f('vh-poids',item.poids);
+    f('vh-charge',item.charge); f('vh-pma',item.pma); f('vh-volume',item.volume);
+    f('vh-dimensions',item.dimensions); f('vh-cout-j',item.cout_j); f('vh-notes',item.notes);
+  }
+  if(s==='materiel'){
+    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
+    f('mt-cat',catVal); f('mt-nom',item.nom); f('mt-type',item.type);
+    f('mt-marque',item.marque); f('mt-ref',item.ref); f('mt-poids',item.poids);
+    f('mt-puissance',item.puissance); f('mt-prix',item.prix);
+    f('mt-location',item.location); f('mt-notes',item.notes);
+  }
+  if(s==='materiaux'){
+    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
+    f('mx-cat',catVal); f('mx-nom',item.nom); f('mx-famille',item.famille);
+    f('mx-unite',item.unite); f('mx-densite',item.densite); f('mx-classe',item.classe);
+    f('mx-granulo',item.granulo); f('mx-fournisseur',item.fournisseur);
+    f('mx-prix',item.prix); f('mx-tva',item.tva); f('mx-notes',item.notes);
+  }
+}
+ 
+function resetModalTitle(section){
+  const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
+  if(!titleEl) return;
+  const titles = {equipe:'👷 Nouvel employé',machines:'🚜 Nouvelle machine',vehicules:'🚛 Nouveau véhicule',materiel:'🔧 Nouveau matériel',materiaux:'🪨 Nouveau matériau'};
+  titleEl.textContent = titles[section]||'';
+}
+ 
 function highlight(id){ const el=document.getElementById(id); if(!el)return; el.style.borderColor='var(--red)'; el.focus(); setTimeout(()=>el.style.borderColor='',2000); }
-
+ 
+// ── MEDIA ÉLÉMENTS (photo + icône) ──────────────────────
+function triggerPhoto(section){
+  photoTargetSection = section;
+  const inp = document.getElementById('item-photo-input');
+  inp.onchange = function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      const img = new Image();
+      img.onload = function(){
+        const canvas = document.createElement('canvas');
+        const maxSize = 400;
+        let w = img.width, h = img.height;
+        if(w > h){ h = Math.round(h * maxSize / w); w = maxSize; }
+        else { w = Math.round(w * maxSize / h); h = maxSize; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        itemPhotos[section] = canvas.toDataURL('image/jpeg', 0.75);
+        itemIcons[section] = ''; // photo prioritaire
+        updateMediaPreview(section);
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+    inp.value = '';
+  };
+  inp.click();
+}
+ 
+function clearMedia(section){
+  itemPhotos[section] = '';
+  itemIcons[section] = '';
+  updateMediaPreview(section);
+}
+ 
+function updateMediaPreview(section){
+  const prev = document.getElementById('media-prev-'+section);
+  const del  = document.getElementById('media-del-'+section);
+  if(!prev) return;
+  if(itemPhotos[section]){
+    prev.innerHTML = `<img src="${itemPhotos[section]}">`;
+    if(del) del.style.display='';
+  } else if(itemIcons[section]){
+    prev.innerHTML = itemIcons[section];
+    prev.style.fontSize = '32px';
+    if(del) del.style.display='';
+  } else {
+    prev.innerHTML = '📷';
+    prev.style.fontSize = '32px';
+    if(del) del.style.display='none';
+  }
+}
+ 
 // ── DETAIL ──────────────────────────────────────────────
 function getSubtitle(s,item){
-  if(s==='equipe') return [item.role,item.contrat].filter(Boolean).join(' · ');
+  if(s==='equipe') return item.tel||'';
   if(s==='machines') return [item.type,item.annee].filter(Boolean).join(' · ');
   if(s==='vehicules') return [item.type,item.immat].filter(Boolean).join(' · ');
   if(s==='materiel') return [item.type,item.marque].filter(Boolean).join(' · ');
@@ -737,48 +1239,60 @@ function getSubtitle(s,item){
   return '';
 }
 function getPrice(s,item){
-  if(s==='equipe'&&item.taux)    return 'CHF '+item.taux+'/h';
+  if(s==='equipe') return '';
   if(s==='machines'&&item.cout_h) return 'CHF '+item.cout_h+'/h';
   if(s==='vehicules'&&item.cout_j)return 'CHF '+item.cout_j+'/j';
   if(s==='materiel'&&item.prix)   return 'CHF '+item.prix;
   if(s==='materiaux'&&item.prix)  return 'CHF '+item.prix+'/'+(item.unite||'u.');
   return '';
 }
-
+ 
 function openDetail(section, id){
   const item = load(section).find(i=>i.id===id);
   if(!item) return;
   currentDetailId=id; currentDetailSection=section;
-
-  const cats = loadCats()[section]||[];
-  const cat  = cats.find(c=>c.id===item.catId);
-
+ 
+  const catLabel = getCatLabel(section, item);
+ 
   document.getElementById('det-icon').textContent=ICONS[section];
   document.getElementById('det-icon').style.background=COLORS[section];
   document.getElementById('det-name').textContent=item.nom||'—';
   document.getElementById('det-type').textContent=
-    [getSubtitle(section,item), cat?'📁 '+cat.name:''].filter(Boolean).join(' · ');
-
-  document.getElementById('det-body').innerHTML = getDetailRows(section,item).map(r=>{
+    [getSubtitle(section,item), catLabel].filter(Boolean).join(' · ');
+ 
+  const photoHtml = item.photo ? `<img class="detail-photo" src="${item.photo}">` : '';
+  document.getElementById('det-body').innerHTML = photoHtml + getDetailRows(section,item).map(r=>{
     if(r.type==='note') return `<div style="margin-top:8px"><div class="detail-label" style="margin-bottom:6px">${r.label}</div><div class="detail-notes">${esc(r.val)}</div></div>`;
     return `<div class="detail-row"><span class="detail-label">${r.label}</span><span class="detail-val">${esc(r.val)}</span></div>`;
   }).join('');
-
+ 
   document.getElementById('detail-ov').classList.add('open');
 }
-
+ 
+function getCatLabel(section, item){
+  const cats = loadCats()[section]||[];
+  const cat = cats.find(c=>c.id===item.catId);
+  if(!cat) return '';
+  let label = (cat.emoji?cat.emoji+' ':'')+cat.name;
+  if(item.subCatId && cat.children){
+    const sub = cat.children.find(s=>s.id===item.subCatId);
+    if(sub) label += ' → '+sub.name;
+  }
+  return '📁 '+label;
+}
+ 
 function getDetailRows(s,item){
   const r=[]; const add=(l,v,t)=>{ if(v) r.push({label:l,val:v,type:t}); };
-  if(s==='equipe'){ add('Rôle',item.role); add('Contrat',item.contrat); add('Téléphone',item.tel); add('Email',item.email); if(item.taux)add('Taux horaire','CHF '+item.taux+'/h'); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.valeur)add("Valeur d'achat",'CHF '+item.valeur); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.pma)add('PMA',item.pma+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.volume)add('Volume',item.volume+' m³'); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.cout_km)add('Coût/km','CHF '+item.cout_km); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='equipe'){ add('Téléphone',item.tel); }
+  if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.poids)add('Poids véhicule',item.poids+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.pma)add('Poids maximum',item.pma+' t'); if(item.volume)add('Volume pont',item.volume+' m³'); add('Dimensions',item.dimensions); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='materiel'){ add('Catégorie',item.type); add('Marque',item.marque); add('Référence',item.ref); if(item.poids)add('Poids',item.poids+' kg'); if(item.puissance)add('Puissance',item.puissance+' W'); if(item.prix)add("Prix d'achat",'CHF '+item.prix); if(item.location)add('Location/jour','CHF '+item.location); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='materiaux'){ add('Famille',item.famille); add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.densite)add('Densité',item.densite+' t/m³'); if(item.prix)add('Prix HT','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.tva)add('TVA',item.tva+'%'); if(item.prix&&item.tva){const ttc=(parseFloat(item.prix)*(1+parseFloat(item.tva)/100)).toFixed(2); add('Prix TTC','CHF '+ttc+'/'+(item.unite||'u.')); } if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   return r;
 }
-
+ 
 function closeDetail(){ document.getElementById('detail-ov').classList.remove('open'); }
-
+ 
 function deleteCurrentItem(){
   if(!currentDetailId||!currentDetailSection) return;
   save(currentDetailSection, load(currentDetailSection).filter(i=>i.id!==currentDetailId));
@@ -787,19 +1301,19 @@ function deleteCurrentItem(){
   updateBadges();
   showToast('🗑 Élément supprimé');
 }
-
+ 
 document.getElementById('detail-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('detail-ov')) closeDetail(); });
-
+ 
 // ── TOAST ───────────────────────────────────────────────
 let toastTimer;
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
-
+ 
 // ── ESC ─────────────────────────────────────────────────
 function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
+ 
 // ── ENTRÉE CLAVIER ──────────────────────────────────────
 document.getElementById('cat-new-name').addEventListener('keydown',e=>{ if(e.key==='Enter') addCategory(); });
-
+ 
 // ── INIT ────────────────────────────────────────────────
 TABS.forEach(s=>renderContent(s,''));
 updateBadges();
