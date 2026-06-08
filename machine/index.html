@@ -24,7 +24,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
-
+ 
 /* ── TOPBAR ── */
 .topbar{height:calc(var(--top-h) + var(--safe-t));padding-top:var(--safe-t);background:var(--navy);display:flex;align-items:center;gap:10px;padding-left:14px;padding-right:14px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:50;}
 .topbar-back{background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;width:34px;height:34px;border-radius:8px;cursor:pointer;display:none;align-items:center;justify-content:center;flex-shrink:0;font-family:'Inter',sans-serif;}
@@ -34,10 +34,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .topbar-title-block .t1{font-size:14px;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .topbar-title-block .t2{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.4px;}
 .topbar-right{font-size:10px;color:rgba(255,255,255,.55);text-align:right;line-height:1.6;flex-shrink:0;}
-
+ 
 /* ── SCROLL ── */
 .scroll-area{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:14px 13px calc(var(--nav-h) + var(--safe-b) + 14px);}
-
+ 
 /* ── BOTTOM NAV ── */
 .bottom-nav{height:calc(var(--nav-h) + var(--safe-b));padding-bottom:var(--safe-b);background:#fff;border-top:1px solid var(--border);display:flex;flex-shrink:0;box-shadow:0 -2px 10px rgba(27,58,107,.07);z-index:50;}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:transparent;cursor:pointer;padding:0;transition:all .15s;}
@@ -49,20 +49,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .nav-badge-wrap{position:relative;display:inline-block;}
 .alert-dot{position:absolute;top:-1px;right:-5px;width:8px;height:8px;background:var(--red);border-radius:50%;display:none;}
 .alert-dot.show{display:block;}
-
+ 
 /* ── VIEWS ── */
 .view{display:none;}.view.active{display:block;}
-
+ 
 /* ── PAGE TITLE ── */
 .page-head{margin-bottom:14px;}
 .page-title{font-size:19px;font-weight:700;color:var(--navy);letter-spacing:-.3px;}
 .page-sub{font-size:12px;color:var(--text3);margin-top:2px;}
-
+ 
 /* ── CARD ── */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--sh);}
 .card-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
 .card-label .cdot{width:6px;height:6px;border-radius:50%;background:var(--navy);}
-
+ 
 /* ── FORM ── */
 .field{margin-bottom:11px;}.field:last-child{margin-bottom:0;}
 .field label{display:block;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
@@ -74,12 +74,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .total-box{background:var(--navy);color:#fff;border-radius:var(--rs);padding:10px 12px;font-size:18px;font-weight:700;min-height:44px;display:flex;align-items:center;}
 .total-box.err{background:var(--red);}
 .hint{font-size:11px;color:var(--teal);margin-top:3px;font-weight:500;}
-
+ 
 /* ── CHIPS ── */
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
 .chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;transition:all .12s;}
 .chip.on{background:var(--navy);color:#fff;border-color:var(--navy);}
-
+ 
 /* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;padding:12px 18px;border:none;border-radius:var(--rs);cursor:pointer;transition:all .14s;width:100%;}
 .btn:active{transform:scale(.97);}
@@ -92,14 +92,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .btn-row{display:flex;gap:9px;margin-top:12px;}
 .btn-row .btn{flex:1;}
 .btn-danger-text{background:transparent;border:none;color:var(--red);font-size:12px;font-weight:600;padding:4px 8px;cursor:pointer;font-family:'Inter',sans-serif;}
-
+ 
 /* ── LIST ITEMS ── */
 .list-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:12px 13px;display:flex;align-items:center;gap:10px;margin-bottom:7px;}
 .li-icon{font-size:18px;flex-shrink:0;}
 .li-body{flex:1;min-width:0;}
 .li-name{font-size:14px;font-weight:600;color:var(--text);}
 .li-sub{font-size:11px;color:var(--text3);margin-top:1px;}
-
+ 
 /* ── CHANTIER LIST (tab) ── */
 .ch-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:15px;margin-bottom:10px;box-shadow:var(--sh);cursor:pointer;display:flex;align-items:center;gap:13px;transition:all .14s;}
 .ch-card:active{transform:scale(.98);box-shadow:none;}
@@ -110,7 +110,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .ch-card-right{text-align:right;flex-shrink:0;}
 .ch-card-hours{font-size:17px;font-weight:700;color:var(--teal);}
 .ch-card-arrow{font-size:16px;color:var(--text3);margin-top:2px;}
-
+ 
 /* ── CHANTIER DETAIL ── */
 .mach-row{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--sh);}
 .mr-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
@@ -118,7 +118,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .mr-name{font-size:14px;font-weight:700;color:var(--text);}
 .mr-sub{font-size:11px;color:var(--text3);margin-top:1px;}
 .mr-hours{font-size:20px;font-weight:700;color:var(--teal);flex-shrink:0;}
-
+ 
 /* ── ENTRETIEN CARDS ── */
 .maint-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:15px;margin-bottom:10px;box-shadow:var(--sh);cursor:pointer;display:flex;align-items:center;gap:13px;transition:all .13s;}
 .maint-card:active{transform:scale(.98);}
@@ -132,7 +132,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .maint-card-status.warn{color:var(--orange);}
 .maint-card-status.alert{color:var(--red);}
 .maint-card-arrow{font-size:16px;color:var(--text3);flex-shrink:0;}
-
+ 
 /* ── MAINT DETAIL ── */
 .maint-hist-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:12px 13px;margin-bottom:7px;display:flex;align-items:center;gap:10px;}
 .mhi-badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px;flex-shrink:0;white-space:nowrap;}
@@ -144,7 +144,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .mhi-type{font-size:13px;font-weight:600;color:var(--text);}
 .mhi-sub{font-size:11px;color:var(--text3);margin-top:1px;}
 .mhi-del{background:none;border:none;font-size:16px;cursor:pointer;opacity:.4;flex-shrink:0;padding:4px;}
-
+ 
 /* ── RAPPORT ── */
 .date-hdr{background:var(--navy);color:#fff;padding:9px 13px;border-radius:var(--r) var(--r) 0 0;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;}
 .dh-tot{color:var(--yellow);}
@@ -157,14 +157,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .e-sub{font-size:10px;color:var(--text3);}
 .e-tot{font-size:15px;font-weight:700;color:var(--teal);flex-shrink:0;}
 .e-del{background:none;border:none;font-size:16px;cursor:pointer;opacity:.45;flex-shrink:0;}
-
+ 
 /* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:13px;}
 .stat-c{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px 8px;text-align:center;box-shadow:var(--sh);}
 .stat-v{font-size:22px;font-weight:700;color:var(--navy);line-height:1;}
 .stat-u{font-size:11px;color:var(--text3);}
 .stat-l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-top:3px;}
-
+ 
 /* TRASH */
 .trash-sec{margin-top:18px;}
 .trash-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
@@ -172,40 +172,40 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .trash-clr{font-size:11px;color:var(--red);font-weight:600;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
 .trash-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:9px;margin-bottom:6px;opacity:.6;}
 .trash-restore{background:none;border:1px solid var(--border);border-radius:5px;font-size:11px;font-weight:600;color:var(--text2);padding:4px 8px;cursor:pointer;flex-shrink:0;font-family:'Inter',sans-serif;}
-
+ 
 /* SETTINGS */
 .ss-block{margin-bottom:20px;}
 .ss-t{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;}
 .add-box{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-top:8px;}
-
+ 
 /* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;}
 .modal-ov.open{display:flex;}
 .modal-sh{background:#fff;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + var(--safe-b));width:100%;max-height:88vh;overflow-y:auto;}
 .modal-handle{width:32px;height:4px;background:var(--bg2);border-radius:2px;margin:0 auto 14px;}
 .modal-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:14px;}
-
+ 
 /* EMPTY */
 .empty{text-align:center;padding:36px 20px;}
 .empty-i{font-size:42px;margin-bottom:10px;opacity:.35;}
 .empty-t{font-size:14px;color:var(--text3);}
-
+ 
 /* ALERT BANNER */
 .alert-banner{display:flex;align-items:center;gap:8px;padding:10px 13px;border-radius:var(--rs);margin-bottom:12px;font-size:13px;font-weight:600;}
 .alert-banner.warn{background:#FFF3E0;color:var(--orange);border:1px solid #FFB74D;}
 .alert-banner.alert{background:#FFEBEE;color:var(--red);border:1px solid #EF9A9A;}
 .alert-banner.ok{background:#E8F5E9;color:var(--green);border:1px solid #A5D6A7;}
-
+ 
 .rpt-filter{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;padding:8px 14px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;transition:all .14s;flex:1;}
 .rpt-filter.on{background:var(--navy);color:#fff;border-color:var(--navy);}
-
+ 
 /* TOAST */
 .toast{position:fixed;bottom:calc(var(--nav-h) + var(--safe-b) + 10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 18px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
-
+ 
 <!-- TOPBAR -->
 <div class="topbar">
   <button class="topbar-back" id="topbar-back" onclick="goBack()">‹</button>
@@ -216,10 +216,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   </div>
   <div class="topbar-right" id="topbar-date"></div>
 </div>
-
+ 
 <!-- SCROLL -->
 <div class="scroll-area" id="scroll-area">
-
+ 
   <!-- ══ SAISIE ══ -->
   <div id="view-saisie" class="view active">
     <div class="page-head"><div class="page-title">Nouvelle entrée</div><div class="page-sub">Enregistrement des heures</div></div>
@@ -248,27 +248,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       <button class="btn btn-navy" onclick="saveEntry()">✓ Enregistrer</button>
     </div>
   </div>
-
+ 
   <!-- ══ CHANTIERS LIST ══ -->
   <div id="view-chantiers" class="view">
     <div class="page-head"><div class="page-title">Chantiers actifs</div><div class="page-sub">Taper pour voir le détail</div></div>
     <div id="ch-list"></div>
   </div>
-
+ 
   <!-- chantier detail is now a modal, view kept empty for back-compat -->
   <div id="view-ch-detail" class="view" style="display:none"></div>
-
+ 
   <!-- ══ ENTRETIENS LIST ══ -->
   <div id="view-entretiens" class="view">
     <div class="page-head"><div class="page-title">Entretiens</div><div class="page-sub">Carnet de suivi par machine</div></div>
     <div id="maint-list"></div>
   </div>
-
+ 
   <!-- ══ ENTRETIEN DETAIL ══ -->
   <div id="view-maint-detail" class="view">
     <div id="maint-detail-content"></div>
   </div>
-
+ 
   <!-- ══ RAPPORT ══ -->
   <div id="view-rapport" class="view">
     <div class="page-head"><div class="page-title">Rapport 30 jours</div><div class="page-sub">30 derniers jours · purge automatique</div></div>
@@ -285,11 +285,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       <div id="trash-list"></div>
     </div>
   </div>
-
+ 
   <!-- ══ PARAMÈTRES ══ -->
   <div id="view-params" class="view">
     <div class="page-head"><div class="page-title">Paramètres</div><div class="page-sub">Types d'entretien</div></div>
-
+ 
     <!-- Bloc info Ressources -->
     <div style="background:#EEF2FF;border:1.5px solid #C7D2FE;border-radius:12px;padding:14px 15px;margin-bottom:18px;display:flex;align-items:center;gap:12px;">
       <div style="font-size:26px;flex-shrink:0;">🗄</div>
@@ -299,19 +299,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       </div>
       <a href="../ressources/index.html" style="flex-shrink:0;background:#1B3A6B;color:#fff;font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px;text-decoration:none;">Ouvrir →</a>
     </div>
-
+ 
     <!-- Machines en lecture seule -->
     <div class="ss-block"><div class="ss-t">🚜 Machines (lecture seule)</div><div id="pm-machines"></div></div>
     <div class="ss-block"><div class="ss-t">📍 Chantiers (lecture seule)</div><div id="pm-chantiers"></div></div>
-
+ 
     <!-- Champ caché pour compatibilité JS -->
     <div style="display:none">
       <input type="text" id="nc-name">
       <input type="text" id="nm-name">
       <input type="text" id="nm-type">
       <div class="add-box">
-        <div class="field" style="margin-bottom:9px"><label>Nom du chantier</label><input type="text" id="nc-name2" placeholder="Ex: Villa Dupont..."></div>
-        <button class="btn btn-teal btn-sm" onclick="addChantier()">+ Ajouter chantier</button>
+ 
       </div>
     </div>
     <div class="ss-block"><div class="ss-t">🔧 Types d'entretien</div><div id="pm-types"></div>
@@ -320,7 +319,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <button class="btn btn-teal btn-sm" onclick="addMaintType()">+ Ajouter type</button>
       </div>
     </div>
-
+ 
     <!-- Reset -->
     <div class="ss-block" style="margin-top:10px">
       <div class="ss-t" style="color:#E53935">⚠ Zone dangereuse</div>
@@ -330,10 +329,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <button class="btn btn-red-ghost btn-sm" onclick="confirmReset()">🗑 Tout réinitialiser</button>
       </div>
     </div>
-
+ 
   </div>
 </div>
-
+ 
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav" id="bottom-nav">
   <button class="nav-btn active" onclick="navTo('saisie',this)"><span class="nav-icon">✏️</span><span class="nav-label">Saisie</span><span class="nav-dot"></span></button>
@@ -345,7 +344,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <button class="nav-btn" onclick="navTo('rapport',this)"><span class="nav-icon">📋</span><span class="nav-label">Rapport</span><span class="nav-dot"></span></button>
   <button class="nav-btn" onclick="navTo('params',this)"><span class="nav-icon">⚙️</span><span class="nav-label">Paramètres</span><span class="nav-dot"></span></button>
 </nav>
-
+ 
 <!-- MODAL: chantier detail -->
 <div class="modal-ov" id="modal-ch" onclick="closeModal('modal-ch',event)">
   <div class="modal-sh" style="max-height:92vh">
@@ -362,7 +361,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div id="mch-machines"></div>
   </div>
 </div>
-
+ 
 <!-- MODAL: saisie rapide depuis chantier -->
 <div class="modal-ov" id="modal-entry" onclick="closeModal('modal-entry',event)">
   <div class="modal-sh">
@@ -381,7 +380,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <button class="btn btn-ghost" onclick="closeModal('modal-entry')" style="margin-top:8px">Annuler</button>
   </div>
 </div>
-
+ 
 <!-- MODAL: intervention -->
 <div class="modal-ov" id="modal-maint" onclick="closeModal('modal-maint',event)">
   <div class="modal-sh">
@@ -398,15 +397,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <button class="btn btn-ghost" onclick="closeModal('modal-maint')" style="margin-top:8px">Annuler</button>
   </div>
 </div>
-
+ 
 <div class="toast" id="toast"></div>
-
+ 
 <script>
 // ── STORAGE KEYS ──
-const SK="rv6_e",MK="rv6_m",CK="rv6_c",DK="rv6_d",TK="rv6_t",MAINTK="rv6_mt",TYPEK="rv6_types";
+const SK="rv6_e",MK="rv6_m",CK="rv6_chantiers_v1",DK="rv6_d",TK="rv6_t",MAINTK="rv6_mt",TYPEK="rv6_types";
 const ALERT_H=15;
 let selCh="", modalChantier="", navStack=[], currentMainView="saisie";
-
+ 
 // ── DATA ──
 // Types d'entretien : gérés dans Paramètres du module Machines uniquement
 // Machines : lues depuis le module Ressources (rv6_m)
@@ -420,9 +419,25 @@ function getMachines(){
   }catch(e){return [];}
 }
 function saveMachines(m){localStorage.setItem(MK,JSON.stringify(m));}
-// Chantiers : lus depuis rv6_c
+// Chantiers : lus depuis rv6_chantiers_v1 (clé partagée — source de vérité : module Ressources)
+function migrateOldChantiers(){
+  if(localStorage.getItem('rv6_c_migrated')) return;
+  try{
+    const old=localStorage.getItem('rv6_c');
+    if(old){
+      const arr=JSON.parse(old);
+      const existing=JSON.parse(localStorage.getItem(CK)||'[]');
+      if(!existing.length && arr.length){
+        const objs=arr.map((c,i)=>typeof c==='string'?{id:'mig_'+i,nom:c,statut:'actif'}:c);
+        localStorage.setItem(CK,JSON.stringify(objs));
+      }
+    }
+  }catch(e){}
+  localStorage.setItem('rv6_c_migrated','1');
+}
 function getChantiers(){
   try{
+    migrateOldChantiers();
     const s=localStorage.getItem(CK);
     return s?JSON.parse(s):[];
   }catch(e){return [];}
@@ -436,12 +451,12 @@ function getTrash(){const s=localStorage.getItem(TK);if(!s)return[];let t=JSON.p
 function saveTrash(t){localStorage.setItem(TK,JSON.stringify(t));}
 function getMaintEntries(){const s=localStorage.getItem(MAINTK);return s?JSON.parse(s):[];}
 function saveMaintEntries(m){localStorage.setItem(MAINTK,JSON.stringify(m));}
-
+ 
 // ── DRAFT ──
 function saveDraft(){localStorage.setItem(DK,JSON.stringify({machine:document.getElementById("sel-machine").value,date:document.getElementById("inp-date").value,start:document.getElementById("inp-start").value,end:document.getElementById("inp-end").value,ch:document.getElementById("inp-ch").value,selCh}));}
 function loadDraft(){const s=localStorage.getItem(DK);if(!s)return false;const d=JSON.parse(s);if(d.date)document.getElementById("inp-date").value=d.date;if(d.start)document.getElementById("inp-start").value=d.start;if(d.end)document.getElementById("inp-end").value=d.end;if(d.ch)document.getElementById("inp-ch").value=d.ch;if(d.selCh){selCh=d.selCh;refreshChips();}if(d.machine){const sel=document.getElementById("sel-machine");[...sel.options].forEach(o=>{if(o.value===d.machine)o.selected=true;});}calcTot();return true;}
 function clearDraft(){localStorage.removeItem(DK);}
-
+ 
 // ── INIT ──
 window.onload=function(){
   updateDate();setInterval(updateDate,60000);
@@ -454,7 +469,7 @@ window.onload=function(){
 };
 function updateDate(){const d=new Date();document.getElementById("topbar-date").innerHTML=d.toLocaleDateString("fr-CH",{weekday:"short",day:"numeric",month:"short"})+"<br>"+d.toLocaleTimeString("fr-CH",{hour:"2-digit",minute:"2-digit"});}
 function setToday(){document.getElementById("inp-date").value=new Date().toISOString().split("T")[0];}
-
+ 
 // ── NAVIGATION ──
 function navTo(view,btn){
   navStack=[];
@@ -490,31 +505,31 @@ function goBack(){
   const btn=document.querySelector(`.nav-btn[onclick*="'${prev}'"]`);
   navTo(prev,btn);
 }
-
+ 
 // ── MACHINES ──
 function refreshMachSel(){const sel=document.getElementById("sel-machine");const cur=sel.value;sel.innerHTML="";getMachines().forEach(m=>{const o=document.createElement("option");o.value=m.name;o.textContent=m.name;if(m.name===cur)o.selected=true;sel.appendChild(o);});refreshModalMachSel();}
 function refreshModalMachSel(){const sel=document.getElementById("me-machine");sel.innerHTML="";getMachines().forEach(m=>{const o=document.createElement("option");o.value=m.name;o.textContent=m.name;sel.appendChild(o);});}
 function onMachChange(){prefillStart();saveDraft();}
-
+ 
 // ── CHIPS ──
 function refreshChips(){const c=document.getElementById("chips");c.innerHTML="";getChantiers().forEach(ch=>{const name=typeof ch==='string'?ch:(ch.nom||ch.name||String(ch));const b=document.createElement("button");b.className="chip"+(selCh===name?" on":"");b.textContent=name;b.type="button";b.onclick=()=>{selCh=(selCh===name)?"":name;if(selCh)document.getElementById("inp-ch").value="";refreshChips();saveDraft();};c.appendChild(b);});}
 function onFreeCh(){selCh="";refreshChips();saveDraft();}
-
+ 
 // ── PREFILL ──
 function getMachLastHours(mName){const e=getEntries().filter(x=>x.machine===mName);if(!e.length)return null;e.sort((a,b)=>b.savedAt-a.savedAt);return e[0].end;}
 function prefillStart(){const m=document.getElementById("sel-machine").value;const h=getMachLastHours(m);const hint=document.getElementById("hint-start");if(h!==null){document.getElementById("inp-start").value=h;hint.textContent="Dernière fin : "+h+" h";calcTot();}else{document.getElementById("inp-start").value="";hint.textContent="";}}
-
+ 
 // ── CALC ──
 function calcTot(){const s=parseFloat(document.getElementById("inp-start").value),e=parseFloat(document.getElementById("inp-end").value),b=document.getElementById("total-box");b.className="total-box";if(!isNaN(s)&&!isNaN(e)&&e>s)b.textContent=(e-s).toFixed(1)+" h";else if(!isNaN(s)&&!isNaN(e)&&document.getElementById("inp-end").value!==""){b.textContent="Erreur";b.className="total-box err";}else b.textContent="—";}
 function calcMe(){const s=parseFloat(document.getElementById("me-start").value),e=parseFloat(document.getElementById("me-end").value),b=document.getElementById("me-total");b.className="total-box";if(!isNaN(s)&&!isNaN(e)&&e>s)b.textContent=(e-s).toFixed(1)+" h";else if(!isNaN(s)&&!isNaN(e)&&document.getElementById("me-end").value!==""){b.textContent="Erreur";b.className="total-box err";}else b.textContent="—";}
-
+ 
 // ── SAVE ENTRY ──
 function saveEntry(){const machine=document.getElementById("sel-machine").value,date=document.getElementById("inp-date").value,start=parseFloat(document.getElementById("inp-start").value),end=parseFloat(document.getElementById("inp-end").value),chantier=selCh||document.getElementById("inp-ch").value.trim();if(!date){toast("⚠ Date manquante");return;}if(isNaN(start)){toast("⚠ Compteur début manquant");return;}if(isNaN(end)){toast("⚠ Compteur fin manquant");return;}if(end<=start){toast("⚠ Fin > début");return;}if(!chantier){toast("⚠ Chantier manquant");return;}const total=parseFloat((end-start).toFixed(2));const entries=getEntries();entries.push({id:Date.now(),machine,date,start,end,total,chantier,savedAt:Date.now()});saveEntries(entries);toast("✓ "+total+" h — "+chantier);document.getElementById("inp-start").value=end;document.getElementById("inp-end").value="";document.getElementById("inp-ch").value="";selCh="";refreshChips();document.getElementById("total-box").textContent="—";document.getElementById("hint-start").textContent="Dernière fin : "+end+" h";clearDraft();renderChList();renderRapport();checkAlertDot();}
-
+ 
 function saveModalEntry(){const machine=document.getElementById("me-machine").value,date=document.getElementById("me-date").value,start=parseFloat(document.getElementById("me-start").value),end=parseFloat(document.getElementById("me-end").value);if(!date||isNaN(start)||isNaN(end)||end<=start){toast("⚠ Vérifier les champs");return;}const total=parseFloat((end-start).toFixed(2));const entries=getEntries();entries.push({id:Date.now(),machine,date,start,end,total,chantier:modalChantier,savedAt:Date.now()});saveEntries(entries);toast("✓ "+total+" h — "+modalChantier);closeModal("modal-entry");renderChDetail(modalChantier);renderChList();renderRapport();checkAlertDot();}
-
+ 
 function resetForm(){document.getElementById("inp-start").value="";document.getElementById("inp-end").value="";document.getElementById("inp-ch").value="";selCh="";refreshChips();const b=document.getElementById("total-box");b.textContent="—";b.className="total-box";document.getElementById("hint-start").textContent="";setToday();clearDraft();}
-
+ 
 // ── CHANTIER LIST ──
 const CH_ICONS=["🏗","🏠","🛣","🌿","🔧","🏢","⛏","🚧"];
 function renderChList(){
@@ -547,9 +562,9 @@ function openChDetail(ch){
   renderChModalMachines(ch);
   document.getElementById("modal-ch").classList.add("open");
 }
-
+ 
 function refreshChModalDate(){renderChModalMachines(modalChantier);}
-
+ 
 function renderChModalMachines(ch){
   const entries=getEntries().filter(e=>e.chantier===ch);
   // Grouper par machine
@@ -577,7 +592,7 @@ function renderChModalMachines(ch){
     </div>`;
   }).join("");
 }
-
+ 
 function calcChRow(i){
   const s=parseFloat(document.getElementById("mch-s-"+i).value);
   const e=parseFloat(document.getElementById("mch-e-"+i).value);
@@ -587,7 +602,7 @@ function calcChRow(i){
   else if(!isNaN(s)&&!isNaN(e)&&document.getElementById("mch-e-"+i).value!==""){b.textContent="Err";b.className="total-box err";}
   else b.textContent="—";
 }
-
+ 
 function saveChRow(btn){
   const mach=btn.dataset.mach;
   const i=parseInt(btn.dataset.idx);
@@ -610,23 +625,23 @@ function saveChRow(btn){
   document.getElementById("mch-t-"+i).className="total-box";
   renderChList();renderRapport();checkAlertDot();
 }
-
+ 
 function renderChDetail(ch){const entries=getEntries().filter(e=>e.chantier===ch);const el=document.getElementById("ch-detail-content");if(!entries.length){el.innerHTML='<div class="empty"><div class="empty-i">📍</div><div class="empty-t">Aucune entrée pour ce chantier.</div></div>';return;}// Grouper par machine
 const map={};entries.forEach(e=>{if(!map[e.machine])map[e.machine]={total:0,lastEnd:0,lastDate:"",lastSaved:0,count:0};map[e.machine].total+=e.total;map[e.machine].count++;if(e.savedAt>map[e.machine].lastSaved){map[e.machine].lastEnd=e.end;map[e.machine].lastDate=e.date;map[e.machine].lastSaved=e.savedAt;}});const totalCh=entries.reduce((s,e)=>s+e.total,0);
 el.innerHTML=`<div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span style="font-size:13px;color:var(--text3)">${entries.length} entrées · ${[...new Set(entries.map(e=>e.date))].length} jours</span><span style="font-size:22px;font-weight:700;color:var(--teal)">${totalCh.toFixed(1)} h total</span></div></div>`+
 Object.entries(map).sort((a,b)=>b[1].lastSaved-a[1].lastSaved).map(([mach,d])=>`<div class="mach-row"><div class="mr-header"><div class="mr-icon">🚜</div><div style="flex:1"><div class="mr-name">${mach}</div><div class="mr-sub">${d.count} entrée(s) · Dernière : ${fd(d.lastDate)}</div></div><div class="mr-hours">${d.total.toFixed(1)}h</div></div><div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-radius:var(--rs);padding:8px 12px;margin-top:2px"><span style="font-size:12px;color:var(--text2)">Dernier compteur : <b>${d.lastEnd}h</b></span><button class="btn btn-navy btn-xs" onclick="openModalEntry('${ch}','${mach}',${d.lastEnd})" style="width:auto">+ Saisie rapide</button></div></div>`).join("");}
-
+ 
 // ── MODAL ENTRY ──
 function openModalEntry(ch,machine,lastEnd){modalChantier=ch;document.getElementById("me-title").textContent="⚡ "+ch;document.getElementById("me-date").value=new Date().toISOString().split("T")[0];document.getElementById("me-start").value=lastEnd;document.getElementById("me-end").value="";document.getElementById("me-total").textContent="—";document.getElementById("me-hint").textContent="Dernier compteur : "+lastEnd+"h";const sel=document.getElementById("me-machine");[...sel.options].forEach(o=>{if(o.value===machine)o.selected=true;});document.getElementById("modal-entry").classList.add("open");}
-
+ 
 // ── ENTRETIEN LIST ──
 function getMachLastMaint(mName){const all=getMaintEntries().filter(m=>m.machine===mName);if(!all.length)return null;all.sort((a,b)=>b.savedAt-a.savedAt);return all[0];}
 function checkAlertDot(){let has=false;getMachines().forEach(m=>{const cur=getMachLastHours(m.name);if(cur===null)return;const last=getMachLastMaint(m.name);const since=last?cur-last.hours:cur;if(since>=ALERT_H)has=true;});document.getElementById("alert-dot").classList.toggle("show",has);}
-
+ 
 function getMaintStatus(mName){const cur=getMachLastHours(mName);if(cur===null)return{cls:"ok",text:"Aucune entrée heures",icon:"⚙"};const last=getMachLastMaint(mName);const since=last?cur-last.hours:null;if(since===null)return{cls:"warn",text:"Aucun entretien enregistré",icon:"🟠"};if(since>=ALERT_H*1.5)return{cls:"alert",text:"⚠ Entretien urgent — "+since.toFixed(1)+"h depuis dernier",icon:"🔴"};if(since>=ALERT_H)return{cls:"warn",text:"Entretien recommandé — "+since.toFixed(1)+"h depuis dernier",icon:"🟠"};return{cls:"ok",text:"À jour — "+since.toFixed(1)+"h depuis dernier",icon:"✅"};}
-
+ 
 function renderMaintList(){const machines=getMachines();const el=document.getElementById("maint-list");el.innerHTML=machines.map(m=>{const st=getMaintStatus(m.name);const cur=getMachLastHours(m.name);return `<div class="maint-card" onclick="openMaintDetail('${m.name}')"><div class="maint-card-icon ${st.cls}">${st.icon}</div><div class="maint-card-body"><div class="maint-card-name">Carnet — ${m.name}</div><div class="maint-card-sub">${m.type||""}${cur!==null?" · Compteur : "+cur+"h":""}</div><div class="maint-card-status ${st.cls}">${st.text}</div></div><div class="maint-card-arrow">›</div></div>`;}).join("");}
-
+ 
 // ── ENTRETIEN DETAIL ──
 function openMaintDetail(mName){renderMaintDetail(mName);pushDetail("maint-detail","🔧 "+mName,"Carnet d'entretien");}
 function renderMaintDetail(mName){const mh=getMaintEntries().filter(x=>x.machine===mName).sort((a,b)=>b.savedAt-a.savedAt);const cur=getMachLastHours(mName);const st=getMaintStatus(mName);const el=document.getElementById("maint-detail-content");
@@ -635,14 +650,14 @@ const histHtml=mh.length?mh.map(x=>{let bc="other";if(x.type==="Graissage")bc="g
 el.innerHTML=bannerHtml+`<button class="btn btn-teal" onclick="openModalMaint('${mName}',${cur??0})" style="margin-bottom:14px">+ Enregistrer une intervention</button>`+`<div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:9px">Historique</div>`+histHtml;
 // store machine name for re-render
 document.getElementById("maint-detail-content").dataset.machine=mName;}
-
+ 
 function openModalMaint(mName,curH){document.getElementById("mi-machine").value=mName;document.getElementById("mi-date").value=new Date().toISOString().split("T")[0];document.getElementById("mi-hours").value=curH||"";document.getElementById("mi-note").value="";// refresh type select
 const sel=document.getElementById("mi-type");sel.innerHTML="";getMaintTypes().forEach(t=>{const o=document.createElement("option");o.value=t;o.textContent=t;sel.appendChild(o);});document.getElementById("modal-maint").classList.add("open");}
-
+ 
 function saveMaintEntry(){const machine=document.getElementById("mi-machine").value,type=document.getElementById("mi-type").value,date=document.getElementById("mi-date").value,hours=parseFloat(document.getElementById("mi-hours").value),note=document.getElementById("mi-note").value.trim();if(isNaN(hours)){toast("⚠ Entrer les heures compteur");return;}const maint=getMaintEntries();maint.push({id:Date.now(),machine,type,date,hours,note,savedAt:Date.now()});saveMaintEntries(maint);closeModal("modal-maint");toast("✓ "+type+" enregistré à "+hours+"h");renderMaintDetail(machine);renderMaintList();checkAlertDot();}
-
+ 
 function deleteMaintEntry(id,mName){const m=getMaintEntries().filter(x=>x.id!==id);saveMaintEntries(m);renderMaintDetail(mName);renderMaintList();checkAlertDot();toast("Intervention supprimée");}
-
+ 
 // ── RAPPORT ──
 function renderRapport(){
   const entries=getEntries(),sr=document.getElementById("stats-row"),rl=document.getElementById("rapport-list");
@@ -654,9 +669,9 @@ function renderRapport(){
   // Stats globales
   const totalH=entries.reduce((s,e)=>s+e.total,0),days=new Set(entries.map(e=>e.date)).size;
   sr.innerHTML=`<div class="stat-c"><div class="stat-v">${totalH.toFixed(1)}<span class="stat-u">h</span></div><div class="stat-l">Total</div></div><div class="stat-c"><div class="stat-v">${days}<span class="stat-u">j</span></div><div class="stat-l">Jours</div></div><div class="stat-c"><div class="stat-v">${entries.length}<span class="stat-u">×</span></div><div class="stat-l">Entrées</div></div>`;
-
+ 
   const filter=window.rptFilter||"date";
-
+ 
   if(filter==="date"){
     // Grouper par date desc
     const bd={};entries.forEach(e=>{if(!bd[e.date])bd[e.date]=[];bd[e.date].push(e);});
@@ -664,7 +679,7 @@ function renderRapport(){
       const day=bd[date].sort((a,b)=>a.savedAt-b.savedAt),dayT=day.reduce((s,e)=>s+e.total,0);
       return grpBlock("📅 "+fdl(date),dayT.toFixed(1)+" h total",day);
     }).join("");
-
+ 
   } else if(filter==="machine"){
     // Grouper par machine
     const bm={};entries.forEach(e=>{if(!bm[e.machine])bm[e.machine]=[];bm[e.machine].push(e);});
@@ -674,7 +689,7 @@ function renderRapport(){
       const machT=list.reduce((s,e)=>s+e.total,0);
       return grpBlock("🚜 "+mach,machT.toFixed(1)+" h total",list,true);
     }).join("");
-
+ 
   } else if(filter==="chantier"){
     // Grouper par chantier
     const bc={};entries.forEach(e=>{if(!bc[e.chantier])bc[e.chantier]=[];bc[e.chantier].push(e);});
@@ -688,7 +703,7 @@ function renderRapport(){
   }
   renderTrash();
 }
-
+ 
 function grpBlock(title,subtitle,entries,showDate=false){
   const rows=entries.map(e=>`<div class="e-item">
     <span class="e-badge">${e.machine}</span>
@@ -701,20 +716,20 @@ function grpBlock(title,subtitle,entries,showDate=false){
   </div>`).join("");
   return `<div class="date-hdr"><span>${title}</span><span class="dh-tot">${subtitle}</span></div><div class="e-list">${rows}</div>`;
 }
-
+ 
 function setRptFilter(f,btn){
   window.rptFilter=f;
   document.querySelectorAll(".rpt-filter").forEach(b=>b.classList.remove("on"));
   btn.classList.add("on");
   renderRapport();
 }
-
-
+ 
+ 
 function delEntry(id){const entries=getEntries();const item=entries.find(e=>e.id===id);if(!item)return;const t=getTrash();t.push({...item,deletedAt:new Date().toISOString()});saveTrash(t);saveEntries(entries.filter(e=>e.id!==id));toast("🗑 Déplacé en corbeille");renderRapport();renderChList();}
 function renderTrash(){const t=getTrash();const ts=document.getElementById("trash-sec"),tl=document.getElementById("trash-list");if(!t.length){ts.style.display="none";return;}ts.style.display="block";tl.innerHTML=t.map(e=>`<div class="trash-item"><span class="e-badge">${e.machine}</span><div class="e-body"><div class="e-ch">${e.chantier}</div><div class="e-sub">${e.start}h→${e.end}h · ${fd(e.date)}</div></div><button class="trash-restore" onclick="restoreEntry(${e.id})">Restaurer</button></div>`).join("");}
 function restoreEntry(id){const t=getTrash();const item=t.find(e=>e.id===id);if(!item)return;const{deletedAt,...entry}=item;const entries=getEntries();entries.push(entry);saveEntries(entries);saveTrash(t.filter(e=>e.id!==id));toast("↩ Entrée restaurée");renderRapport();renderChList();}
 function emptyTrash(){saveTrash([]);renderTrash();toast("Corbeille vidée");}
-
+ 
 // ── PARAMS ──
 function renderParams(){renderParamMachines();renderParamChantiers();renderParamTypes();}
 function renderParamMachines(){
@@ -737,10 +752,10 @@ function renderParamChantiers(){
 function renderParamTypes(){document.getElementById("pm-types").innerHTML=getMaintTypes().map((t,i)=>`<div class="list-item"><span class="li-icon">🔧</span><div class="li-body"><div class="li-name">${t}</div></div><button class="btn-danger-text" onclick="removeMaintType(${i})">Supprimer</button></div>`).join("");}
 function addMaintType(){const name=document.getElementById("nt-name").value.trim();if(!name){toast("⚠ Entrer un nom");return;}const t=getMaintTypes();if(t.find(x=>x.toLowerCase()===name.toLowerCase())){toast("Déjà existant");return;}t.push(name);saveMaintTypes(t);document.getElementById("nt-name").value="";renderParamTypes();toast("✓ Type ajouté");}
 function removeMaintType(i){const t=getMaintTypes();t.splice(i,1);saveMaintTypes(t);renderParamTypes();toast("Type supprimé");}
-
+ 
 // ── MODAL ──
 function closeModal(id,e){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove("open");}
-
+ 
 // ── UTILS ──
 function fd(d){return new Date(d+"T00:00:00").toLocaleDateString("fr-CH",{day:"2-digit",month:"2-digit",year:"2-digit"});}
 function fdl(d){return new Date(d+"T00:00:00").toLocaleDateString("fr-CH",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
