@@ -21,7 +21,7 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
-
+ 
 /* ── HEADER ── */
 .header{background:var(--navy);padding-top:var(--safe-t);flex-shrink:0;box-shadow:0 2px 14px rgba(0,0,0,.28);}
 .header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;}
@@ -31,10 +31,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .header-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px;}
 .header-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.8px;text-transform:uppercase;}
 .header-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;}
-
+ 
 /* ── SCROLL ── */
 .scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:16px 14px calc(var(--safe-b)+20px);}
-
+ 
 /* ── TOOLBAR ── */
 .toolbar{display:flex;gap:8px;margin-bottom:16px;position:sticky;top:0;z-index:5;background:var(--bg);padding:2px 0 8px;}
 .search-input{flex:1;background:#fff;border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 14px;border-radius:24px;-webkit-appearance:none;transition:border-color .15s;}
@@ -42,17 +42,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .search-input::placeholder{color:var(--text3);}
 .add-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shm);transition:all .15s;}
 .add-fab:active{transform:scale(.92);}
-
+ 
 /* ── FILTRES STATUT ── */
 .filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;}
 .filter-row::-webkit-scrollbar{display:none;}
 .filter-chip{flex-shrink:0;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;transition:all .13s;white-space:nowrap;}
 .filter-chip.on{border-color:var(--navy);background:var(--navy);color:#fff;}
-
+ 
 /* ── CHANTIER CARD ── */
 .chantier-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:10px;overflow:hidden;cursor:pointer;transition:transform .13s,box-shadow .13s;}
 .chantier-card:active{transform:scale(.98);box-shadow:none;}
-
+ 
 .card-top{display:flex;align-items:stretch;gap:0;}
 .card-accent{width:5px;flex-shrink:0;}
 .card-body-wrap{flex:1;padding:13px 14px 13px 12px;min-width:0;}
@@ -63,21 +63,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .status-pause{background:#FFF3E0;color:#E67E22;}
 .status-termine{background:#F3F4F6;color:#6B7280;}
 .status-prospect{background:#EEF2FF;color:#3B5BDB;}
-
+ 
 .card-meta{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
 .meta-pill{font-size:10px;font-weight:600;color:var(--text2);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:10px;white-space:nowrap;}
 .meta-pill.accent{color:var(--teal);background:rgba(26,127,114,.06);border-color:rgba(26,127,114,.2);}
-
+ 
 .card-bottom{display:flex;align-items:center;justify-content:space-between;}
 .card-client{font-size:11px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .card-arrow{font-size:16px;color:var(--text3);flex-shrink:0;}
-
+ 
 /* ── EMPTY ── */
 .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;color:var(--text3);text-align:center;padding:40px 20px;}
 .empty-icon{font-size:52px;margin-bottom:14px;opacity:.5;}
 .empty-txt{font-size:14px;font-weight:600;color:var(--text2);}
 .empty-hint{font-size:12px;margin-top:6px;}
-
+ 
 /* ── MODAL AJOUT ── */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:300;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
 .modal-ov.open{display:flex;}
@@ -89,7 +89,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .modal-close{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .modal-body{flex:1;overflow-y:auto;padding:16px;}
 .modal-footer{padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);}
-
+ 
 /* ── FORM ── */
 .fsec{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
 .fsec:first-child{margin-top:0;}
@@ -108,12 +108,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .btn-danger{background:#FFF0F0;color:var(--red);border:1.5px solid rgba(229,57,53,.2);}
 .btn-sm{padding:10px 14px;font-size:13px;}
 .mt8{margin-top:8px;}
-
+ 
 /* ── COULEURS SÉLECTEUR ── */
 .color-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;}
 .color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .13s;}
 .color-dot.sel{border-color:var(--navy);transform:scale(1.18);}
-
+ 
 /* ── DETAIL SHEET ── */
 .detail-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
 .detail-ov.open{display:flex;}
@@ -132,16 +132,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .det-soon-icon{font-size:28px;margin-bottom:6px;}
 .det-soon-txt{font-size:12px;color:var(--text3);font-weight:600;}
 .det-footer{padding:12px 16px calc(12px + var(--safe-b));display:flex;gap:8px;border-top:1px solid var(--border);}
-
+ 
 /* ── STATUT COLOR MAP ── */
-
+ 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:calc(var(--safe-b)+12px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
-
+ 
 <!-- HEADER -->
 <div class="header">
   <div class="header-inner">
@@ -153,29 +153,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="header-count" id="hdrCount">0</div>
   </div>
 </div>
-
+ 
 <!-- SCROLL -->
 <div class="scroll">
   <div class="toolbar">
     <input class="search-input" type="search" placeholder="🔍  Rechercher un chantier…" oninput="onSearch(this.value)" autocomplete="off">
     <button class="add-fab" onclick="openAdd()">＋</button>
   </div>
-
+ 
   <!-- Filtres statut -->
   <div class="filter-row" id="filterRow">
     <div class="filter-chip on" data-filter="tous" onclick="setFilter('tous',this)">Tous</div>
     <div class="filter-chip" data-filter="actif" onclick="setFilter('actif',this)">🟢 Actif</div>
     <div class="filter-chip" data-filter="pause" onclick="setFilter('pause',this)">🟡 En pause</div>
     <div class="filter-chip" data-filter="termine" onclick="setFilter('termine',this)">⬜ Terminé</div>
-    <div class="filter-chip" data-filter="prospect" onclick="setFilter('prospect',this)">🔵 Prospect</div>
+    <div class="filter-chip" data-filter="prospect" onclick="setFilter('prospect',this)">🔵 Devisé</div>
   </div>
-
+ 
   <div id="listContainer"></div>
 </div>
-
+ 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-
+ 
 <!-- ═══ MODAL AJOUT ═══ -->
 <div class="modal-ov" id="modal-add">
   <div class="modal-sh">
@@ -185,21 +185,19 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       <button class="modal-close" onclick="closeAdd()">✕</button>
     </div>
     <div class="modal-body">
-
+ 
       <div class="fsec">Identification</div>
       <div class="field"><label>Nom du chantier *</label><input type="text" id="add-nom" placeholder="Villa Dupont, Route cantonale..." autocomplete="off"></div>
-      <div class="field"><label>Référence / N° dossier</label><input type="text" id="add-ref" placeholder="2024-042" autocomplete="off"></div>
-
       <div class="fsec">Client & Lieu</div>
       <div class="field"><label>Client / Maître d'ouvrage</label><input type="text" id="add-client" placeholder="M. et Mme Dupont" autocomplete="off"></div>
       <div class="field"><label>Adresse / Lieu</label><input type="text" id="add-adresse" placeholder="Rue des Fleurs 12, 1000 Lausanne" autocomplete="off"></div>
       <div class="field"><label>Commune</label><input type="text" id="add-commune" placeholder="Lausanne" autocomplete="off"></div>
-
+ 
       <div class="fsec">Statut & Dates</div>
       <div class="field"><label>Statut</label>
         <select id="add-statut">
           <option value="actif">🟢 Actif</option>
-          <option value="prospect">🔵 Prospect</option>
+          <option value="prospect">🔵 Devisé</option>
           <option value="pause">🟡 En pause</option>
           <option value="termine">⬜ Terminé</option>
         </select>
@@ -208,7 +206,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <div class="field"><label>Date début</label><input type="date" id="add-debut"></div>
         <div class="field"><label>Date fin prévue</label><input type="date" id="add-fin"></div>
       </div>
-
+ 
       <div class="fsec">Informations financières</div>
       <div class="field-row">
         <div class="field"><label>Montant devis (CHF)</label><input type="number" id="add-montant" placeholder="45000" min="0" step="100" autocomplete="off"></div>
@@ -222,10 +220,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
           </select>
         </div>
       </div>
-
+ 
+      <div class="fsec">Devis (PDF)</div>
+      <div id="pdf-zone">
+        <div id="pdf-preview" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="font-size:24px;">📄</span>
+          <div style="flex:1;min-width:0;">
+            <div id="pdf-name" style="font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+            <div id="pdf-size" style="font-size:10px;color:var(--text3);"></div>
+          </div>
+          <button onclick="clearPdf()" style="background:none;border:none;color:var(--red);font-size:16px;cursor:pointer;padding:4px;">✕</button>
+        </div>
+        <button onclick="document.getElementById('pdf-input').click()" style="width:100%;padding:14px;border:1.5px dashed var(--border);border-radius:var(--rs);background:var(--bg);cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;justify-content:center;gap:8px;" id="pdf-upload-btn">
+          📎 Ajouter le devis (PDF)
+        </button>
+        <input type="file" id="pdf-input" accept="application/pdf" style="display:none" onchange="handlePdfUpload(event)">
+        <div style="font-size:10px;color:var(--text3);margin-top:4px;">Max. 2 Mo</div>
+      </div>
+ 
       <div class="fsec">Couleur d'identification</div>
       <div class="color-row" id="colorPicker"></div>
-
+ 
       <div class="fsec">Notes</div>
       <div class="field"><label>Notes libres</label><textarea id="add-notes" placeholder="Accès, contraintes particulières, contacts..."></textarea></div>
     </div>
@@ -234,7 +249,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     </div>
   </div>
 </div>
-
+ 
 <!-- ═══ DETAIL SHEET ═══ -->
 <div class="detail-ov" id="detail-ov">
   <div class="detail-sh">
@@ -261,7 +276,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     </div>
   </div>
 </div>
-
+ 
 <script>
 // ════════════════════════════════════════════
 // CONFIG
@@ -269,17 +284,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 const KEY = 'rv6_chantiers_v1'; // clé dédiée au module Chantiers (riche)
 // rv6_c = liste simple de noms partagée avec Machines/Rapport (maintenue en sync)
 const KEY_SIMPLE = 'rv6_c';
-
+ 
 const COLORS = ['#1B3A6B','#1A7F72','#F0A500','#E53935','#E67E22','#2E7D32','#6C3483','#1565C0','#00838F','#4E342E','#546E7A','#1A2340'];
-
-const STATUS_LABEL = { actif:'Actif', pause:'En pause', termine:'Terminé', prospect:'Prospect' };
+ 
+const STATUS_LABEL = { actif:'Actif', pause:'En pause', termine:'Terminé', prospect:'Devisé' };
 const STATUS_CLASS = { actif:'status-actif', pause:'status-pause', termine:'status-termine', prospect:'status-prospect' };
-
+ 
 let currentFilter = 'tous';
 let currentSearch = '';
 let currentDetailId = null;
 let selectedColor = COLORS[0];
-
+let currentPdf = null; // {name, size, data}
+ 
 // ════════════════════════════════════════════
 // STORAGE
 // ════════════════════════════════════════════
@@ -290,19 +306,19 @@ function save(d) {
   const simple = d.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
   localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
 }
-
+ 
 // ════════════════════════════════════════════
 // RENDU LISTE
 // ════════════════════════════════════════════
 function renderList() {
   let data = load();
   const q = currentSearch.toLowerCase();
-
+ 
   // Filtre statut
   if (currentFilter !== 'tous') data = data.filter(c => c.statut === currentFilter);
   // Filtre recherche
   if (q) data = data.filter(c => Object.values(c).some(v=>String(v).toLowerCase().includes(q)));
-
+ 
   // Tri : actif d'abord, puis par date début desc, puis alphabétique
   const order = { actif:0, prospect:1, pause:2, termine:3 };
   data.sort((a,b) => {
@@ -311,16 +327,16 @@ function renderList() {
     if (a.debut && b.debut) return b.debut.localeCompare(a.debut);
     return a.nom.localeCompare(b.nom);
   });
-
+ 
   const el = document.getElementById('listContainer');
   const total = load().length;
   document.getElementById('hdrCount').textContent = total;
-
+ 
   if (!data.length) {
     el.innerHTML = `<div class="empty"><div class="empty-icon">📁</div><div class="empty-txt">${q||currentFilter!=='tous'?'Aucun résultat':'Aucun chantier'}</div><div class="empty-hint">${q||currentFilter!=='tous'?'Modifiez les filtres':'Appuyez sur ＋ pour créer le premier'}</div></div>`;
     return;
   }
-
+ 
   el.innerHTML = data.map(c => {
     const color = c.color || COLORS[0];
     const pills = [];
@@ -329,7 +345,8 @@ function renderList() {
     if (c.fin) pills.push({ label: '→ '+fmtDate(c.fin) });
     if (c.montant) pills.push({ label: 'CHF '+Number(c.montant).toLocaleString('fr-CH'), accent: true });
     if (c.marche) pills.push({ label: c.marche });
-
+    if (c.pdf && c.pdf.data) pills.push({ label: '📄 Devis' });
+ 
     return `
     <div class="chantier-card" onclick="openDetail('${c.id}')">
       <div class="card-top">
@@ -341,7 +358,7 @@ function renderList() {
           </div>
           ${pills.length?`<div class="card-meta">${pills.map(p=>`<span class="meta-pill${p.accent?' accent':''}">${esc(p.label)}</span>`).join('')}</div>`:''}
           <div class="card-bottom">
-            <div class="card-client">${esc(c.client||c.ref||'')}</div>
+            <div class="card-client">${esc(c.client||'')}</div>
             <div class="card-arrow">›</div>
           </div>
         </div>
@@ -349,7 +366,7 @@ function renderList() {
     </div>`;
   }).join('');
 }
-
+ 
 // ════════════════════════════════════════════
 // FILTRES & RECHERCHE
 // ════════════════════════════════════════════
@@ -360,7 +377,7 @@ function setFilter(f, el) {
   renderList();
 }
 function onSearch(v) { currentSearch = v; renderList(); }
-
+ 
 // ════════════════════════════════════════════
 // COULEUR PICKER
 // ════════════════════════════════════════════
@@ -373,7 +390,7 @@ function selectColor(c) {
   selectedColor = c;
   document.querySelectorAll('.color-dot').forEach(d=>d.classList.toggle('sel', d.style.background===c||d.style.backgroundColor===c));
 }
-
+ 
 // ════════════════════════════════════════════
 // MODAL AJOUT
 // ════════════════════════════════════════════
@@ -385,8 +402,7 @@ function openAdd() {
 }
 function closeAdd() {
   document.getElementById('modal-add').classList.remove('open');
-  // Reset form
-  ['add-nom','add-ref','add-client','add-adresse','add-commune','add-montant','add-notes'].forEach(id=>{
+  ['add-nom','add-client','add-adresse','add-commune','add-montant','add-notes'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.value='';
   });
   document.getElementById('add-statut').value='actif';
@@ -394,21 +410,21 @@ function closeAdd() {
   document.getElementById('add-debut').value='';
   document.getElementById('add-fin').value='';
   selectedColor = COLORS[0];
+  clearPdf();
 }
-
+ 
 document.getElementById('modal-add').addEventListener('click',e=>{ if(e.target===document.getElementById('modal-add')) closeAdd(); });
 document.getElementById('add-nom').addEventListener('keydown',e=>{ if(e.key==='Enter') saveChantier(); });
-
+ 
 function g(id){ const el=document.getElementById(id); return el?(el.value||'').trim():''; }
-
+ 
 function saveChantier() {
   const nom = g('add-nom');
   if (!nom) { highlight('add-nom'); return; }
-
+ 
   const item = {
     id: Date.now().toString(36)+Math.random().toString(36).slice(2,4),
     nom,
-    ref:      g('add-ref'),
     client:   g('add-client'),
     adresse:  g('add-adresse'),
     commune:  g('add-commune'),
@@ -419,6 +435,7 @@ function saveChantier() {
     marche:   g('add-marche'),
     color:    selectedColor,
     notes:    g('add-notes'),
+    pdf:      currentPdf,
     createdAt: new Date().toISOString(),
     // Structure pour la suite
     documents: [],
@@ -426,14 +443,14 @@ function saveChantier() {
     contacts:  [],
     travaux:   [],
   };
-
+ 
   const data = [...load(), item];
   save(data);
   closeAdd();
   renderList();
   showToast('📁 Chantier créé ✓');
 }
-
+ 
 function highlight(id) {
   const el=document.getElementById(id);
   if(!el) return;
@@ -441,7 +458,60 @@ function highlight(id) {
   el.focus();
   setTimeout(()=>el.style.borderColor='',2000);
 }
-
+ 
+// ════════════════════════════════════════════
+// PDF DEVIS
+// ════════════════════════════════════════════
+function handlePdfUpload(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  if(file.size > 2 * 1024 * 1024){
+    showToast('⚠️ Fichier trop lourd (max 2 Mo)');
+    event.target.value='';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    currentPdf = {
+      name: file.name,
+      size: (file.size/1024).toFixed(0)+' Ko',
+      data: e.target.result
+    };
+    updatePdfPreview();
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
+}
+ 
+function clearPdf(){
+  currentPdf = null;
+  updatePdfPreview();
+}
+ 
+function updatePdfPreview(){
+  const prev = document.getElementById('pdf-preview');
+  const btn  = document.getElementById('pdf-upload-btn');
+  if(currentPdf){
+    document.getElementById('pdf-name').textContent = currentPdf.name;
+    document.getElementById('pdf-size').textContent = currentPdf.size;
+    prev.style.display = 'flex';
+    btn.style.display = 'none';
+  } else {
+    prev.style.display = 'none';
+    btn.style.display = 'flex';
+  }
+}
+ 
+function viewPdf(chId){
+  const c = load().find(x=>x.id===chId);
+  if(!c || !c.pdf || !c.pdf.data) return;
+  // Ouvrir le PDF dans un nouvel onglet
+  const w = window.open('');
+  if(w){
+    w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0;"><embed src="${c.pdf.data}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
+  }
+}
+ 
 // ════════════════════════════════════════════
 // DETAIL
 // ════════════════════════════════════════════
@@ -449,33 +519,44 @@ function openDetail(id) {
   const c = load().find(x=>x.id===id);
   if (!c) return;
   currentDetailId = id;
-
+ 
   document.getElementById('det-color-dot').style.background = c.color||COLORS[0];
   document.getElementById('det-nom').textContent = c.nom;
   document.getElementById('det-status-badge').textContent = STATUS_LABEL[c.statut]||'Actif';
   document.getElementById('det-status-badge').className = 'card-status-badge '+(STATUS_CLASS[c.statut]||'status-actif');
-  document.getElementById('det-meta').textContent = [c.ref, c.commune].filter(Boolean).join(' · ');
-
+  document.getElementById('det-meta').textContent = c.commune||'';
+ 
   const rows = [];
   const add = (l,v) => { if(v) rows.push(`<div class="det-row"><span class="det-label">${l}</span><span class="det-val">${esc(v)}</span></div>`); };
   add('Client',c.client);
   add('Adresse',c.adresse);
   add('Commune',c.commune);
-  add('Référence',c.ref);
   add('Date début',c.debut?fmtDateLong(c.debut):'');
   add('Date fin prévue',c.fin?fmtDateLong(c.fin):'');
   add('Montant devis',c.montant?'CHF '+Number(c.montant).toLocaleString('fr-CH'):'');
   add('Type de marché',c.marche);
+ 
+  // PDF devis
+  let pdfHtml = '';
+  if(c.pdf && c.pdf.data){
+    pdfHtml = `<div style="margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:12px;display:flex;align-items:center;gap:10px;">
+      <span style="font-size:28px;">📄</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:600;color:var(--text);">${esc(c.pdf.name)}</div>
+        <div style="font-size:10px;color:var(--text3);">${c.pdf.size}</div>
+      </div>
+      <button onclick="viewPdf('${c.id}')" style="background:var(--navy);color:#fff;border:none;border-radius:var(--rs);padding:8px 12px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">Ouvrir</button>
+    </div>`;
+  }
+ 
   const notesHtml = c.notes ? `<div style="margin-top:8px"><div class="det-label" style="margin-bottom:6px">Notes</div><div class="det-notes">${esc(c.notes)}</div></div>` : '';
-  const age = c.createdAt ? `Créé ${Math.floor((Date.now()-new Date(c.createdAt).getTime())/86400000)}j` : '';
-  if (age) add('',age);
-
-  document.getElementById('det-rows').innerHTML = rows.join('') + notesHtml;
+ 
+  document.getElementById('det-rows').innerHTML = rows.join('') + pdfHtml + notesHtml;
   document.getElementById('detail-ov').classList.add('open');
 }
 function closeDetail() { document.getElementById('detail-ov').classList.remove('open'); }
 document.getElementById('detail-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('detail-ov')) closeDetail(); });
-
+ 
 function deleteCurrentChantier() {
   if (!currentDetailId) return;
   const data = load().filter(c=>c.id!==currentDetailId);
@@ -484,7 +565,7 @@ function deleteCurrentChantier() {
   renderList();
   showToast('🗑 Chantier supprimé');
 }
-
+ 
 // ════════════════════════════════════════════
 // UTILS
 // ════════════════════════════════════════════
@@ -497,14 +578,14 @@ function fmtDateLong(d) {
   return new Date(d+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
+ 
 let toastTimer;
 function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
-
+ 
 // ════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════
-
+ 
 // Migration : si des chantiers existent dans rv6_c (format simple),
 // les importer dans rv6_chantiers_v1 si celui-ci est vide
 function migrateLegacyChantiers() {
@@ -524,13 +605,14 @@ function migrateLegacyChantiers() {
     save(migrated);
   } catch(e) {}
 }
-
+ 
 migrateLegacyChantiers();
 renderList();
-
+ 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
 }
 </script>
 </body>
 </html>
+ 
