@@ -447,7 +447,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       </div>
       <div class="form-sec-label">Caractéristiques techniques</div>
       <div class="field-row">
-        <div class="field"><label>Densité (t/m³)</label><input type="number" id="mx-densite" placeholder="2.4" step="0.01" min="0" autocomplete="off"></div>
+        <div class="field"><label>Masse volumique (kg/m³)</label><input type="number" id="mx-densite" placeholder="2400" step="1" min="0" autocomplete="off"></div>
         <div class="field"><label>Classe / Résistance</label><input type="text" id="mx-classe" placeholder="C25/30…" autocomplete="off"></div>
       </div>
       <div class="field-row">
@@ -1067,7 +1067,7 @@ function saveItem(section){
   } else if(section==='materiaux'){
     if(!g('mx-nom')){ highlight('mx-nom'); return; }
     const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
-    item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), famille:g('mx-famille'), unite:g('mx-unite'), densite:g('mx-densite'), classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), tva:g('mx-tva'), notes:g('mx-notes') };
+    item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), famille:g('mx-famille'), unite:g('mx-unite'), densite:g('mx-densite'), masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), tva:g('mx-tva'), notes:g('mx-notes') };
   }
  
   // Ajouter la photo et l'icône
@@ -1160,7 +1160,7 @@ function fillForm(s, item){
   if(s==='materiaux'){
     const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
     f('mx-cat',catVal); f('mx-nom',item.nom); f('mx-famille',item.famille);
-    f('mx-unite',item.unite); f('mx-densite',item.densite); f('mx-classe',item.classe);
+    f('mx-unite',item.unite); f('mx-densite',item.masse_volumique||item.densite); f('mx-classe',item.classe);
     f('mx-granulo',item.granulo); f('mx-fournisseur',item.fournisseur);
     f('mx-prix',item.prix); f('mx-tva',item.tva); f('mx-notes',item.notes);
   }
@@ -1287,7 +1287,7 @@ function getDetailRows(s,item){
   if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.poids)add('Poids véhicule',item.poids+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.pma)add('Poids maximum',item.pma+' t'); if(item.volume)add('Volume pont',item.volume+' m³'); add('Dimensions',item.dimensions); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='materiel'){ add('Catégorie',item.type); add('Marque',item.marque); add('Référence',item.ref); if(item.poids)add('Poids',item.poids+' kg'); if(item.puissance)add('Puissance',item.puissance+' W'); if(item.prix)add("Prix d'achat",'CHF '+item.prix); if(item.location)add('Location/jour','CHF '+item.location); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='materiaux'){ add('Famille',item.famille); add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.densite)add('Densité',item.densite+' t/m³'); if(item.prix)add('Prix HT','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.tva)add('TVA',item.tva+'%'); if(item.prix&&item.tva){const ttc=(parseFloat(item.prix)*(1+parseFloat(item.tva)/100)).toFixed(2); add('Prix TTC','CHF '+ttc+'/'+(item.unite||'u.')); } if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='materiaux'){ add('Famille',item.famille); add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.masse_volumique||item.densite){ const mv=item.masse_volumique||item.densite; add('Masse volumique',mv+' kg/m³'); } if(item.prix)add('Prix HT','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.tva)add('TVA',item.tva+'%'); if(item.prix&&item.tva){const ttc=(parseFloat(item.prix)*(1+parseFloat(item.tva)/100)).toFixed(2); add('Prix TTC','CHF '+ttc+'/'+(item.unite||'u.')); } if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   return r;
 }
  
