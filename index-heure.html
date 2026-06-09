@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Carnet d'heure — Risse S.A.</title>
+<style>
+:root {
+  --navy:#1B3A6B; --teal:#1A7F72; --gold:#F0A500;
+  --bg:#F5F6F8; --white:#fff; --text:#1A1A2E;
+  --muted:#6B7280; --border:#E2E5EA; --red:#E53935;
+  --radius:12px; --shadow:0 2px 8px rgba(27,58,107,0.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+
+/* HEADER */
+.header{background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.header-left{display:flex;align-items:center;gap:10px}
+.back-btn{background:rgba(255,255,255,0.12);border:none;color:#fff;width:34px;height:34px;border-radius:8px;
+  font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer}
+.header-title{font-size:17px;font-weight:700}
+.header-sub{font-size:12px;opacity:0.6;margin-top:1px}
+
+/* MONTH PICKER */
+.month-picker{background:var(--white);padding:10px 12px;display:flex;gap:7px;overflow-x:auto;
+  scrollbar-width:none;border-bottom:1px solid var(--border);position:sticky;top:108px;z-index:89}
+.month-picker::-webkit-scrollbar{display:none}
+.mchip{flex-shrink:0;padding:6px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
+  border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;user-select:none}
+.mchip.has-data{border-color:rgba(26,127,114,0.4);color:var(--teal)}
+.mchip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.mchip.has-data.active{background:var(--teal);border-color:var(--teal)}
+
+/* STATS */
+.stats-bar{display:flex;gap:8px;padding:12px 12px 0}
+.stat-card{flex:1;background:var(--white);border-radius:var(--radius);padding:10px 6px;
+  text-align:center;box-shadow:var(--shadow)}
+.stat-val{font-size:17px;font-weight:800;color:var(--navy)}
+.stat-lbl{font-size:9px;color:var(--muted);margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+/* ADD BTN */
+.add-btn-wrap{padding:10px 12px 0}
+.add-btn{width:100%;padding:15px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--teal);color:#fff;box-shadow:0 4px 14px rgba(26,127,114,0.3);
+  transition:transform .12s;font-family:inherit}
+.add-btn:active{transform:scale(0.97)}
+
+/* DAYS LIST */
+.days-wrap{padding:10px 12px 90px}
+.week-sep{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.08em;padding:10px 2px 5px}
+
+/* DAY CARD */
+.day-card{background:var(--white);border-radius:var(--radius);margin-bottom:8px;
+  box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.day-card:active{box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.day-head{display:flex;align-items:center;padding:10px 14px;gap:10px}
+.day-badge{width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+.day-badge.wknd{background:var(--border);color:var(--muted)}
+.day-badge.ferie{background:var(--gold);color:#fff}
+.day-badge.vac{background:var(--teal);color:#fff}
+.day-badge.abs{background:var(--red);color:#fff}
+.day-dow{font-size:12px;color:var(--muted);line-height:1.3}
+.day-note{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
+.day-hours{margin-left:auto;font-size:20px;font-weight:800;color:var(--teal);white-space:nowrap}
+.day-hours.special{color:var(--gold);font-size:14px}
+
+.day-times{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.time-blk{padding:8px 14px;border-right:1px solid var(--border)}
+.time-blk:last-child{border-right:none}
+.time-lbl{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.time-val{font-size:13px;font-weight:600;color:var(--text)}
+
+.day-tags{display:flex;gap:5px;flex-wrap:wrap;padding:7px 14px 9px;border-top:1px solid var(--border)}
+.tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px}
+.tag-blue{background:#E3F2FD;color:#1565C0}
+.tag-red{background:#FFEBEE;color:var(--red)}
+.tag-orange{background:#FFF3E0;color:#F57C00}
+.tag-purple{background:#F3E5F5;color:#6A1B9A}
+.tag-green{background:#E8F5E9;color:#2E7D32}
+
+.empty-mo{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-size:48px;opacity:.25;margin-bottom:12px}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:flex-end}
+.overlay.open{display:flex}
+.modal{background:var(--white);width:100%;max-width:500px;border-radius:20px 20px 0 0;
+  padding-bottom:32px;max-height:93vh;overflow-y:auto;animation:up .22s ease}
+@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.m-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 0}
+.m-title{font-size:18px;font-weight:800;color:var(--navy);padding:14px 16px 12px;
+  border-bottom:1px solid var(--border)}
+.m-title small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+
+/* FORM ROWS */
+.f-section{padding:12px 16px 0}
+.f-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.07em;margin-bottom:8px}
+.f-card{background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.f-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);gap:10px}
+.f-row:last-child{border-bottom:none}
+.f-rlabel{font-size:13px;color:var(--muted);flex-shrink:0;min-width:88px}
+.f-time{display:flex;align-items:center;gap:6px;flex:1}
+.tfield{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
+  font-size:15px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
+.tsep{color:var(--muted);font-weight:600}
+.total-display{font-size:18px;font-weight:800;color:var(--teal);margin-left:auto}
+
+/* TOGGLE */
+.tog-row{display:flex;align-items:center;padding:12px 14px;gap:10px;border-bottom:1px solid var(--border)}
+.tog-row:last-child{border-bottom:none}
+.tog-lbl{flex:1;font-size:14px;font-weight:600;color:var(--text)}
+.tog{width:44px;height:26px;border-radius:13px;border:none;cursor:pointer;position:relative;
+  background:var(--border);transition:background .2s;flex-shrink:0}
+.tog.on{background:var(--teal)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.tog.on::after{left:21px}
+
+/* TYPE CHIPS */
+.type-row{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px 0}
+.tchip{padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
+  border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;user-select:none}
+.tchip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ACTION BTNS */
+.m-actions{display:flex;gap:8px;padding:16px 16px 0}
+.m-btn{flex:1;padding:14px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:transform .1s}
+.m-btn:active{transform:scale(0.97)}
+.m-btn.primary{background:var(--teal);color:#fff}
+.m-btn.secondary{background:var(--bg);color:var(--muted)}
+.m-btn.danger{background:#FFEBEE;color:var(--red)}
+
+/* TEXT INPUT */
+.f-input{flex:1;border:none;outline:none;font-size:14px;font-weight:600;color:var(--text);
+  background:transparent;font-family:inherit}
+
+
+/* NAV TABS */
+.nav-tabs{background:var(--white);display:flex;border-bottom:2px solid var(--border);
+  position:sticky;top:62px;z-index:91;}
+.ntab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:700;
+  color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:color .15s,border-color .15s;user-select:none}
+.ntab.act{color:var(--navy);border-bottom-color:var(--navy)}
+
+/* MAIN / PARAMS PAGES */
+.view{display:none}.view.act{display:block}
+
+/* PARAMS */
+.p-section{margin:12px 12px 0}
+.p-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:8px;padding-left:2px}
+.p-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:4px}
+.p-row{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);gap:10px}
+.p-row:last-child{border-bottom:none}
+.p-lbl{font-size:13px;color:var(--muted);flex-shrink:0;min-width:92px}
+.p-input{flex:1;border:none;outline:none;font-size:15px;font-weight:600;color:var(--text);
+  background:transparent;font-family:inherit}
+.p-tfield{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
+  font-size:14px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
+.p-tsep{color:var(--muted);font-weight:600}
+
+/* SIGNATURE PAD */
+.sig-wrap{margin:12px 12px 0}
+.sig-canvas{display:block;width:100%;height:140px;border-radius:var(--radius);
+  border:2px dashed var(--border);background:var(--white);cursor:crosshair;touch-action:none}
+.sig-canvas.has-sig{border-color:var(--teal);border-style:solid}
+.sig-actions{display:flex;gap:8px;margin-top:8px}
+.sig-btn{flex:1;padding:11px;border-radius:var(--radius);border:none;font-size:13px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:transform .1s}
+.sig-btn.clear{background:var(--bg);color:var(--muted)}
+.sig-btn.save{background:var(--teal);color:#fff}
+
+/* PDF BTN */
+.pdf-btn{width:100%;padding:14px;border-radius:var(--radius);border:none;font-size:14px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;
+  background:#1D6F42;color:#fff;box-shadow:0 4px 14px rgba(29,111,66,0.28);
+  transition:transform .12s;font-family:inherit}
+.pdf-btn:active{transform:scale(0.97)}
+
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);
+  background:var(--text);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;
+  font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:500;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <a href="../" class="back-btn">‹</a>
+    <div>
+      <div class="header-title">Carnet d'heure</div>
+      <div class="header-sub" id="hSub">2026</div>
+    </div>
+  </div>
+  <input type="file" id="fileInput" accept=".xlsx" style="display:none" onchange="importExcel(this.files[0])">
+  <button id="importBtn" onclick="document.getElementById('fileInput').click()" title="Importer Excel"
+    style="background:rgba(255,255,255,0.12);border:none;color:#fff;border-radius:8px;
+      padding:5px 10px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit">
+    <span style="font-size:16px">📂</span>
+    <span id="importBtnLabel" style="font-size:11px;font-weight:700;opacity:0.9">Importer</span>
+  </button>
+</div>
+
+<div class="nav-tabs">
+  <div class="ntab act" id="nt-main" onclick="switchView('main')">📋 Heures</div>
+  <div class="ntab" id="nt-params" onclick="switchView('params')">⚙️ Paramètres</div>
+</div>
+
+<div class="view act" id="view-main">
+<div class="month-picker" id="mPicker"></div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-val" id="sJ">—</div><div class="stat-lbl">Jours T</div></div>
+  <div class="stat-card"><div class="stat-val" id="sH">—</div><div class="stat-lbl">Heures</div></div>
+  <div class="stat-card"><div class="stat-val" id="sR">—</div><div class="stat-lbl">Repas</div></div>
+  <div class="stat-card"><div class="stat-val" id="sN">—</div><div class="stat-lbl">H. nuit</div></div>
+</div>
+
+
+<div class="add-btn-wrap">
+  <button class="add-btn" onclick="openNew()">
+    <span style="font-size:22px">+</span> Ajouter une journée
+  </button>
+</div>
+
+<div style="padding:8px 12px 0">
+  <button class="pdf-btn" onclick="exportPDF()">
+    <span style="font-size:20px">📄</span> Exporter en PDF — <span id="pdfMoLabel"></span>
+  </button>
+</div>
+<div class="days-wrap" id="daysWrap"></div>
+
+</div><!-- /view-main -->
+
+<!-- PARAMS VIEW -->
+<div class="view" id="view-params">
+
+  <div class="p-section" style="margin-top:14px">
+    <div class="p-title">Informations personnelles</div>
+    <div class="p-card">
+      <div class="p-row"><span class="p-lbl">👤 Nom</span><input class="p-input" id="cfgNom" placeholder="Prénom Nom" onchange="saveParams()"></div>
+      <div class="p-row"><span class="p-lbl">🏢 Entreprise</span><input class="p-input" id="cfgEntreprise" placeholder="Risse S.A." onchange="saveParams()"></div>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-title">🌨 Horaire Hiver (Oct – Mars)</div>
+    <div class="p-card">
+      <div class="p-row"><span class="p-lbl">🌅 Matin</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgHivMd" type="time" value="07:30" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgHivMf" type="time" value="12:00" onchange="saveParams()"></div></div>
+      <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgHivAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgHivAf" type="time" value="17:30" onchange="saveParams()"></div></div>
+    </div>
+  </div>
+
+  <div class="p-section">
+    <div class="p-title">☀️ Horaire Été (Avr – Sept)</div>
+    <div class="p-card">
+      <div class="p-row"><span class="p-lbl">🌅 Matin</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgEteMd" type="time" value="07:30" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgEteMf" type="time" value="12:00" onchange="saveParams()"></div></div>
+      <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgEteAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgEteAf" type="time" value="17:30" onchange="saveParams()"></div></div>
+    </div>
+  </div>
+
+  <div class="sig-wrap">
+    <div class="p-title" style="padding-left:2px">✍️ Signature</div>
+    <canvas class="sig-canvas" id="sigCanvas" width="800" height="280"></canvas>
+    <div class="sig-actions">
+      <button class="sig-btn clear" onclick="clearSig()">🗑 Effacer</button>
+      <button class="sig-btn save" onclick="saveSig()">💾 Enregistrer la signature</button>
+    </div>
+  </div>
+
+  <div style="height:80px"></div>
+</div><!-- /view-params -->
+
+<!-- MODAL SAISIE / ÉDITION -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+<div class="modal" id="modal">
+  <div class="m-handle"></div>
+  <div class="m-title" id="mTitle">Nouvelle journée</div>
+
+  <!-- Type de journée -->
+  <div class="type-row" id="typeRow">
+    <div class="tchip sel" data-t="normal"  onclick="selType('normal')">✅ Normal</div>
+    <div class="tchip"     data-t="vacances" onclick="selType('vacances')">🏖 Vacances</div>
+    <div class="tchip"     data-t="ferie"    onclick="selType('ferie')">🏛 Férié</div>
+    <div class="tchip"     data-t="assurance" onclick="selType('assurance')">🏥 Assurance</div>
+    <div class="tchip"     data-t="nuit"     onclick="selType('nuit')">🌙 Nuit</div>
+    <div class="tchip"     data-t="samedi"   onclick="selType('samedi')">📅 Samedi</div>
+  </div>
+
+  <!-- Date -->
+  <div class="f-section" style="margin-top:12px">
+    <div class="f-label">Date</div>
+    <div class="f-card">
+      <div class="f-row">
+        <span class="f-rlabel">📅 Jour</span>
+        <input type="date" id="fDate" class="tfield" style="width:auto;flex:1">
+      </div>
+    </div>
+  </div>
+
+  <!-- Horaires (masqué si type spécial) -->
+  <div id="horaireSection">
+    <div class="f-section" style="margin-top:12px">
+      <div class="f-label">Horaires</div>
+      <div class="f-card">
+        <div class="f-row">
+          <span class="f-rlabel">🌅 Matin</span>
+          <div class="f-time">
+            <input class="tfield" id="fMatDeb" type="time">
+            <span class="tsep">–</span>
+            <input class="tfield" id="fMatFin" type="time">
+          </div>
+        </div>
+        <div class="f-row">
+          <span class="f-rlabel">☀️ Après-m.</span>
+          <div class="f-time">
+            <input class="tfield" id="fAmDeb" type="time">
+            <span class="tsep">–</span>
+            <input class="tfield" id="fAmFin" type="time">
+          </div>
+        </div>
+        <div class="f-row">
+          <span class="f-rlabel">⏱ Total</span>
+          <span id="fTotal" class="total-display">0h00</span>
+          <button onclick="applyStd()" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit">Standard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repas -->
+    <div class="f-section" style="margin-top:10px">
+      <div class="f-card">
+        <div class="tog-row">
+          <span class="tog-lbl">🍽 Repas</span>
+          <button class="tog" id="togRepas" onclick="togR()"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Heures spéciales (nuit/samedi) -->
+    <div id="specialSection" style="display:none">
+      <div class="f-section" style="margin-top:10px">
+        <div class="f-label">Heures spéciales</div>
+        <div class="f-card">
+          <div class="f-row" id="rowNuit" style="display:none">
+            <span class="f-rlabel">🌙 Heures nuit</span>
+            <div style="display:flex;align-items:center;gap:0;margin-left:auto">
+              <button onclick="step('fNuit',-0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:8px 0 0 8px;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">−</button>
+              <input id="fNuit" value="0" readonly style="width:44px;text-align:center;font-size:14px;font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-left:none;border-right:none;padding:6px 0;font-family:inherit">
+              <button onclick="step('fNuit',0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:0 8px 8px 0;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">+</button>
+            </div>
+          </div>
+          <div class="f-row" id="rowSam" style="display:none">
+            <span class="f-rlabel">📅 H. samedi</span>
+            <div style="display:flex;align-items:center;gap:0;margin-left:auto">
+              <button onclick="step('fSam',-0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:8px 0 0 8px;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">−</button>
+              <input id="fSam" value="0" readonly style="width:44px;text-align:center;font-size:14px;font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-left:none;border-right:none;padding:6px 0;font-family:inherit">
+              <button onclick="step('fSam',0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:0 8px 8px 0;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note -->
+  <div class="f-section" style="margin-top:10px">
+    <div class="f-card">
+      <div class="f-row">
+        <input class="f-input" id="fNote" placeholder="Note (chantier, info…)" maxlength="100">
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="m-actions">
+    <button class="m-btn danger" id="btnDelete" onclick="deleteEntry()" style="display:none;flex:0.6">🗑</button>
+    <button class="m-btn secondary" onclick="closeModal()">Annuler</button>
+    <button class="m-btn primary" onclick="saveEntry()">Enregistrer</button>
+  </div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════
+// DONNÉES EXCEL (lecture seule)
+// ══════════════════════════════
+// ══════════════════════════════
+// DONNÉES EXCEL (dynamiques)
+// ══════════════════════════════
+let EXCEL_DATA = null;          // null = pas encore importé
+let excelYear  = null;
+
+function parseExcelFile(buffer) {
+  const wb = XLSX.read(buffer, {type:'array'});
+  const ws = wb.Sheets[wb.SheetNames[0]];
+  
+  // Detect year from title cell C1
+  const titleCell = ws['C1'];
+  const titleStr  = titleCell ? String(titleCell.v) : '';
+  const yearMatch = titleStr.match(/20\d\d/);
+  excelYear = yearMatch ? parseInt(yearMatch[0]) : new Date().getFullYear();
+
+  // Month block start rows (1-based) — structure identique chaque année
+  const MONTH_STARTS = [1,25,48,71,94,117,140,163,186,209,232,255];
+  const MOIS_NAMES   = ['Janvier','Février','Mars','Avril','Mai','Juin',
+                        'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+  function cellVal(r, c) {
+    const addr = XLSX.utils.encode_cell({r: r-1, c: c-1});
+    const cell = ws[addr];
+    if (!cell) return null;
+    if (cell.v instanceof Date) return null; // ignore date objects
+    return cell.v;
+  }
+
+  const months = [];
+  for (let mi = 0; mi < 12; mi++) {
+    const s = MONTH_STARTS[mi];
+    const days = [];
+    for (let col = 4; col <= 34; col++) { // cols D(4) to AH(34)
+      const dayNum = cellVal(s+3, col);
+      if (dayNum === null) continue;
+      const n = typeof dayNum === 'number' ? Math.round(dayNum) : parseInt(dayNum);
+      if (isNaN(n) || n < 1 || n > 31) continue;
+      days.push({
+        n,
+        am:  cellVal(s+13, col),  // matin
+        pm:  cellVal(s+12, col),  // après-midi
+        h:   cellVal(s+14, col),  // heures
+        r:   cellVal(s+15, col),  // repas
+        nu:  cellVal(s+16, col),  // nuit
+        sa:  cellVal(s+17, col),  // samedi
+        di:  cellVal(s+18, col),  // dim
+        as:  cellVal(s+19, col),  // assurance
+      });
+    }
+    months.push({ m: MOIS_NAMES[mi], days });
+  }
+  return months;
+}
+
+function importExcel(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = new Uint8Array(e.target.result);
+      EXCEL_DATA = parseExcelFile(data);
+      localStorage.setItem('ch_excel', JSON.stringify({year: excelYear, data: EXCEL_DATA}));
+      updateImportBanner();
+      curMo = new Date().getMonth();
+      renderPicker();
+      renderMonth();
+      showToast(`✅ Excel ${excelYear} importé !`);
+    } catch(err) {
+      showToast('❌ Erreur lecture Excel');
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function loadStoredExcel() {
+  const stored = localStorage.getItem('ch_excel');
+  if (stored) {
+    const {year, data} = JSON.parse(stored);
+    EXCEL_DATA = data;
+    excelYear  = year;
+  }
+}
+
+function updateImportBanner() {
+  const btn   = document.getElementById('importBtn');
+  const label = document.getElementById('importBtnLabel');
+  if (!btn) return;
+  if (EXCEL_DATA && excelYear) {
+    btn.style.background = 'rgba(26,127,114,0.55)';
+    label.textContent = `${excelYear} ✓`;
+  } else {
+    btn.style.background = 'rgba(255,255,255,0.12)';
+    label.textContent = 'Importer';
+  }
+}
+
+const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
+              'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+
+// Config horaires standard
+function stdFor(mo) {
+  const hiv = {md:params.hivMd||'07:30',mf:params.hivMf||'12:00',ad:params.hivAd||'13:00',af:params.hivAf||'17:30'};
+  const ete = {md:params.eteMd||'07:30',mf:params.eteMf||'12:00',ad:params.eteAd||'13:00',af:params.eteAf||'17:30'};
+  return (mo>=3&&mo<=8) ? ete : hiv;
+}
+
+// ══════════════════════════════
+// STATE
+// ══════════════════════════════
+const now = new Date();
+let curMo = now.getMonth();
+let entries = {}; // key = "YYYY-MM-DD"
+let selT = 'normal';
+let hasRepas = false;
+let editKey = null;
+
+// ══════════════════════════════
+// PERSISTENCE
+// ══════════════════════════════
+function load() {
+  const e = localStorage.getItem('ch_e2');
+  if (e) entries = JSON.parse(e);
+}
+function persist() { localStorage.setItem('ch_e2', JSON.stringify(entries)); }
+
+// ══════════════════════════════
+// HELPERS
+// ══════════════════════════════
+const $ = id => document.getElementById(id);
+function toMin(t) { if(!t)return 0; const[h,m]=t.split(':').map(Number); return h*60+m; }
+function calcH(md,mf,ad,af) {
+  const raw = (Math.max(0,toMin(mf)-toMin(md)) + Math.max(0,toMin(af)-toMin(ad))) / 60;
+  return raw > 0 ? Math.max(0, raw - 0.25) : 0; // pause 9h00 = -15 min
+}
+function fmtH(v) {
+  if(v===null||v===undefined) return '—';
+  if(typeof v==='string') return v;
+  const m=Math.round(v*60);
+  return `${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}`;
+}
+// Parse Excel time string "7h30 - 12h00" → "07:30"
+function parseExTime(s) {
+  if(!s||typeof s!=='string') return '';
+  const m = s.trim().match(/^(\d+)h(\d+)/);
+  if(!m) return '';
+  return `${String(m[1]).padStart(2,'0')}:${String(m[2]).padStart(2,'0')}`;
+}
+function dKey(y,mo,d) {
+  return `${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+function keyToDate(k) { const[y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
+
+// ══════════════════════════════
+// MERGER: Excel data + user entries
+// ══════════════════════════════
+function getDay(mo0, dayNum) {
+  // mo0 = 0-based month
+  const key = dKey(excelYear||2026, mo0, dayNum);
+  // User entry takes priority
+  if (entries[key]) return {...entries[key], _user: true, _key: key};
+  // Fallback: Excel data
+  const exMo = EXCEL_DATA[mo0];
+  if (!exMo) return null;
+  const exDay = exMo ? exMo.days.find(d => d.n === dayNum) : null;
+  if (!exDay || (exDay.h===null&&exDay.am===null)) return null;
+  
+  // Convert Excel day to unified format
+  const amParts = exDay.am ? exDay.am.split(' - ') : [];
+  const pmParts = exDay.pm ? exDay.pm.split(' - ') : [];
+  
+  let type = 'normal';
+  if (exDay.h === 'V' || (exDay.am && exDay.am.toLowerCase().includes('vacances'))) type = 'vacances';
+  else if (exDay.h === 'Férié') type = 'ferie';
+  else if (exDay.as !== null && exDay.as !== undefined) type = 'assurance';
+  else if (exDay.am && exDay.am.toLowerCase().includes('proche')) type = 'proche';
+  else if (exDay.am && exDay.am.toLowerCase().includes('congé')) type = 'conge';
+  
+  return {
+    matDeb: parseExTime(amParts[0]),
+    matFin: parseExTime(amParts[1]),
+    amDeb:  parseExTime(pmParts[0]),
+    amFin:  parseExTime(pmParts[1]),
+    hours:  typeof exDay.h === 'number' ? exDay.h : 0,
+    repas:  !!exDay.r,
+    nuitH:  typeof exDay.nu === 'number' ? exDay.nu : 0,
+    samH:   typeof exDay.sa === 'number' ? exDay.sa : 0,
+    type,
+    note:   '',
+    _user:  false,
+    _key:   key,
+    _excel: true
+  };
+}
+
+// ══════════════════════════════
+// RENDER PICKER
+// ══════════════════════════════
+function renderPicker() {
+  $('mPicker').innerHTML = MOIS.map((m,i) => {
+    const exFilled = EXCEL_DATA[i].days.filter(d=>d.h!==null).length;
+    const userFilled = Object.keys(entries).filter(k=>k.startsWith(`2026-${String(i+1).padStart(2,'0')}`)).length;
+    const hasDat = exFilled > 0 || userFilled > 0;
+    const cls = (hasDat?'has-data ':'') + (i===curMo?'active':'');
+    return `<div class="mchip ${cls}" onclick="selMo(${i})">${m.slice(0,4)}</div>`;
+  }).join('');
+}
+
+function selMo(i) {
+  curMo = i;
+  renderPicker();
+  renderMonth();
+  document.querySelectorAll('.mchip')[i]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
+
+// ══════════════════════════════
+// RENDER MONTH
+// ══════════════════════════════
+function renderMonth() {
+  $('hSub').textContent = `${MOIS[curMo]} 2026`;
+  const plbl = $('pdfMoLabel'); if(plbl) plbl.textContent = MOIS[curMo];
+  const dim = new Date(2026, curMo+1, 0).getDate();
+
+  // Collect all days with data
+  const days = [];
+  for (let d=1; d<=dim; d++) {
+    const day = getDay(curMo, d);
+    if (day) days.push({d, ...day});
+  }
+
+  // Stats (user entries + excel)
+  let totH=0, totR=0, totN=0, joursT=0;
+  for (let d=1; d<=dim; d++) {
+    const day = getDay(curMo, d);
+    if (!day) continue;
+    if (['normal','nuit','samedi'].includes(day.type)) { joursT++; totH += day.hours||0; }
+    if (day.repas) totR++;
+    totN += day.nuitH||0;
+  }
+  $('sJ').textContent = joursT||'—';
+  $('sH').textContent = joursT ? fmtH(totH) : '—';
+  $('sR').textContent = totR||'—';
+  $('sN').textContent = totN>0 ? `${totN}h` : '—';
+
+  if (days.length === 0) {
+    $('daysWrap').innerHTML = `<div class="empty-mo"><div class="empty-icon">📋</div>Aucune donnée — ajoute ta première journée !</div>`;
+    return;
+  }
+
+  let html = '';
+  let lastWeek = -1;
+
+  days.forEach(({d, ...day}) => {
+    const date = new Date(excelYear||2026, curMo, d);
+    const dow = date.getDay();
+    const wknd = dow===0||dow===6;
+    const week = Math.ceil((d + (new Date(2026,curMo,1).getDay()+6)%7) / 7);
+
+    if (week !== lastWeek) {
+      lastWeek = week;
+      html += `<div class="week-sep">Semaine ${week}</div>`;
+    }
+
+    const t = day.type;
+    let bdgCls = wknd ? 'wknd' : '';
+    if (t==='ferie') bdgCls='ferie';
+    else if (t==='vacances'||t==='conge') bdgCls='vac';
+    else if (t==='assurance') bdgCls='abs';
+
+    let hoursHtml = '';
+    if (t==='ferie') hoursHtml = '<span class="day-hours special">Férié</span>';
+    else if (t==='vacances'||t==='conge') hoursHtml = '<span class="day-hours special">Vacances</span>';
+    else if (t==='assurance') hoursHtml = '<span class="day-hours special">Ass.</span>';
+    else if (t==='proche') hoursHtml = '<span class="day-hours special">Proche aidant</span>';
+    else if (day.hours>0) hoursHtml = `<span class="day-hours">${fmtH(day.hours)}</span>`;
+
+    const noteHtml = day.note ? `<div class="day-note">${day.note}</div>` : '';
+
+    let timesHtml = '';
+    if (day.matDeb||day.matFin||day.amDeb||day.amFin) {
+      const matStr = (day.matDeb&&day.matFin) ? `${day.matDeb} – ${day.matFin}` : '—';
+      const amStr  = (day.amDeb&&day.amFin)   ? `${day.amDeb} – ${day.amFin}`  : '—';
+      timesHtml = `<div class="day-times">
+        <div class="time-blk"><div class="time-lbl">🌅 Matin</div><div class="time-val">${matStr}</div></div>
+        <div class="time-blk"><div class="time-lbl">☀️ Après-m.</div><div class="time-val">${amStr}</div></div>
+      </div>`;
+    }
+
+    const tags = [];
+    if (day.repas) tags.push('<span class="tag tag-blue">🍽 Repas</span>');
+    if ((day.nuitH||0)>0) tags.push(`<span class="tag tag-red">🌙 ${day.nuitH}h nuit</span>`);
+    if ((day.samH||0)>0)  tags.push(`<span class="tag tag-orange">📅 ${day.samH}h sam.</span>`);
+    if (day._user) tags.push('<span class="tag tag-green">✏️ Saisi</span>');
+    const tagsHtml = tags.length ? `<div class="day-tags">${tags.join('')}</div>` : '';
+
+    const key = day._key;
+    html += `<div class="day-card" onclick="openEdit('${key}',${d})">
+      <div class="day-head">
+        <div class="day-badge ${bdgCls}">${d}</div>
+        <div><div class="day-dow">${JOURS[dow]}</div>${noteHtml}</div>
+        ${hoursHtml}
+      </div>
+      ${timesHtml}
+      ${tagsHtml}
+    </div>`;
+  });
+
+  $('daysWrap').innerHTML = html;
+}
+
+// ══════════════════════════════
+// MODAL OPEN
+// ══════════════════════════════
+function openNew() {
+  editKey = null;
+  $('btnDelete').style.display = 'none';
+  $('mTitle').innerHTML = 'Nouvelle journée';
+
+  // Default date = today if in current month, else 1st
+  const yr = excelYear||2026; const d = (now.getFullYear()===yr && now.getMonth()===curMo) ? now : new Date(yr,curMo,1);
+  $('fDate').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  applyStd();
+  hasRepas = false; updateTog();
+  selType('normal');
+  $('fNuit').value=0; $('fSam').value=0;
+  $('fNote').value='';
+  openModal();
+}
+
+function openEdit(key, dayNum) {
+  editKey = key;
+  $('btnDelete').style.display = 'block';
+
+  const [y,mo,d] = key.split('-').map(Number);
+  const date = new Date(y,mo-1,d);
+  const dow = JOURS[date.getDay()];
+  $('mTitle').innerHTML = `${dow} ${d} ${MOIS[mo-1]}<small>${y}</small>`;
+  $('fDate').value = key;
+
+  // Load existing user entry or excel data
+  let entry = entries[key];
+  if (!entry) {
+    const exDay = getDay(mo-1, d);
+    if (exDay) entry = exDay;
+  }
+  if (entry) {
+    $('fMatDeb').value = entry.matDeb||'';
+    $('fMatFin').value = entry.matFin||'';
+    $('fAmDeb').value  = entry.amDeb||'';
+    $('fAmFin').value  = entry.amFin||'';
+    hasRepas = entry.repas||false;
+    $('fNuit').value = entry.nuitH||0;
+    $('fSam').value  = entry.samH||0;
+    $('fNote').value = entry.note||'';
+    selType(entry.type||'normal');
+  } else {
+    applyStd(); hasRepas=false; selType('normal');
+    $('fNuit').value=0; $('fSam').value=0; $('fNote').value='';
+  }
+  updateTog();
+  updateTotal();
+  openModal();
+}
+
+// ══════════════════════════════
+// FORM LOGIC
+// ══════════════════════════════
+function applyStd() {
+  const mo = curMo;
+  const s = stdFor(mo);
+  $('fMatDeb').value=s.md; $('fMatFin').value=s.mf;
+  $('fAmDeb').value=s.ad;  $('fAmFin').value=s.af;
+  updateTotal();
+}
+
+function updateTotal() {
+  const h = calcH($('fMatDeb').value,$('fMatFin').value,$('fAmDeb').value,$('fAmFin').value);
+  $('fTotal').textContent = fmtH(h);
+}
+
+['fMatDeb','fMatFin','fAmDeb','fAmFin'].forEach(id =>
+  $(id).addEventListener('input', updateTotal)
+);
+
+function selType(t) {
+  selT = t;
+  document.querySelectorAll('.tchip').forEach(c => c.classList.toggle('sel', c.dataset.t===t));
+  const normal = ['normal','nuit','samedi'].includes(t);
+  $('horaireSection').style.display = normal ? 'block' : 'none';
+  $('specialSection').style.display = (t==='nuit'||t==='samedi') ? 'block' : 'none';
+  $('rowNuit').style.display = t==='nuit'   ? 'flex' : 'none';
+  $('rowSam').style.display  = t==='samedi' ? 'flex' : 'none';
+}
+
+function togR() { hasRepas=!hasRepas; updateTog(); }
+function updateTog() { $('togRepas').classList.toggle('on', hasRepas); }
+function step(id, d) { const e=$(id); e.value=Math.max(0, Math.round((parseFloat(e.value)+d)*2)/2); }
+
+// ══════════════════════════════
+// SAVE / DELETE
+// ══════════════════════════════
+function saveEntry() {
+  const key = $('fDate').value;
+  if (!key) { showToast('Sélectionne une date'); return; }
+
+  const md=$('fMatDeb').value, mf=$('fMatFin').value;
+  const ad=$('fAmDeb').value,  af=$('fAmFin').value;
+  const h = ['normal','nuit','samedi'].includes(selT) ? calcH(md,mf,ad,af) : 0;
+
+  entries[key] = {
+    matDeb:md, matFin:mf, amDeb:ad, amFin:af,
+    hours: h, repas: hasRepas, type: selT,
+    nuitH: parseFloat($('fNuit').value)||0,
+    samH:  parseFloat($('fSam').value)||0,
+    note:  $('fNote').value
+  };
+  persist();
+  closeModal();
+  
+  // Update curMo to match saved date
+  const [y,mo] = key.split('-').map(Number);
+  curMo = mo-1;
+  renderPicker();
+  renderMonth();
+  showToast('Journée enregistrée ✓');
+}
+
+function deleteEntry() {
+  if (!editKey) return;
+  delete entries[editKey];
+  persist();
+  closeModal();
+  renderPicker();
+  renderMonth();
+  showToast('Journée supprimée');
+}
+
+// ══════════════════════════════
+// MODAL
+// ══════════════════════════════
+function openModal()  { $('overlay').classList.add('open'); }
+function closeModal() { $('overlay').classList.remove('open'); }
+function closeOverlay(e) { if(e.target===$('overlay')) closeModal(); }
+
+function showToast(msg) {
+  const t=$('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2300);
+}
+
+
+// ══════════════════════════════
+// PDF EXPORT
+// ══════════════════════════════
+function exportPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation:'landscape', unit:'mm', format:'a4' });
+
+  const MOIS_NOM = ['Janvier','Février','Mars','Avril','Mai','Juin',
+                    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const JOURS_INIT = ['D','L','M','M','J','V','S'];
+
+  const mo = curMo; // 0-based
+  const year = excelYear||2026;
+  const dim = new Date(year, mo+1, 0).getDate();
+  const moNom = MOIS_NOM[mo];
+
+  // Collect all days data
+  const days = {};
+  for (let d=1; d<=dim; d++) {
+    const day = getDay(mo, d);
+    if (day) days[d] = day;
+  }
+
+  // ── Layout constants (mm) ──
+  const ML = 10, MT = 10; // margins
+  const PW = 277; // usable width
+  const LABEL_W = 52;
+  const TOT_W = 20;
+  const DAY_W = (PW - LABEL_W - TOT_W) / 31;
+
+  // Row heights
+  const R_TITLE = 8;
+  const R_HEAD  = 6;
+  const R_TIMES = 14; // AM + PM rows (tall)
+  const R_DATA  = 8;  // other rows
+
+  let y = MT;
+
+  // ── COLORS ──
+  const C_NAVY   = [27, 58, 107];
+  const C_TEAL   = [26, 127, 114];
+  const C_GOLD   = [240, 165, 0];
+  const C_LIGHT  = [235, 240, 248];
+  const C_BORDER = [200, 208, 218];
+  const C_WHITE  = [255, 255, 255];
+  const C_RED    = [229, 57, 53];
+  const C_GREEN  = [29, 111, 66];
+
+  function colX(d) { return ML + LABEL_W + (d-1)*DAY_W; } // x for day d (1-based)
+  function totX()  { return ML + LABEL_W + 31*DAY_W; }
+
+  function rect(x,y,w,h,fill,stroke) {
+    if(fill) { doc.setFillColor(...fill); doc.rect(x,y,w,h,'F'); }
+    if(stroke) { doc.setDrawColor(...stroke); doc.setLineWidth(0.2); doc.rect(x,y,w,h,'S'); }
+  }
+  function cell(x,y,w,h,txt,opts={}) {
+    const {fill,stroke,bold,size=7,color=[0,0,0],align='center',vpad=0} = opts;
+    if(fill) { doc.setFillColor(...fill); doc.rect(x,y,w,h,'F'); }
+    if(stroke!==false) {
+      doc.setDrawColor(...(stroke||C_BORDER)); doc.setLineWidth(0.15);
+      doc.rect(x,y,w,h,'S');
+    }
+    if(!txt && txt!==0) return;
+    doc.setFont('helvetica', bold?'bold':'normal');
+    doc.setFontSize(size);
+    doc.setTextColor(...color);
+    const tx = align==='left' ? x+1.5 : align==='right' ? x+w-1.5 : x+w/2;
+    doc.text(String(txt), tx, y+h/2+size*0.18+vpad,
+      {align: align==='left'?'left': align==='right'?'right':'center', baseline:'middle'});
+  }
+
+  // ── TITLE ROW ──
+  rect(ML, y, PW, R_TITLE, C_NAVY);
+  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...C_WHITE);
+  const empNom = params.nom ? ` — ${params.nom}` : '';
+  doc.text(`Feuille de présence — ${moNom} ${year}${empNom}`, ML + PW/2, y + R_TITLE/2,
+    {align:'center', baseline:'middle'});
+  y += R_TITLE;
+
+  // ── DAY NUMBERS HEADER ──
+  // Label cell
+  cell(ML, y, LABEL_W, R_HEAD, 'Mois', {fill:C_LIGHT, bold:true, size:7, color:C_NAVY});
+  // Day numbers
+  for (let d=1; d<=31; d++) {
+    const x = colX(d);
+    if (d > dim) {
+      rect(x, y, DAY_W, R_HEAD, [245,245,245]);
+      doc.setDrawColor(...C_BORDER); doc.setLineWidth(0.1); doc.rect(x,y,DAY_W,R_HEAD,'S');
+      continue;
+    }
+    const date = new Date(year, mo, d);
+    const dow = date.getDay(); // 0=sun
+    const isWknd = dow===0||dow===6;
+    const dayEntry = days[d];
+    let fill = isWknd ? [240,244,250] : C_WHITE;
+    if (dayEntry?.type==='ferie')   fill = [255,248,225];
+    if (dayEntry?.type==='vacances') fill = [232,245,233];
+
+    cell(x, y, DAY_W, R_HEAD, d, {fill, bold:true, size:6.5, color: isWknd?[150,160,175]:C_NAVY});
+    // Day initial below
+    doc.setFont('helvetica','normal'); doc.setFontSize(5.5);
+    doc.setTextColor(150,160,175);
+    doc.text(JOURS_INIT[dow], x+DAY_W/2, y+R_HEAD-1.5, {align:'center'});
+  }
+  // Total header
+  cell(totX(), y, TOT_W, R_HEAD, 'TOTAL', {fill:C_LIGHT, bold:true, size:6.5, color:C_NAVY});
+  y += R_HEAD;
+
+  // ── HELPER: draw a data row ──
+  function dataRow(labelTxt, rowH, getValue, getColor, opts={}) {
+    const {labelColor=C_NAVY, labelBold=false, labelSize=6.5} = opts;
+    cell(ML, y, LABEL_W, rowH, labelTxt,
+      {fill:[248,250,253], bold:labelBold, size:labelSize, color:labelColor, align:'left'});
+
+    let total = 0; let totalStr = '';
+    for (let d=1; d<=31; d++) {
+      const x = colX(d);
+      if (d > dim) { rect(x,y,DAY_W,rowH,[250,250,250]); doc.setDrawColor(...C_BORDER);doc.setLineWidth(0.1);doc.rect(x,y,DAY_W,rowH,'S'); continue; }
+      const date = new Date(year,mo,d);
+      const dow = date.getDay();
+      const isWknd = dow===0||dow===6;
+      const dayEntry = days[d];
+      const val = getValue(d, dayEntry);
+      const col = getColor ? getColor(d, dayEntry, val) : (isWknd?[220,228,240]:C_WHITE);
+      const textCol = opts.textColor || [30,30,30];
+      const isNum = typeof val === 'number' && val > 0;
+      if (isNum) total += val;
+      cell(x, y, DAY_W, rowH, val||'', {fill:col, size:6, color:textCol, stroke:C_BORDER});
+    }
+    if (opts.showTotal !== false) {
+      totalStr = total > 0 ? fmtH(total) : '';
+      cell(totX(), y, TOT_W, rowH, totalStr,
+        {fill:C_LIGHT, bold:true, size:7, color:C_NAVY});
+    } else {
+      cell(totX(), y, TOT_W, rowH, '', {fill:C_LIGHT});
+    }
+    y += rowH;
+    return total;
+  }
+
+  // ── APRÈS-MIDI ROW ──
+  cell(ML, y, LABEL_W, R_TIMES, 'Après-midi\nHres début et fin',
+    {fill:[248,250,253], bold:false, size:6.5, color:C_NAVY, align:'left'});
+  for (let d=1; d<=31; d++) {
+    const x = colX(d);
+    if (d>dim) { rect(x,y,DAY_W,R_TIMES,[250,250,250]); doc.setDrawColor(...C_BORDER);doc.setLineWidth(0.1);doc.rect(x,y,DAY_W,R_TIMES,'S'); continue; }
+    const date = new Date(year,mo,d);
+    const dow = date.getDay();
+    const isWknd = dow===0||dow===6;
+    const e = days[d];
+    let txt='', fill = isWknd?[240,244,250]:C_WHITE;
+    if(e) {
+      if(e.type==='vacances'||e.type==='conge') { txt='V'; fill=[232,245,233]; }
+      else if(e.type==='ferie') { txt='Fé'; fill=[255,248,225]; }
+      else if(e.amDeb&&e.amFin) txt=`${e.amDeb}\n${e.amFin}`;
+    }
+    cell(x, y, DAY_W, R_TIMES, txt, {fill, size:5.5, color:[40,40,40], stroke:C_BORDER});
+  }
+  cell(totX(), y, TOT_W, R_TIMES, '', {fill:C_LIGHT});
+  y += R_TIMES;
+
+  // ── MATIN ROW ──
+  cell(ML, y, LABEL_W, R_TIMES, 'Matin\nHres début et fin',
+    {fill:[248,250,253], bold:false, size:6.5, color:C_NAVY, align:'left'});
+  for (let d=1; d<=31; d++) {
+    const x = colX(d);
+    if (d>dim) { rect(x,y,DAY_W,R_TIMES,[250,250,250]); doc.setDrawColor(...C_BORDER);doc.setLineWidth(0.1);doc.rect(x,y,DAY_W,R_TIMES,'S'); continue; }
+    const date = new Date(year,mo,d);
+    const dow = date.getDay();
+    const isWknd = dow===0||dow===6;
+    const e = days[d];
+    let txt='', fill = isWknd?[240,244,250]:C_WHITE;
+    if(e) {
+      if(e.type==='vacances'||e.type==='conge') { txt='V'; fill=[232,245,233]; }
+      else if(e.type==='ferie') { txt='Fé'; fill=[255,248,225]; }
+      else if(e.matDeb&&e.matFin) txt=`${e.matDeb}\n${e.matFin}`;
+    }
+    cell(x, y, DAY_W, R_TIMES, txt, {fill, size:5.5, color:[40,40,40], stroke:C_BORDER});
+  }
+  cell(totX(), y, TOT_W, R_TIMES, '', {fill:C_LIGHT});
+  y += R_TIMES;
+
+  // ── HEURES TRAVAIL ──
+  let totH = dataRow('Heures de travail', R_DATA,
+    (d,e) => {
+      if(!e) return '';
+      if(e.type==='vacances') return 'V';
+      if(e.type==='ferie') return 'Fé';
+      if(e.type==='assurance') return 'A';
+      return e.hours>0 ? e.hours : '';
+    },
+    (d,e,v) => {
+      if(!e) return [250,250,250];
+      const dow=new Date(year,mo,d).getDay(), wknd=dow===0||dow===6;
+      if(e.type==='vacances') return [232,245,233];
+      if(e.type==='ferie') return [255,248,225];
+      if(e.type==='assurance') return [252,232,232];
+      return wknd?[240,244,250]:C_WHITE;
+    },
+    {labelBold:true, labelColor:C_NAVY, textColor:C_NAVY}
+  );
+
+  // ── REPAS ──
+  let totR = dataRow('Repas', R_DATA,
+    (d,e) => e?.repas ? 1 : '',
+    (d,e,v) => v===1 ? [227,242,253] : [250,252,255],
+    {textColor:[21,101,192]}
+  );
+
+  // ── HEURES NUIT ──
+  let totN = dataRow('Hres Travail 20h–5h (+50%)', R_DATA,
+    (d,e) => e?.nuitH>0 ? e.nuitH : '',
+    () => [255,250,250],
+    {textColor:[183,28,28]}
+  );
+
+  // ── HEURES SAMEDI ──
+  dataRow('Hres samedi 5h–17h (+25%)', R_DATA,
+    (d,e) => e?.samH>0 ? e.samH : '',
+    () => [255,253,245],
+    {textColor:[230,81,0]}
+  );
+
+  // ── HEURES DIM ──
+  dataRow('Hres sam 17h–lun 5h (+50%)', R_DATA,
+    (d,e) => e?.dimH>0 ? e.dimH : '',
+    () => [255,253,245],
+    {textColor:[230,81,0]}
+  );
+
+  // ── ASSURANCE ──
+  dataRow('Assurance (1.00 / 0.50 / 0.25)', R_DATA,
+    (d,e) => e?.type==='assurance' ? ((e.assur||100)/100).toFixed(2) : '',
+    (d,e,v) => v ? [252,232,232] : [250,250,250],
+    {textColor:[183,28,28], showTotal:false}
+  );
+
+  // ── TOTALS SUMMARY BOX ──
+  y += 2;
+  const sumW = 80, sumH = 7;
+  const sumX = ML + PW - sumW;
+  rect(sumX, y, sumW, sumH*3+2, C_NAVY);
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...C_WHITE);
+  doc.text('RÉCAPITULATIF', sumX + sumW/2, y+3, {align:'center'});
+  y += 5;
+  const summaries = [
+    [`Jours travaillés :`, String(Object.values(days).filter(d=>['normal','nuit','samedi'].includes(d.type)).length)],
+    [`Heures totales :`, fmtH(totH)],
+    [`Repas :`, String(totR)],
+    totN>0 ? [`Heures de nuit :`, `${totN}h`] : null,
+  ].filter(Boolean);
+  summaries.forEach(([lbl,val]) => {
+    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...C_WHITE);
+    doc.text(lbl, sumX+3, y+3.5);
+    doc.setFont('helvetica','bold');
+    doc.text(val, sumX+sumW-3, y+3.5, {align:'right'});
+    y += 6;
+  });
+
+  // ── SIGNATURE LINE ──
+  y += 3;
+  doc.setDrawColor(...C_BORDER); doc.setLineWidth(0.3);
+  doc.line(ML, y, ML+90, y);
+  doc.line(ML+100, y, ML+200, y);
+  doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(120,130,145);
+  doc.text(`Date : ______________________`, ML, y+4);
+  // Signature image if saved
+  if (sigDataURL) {
+    try {
+      doc.addImage(sigDataURL, 'PNG', ML+95, y-8, 50, 16);
+    } catch(e) {}
+  } else {
+    doc.text(`Signature : ___________________________`, ML+95, y+4);
+  }
+
+  // ── SAVE ──
+  doc.save(`Feuille_presence_${moNom}_${year}.pdf`);
+  showToast(`PDF ${moNom} ${year} téléchargé !`);
+}
+
+
+// ══════════════════════════════
+// PARAMÈTRES & SIGNATURE
+// ══════════════════════════════
+let params = {
+  nom: '', entreprise: 'Risse S.A.',
+  hivMd:'07:30', hivMf:'12:00', hivAd:'13:00', hivAf:'17:30',
+  eteMd:'07:30', eteMf:'12:00', eteAd:'13:00', eteAf:'17:30',
+};
+let sigDataURL = null; // base64 PNG of signature
+
+function loadParams() {
+  const p = localStorage.getItem('ch_params');
+  if (p) params = {...params, ...JSON.parse(p)};
+  const s = localStorage.getItem('ch_sig');
+  if (s) sigDataURL = s;
+}
+
+function saveParams() {
+  params.nom         = document.getElementById('cfgNom').value;
+  params.entreprise  = document.getElementById('cfgEntreprise').value;
+  params.hivMd = document.getElementById('cfgHivMd').value;
+  params.hivMf = document.getElementById('cfgHivMf').value;
+  params.hivAd = document.getElementById('cfgHivAd').value;
+  params.hivAf = document.getElementById('cfgHivAf').value;
+  params.eteMd = document.getElementById('cfgEteMd').value;
+  params.eteMf = document.getElementById('cfgEteMf').value;
+  params.eteAd = document.getElementById('cfgEteAd').value;
+  params.eteAf = document.getElementById('cfgEteAf').value;
+  localStorage.setItem('ch_params', JSON.stringify(params));
+}
+
+function loadParamsUI() {
+  document.getElementById('cfgNom').value        = params.nom;
+  document.getElementById('cfgEntreprise').value = params.entreprise;
+  document.getElementById('cfgHivMd').value = params.hivMd;
+  document.getElementById('cfgHivMf').value = params.hivMf;
+  document.getElementById('cfgHivAd').value = params.hivAd;
+  document.getElementById('cfgHivAf').value = params.hivAf;
+  document.getElementById('cfgEteMd').value = params.eteMd;
+  document.getElementById('cfgEteMf').value = params.eteMf;
+  document.getElementById('cfgEteAd').value = params.eteAd;
+  document.getElementById('cfgEteAf').value = params.eteAf;
+  if (sigDataURL) {
+    const canvas = document.getElementById('sigCanvas');
+    const img = new Image();
+    img.onload = () => {
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      canvas.classList.add('has-sig');
+    };
+    img.src = sigDataURL;
+  }
+}
+
+// ── Signature Pad ──
+function initSigPad() {
+  const canvas = document.getElementById('sigCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  // Scale canvas to real pixel size
+  const rect = canvas.getBoundingClientRect();
+  canvas.width  = rect.width  * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  ctx.strokeStyle = '#1B3A6B';
+  ctx.lineWidth   = 2.5;
+  ctx.lineCap     = 'round';
+  ctx.lineJoin    = 'round';
+
+  let drawing = false, lastX = 0, lastY = 0;
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - r.left, y: src.clientY - r.top };
+  }
+  function start(e) { e.preventDefault(); drawing=true; const p=getPos(e); lastX=p.x; lastY=p.y; }
+  function move(e)  {
+    e.preventDefault();
+    if (!drawing) return;
+    const p=getPos(e);
+    ctx.beginPath(); ctx.moveTo(lastX,lastY); ctx.lineTo(p.x,p.y); ctx.stroke();
+    lastX=p.x; lastY=p.y;
+    canvas.classList.add('has-sig');
+  }
+  function end() { drawing=false; }
+
+  canvas.addEventListener('mousedown',  start);
+  canvas.addEventListener('mousemove',  move);
+  canvas.addEventListener('mouseup',    end);
+  canvas.addEventListener('touchstart', start, {passive:false});
+  canvas.addEventListener('touchmove',  move,  {passive:false});
+  canvas.addEventListener('touchend',   end);
+
+  // Restore sig if exists
+  if (sigDataURL) {
+    const img = new Image();
+    img.onload = () => { ctx.drawImage(img, 0, 0, rect.width, rect.height); canvas.classList.add('has-sig'); };
+    img.src = sigDataURL;
+  }
+}
+
+function clearSig() {
+  const canvas = document.getElementById('sigCanvas');
+  const rect   = canvas.getBoundingClientRect();
+  canvas.getContext('2d').clearRect(0, 0, rect.width * window.devicePixelRatio, rect.height * window.devicePixelRatio);
+  canvas.classList.remove('has-sig');
+  sigDataURL = null;
+  localStorage.removeItem('ch_sig');
+  showToast('Signature effacée');
+}
+
+function saveSig() {
+  const canvas = document.getElementById('sigCanvas');
+  if (!canvas.classList.contains('has-sig')) { showToast('Signe d'abord !'); return; }
+  sigDataURL = canvas.toDataURL('image/png');
+  localStorage.setItem('ch_sig', sigDataURL);
+  showToast('Signature enregistrée ✓');
+}
+
+// ── View switch ──
+function switchView(v) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('act'));
+  document.querySelectorAll('.ntab').forEach(el => el.classList.remove('act'));
+  document.getElementById('view-'+v).classList.add('act');
+  document.getElementById('nt-'+v).classList.add('act');
+  if (v === 'params') setTimeout(initSigPad, 50);
+}
+
+// ══════════════════════════════
+// BOOT
+// ══════════════════════════════
+load();
+loadParams();
+loadStoredExcel();
+updateImportBanner();
+loadParamsUI();
+renderPicker();
+renderMonth();
+setTimeout(()=>{
+  document.querySelectorAll('.mchip')[curMo]?.scrollIntoView({inline:'center',block:'nearest'});
+},80);
+</script>
+</body>
+</html>
