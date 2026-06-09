@@ -30,9 +30,9 @@
   --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
 }
- 
+
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
- 
+
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
@@ -43,7 +43,7 @@ body {
   flex-direction: column;
   font-size: 15px;
 }
- 
+
 /* ── HEADER ── */
 .app-header {
   background: var(--navy);
@@ -87,7 +87,7 @@ body {
   cursor: pointer;
 }
 .btn-save-draft:active { opacity: 0.7; }
- 
+
 /* ── TAB BAR ── */
 .tab-bar {
   display: flex;
@@ -149,7 +149,7 @@ body {
   align-items: center;
   justify-content: center;
 }
- 
+
 /* ── SCROLL AREA ── */
 .scroll-area {
   flex: 1;
@@ -158,11 +158,11 @@ body {
   padding: 12px 12px 24px;
   scroll-behavior: smooth;
 }
- 
+
 /* ── SECTIONS ── */
 .section { display: none; }
 .section.active { display: block; }
- 
+
 /* ── CARDS ── */
 .card {
   background: var(--bg-card);
@@ -196,7 +196,7 @@ body {
   border-radius: 10px;
 }
 .card-body { padding: 14px; }
- 
+
 /* ── FORM ELEMENTS ── */
 .form-row {
   margin-bottom: 12px;
@@ -231,7 +231,7 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--navy);
 }
 textarea { resize: none; }
- 
+
 /* ── CHIPS ── */
 .chips {
   display: flex;
@@ -256,7 +256,7 @@ textarea { resize: none; }
   border-color: var(--navy);
   color: white;
 }
- 
+
 /* ── SECTION 1: EN-TÊTE ── */
 .section-badge {
   background: var(--navy);
@@ -284,7 +284,7 @@ textarea { resize: none; }
 .section-badge .info { flex: 1; }
 .section-badge .info strong { color: white; font-size: 15px; display: block; }
 .section-badge .info span { color: rgba(255,255,255,0.65); font-size: 12px; }
- 
+
 /* ── BOUTON AJOUTER LOCATION ── */
 .btn-add-loc {
   width: 100%;
@@ -300,7 +300,7 @@ textarea { resize: none; }
   margin-top: 4px;
 }
 .btn-add-loc:active { background: var(--bg); }
- 
+
 /* ── SECTION 2: MAIN D'OEUVRE — liste plate ── */
 .mo-row {
   display: flex;
@@ -341,7 +341,7 @@ textarea { resize: none; }
   color: white;
 }
 .mo-quick-btn:active { opacity: 0.7; transform: scale(0.95); }
- 
+
 .btn-add-employe {
   width: 100%;
   border: 2px dashed var(--border);
@@ -359,7 +359,7 @@ textarea { resize: none; }
   gap: 6px;
 }
 .btn-add-employe:active { background: var(--bg); }
- 
+
 /* ── SECTION 3: LOCATION INTERNE — ACCORDÉON ── */
 .accord-group {
   background: white;
@@ -414,7 +414,7 @@ textarea { resize: none; }
 }
 .accord-body.open { max-height: 9999px; }
 .accord-inner { padding: 8px 14px 12px; }
- 
+
 .loc-item {
   display: flex;
   align-items: center;
@@ -445,7 +445,7 @@ textarea { resize: none; }
   border-color: var(--teal);
   color: var(--teal);
 }
- 
+
 /* ── MÉTRÉS CALCULATEUR ── */
 .metre-card {
   background: var(--bg);
@@ -486,7 +486,7 @@ textarea { resize: none; }
   cursor: pointer;
 }
 .metre-formule-sel:focus { border-color: var(--navy); }
- 
+
 .metre-type-btns {
   display: flex;
   gap: 4px;
@@ -616,8 +616,8 @@ textarea { resize: none; }
   width: 100%;
 }
 .btn-add-subline:active { background: var(--bg); }
- 
- 
+
+
 /* ── SECTION 4: TRAVAUX ── */
 .metrage-row {
   display: grid;
@@ -669,7 +669,7 @@ textarea { resize: none; }
   letter-spacing: 0.4px;
   padding-left: 2px;
 }
- 
+
 /* ── SECTION 5: FOURNITURES ── */
 .fournit-item {
   display: grid;
@@ -691,7 +691,7 @@ textarea { resize: none; }
   cursor: pointer;
 }
 .mat-chip:active { background: var(--navy); color: white; }
- 
+
 /* ── EXTRAS OPTIONNELS ── */
 .extra-toggle-row {
   display: flex;
@@ -720,7 +720,7 @@ textarea { resize: none; }
   border-color: var(--teal);
 }
 .extra-content { background: var(--bg); }
- 
+
 /* Photos grid */
 .photo-thumb {
   position: relative;
@@ -784,8 +784,8 @@ textarea { resize: none; }
   justify-content: center;
   cursor: pointer;
 }
- 
- 
+
+
   position: absolute;
   top: 4px; right: 4px;
   background: rgba(0,0,0,0.5);
@@ -797,8 +797,8 @@ textarea { resize: none; }
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
- 
- 
+
+
 .resume-bar {
   display: flex;
   gap: 6px;
@@ -818,7 +818,7 @@ textarea { resize: none; }
   flex-shrink: 0;
 }
 .resume-chip.filled { border-color: var(--teal); color: var(--teal); }
- 
+
 /* ── BOTTOM ACTIONS ── */
 .bottom-actions {
   padding: 12px;
@@ -852,7 +852,7 @@ textarea { resize: none; }
   border-radius: var(--radius-sm);
   cursor: pointer;
 }
- 
+
 /* ── MODAL ADD EMPLOYE ── */
 .overlay {
   position: fixed;
@@ -890,7 +890,7 @@ textarea { resize: none; }
   cursor: pointer;
   margin-top: 12px;
 }
- 
+
 /* ── FOURNIT-ROW ── */
 .fournit-row {
   display: flex;
@@ -933,8 +933,8 @@ textarea { resize: none; }
   outline: none;
   flex-shrink: 0;
 }
- 
- 
+
+
 .prod-row {
   display: flex;
   align-items: center;
@@ -952,8 +952,8 @@ textarea { resize: none; }
   border-radius: 10px;
   flex-shrink: 0;
 }
- 
- 
+
+
 .rapport-export {
   background: var(--navy);
   border-radius: var(--radius);
@@ -979,7 +979,7 @@ textarea { resize: none; }
   background: rgba(255,255,255,0.12);
   color: white;
 }
- 
+
 /* ── HISTORIQUE PAGE ── */
 .histo-page {
   position: fixed;
@@ -1017,7 +1017,7 @@ textarea { resize: none; }
 .histo-header h2 { color: white; font-size: 15px; font-weight: 600; flex:1; }
 .histo-count { color: rgba(255,255,255,0.65); font-size: 13px; }
 .histo-scroll { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding: 12px; }
- 
+
 .rapport-card {
   background: white;
   border-radius: var(--radius);
@@ -1073,7 +1073,7 @@ textarea { resize: none; }
 }
 .rc-chip.green { background: #e8f5f3; color: var(--teal); }
 .rc-chip.blue { background: #e8eef7; color: var(--navy); }
- 
+
 .btn-del-rapport {
   background: #fff0f0;
   border: 1px solid #fcc;
@@ -1085,7 +1085,7 @@ textarea { resize: none; }
   border-radius: 6px;
   cursor: pointer;
 }
- 
+
 .histo-empty {
   text-align: center;
   padding: 60px 20px;
@@ -1093,7 +1093,7 @@ textarea { resize: none; }
 }
 .histo-empty .icon { font-size: 48px; margin-bottom: 12px; }
 .histo-empty p { font-size: 14px; }
- 
+
 .corbeille-section {
   margin-top: 16px;
   padding-top: 16px;
@@ -1126,7 +1126,7 @@ textarea { resize: none; }
   border-radius: 6px;
   cursor: pointer;
 }
- 
+
 /* ── PAGE EDIT RAPPORT ── */
 .edit-page {
   position: fixed;
@@ -1160,7 +1160,7 @@ textarea { resize: none; }
   border-radius: 20px;
   cursor: pointer;
 }
- 
+
 .saved-toast {
   position: fixed;
   bottom: 80px;
@@ -1178,7 +1178,7 @@ textarea { resize: none; }
   transition: opacity 0.3s;
 }
 .saved-toast.show { opacity: 1; }
- 
+
 .info-row {
   display: flex;
   align-items: center;
@@ -1190,7 +1190,7 @@ textarea { resize: none; }
 .info-row:last-child { border-bottom: none; }
 .info-row .k { color: var(--text-muted); }
 .info-row .v { font-weight: 600; color: var(--navy); }
- 
+
 /* ── STEP INDICATOR ── */
 .step-bar {
   display: flex;
@@ -1205,7 +1205,7 @@ textarea { resize: none; }
 }
 .step-dot.done { background: var(--teal); }
 .step-dot.active { background: var(--navy); }
- 
+
 /* NAV BTNS */
 .nav-btns { display: flex; gap: 8px; margin-top: 14px; }
 .btn-next {
@@ -1232,7 +1232,7 @@ textarea { resize: none; }
   cursor: pointer;
 }
 .btn-next:active, .btn-prev:active { opacity: 0.75; }
- 
+
 /* Rapport final preview */
 .preview-section {
   background: var(--bg);
@@ -1243,11 +1243,11 @@ textarea { resize: none; }
 .preview-section h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px; }
 .preview-section p { font-size: 13px; color: var(--text); line-height: 1.5; }
 .preview-empty { color: var(--text-light); font-style: italic; }
- 
+
 </style>
 </head>
 <body>
- 
+
 <div class="app-header">
   <div>
     <div style="color:white;font-size:17px;font-weight:700;line-height:1.1;" id="header-title">Rapport journalier</div>
@@ -1255,10 +1255,10 @@ textarea { resize: none; }
   </div>
   <button class="btn-save-draft" onclick="saveDraft()">💾 Brouillon</button>
 </div>
- 
+
 <!-- STEP DOTS -->
 <div class="scroll-area" id="main-scroll">
- 
+
   <!-- STEP INDICATOR -->
   <div class="step-bar" id="step-bar">
     <div class="step-dot active" id="dot-0"></div>
@@ -1268,12 +1268,12 @@ textarea { resize: none; }
     <div class="step-dot" id="dot-4"></div>
     <div class="step-dot" id="dot-5"></div>
   </div>
- 
+
   <!-- ═══════════════════════════════════
        SECTION 0 : EN-TÊTE
   ════════════════════════════════════ -->
   <div class="section active" id="sec-0">
- 
+
     <div class="card">
       <div class="card-body">
         <div class="form-row">
@@ -1292,17 +1292,17 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div class="nav-btns">
       <button class="btn-next" onclick="goSection(1)">Suivant → Main d'œuvre</button>
     </div>
   </div>
- 
+
   <!-- ═══════════════════════════════════
        SECTION 1 : MAIN D'OEUVRE
   ════════════════════════════════════ -->
   <div class="section" id="sec-1">
- 
+
     <!-- TOTAL JOURNÉE -->
     <div style="background:var(--navy);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
       <div>
@@ -1317,12 +1317,12 @@ textarea { resize: none; }
         <div style="color:white;font-size:28px;font-weight:700;line-height:1;" id="mo-count-global">0</div>
       </div>
     </div>
- 
+
     <!-- LISTE EMPLOYÉS -->
     <div class="card">
       <div class="card-body" id="employes-list"></div>
     </div>
- 
+
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(0)">←</button>
       <button class="btn-next" onclick="goSection(2)">Suivant → Location</button>
@@ -1332,7 +1332,7 @@ textarea { resize: none; }
        SECTION 2 : LOCATION INTERNE
   ════════════════════════════════════ -->
   <div class="section" id="sec-2">
- 
+
     <!-- ZONE SÉLECTION (même principe que fournitures) -->
     <div id="loc-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
@@ -1342,17 +1342,7 @@ textarea { resize: none; }
         <div id="loc-sel-list"></div>
       </div>
     </div>
- 
-    <!-- SYNC MACHINES AUTO -->
-    <div id="sync-machines-bar" style="display:none;background:rgba(26,127,114,.1);border:1.5px solid rgba(26,127,114,.3);border-radius:10px;padding:10px 14px;margin-bottom:10px;align-items:center;gap:10px;">
-      <span style="font-size:20px;">🚜</span>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:12px;font-weight:700;color:#0F6E56;" id="sync-machines-label">Heures machines disponibles</div>
-        <div style="font-size:10px;color:var(--text-muted);" id="sync-machines-detail"></div>
-      </div>
-      <button onclick="syncMachineHoursToLocation(true)" style="background:#1A7F72;color:#fff;border:none;font-family:inherit;font-size:11px;font-weight:700;padding:7px 12px;border-radius:8px;cursor:pointer;flex-shrink:0;">↻ Injecter</button>
-    </div>
- 
+
     <!-- CATALOGUE LOCATION -->
     <div class="accord-group" id="accord-vehicules">
       <div class="accord-header" onclick="toggleAccord('vehicules')">
@@ -1367,7 +1357,7 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div class="accord-group" id="accord-materiel">
       <div class="accord-header" onclick="toggleAccord('materiel')">
         <span class="accord-icon">🦺</span>
@@ -1381,7 +1371,7 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div class="accord-group" id="accord-engins">
       <div class="accord-header" onclick="toggleAccord('engins')">
         <span class="accord-icon">🚜</span>
@@ -1395,18 +1385,18 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(1)">←</button>
       <button class="btn-next" onclick="goSection(3)">Suivant → Travaux</button>
     </div>
   </div>
- 
+
   <!-- ═══════════════════════════════════
        SECTION 3 : TRAVAUX RÉALISÉS
   ════════════════════════════════════ -->
   <div class="section" id="sec-3">
- 
+
     <!-- Description — toujours visible -->
     <div class="card">
       <div class="card-header"><span class="icon">📝</span><h2>Description</h2></div>
@@ -1414,7 +1404,7 @@ textarea { resize: none; }
         <textarea id="tx-travaux" rows="4" placeholder="Décrire les travaux effectués aujourd'hui…"></textarea>
       </div>
     </div>
- 
+
     <!-- BLOCS OPTIONNELS — apparaissent ici quand activés -->
     <div id="bloc-metres" style="display:none;">
       <div class="card">
@@ -1425,7 +1415,7 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div id="bloc-photos" style="display:none;">
       <div class="card">
         <div class="card-header"><span class="icon">📷</span><h2>Photos du chantier</h2></div>
@@ -1446,7 +1436,7 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div id="bloc-bons" style="display:none;">
       <div class="card">
         <div class="card-header"><span class="icon">🧾</span><h2>Bons de livraison</h2></div>
@@ -1467,7 +1457,7 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div id="bloc-croquis" style="display:none;">
       <div class="card">
         <div class="card-header"><span class="icon">✏️</span><h2>Croquis / Schéma</h2></div>
@@ -1489,7 +1479,7 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <!-- MENU AJOUTER AU RAPPORT — accordéon bleu, fermé par défaut -->
     <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow);">
       <div onclick="toggleExtrasMenu()" id="extras-menu-header"
@@ -1521,20 +1511,20 @@ textarea { resize: none; }
         </div>
       </div>
     </div>
- 
+
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(2)">←</button>
       <button class="btn-next" onclick="goSection(4)">Suivant → Fournitures</button>
     </div>
   </div>
- 
- 
- 
+
+
+
   <!-- ═══════════════════════════════════
        SECTION 4 : FOURNITURES & ÉVACUATIONS
   ════════════════════════════════════ -->
   <div class="section" id="sec-4">
- 
+
     <!-- ZONE SÉLECTION (toujours visible en haut) -->
     <div id="fournit-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
@@ -1544,30 +1534,30 @@ textarea { resize: none; }
         <div id="fournit-sel-list"></div>
       </div>
     </div>
- 
+
     <!-- BARRE RECHERCHE -->
     <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;display:flex;gap:8px;align-items:center;padding:10px 12px;">
       <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
         type="text" placeholder="Rechercher un produit…" id="fournit-search" oninput="fournitSearch(this.value)">
       <button onclick="fournitClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="fournit-clear">✕</button>
     </div>
- 
+
     <!-- CATALOGUE FOURNITURES -->
     <div id="fournit-catalogue"></div>
- 
+
     <!-- RÉCAP + FINALISER -->
- 
+
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(3)">←</button>
       <button class="btn-next" onclick="goSection(5)" style="background:var(--navy);">Suivant → Rapport</button>
     </div>
   </div>
- 
+
   <!-- ═══════════════════════════════════
        SECTION 5 : RAPPORTS
   ════════════════════════════════════ -->
   <div class="section" id="sec-5">
- 
+
     <!-- ONGLETS BROUILLON / VALIDÉS -->
     <div style="display:flex;gap:0;background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;">
       <button id="rap-tab-brouillon" onclick="showRapTab('brouillon')"
@@ -1579,7 +1569,7 @@ textarea { resize: none; }
         ✅ Validés
       </button>
     </div>
- 
+
     <!-- PANNEAU BROUILLON -->
     <div id="rap-panel-brouillon">
       <div id="recap-preview"></div>
@@ -1590,17 +1580,17 @@ textarea { resize: none; }
         </button>
       </div>
     </div>
- 
+
     <!-- PANNEAU VALIDÉS -->
     <div id="rap-panel-valides" style="display:none;">
       <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;" id="histo-subtitle">30 derniers jours</div>
       <div id="histo-inline"></div>
     </div>
- 
+
   </div>
- 
+
 </div><!-- /scroll-area -->
- 
+
 <!-- BOTTOM TAB BAR -->
 <div class="tab-bar">
   <button class="tab-item active" onclick="goSection(0)" id="tab-0">
@@ -1629,7 +1619,7 @@ textarea { resize: none; }
     <span id="histo-badge" style="display:none;position:absolute;top:6px;right:6px;background:var(--yellow);color:var(--navy);font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;padding:0 3px;line-height:16px;text-align:center;"></span>
   </button>
 </div>
- 
+
 <!-- OVERLAY: AJOUTER EMPLOYÉ -->
 <div class="overlay" id="overlay-employe" onclick="closeOverlay(event)">
   <div class="bottom-sheet">
@@ -1643,7 +1633,7 @@ textarea { resize: none; }
     <button class="btn-sheet-confirm" onclick="confirmAddEmploye()">Ajouter ✓</button>
   </div>
 </div>
- 
+
 <!-- OVERLAY: AJOUTER ÉQUIPEMENT LOCATION -->
 <div class="overlay" id="overlay-loc" onclick="closeOverlay(event)">
   <div class="bottom-sheet">
@@ -1667,7 +1657,7 @@ textarea { resize: none; }
     <button class="btn-sheet-confirm" onclick="confirmAddLoc()">Ajouter ✓</button>
   </div>
 </div>
- 
+
 <!-- ═══ OVERLAY ANNOTATION ═══ -->
 <div class="overlay" id="annotate-overlay" style="align-items:stretch;flex-direction:column;background:#111;">
   <!-- Toolbar haut -->
@@ -1697,10 +1687,10 @@ textarea { resize: none; }
       style="flex:1;min-width:60px;">
   </div>
 </div>
- 
- 
- 
- 
+
+
+
+
 <!-- ═══ PAGE HISTORIQUE ═══ -->
 <div class="histo-page" id="histo-page">
   <div class="histo-header">
@@ -1712,7 +1702,7 @@ textarea { resize: none; }
     <!-- rempli par JS -->
   </div>
 </div>
- 
+
 <!-- ═══ PAGE ÉDITION RAPPORT ═══ -->
 <div class="edit-page" id="edit-page">
   <div class="edit-header">
@@ -1761,11 +1751,11 @@ textarea { resize: none; }
     </div>
   </div>
 </div>
- 
+
 <script>
 // ─── DATA DEPUIS RESSOURCES ENTREPRISE ────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
- 
+
 // Lecture dynamique depuis les clés partagées du Hub Ressources
 function getResEquipe() {
   try { return JSON.parse(localStorage.getItem('rv6_equipe') || '[]'); } catch(e) { return []; }
@@ -1797,21 +1787,21 @@ function getResVehicules() {
 function getResMateriel() {
   try { return JSON.parse(localStorage.getItem('rv6_equipment') || '[]'); } catch(e) { return []; }
 }
- 
+
 // Noms des employés depuis Ressources
 function getNomPresets() {
   const equipe = getResEquipe();
   return equipe.map(e => e.nom || e.name || '').filter(Boolean);
 }
 let NOMS_PRESETS = [];
- 
+
 // Chantiers depuis Ressources
 function getChantiersForRapport() {
   const ch = getResChantiers();
   return ch.map(c => typeof c === 'string' ? c : (c.nom||c.name||c)).filter(Boolean);
 }
 let CHANTIERS = [];
- 
+
 // Équipements location — construits depuis Ressources
 function buildLocFromRessources() {
   // Engins = machines depuis rv6_m
@@ -1821,7 +1811,7 @@ function buildLocFromRessources() {
     label: m.nom || m.name || '—',
     unit: 'h'
   }));
- 
+
   // Véhicules depuis rv6_vehicles
   const vehicules = getResVehicules();
   const locVehicules = vehicules.map(v => ({
@@ -1829,7 +1819,7 @@ function buildLocFromRessources() {
     label: v.nom || '—',
     unit: 'p/j'
   }));
- 
+
   // Matériel depuis rv6_equipment
   const materiel = getResMateriel();
   const locMateriel = materiel.map(mt => ({
@@ -1837,22 +1827,22 @@ function buildLocFromRessources() {
     label: mt.nom || '—',
     unit: 'h'
   }));
- 
+
   return { locEngins, locVehicules, locMateriel };
 }
- 
+
 // Variables globales (peuplées à l'init)
 let LOC_VEHICULES = [];
 let LOC_MATERIEL  = [];
 let LOC_ENGINS    = [];
- 
+
 const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
 let state = {
   currentSection: 0,
   employes: [],
   selectedMeteo: '',
 };
- 
+
 // ─── INIT ──────────────────────────────────────────────────────
 function updateHeader() {
   const chantier = document.getElementById('rj-chantier').value.trim();
@@ -1867,10 +1857,10 @@ function updateHeader() {
   } else {
     subEl.textContent = 'Nouveau rapport';
   }
-  // Vérifier si des heures machines correspondent → afficher la barre de sync
-  scheduleSyncCheck();
+  // Rafraîchir les badges d'heures dans l'accordéon engins
+  refreshEnginBadges();
 }
- 
+
 window.addEventListener('DOMContentLoaded', () => {
   // Charger les données depuis Ressources entreprise
   NOMS_PRESETS = getNomPresets();
@@ -1879,7 +1869,7 @@ window.addEventListener('DOMContentLoaded', () => {
   LOC_VEHICULES = loc.locVehicules;
   LOC_MATERIEL  = loc.locMateriel;
   LOC_ENGINS    = loc.locEngins;
- 
+
   setDefaultDate();
   buildChantierChips();
   buildNomChips();
@@ -1888,17 +1878,15 @@ window.addEventListener('DOMContentLoaded', () => {
   loadDraft();
   renderEmployes();
   updateHeader();
-  // Vérification initiale des heures machines (après chargement du brouillon)
-  setTimeout(() => syncMachineHoursToLocation(false), 300);
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
   document.getElementById('rj-date').addEventListener('change', updateHeader);
 });
- 
+
 function setDefaultDate() {
   const d = document.getElementById('rj-date');
   d.value = new Date().toISOString().split('T')[0];
 }
- 
+
 function buildChantierChips() {
   const c = document.getElementById('chantier-chips');
   CHANTIERS.forEach(ch => {
@@ -1914,7 +1902,7 @@ function buildChantierChips() {
     c.appendChild(b);
   });
 }
- 
+
 function buildNomChips() {
   const c = document.getElementById('nom-chips');
   NOMS_PRESETS.slice(0,4).forEach(n => {
@@ -1929,22 +1917,51 @@ function buildNomChips() {
     c.appendChild(b);
   });
 }
- 
+
 function buildLocationItems() {
   // Charger les équipements custom sauvegardés
   const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
   if (ressources.vehicules) LOC_VEHICULES.push(...ressources.vehicules);
   if (ressources.materiel)  LOC_MATERIEL.push(...ressources.materiel);
   if (ressources.engins)    LOC_ENGINS.push(...ressources.engins);
- 
+
   buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
   buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
   buildLocGroup('loc-engins',    LOC_ENGINS,    'engins');
 }
- 
+
 // État sélection location : { id: { label, unit, qty } }
 let locSelection = {};
- 
+
+// ─── HEURES MACHINES → LOCATION ──────────────────────────────
+// Retourne la somme des heures enregistrées dans rv6_e pour
+// cette machine à la date du rapport (toutes chantiers confondus)
+function getEnginHoursForDate(machineName) {
+  const date = document.getElementById('rj-date')?.value;
+  if (!date || !machineName) return 0;
+  try {
+    const entries = JSON.parse(localStorage.getItem('rv6_e') || '[]');
+    return entries
+      .filter(e => e.date === date && (e.machine||'').toLowerCase() === machineName.toLowerCase())
+      .reduce((s, e) => s + parseFloat(e.total || 0), 0);
+  } catch(e) { return 0; }
+}
+
+// Rafraîchit les badges d'heures dans l'accordéon engins (appelé quand la date change)
+function refreshEnginBadges() {
+  LOC_ENGINS.forEach(engin => {
+    const badge = document.getElementById(`engin-h-${engin.id}`);
+    if (!badge) return;
+    const h = getEnginHoursForDate(engin.label);
+    if (h > 0) {
+      badge.textContent = `${parseFloat(h.toFixed(2))} h`;
+      badge.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+    }
+  });
+}
+
 function buildLocGroup(containerId, items, groupKey) {
   const c = document.getElementById(containerId);
   items.forEach(item => {
@@ -1952,29 +1969,43 @@ function buildLocGroup(containerId, items, groupKey) {
     row.className = 'fournit-row';
     row.style.cursor = 'pointer';
     row.dataset.id = item.id;
- 
+
     const isSelected = !!locSelection[item.id];
     const nameSpan = document.createElement('span');
     nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
     nameSpan.textContent = `${item.label} (${item.unit})`;
     nameSpan.id = `locname-${item.id}`;
- 
+
+    // Badge heures machines (engins uniquement)
+    if (groupKey === 'engins') {
+      const h = getEnginHoursForDate(item.label);
+      const badge = document.createElement('span');
+      badge.id = `engin-h-${item.id}`;
+      badge.style.cssText = 'font-size:10px;font-weight:700;background:rgba(26,127,114,.15);color:#0F6E56;padding:2px 8px;border-radius:10px;margin-left:6px;flex-shrink:0;';
+      badge.style.display = h > 0 ? 'inline-block' : 'none';
+      if (h > 0) badge.textContent = `${parseFloat(h.toFixed(2))} h`;
+      nameSpan.appendChild(badge);
+    }
+
     const chk = document.createElement('span');
     chk.id = `locchk-${item.id}`;
     chk.style.cssText = 'font-size:18px;flex-shrink:0;';
     chk.textContent = isSelected ? '✅' : '⬜';
- 
+
     row.appendChild(nameSpan);
     row.appendChild(chk);
     row.onclick = () => toggleLocSelect(item);
     c.appendChild(row);
   });
 }
- 
+
 function toggleLocSelect(item) {
   const isNow = !locSelection[item.id];
   if (isNow) {
-    locSelection[item.id] = { label: item.label, unit: item.unit, qty: 0 };
+    // Pré-remplir avec les heures machines du jour si disponibles
+    const machineH = getEnginHoursForDate(item.label);
+    const qty = machineH > 0 ? parseFloat(machineH.toFixed(2)) : 0;
+    locSelection[item.id] = { label: item.label, unit: item.unit, qty, fromMachines: machineH > 0 };
   } else {
     delete locSelection[item.id];
   }
@@ -1985,23 +2016,23 @@ function toggleLocSelect(item) {
   renderLocSelectionZone();
   autoSaveDraft();
 }
- 
+
 function renderLocSelectionZone() {
   const zone = document.getElementById('loc-selection-zone');
   const list = document.getElementById('loc-sel-list');
   const items = Object.entries(locSelection);
- 
+
   if (items.length === 0) { zone.style.display = 'none'; return; }
   zone.style.display = 'block';
   list.innerHTML = '';
- 
+
   items.forEach(([id, sel]) => {
     const row = document.createElement('div');
     row.style.cssText = 'display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.08);';
- 
+
     const allItems = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS];
     const item = allItems.find(i => i.id === id);
- 
+
     row.innerHTML = `
       <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label}${sel.fromMachines ? ' <span style=\"font-size:9px;background:rgba(26,127,114,.5);color:#fff;padding:1px 5px;border-radius:8px;margin-left:5px;font-weight:700;letter-spacing:.3px;vertical-align:middle;\">🚜 auto</span>' : ''} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
       <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
@@ -2012,13 +2043,13 @@ function renderLocSelectionZone() {
         value="${sel.qty > 0 ? sel.qty : ''}">
       <button class="loc-del" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;padding:2px 4px;flex-shrink:0;">✕</button>
     `;
- 
+
     const btnQrt  = row.querySelector('.loc-plus-qrt');
     const btnHalf = row.querySelector('.loc-plus-half');
     const btnOne  = row.querySelector('.loc-plus-one');
     const input   = row.querySelector('input');
     const btnDel  = row.querySelector('.loc-del');
- 
+
     const updateQty = (val) => {
       locSelection[id].qty = Math.round(val * 4) / 4;
       locSelection[id].fromMachines = false; // saisie manuelle — ne plus écraser
@@ -2042,98 +2073,12 @@ function renderLocSelectionZone() {
       renderLocSelectionZone();
       autoSaveDraft();
     };
- 
+
     list.appendChild(row);
   });
 }
- 
- 
-// ─── SYNC MACHINES → LOCATION ─────────────────────────────────
-// Lit rv6_e, filtre par date+chantier, injecte les heures dans locSelection
-function syncMachineHoursToLocation(force) {
-  const date     = document.getElementById('rj-date').value;
-  const chantier = document.getElementById('rj-chantier').value.trim();
-  const bar      = document.getElementById('sync-machines-bar');
- 
-  if (!date || !chantier) { if (bar) bar.style.display = 'none'; return; }
- 
-  let entries = [];
-  try { entries = JSON.parse(localStorage.getItem('rv6_e') || '[]'); } catch(e) { return; }
- 
-  // Filtrer par date + chantier exact
-  const matching = entries.filter(e => e.date === date && e.chantier === chantier);
- 
-  // Toujours afficher la barre si des entrées existent (même sans engins reconnus)
-  if (!matching.length) { if (bar) bar.style.display = 'none'; return; }
- 
-  // Grouper par machine, sommer les heures
-  const byMachine = {};
-  matching.forEach(e => {
-    const name = (e.machine || '').trim();
-    if (!name) return;
-    byMachine[name] = (byMachine[name] || 0) + parseFloat(e.total || 0);
-  });
- 
-  const machineNames = Object.keys(byMachine);
- 
-  // Mettre à jour la barre info
-  if (bar) {
-    const detail = machineNames.map(n => `${n} : ${byMachine[n].toFixed(2)} h`).join(' · ');
-    document.getElementById('sync-machines-detail').textContent = detail;
-    document.getElementById('sync-machines-label').textContent =
-      `${machineNames.length} machine${machineNames.length > 1 ? 's' : ''} enregistrée${machineNames.length > 1 ? 's' : ''} ce jour`;
-    bar.style.display = 'flex';
-  }
- 
-  if (!force) return; // Sans force, on affiche seulement la barre, on n'injecte pas
- 
-  let injected = 0;
-  machineNames.forEach(machineName => {
-    const totalH = byMachine[machineName];
-    // Chercher l'engin correspondant dans LOC_ENGINS (insensible à la casse)
-    const engin = LOC_ENGINS.find(e =>
-      (e.label || '').toLowerCase() === machineName.toLowerCase()
-    );
-    if (!engin) return;
- 
-    const key = engin.id;
-    // Ne pas écraser une saisie manuelle (fromMachines absent = saisie manuelle)
-    if (locSelection[key] && !locSelection[key].fromMachines) return;
- 
-    const qty = Math.round(parseFloat(totalH.toFixed(2)) * 100) / 100;
-    locSelection[key] = { label: engin.label, unit: engin.unit || 'h', qty, fromMachines: true };
- 
-    // Cocher dans l'accordéon
-    const nameEl = document.getElementById(`locname-${key}`);
-    const chkEl  = document.getElementById(`locchk-${key}`);
-    if (nameEl) nameEl.classList.add('active');
-    if (chkEl)  chkEl.textContent = '✅';
- 
-    injected++;
-  });
- 
-  if (injected > 0) {
-    renderLocSelectionZone();
-    autoSaveDraft();
-    const t = document.getElementById('toast');
-    t.textContent = `🚜 ${injected} engin${injected > 1 ? 's' : ''} injecté${injected > 1 ? 's' : ''} dans Location`;
-    t.classList.add('show');
-    setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2500);
-  } else if (machineNames.length > 0) {
-    const t = document.getElementById('toast');
-    t.textContent = `⚠ Engins non trouvés dans Ressources (${machineNames.join(', ')})`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-}
- 
-// Debounce pour updateHeader
-let _syncDebounce = null;
-function scheduleSyncCheck() {
-  clearTimeout(_syncDebounce);
-  _syncDebounce = setTimeout(() => syncMachineHoursToLocation(false), 400);
-}
- 
+
+
 function toggleAccord(key) {
   const header = document.querySelector(`#accord-${key} .accord-header`);
   const body   = document.getElementById(`body-${key}`);
@@ -2141,18 +2086,18 @@ function toggleAccord(key) {
   header.classList.toggle('open', !isOpen);
   body.classList.toggle('open', !isOpen);
 }
- 
+
 function openAccord(key) {
   document.querySelector(`#accord-${key} .accord-header`).classList.add('open');
   document.getElementById(`body-${key}`).classList.add('open');
 }
- 
+
 function updateLocSummary(groupKey) {
   const groupMap = { vehicules: LOC_VEHICULES, materiel: LOC_MATERIEL, engins: LOC_ENGINS };
   const items = groupMap[groupKey];
   const filledZone = document.getElementById(`filled-${groupKey}`);
   const innerZone  = document.getElementById(`loc-${groupKey}`);
- 
+
   let filledCount = 0;
   items.forEach(item => {
     const input = document.getElementById(`loc-${item.id}`);
@@ -2161,7 +2106,7 @@ function updateLocSummary(groupKey) {
     const hasVal = val && parseFloat(val) > 0;
     const row = document.getElementById(`locrow-${item.id}`);
     if (!row) return;
- 
+
     if (hasVal) {
       // Déplacer dans la zone toujours visible
       if (row.parentElement !== filledZone) filledZone.appendChild(row);
@@ -2171,7 +2116,7 @@ function updateLocSummary(groupKey) {
       if (row.parentElement !== innerZone) innerZone.appendChild(row);
     }
   });
- 
+
   const sumEl = document.getElementById(`sum-${groupKey}`);
   if (filledCount > 0) {
     sumEl.textContent = `${filledCount} utilisé${filledCount > 1 ? 's' : ''}`;
@@ -2181,10 +2126,10 @@ function updateLocSummary(groupKey) {
     sumEl.classList.add('empty');
   }
 }
- 
+
 function buildMatChips() {
 }
- 
+
 function buildMatChipGroup(containerId, items, listId, badgeId) {
   const c = document.getElementById(containerId);
   if (!c) return; // sécurité si l'élément n'existe pas
@@ -2196,7 +2141,7 @@ function buildMatChipGroup(containerId, items, listId, badgeId) {
     c.appendChild(b);
   });
 }
- 
+
 // ─── NAVIGATION ────────────────────────────────────────────────
 function goSection(n) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -2209,57 +2154,57 @@ function goSection(n) {
   if (n === 4) { buildFournitCatalogue(); }
   if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
 }
- 
+
 function updateStepBar(n) {
   for(let i = 0; i < 6; i++) {
     const d = document.getElementById(`dot-${i}`);
     if (d) d.className = 'step-dot' + (i < n ? ' done' : i === n ? ' active' : '');
   }
 }
- 
+
 // ─── CHIPS HELPERS ─────────────────────────────────────────────
 function selectChip(el, group) {
   el.closest('.chips, #meteo-chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   if (group === 'meteo') state.selectedMeteo = el.textContent;
 }
- 
+
 // ─── EMPLOYÉS ──────────────────────────────────────────────────
 function renderEmployes() {
   const c = document.getElementById('employes-list');
   c.innerHTML = '';
- 
+
   // Total global
   const total = state.employes.reduce((s,e) => s + parseFloat(e.heures||0), 0);
   const totEl = document.getElementById('mo-total-global');
   const cntEl = document.getElementById('mo-count-global');
   if (totEl) totEl.textContent = total.toFixed(2);
   if (cntEl) cntEl.textContent = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
- 
+
   const tous = [...new Set([...NOMS_PRESETS, ...state.employes.map(e=>e.nom)])];
- 
+
   tous.forEach(nom => {
     const idx    = state.employes.findIndex(e => e.nom === nom);
     const heures = idx >= 0 ? parseFloat(state.employes[idx].heures||0) : 0;
     const actif  = heures > 0;
- 
+
     const row = document.createElement('div');
     row.className = 'mo-row';
- 
+
     const nameSpan = document.createElement('span');
     nameSpan.className = 'mo-row-nom' + (actif ? ' actif' : '');
     nameSpan.textContent = nom;
- 
+
     const btnDemi = document.createElement('button');
     btnDemi.className = 'mo-quick-btn';
     btnDemi.textContent = '+4h45';
     btnDemi.addEventListener('click', () => moAddHeures(nom, 4.75));
- 
+
     const btnJour = document.createElement('button');
     btnJour.className = 'mo-quick-btn jour';
     btnJour.textContent = '+8h45';
     btnJour.addEventListener('click', () => moAddHeures(nom, 8.75));
- 
+
     const input = document.createElement('input');
     input.type = 'number';
     input.className = 'loc-input';
@@ -2267,24 +2212,24 @@ function renderEmployes() {
     input.min = 0; input.max = 24; input.step = 0.25;
     input.value = heures > 0 ? heures : '';
     input.addEventListener('change', () => moSetHeures(nom, input.value));
- 
+
     const resetBtn = document.createElement('button');
     resetBtn.style.cssText = 'background:none;border:none;color:var(--text-light);font-size:16px;cursor:pointer;padding:2px 4px;flex-shrink:0;opacity:' + (actif ? '1' : '0') + ';pointer-events:' + (actif ? 'auto' : 'none') + ';';
     resetBtn.textContent = '✕';
     resetBtn.addEventListener('click', () => moSetHeures(nom, 0));
- 
+
     row.appendChild(nameSpan);
     row.appendChild(btnDemi);
     row.appendChild(btnJour);
     row.appendChild(input);
     row.appendChild(resetBtn);
     c.appendChild(row);
- 
+
     const sep = document.createElement('div');
     sep.style.cssText = 'height:1px;background:var(--border);margin:0';
     c.appendChild(sep);
   });
- 
+
   // Bouton ajouter
   const addBtn = document.createElement('button');
   addBtn.className = 'btn-add-employe';
@@ -2293,14 +2238,14 @@ function renderEmployes() {
   addBtn.addEventListener('click', openAddEmploye);
   c.appendChild(addBtn);
 }
- 
+
 function moAddHeures(nom, val) {
   let idx = state.employes.findIndex(e => e.nom === nom);
   if (idx === -1) { state.employes.push({nom, heures: 0}); idx = state.employes.length - 1; }
   state.employes[idx].heures = Math.min(24, parseFloat(state.employes[idx].heures||0) + val);
   renderEmployes();
 }
- 
+
 function moSetHeures(nom, val) {
   const h = parseFloat(val) || 0;
   let idx = state.employes.findIndex(e => e.nom === nom);
@@ -2312,8 +2257,8 @@ function moSetHeures(nom, val) {
   }
   renderEmployes();
 }
- 
- 
+
+
 function openAddEmploye() {
   const c = document.getElementById('employe-presets');
   c.innerHTML = '';
@@ -2331,7 +2276,7 @@ function openAddEmploye() {
   document.getElementById('new-employe-nom').value = '';
   document.getElementById('overlay-employe').classList.add('open');
 }
- 
+
 function confirmAddEmploye() {
   const nom = document.getElementById('new-employe-nom').value.trim();
   if (!nom) return;
@@ -2339,16 +2284,16 @@ function confirmAddEmploye() {
   renderEmployes();
   document.getElementById('overlay-employe').classList.remove('open');
 }
- 
+
 function closeOverlay(e) {
   if (e.target.classList.contains('overlay')) {
     e.target.classList.remove('open');
   }
 }
- 
+
 // ─── AJOUT LOCATION ────────────────────────────────────────────
 let currentLocGroup = null;
- 
+
 function openAddLoc(groupKey, icon) {
   currentLocGroup = groupKey;
   const titles = { vehicules: `${icon} Ajouter un véhicule`, materiel: `${icon} Ajouter du matériel`, engins: `${icon} Ajouter un engin` };
@@ -2358,28 +2303,28 @@ function openAddLoc(groupKey, icon) {
   document.querySelectorAll('#new-loc-unit-chips .chip').forEach(c => c.classList.remove('selected'));
   document.getElementById('overlay-loc').classList.add('open');
 }
- 
+
 function selectLocUnit(el) {
   document.querySelectorAll('#new-loc-unit-chips .chip').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   document.getElementById('new-loc-unit-custom').value = '';
 }
- 
+
 function confirmAddLoc() {
   const nom = document.getElementById('new-loc-nom').value.trim();
   if (!nom) return;
   const selectedChip = document.querySelector('#new-loc-unit-chips .chip.selected');
   const unit = selectedChip ? selectedChip.textContent : (document.getElementById('new-loc-unit-custom').value.trim() || 'h');
   const groupKey = currentLocGroup;
- 
+
   // Générer un id unique
   const id = 'custom-' + Date.now();
   const item = { id, label: nom, unit };
- 
+
   // Ajouter à la liste en mémoire
   const groupMap = { vehicules: LOC_VEHICULES, materiel: LOC_MATERIEL, engins: LOC_ENGINS };
   groupMap[groupKey].push(item);
- 
+
   // Ajouter la ligne dans l'accordéon
   const innerZone = document.getElementById(`loc-${groupKey}`);
   const row = document.createElement('div');
@@ -2393,29 +2338,29 @@ function confirmAddLoc() {
       oninput="updateLocSummary('${groupKey}')">
   `;
   innerZone.appendChild(row);
- 
+
   // Sauvegarder dans localStorage Ressources (clé partagée avec app principale)
   const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
   if (!ressources[groupKey]) ressources[groupKey] = [];
   ressources[groupKey].push(item);
   localStorage.setItem('rv6_loc_custom', JSON.stringify(ressources));
- 
+
   document.getElementById('overlay-loc').classList.remove('open');
- 
+
   // Toast confirmation
   const t = document.getElementById('toast');
   t.textContent = `✅ "${nom}" ajouté et sauvegardé`;
   t.classList.add('show');
   setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2500);
 }
- 
+
 // ─── EXTRAS (Métrés / Photos / Bons / Croquis) ────────────────
 const extrasState = { metres: false, photos: false, bons: false, croquis: false };
 const extrasLabels = { metres: '📐 Métrés', photos: '📷 Photos', bons: '🧾 Bons', croquis: '✏️ Croquis' };
 const photosData = [];
 const bonsData = [];
 let extrasMenuOpen = false;
- 
+
 function toggleExtrasMenu() {
   extrasMenuOpen = !extrasMenuOpen;
   const body = document.getElementById('extras-menu-body');
@@ -2423,7 +2368,7 @@ function toggleExtrasMenu() {
   body.style.maxHeight = extrasMenuOpen ? '400px' : '0';
   chev.style.transform = extrasMenuOpen ? 'rotate(180deg)' : '';
 }
- 
+
 function toggleExtra(key) {
   extrasState[key] = !extrasState[key];
   const sw = document.getElementById(`sw-${key}`);
@@ -2433,16 +2378,16 @@ function toggleExtra(key) {
   if (bloc) bloc.style.display = extrasState[key] ? 'block' : 'none';
   if (key === 'croquis' && extrasState[key]) setTimeout(initSketch, 100);
 }
- 
+
 // ── CROQUIS ──
 let sketchCtx, sketchDrawing = false, sketchLast = null, sketchEraser = false;
- 
+
 function initSketch() {
   const canvas = document.getElementById('sketch-canvas');
   if (canvas._init) return;
   canvas._init = true;
   sketchCtx = canvas.getContext('2d');
- 
+
   const getPos = (e) => {
     const r = canvas.getBoundingClientRect();
     const scaleX = canvas.width / r.width;
@@ -2450,7 +2395,7 @@ function initSketch() {
     const src = e.touches ? e.touches[0] : e;
     return { x: (src.clientX - r.left) * scaleX, y: (src.clientY - r.top) * scaleY };
   };
- 
+
   const start = (e) => { e.preventDefault(); sketchDrawing = true; sketchLast = getPos(e); };
   const move  = (e) => {
     if (!sketchDrawing) return;
@@ -2472,7 +2417,7 @@ function initSketch() {
     sketchLast = pos;
   };
   const stop = () => { sketchDrawing = false; sketchLast = null; };
- 
+
   canvas.addEventListener('mousedown', start);
   canvas.addEventListener('mousemove', move);
   canvas.addEventListener('mouseup', stop);
@@ -2480,7 +2425,7 @@ function initSketch() {
   canvas.addEventListener('touchmove', move,  { passive: false });
   canvas.addEventListener('touchend', stop);
 }
- 
+
 function setSketchEraser() {
   sketchEraser = !sketchEraser;
   const btn = document.getElementById('btn-eraser');
@@ -2488,12 +2433,12 @@ function setSketchEraser() {
   btn.style.color = sketchEraser ? 'white' : 'var(--text-muted)';
   btn.textContent = sketchEraser ? '✏️ Stylo' : '◻️ Gomme';
 }
- 
+
 function clearSketch() {
   const canvas = document.getElementById('sketch-canvas');
   if (sketchCtx) sketchCtx.clearRect(0, 0, canvas.width, canvas.height);
 }
- 
+
 // ── PHOTOS ──
 // ── COMPRESSION ──
 function compressImage(file, maxPx = 1200, quality = 0.78) {
@@ -2515,7 +2460,7 @@ function compressImage(file, maxPx = 1200, quality = 0.78) {
     reader.readAsDataURL(file);
   });
 }
- 
+
 // ── PHOTOS ──
 function handlePhotos(input) {
   const grid = document.getElementById('photos-grid');
@@ -2536,7 +2481,7 @@ function handlePhotos(input) {
   input.value = '';
 }
 function delPhoto(idx) { photosData[idx] = null; document.getElementById(`photo-${idx}`)?.remove(); }
- 
+
 // ── BONS ──
 function handleBons(input) {
   const grid = document.getElementById('bons-grid');
@@ -2557,22 +2502,22 @@ function handleBons(input) {
   input.value = '';
 }
 function delBon(idx) { bonsData[idx] = null; document.getElementById(`bon-${idx}`)?.remove(); }
- 
+
 // ── ÉDITEUR D'ANNOTATION ──
 let annotateIdx = null, annotateType = null;
 let annoCanvas, annoCtx, annoDrawing = false, annoLast = null;
 let annoTool = 'stylo', annoColor = '#e53e3e', annoSize = 3;
 let annoHistory = [];
- 
+
 function openAnnotate(idx, type) {
   annotateIdx = idx;
   annotateType = type;
   const src = type === 'photo' ? photosData[idx] : bonsData[idx];
   if (!src) return;
- 
+
   const overlay = document.getElementById('annotate-overlay');
   overlay.classList.add('open');
- 
+
   const img = new Image();
   img.onload = () => {
     annoCanvas = document.getElementById('anno-canvas');
@@ -2591,7 +2536,7 @@ function openAnnotate(idx, type) {
   };
   img.src = src;
 }
- 
+
 function initAnnoEvents() {
   annoCanvas.onmousedown = annoCanvas.ontouchstart = (e) => {
     e.preventDefault();
@@ -2638,7 +2583,7 @@ function initAnnoEvents() {
     saveAnnoHistory();
   };
 }
- 
+
 let annoStartPos = null;
 function getAnnoPos(e) {
   const r = annoCanvas.getBoundingClientRect();
@@ -2646,11 +2591,11 @@ function getAnnoPos(e) {
   return { x: src.clientX - r.left, y: src.clientY - r.top };
 }
 function getAnnoStartPos() { return annoStartPos; }
- 
+
 // Track start position for shapes
 document.addEventListener('mousedown', e => { if (annoCanvas && e.target === annoCanvas) annoStartPos = getAnnoPos(e); });
 document.addEventListener('touchstart', e => { if (annoCanvas && e.target === annoCanvas) annoStartPos = getAnnoPos(e.touches[0]); }, { passive: false });
- 
+
 function drawShape(from, to) {
   annoCtx.strokeStyle = annoColor;
   annoCtx.lineWidth = annoSize * 2;
@@ -2680,24 +2625,24 @@ function drawShape(from, to) {
     annoCtx.stroke();
   }
 }
- 
+
 function saveAnnoHistory() {
   annoHistory.push(annoCtx.getImageData(0, 0, annoCanvas.width, annoCanvas.height));
   if (annoHistory.length > 20) annoHistory.shift();
 }
- 
+
 function annoUndo() {
   if (annoHistory.length <= 1) return;
   annoHistory.pop();
   annoCtx.putImageData(annoHistory[annoHistory.length - 1], 0, 0);
 }
- 
+
 function setAnnoTool(tool, btn) {
   annoTool = tool;
   document.querySelectorAll('.anno-tool-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
- 
+
 function confirmAnnotate() {
   const data = annoCanvas.toDataURL('image/jpeg', 0.88);
   if (annotateType === 'photo') {
@@ -2711,26 +2656,26 @@ function confirmAnnotate() {
   }
   document.getElementById('annotate-overlay').classList.remove('open');
 }
- 
+
 function closeAnnotate() {
   document.getElementById('annotate-overlay').classList.remove('open');
 }
- 
- 
- 
- 
- 
- 
+
+
+
+
+
+
 let metresCount = 0;
 let subCount = 0;
 const metreTypes = {};
- 
+
 function addMetreRow(data = {}) {
   const c = document.getElementById('metres-list');
   const id = ++metresCount;
   const type = data.type || 'coupe';
   metreTypes[id] = type;
- 
+
   const div = document.createElement('div');
   div.className = 'metre-card';
   div.id = `mc-${id}`;
@@ -2755,25 +2700,25 @@ function addMetreRow(data = {}) {
     </div>
   `;
   c.appendChild(div);
- 
+
   // Première sous-ligne
   if (data.subs?.length) data.subs.forEach(s => addMetreSub(id, s));
   else addMetreSub(id);
- 
+
   updateMetreBadge();
 }
- 
+
 function addMetreSub(cardId, data = {}) {
   const cardType = metreTypes[cardId] || 'surface';
   const container = document.getElementById(`msubs-${cardId}`);
   const sid = ++subCount;
   const formule = data.formule || 'rect';
   subFormules[sid] = formule;
- 
+
   const row = document.createElement('div');
   row.className = 'metre-subline';
   row.id = `msub-${sid}`;
- 
+
   const FORMES_OPTS = {
     coupe:   ['rect','cercle','demicercle'],
     surface: ['rect','triangle','trapeze','cercle','demicercle'],
@@ -2786,14 +2731,14 @@ function addMetreSub(cardId, data = {}) {
     cercle:     { coupe:'○', surface:'○', volume:'○' },
     demicercle: { coupe:'◐', surface:'◐', volume:'◐' },
   };
- 
+
   const opts = FORMES_OPTS[cardType] || FORMES_OPTS.surface;
   const label = FORMES_LABELS[formule]?.[cardType] || '□';
- 
+
   const cycleBtn = `<button id="mfb-${sid}"
     style="background:var(--navy);border:none;color:white;font-size:13px;font-weight:700;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;font-family:inherit;padding:0;"
     onclick="cycleFormule(${sid},${cardId})">${label}</button>`;
- 
+
   row.innerHTML = `
     <div style="display:flex;align-items:center;gap:4px;flex-wrap:nowrap;width:100%;">
       ${cycleBtn}
@@ -2807,7 +2752,7 @@ function addMetreSub(cardId, data = {}) {
   container.appendChild(row);
   if (data.l || data.d || data.b1) calcSub(sid, cardId);
 }
- 
+
 // Retourne la valeur formatée (2 déc. min, 3 si saisi)
 function fmtInput(val) {
   const n = parseFloat(String(val).replace(',', '.'));
@@ -2816,19 +2761,19 @@ function fmtInput(val) {
   const dec = s.includes('.') ? s.split('.')[1].length : 0;
   return dec >= 3 ? n.toFixed(3) : n.toFixed(2);
 }
- 
+
 // Formate le champ au blur
 function fmtInputEl(input) {
   const formatted = fmtInput(input.value);
   if (formatted !== '') input.value = formatted;
 }
- 
+
 // Lecture numérique d'un champ texte
 function dimVal(id) {
   const el = document.getElementById(id);
   return el ? parseFloat(el.value.replace(',', '.')) || 0 : 0;
 }
- 
+
 // Navigation clavier entre champs
 function metreNav(e, input) {
   if (e.key === 'Enter' || e.key === 'Tab') {
@@ -2848,9 +2793,9 @@ function metreNav(e, input) {
     if (prev) { prev.focus(); prev.select(); }
   }
 }
- 
+
 const subFormules = {};
- 
+
 function buildSubDims(sid, cardId, cardType, formule, data = {}) {
   const inp = (idName, val, ph) =>
     `<input id="${idName}" type="text" inputmode="decimal" class="metre-dim"
@@ -2875,7 +2820,7 @@ function buildSubDims(sid, cardId, cardType, formule, data = {}) {
   if (cardType === 'surface') return inp(`msl-${sid}`, data.l, 'L') + x + inp(`msw-${sid}`, data.w, 'l');
   return inp(`msl-${sid}`, data.l, 'L') + x + inp(`msw-${sid}`, data.w, 'l') + x + inp(`msh-${sid}`, data.h, 'H');
 }
- 
+
 function cycleFormule(sid, cardId) {
   const cardType = metreTypes[cardId] || 'surface';
   const opts = {
@@ -2891,16 +2836,16 @@ function cycleFormule(sid, cardId) {
   const cur = subFormules[sid] || 'rect';
   const next = list[(list.indexOf(cur) + 1) % list.length];
   subFormules[sid] = next;
- 
+
   const btn = document.getElementById(`mfb-${sid}`);
   if (btn) btn.textContent = labels[next] || '□';
- 
+
   const dimsDiv = document.getElementById(`msdims-${sid}`);
   if (dimsDiv) dimsDiv.innerHTML = buildSubDims(sid, cardId, cardType, next);
   calcSub(sid, cardId);
 }
- 
- 
+
+
 function calcSubVal(sid, cardId) {
   const cardType = metreTypes[cardId] || 'surface';
   const formule  = subFormules[sid] || 'rect';
@@ -2911,7 +2856,7 @@ function calcSubVal(sid, cardId) {
   const b2  = dimVal(`msb2-${sid}`);
   const d   = dimVal(`msd-${sid}`);
   const r   = d / 2;
- 
+
   if (formule === 'cercle') {
     if (cardType === 'coupe')   return Math.PI * d;
     if (cardType === 'surface') return Math.PI * r * r;
@@ -2934,7 +2879,7 @@ function calcSubVal(sid, cardId) {
   if (cardType === 'surface') return l * w;
   return l * w * h;
 }
- 
+
 function calcSub(sid, cardId) {
   const type = metreTypes[cardId] || 'surface';
   const unit = type==='coupe'?'ml':type==='volume'?'m³':'m²';
@@ -2943,7 +2888,7 @@ function calcSub(sid, cardId) {
   if (el) el.textContent = sub > 0 ? fmtNum(sub)+' '+unit : '—';
   calcMetreTotal(cardId);
 }
- 
+
 function calcMetreTotal(cardId) {
   let total = 0;
   document.querySelectorAll(`#msubs-${cardId} .metre-subline`).forEach(row => {
@@ -2953,9 +2898,9 @@ function calcMetreTotal(cardId) {
   const el = document.getElementById(`mt-val-${cardId}`);
   if (el) el.textContent = total > 0 ? fmtNum(total) : '—';
 }
- 
- 
- 
+
+
+
 function setMetreType(id, type, btn) {
   btn.closest('.metre-type-btns').querySelectorAll('.metre-type-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -2967,7 +2912,7 @@ function setMetreType(id, type, btn) {
   container.innerHTML = '';
   for (let i = 0; i < count; i++) addMetreSub(id);
 }
- 
+
 function delMetreSub(rowId, cardId) {
   const container = document.getElementById(`msubs-${cardId}`);
   // Garder au moins 1 ligne
@@ -2975,29 +2920,29 @@ function delMetreSub(rowId, cardId) {
   document.getElementById(rowId)?.remove();
   calcMetreTotal(cardId);
 }
- 
+
 function delMetreCard(id) {
   document.getElementById(id)?.remove();
   updateMetreBadge();
 }
- 
+
 function fmtNum(n) {
   // Toujours au moins 2 décimales, max 3 si nécessaire
   const s3 = n.toFixed(3);
   // Si le 3e chiffre après virgule est 0, on affiche 2 décimales
   return s3.endsWith('0') ? n.toFixed(2) : s3;
 }
- 
+
 function updateMetreBadge() {
   const badge = document.getElementById('badge-metres');
   if (badge) badge.textContent = document.getElementById('metres-list')?.children.length || 0;
 }
- 
- 
+
+
 function addFournitRow(listId, badgeId, mat = '') {
   addFournitRowWithMat(listId, badgeId, mat);
 }
- 
+
 let fournitCount = 0;
 function addFournitRowWithMat(listId, badgeId, mat = '') {
   const c = document.getElementById(listId);
@@ -3014,37 +2959,37 @@ function addFournitRowWithMat(listId, badgeId, mat = '') {
   c.appendChild(row);
   updateBadge(badgeId, listId);
 }
- 
+
 function delRow(rowId, badgeId, listId) {
   document.getElementById(rowId)?.remove();
   updateBadge(badgeId, listId);
 }
- 
+
 function updateBadge(badgeId, listId) {
   const cnt = document.getElementById(listId)?.children.length || 0;
   const b = document.getElementById(badgeId);
   if (b) b.textContent = cnt;
 }
- 
+
 // ─── RÉCAP PREVIEW ─────────────────────────────────────────────
 function buildRecapPreview() {
   const date = document.getElementById('rj-date').value;
   const nom = document.getElementById('rj-nom').value || '—';
   const chantier = document.getElementById('rj-chantier').value || '—';
- 
+
   const totalMO = state.employes.reduce((s,e) => s + parseFloat(e.heures||0), 0);
   const nEmp = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
- 
+
   const travaux = document.getElementById('tx-travaux').value || '';
   const nMetres = document.getElementById('metres-list')?.children.length || 0;
   // Location summary
   const locFilled = Object.entries(locSelection).filter(([,sel]) => sel.qty > 0);
- 
+
   // Fournitures catalogue
   const fournitItems = Object.entries(fournitSelection).filter(([,v]) => v.qty && parseFloat(v.qty) > 0);
- 
+
   const dateStr = date ? new Date(date + 'T12:00:00').toLocaleDateString('fr-CH', {weekday:'long', day:'numeric', month:'long'}) : '—';
- 
+
   document.getElementById('recap-preview').innerHTML = `
     <div class="preview-section">
       <h4>📋 En-tête</h4>
@@ -3077,1246 +3022,4 @@ function buildRecapPreview() {
       <p>${travaux || '<span class="preview-empty">Aucune description</span>'}</p>
       ${nMetres > 0 ? (() => {
         const ms = collectData().metres;
-        return ms.map(m => `
-          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;">
-            <span style="color:var(--text-muted);">${m.desc||'Métré'} <span style="font-size:11px;">(${(m.subStrings||m.subs||[]).join(' + ')})</span></span>
-            <span style="font-weight:600;">${m.total} ${m.unit}</span>
-          </div>`).join('');
-      })() : ''}
-    </div>
-    <div class="preview-section">
-      <h4>📦 Fournitures</h4>
-      ${fournitItems.length === 0 ? '<p class="preview-empty">Aucune fourniture</p>' :
-        fournitItems.map(([k,v]) =>
-          `<div class="info-row"><span class="k">${v.nom||k.split('|')[1]}</span><span class="v">${v.qty} ${v.unit}</span></div>`
-        ).join('')
-      }
-    </div>
-    ${nEvac > 0 ? `
-    <div class="preview-section">
-      <h4>🚮 Évacuations</h4>
-      <div class="info-row"><span class="k">Évacuations</span><span class="v">${nEvac} article(s)</span></div>
-    </div>` : ''}
-  `;
-}
- 
-// ─── DRAFT SAVE/LOAD ────────────────────────────────────────────
-function collectData() {
-  const locData = {};
-  Object.entries(locSelection).forEach(([id, sel]) => {
-    locData[id] = sel.qty > 0 ? String(sel.qty) : '';
-  });
- 
-  const metresData = [];
-  document.querySelectorAll('#metres-list .metre-card').forEach(card => {
-    const cardId = card.id.replace('mc-','');
-    const desc = card.querySelector('.metre-desc')?.value || '';
-    const type = metreTypes[parseInt(cardId)] || 'coupe';
-    const unit = type === 'coupe' ? 'ml' : type === 'volume' ? 'm³' : 'm²';
-    const totalVal = card.querySelector(`#mt-val-${cardId}`)?.textContent || '—';
-    const subs = [];
-    const subStrings = [];
-    card.querySelectorAll('.metre-subline').forEach(sub => {
-      const sid = sub.id.replace('msub-','');
-      const l = document.getElementById(`msl-${sid}`)?.value || '';
-      const w = document.getElementById(`msw-${sid}`)?.value || '';
-      const h = document.getElementById(`msh-${sid}`)?.value || '';
-      subs.push({ l, w, h });
-      const parts = [l, w, h].filter(v => v);
-      if (parts.length) subStrings.push(parts.join(' × '));
-    });
-    metresData.push({ desc, type, unit, total: totalVal, subs, subStrings });
-  });
- 
-  const fournitData = [];
-  document.querySelectorAll('#fournit-list .fournit-item').forEach(row => {
-    const inputs = row.querySelectorAll('input, select');
-    fournitData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
-  });
- 
-  return {
-    date: document.getElementById('rj-date').value,
-    nom: document.getElementById('rj-nom').value,
-    chantier: document.getElementById('rj-chantier').value,
-    meteo: state.selectedMeteo,
-    employes: state.employes,
-    location: locData,
-    locSelection: locSelection,
-    travaux: document.getElementById('tx-travaux').value,
-    metres: metresData,
-    fournitures: fournitData,
-    fournitSelection: fournitSelection,
-    fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
-      cat: k.split('|')[0], nom: k.split('|')[1], qty: v.qty, unit: v.unit
-    })),
-  };
-}
- 
-function showToast(msg, color) {
-  const t = document.getElementById('toast');
-  if (!t) return;
-  t.textContent = msg;
-  t.style.background = color || 'var(--teal)';
-  t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; t.style.background = 'var(--teal)'; }, 2500);
-}
- 
-function saveDraft() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
-  showToast('💾 Brouillon sauvegardé');
-}
-function autoSaveDraft() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(collectData()));
-}
- 
-function loadDraft() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return;
-  try {
-    const d = JSON.parse(raw);
- 
-    // En-tête
-    if (d.date)    document.getElementById('rj-date').value = d.date;
-    if (d.nom)     document.getElementById('rj-nom').value = d.nom;
-    if (d.chantier) document.getElementById('rj-chantier').value = d.chantier;
-    if (d.meteo)   state.selectedMeteo = d.meteo;
- 
-    // Employés
-    if (d.employes) { state.employes = d.employes; renderEmployes(); }
- 
-    // Location — restaurer locSelection
-    if (d.locSelection && Object.keys(d.locSelection).length > 0) {
-      locSelection = d.locSelection;
-      renderLocSelectionZone();
-    } else if (d.location) {
-      // Compatibilité ancienne sauvegarde
-      Object.entries(d.location).forEach(([k,v]) => {
-        if (!v || parseFloat(v) <= 0) return;
-        const item = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS].find(i => i.id === k);
-        if (item) locSelection[k] = { label: item.label, unit: item.unit, qty: parseFloat(v) };
-      });
-      renderLocSelectionZone();
-    }
- 
-    // Travaux
-    if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
- 
-    // Métrés
-    if (d.metres && d.metres.length > 0) {
-      if (!extrasState.metres) toggleExtra('metres');
-      d.metres.forEach(m => addMetreRow({ desc: m.desc, type: m.type, subs: m.subs }));
-    }
- 
-    // Fournitures catalogue — restaurer fournitSelection
-    if (d.fournitSelection && Object.keys(d.fournitSelection).length > 0) {
-      fournitSelection = d.fournitSelection;
-      renderFournitSelectionZone();
-    }
- 
-    // Évacuations
- 
-    updateHeader();
-  } catch(e) { console.warn('Draft load error', e); }
-}
- 
-function resetRapport() {
-  // En-tête
-  document.getElementById('rj-date').value = new Date().toISOString().split('T')[0];
-  document.getElementById('rj-nom').value = '';
-  document.getElementById('rj-chantier').value = '';
-  state.selectedMeteo = '';
-  // Réinitialiser les chips responsable
-  document.querySelectorAll('.nom-chip').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.chantier-chip').forEach(c => c.classList.remove('active'));
- 
-  // Employés
-  state.employes = [];
-  renderEmployes();
- 
-  // Location — vider et reconstruire depuis zéro
-  locSelection = {};
-  renderLocSelectionZone();
-  ['loc-vehicules','loc-materiel','loc-engins'].forEach(id => {
-    const c = document.getElementById(id);
-    if (c) c.innerHTML = '';
-  });
-  // Fermer tous les accordéons location
-  ['vehicules','materiel','engins'].forEach(key => {
-    document.querySelector(`#accord-${key} .accord-header`)?.classList.remove('open');
-    document.getElementById(`body-${key}`)?.classList.remove('open');
-  });
-  buildLocationItems();
- 
-  // Travaux
-  document.getElementById('tx-travaux').value = '';
- 
-  // Métrés — fermer le bloc et vider la liste
-  if (extrasState.metres) toggleExtra('metres');
-  document.getElementById('metres-list').innerHTML = '';
-  metresCount = 0;
- 
-  // Fournitures
-  fournitSelection = {};
-  // Vider le catalogue (forcer reconstruction au prochain accès)
-  const cat = document.getElementById('fournit-catalogue');
-  if (cat) cat.innerHTML = '';
-  renderFournitSelectionZone();
- 
-  // Évacuations
-  if (sumEvac) sumEvac.textContent = '—';
- 
-  updateHeader();
-}
- 
-function finaliserRapport() {
-  const data = collectData();
-  const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
-  data.id = Date.now();
-  data.savedAt = new Date().toISOString();
-  reports.unshift(data);
-  localStorage.setItem(REPORTS_KEY, JSON.stringify(reports));
-  localStorage.removeItem(STORAGE_KEY);
-  resetRapport();
-  // Refresh badge
-  const badge = document.getElementById('histo-badge');
-  badge.style.display = 'inline-block';
-  badge.textContent = reports.length;
- 
-  const t = document.getElementById('toast');
-  t.textContent = '✅ Rapport enregistré!';
-  t.style.background = 'var(--teal)';
-  t.classList.add('show');
-  setTimeout(() => {
-    t.classList.remove('show');
-    t.textContent = '💾 Brouillon sauvegardé';
-    // Basculer sur l'onglet Validés
-    renderHistoriqueInline();
-    showRapTab('valides');
-  }, 1500);
-}
- 
- 
-// ─── MODULE FOURNITURES ────────────────────────────────────────
-const FOURNIT_UNITES = ['pc','m','ml','m²','m³','kg','T','L','sac','rouleau','barre','boîte','paquet','forfait'];
-const FOURNIT_CUSTOM_KEY = 'rv6_fournitures_custom_v1';
- 
-let fournitSelection = {};
-let fournitCustom = {};
-let fournitAddingCat = null;
- 
-// ─── MATÉRIAUX DEPUIS RESSOURCES (rv6_materials) ──────────────
-function getResMateriaux() {
-  try { return JSON.parse(localStorage.getItem('rv6_materials') || '[]'); } catch(e) { return []; }
-}
-function buildResMatCategories(mats) {
-  // Supporte deux formats possibles du module Ressources :
-  // Format A (plat)   : [{nom, categorie?, sousCategorie?, unite?}]
-  // Format B (hiérar.): [{nom, items:[{nom,...}]}]  — catégorie = l'objet parent
-  const cats = {};
-  mats.forEach(m => {
-    if (!m || typeof m !== 'object') return;
-    if (Array.isArray(m.items)) {
-      // Format B : m est une catégorie, m.items sont les articles
-      const cat = m.nom || 'Matériaux entreprise';
-      if (!cats[cat]) cats[cat] = { subcats: {} };
-      m.items.forEach(item => {
-        const nom = item.nom || item.name || '';
-        if (!nom) return;
-        const sub = item.sousCategorie || item.sous_categorie || cat;
-        if (!cats[cat].subcats[sub]) cats[cat].subcats[sub] = [];
-        cats[cat].subcats[sub].push(nom);
-      });
-    } else {
-      // Format A : article plat avec champ categorie optionnel
-      const nom = m.nom || m.name || '';
-      if (!nom) return;
-      const cat = m.categorie || m.category || 'Matériaux entreprise';
-      const sub = m.sousCategorie || m.sous_categorie || m.subcategorie || cat;
-      if (!cats[cat]) cats[cat] = { subcats: {} };
-      if (!cats[cat].subcats[sub]) cats[cat].subcats[sub] = [];
-      cats[cat].subcats[sub].push(nom);
-    }
-  });
-  return cats;
-}
- 
-function buildFournitCatalogue() {
-  fournitCustom = JSON.parse(localStorage.getItem(FOURNIT_CUSTOM_KEY) || '{}');
-  const container = document.getElementById('fournit-catalogue');
-  if (!container || container.children.length > 0) return;
- 
-  // Matériaux depuis Ressources entreprise (rv6_materials) — unique source de vérité
-  const resMats = getResMateriaux();
-  if (!resMats.length) {
-    container.innerHTML = `
-      <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
-        <div style="font-size:36px;margin-bottom:12px;">🪨</div>
-        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucun matériau enregistré</div>
-        <div style="font-size:12px;margin-bottom:16px;">Ajoutez des matériaux dans le module Ressources entreprise pour les retrouver ici.</div>
-        <a href="../ressources/index.html" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;">Ouvrir Ressources →</a>
-      </div>`;
-    return;
-  }
- 
-  const resCats = buildResMatCategories(resMats);
-  Object.entries(resCats).forEach(([catName, catData]) => {
-    container.appendChild(buildFournitAccord(catName, catData, fournitCustom[catName]||[]));
-  });
-}
- 
-function buildFournitAccord(catName, catData, extra) {
-  const slug = fslug(catName);
-  const div = document.createElement('div');
-  div.className = 'accord-group';
-  div.style.marginBottom = '10px';
-  div.id = 'fcat-' + slug;
- 
-  const header = document.createElement('div');
-  header.className = 'accord-header';
-  header.innerHTML = `
-    <span class="accord-title" style="font-size:14px;">${catName}</span>
-    <span class="accord-count" id="fcnt-${slug}">—</span>
-    <span class="accord-chevron">▼</span>
-  `;
-  const body = document.createElement('div');
-  body.className = 'accord-body';
-  header.onclick = () => { header.classList.toggle('open'); body.classList.toggle('open'); };
-  div.appendChild(header);
- 
-  Object.entries(catData.subcats).forEach(([subName, prods]) => {
-    // Label sous-catégorie avec bouton + inline
-    const subDiv = document.createElement('div');
-    subDiv.style.cssText = 'display:flex;align-items:center;background:var(--bg);border-bottom:1px solid var(--border);padding:6px 14px 6px 14px;';
-    subDiv.dataset.subcatLabel = '1';
-    subDiv.innerHTML = `
-      <span style="flex:1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);">${subName}</span>
-      <button style="background:none;border:1.5px dashed var(--border);color:var(--teal);font-family:inherit;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;cursor:pointer;">+ Ajouter</button>
-    `;
-    subDiv.querySelector('button').onclick = () => openFournitAddOverlay(catName, subName);
-    body.appendChild(subDiv);
-    prods.forEach(nom => body.appendChild(buildFournitRow(catName, nom)));
-  });
- 
-  // Produits custom (sans sous-cat spécifique)
-  extra.forEach(p => body.appendChild(buildFournitRow(catName, p.nom, p.unit)));
- 
-  // Bouton ajouter global en bas
-  const addBtn = document.createElement('button');
-  addBtn.style.cssText = 'width:100%;border:none;border-top:1.5px dashed var(--border);background:none;color:var(--teal);font-family:inherit;font-size:13px;font-weight:600;padding:10px 14px;cursor:pointer;text-align:left;';
-  addBtn.textContent = `+ Ajouter dans "${catName}"`;
-  addBtn.onclick = () => openFournitAddOverlay(catName, null);
-  body.appendChild(addBtn);
- 
-  div.appendChild(body);
-  return div;
-}
- 
-let _frowId = 0;
- 
-function buildFournitRow(catName, nom, defaultUnit) {
-  const key = catName + '|' + nom;
-  const isSelected = !!fournitSelection[key];
-  const uid = ++_frowId; // ID unique garanti
-  const row = document.createElement('div');
-  row.className = 'fournit-row';
-  row.dataset.nom = nom; row.dataset.cat = catName; row.dataset.key = key;
-  row.dataset.uid = uid;
-  row.style.cursor = 'pointer';
-  row.innerHTML = `
-    <span class="fournit-row-name${isSelected?' active':''}" id="fn-${uid}">${nom}</span>
-    <span id="fchk-${uid}" style="font-size:18px;flex-shrink:0;">${isSelected?'✅':'⬜'}</span>
-  `;
-  // Stocker l'uid sur la clé pour retrouver l'élément
-  if (!window._fournitUids) window._fournitUids = {};
-  window._fournitUids[key] = uid;
-  row.onclick = () => toggleFournitSelect(key, catName, nom, defaultUnit||'pc');
-  return row;
-}
- 
-function toggleFournitSelect(key, catName, nom, defaultUnit) {
-  if (fournitSelection[key]) {
-    delete fournitSelection[key];
-  } else {
-    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
-  }
-  const isNow = !!fournitSelection[key];
-  // Retrouver les éléments via uid stocké
-  const uid = window._fournitUids?.[key];
-  if (uid) {
-    const nameEl = document.getElementById('fn-' + uid);
-    const chkEl  = document.getElementById('fchk-' + uid);
-    nameEl?.classList.toggle('active', isNow);
-    if (chkEl) chkEl.textContent = isNow ? '✅' : '⬜';
-  }
-  updateFournitCatCount(catName);
-  renderFournitSelectionZone();
-  autoSaveDraft();
-}
- 
-function renderFournitSelectionZone() {
-  const zone  = document.getElementById('fournit-selection-zone');
-  const list  = document.getElementById('fournit-sel-list');
-  const count = document.getElementById('fournit-sel-count');
-  const items = Object.entries(fournitSelection);
- 
-  if (items.length === 0) { zone.style.display = 'none'; return; }
-  zone.style.display = 'block';
- 
-  list.innerHTML = '';
-  items.forEach(([key, sel]) => {
-    const nom  = sel.nom || key.split('|')[1];
-    const cat  = sel.cat || key.split('|')[0];
-    const row  = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.08);';
-    row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nom}</span>
-      <button class="f-plus1" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
-      <input type="number" placeholder="0"
-        style="width:48px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:6px 4px;font-family:inherit;font-size:14px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
-        min="0" step="0.5" value="${sel.qty||''}">
-      <select style="width:62px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 2px;font-family:inherit;font-size:11px;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;">
-        ${FOURNIT_UNITES.map(u=>`<option style="color:var(--text)"${u===(sel.unit||'pc')?' selected':''}>${u}</option>`).join('')}
-      </select>
-      <button class="f-del" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;line-height:1;">✕</button>
-    `;
-    const plusBtn  = row.querySelector('.f-plus1');
-    const qtyInput = row.querySelector('input');
-    const unitSel  = row.querySelector('select');
-    const delBtn   = row.querySelector('.f-del');
-    plusBtn.onclick  = () => { const v = (parseFloat(qtyInput.value)||0) + 1; qtyInput.value = v; setSrv(key, 'qty', String(v)); };
-    qtyInput.oninput = () => setSrv(key, 'qty', qtyInput.value);
-    unitSel.onchange = () => setSrv(key, 'unit', unitSel.value);
-    delBtn.onclick   = () => toggleFournitSelect(key, cat, nom, sel.unit||'pc');
-    list.appendChild(row);
-    list.appendChild(row);
-  });
-}
- 
-function setSrv(key, field, val) {
-  if (fournitSelection[key]) { fournitSelection[key][field] = val; autoSaveDraft(); }
-}
- 
-function onFournitQty() {}
-function onFournitUnit(key, select) { if (fournitSelection[key]) fournitSelection[key].unit = select.value; }
- 
-function updateFournitCatCount(catName) {
-  const count = Object.keys(fournitSelection).filter(k => k.startsWith(catName + '|')).length;
-  const el = document.getElementById('fcnt-' + fslug(catName));
-  if (!el) return;
-  el.textContent = count > 0 ? `${count} sél.` : '—';
-  el.style.background = count > 0 ? '#e8f5f3' : 'var(--bg)';
-  el.style.color = count > 0 ? 'var(--teal)' : 'var(--text-muted)';
-}
- 
-function fournitSearch(q) {
-  document.getElementById('fournit-clear').style.display = q ? 'block' : 'none';
-  q = q.toLowerCase().trim();
- 
-  if (!q) {
-    // Tout fermer et tout réafficher
-    document.querySelectorAll('#fournit-catalogue .fournit-row').forEach(r => r.style.display = '');
-    document.querySelectorAll('#fournit-catalogue .accord-group').forEach(g => g.style.display = '');
-    document.querySelectorAll('#fournit-catalogue [data-subcat-label]').forEach(s => s.style.display = '');
-    document.querySelectorAll('#fournit-catalogue .accord-header').forEach(h => {
-      h.classList.remove('open');
-      h.nextElementSibling?.classList.remove('open');
-    });
-    return;
-  }
- 
-  // Pour chaque accordéon, vérifier si au moins un produit correspond
-  document.querySelectorAll('#fournit-catalogue .accord-group').forEach(group => {
-    const rows = group.querySelectorAll('.fournit-row');
-    let groupHasMatch = false;
- 
-    rows.forEach(row => {
-      const match = row.dataset.nom.toLowerCase().includes(q) || row.dataset.cat.toLowerCase().includes(q);
-      row.style.display = match ? '' : 'none';
-      if (match) groupHasMatch = true;
-    });
- 
-    // Cacher les labels de sous-cat qui n'ont plus de produits visibles
-    group.querySelectorAll('[data-subcat-label]').forEach(sub => {
-      let next = sub.nextElementSibling;
-      let hasVisible = false;
-      while (next && next.classList.contains('fournit-row')) {
-        if (next.style.display !== 'none') hasVisible = true;
-        next = next.nextElementSibling;
-      }
-      sub.style.display = hasVisible ? '' : 'none';
-    });
- 
-    // Cacher le groupe entier si aucun produit ne correspond
-    group.style.display = groupHasMatch ? '' : 'none';
-    if (groupHasMatch) {
-      group.querySelector('.accord-header')?.classList.add('open');
-      group.querySelector('.accord-body')?.classList.add('open');
-    }
-  });
-}
-function fournitClearSearch() { document.getElementById('fournit-search').value = ''; fournitSearch(''); }
- 
-function openFournitAddOverlay(catName, subName) {
-  fournitAddingCat = catName;
-  const where = subName ? `"${subName}"` : `"${catName}"`;
-  document.getElementById('fournit-add-title').textContent = `+ Ajouter dans ${where}`;
-  document.getElementById('fournit-new-nom').value = '';
-  const chips = document.getElementById('fournit-new-unit-chips');
-  chips.innerHTML = '';
-  FOURNIT_UNITES.forEach(u => {
-    const b = document.createElement('button');
-    b.className = 'chip' + (u==='pc'?' selected':'');
-    b.textContent = u;
-    b.onclick = () => { chips.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected')); b.classList.add('selected'); };
-    chips.appendChild(b);
-  });
-  document.getElementById('overlay-fournit-add').classList.add('open');
-}
- 
-function confirmFournitAdd() {
-  const nom = document.getElementById('fournit-new-nom').value.trim();
-  if (!nom || !fournitAddingCat) return;
-  const unit = document.querySelector('#fournit-new-unit-chips .chip.selected')?.textContent || 'pc';
-  const catName = fournitAddingCat;
- 
-  // 1. Sauvegarder dans le catalogue custom du rapport
-  if (!fournitCustom[catName]) fournitCustom[catName] = [];
-  fournitCustom[catName].push({ nom, unit });
-  localStorage.setItem(FOURNIT_CUSTOM_KEY, JSON.stringify(fournitCustom));
- 
-  // 2. Sync automatique → rv6_materials (si l'article n'existe pas encore)
-  try {
-    const mats = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
-    const exists = mats.some(m => {
-      const mNom = m.nom || m.name || '';
-      return mNom.toLowerCase() === nom.toLowerCase();
-    });
-    if (!exists) {
-      mats.push({ id: 'rj_' + Date.now(), nom, categorie: catName, unite: unit });
-      localStorage.setItem('rv6_materials', JSON.stringify(mats));
-    }
-  } catch(e) {}
- 
-  // 3. Mettre à jour le DOM
-  const body = document.querySelector('#fcat-' + fslug(catName) + ' .accord-body');
-  const addBtn = body?.querySelector('button');
-  if (addBtn) body.insertBefore(buildFournitRow(catName, nom, unit), addBtn);
-  document.getElementById('overlay-fournit-add').classList.remove('open');
-  const t = document.getElementById('toast');
-  t.textContent = `✅ "${nom}" ajouté dans Ressources`;
-  t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2000);
-}
-function closeFournitOverlay(e) { if (e.target.classList.contains('overlay')) e.target.classList.remove('open'); }
-function fslug(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').substring(0,40); }
- 
-// Auto-save every 60s
-setInterval(saveDraft, 60000);
- 
-function showRapTab(tab) {
-  const isBrouillon = tab === 'brouillon';
-  document.getElementById('rap-panel-brouillon').style.display = isBrouillon ? '' : 'none';
-  document.getElementById('rap-panel-valides').style.display   = isBrouillon ? 'none' : '';
-  const btnB = document.getElementById('rap-tab-brouillon');
-  const btnV = document.getElementById('rap-tab-valides');
-  if (btnB) { btnB.style.background = isBrouillon ? 'var(--navy)' : 'var(--bg)'; btnB.style.color = isBrouillon ? 'white' : 'var(--text-muted)'; }
-  if (btnV) { btnV.style.background = isBrouillon ? 'var(--bg)' : 'var(--teal)'; btnV.style.color = isBrouillon ? 'var(--text-muted)' : 'white'; }
-}
- 
- 
-const REPORTS_KEY = 'rj_reports_v1';
-const TRASH_KEY   = 'rj_trash_v1';
-const MAX_DAYS    = 30;
-const TRASH_DAYS  = 7;
- 
-function getReports() {
-  return JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
-}
-function getTrash() {
-  return JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
-}
-function saveReports(arr) {
-  localStorage.setItem(REPORTS_KEY, JSON.stringify(arr));
-}
-function saveTrash(arr) {
-  localStorage.setItem(TRASH_KEY, JSON.stringify(arr));
-}
- 
-function purgeOld() {
-  const now = Date.now();
-  // Purge rapports > 30j
-  let reports = getReports().filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
-  saveReports(reports);
-  // Purge corbeille > 7j
-  let trash = getTrash().filter(r => (now - new Date(r.deletedAt).getTime()) < TRASH_DAYS * 86400000);
-  saveTrash(trash);
-}
- 
-function openHistorique() { goSection(5); }
-function closeHistorique() { goSection(0); }
- 
-function renderHistoriqueInline() {
-  purgeOld();
-  const reports = getReports();
-  const trash   = getTrash();
-  const container = document.getElementById('histo-inline');
- 
-  // Badge
-  const badge = document.getElementById('histo-badge');
-  badge.style.display = reports.length > 0 ? 'inline-block' : 'none';
-  badge.textContent = reports.length;
-  const subtitle = document.getElementById('histo-subtitle');
-  if (subtitle) subtitle.textContent = `${reports.length} rapport${reports.length>1?'s':''} · 30 derniers jours`;
- 
-  if (reports.length === 0 && trash.length === 0) {
-    container.innerHTML = `<div class="histo-empty"><div class="icon">📭</div><p>Aucun rapport validé</p><p style="margin-top:6px;font-size:12px;">Les rapports validés apparaîtront ici</p></div>`;
-    return;
-  }
- 
-  const rows = (arr, style='') => arr.map(([k,v]) =>
-    `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;${style}">
-      <span style="color:var(--text-muted);flex:1;">${k}</span>
-      <span style="font-weight:600;color:var(--text);text-align:right;">${v}</span>
-    </div>`
-  ).join('');
- 
-  const section = (icon, title, content) => content ? `
-    <div style="margin-bottom:0;">
-      <div style="background:var(--bg);padding:6px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-top:1px solid var(--border);">${icon} ${title}</div>
-      <div style="padding:4px 14px 8px;">${content}</div>
-    </div>` : '';
- 
-  let html = '';
- 
-  reports.forEach(r => {
-    const d = new Date((r.date||'') + 'T12:00:00');
-    const dateStr  = d.toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-    const day      = d.toLocaleDateString('fr-CH',{day:'2-digit'});
-    const month    = d.toLocaleDateString('fr-CH',{month:'short'});
-    const age      = Math.floor((Date.now()-new Date(r.savedAt).getTime())/86400000);
-    const ageStr   = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
- 
-    // MO
-    const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
-    const totalMO   = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
-    const moContent = empActifs.length > 0
-      ? rows(empActifs.map(e=>[e.nom, `${parseFloat(e.heures).toFixed(2)} h`])) +
-        `<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-top:2px solid var(--border);margin-top:2px;">
-          <span style="font-weight:700;color:var(--navy);">Total</span>
-          <span style="font-weight:700;color:var(--teal);">${totalMO.toFixed(2)} h</span>
-        </div>`
-      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune main d\'œuvre</p>';
- 
-    // Location
-    const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
-    const locEntries  = Object.entries(r.location||{})
-      .filter(([,v])=>v&&parseFloat(v)>0)
-      .map(([k,v])=>{
-        const item = allLocItems.find(i=>i.id===k);
-        return item ? [item.label, `${v} ${item.unit}`] : [k, v];
-      });
-    const locContent = locEntries.length > 0
-      ? rows(locEntries)
-      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune location</p>';
- 
-    // Travaux
-    const metresRows = (r.metres||[]).map(m => `
-      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;">
-        <span style="color:var(--text-muted);">${m.desc||'Métré'} <span style="font-size:11px;">(${(m.subStrings||m.subs||[]).join(' + ')})</span></span>
-        <span style="font-weight:600;color:var(--text);">${m.total} ${m.unit}</span>
-      </div>`).join('');
- 
-    const travauxContent = r.travaux || (r.metres||[]).length > 0
-      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;">${r.travaux}</p>` : ''}
-         ${(r.metres||[]).length > 0 ? metresRows : ''}`
-      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune description</p>';
- 
-    // Fournitures catalogue
-    const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
-    const fournitContent = fournitCat.length > 0
-      ? rows(fournitCat.map(f=>[f.nom||f.cat, `${f.qty} ${f.unit}`]))
-      : null;
- 
-    // Évacuations
- 
-    html += `
-    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
- 
-      <!-- EN-TÊTE CARTE -->
-      <div style="background:var(--navy);padding:12px 14px;display:flex;align-items:center;gap:12px;">
-        <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 10px;text-align:center;flex-shrink:0;">
-          <div style="color:white;font-size:22px;font-weight:700;line-height:1;">${day}</div>
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;font-weight:600;text-transform:uppercase;">${month}</div>
-        </div>
-        <div style="flex:1;min-width:0;">
-          <div style="color:white;font-size:16px;font-weight:700;">${r.chantier||'Sans chantier'}</div>
-          <div style="color:rgba(255,255,255,0.65);font-size:12px;margin-top:2px;">${r.nom||'—'}</div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <button onclick="partagerRapport(event,'${r.id}')"
-            style="background:var(--yellow);border:none;color:var(--navy);font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">⬆️</button>
-          <button onclick="modifierRapport(event,'${r.id}')"
-            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">✏️</button>
-          <button onclick="deleteRapportInline(event,'${r.id}')"
-            style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">🗑️</button>
-        </div>
-      </div>
- 
-      <!-- SECTIONS DÉTAIL -->
-      ${section('👷','Main d\'œuvre', moContent)}
-      ${section('🔧','Location interne', locContent)}
-      ${section('🏗️','Travaux réalisés', travauxContent)}
-      ${fournitContent ? section('📦','Fournitures', fournitContent) : ''}
- 
-      ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.notes}</p>`) : ''}
- 
-    </div>`;
-  });
- 
-  // Corbeille
-  if (trash.length > 0) {
-    html += `<div style="margin-top:16px;padding-top:16px;border-top:2px dashed var(--border);">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-        <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">🗑️ Corbeille (${trash.length}) — suppression dans 7 jours</div>
-        <button onclick="viderCorbeille()" style="background:#fee2e2;border:1px solid #fca5a5;color:#dc2626;font-family:inherit;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;cursor:pointer;">Vider</button>
-      </div>`;
-    trash.forEach(r => {
-      const daysLeft = TRASH_DAYS - Math.floor((Date.now()-new Date(r.deletedAt).getTime())/86400000);
-      const d = new Date((r.date||'')+'T12:00:00');
-      html += `
-      <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:8px;opacity:0.6;overflow:hidden;">
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;">
-          <div style="flex:1;">
-            <div style="font-weight:700;font-size:14px;color:var(--text-muted);">${r.chantier||'Sans chantier'}</div>
-            <div style="font-size:12px;color:var(--text-light);">${d.toLocaleDateString('fr-CH')} · Supprimé · encore ${daysLeft}j</div>
-          </div>
-          <button onclick="restoreRapportInline(event,'${r.id}')"
-            style="background:#e8f5f3;border:1px solid #a0d4cc;color:var(--teal);font-size:12px;font-weight:600;font-family:inherit;padding:6px 12px;border-radius:6px;cursor:pointer;">
-            ↩️ Restaurer
-          </button>
-        </div>
-      </div>`;
-    });
-    html += `</div>`;
-  }
- 
-  container.innerHTML = html;
-}
- 
-function partagerRapport(e, id) {
-  e.stopPropagation();
-  const reports = getReports();
-  const r = reports.find(rep => String(rep.id) === String(id));
-  if (!r) return;
- 
-  // Bottom sheet de choix
-  const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:flex;align-items:flex-end;';
-  overlay.innerHTML = `
-    <div style="background:white;border-radius:20px 20px 0 0;width:100%;padding:20px 16px 36px;">
-      <div style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;"></div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Partager le rapport</div>
-      <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">${r.chantier||'Sans chantier'} · ${new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH')}</div>
-      <button id="btn-share-text" style="width:100%;background:var(--navy);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
-        📝 Partager en texte
-      </button>
-      <button id="btn-share-pdf" style="width:100%;background:var(--teal);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
-        📄 Partager en PDF
-      </button>
-    </div>
-  `;
-  overlay.onclick = (ev) => { if (ev.target === overlay) document.body.removeChild(overlay); };
-  document.body.appendChild(overlay);
- 
-  document.getElementById('btn-share-text').onclick = () => {
-    document.body.removeChild(overlay);
-    partagerTexte(r);
-  };
-  document.getElementById('btn-share-pdf').onclick = () => {
-    document.body.removeChild(overlay);
-    partagerPDF(r);
-  };
-}
- 
-function rapportToTexte(r) {
-  const d = new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
-  const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
-  const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
-  const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
-  const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
- 
-  let txt = `📋 RAPPORT JOURNALIER — RISSE S.A.\n`;
-  txt += `${'─'.repeat(35)}\n`;
-  txt += `📅 ${d}\n`;
-  txt += `🏗️ Chantier : ${r.chantier||'—'}\n`;
-  txt += `👤 Responsable : ${r.nom||'—'}\n\n`;
- 
-  txt += `👷 MAIN D'ŒUVRE\n`;
-  if (empActifs.length > 0) {
-    empActifs.forEach(e => txt += `  ${e.nom} : ${parseFloat(e.heures).toFixed(2)} h\n`);
-    txt += `  Total : ${totalMO.toFixed(2)} h\n`;
-  } else txt += `  Aucune\n`;
-  txt += '\n';
- 
-  txt += `🔧 LOCATION INTERNE\n`;
-  if (locFilled.length > 0) {
-    locFilled.forEach(([k,v]) => {
-      const item = allLocItems.find(i=>i.id===k);
-      txt += `  ${item?.label||k} : ${v} ${item?.unit||''}\n`;
-    });
-  } else txt += `  Aucune\n`;
-  txt += '\n';
- 
-  txt += `🏗️ TRAVAUX RÉALISÉS\n`;
-  txt += r.travaux ? `  ${r.travaux}\n` : `  Aucune description\n`;
-  if ((r.metres||[]).length > 0) txt += `  + ${r.metres.length} métré(s)\n`;
-  txt += '\n';
- 
-  if (fournitCat.length > 0) {
-    txt += `📦 FOURNITURES\n`;
-    fournitCat.forEach(f => txt += `  ${f.nom||f.cat} : ${f.qty} ${f.unit}\n`);
-    txt += '\n';
-  }
- 
-  if (evac.length > 0) {
-    txt += `🚮 ÉVACUATIONS\n`;
-    evac.forEach(e => txt += `  ${e.mat||'—'} : ${e.qte} ${e.unite}\n`);
-    txt += '\n';
-  }
- 
-  if (r.notes) txt += `💬 NOTES\n  ${r.notes}\n\n`;
-  txt += `${'─'.repeat(35)}\nRisse S.A.`;
-  return txt;
-}
- 
-function partagerTexte(r) {
-  const txt = rapportToTexte(r);
-  if (navigator.share) {
-    navigator.share({ title: `Rapport ${r.chantier} - ${r.date}`, text: txt })
-      .catch(() => copyToClipboard(txt));
-  } else {
-    copyToClipboard(txt);
-  }
-}
- 
-function copyToClipboard(txt) {
-  navigator.clipboard?.writeText(txt).then(() => showToast('✅ Copié dans le presse-papiers'))
-    .catch(() => showToast('⚠️ Impossible de copier'));
-}
- 
-function partagerPDF(r) {
-  const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
-  const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
-  const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
-  const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
-  const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
-  const d = new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
- 
-  const rowsHTML = (items) => items.map(([k,v])=>`
-    <tr><td style="padding:5px 8px;color:#555;border-bottom:1px solid #eee;">${k}</td>
-        <td style="padding:5px 8px;font-weight:600;text-align:right;border-bottom:1px solid #eee;">${v}</td></tr>`).join('');
- 
-  const section = (icon, title, content) => `
-    <div style="margin-bottom:16px;">
-      <div style="background:#1B3A6B;color:white;padding:6px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">${icon} ${title}</div>
-      <table style="width:100%;border-collapse:collapse;">${content}</table>
-    </div>`;
- 
-  const moRows = empActifs.length > 0
-    ? rowsHTML(empActifs.map(e=>[e.nom,`${parseFloat(e.heures).toFixed(2)} h`])) +
-      `<tr><td style="padding:6px 8px;font-weight:700;color:#1B3A6B;">Total</td><td style="padding:6px 8px;font-weight:700;color:#1A7F72;text-align:right;">${totalMO.toFixed(2)} h</td></tr>`
-    : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
- 
-  const locRows = locFilled.length > 0
-    ? rowsHTML(locFilled.map(([k,v])=>{ const item=allLocItems.find(i=>i.id===k); return [item?.label||k,`${v} ${item?.unit||''}`]; }))
-    : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
- 
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-  <title>Rapport Journalier - ${r.chantier}</title>
-  <style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#222;}
-  h1{color:#1B3A6B;font-size:20px;margin:0;}
-  .header{background:#1B3A6B;color:white;padding:16px 20px;border-radius:8px;margin-bottom:20px;}
-  .meta{color:rgba(255,255,255,0.75);font-size:13px;margin-top:4px;}
-  table{width:100%;border-collapse:collapse;}
-  p{font-size:13px;line-height:1.6;padding:8px;color:#333;}</style>
-  </head><body>
-  <div class="header">
-    <h1>📋 Rapport Journalier — Risse S.A.</h1>
-    <div class="meta">${d} · ${r.chantier||'—'} · ${r.nom||'—'}</div>
-  </div>
-  ${section('👷','Main d\'œuvre', moRows)}
-  ${section('🔧','Location interne', locRows)}
-  ${section('🏗️','Travaux réalisés',
-    `<tr><td style="padding:8px;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
-    + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} métré(s)</td></tr>`:'')
-  )}
-  ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.nom||f.cat,`${f.qty} ${f.unit}`]))):''}
-  ${r.notes?section('💬','Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
-  <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — rapport généré le ${new Date().toLocaleDateString('fr-CH')}</p>
-  </body></html>`;
- 
-  const win = window.open('', '_blank');
-  if (win) {
-    win.document.write(html);
-    win.document.close();
-    setTimeout(() => win.print(), 500);
-  } else {
-    showToast('⚠️ Autorisez les popups pour générer le PDF');
-  }
-}
- 
-function modifierRapport(e, id) {
-  e.stopPropagation();
-  const reports = getReports();
-  const r = reports.find(rep => String(rep.id) === String(id));
-  if (!r) return;
- 
-  // Confirmation si brouillon en cours
-  const hasDraft = localStorage.getItem(STORAGE_KEY);
-  if (hasDraft) {
-    if (!confirm('Un brouillon est en cours. Le remplacer par ce rapport ?')) return;
-  }
- 
-  // Supprimer de la liste des validés
-  const updated = reports.filter(rep => String(rep.id) !== String(id));
-  localStorage.setItem(REPORTS_KEY, JSON.stringify(updated));
- 
-  // Remettre à zéro puis charger le rapport dans le brouillon
-  resetRapport();
- 
-  // Charger les données du rapport
-  const d = r;
-  if (d.date)    document.getElementById('rj-date').value = d.date;
-  if (d.nom)     document.getElementById('rj-nom').value = d.nom;
-  if (d.chantier) document.getElementById('rj-chantier').value = d.chantier;
-  if (d.employes) { state.employes = d.employes; renderEmployes(); }
- 
-  if (d.locSelection && Object.keys(d.locSelection).length > 0) {
-    locSelection = d.locSelection;
-    renderLocSelectionZone();
-  } else if (d.location) {
-    Object.entries(d.location).forEach(([k,v]) => {
-      if (!v || parseFloat(v) <= 0) return;
-      const item = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS].find(i => i.id === k);
-      if (item) locSelection[k] = { label: item.label, unit: item.unit, qty: parseFloat(v) };
-    });
-    renderLocSelectionZone();
-  }
- 
-  if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
- 
-  if (d.metres && d.metres.length > 0) {
-    if (!extrasState.metres) toggleExtra('metres');
-    d.metres.forEach(m => addMetreRow({ desc: m.desc, type: m.type, subs: m.subs }));
-  }
- 
-  if (d.fournitSelection && Object.keys(d.fournitSelection).length > 0) {
-    fournitSelection = d.fournitSelection;
-    renderFournitSelectionZone();
-  }
- 
- 
-  // Sauvegarder comme brouillon
-  autoSaveDraft();
-  updateHeader();
- 
-  // Aller sur brouillon
-  renderHistoriqueInline();
-  showRapTab('brouillon');
-  buildRecapPreview();
- 
-  showToast('✏️ Rapport chargé dans le brouillon');
-}
- 
-function deleteRapportInline(e, id) {
-  e.stopPropagation();
-  let reports = getReports();
-  const idx = reports.findIndex(r => String(r.id) === String(id));
-  if (idx === -1) return;
-  const [removed] = reports.splice(idx, 1);
-  removed.deletedAt = new Date().toISOString();
-  saveReports(reports);
-  const trash = getTrash();
-  trash.unshift(removed);
-  saveTrash(trash);
-  renderHistoriqueInline();
-}
- 
-function viderCorbeille() {
-  const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:flex;align-items:flex-end;';
-  overlay.innerHTML = `
-    <div style="background:white;border-radius:20px 20px 0 0;width:100%;padding:20px 16px 36px;">
-      <div style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;"></div>
-      <div style="font-size:16px;font-weight:700;margin-bottom:8px;">Vider la corbeille</div>
-      <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Les rapports supprimés seront perdus définitivement.</div>
-      <button id="btn-confirm-vider" style="width:100%;background:#dc2626;color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
-        🗑️ Vider définitivement
-      </button>
-      <button id="btn-cancel-vider" style="width:100%;background:var(--bg);color:var(--text-muted);border:none;font-family:inherit;font-weight:600;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
-        Annuler
-      </button>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  document.getElementById('btn-confirm-vider').onclick = () => {
-    localStorage.setItem(TRASH_KEY, '[]');
-    document.body.removeChild(overlay);
-    renderHistoriqueInline();
-    showToast('🗑️ Corbeille vidée');
-  };
-  document.getElementById('btn-cancel-vider').onclick = () => document.body.removeChild(overlay);
-  overlay.onclick = e => { if (e.target === overlay) document.body.removeChild(overlay); };
-}
- 
-function restoreRapportInline(e, id) {
-  e.stopPropagation();
-  let trash = getTrash();
-  const idx = trash.findIndex(r => String(r.id) === String(id));
-  if (idx === -1) return;
-  const [restored] = trash.splice(idx, 1);
-  delete restored.deletedAt;
-  saveTrash(trash);
-  const reports = getReports();
-  reports.unshift(restored);
-  saveReports(reports);
-  renderHistoriqueInline();
-}
- 
-function renderHistorique() {
-  const reports = getReports();
-  const trash   = getTrash();
-  const scroll  = document.getElementById('histo-scroll');
-  const countEl = document.getElementById('histo-count');
- 
-  // Update badge
-  const badge = document.getElementById('histo-badge');
-  if (reports.length > 0) {
-    badge.style.display = 'flex';
-    badge.textContent = reports.length;
-  } else {
-    badge.style.display = 'none';
-  }
- 
-  countEl.textContent = `${reports.length} rapport${reports.length>1?'s':''}`;
- 
-  if (reports.length === 0 && trash.length === 0) {
-    scroll.innerHTML = `
-      <div class="histo-empty">
-        <div class="icon">📭</div>
-        <p>Aucun rapport enregistré</p>
-        <p style="margin-top:6px;font-size:12px;">Validez un rapport pour le retrouver ici</p>
-      </div>`;
-    return;
-  }
- 
-  let html = '';
- 
-  reports.forEach(r => {
-    const d = new Date(r.date + 'T12:00:00');
-    const day = d.toLocaleDateString('fr-CH',{day:'2-digit'});
-    const month = d.toLocaleDateString('fr-CH',{month:'short'});
-    const weekday = d.toLocaleDateString('fr-CH',{weekday:'short'});
-    const totalMO = (r.employes||[]).reduce((s,e)=>s+parseFloat(e.heures||0),0);
-    const nEmp = (r.employes||[]).length;
-    const nLoc = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
-    const nFournit = (r.fournitures||[]).length;
-    const age = Math.floor((Date.now() - new Date(r.savedAt).getTime()) / 86400000);
-    const ageStr = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
- 
-    html += `
-    <div class="rapport-card" onclick="openEditPage('${r.id}')">
-      <div class="rapport-card-header">
-        <div class="rapport-card-date">
-          <div class="day">${day}</div>
-          <div class="month">${month}</div>
-        </div>
-        <div class="rapport-card-info">
-          <div class="chantier">${r.chantier || 'Sans chantier'}</div>
-          <div class="meta">${weekday} · ${r.nom||'—'} · ${ageStr}</div>
-        </div>
-        <div class="rapport-card-actions">
-          ${totalMO > 0 ? `<span class="badge-mo">${totalMO.toFixed(2)}h MO</span>` : ''}
-          <button class="btn-del-rapport" onclick="deleteRapport(event,'${r.id}')">🗑️</button>
-        </div>
-      </div>
-      <div class="rapport-card-chips">
-        ${nEmp>0 ? `<span class="rc-chip blue">👷 ${nEmp} emp.</span>` : ''}
-        ${nLoc>0 ? `<span class="rc-chip blue">🔧 ${nLoc} engin(s)</span>` : ''}
-        ${(r.metres||[]).length>0 ? `<span class="rc-chip green">📐 ${r.metres.length} métré(s)</span>` : ''}
-        ${nFournit>0 ? `<span class="rc-chip green">📦 ${nFournit} fournit.</span>` : ''}
-        ${nEvac>0 ? `<span class="rc-chip green">🚮 ${nEvac} évac.</span>` : ''}
-        ${r.meteo ? `<span class="rc-chip">${r.meteo}</span>` : ''}
-      </div>
-    </div>`;
-  });
- 
-  if (trash.length > 0) {
-    html += `
-    <div class="corbeille-section">
-      <div class="corbeille-title">🗑️ Corbeille (${trash.length}) — suppression dans 7 jours</div>`;
-    trash.forEach(r => {
-      const d = new Date(r.date + 'T12:00:00');
-      const day = d.toLocaleDateString('fr-CH',{day:'2-digit'});
-      const month = d.toLocaleDateString('fr-CH',{month:'short'});
-      const daysLeft = TRASH_DAYS - Math.floor((Date.now() - new Date(r.deletedAt).getTime()) / 86400000);
-      html += `
-      <div class="rapport-card deleted">
-        <div class="rapport-card-header">
-          <div class="rapport-card-date" style="background:var(--text-muted)">
-            <div class="day">${day}</div>
-            <div class="month">${month}</div>
-          </div>
-          <div class="rapport-card-info">
-            <div class="chantier" style="color:var(--text-muted)">${r.chantier||'Sans chantier'}</div>
-            <div class="meta">Supprimé · encore ${daysLeft}j</div>
-          </div>
-          <div class="rapport-card-actions">
-            <button class="btn-restore" onclick="restoreRapport(event,'${r.id}')">↩️ Restaurer</button>
-          </div>
-        </div>
-      </div>`;
-    });
-    html += `</div>`;
-  }
- 
-  scroll.innerHTML = html;
-}
- 
-function deleteRapport(e, id) {
-  e.stopPropagation();
-  let reports = getReports();
-  const idx = reports.findIndex(r => String(r.id) === String(id));
-  if (idx === -1) return;
-  const [removed] = reports.splice(idx, 1);
-  removed.deletedAt = new Date().toISOString();
-  saveReports(reports);
-  const trash = getTrash();
-  trash.unshift(removed);
-  saveTrash(trash);
-  renderHistorique();
-}
- 
-function restoreRapport(e, id) {
-  e.stopPropagation();
-  let trash = getTrash();
-  const idx = trash.findIndex(r => String(r.id) === String(id));
-  if (idx === -1) return;
-  const [restored] = trash.splice(idx, 1);
-  delete restored.deletedAt;
-  saveTrash(trash);
-  const reports = getReports();
-  reports.unshift(restored);
-  saveReports(reports);
-  renderHistorique();
-}
- 
-// ─── EDIT PAGE ─────────────────────────────────────────────────
-let currentEditId = null;
- 
-function openEditPage(id) {
-  const reports = getReports();
-  const r = reports.find(rep => String(rep.id) === String(id));
-  if (!r) return;
-  currentEditId = id;
- 
-  document.getElementById('ed-date').value = r.date || '';
-  document.getElementById('ed-nom').value = r.nom || '';
-  document.getElementById('ed-chantier').value = r.chantier || '';
-  document.getElementById('ed-travaux').value = r.travaux || '';
-  document.getElementById('ed-notes').value = r.notes || '';
- 
-  // Météo chips
-  document.querySelectorAll('#ed-meteo-chips .chip').forEach(c => {
-    c.classList.toggle('selected', c.textContent.trim() === (r.meteo||'').trim());
-  });
- 
-  // Titre
-  const d = new Date((r.date||'') + 'T12:00:00');
-  document.getElementById('edit-page-title').textContent =
-    `${r.chantier||'Rapport'} — ${d.toLocaleDateString('fr-CH',{day:'numeric',month:'short'})}`;
- 
-  // Récap lecture seule
-  const totalMO = (r.employes||[]).reduce((s,e)=>s+parseFloat(e.heures||0),0);
-  const nLoc = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
-  document.getElementById('ed-recap').innerHTML = `
-    <div class="info-row"><span class="k">👷 MO total</span><span class="v">${totalMO.toFixed(2)} h (${(r.employes||[]).length} pers.)</span></div>
-    <div class="info-row"><span class="k">🔧 Location</span><span class="v">${nLoc} équipement(s)</span></div>
-    <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} ligne(s)</span></div>
-          ${(r.metres||[]).map(m => `<div class="info-row" style="padding-left:20px;"><span class="k" style="color:var(--text-muted);font-size:12px;">${m.article||'—'}</span><span class="v" style="font-size:12px;">${m.qte} ${m.unite}</span></div>`).join('')}
-    <div class="info-row"><span class="k">📦 Fournitures</span><span class="v">${(r.fournitures||[]).length} article(s)</span></div>
-  `;
- 
-  document.getElementById('edit-page').classList.add('open');
-}
- 
-function closeEditPage() {
-  document.getElementById('edit-page').classList.remove('open');
-  currentEditId = null;
-}
- 
-function selectEditChip(el, group) {
-  el.closest('.chips').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-}
- 
-function saveEditedRapport() {
-  if (!currentEditId) return;
-  let reports = getReports();
-  const idx = reports.findIndex(r => String(r.id) === String(currentEditId));
-  if (idx === -1) return;
- 
-  const meteoChip = document.querySelector('#ed-meteo-chips .chip.selected');
-  reports[idx].date     = document.getElementById('ed-date').value;
-  reports[idx].nom      = document.getElementById('ed-nom').value;
-  reports[idx].chantier = document.getElementById('ed-chantier').value;
-  reports[idx].travaux  = document.getElementById('ed-travaux').value;
-  reports[idx].notes    = document.getElementById('ed-notes').value;
-  reports[idx].meteo    = meteoChip ? meteoChip.textContent.trim() : reports[idx].meteo;
-  reports[idx].editedAt = new Date().toISOString();
- 
-  saveReports(reports);
-  closeEditPage();
-  if (state.currentSection === 5) renderHistoriqueInline();
- 
-  const t = document.getElementById('toast');
-  t.textContent = '✅ Rapport mis à jour';
-  t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2000);
-}
- 
-// Mise à jour badge au chargement
-window.addEventListener('DOMContentLoaded', () => {
-  purgeOld();
-  const reports = getReports();
-  const badge = document.getElementById('histo-badge');
-  if (reports.length > 0) {
-    badge.style.display = 'inline-block';
-    badge.textContent = reports.length;
-  }
-});
-</script>
- 
-<!-- OVERLAY AJOUT PRODUIT FOURNITURES -->
-<div class="overlay" id="overlay-fournit-add" onclick="closeFournitOverlay(event)">
-  <div class="bottom-sheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title" id="fournit-add-title">Ajouter un produit</div>
-    <div class="form-row">
-      <label class="lbl">Nom du produit</label>
-      <input type="text" id="fournit-new-nom" placeholder="Nom…">
-    </div>
-    <div class="form-row">
-      <label class="lbl">Unité</label>
-      <div class="chips" id="fournit-new-unit-chips"></div>
-    </div>
-    <button class="btn-sheet-confirm" onclick="confirmFournitAdd()">Ajouter ✓</button>
-  </div>
-</div>
- 
-<div class="saved-toast" id="toast">💾 Brouillon sauvegardé</div>
- 
-</body>
-</html>
- 
+        return ms.map(m 
