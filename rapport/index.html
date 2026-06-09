@@ -1343,6 +1343,16 @@ textarea { resize: none; }
       </div>
     </div>
  
+    <!-- SYNC MACHINES AUTO -->
+    <div id="sync-machines-bar" style="display:none;background:rgba(26,127,114,.1);border:1.5px solid rgba(26,127,114,.3);border-radius:10px;padding:10px 14px;margin-bottom:10px;align-items:center;gap:10px;">
+      <span style="font-size:20px;">🚜</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:12px;font-weight:700;color:#0F6E56;" id="sync-machines-label">Heures machines disponibles</div>
+        <div style="font-size:10px;color:var(--text-muted);" id="sync-machines-detail"></div>
+      </div>
+      <button onclick="syncMachineHoursToLocation(true)" style="background:#1A7F72;color:#fff;border:none;font-family:inherit;font-size:11px;font-weight:700;padding:7px 12px;border-radius:8px;cursor:pointer;flex-shrink:0;">↻ Injecter</button>
+    </div>
+ 
     <!-- CATALOGUE LOCATION -->
     <div class="accord-group" id="accord-vehicules">
       <div class="accord-header" onclick="toggleAccord('vehicules')">
@@ -1544,24 +1554,6 @@ textarea { resize: none; }
  
     <!-- CATALOGUE FOURNITURES -->
     <div id="fournit-catalogue"></div>
- 
-    <!-- ÉVACUATIONS -->
-    <div class="accord-group" id="accord-evac">
-      <div class="accord-header" onclick="toggleAccord('evac')">
-        <span class="accord-title">Évacuations</span>
-        <span class="accord-summary empty" id="sum-evac">—</span>
-        <span class="accord-chevron">▼</span>
-      </div>
-      <div class="accord-body" id="body-evac">
-        <div style="padding:10px 14px;">
-          <div class="col-headers">
-            <span>Matériau</span><span>Qté</span><span>Unité</span><span></span>
-          </div>
-          <div id="evac-list"></div>
-          <button class="btn-add-row" onclick="addFournitRow('evac-list','sum-evac')">+ Ajouter évacuation</button>
-        </div>
-      </div>
-    </div>
  
     <!-- RÉCAP + FINALISER -->
  
@@ -1855,15 +1847,6 @@ let LOC_MATERIEL  = [];
 let LOC_ENGINS    = [];
  
 const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
-// Matériaux évacuations depuis Ressources (rv6_materials), fallback vide
-function getMatEvacuations() {
-  try {
-    const mats = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
-    return mats.map(m => m.nom || '').filter(Boolean);
-  } catch(e) { return []; }
-}
-const MAT_EVACUATIONS = []; // sera construit dynamiquement
- 
 let state = {
   currentSection: 0,
   employes: [],
@@ -1884,6 +1867,8 @@ function updateHeader() {
   } else {
     subEl.textContent = 'Nouveau rapport';
   }
+  // Vérifier si des heures machines correspondent → afficher la barre de sync
+  scheduleSyncCheck();
 }
  
 window.addEventListener('DOMContentLoaded', () => {
@@ -1903,6 +1888,8 @@ window.addEventListener('DOMContentLoaded', () => {
   loadDraft();
   renderEmployes();
   updateHeader();
+  // Vérification initiale des heures machines (après chargement du brouillon)
+  setTimeout(() => syncMachineHoursToLocation(false), 300);
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
   document.getElementById('rj-date').addEventListener('change', updateHeader);
 });
@@ -2016,7 +2003,7 @@ function renderLocSelectionZone() {
     const item = allItems.find(i => i.id === id);
  
     row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label}${sel.fromMachines ? ' <span style=\"font-size:9px;background:rgba(26,127,114,.5);color:#fff;padding:1px 5px;border-radius:8px;margin-left:5px;font-weight:700;letter-spacing:.3px;vertical-align:middle;\">🚜 auto</span>' : ''} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
       <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
       <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
       <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
@@ -2034,13 +2021,18 @@ function renderLocSelectionZone() {
  
     const updateQty = (val) => {
       locSelection[id].qty = Math.round(val * 4) / 4;
+      locSelection[id].fromMachines = false; // saisie manuelle — ne plus écraser
       input.value = locSelection[id].qty > 0 ? locSelection[id].qty : '';
       autoSaveDraft();
     };
     btnQrt.onclick  = () => updateQty((parseFloat(input.value)||0) + 0.25);
     btnHalf.onclick = () => updateQty((parseFloat(input.value)||0) + 0.5);
     btnOne.onclick  = () => updateQty((parseFloat(input.value)||0) + 1);
-    input.oninput   = () => { locSelection[id].qty = parseFloat(input.value)||0; autoSaveDraft(); };
+    input.oninput   = () => {
+      locSelection[id].qty = parseFloat(input.value)||0;
+      locSelection[id].fromMachines = false; // saisie manuelle — ne plus écraser
+      autoSaveDraft();
+    };
     btnDel.onclick  = () => {
       delete locSelection[id];
       const nameEl = document.getElementById(`locname-${id}`);
@@ -2055,6 +2047,92 @@ function renderLocSelectionZone() {
   });
 }
  
+ 
+// ─── SYNC MACHINES → LOCATION ─────────────────────────────────
+// Lit rv6_e, filtre par date+chantier, injecte les heures dans locSelection
+function syncMachineHoursToLocation(force) {
+  const date     = document.getElementById('rj-date').value;
+  const chantier = document.getElementById('rj-chantier').value.trim();
+  const bar      = document.getElementById('sync-machines-bar');
+ 
+  if (!date || !chantier) { if (bar) bar.style.display = 'none'; return; }
+ 
+  let entries = [];
+  try { entries = JSON.parse(localStorage.getItem('rv6_e') || '[]'); } catch(e) { return; }
+ 
+  // Filtrer par date + chantier exact
+  const matching = entries.filter(e => e.date === date && e.chantier === chantier);
+ 
+  // Toujours afficher la barre si des entrées existent (même sans engins reconnus)
+  if (!matching.length) { if (bar) bar.style.display = 'none'; return; }
+ 
+  // Grouper par machine, sommer les heures
+  const byMachine = {};
+  matching.forEach(e => {
+    const name = (e.machine || '').trim();
+    if (!name) return;
+    byMachine[name] = (byMachine[name] || 0) + parseFloat(e.total || 0);
+  });
+ 
+  const machineNames = Object.keys(byMachine);
+ 
+  // Mettre à jour la barre info
+  if (bar) {
+    const detail = machineNames.map(n => `${n} : ${byMachine[n].toFixed(2)} h`).join(' · ');
+    document.getElementById('sync-machines-detail').textContent = detail;
+    document.getElementById('sync-machines-label').textContent =
+      `${machineNames.length} machine${machineNames.length > 1 ? 's' : ''} enregistrée${machineNames.length > 1 ? 's' : ''} ce jour`;
+    bar.style.display = 'flex';
+  }
+ 
+  if (!force) return; // Sans force, on affiche seulement la barre, on n'injecte pas
+ 
+  let injected = 0;
+  machineNames.forEach(machineName => {
+    const totalH = byMachine[machineName];
+    // Chercher l'engin correspondant dans LOC_ENGINS (insensible à la casse)
+    const engin = LOC_ENGINS.find(e =>
+      (e.label || '').toLowerCase() === machineName.toLowerCase()
+    );
+    if (!engin) return;
+ 
+    const key = engin.id;
+    // Ne pas écraser une saisie manuelle (fromMachines absent = saisie manuelle)
+    if (locSelection[key] && !locSelection[key].fromMachines) return;
+ 
+    const qty = Math.round(parseFloat(totalH.toFixed(2)) * 100) / 100;
+    locSelection[key] = { label: engin.label, unit: engin.unit || 'h', qty, fromMachines: true };
+ 
+    // Cocher dans l'accordéon
+    const nameEl = document.getElementById(`locname-${key}`);
+    const chkEl  = document.getElementById(`locchk-${key}`);
+    if (nameEl) nameEl.classList.add('active');
+    if (chkEl)  chkEl.textContent = '✅';
+ 
+    injected++;
+  });
+ 
+  if (injected > 0) {
+    renderLocSelectionZone();
+    autoSaveDraft();
+    const t = document.getElementById('toast');
+    t.textContent = `🚜 ${injected} engin${injected > 1 ? 's' : ''} injecté${injected > 1 ? 's' : ''} dans Location`;
+    t.classList.add('show');
+    setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2500);
+  } else if (machineNames.length > 0) {
+    const t = document.getElementById('toast');
+    t.textContent = `⚠ Engins non trouvés dans Ressources (${machineNames.join(', ')})`;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+}
+ 
+// Debounce pour updateHeader
+let _syncDebounce = null;
+function scheduleSyncCheck() {
+  clearTimeout(_syncDebounce);
+  _syncDebounce = setTimeout(() => syncMachineHoursToLocation(false), 400);
+}
  
 function toggleAccord(key) {
   const header = document.querySelector(`#accord-${key} .accord-header`);
@@ -2105,7 +2183,6 @@ function updateLocSummary(groupKey) {
 }
  
 function buildMatChips() {
-  buildMatChipGroup('quick-evacuations', getMatEvacuations(), 'evac-list', 'badge-evac');
 }
  
 function buildMatChipGroup(containerId, items, listId, badgeId) {
@@ -2960,8 +3037,6 @@ function buildRecapPreview() {
  
   const travaux = document.getElementById('tx-travaux').value || '';
   const nMetres = document.getElementById('metres-list')?.children.length || 0;
-  const nEvac = document.getElementById('evac-list')?.children.length || 0;
- 
   // Location summary
   const locFilled = Object.entries(locSelection).filter(([,sel]) => sel.qty > 0);
  
@@ -3059,12 +3134,6 @@ function collectData() {
     fournitData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
   });
  
-  const evacData = [];
-  document.querySelectorAll('#evac-list .fournit-item').forEach(row => {
-    const inputs = row.querySelectorAll('input, select');
-    evacData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
-  });
- 
   return {
     date: document.getElementById('rj-date').value,
     nom: document.getElementById('rj-nom').value,
@@ -3077,7 +3146,6 @@ function collectData() {
     metres: metresData,
     fournitures: fournitData,
     fournitSelection: fournitSelection,
-    evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
       cat: k.split('|')[0], nom: k.split('|')[1], qty: v.qty, unit: v.unit
     })),
@@ -3146,16 +3214,6 @@ function loadDraft() {
     }
  
     // Évacuations
-    if (d.evacuations) d.evacuations.forEach(e => {
-      addFournitRowWithMat('evac-list', 'sum-evac', e.mat);
-      const rows = document.querySelectorAll('#evac-list .fournit-item');
-      const last = rows[rows.length-1];
-      if (last) {
-        const inputs = last.querySelectorAll('input, select');
-        if (inputs[1]) inputs[1].value = e.qte;
-        if (inputs[2]) inputs[2].value = e.unite;
-      }
-    });
  
     updateHeader();
   } catch(e) { console.warn('Draft load error', e); }
@@ -3205,8 +3263,6 @@ function resetRapport() {
   renderFournitSelectionZone();
  
   // Évacuations
-  document.getElementById('evac-list').innerHTML = '';
-  const sumEvac = document.getElementById('sum-evac');
   if (sumEvac) sumEvac.textContent = '—';
  
   updateHeader();
@@ -3241,7 +3297,6 @@ function finaliserRapport() {
  
  
 // ─── MODULE FOURNITURES ────────────────────────────────────────
-const FOURNIT_CATEGORIES = {"Protection":{"subcats":{"Scotch":["Scotch carossier 15mm","Scotch carossier 19mm","Scotch carossier 25mm","Scotch carossier 30mm","Scotch carossier 38mm","Scotch carossier 50mm","Scotch jaune","Papier de protection","Sicrall"],"Rouleau":["Plastique","Protection Floorliner permafix 1m","Protection Floorliner permafix 2m","Protection statique"]}},"Mortier":{"subcats":{"Mortier":["Weber multi 280","Webermur 920","Weberton 908","Weber ip 14","Weber NO MIX Béton","Holcim Optimo","StoCrete SM","StoCrete TM","Ciment rapide PROMPT","Chape ciment","Chape rapide"]}},"Canalisation PVC":{"subcats":{"PVC Ø 110":["Coude PVC Ø 110 mm 15°","Coude PVC Ø 110 mm 30°","Coude PVC Ø 110 mm 45°","Coude PVC Ø 110 mm 67°","Coude PVC Ø 110 mm 90°","Embranchement Y Ø 110 mm 45°","Embranchement T Ø 110 mm 90°","Bouchon PVC Ø 110 mm","Manchon PVC Ø 110 mm","Tuyau drainage PVC Ø 110 mm 5m","Tuyau PVC Ø 110 mm 5m"],"PVC Ø 125":["Coude PVC Ø 125 mm 45°","Coude PVC Ø 125 mm 90°","Bouchon PVC Ø 125 mm","Tuyau PVC Ø 125 mm 5m","Réduction PVC Ø 125/110 mm"],"PVC Ø 160":["Coude PVC Ø 160 mm 45°","Coude PVC Ø 160 mm 90°","Bouchon PVC Ø 160 mm","Tuyau PVC Ø 160 mm 5m","Réduction PVC Ø 160/110 mm","Réduction PVC Ø 160/125 mm"],"PVC Ø 200":["Coude PVC Ø 200 mm 45°","Bouchon PVC Ø 200 mm","Tuyau PVC Ø 200 mm 5m","Réduction PVC Ø 200/160 mm"],"PVC Ø 250":["Coude PVC Ø 250 mm 45°","Tuyau PVC Ø 250 mm 5m","Réduction PVC Ø 250/200 mm"],"Chambres béton":["Tuyaux béton Ø40 50cm","Tuyaux béton Ø40 100cm","Tuyaux béton Ø60 100cm","Tuyaux béton Ø80 100cm","Couvercle de regard"]}},"Bois":{"subcats":{"Bois":["Latte à tuile 4m","Lambourde 4m","Planche de 15 4m","Plateau raboté 4m","Panneau de coffrage 2m","Panneau de coffrage 2.5m","Poutrelle","Carelet 1m","Carelet 2m","Carelet 3m","Carelet 4m"]}},"Coffrage":{"subcats":{"Distanceur":["Distanceur 100mm","Distanceur 120mm","Distanceur 150mm","Distanceur 180mm","Distanceur 200mm","Distanceur 220mm","Distanceur 250mm","Distanceur 300mm"],"Autres":["Réglette d'espacement","Constri-Taquets","Goutte pendante","Liste d'angle haut de coffrage","Liste d'angle noyée"]}},"Isolation":{"subcats":{"XPS":["XPS 10mm","XPS 20mm","XPS 30mm","XPS 40mm","XPS 50mm","XPS 60mm","XPS 80mm","XPS 100mm","XPS 120mm","XPS 150mm","XPS 200mm"],"EPS":["EPS 10mm","EPS 20mm","EPS 30mm","EPS 40mm","EPS 50mm","EPS 80mm","EPS 100mm","EPS 120mm","EPS 150mm","EPS 200mm"],"Autre":["Bande de rive","Laine de verre","Laine de pierre","Plastimule"]}},"Alba":{"subcats":{"ALBA 40mm":["ALBA 50/100cm","ALBA Hydro 50/100cm"],"ALBA 60mm":["ALBA 50/66cm","ALBA Hydro 50/66cm","ALBA Light 50/66cm"],"ALBA 80mm":["ALBA 50/66cm (80mm)","ALBA Hydro 50/66cm (80mm)"],"ALBA 100mm":["ALBA 50/66cm (100mm)","ALBA Hydro 50/66cm (100mm)","ALBA Light 50/66cm (100mm)"],"Sacs & Colle":["Colle Enduit PF3","FIXIT 160","FIXIT 140"],"Autre":["Brique béton cellulaire 80mm 52/62"]}},"Crépis":{"subcats":{"Treillis":["Treillis d'armature renforcé","Treillis d'armature","Treillis d'angle","Profilé pour enduit"]}},"Pièce PE":{"subcats":{"PE Ø 40":["Tube PE Ø40","Coude PE 45° Ø40","Coude PE 90° Ø40","Manchon à emboîter PE Ø40"],"PE Ø 50":["Tube PE Ø50","Coude PE 45° Ø50","Coude PE 90° Ø50","Manchon à emboîter PE Ø50"],"PE Ø 56":["Tube PE Ø56","Coude PE 45° Ø56","Coude PE 90° Ø56","Embranchement 45° Ø56/56"],"PE Ø 63":["Tube PE Ø63","Coude PE 45° Ø63","Coude PE 90° Ø63","Embranchement 45° Ø63/56"],"PE Ø 75":["Tube PE Ø75","Coude PE 45° Ø75","Coude PE 90° Ø75","Embranchement 88.5° Ø75/75"],"PE Ø 90":["Tube PE Ø90","Coude PE 45° Ø90","Coude PE 90° Ø90","Embranchement 88.5° Ø90/90"],"PE Ø 110":["Tube PE Ø110","Coude PE 45° Ø110","Embranchement 45° Ø110/56","Embranchement 88.5° Ø110/110"],"PE Ø 125+":["Manchon électrique Ø125","Tube SILENTE Ø160","Coude PE 45° SILENTE Ø160","Coude PE 45° Ø200"]}},"Armature":{"subcats":{"Treillis":["K335","K188"],"Firipa":["Cage FIRIPA 90mm","Cage FIRIPA 130mm","Cage FIRIPA 150mm","Cage FIRIPA 180mm","Cage FIRIPA 190mm"],"Pannier":["Pannier avec bout caoutchouc","Pannier sans bout caoutchouc"]}},"Aménagement extérieur":{"subcats":{"Bordure":["Bordure béton 4cm","Bordure béton 6cm","Bordure béton 8cm","Bordure béton 10cm"],"Pavés & Dallage":["Pavés","Pierre naturelle","Dalle de jardin"],"Grille gazon":["Grille gazon 8cm","Grille gazon 6cm","Grille gazon plastique"]}}};
 const FOURNIT_UNITES = ['pc','m','ml','m²','m³','kg','T','L','sac','rouleau','barre','boîte','paquet','forfait'];
 const FOURNIT_CUSTOM_KEY = 'rv6_fournitures_custom_v1';
  
@@ -3249,11 +3304,62 @@ let fournitSelection = {};
 let fournitCustom = {};
 let fournitAddingCat = null;
  
+// ─── MATÉRIAUX DEPUIS RESSOURCES (rv6_materials) ──────────────
+function getResMateriaux() {
+  try { return JSON.parse(localStorage.getItem('rv6_materials') || '[]'); } catch(e) { return []; }
+}
+function buildResMatCategories(mats) {
+  // Supporte deux formats possibles du module Ressources :
+  // Format A (plat)   : [{nom, categorie?, sousCategorie?, unite?}]
+  // Format B (hiérar.): [{nom, items:[{nom,...}]}]  — catégorie = l'objet parent
+  const cats = {};
+  mats.forEach(m => {
+    if (!m || typeof m !== 'object') return;
+    if (Array.isArray(m.items)) {
+      // Format B : m est une catégorie, m.items sont les articles
+      const cat = m.nom || 'Matériaux entreprise';
+      if (!cats[cat]) cats[cat] = { subcats: {} };
+      m.items.forEach(item => {
+        const nom = item.nom || item.name || '';
+        if (!nom) return;
+        const sub = item.sousCategorie || item.sous_categorie || cat;
+        if (!cats[cat].subcats[sub]) cats[cat].subcats[sub] = [];
+        cats[cat].subcats[sub].push(nom);
+      });
+    } else {
+      // Format A : article plat avec champ categorie optionnel
+      const nom = m.nom || m.name || '';
+      if (!nom) return;
+      const cat = m.categorie || m.category || 'Matériaux entreprise';
+      const sub = m.sousCategorie || m.sous_categorie || m.subcategorie || cat;
+      if (!cats[cat]) cats[cat] = { subcats: {} };
+      if (!cats[cat].subcats[sub]) cats[cat].subcats[sub] = [];
+      cats[cat].subcats[sub].push(nom);
+    }
+  });
+  return cats;
+}
+ 
 function buildFournitCatalogue() {
   fournitCustom = JSON.parse(localStorage.getItem(FOURNIT_CUSTOM_KEY) || '{}');
   const container = document.getElementById('fournit-catalogue');
   if (!container || container.children.length > 0) return;
-  Object.entries(FOURNIT_CATEGORIES).forEach(([catName, catData]) => {
+ 
+  // Matériaux depuis Ressources entreprise (rv6_materials) — unique source de vérité
+  const resMats = getResMateriaux();
+  if (!resMats.length) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
+        <div style="font-size:36px;margin-bottom:12px;">🪨</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucun matériau enregistré</div>
+        <div style="font-size:12px;margin-bottom:16px;">Ajoutez des matériaux dans le module Ressources entreprise pour les retrouver ici.</div>
+        <a href="../ressources/index.html" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;">Ouvrir Ressources →</a>
+      </div>`;
+    return;
+  }
+ 
+  const resCats = buildResMatCategories(resMats);
+  Object.entries(resCats).forEach(([catName, catData]) => {
     container.appendChild(buildFournitAccord(catName, catData, fournitCustom[catName]||[]));
   });
 }
@@ -3472,15 +3578,32 @@ function confirmFournitAdd() {
   if (!nom || !fournitAddingCat) return;
   const unit = document.querySelector('#fournit-new-unit-chips .chip.selected')?.textContent || 'pc';
   const catName = fournitAddingCat;
+ 
+  // 1. Sauvegarder dans le catalogue custom du rapport
   if (!fournitCustom[catName]) fournitCustom[catName] = [];
   fournitCustom[catName].push({ nom, unit });
   localStorage.setItem(FOURNIT_CUSTOM_KEY, JSON.stringify(fournitCustom));
+ 
+  // 2. Sync automatique → rv6_materials (si l'article n'existe pas encore)
+  try {
+    const mats = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
+    const exists = mats.some(m => {
+      const mNom = m.nom || m.name || '';
+      return mNom.toLowerCase() === nom.toLowerCase();
+    });
+    if (!exists) {
+      mats.push({ id: 'rj_' + Date.now(), nom, categorie: catName, unite: unit });
+      localStorage.setItem('rv6_materials', JSON.stringify(mats));
+    }
+  } catch(e) {}
+ 
+  // 3. Mettre à jour le DOM
   const body = document.querySelector('#fcat-' + fslug(catName) + ' .accord-body');
   const addBtn = body?.querySelector('button');
   if (addBtn) body.insertBefore(buildFournitRow(catName, nom, unit), addBtn);
   document.getElementById('overlay-fournit-add').classList.remove('open');
   const t = document.getElementById('toast');
-  t.textContent = `✅ "${nom}" ajouté`;
+  t.textContent = `✅ "${nom}" ajouté dans Ressources`;
   t.classList.add('show');
   setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2000);
 }
@@ -3615,10 +3738,6 @@ function renderHistoriqueInline() {
       : null;
  
     // Évacuations
-    const evacItems = (r.evacuations||[]);
-    const evacContent = evacItems.length > 0
-      ? rows(evacItems.map(e=>[e.mat||'—', `${e.qte} ${e.unite}`]))
-      : null;
  
     html += `
     <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
@@ -3648,7 +3767,7 @@ function renderHistoriqueInline() {
       ${section('🔧','Location interne', locContent)}
       ${section('🏗️','Travaux réalisés', travauxContent)}
       ${fournitContent ? section('📦','Fournitures', fournitContent) : ''}
-      ${evacContent ? section('🚮','Évacuations', evacContent) : ''}
+ 
       ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.notes}</p>`) : ''}
  
     </div>`;
@@ -3726,7 +3845,6 @@ function rapportToTexte(r) {
   const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
   const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
   const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
-  const evac = (r.evacuations||[]);
  
   let txt = `📋 RAPPORT JOURNALIER — RISSE S.A.\n`;
   txt += `${'─'.repeat(35)}\n`;
@@ -3793,7 +3911,6 @@ function partagerPDF(r) {
   const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
   const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
   const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
-  const evac = (r.evacuations||[]);
   const d = new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  
   const rowsHTML = (items) => items.map(([k,v])=>`
@@ -3835,7 +3952,6 @@ function partagerPDF(r) {
     + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} métré(s)</td></tr>`:'')
   )}
   ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.nom||f.cat,`${f.qty} ${f.unit}`]))):''}
-  ${evac.length>0?section('🚮','Évacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
   ${r.notes?section('💬','Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
   <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — rapport généré le ${new Date().toLocaleDateString('fr-CH')}</p>
   </body></html>`;
@@ -3900,16 +4016,6 @@ function modifierRapport(e, id) {
     renderFournitSelectionZone();
   }
  
-  if (d.evacuations) d.evacuations.forEach(ev => {
-    addFournitRowWithMat('evac-list', 'sum-evac', ev.mat);
-    const rows = document.querySelectorAll('#evac-list .fournit-item');
-    const last = rows[rows.length-1];
-    if (last) {
-      const inputs = last.querySelectorAll('input, select');
-      if (inputs[1]) inputs[1].value = ev.qte;
-      if (inputs[2]) inputs[2].value = ev.unite;
-    }
-  });
  
   // Sauvegarder comme brouillon
   autoSaveDraft();
@@ -4016,7 +4122,6 @@ function renderHistorique() {
     const nEmp = (r.employes||[]).length;
     const nLoc = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
     const nFournit = (r.fournitures||[]).length;
-    const nEvac = (r.evacuations||[]).length;
     const age = Math.floor((Date.now() - new Date(r.savedAt).getTime()) / 86400000);
     const ageStr = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
  
@@ -4141,7 +4246,6 @@ function openEditPage(id) {
     <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} ligne(s)</span></div>
           ${(r.metres||[]).map(m => `<div class="info-row" style="padding-left:20px;"><span class="k" style="color:var(--text-muted);font-size:12px;">${m.article||'—'}</span><span class="v" style="font-size:12px;">${m.qte} ${m.unite}</span></div>`).join('')}
     <div class="info-row"><span class="k">📦 Fournitures</span><span class="v">${(r.fournitures||[]).length} article(s)</span></div>
-    <div class="info-row"><span class="k">🚮 Évacuations</span><span class="v">${(r.evacuations||[]).length} article(s)</span></div>
   `;
  
   document.getElementById('edit-page').classList.add('open');
@@ -4215,3 +4319,4 @@ window.addEventListener('DOMContentLoaded', () => {
  
 </body>
 </html>
+ 
