@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Calculatrice — Risse S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1B3A6B; --teal:#1A7F72; --gold:#F0A500;
+  --bg:#f5f6fa; --white:#fff;
+  --gray1:#f0f1f5; --gray2:#e2e4ec; --gray3:#9ca3af;
+  --text:#1a1f2e; --radius:12px;
+  --shadow:0 2px 12px rgba(27,58,107,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.header{background:var(--navy);position:sticky;top:0;z-index:100;}
+.header-top{display:flex;align-items:center;gap:12px;padding:14px 16px 10px;}
+.back-btn{background:rgba(255,255,255,.12);border:none;color:#fff;width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-title{color:#fff;font-size:18px;font-weight:700;flex:1;}
+.header-subtitle{color:rgba(255,255,255,.6);font-size:12px;}
+
+/* MAIN TABS (Métrés / Poids) */
+.tabs-bar{display:flex;padding:0 16px 12px;gap:0;}
+.tab-btn{flex:1;background:rgba(255,255,255,.10);border:none;color:rgba(255,255,255,.65);padding:8px 10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s;}
+.tab-btn:first-child{border-radius:10px 0 0 10px;}
+.tab-btn:last-child{border-radius:0 10px 10px 0;}
+.tab-btn.active{background:var(--gold);color:var(--navy);}
+
+/* CONTENT */
+.content{padding:16px;padding-bottom:40px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* MODE SELECTOR (Longueur / Surface / Volume) */
+.mode-bar{display:flex;gap:8px;margin-bottom:16px;}
+.mode-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;background:var(--white);border:2px solid var(--gray2);border-radius:var(--radius);cursor:pointer;font-family:inherit;transition:all .18s;}
+.mode-btn:active{transform:scale(.96);}
+.mode-btn.active{border-color:var(--navy);background:rgba(27,58,107,.04);}
+.mode-icon{font-size:20px;}
+.mode-label{font-size:11px;font-weight:700;color:var(--gray3);}
+.mode-unit{font-size:10px;color:var(--gray3);}
+.mode-btn.active .mode-label{color:var(--navy);}
+.mode-btn.active .mode-unit{color:var(--teal);}
+
+/* CARD */
+.section-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--gray2);}
+.card-title{font-size:14px;font-weight:700;color:var(--navy);}
+.card-total{font-size:13px;font-weight:700;color:var(--teal);background:rgba(26,127,114,.1);padding:4px 10px;border-radius:20px;}
+
+/* ROW */
+.metree-row{display:flex;align-items:center;border-bottom:1px solid var(--gray2);}
+.metree-row:last-child{border-bottom:none;}
+.shape-btn{background:var(--gray1);border:none;border-right:1px solid var(--gray2);width:44px;flex-shrink:0;align-self:stretch;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:background .15s;}
+.shape-btn:active{background:var(--gray2);}
+.metree-inputs{flex:1;display:flex;align-items:center;flex-wrap:wrap;}
+.metree-field{display:flex;flex-direction:column;padding:6px 8px;flex:1;min-width:54px;}
+.metree-field+.metree-field{border-left:1px solid var(--gray2);}
+.metree-field-label{font-size:9px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;}
+.metree-input{border:none;outline:none;background:transparent;font-size:15px;font-weight:600;font-family:inherit;color:var(--text);width:100%;padding:2px 0;}
+.metree-input::placeholder{color:var(--gray2);font-weight:400;}
+.metree-result{padding:0 10px;flex-shrink:0;font-size:12px;font-weight:700;color:var(--teal);min-width:68px;text-align:right;border-left:1px solid var(--gray2);align-self:stretch;display:flex;align-items:center;justify-content:flex-end;}
+.metree-del{background:none;border:none;border-left:1px solid var(--gray2);color:var(--gray3);width:36px;align-self:stretch;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:color .15s;}
+.metree-del:active{color:#e53e3e;}
+
+/* ADD ROW */
+.add-row-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:11px;background:none;border:none;border-top:1px solid var(--gray2);color:var(--teal);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* SHAPES LEGEND */
+.shapes-legend{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--gray2);background:var(--gray1);}
+.shape-chip{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--gray3);padding:2px 8px;background:white;border-radius:20px;border:1px solid var(--gray2);}
+
+/* TOTAL BAR */
+.total-bar{background:linear-gradient(135deg,var(--navy),#2a5298);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;box-shadow:0 4px 16px rgba(27,58,107,.25);}
+.total-label{color:rgba(255,255,255,.75);font-size:13px;font-weight:600;}
+.total-value{color:#fff;font-size:26px;font-weight:800;}
+.total-unit{color:rgba(255,255,255,.6);font-size:13px;}
+
+/* RESET */
+.reset-btn{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px;}
+
+/* EMPTY */
+.metree-empty{padding:24px;text-align:center;color:var(--gray3);font-size:13px;}
+
+/* POIDS */
+.poids-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.poids-header{background:linear-gradient(135deg,rgba(26,127,114,.07),rgba(26,127,114,.02));border-bottom:1px solid var(--gray2);padding:14px 16px;}
+.poids-title{font-size:14px;font-weight:700;color:var(--navy);}
+.poids-body{padding:16px;}
+.mat-label{font-size:11px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:block;}
+.mat-select-wrap{position:relative;margin-bottom:14px;}
+.mat-select{width:100%;padding:12px 40px 12px 14px;border:1.5px solid var(--gray2);border-radius:10px;font-size:15px;font-family:inherit;color:var(--text);background:#fff;appearance:none;outline:none;cursor:pointer;transition:border-color .15s;}
+.mat-select:focus{border-color:var(--teal);}
+.mat-select-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--gray3);font-size:12px;}
+.vol-row{display:flex;gap:10px;align-items:flex-end;margin-bottom:16px;}
+.vol-group{flex:1;}
+.vol-input-wrap{position:relative;}
+.vol-input{width:100%;padding:12px 50px 12px 14px;border:1.5px solid var(--gray2);border-radius:10px;font-size:18px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .15s;}
+.vol-input:focus{border-color:var(--teal);}
+.vol-unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--gray3);pointer-events:none;}
+.vol-from-btn{padding:12px 14px;background:rgba(26,127,114,.1);border:1.5px solid rgba(26,127,114,.25);border-radius:10px;color:var(--teal);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;line-height:1.2;text-align:center;}
+.vol-from-btn:active{background:rgba(26,127,114,.2);}
+.density-info{display:flex;align-items:center;gap:8px;background:var(--gray1);border-radius:10px;padding:10px 12px;margin-bottom:16px;font-size:13px;color:var(--gray3);}
+.density-info.has-density{background:rgba(26,127,114,.07);color:var(--teal);}
+.density-dot{width:8px;height:8px;border-radius:50%;background:var(--gray3);flex-shrink:0;}
+.density-info.has-density .density-dot{background:var(--teal);}
+.poids-result{border-radius:12px;overflow:hidden;border:2px solid var(--gray2);transition:border-color .25s;}
+.poids-result.active{border-color:var(--gold);}
+.poids-result-main{background:var(--gray1);padding:20px;display:flex;align-items:baseline;gap:8px;justify-content:center;transition:background .25s;}
+.poids-result.active .poids-result-main{background:linear-gradient(135deg,#fffbf0,#fff8e0);}
+.poids-number{font-size:42px;font-weight:800;color:var(--navy);}
+.poids-unit-big{font-size:20px;font-weight:600;color:var(--gray3);}
+.poids-result-sub{background:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--gray2);}
+.poids-sub-item{text-align:center;}
+.poids-sub-val{font-size:15px;font-weight:700;color:var(--text);}
+.poids-sub-label{font-size:11px;color:var(--gray3);font-weight:500;}
+.poids-divider{width:1px;height:32px;background:var(--gray2);}
+.no-mat-state{text-align:center;padding:24px 16px;color:var(--gray3);font-size:13px;}
+.no-mat-icon{font-size:32px;margin-bottom:8px;}
+.no-mat-link{display:inline-block;margin-top:10px;color:var(--teal);font-weight:700;font-size:13px;text-decoration:none;background:rgba(26,127,114,.08);padding:8px 16px;border-radius:20px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
+    <div>
+      <div class="header-title">Calculatrice</div>
+      <div class="header-subtitle">Métrés &amp; poids matériaux</div>
+    </div>
+  </div>
+  <div class="tabs-bar">
+    <button class="tab-btn active" id="btn-metrees" onclick="switchTab('metrees')">📐 Métrés</button>
+    <button class="tab-btn" id="btn-poids" onclick="switchTab('poids')">⚖️ Poids</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ── TAB MÉTRÉS ── -->
+  <div class="tab-panel active" id="panel-metrees">
+
+    <!-- Mode selector -->
+    <div class="mode-bar">
+      <button class="mode-btn active" id="mode-btn-longueur" onclick="switchMode('longueur')">
+        <span class="mode-icon">📏</span>
+        <span class="mode-label">Longueur</span>
+        <span class="mode-unit">ml</span>
+      </button>
+      <button class="mode-btn" id="mode-btn-surface" onclick="switchMode('surface')">
+        <span class="mode-icon">⬜</span>
+        <span class="mode-label">Surface</span>
+        <span class="mode-unit">m²</span>
+      </button>
+      <button class="mode-btn" id="mode-btn-volume" onclick="switchMode('volume')">
+        <span class="mode-icon">📦</span>
+        <span class="mode-label">Volume</span>
+        <span class="mode-unit">m³</span>
+      </button>
+    </div>
+
+    <div class="section-card">
+      <div class="card-header">
+        <span class="card-title" id="card-title-label">Lignes de calcul</span>
+        <span class="card-total" id="metrees-total">0.00 ml</span>
+      </div>
+      <div id="metrees-rows"></div>
+      <button class="add-row-btn" onclick="addRow()">＋ Ajouter une ligne</button>
+      <div class="shapes-legend" id="shapes-legend"></div>
+    </div>
+
+    <div class="total-bar">
+      <div>
+        <div class="total-label" id="total-label-txt">Total longueur</div>
+        <div class="total-unit" id="total-unit-sub">métrés</div>
+      </div>
+      <div style="text-align:right">
+        <div class="total-value" id="total-display">0.00</div>
+        <div class="total-unit" id="total-unit-display">ml</div>
+      </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetRows()">🗑 Effacer toutes les lignes</button>
+  </div>
+
+  <!-- ── TAB POIDS ── -->
+  <div class="tab-panel" id="panel-poids">
+    <div class="poids-card">
+      <div class="poids-header"><div class="poids-title">Calcul de poids</div></div>
+      <div class="poids-body">
+        <label class="mat-label">Matériau</label>
+        <div id="mat-selector-wrap"></div>
+        <label class="mat-label">Volume</label>
+        <div class="vol-row">
+          <div class="vol-group">
+            <div class="vol-input-wrap">
+              <input class="vol-input" id="vol-input" type="number" min="0" step="0.01" placeholder="0.00" oninput="calcPoids()">
+              <span class="vol-unit">m³</span>
+            </div>
+          </div>
+          <button class="vol-from-btn" onclick="importFromMetrees()">📐<br>Depuis<br>métrés</button>
+        </div>
+        <div class="density-info" id="density-info">
+          <div class="density-dot"></div>
+          <span id="density-text">Sélectionnez un matériau</span>
+        </div>
+        <div class="poids-result" id="poids-result">
+          <div class="poids-result-main">
+            <span class="poids-number" id="poids-tonnes">—</span>
+            <span class="poids-unit-big">t</span>
+          </div>
+          <div class="poids-result-sub">
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="poids-kg">—</div>
+              <div class="poids-sub-label">kilogrammes</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="poids-vol">—</div>
+              <div class="poids-sub-label">m³ utilisés</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="poids-densite">—</div>
+              <div class="poids-sub-label">kg/m³</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+// DÉFINITIONS DES FORMES PAR MODE
+// ─────────────────────────────────────────────────────────────────
+
+const MODES = {
+  longueur: {
+    unit: 'ml',
+    label: 'Total longueur',
+    cardTitle: 'Lignes de calcul — Longueur',
+    shapes: ['—', '⌒', 'U'],
+    legend: [
+      {s:'—', l:'Ligne droite'},
+      {s:'⌒', l:'Arc (π·r)'},
+      {s:'U',  l:'Périmètre rect.'},
+    ],
+    defs: {
+      '—': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'}],
+        calc: v => (v.l||0)
+      },
+      '⌒': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'},{key:'a', label:'Angle (°)', ph:'360'}],
+        calc: v => Math.PI * (v.r||0) * ((v.a||360)/180)
+      },
+      'U': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'},{key:'w', label:'l (m)', ph:'0.00'}],
+        calc: v => 2*((v.l||0)+(v.w||0))
+      }
+    }
+  },
+
+  surface: {
+    unit: 'm²',
+    label: 'Total surface',
+    cardTitle: 'Lignes de calcul — Surface',
+    shapes: ['□', '△', '⬡', '○', '◐'],
+    legend: [
+      {s:'□', l:'Rectangle'},
+      {s:'△', l:'Triangle'},
+      {s:'⬡', l:'Hexagone'},
+      {s:'○', l:'Cercle'},
+      {s:'◐', l:'Demi-cercle'},
+    ],
+    defs: {
+      '□': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'},{key:'w', label:'l (m)', ph:'0.00'}],
+        calc: v => (v.l||0)*(v.w||0)
+      },
+      '△': {
+        fields:[{key:'b', label:'Base (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => 0.5*(v.b||0)*(v.h||0)
+      },
+      '⬡': {
+        fields:[{key:'a', label:'Côté (m)', ph:'0.00'}],
+        calc: v => (3*Math.sqrt(3)/2)*(v.a||0)*(v.a||0)
+      },
+      '○': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => Math.PI*(v.r||0)*(v.r||0)
+      },
+      '◐': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => 0.5*Math.PI*(v.r||0)*(v.r||0)
+      }
+    }
+  },
+
+  volume: {
+    unit: 'm³',
+    label: 'Total volume',
+    cardTitle: 'Lignes de calcul — Volume',
+    shapes: ['□', '△', '⬡', '○', '◐'],
+    legend: [
+      {s:'□', l:'Parallélépipède'},
+      {s:'△', l:'Prisme triangulaire'},
+      {s:'⬡', l:'Prisme hexagonal'},
+      {s:'○', l:'Cylindre'},
+      {s:'◐', l:'Demi-cylindre'},
+    ],
+    defs: {
+      '□': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'},{key:'w', label:'l (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => (v.l||0)*(v.w||0)*(v.h||0)
+      },
+      '△': {
+        fields:[{key:'b', label:'Base (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'},{key:'e', label:'É (m)', ph:'0.00'}],
+        calc: v => 0.5*(v.b||0)*(v.h||0)*(v.e||0)
+      },
+      '⬡': {
+        fields:[{key:'a', label:'Côté (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => (3*Math.sqrt(3)/2)*(v.a||0)*(v.a||0)*(v.h||0)
+      },
+      '○': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => Math.PI*(v.r||0)*(v.r||0)*(v.h||0)
+      },
+      '◐': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => 0.5*Math.PI*(v.r||0)*(v.r||0)*(v.h||0)
+      }
+    }
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────
+let currentMode = 'longueur';
+let rows = [];
+let rowCounter = 0;
+
+function newRow() {
+  const shapes = MODES[currentMode].shapes;
+  return { id: ++rowCounter, shape: shapes[0], vals: {} };
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MODE SWITCH
+// ─────────────────────────────────────────────────────────────────
+function switchMode(mode) {
+  currentMode = mode;
+  rows = [];
+  rowCounter = 0;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('mode-btn-' + mode).classList.add('active');
+  const m = MODES[mode];
+  document.getElementById('card-title-label').textContent = m.cardTitle;
+  document.getElementById('metrees-total').textContent = '0.00 ' + m.unit;
+  document.getElementById('total-label-txt').textContent = m.label;
+  document.getElementById('total-unit-sub').textContent = 'métrés';
+  document.getElementById('total-unit-display').textContent = m.unit;
+  document.getElementById('total-display').textContent = '0.00';
+  renderLegend();
+  renderRows();
+}
+
+function renderLegend() {
+  const legend = MODES[currentMode].legend;
+  document.getElementById('shapes-legend').innerHTML = legend.map(l =>
+    `<div class="shape-chip">${l.s} ${l.l}</div>`
+  ).join('');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// ROWS
+// ─────────────────────────────────────────────────────────────────
+function addRow() {
+  rows.push(newRow());
+  renderRows();
+}
+
+function deleteRow(id) {
+  rows = rows.filter(r => r.id !== id);
+  renderRows();
+  updateTotal();
+}
+
+function resetRows() {
+  if (!rows.length) return;
+  if (!confirm('Effacer toutes les lignes ?')) return;
+  rows = []; rowCounter = 0;
+  renderRows(); updateTotal();
+}
+
+function cycleShape(id) {
+  const row = rows.find(r => r.id === id);
+  if (!row) return;
+  const shapes = MODES[currentMode].shapes;
+  const idx = shapes.indexOf(row.shape);
+  row.shape = shapes[(idx + 1) % shapes.length];
+  row.vals = {};
+  renderRows(); updateTotal();
+}
+
+function onInputChange(id, key, val) {
+  const row = rows.find(r => r.id === id);
+  if (!row) return;
+  row.vals[key] = parseFloat(val) || 0;
+  updateTotal();
+  const def = MODES[currentMode].defs[row.shape];
+  const result = def.calc(row.vals);
+  const cell = document.getElementById('res-' + id);
+  const unit = MODES[currentMode].unit;
+  if (cell) cell.textContent = result > 0 ? fmt(result) + ' ' + unit : '';
+}
+
+function renderRows() {
+  const container = document.getElementById('metrees-rows');
+  const unit = MODES[currentMode].unit;
+  if (!rows.length) {
+    container.innerHTML = `<div class="metree-empty">Aucune ligne — tap "Ajouter"</div>`;
+    return;
+  }
+  container.innerHTML = rows.map(row => {
+    const def = MODES[currentMode].defs[row.shape];
+    const result = def.calc(row.vals);
+    const fieldsHtml = def.fields.map(f => `
+      <div class="metree-field">
+        <span class="metree-field-label">${f.label}</span>
+        <input class="metree-input" type="number" min="0" step="0.01"
+               placeholder="${f.ph}" value="${row.vals[f.key]||''}"
+               oninput="onInputChange(${row.id},'${f.key}',this.value)">
+      </div>`).join('');
+    return `<div class="metree-row" id="row-${row.id}">
+      <button class="shape-btn" onclick="cycleShape(${row.id})" title="Changer de forme">${row.shape}</button>
+      <div class="metree-inputs">${fieldsHtml}</div>
+      <div class="metree-result" id="res-${row.id}">${result > 0 ? fmt(result)+' '+unit : ''}</div>
+      <button class="metree-del" onclick="deleteRow(${row.id})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function updateTotal() {
+  const defs = MODES[currentMode].defs;
+  const unit = MODES[currentMode].unit;
+  let total = 0;
+  rows.forEach(row => { total += defs[row.shape].calc(row.vals); });
+  document.getElementById('metrees-total').textContent = fmt(total) + ' ' + unit;
+  document.getElementById('total-display').textContent = fmt(total);
+  return total;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MATÉRIAUX
+// ─────────────────────────────────────────────────────────────────
+function loadMateriaux() {
+  try {
+    const data = JSON.parse(localStorage.getItem('rv6_materials')) || [];
+    const all = [];
+    data.forEach(cat => {
+      (cat.items||[]).forEach(item => {
+        const mv = item.masse_volumique || (item.densite ? parseFloat(item.densite) : null);
+        if (mv) all.push({ id: item.id, name: item.nom||item.name, masse_volumique: mv, cat: cat.name, color: cat.color });
+      });
+    });
+    return all;
+  } catch { return []; }
+}
+
+function buildMatSelector() {
+  const wrap = document.getElementById('mat-selector-wrap');
+  const mats = loadMateriaux();
+  if (!mats.length) {
+    wrap.innerHTML = `<div class="no-mat-state">
+      <div class="no-mat-icon">🪨</div>
+      Aucun matériau avec masse volumique.<br>
+      Allez dans <strong>Ressources → Matériaux</strong> pour en ajouter.
+      <br><a class="no-mat-link" href="../ressources/index.html">Ouvrir Ressources</a>
+    </div>`;
+    return;
+  }
+  const groups = {};
+  mats.forEach(m => { if (!groups[m.cat]) groups[m.cat]=[]; groups[m.cat].push(m); });
+  let optHtml = `<option value="">— Choisir un matériau —</option>`;
+  Object.entries(groups).forEach(([cat, items]) => {
+    optHtml += `<optgroup label="${esc(cat)}">`;
+    items.forEach(m => {
+      optHtml += `<option value="${m.id}" data-mv="${m.masse_volumique}" data-color="${m.color||'#ccc'}">${esc(m.name)} (${m.masse_volumique} kg/m³)</option>`;
+    });
+    optHtml += `</optgroup>`;
+  });
+  wrap.innerHTML = `<div class="mat-select-wrap">
+    <select class="mat-select" id="mat-select" onchange="onMatChange()">${optHtml}</select>
+    <span class="mat-select-arrow">▼</span>
+  </div>`;
+}
+
+function onMatChange() {
+  const sel = document.getElementById('mat-select');
+  if (!sel) return;
+  const opt = sel.options[sel.selectedIndex];
+  const mv = parseFloat(opt.dataset.mv) || null;
+  const color = opt.dataset.color || '#ccc';
+  const infoEl = document.getElementById('density-info');
+  const dotEl = infoEl.querySelector('.density-dot');
+  if (mv) {
+    infoEl.classList.add('has-density');
+    dotEl.style.background = color;
+    document.getElementById('density-text').textContent = `Masse volumique : ${mv.toLocaleString('fr-CH')} kg/m³`;
+  } else {
+    infoEl.classList.remove('has-density');
+    dotEl.style.background = 'var(--gray3)';
+    document.getElementById('density-text').textContent = 'Sélectionnez un matériau';
+  }
+  calcPoids();
+}
+
+function getCurrentMv() {
+  const sel = document.getElementById('mat-select');
+  if (!sel) return null;
+  return parseFloat(sel.options[sel.selectedIndex]?.dataset?.mv) || null;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCUL POIDS
+// ─────────────────────────────────────────────────────────────────
+function calcPoids() {
+  const mv = getCurrentMv();
+  const vol = parseFloat(document.getElementById('vol-input')?.value) || 0;
+  const resultEl = document.getElementById('poids-result');
+  if (!mv || vol <= 0) {
+    resultEl.classList.remove('active');
+    document.getElementById('poids-tonnes').textContent = '—';
+    document.getElementById('poids-kg').textContent = '—';
+    document.getElementById('poids-vol').textContent = '—';
+    document.getElementById('poids-densite').textContent = mv ? mv.toLocaleString('fr-CH') : '—';
+    return;
+  }
+  const kg = mv * vol;
+  const tonnes = kg / 1000;
+  resultEl.classList.add('active');
+  document.getElementById('poids-tonnes').textContent = fmtPoids(tonnes);
+  document.getElementById('poids-kg').textContent = Math.round(kg).toLocaleString('fr-CH') + ' kg';
+  document.getElementById('poids-vol').textContent = fmt(vol) + ' m³';
+  document.getElementById('poids-densite').textContent = mv.toLocaleString('fr-CH');
+}
+
+function fmtPoids(t) {
+  if (t >= 100) return Math.round(t).toLocaleString('fr-CH');
+  if (t >= 10) return t.toFixed(1);
+  return t.toFixed(2);
+}
+
+function importFromMetrees() {
+  // Uniquement si on est en mode volume
+  if (currentMode !== 'volume') {
+    showToast('Passez en mode Volume pour importer en m³');
+    return;
+  }
+  const defs = MODES['volume'].defs;
+  let total = 0;
+  rows.forEach(row => { total += defs[row.shape].calc(row.vals); });
+  if (total <= 0) { showToast('Aucun volume calculé dans les métrés'); return; }
+  const inp = document.getElementById('vol-input');
+  if (inp) { inp.value = fmt(total); calcPoids(); showToast('Volume importé ✓'); }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// TAB SWITCH
+// ─────────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.getElementById('btn-' + tab).classList.add('active');
+  if (tab === 'poids') { buildMatSelector(); onMatChange(); }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────────────────────────
+function fmt(v) { return parseFloat(v).toFixed(2); }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────
+renderLegend();
+addRow();
+</script>
+</body>
+</html>
