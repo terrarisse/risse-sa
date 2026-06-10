@@ -13,7 +13,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
-
+ 
 /* HEADER */
 .header{background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;
   justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
@@ -22,7 +22,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer}
 .header-title{font-size:17px;font-weight:700}
 .header-sub{font-size:12px;opacity:0.6;margin-top:1px}
-
+ 
 /* MONTH PICKER */
 .month-picker{background:var(--white);padding:10px 12px;display:flex;gap:7px;overflow-x:auto;
   scrollbar-width:none;border-bottom:1px solid var(--border);position:sticky;top:108px;z-index:89}
@@ -32,14 +32,14 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .mchip.has-data{border-color:rgba(26,127,114,0.4);color:var(--teal)}
 .mchip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .mchip.has-data.active{background:var(--teal);border-color:var(--teal)}
-
+ 
 /* STATS */
 .stats-bar{display:flex;gap:8px;padding:12px 12px 0}
 .stat-card{flex:1;background:var(--white);border-radius:var(--radius);padding:10px 6px;
   text-align:center;box-shadow:var(--shadow)}
 .stat-val{font-size:17px;font-weight:800;color:var(--navy)}
 .stat-lbl{font-size:9px;color:var(--muted);margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-
+ 
 /* ADD BTN */
 .add-btn-wrap{padding:10px 12px 0}
 .add-btn{width:100%;padding:15px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
@@ -47,12 +47,12 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   background:var(--teal);color:#fff;box-shadow:0 4px 14px rgba(26,127,114,0.3);
   transition:transform .12s;font-family:inherit}
 .add-btn:active{transform:scale(0.97)}
-
+ 
 /* DAYS LIST */
 .days-wrap{padding:10px 12px 90px}
 .week-sep{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;
   letter-spacing:.08em;padding:10px 2px 5px}
-
+ 
 /* DAY CARD */
 .day-card{background:var(--white);border-radius:var(--radius);margin-bottom:8px;
   box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
@@ -68,13 +68,13 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .day-note{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
 .day-hours{margin-left:auto;font-size:20px;font-weight:800;color:var(--teal);white-space:nowrap}
 .day-hours.special{color:var(--gold);font-size:14px}
-
+ 
 .day-times{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
 .time-blk{padding:8px 14px;border-right:1px solid var(--border)}
 .time-blk:last-child{border-right:none}
 .time-lbl{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
 .time-val{font-size:13px;font-weight:600;color:var(--text)}
-
+ 
 .day-tags{display:flex;gap:5px;flex-wrap:wrap;padding:7px 14px 9px;border-top:1px solid var(--border)}
 .tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px}
 .tag-blue{background:#E3F2FD;color:#1565C0}
@@ -82,10 +82,10 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .tag-orange{background:#FFF3E0;color:#F57C00}
 .tag-purple{background:#F3E5F5;color:#6A1B9A}
 .tag-green{background:#E8F5E9;color:#2E7D32}
-
+ 
 .empty-mo{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty-icon{font-size:48px;opacity:.25;margin-bottom:12px}
-
+ 
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:flex-end}
 .overlay.open{display:flex}
@@ -96,7 +96,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .m-title{font-size:18px;font-weight:800;color:var(--navy);padding:14px 16px 12px;
   border-bottom:1px solid var(--border)}
 .m-title small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
-
+ 
 /* FORM ROWS */
 .f-section{padding:12px 16px 0}
 .f-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
@@ -110,7 +110,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   font-size:15px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
 .tsep{color:var(--muted);font-weight:600}
 .total-display{font-size:18px;font-weight:800;color:var(--teal);margin-left:auto}
-
+ 
 /* TOGGLE */
 .tog-row{display:flex;align-items:center;padding:12px 14px;gap:10px;border-bottom:1px solid var(--border)}
 .tog-row:last-child{border-bottom:none}
@@ -121,13 +121,13 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
   background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
 .tog.on::after{left:21px}
-
+ 
 /* TYPE CHIPS */
 .type-row{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px 0}
 .tchip{padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
   border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;user-select:none}
 .tchip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
-
+ 
 /* ACTION BTNS */
 .m-actions{display:flex;gap:8px;padding:16px 16px 0}
 .m-btn{flex:1;padding:14px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
@@ -136,12 +136,12 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .m-btn.primary{background:var(--teal);color:#fff}
 .m-btn.secondary{background:var(--bg);color:var(--muted)}
 .m-btn.danger{background:#FFEBEE;color:var(--red)}
-
+ 
 /* TEXT INPUT */
 .f-input{flex:1;border:none;outline:none;font-size:14px;font-weight:600;color:var(--text);
   background:transparent;font-family:inherit}
-
-
+ 
+ 
 /* NAV TABS */
 .nav-tabs{background:var(--white);display:flex;border-bottom:2px solid var(--border);
   position:sticky;top:62px;z-index:91;}
@@ -149,10 +149,10 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;
   transition:color .15s,border-color .15s;user-select:none}
 .ntab.act{color:var(--navy);border-bottom-color:var(--navy)}
-
+ 
 /* MAIN / PARAMS PAGES */
 .view{display:none}.view.act{display:block}
-
+ 
 /* PARAMS */
 .p-section{margin:12px 12px 0}
 .p-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
@@ -166,7 +166,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .p-tfield{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
   font-size:14px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
 .p-tsep{color:var(--muted);font-weight:600}
-
+ 
 /* SIGNATURE PAD */
 .sig-wrap{margin:12px 12px 0}
 .sig-canvas{display:block;width:100%;height:140px;border-radius:var(--radius);
@@ -177,14 +177,26 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   cursor:pointer;font-family:inherit;transition:transform .1s}
 .sig-btn.clear{background:var(--bg);color:var(--muted)}
 .sig-btn.save{background:var(--teal);color:#fff}
-
+ 
 /* PDF BTN */
 .pdf-btn{width:100%;padding:14px;border-radius:var(--radius);border:none;font-size:14px;font-weight:700;
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;
   background:#1D6F42;color:#fff;box-shadow:0 4px 14px rgba(29,111,66,0.28);
   transition:transform .12s;font-family:inherit}
 .pdf-btn:active{transform:scale(0.97)}
-
+ 
+/* PDF PREVIEW */
+.pdf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;flex-direction:column}
+.pdf-overlay.open{display:flex}
+.pdf-topbar{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.pdf-topbar-title{flex:1;font-size:15px;font-weight:700}
+.pdf-action-btn{padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.pdf-action-btn.dl{background:var(--teal);color:#fff}
+.pdf-action-btn.cl{background:rgba(255,255,255,0.15);color:#fff}
+.pdf-frame{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:16px;background:#555}
+.pdf-canvas-wrap{background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.4)}
+canvas#pdfPreviewCanvas{display:block;max-width:100%}
+ 
 /* TOAST */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);
   background:var(--text);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;
@@ -195,7 +207,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-
+ 
 <div class="header">
   <div class="header-left">
     <a href="../" class="back-btn">‹</a>
@@ -212,41 +224,41 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
     <span id="importBtnLabel" style="font-size:11px;font-weight:700;opacity:0.9">Importer</span>
   </button>
 </div>
-
+ 
 <div class="nav-tabs">
   <div class="ntab act" id="nt-main" onclick="switchView('main')">📋 Heures</div>
   <div class="ntab" id="nt-params" onclick="switchView('params')">⚙️ Paramètres</div>
 </div>
-
+ 
 <div class="view act" id="view-main">
 <div class="month-picker" id="mPicker"></div>
-
+ 
 <div class="stats-bar">
   <div class="stat-card"><div class="stat-val" id="sJ">—</div><div class="stat-lbl">Jours T</div></div>
   <div class="stat-card"><div class="stat-val" id="sH">—</div><div class="stat-lbl">Heures</div></div>
   <div class="stat-card"><div class="stat-val" id="sR">—</div><div class="stat-lbl">Repas</div></div>
   <div class="stat-card"><div class="stat-val" id="sN">—</div><div class="stat-lbl">H. nuit</div></div>
 </div>
-
-
+ 
+ 
 <div class="add-btn-wrap">
   <button class="add-btn" onclick="openNew()">
     <span style="font-size:22px">+</span> Ajouter une journée
   </button>
 </div>
-
+ 
 <div style="padding:8px 12px 0">
   <button class="pdf-btn" onclick="exportPDF()">
     <span style="font-size:20px">📄</span> Exporter en PDF — <span id="pdfMoLabel"></span>
   </button>
 </div>
 <div class="days-wrap" id="daysWrap"></div>
-
+ 
 </div><!-- /view-main -->
-
+ 
 <!-- PARAMS VIEW -->
 <div class="view" id="view-params">
-
+ 
   <div class="p-section" style="margin-top:14px">
     <div class="p-title">Informations personnelles</div>
     <div class="p-card">
@@ -254,7 +266,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       <div class="p-row"><span class="p-lbl">🏢 Entreprise</span><input class="p-input" id="cfgEntreprise" placeholder="Risse S.A." onchange="saveParams()"></div>
     </div>
   </div>
-
+ 
   <div class="p-section">
     <div class="p-title">🌨 Horaire Hiver (Oct – Mars)</div>
     <div class="p-card">
@@ -262,7 +274,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgHivAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgHivAf" type="time" value="17:30" onchange="saveParams()"></div></div>
     </div>
   </div>
-
+ 
   <div class="p-section">
     <div class="p-title">☀️ Horaire Été (Avr – Sept)</div>
     <div class="p-card">
@@ -270,7 +282,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgEteAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgEteAf" type="time" value="17:30" onchange="saveParams()"></div></div>
     </div>
   </div>
-
+ 
   <div class="sig-wrap">
     <div class="p-title" style="padding-left:2px">✍️ Signature</div>
     <canvas class="sig-canvas" id="sigCanvas" width="800" height="280"></canvas>
@@ -279,16 +291,16 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       <button class="sig-btn save" onclick="saveSig()">💾 Enregistrer la signature</button>
     </div>
   </div>
-
+ 
   <div style="height:80px"></div>
 </div><!-- /view-params -->
-
+ 
 <!-- MODAL SAISIE / ÉDITION -->
 <div class="overlay" id="overlay" onclick="closeOverlay(event)">
 <div class="modal" id="modal">
   <div class="m-handle"></div>
   <div class="m-title" id="mTitle">Nouvelle journée</div>
-
+ 
   <!-- Type de journée -->
   <div class="type-row" id="typeRow">
     <div class="tchip sel" data-t="normal"  onclick="selType('normal')">✅ Normal</div>
@@ -298,7 +310,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
     <div class="tchip"     data-t="nuit"     onclick="selType('nuit')">🌙 Nuit</div>
     <div class="tchip"     data-t="samedi"   onclick="selType('samedi')">📅 Samedi</div>
   </div>
-
+ 
   <!-- Date -->
   <div class="f-section" style="margin-top:12px">
     <div class="f-label">Date</div>
@@ -309,7 +321,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       </div>
     </div>
   </div>
-
+ 
   <!-- Horaires (masqué si type spécial) -->
   <div id="horaireSection">
     <div class="f-section" style="margin-top:12px">
@@ -338,7 +350,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
         </div>
       </div>
     </div>
-
+ 
     <!-- Repas -->
     <div class="f-section" style="margin-top:10px">
       <div class="f-card">
@@ -348,7 +360,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
         </div>
       </div>
     </div>
-
+ 
     <!-- Heures spéciales (nuit/samedi) -->
     <div id="specialSection" style="display:none">
       <div class="f-section" style="margin-top:10px">
@@ -374,7 +386,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       </div>
     </div>
   </div>
-
+ 
   <!-- Note -->
   <div class="f-section" style="margin-top:10px">
     <div class="f-card">
@@ -383,7 +395,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
       </div>
     </div>
   </div>
-
+ 
   <!-- Actions -->
   <div class="m-actions">
     <button class="m-btn danger" id="btnDelete" onclick="deleteEntry()" style="display:none;flex:0.6">🗑</button>
@@ -392,9 +404,23 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   </div>
 </div>
 </div>
-
+ 
 <div class="toast" id="toast"></div>
-
+ 
+<!-- PDF PREVIEW -->
+<div class="pdf-overlay" id="pdfOverlay">
+  <div class="pdf-topbar">
+    <button class="pdf-action-btn cl" onclick="closePdfPreview()">✕</button>
+    <div class="pdf-topbar-title" id="pdfPreviewTitle">Aperçu PDF</div>
+    <button class="pdf-action-btn dl" onclick="downloadPDF()">⬇ Télécharger</button>
+  </div>
+  <div class="pdf-frame">
+    <div class="pdf-canvas-wrap">
+      <canvas id="pdfPreviewCanvas"></canvas>
+    </div>
+  </div>
+</div>
+ 
 <script>
 // ══════════════════════════════
 // DONNÉES EXCEL (lecture seule)
@@ -404,7 +430,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 // ══════════════════════════════
 let EXCEL_DATA = null;          // null = pas encore importé
 let excelYear  = null;
-
+ 
 function parseExcelFile(buffer) {
   const wb = XLSX.read(buffer, {type:'array'});
   const ws = wb.Sheets[wb.SheetNames[0]];
@@ -414,12 +440,12 @@ function parseExcelFile(buffer) {
   const titleStr  = titleCell ? String(titleCell.v) : '';
   const yearMatch = titleStr.match(/20\d\d/);
   excelYear = yearMatch ? parseInt(yearMatch[0]) : new Date().getFullYear();
-
+ 
   // Month block start rows (1-based) — structure identique chaque année
   const MONTH_STARTS = [1,25,48,71,94,117,140,163,186,209,232,255];
   const MOIS_NAMES   = ['Janvier','Février','Mars','Avril','Mai','Juin',
                         'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-
+ 
   function cellVal(r, c) {
     const addr = XLSX.utils.encode_cell({r: r-1, c: c-1});
     const cell = ws[addr];
@@ -427,7 +453,7 @@ function parseExcelFile(buffer) {
     if (cell.v instanceof Date) return null; // ignore date objects
     return cell.v;
   }
-
+ 
   const months = [];
   for (let mi = 0; mi < 12; mi++) {
     const s = MONTH_STARTS[mi];
@@ -453,7 +479,7 @@ function parseExcelFile(buffer) {
   }
   return months;
 }
-
+ 
 function importExcel(file) {
   const reader = new FileReader();
   reader.onload = e => {
@@ -473,7 +499,7 @@ function importExcel(file) {
   };
   reader.readAsArrayBuffer(file);
 }
-
+ 
 function loadStoredExcel() {
   const stored = localStorage.getItem('ch_excel');
   if (stored) {
@@ -482,7 +508,7 @@ function loadStoredExcel() {
     excelYear  = year;
   }
 }
-
+ 
 function updateImportBanner() {
   const btn   = document.getElementById('importBtn');
   const label = document.getElementById('importBtnLabel');
@@ -495,18 +521,18 @@ function updateImportBanner() {
     label.textContent = 'Importer';
   }
 }
-
+ 
 const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
               'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-
+ 
 // Config horaires standard
 function stdFor(mo) {
   const hiv = {md:params.hivMd||'07:30',mf:params.hivMf||'12:00',ad:params.hivAd||'13:00',af:params.hivAf||'17:30'};
   const ete = {md:params.eteMd||'07:30',mf:params.eteMf||'12:00',ad:params.eteAd||'13:00',af:params.eteAf||'17:30'};
   return (mo>=3&&mo<=8) ? ete : hiv;
 }
-
+ 
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
@@ -516,7 +542,7 @@ let entries = {}; // key = "YYYY-MM-DD"
 let selT = 'normal';
 let hasRepas = false;
 let editKey = null;
-
+ 
 // ══════════════════════════════
 // PERSISTENCE
 // ══════════════════════════════
@@ -525,7 +551,7 @@ function load() {
   if (e) entries = JSON.parse(e);
 }
 function persist() { localStorage.setItem('ch_e2', JSON.stringify(entries)); }
-
+ 
 // ══════════════════════════════
 // HELPERS
 // ══════════════════════════════
@@ -552,7 +578,7 @@ function dKey(y,mo,d) {
   return `${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
 }
 function keyToDate(k) { const[y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
-
+ 
 // ══════════════════════════════
 // MERGER: Excel data + user entries
 // ══════════════════════════════
@@ -562,6 +588,7 @@ function getDay(mo0, dayNum) {
   // User entry takes priority
   if (entries[key]) return {...entries[key], _user: true, _key: key};
   // Fallback: Excel data
+  if (!EXCEL_DATA) return null;
   const exMo = EXCEL_DATA[mo0];
   if (!exMo) return null;
   const exDay = exMo ? exMo.days.find(d => d.n === dayNum) : null;
@@ -594,42 +621,45 @@ function getDay(mo0, dayNum) {
     _excel: true
   };
 }
-
+ 
 // ══════════════════════════════
 // RENDER PICKER
 // ══════════════════════════════
 function renderPicker() {
+  const yr = excelYear||2026;
   $('mPicker').innerHTML = MOIS.map((m,i) => {
-    const exFilled = EXCEL_DATA[i].days.filter(d=>d.h!==null).length;
-    const userFilled = Object.keys(entries).filter(k=>k.startsWith(`2026-${String(i+1).padStart(2,'0')}`)).length;
+    const exFilled = (EXCEL_DATA && EXCEL_DATA[i]) ? EXCEL_DATA[i].days.filter(d=>d.h!==null).length : 0;
+    const prefix = `${yr}-${String(i+1).padStart(2,'0')}`;
+    const userFilled = Object.keys(entries).filter(k=>k.startsWith(prefix)).length;
     const hasDat = exFilled > 0 || userFilled > 0;
     const cls = (hasDat?'has-data ':'') + (i===curMo?'active':'');
     return `<div class="mchip ${cls}" onclick="selMo(${i})">${m.slice(0,4)}</div>`;
   }).join('');
 }
-
+ 
 function selMo(i) {
   curMo = i;
   renderPicker();
   renderMonth();
   document.querySelectorAll('.mchip')[i]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
 }
-
+ 
 // ══════════════════════════════
 // RENDER MONTH
 // ══════════════════════════════
 function renderMonth() {
-  $('hSub').textContent = `${MOIS[curMo]} 2026`;
+  const yr = excelYear||2026;
+  $('hSub').textContent = `${MOIS[curMo]} ${yr}`;
   const plbl = $('pdfMoLabel'); if(plbl) plbl.textContent = MOIS[curMo];
-  const dim = new Date(2026, curMo+1, 0).getDate();
-
+  const dim = new Date(yr, curMo+1, 0).getDate();
+ 
   // Collect all days with data
   const days = [];
   for (let d=1; d<=dim; d++) {
     const day = getDay(curMo, d);
     if (day) days.push({d, ...day});
   }
-
+ 
   // Stats (user entries + excel)
   let totH=0, totR=0, totN=0, joursT=0;
   for (let d=1; d<=dim; d++) {
@@ -643,41 +673,41 @@ function renderMonth() {
   $('sH').textContent = joursT ? fmtH(totH) : '—';
   $('sR').textContent = totR||'—';
   $('sN').textContent = totN>0 ? `${totN}h` : '—';
-
+ 
   if (days.length === 0) {
     $('daysWrap').innerHTML = `<div class="empty-mo"><div class="empty-icon">📋</div>Aucune donnée — ajoute ta première journée !</div>`;
     return;
   }
-
+ 
   let html = '';
   let lastWeek = -1;
-
+ 
   days.forEach(({d, ...day}) => {
     const date = new Date(excelYear||2026, curMo, d);
     const dow = date.getDay();
     const wknd = dow===0||dow===6;
-    const week = Math.ceil((d + (new Date(2026,curMo,1).getDay()+6)%7) / 7);
-
+    const week = Math.ceil((d + (new Date(yr,curMo,1).getDay()+6)%7) / 7);
+ 
     if (week !== lastWeek) {
       lastWeek = week;
       html += `<div class="week-sep">Semaine ${week}</div>`;
     }
-
+ 
     const t = day.type;
     let bdgCls = wknd ? 'wknd' : '';
     if (t==='ferie') bdgCls='ferie';
     else if (t==='vacances'||t==='conge') bdgCls='vac';
     else if (t==='assurance') bdgCls='abs';
-
+ 
     let hoursHtml = '';
     if (t==='ferie') hoursHtml = '<span class="day-hours special">Férié</span>';
     else if (t==='vacances'||t==='conge') hoursHtml = '<span class="day-hours special">Vacances</span>';
     else if (t==='assurance') hoursHtml = '<span class="day-hours special">Ass.</span>';
     else if (t==='proche') hoursHtml = '<span class="day-hours special">Proche aidant</span>';
     else if (day.hours>0) hoursHtml = `<span class="day-hours">${fmtH(day.hours)}</span>`;
-
+ 
     const noteHtml = day.note ? `<div class="day-note">${day.note}</div>` : '';
-
+ 
     let timesHtml = '';
     if (day.matDeb||day.matFin||day.amDeb||day.amFin) {
       const matStr = (day.matDeb&&day.matFin) ? `${day.matDeb} – ${day.matFin}` : '—';
@@ -687,14 +717,14 @@ function renderMonth() {
         <div class="time-blk"><div class="time-lbl">☀️ Après-m.</div><div class="time-val">${amStr}</div></div>
       </div>`;
     }
-
+ 
     const tags = [];
     if (day.repas) tags.push('<span class="tag tag-blue">🍽 Repas</span>');
     if ((day.nuitH||0)>0) tags.push(`<span class="tag tag-red">🌙 ${day.nuitH}h nuit</span>`);
     if ((day.samH||0)>0)  tags.push(`<span class="tag tag-orange">📅 ${day.samH}h sam.</span>`);
     if (day._user) tags.push('<span class="tag tag-green">✏️ Saisi</span>');
     const tagsHtml = tags.length ? `<div class="day-tags">${tags.join('')}</div>` : '';
-
+ 
     const key = day._key;
     html += `<div class="day-card" onclick="openEdit('${key}',${d})">
       <div class="day-head">
@@ -706,10 +736,10 @@ function renderMonth() {
       ${tagsHtml}
     </div>`;
   });
-
+ 
   $('daysWrap').innerHTML = html;
 }
-
+ 
 // ══════════════════════════════
 // MODAL OPEN
 // ══════════════════════════════
@@ -717,7 +747,7 @@ function openNew() {
   editKey = null;
   $('btnDelete').style.display = 'none';
   $('mTitle').innerHTML = 'Nouvelle journée';
-
+ 
   // Default date = today if in current month, else 1st
   const yr = excelYear||2026; const d = (now.getFullYear()===yr && now.getMonth()===curMo) ? now : new Date(yr,curMo,1);
   $('fDate').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -728,17 +758,17 @@ function openNew() {
   $('fNote').value='';
   openModal();
 }
-
+ 
 function openEdit(key, dayNum) {
   editKey = key;
   $('btnDelete').style.display = 'block';
-
+ 
   const [y,mo,d] = key.split('-').map(Number);
   const date = new Date(y,mo-1,d);
   const dow = JOURS[date.getDay()];
   $('mTitle').innerHTML = `${dow} ${d} ${MOIS[mo-1]}<small>${y}</small>`;
   $('fDate').value = key;
-
+ 
   // Load existing user entry or excel data
   let entry = entries[key];
   if (!entry) {
@@ -763,7 +793,7 @@ function openEdit(key, dayNum) {
   updateTotal();
   openModal();
 }
-
+ 
 // ══════════════════════════════
 // FORM LOGIC
 // ══════════════════════════════
@@ -774,16 +804,16 @@ function applyStd() {
   $('fAmDeb').value=s.ad;  $('fAmFin').value=s.af;
   updateTotal();
 }
-
+ 
 function updateTotal() {
   const h = calcH($('fMatDeb').value,$('fMatFin').value,$('fAmDeb').value,$('fAmFin').value);
   $('fTotal').textContent = fmtH(h);
 }
-
+ 
 ['fMatDeb','fMatFin','fAmDeb','fAmFin'].forEach(id =>
   $(id).addEventListener('input', updateTotal)
 );
-
+ 
 function selType(t) {
   selT = t;
   document.querySelectorAll('.tchip').forEach(c => c.classList.toggle('sel', c.dataset.t===t));
@@ -793,22 +823,22 @@ function selType(t) {
   $('rowNuit').style.display = t==='nuit'   ? 'flex' : 'none';
   $('rowSam').style.display  = t==='samedi' ? 'flex' : 'none';
 }
-
+ 
 function togR() { hasRepas=!hasRepas; updateTog(); }
 function updateTog() { $('togRepas').classList.toggle('on', hasRepas); }
 function step(id, d) { const e=$(id); e.value=Math.max(0, Math.round((parseFloat(e.value)+d)*2)/2); }
-
+ 
 // ══════════════════════════════
 // SAVE / DELETE
 // ══════════════════════════════
 function saveEntry() {
   const key = $('fDate').value;
   if (!key) { showToast('Sélectionne une date'); return; }
-
+ 
   const md=$('fMatDeb').value, mf=$('fMatFin').value;
   const ad=$('fAmDeb').value,  af=$('fAmFin').value;
   const h = ['normal','nuit','samedi'].includes(selT) ? calcH(md,mf,ad,af) : 0;
-
+ 
   entries[key] = {
     matDeb:md, matFin:mf, amDeb:ad, amFin:af,
     hours: h, repas: hasRepas, type: selT,
@@ -826,7 +856,7 @@ function saveEntry() {
   renderMonth();
   showToast('Journée enregistrée ✓');
 }
-
+ 
 function deleteEntry() {
   if (!editKey) return;
   delete entries[editKey];
@@ -836,58 +866,58 @@ function deleteEntry() {
   renderMonth();
   showToast('Journée supprimée');
 }
-
+ 
 // ══════════════════════════════
 // MODAL
 // ══════════════════════════════
 function openModal()  { $('overlay').classList.add('open'); }
 function closeModal() { $('overlay').classList.remove('open'); }
 function closeOverlay(e) { if(e.target===$('overlay')) closeModal(); }
-
+ 
 function showToast(msg) {
   const t=$('toast'); t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 2300);
 }
-
-
+ 
+ 
 // ══════════════════════════════
 // PDF EXPORT
 // ══════════════════════════════
 function exportPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation:'landscape', unit:'mm', format:'a4' });
-
+ 
   const MOIS_NOM = ['Janvier','Février','Mars','Avril','Mai','Juin',
                     'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
   const JOURS_INIT = ['D','L','M','M','J','V','S'];
-
+ 
   const mo = curMo; // 0-based
   const year = excelYear||2026;
   const dim = new Date(year, mo+1, 0).getDate();
   const moNom = MOIS_NOM[mo];
-
+ 
   // Collect all days data
   const days = {};
   for (let d=1; d<=dim; d++) {
     const day = getDay(mo, d);
     if (day) days[d] = day;
   }
-
+ 
   // ── Layout constants (mm) ──
   const ML = 10, MT = 10; // margins
   const PW = 277; // usable width
   const LABEL_W = 52;
   const TOT_W = 20;
   const DAY_W = (PW - LABEL_W - TOT_W) / 31;
-
+ 
   // Row heights
   const R_TITLE = 8;
   const R_HEAD  = 6;
   const R_TIMES = 14; // AM + PM rows (tall)
   const R_DATA  = 8;  // other rows
-
+ 
   let y = MT;
-
+ 
   // ── COLORS ──
   const C_NAVY   = [27, 58, 107];
   const C_TEAL   = [26, 127, 114];
@@ -897,10 +927,10 @@ function exportPDF() {
   const C_WHITE  = [255, 255, 255];
   const C_RED    = [229, 57, 53];
   const C_GREEN  = [29, 111, 66];
-
+ 
   function colX(d) { return ML + LABEL_W + (d-1)*DAY_W; } // x for day d (1-based)
   function totX()  { return ML + LABEL_W + 31*DAY_W; }
-
+ 
   function rect(x,y,w,h,fill,stroke) {
     if(fill) { doc.setFillColor(...fill); doc.rect(x,y,w,h,'F'); }
     if(stroke) { doc.setDrawColor(...stroke); doc.setLineWidth(0.2); doc.rect(x,y,w,h,'S'); }
@@ -920,7 +950,7 @@ function exportPDF() {
     doc.text(String(txt), tx, y+h/2+size*0.18+vpad,
       {align: align==='left'?'left': align==='right'?'right':'center', baseline:'middle'});
   }
-
+ 
   // ── TITLE ROW ──
   rect(ML, y, PW, R_TITLE, C_NAVY);
   doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...C_WHITE);
@@ -928,7 +958,7 @@ function exportPDF() {
   doc.text(`Feuille de présence — ${moNom} ${year}${empNom}`, ML + PW/2, y + R_TITLE/2,
     {align:'center', baseline:'middle'});
   y += R_TITLE;
-
+ 
   // ── DAY NUMBERS HEADER ──
   // Label cell
   cell(ML, y, LABEL_W, R_HEAD, 'Mois', {fill:C_LIGHT, bold:true, size:7, color:C_NAVY});
@@ -947,7 +977,7 @@ function exportPDF() {
     let fill = isWknd ? [240,244,250] : C_WHITE;
     if (dayEntry?.type==='ferie')   fill = [255,248,225];
     if (dayEntry?.type==='vacances') fill = [232,245,233];
-
+ 
     cell(x, y, DAY_W, R_HEAD, d, {fill, bold:true, size:6.5, color: isWknd?[150,160,175]:C_NAVY});
     // Day initial below
     doc.setFont('helvetica','normal'); doc.setFontSize(5.5);
@@ -957,13 +987,13 @@ function exportPDF() {
   // Total header
   cell(totX(), y, TOT_W, R_HEAD, 'TOTAL', {fill:C_LIGHT, bold:true, size:6.5, color:C_NAVY});
   y += R_HEAD;
-
+ 
   // ── HELPER: draw a data row ──
   function dataRow(labelTxt, rowH, getValue, getColor, opts={}) {
     const {labelColor=C_NAVY, labelBold=false, labelSize=6.5} = opts;
     cell(ML, y, LABEL_W, rowH, labelTxt,
       {fill:[248,250,253], bold:labelBold, size:labelSize, color:labelColor, align:'left'});
-
+ 
     let total = 0; let totalStr = '';
     for (let d=1; d<=31; d++) {
       const x = colX(d);
@@ -989,7 +1019,7 @@ function exportPDF() {
     y += rowH;
     return total;
   }
-
+ 
   // ── APRÈS-MIDI ROW ──
   cell(ML, y, LABEL_W, R_TIMES, 'Après-midi\nHres début et fin',
     {fill:[248,250,253], bold:false, size:6.5, color:C_NAVY, align:'left'});
@@ -1010,7 +1040,7 @@ function exportPDF() {
   }
   cell(totX(), y, TOT_W, R_TIMES, '', {fill:C_LIGHT});
   y += R_TIMES;
-
+ 
   // ── MATIN ROW ──
   cell(ML, y, LABEL_W, R_TIMES, 'Matin\nHres début et fin',
     {fill:[248,250,253], bold:false, size:6.5, color:C_NAVY, align:'left'});
@@ -1031,7 +1061,7 @@ function exportPDF() {
   }
   cell(totX(), y, TOT_W, R_TIMES, '', {fill:C_LIGHT});
   y += R_TIMES;
-
+ 
   // ── HEURES TRAVAIL ──
   let totH = dataRow('Heures de travail', R_DATA,
     (d,e) => {
@@ -1051,42 +1081,42 @@ function exportPDF() {
     },
     {labelBold:true, labelColor:C_NAVY, textColor:C_NAVY}
   );
-
+ 
   // ── REPAS ──
   let totR = dataRow('Repas', R_DATA,
     (d,e) => e?.repas ? 1 : '',
     (d,e,v) => v===1 ? [227,242,253] : [250,252,255],
     {textColor:[21,101,192]}
   );
-
+ 
   // ── HEURES NUIT ──
   let totN = dataRow('Hres Travail 20h–5h (+50%)', R_DATA,
     (d,e) => e?.nuitH>0 ? e.nuitH : '',
     () => [255,250,250],
     {textColor:[183,28,28]}
   );
-
+ 
   // ── HEURES SAMEDI ──
   dataRow('Hres samedi 5h–17h (+25%)', R_DATA,
     (d,e) => e?.samH>0 ? e.samH : '',
     () => [255,253,245],
     {textColor:[230,81,0]}
   );
-
+ 
   // ── HEURES DIM ──
   dataRow('Hres sam 17h–lun 5h (+50%)', R_DATA,
     (d,e) => e?.dimH>0 ? e.dimH : '',
     () => [255,253,245],
     {textColor:[230,81,0]}
   );
-
+ 
   // ── ASSURANCE ──
   dataRow('Assurance (1.00 / 0.50 / 0.25)', R_DATA,
     (d,e) => e?.type==='assurance' ? ((e.assur||100)/100).toFixed(2) : '',
     (d,e,v) => v ? [252,232,232] : [250,250,250],
     {textColor:[183,28,28], showTotal:false}
   );
-
+ 
   // ── TOTALS SUMMARY BOX ──
   y += 2;
   const sumW = 80, sumH = 7;
@@ -1108,7 +1138,7 @@ function exportPDF() {
     doc.text(val, sumX+sumW-3, y+3.5, {align:'right'});
     y += 6;
   });
-
+ 
   // ── SIGNATURE LINE ──
   y += 3;
   doc.setDrawColor(...C_BORDER); doc.setLineWidth(0.3);
@@ -1124,13 +1154,67 @@ function exportPDF() {
   } else {
     doc.text(`Signature : ___________________________`, ML+95, y+4);
   }
-
-  // ── SAVE ──
-  doc.save(`Feuille_presence_${moNom}_${year}.pdf`);
-  showToast(`PDF ${moNom} ${year} téléchargé !`);
+ 
+  // ── PREVIEW instead of direct save ──
+  window._pdfDoc   = doc;
+  window._pdfName  = `Feuille_presence_${moNom}_${year}.pdf`;
+  showPdfPreview(doc, moNom, year);
 }
-
-
+ 
+let _pdfRenderTask = null;
+ 
+async function showPdfPreview(doc, moNom, year) {
+  // Get PDF as blob URL and render first page via pdf.js
+  const blob = doc.output('blob');
+  const url  = URL.createObjectURL(blob);
+  document.getElementById('pdfPreviewTitle').textContent = `${moNom} ${year}`;
+  document.getElementById('pdfOverlay').classList.add('open');
+ 
+  // Use pdf.js from CDN to render preview
+  if (!window.pdfjsLib) {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    s.onload = () => {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      renderPreview(url);
+    };
+    document.head.appendChild(s);
+  } else {
+    renderPreview(url);
+  }
+}
+ 
+async function renderPreview(url) {
+  try {
+    const pdf  = await pdfjsLib.getDocument(url).promise;
+    const page = await pdf.getPage(1);
+    const canvas = document.getElementById('pdfPreviewCanvas');
+    const container = canvas.parentElement;
+    const vw = Math.min(window.innerWidth - 32, 900);
+    const viewport = page.getViewport({scale: 1});
+    const scale = vw / viewport.width;
+    const scaled = page.getViewport({scale});
+    canvas.width  = scaled.width;
+    canvas.height = scaled.height;
+    canvas.style.width  = scaled.width + 'px';
+    canvas.style.height = scaled.height + 'px';
+    await page.render({canvasContext: canvas.getContext('2d'), viewport: scaled}).promise;
+  } catch(e) { console.error('PDF preview error', e); }
+}
+ 
+function downloadPDF() {
+  if (window._pdfDoc) {
+    window._pdfDoc.save(window._pdfName);
+    showToast('PDF téléchargé !');
+  }
+}
+ 
+function closePdfPreview() {
+  document.getElementById('pdfOverlay').classList.remove('open');
+}
+ 
+ 
 // ══════════════════════════════
 // PARAMÈTRES & SIGNATURE
 // ══════════════════════════════
@@ -1140,14 +1224,14 @@ let params = {
   eteMd:'07:30', eteMf:'12:00', eteAd:'13:00', eteAf:'17:30',
 };
 let sigDataURL = null; // base64 PNG of signature
-
+ 
 function loadParams() {
   const p = localStorage.getItem('ch_params');
   if (p) params = {...params, ...JSON.parse(p)};
   const s = localStorage.getItem('ch_sig');
   if (s) sigDataURL = s;
 }
-
+ 
 function saveParams() {
   params.nom         = document.getElementById('cfgNom').value;
   params.entreprise  = document.getElementById('cfgEntreprise').value;
@@ -1161,7 +1245,7 @@ function saveParams() {
   params.eteAf = document.getElementById('cfgEteAf').value;
   localStorage.setItem('ch_params', JSON.stringify(params));
 }
-
+ 
 function loadParamsUI() {
   document.getElementById('cfgNom').value        = params.nom;
   document.getElementById('cfgEntreprise').value = params.entreprise;
@@ -1183,7 +1267,7 @@ function loadParamsUI() {
     img.src = sigDataURL;
   }
 }
-
+ 
 // ── Signature Pad ──
 function initSigPad() {
   const canvas = document.getElementById('sigCanvas');
@@ -1198,9 +1282,9 @@ function initSigPad() {
   ctx.lineWidth   = 2.5;
   ctx.lineCap     = 'round';
   ctx.lineJoin    = 'round';
-
+ 
   let drawing = false, lastX = 0, lastY = 0;
-
+ 
   function getPos(e) {
     const r = canvas.getBoundingClientRect();
     const src = e.touches ? e.touches[0] : e;
@@ -1216,14 +1300,14 @@ function initSigPad() {
     canvas.classList.add('has-sig');
   }
   function end() { drawing=false; }
-
+ 
   canvas.addEventListener('mousedown',  start);
   canvas.addEventListener('mousemove',  move);
   canvas.addEventListener('mouseup',    end);
   canvas.addEventListener('touchstart', start, {passive:false});
   canvas.addEventListener('touchmove',  move,  {passive:false});
   canvas.addEventListener('touchend',   end);
-
+ 
   // Restore sig if exists
   if (sigDataURL) {
     const img = new Image();
@@ -1231,7 +1315,7 @@ function initSigPad() {
     img.src = sigDataURL;
   }
 }
-
+ 
 function clearSig() {
   const canvas = document.getElementById('sigCanvas');
   const rect   = canvas.getBoundingClientRect();
@@ -1241,15 +1325,15 @@ function clearSig() {
   localStorage.removeItem('ch_sig');
   showToast('Signature effacée');
 }
-
+ 
 function saveSig() {
   const canvas = document.getElementById('sigCanvas');
-  if (!canvas.classList.contains('has-sig')) { showToast('Signe d'abord !'); return; }
+  if (!canvas.classList.contains('has-sig')) { showToast('Signe dabord !'); return; }
   sigDataURL = canvas.toDataURL('image/png');
   localStorage.setItem('ch_sig', sigDataURL);
   showToast('Signature enregistrée ✓');
 }
-
+ 
 // ── View switch ──
 function switchView(v) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('act'));
@@ -1258,12 +1342,12 @@ function switchView(v) {
   document.getElementById('nt-'+v).classList.add('act');
   if (v === 'params') setTimeout(initSigPad, 50);
 }
-
+ 
 // ══════════════════════════════
 // BOOT
 // ══════════════════════════════
 load();
-loadParams();
+loadParams();       // doit être avant renderPicker/renderMonth (stdFor utilise params)
 loadStoredExcel();
 updateImportBanner();
 loadParamsUI();
