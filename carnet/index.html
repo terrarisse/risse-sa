@@ -13,7 +13,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
- 
+
 /* HEADER */
 .header{background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;
   justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
@@ -22,7 +22,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer}
 .header-title{font-size:17px;font-weight:700}
 .header-sub{font-size:12px;opacity:0.6;margin-top:1px}
- 
+
 /* MONTH PICKER */
 .month-picker{background:var(--white);padding:10px 12px;display:flex;gap:7px;overflow-x:auto;
   scrollbar-width:none;border-bottom:1px solid var(--border);position:sticky;top:108px;z-index:89}
@@ -32,14 +32,14 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .mchip.has-data{border-color:rgba(26,127,114,0.4);color:var(--teal)}
 .mchip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .mchip.has-data.active{background:var(--teal);border-color:var(--teal)}
- 
+
 /* STATS */
 .stats-bar{display:flex;gap:8px;padding:12px 12px 0}
 .stat-card{flex:1;background:var(--white);border-radius:var(--radius);padding:10px 6px;
   text-align:center;box-shadow:var(--shadow)}
 .stat-val{font-size:17px;font-weight:800;color:var(--navy)}
 .stat-lbl{font-size:9px;color:var(--muted);margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
- 
+
 /* ADD BTN */
 .add-btn-wrap{padding:10px 12px 0}
 .add-btn{width:100%;padding:15px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
@@ -47,12 +47,12 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   background:var(--teal);color:#fff;box-shadow:0 4px 14px rgba(26,127,114,0.3);
   transition:transform .12s;font-family:inherit}
 .add-btn:active{transform:scale(0.97)}
- 
+
 /* DAYS LIST */
 .days-wrap{padding:10px 12px 90px}
 .week-sep{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;
   letter-spacing:.08em;padding:10px 2px 5px}
- 
+
 /* DAY CARD */
 .day-card{background:var(--white);border-radius:var(--radius);margin-bottom:8px;
   box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
@@ -68,13 +68,13 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .day-note{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
 .day-hours{margin-left:auto;font-size:20px;font-weight:800;color:var(--teal);white-space:nowrap}
 .day-hours.special{color:var(--gold);font-size:14px}
- 
+
 .day-times{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
 .time-blk{padding:8px 14px;border-right:1px solid var(--border)}
 .time-blk:last-child{border-right:none}
 .time-lbl{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
 .time-val{font-size:13px;font-weight:600;color:var(--text)}
- 
+
 .day-tags{display:flex;gap:5px;flex-wrap:wrap;padding:7px 14px 9px;border-top:1px solid var(--border)}
 .tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px}
 .tag-blue{background:#E3F2FD;color:#1565C0}
@@ -82,10 +82,10 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .tag-orange{background:#FFF3E0;color:#F57C00}
 .tag-purple{background:#F3E5F5;color:#6A1B9A}
 .tag-green{background:#E8F5E9;color:#2E7D32}
- 
+
 .empty-mo{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty-icon{font-size:48px;opacity:.25;margin-bottom:12px}
- 
+
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:flex-end}
 .overlay.open{display:flex}
@@ -96,7 +96,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .m-title{font-size:18px;font-weight:800;color:var(--navy);padding:14px 16px 12px;
   border-bottom:1px solid var(--border)}
 .m-title small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
- 
+
 /* FORM ROWS */
 .f-section{padding:12px 16px 0}
 .f-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
@@ -110,7 +110,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   font-size:15px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
 .tsep{color:var(--muted);font-weight:600}
 .total-display{font-size:18px;font-weight:800;color:var(--teal);margin-left:auto}
- 
+
 /* TOGGLE */
 .tog-row{display:flex;align-items:center;padding:12px 14px;gap:10px;border-bottom:1px solid var(--border)}
 .tog-row:last-child{border-bottom:none}
@@ -121,13 +121,13 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
   background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
 .tog.on::after{left:21px}
- 
+
 /* TYPE CHIPS */
 .type-row{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px 0}
 .tchip{padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
   border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;user-select:none}
 .tchip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
- 
+
 /* ACTION BTNS */
 .m-actions{display:flex;gap:8px;padding:16px 16px 0}
 .m-btn{flex:1;padding:14px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
@@ -136,12 +136,12 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .m-btn.primary{background:var(--teal);color:#fff}
 .m-btn.secondary{background:var(--bg);color:var(--muted)}
 .m-btn.danger{background:#FFEBEE;color:var(--red)}
- 
+
 /* TEXT INPUT */
 .f-input{flex:1;border:none;outline:none;font-size:14px;font-weight:600;color:var(--text);
   background:transparent;font-family:inherit}
- 
- 
+
+
 /* NAV TABS */
 .nav-tabs{background:var(--white);display:flex;border-bottom:2px solid var(--border);
   position:sticky;top:62px;z-index:91;}
@@ -149,10 +149,10 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;
   transition:color .15s,border-color .15s;user-select:none}
 .ntab.act{color:var(--navy);border-bottom-color:var(--navy)}
- 
+
 /* MAIN / PARAMS PAGES */
 .view{display:none}.view.act{display:block}
- 
+
 /* PARAMS */
 .p-section{margin:12px 12px 0}
 .p-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
@@ -166,7 +166,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .p-tfield{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
   font-size:14px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
 .p-tsep{color:var(--muted);font-weight:600}
- 
+
 /* SIGNATURE PAD */
 .sig-wrap{margin:12px 12px 0}
 .sig-canvas{display:block;width:100%;height:140px;border-radius:var(--radius);
@@ -177,26 +177,25 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   cursor:pointer;font-family:inherit;transition:transform .1s}
 .sig-btn.clear{background:var(--bg);color:var(--muted)}
 .sig-btn.save{background:var(--teal);color:#fff}
- 
+
+
+/* PDF PREVIEW OVERLAY */
+.pdf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;flex-direction:column}
+.pdf-overlay.open{display:flex}
+.pdf-topbar{background:#1B3A6B;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.pdf-topbar-title{flex:1;font-size:15px;font-weight:700}
+.pdf-topbar-btn{padding:8px 14px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.15);color:#fff}
+.pdf-topbar-btn.dl{background:#1A7F72}
+.pdf-frame{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:16px;background:#666}
+.pdf-canvas-wrap{background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.4)}
+#pdfPreviewCanvas{display:block;max-width:100%}
 /* PDF BTN */
 .pdf-btn{width:100%;padding:14px;border-radius:var(--radius);border:none;font-size:14px;font-weight:700;
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;
   background:#1D6F42;color:#fff;box-shadow:0 4px 14px rgba(29,111,66,0.28);
   transition:transform .12s;font-family:inherit}
 .pdf-btn:active{transform:scale(0.97)}
- 
-/* PDF PREVIEW */
-.pdf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;flex-direction:column}
-.pdf-overlay.open{display:flex}
-.pdf-topbar{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
-.pdf-topbar-title{flex:1;font-size:15px;font-weight:700}
-.pdf-action-btn{padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
-.pdf-action-btn.dl{background:var(--teal);color:#fff}
-.pdf-action-btn.cl{background:rgba(255,255,255,0.15);color:#fff}
-.pdf-frame{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:16px;background:#555}
-.pdf-canvas-wrap{background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.4)}
-canvas#pdfPreviewCanvas{display:block;max-width:100%}
- 
+
 /* TOAST */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);
   background:var(--text);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;
@@ -207,7 +206,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
- 
+
 <div class="header">
   <div class="header-left">
     <a href="../" class="back-btn">‹</a>
@@ -217,48 +216,133 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
     </div>
   </div>
   <input type="file" id="fileInput" accept=".xlsx" style="display:none" onchange="importExcel(this.files[0])">
-  <button id="importBtn" onclick="document.getElementById('fileInput').click()" title="Importer Excel"
-    style="background:rgba(255,255,255,0.12);border:none;color:#fff;border-radius:8px;
-      padding:5px 10px;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit">
-    <span style="font-size:16px">📂</span>
-    <span id="importBtnLabel" style="font-size:11px;font-weight:700;opacity:0.9">Importer</span>
-  </button>
 </div>
- 
+
 <div class="nav-tabs">
   <div class="ntab act" id="nt-main" onclick="switchView('main')">📋 Heures</div>
   <div class="ntab" id="nt-params" onclick="switchView('params')">⚙️ Paramètres</div>
 </div>
- 
+
 <div class="view act" id="view-main">
 <div class="month-picker" id="mPicker"></div>
- 
+
 <div class="stats-bar">
   <div class="stat-card"><div class="stat-val" id="sJ">—</div><div class="stat-lbl">Jours T</div></div>
   <div class="stat-card"><div class="stat-val" id="sH">—</div><div class="stat-lbl">Heures</div></div>
   <div class="stat-card"><div class="stat-val" id="sR">—</div><div class="stat-lbl">Repas</div></div>
   <div class="stat-card"><div class="stat-val" id="sN">—</div><div class="stat-lbl">H. nuit</div></div>
 </div>
- 
- 
+
+
 <div class="add-btn-wrap">
   <button class="add-btn" onclick="openNew()">
     <span style="font-size:22px">+</span> Ajouter une journée
   </button>
 </div>
- 
-<div style="padding:8px 12px 0">
-  <button class="pdf-btn" onclick="exportPDF()">
-    <span style="font-size:20px">📄</span> Exporter en PDF — <span id="pdfMoLabel"></span>
+
+<div style="padding:8px 12px 0;">
+  <button class="pdf-btn" id="mainExportBtn" onclick="smartExport()">
+    <span style="font-size:20px">📄</span>
+    <span id="exportBtnLabel">Exporter PDF — <span id="pdfMoLabel"></span></span>
   </button>
 </div>
 <div class="days-wrap" id="daysWrap"></div>
- 
+
 </div><!-- /view-main -->
- 
+
 <!-- PARAMS VIEW -->
 <div class="view" id="view-params">
- 
+
+  <!-- PDF TEMPLATE UPLOAD -->
+  <div class="p-section" style="margin-top:14px">
+    <div class="p-title">📄 Feuilles d'heure (1 PDF par mois)</div>
+    <div class="p-card">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_0').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Janvier</span>
+        <span id="pdfStatus_0" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_0" accept=".pdf" style="display:none" onchange="importMonthPdf(0, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_1').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Février</span>
+        <span id="pdfStatus_1" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_1" accept=".pdf" style="display:none" onchange="importMonthPdf(1, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_2').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Mars</span>
+        <span id="pdfStatus_2" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_2" accept=".pdf" style="display:none" onchange="importMonthPdf(2, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_3').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Avril</span>
+        <span id="pdfStatus_3" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_3" accept=".pdf" style="display:none" onchange="importMonthPdf(3, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_4').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Mai</span>
+        <span id="pdfStatus_4" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_4" accept=".pdf" style="display:none" onchange="importMonthPdf(4, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_5').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Juin</span>
+        <span id="pdfStatus_5" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_5" accept=".pdf" style="display:none" onchange="importMonthPdf(5, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_6').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Juillet</span>
+        <span id="pdfStatus_6" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_6" accept=".pdf" style="display:none" onchange="importMonthPdf(6, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_7').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Août</span>
+        <span id="pdfStatus_7" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_7" accept=".pdf" style="display:none" onchange="importMonthPdf(7, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_8').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Septembre</span>
+        <span id="pdfStatus_8" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_8" accept=".pdf" style="display:none" onchange="importMonthPdf(8, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_9').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Octobre</span>
+        <span id="pdfStatus_9" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_9" accept=".pdf" style="display:none" onchange="importMonthPdf(9, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_10').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Novembre</span>
+        <span id="pdfStatus_10" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_10" accept=".pdf" style="display:none" onchange="importMonthPdf(10, this.files[0])">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_11').click()">
+        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Décembre</span>
+        <span id="pdfStatus_11" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+      <input type="file" id="pdfInput_11" accept=".pdf" style="display:none" onchange="importMonthPdf(11, this.files[0])">
+    </div>
+  </div>
+
+  <div class="p-section" style="margin-top:12px">
+    <div class="p-title">📊 Données Excel annuelles</div>
+    <div class="p-card">
+      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('fileInput').click()">
+        <span style="flex:1;font-size:14px;font-weight:600;color:var(--text);" id="excelImportLabel">📂 Importer le fichier Excel</span>
+        <span id="excelImportStatus" style="font-size:11px;color:var(--muted);">—</span>
+        <span style="color:var(--muted);margin-left:6px;">›</span>
+      </div>
+    </div>
+  </div>
+
   <div class="p-section" style="margin-top:14px">
     <div class="p-title">Informations personnelles</div>
     <div class="p-card">
@@ -266,7 +350,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       <div class="p-row"><span class="p-lbl">🏢 Entreprise</span><input class="p-input" id="cfgEntreprise" placeholder="Risse S.A." onchange="saveParams()"></div>
     </div>
   </div>
- 
+
   <div class="p-section">
     <div class="p-title">🌨 Horaire Hiver (Oct – Mars)</div>
     <div class="p-card">
@@ -274,7 +358,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgHivAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgHivAf" type="time" value="17:30" onchange="saveParams()"></div></div>
     </div>
   </div>
- 
+
   <div class="p-section">
     <div class="p-title">☀️ Horaire Été (Avr – Sept)</div>
     <div class="p-card">
@@ -282,7 +366,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgEteAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgEteAf" type="time" value="17:30" onchange="saveParams()"></div></div>
     </div>
   </div>
- 
+
   <div class="sig-wrap">
     <div class="p-title" style="padding-left:2px">✍️ Signature</div>
     <canvas class="sig-canvas" id="sigCanvas" width="800" height="280"></canvas>
@@ -291,16 +375,16 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       <button class="sig-btn save" onclick="saveSig()">💾 Enregistrer la signature</button>
     </div>
   </div>
- 
+
   <div style="height:80px"></div>
 </div><!-- /view-params -->
- 
+
 <!-- MODAL SAISIE / ÉDITION -->
 <div class="overlay" id="overlay" onclick="closeOverlay(event)">
 <div class="modal" id="modal">
   <div class="m-handle"></div>
   <div class="m-title" id="mTitle">Nouvelle journée</div>
- 
+
   <!-- Type de journée -->
   <div class="type-row" id="typeRow">
     <div class="tchip sel" data-t="normal"  onclick="selType('normal')">✅ Normal</div>
@@ -310,7 +394,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
     <div class="tchip"     data-t="nuit"     onclick="selType('nuit')">🌙 Nuit</div>
     <div class="tchip"     data-t="samedi"   onclick="selType('samedi')">📅 Samedi</div>
   </div>
- 
+
   <!-- Date -->
   <div class="f-section" style="margin-top:12px">
     <div class="f-label">Date</div>
@@ -321,7 +405,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       </div>
     </div>
   </div>
- 
+
   <!-- Horaires (masqué si type spécial) -->
   <div id="horaireSection">
     <div class="f-section" style="margin-top:12px">
@@ -350,7 +434,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
         </div>
       </div>
     </div>
- 
+
     <!-- Repas -->
     <div class="f-section" style="margin-top:10px">
       <div class="f-card">
@@ -360,7 +444,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
         </div>
       </div>
     </div>
- 
+
     <!-- Heures spéciales (nuit/samedi) -->
     <div id="specialSection" style="display:none">
       <div class="f-section" style="margin-top:10px">
@@ -386,7 +470,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       </div>
     </div>
   </div>
- 
+
   <!-- Note -->
   <div class="f-section" style="margin-top:10px">
     <div class="f-card">
@@ -395,7 +479,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
       </div>
     </div>
   </div>
- 
+
   <!-- Actions -->
   <div class="m-actions">
     <button class="m-btn danger" id="btnDelete" onclick="deleteEntry()" style="display:none;flex:0.6">🗑</button>
@@ -404,23 +488,9 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
   </div>
 </div>
 </div>
- 
+
 <div class="toast" id="toast"></div>
- 
-<!-- PDF PREVIEW -->
-<div class="pdf-overlay" id="pdfOverlay">
-  <div class="pdf-topbar">
-    <button class="pdf-action-btn cl" onclick="closePdfPreview()">✕</button>
-    <div class="pdf-topbar-title" id="pdfPreviewTitle">Aperçu PDF</div>
-    <button class="pdf-action-btn dl" onclick="downloadPDF()">⬇ Télécharger</button>
-  </div>
-  <div class="pdf-frame">
-    <div class="pdf-canvas-wrap">
-      <canvas id="pdfPreviewCanvas"></canvas>
-    </div>
-  </div>
-</div>
- 
+
 <script>
 // ══════════════════════════════
 // DONNÉES EXCEL (lecture seule)
@@ -430,7 +500,7 @@ canvas#pdfPreviewCanvas{display:block;max-width:100%}
 // ══════════════════════════════
 let EXCEL_DATA = null;          // null = pas encore importé
 let excelYear  = null;
- 
+
 function parseExcelFile(buffer) {
   const wb = XLSX.read(buffer, {type:'array'});
   const ws = wb.Sheets[wb.SheetNames[0]];
@@ -440,12 +510,12 @@ function parseExcelFile(buffer) {
   const titleStr  = titleCell ? String(titleCell.v) : '';
   const yearMatch = titleStr.match(/20\d\d/);
   excelYear = yearMatch ? parseInt(yearMatch[0]) : new Date().getFullYear();
- 
+
   // Month block start rows (1-based) — structure identique chaque année
   const MONTH_STARTS = [1,25,48,71,94,117,140,163,186,209,232,255];
   const MOIS_NAMES   = ['Janvier','Février','Mars','Avril','Mai','Juin',
                         'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
- 
+
   function cellVal(r, c) {
     const addr = XLSX.utils.encode_cell({r: r-1, c: c-1});
     const cell = ws[addr];
@@ -453,7 +523,7 @@ function parseExcelFile(buffer) {
     if (cell.v instanceof Date) return null; // ignore date objects
     return cell.v;
   }
- 
+
   const months = [];
   for (let mi = 0; mi < 12; mi++) {
     const s = MONTH_STARTS[mi];
@@ -479,7 +549,7 @@ function parseExcelFile(buffer) {
   }
   return months;
 }
- 
+
 function importExcel(file) {
   const reader = new FileReader();
   reader.onload = e => {
@@ -499,7 +569,7 @@ function importExcel(file) {
   };
   reader.readAsArrayBuffer(file);
 }
- 
+
 function loadStoredExcel() {
   const stored = localStorage.getItem('ch_excel');
   if (stored) {
@@ -508,31 +578,33 @@ function loadStoredExcel() {
     excelYear  = year;
   }
 }
- 
+
 function updateImportBanner() {
-  const btn   = document.getElementById('importBtn');
-  const label = document.getElementById('importBtnLabel');
-  if (!btn) return;
+  const lbl    = document.getElementById('excelImportLabel');
+  const status = document.getElementById('excelImportStatus');
+  if (!lbl) return;
   if (EXCEL_DATA && excelYear) {
-    btn.style.background = 'rgba(26,127,114,0.55)';
-    label.textContent = `${excelYear} ✓`;
+    lbl.textContent    = `✅ Excel ${excelYear} chargé`;
+    lbl.style.color    = 'var(--teal)';
+    if (status) { status.textContent = excelYear + ' ✓'; status.style.color = 'var(--teal)'; }
   } else {
-    btn.style.background = 'rgba(255,255,255,0.12)';
-    label.textContent = 'Importer';
+    lbl.textContent    = '📂 Importer le fichier Excel';
+    lbl.style.color    = 'var(--text)';
+    if (status) { status.textContent = '—'; status.style.color = 'var(--muted)'; }
   }
 }
- 
+
 const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
               'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
- 
+
 // Config horaires standard
 function stdFor(mo) {
   const hiv = {md:params.hivMd||'07:30',mf:params.hivMf||'12:00',ad:params.hivAd||'13:00',af:params.hivAf||'17:30'};
   const ete = {md:params.eteMd||'07:30',mf:params.eteMf||'12:00',ad:params.eteAd||'13:00',af:params.eteAf||'17:30'};
   return (mo>=3&&mo<=8) ? ete : hiv;
 }
- 
+
 // ══════════════════════════════
 // STATE
 // ══════════════════════════════
@@ -542,7 +614,7 @@ let entries = {}; // key = "YYYY-MM-DD"
 let selT = 'normal';
 let hasRepas = false;
 let editKey = null;
- 
+
 // ══════════════════════════════
 // PERSISTENCE
 // ══════════════════════════════
@@ -551,7 +623,7 @@ function load() {
   if (e) entries = JSON.parse(e);
 }
 function persist() { localStorage.setItem('ch_e2', JSON.stringify(entries)); }
- 
+
 // ══════════════════════════════
 // HELPERS
 // ══════════════════════════════
@@ -578,7 +650,7 @@ function dKey(y,mo,d) {
   return `${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
 }
 function keyToDate(k) { const[y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
- 
+
 // ══════════════════════════════
 // MERGER: Excel data + user entries
 // ══════════════════════════════
@@ -588,7 +660,6 @@ function getDay(mo0, dayNum) {
   // User entry takes priority
   if (entries[key]) return {...entries[key], _user: true, _key: key};
   // Fallback: Excel data
-  if (!EXCEL_DATA) return null;
   const exMo = EXCEL_DATA[mo0];
   if (!exMo) return null;
   const exDay = exMo ? exMo.days.find(d => d.n === dayNum) : null;
@@ -621,45 +692,42 @@ function getDay(mo0, dayNum) {
     _excel: true
   };
 }
- 
+
 // ══════════════════════════════
 // RENDER PICKER
 // ══════════════════════════════
 function renderPicker() {
-  const yr = excelYear||2026;
   $('mPicker').innerHTML = MOIS.map((m,i) => {
-    const exFilled = (EXCEL_DATA && EXCEL_DATA[i]) ? EXCEL_DATA[i].days.filter(d=>d.h!==null).length : 0;
-    const prefix = `${yr}-${String(i+1).padStart(2,'0')}`;
-    const userFilled = Object.keys(entries).filter(k=>k.startsWith(prefix)).length;
+    const exFilled = EXCEL_DATA[i].days.filter(d=>d.h!==null).length;
+    const userFilled = Object.keys(entries).filter(k=>k.startsWith(`2026-${String(i+1).padStart(2,'0')}`)).length;
     const hasDat = exFilled > 0 || userFilled > 0;
     const cls = (hasDat?'has-data ':'') + (i===curMo?'active':'');
     return `<div class="mchip ${cls}" onclick="selMo(${i})">${m.slice(0,4)}</div>`;
   }).join('');
 }
- 
+
 function selMo(i) {
   curMo = i;
   renderPicker();
   renderMonth();
   document.querySelectorAll('.mchip')[i]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
 }
- 
+
 // ══════════════════════════════
 // RENDER MONTH
 // ══════════════════════════════
 function renderMonth() {
-  const yr = excelYear||2026;
-  $('hSub').textContent = `${MOIS[curMo]} ${yr}`;
+  $('hSub').textContent = `${MOIS[curMo]} 2026`;
   const plbl = $('pdfMoLabel'); if(plbl) plbl.textContent = MOIS[curMo];
-  const dim = new Date(yr, curMo+1, 0).getDate();
- 
+  const dim = new Date(2026, curMo+1, 0).getDate();
+
   // Collect all days with data
   const days = [];
   for (let d=1; d<=dim; d++) {
     const day = getDay(curMo, d);
     if (day) days.push({d, ...day});
   }
- 
+
   // Stats (user entries + excel)
   let totH=0, totR=0, totN=0, joursT=0;
   for (let d=1; d<=dim; d++) {
@@ -673,41 +741,41 @@ function renderMonth() {
   $('sH').textContent = joursT ? fmtH(totH) : '—';
   $('sR').textContent = totR||'—';
   $('sN').textContent = totN>0 ? `${totN}h` : '—';
- 
+
   if (days.length === 0) {
     $('daysWrap').innerHTML = `<div class="empty-mo"><div class="empty-icon">📋</div>Aucune donnée — ajoute ta première journée !</div>`;
     return;
   }
- 
+
   let html = '';
   let lastWeek = -1;
- 
+
   days.forEach(({d, ...day}) => {
     const date = new Date(excelYear||2026, curMo, d);
     const dow = date.getDay();
     const wknd = dow===0||dow===6;
-    const week = Math.ceil((d + (new Date(yr,curMo,1).getDay()+6)%7) / 7);
- 
+    const week = Math.ceil((d + (new Date(2026,curMo,1).getDay()+6)%7) / 7);
+
     if (week !== lastWeek) {
       lastWeek = week;
       html += `<div class="week-sep">Semaine ${week}</div>`;
     }
- 
+
     const t = day.type;
     let bdgCls = wknd ? 'wknd' : '';
     if (t==='ferie') bdgCls='ferie';
     else if (t==='vacances'||t==='conge') bdgCls='vac';
     else if (t==='assurance') bdgCls='abs';
- 
+
     let hoursHtml = '';
     if (t==='ferie') hoursHtml = '<span class="day-hours special">Férié</span>';
     else if (t==='vacances'||t==='conge') hoursHtml = '<span class="day-hours special">Vacances</span>';
     else if (t==='assurance') hoursHtml = '<span class="day-hours special">Ass.</span>';
     else if (t==='proche') hoursHtml = '<span class="day-hours special">Proche aidant</span>';
     else if (day.hours>0) hoursHtml = `<span class="day-hours">${fmtH(day.hours)}</span>`;
- 
+
     const noteHtml = day.note ? `<div class="day-note">${day.note}</div>` : '';
- 
+
     let timesHtml = '';
     if (day.matDeb||day.matFin||day.amDeb||day.amFin) {
       const matStr = (day.matDeb&&day.matFin) ? `${day.matDeb} – ${day.matFin}` : '—';
@@ -717,14 +785,14 @@ function renderMonth() {
         <div class="time-blk"><div class="time-lbl">☀️ Après-m.</div><div class="time-val">${amStr}</div></div>
       </div>`;
     }
- 
+
     const tags = [];
     if (day.repas) tags.push('<span class="tag tag-blue">🍽 Repas</span>');
     if ((day.nuitH||0)>0) tags.push(`<span class="tag tag-red">🌙 ${day.nuitH}h nuit</span>`);
     if ((day.samH||0)>0)  tags.push(`<span class="tag tag-orange">📅 ${day.samH}h sam.</span>`);
     if (day._user) tags.push('<span class="tag tag-green">✏️ Saisi</span>');
     const tagsHtml = tags.length ? `<div class="day-tags">${tags.join('')}</div>` : '';
- 
+
     const key = day._key;
     html += `<div class="day-card" onclick="openEdit('${key}',${d})">
       <div class="day-head">
@@ -736,10 +804,10 @@ function renderMonth() {
       ${tagsHtml}
     </div>`;
   });
- 
+
   $('daysWrap').innerHTML = html;
 }
- 
+
 // ══════════════════════════════
 // MODAL OPEN
 // ══════════════════════════════
@@ -747,7 +815,7 @@ function openNew() {
   editKey = null;
   $('btnDelete').style.display = 'none';
   $('mTitle').innerHTML = 'Nouvelle journée';
- 
+
   // Default date = today if in current month, else 1st
   const yr = excelYear||2026; const d = (now.getFullYear()===yr && now.getMonth()===curMo) ? now : new Date(yr,curMo,1);
   $('fDate').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -758,17 +826,17 @@ function openNew() {
   $('fNote').value='';
   openModal();
 }
- 
+
 function openEdit(key, dayNum) {
   editKey = key;
   $('btnDelete').style.display = 'block';
- 
+
   const [y,mo,d] = key.split('-').map(Number);
   const date = new Date(y,mo-1,d);
   const dow = JOURS[date.getDay()];
   $('mTitle').innerHTML = `${dow} ${d} ${MOIS[mo-1]}<small>${y}</small>`;
   $('fDate').value = key;
- 
+
   // Load existing user entry or excel data
   let entry = entries[key];
   if (!entry) {
@@ -793,7 +861,7 @@ function openEdit(key, dayNum) {
   updateTotal();
   openModal();
 }
- 
+
 // ══════════════════════════════
 // FORM LOGIC
 // ══════════════════════════════
@@ -804,16 +872,16 @@ function applyStd() {
   $('fAmDeb').value=s.ad;  $('fAmFin').value=s.af;
   updateTotal();
 }
- 
+
 function updateTotal() {
   const h = calcH($('fMatDeb').value,$('fMatFin').value,$('fAmDeb').value,$('fAmFin').value);
   $('fTotal').textContent = fmtH(h);
 }
- 
+
 ['fMatDeb','fMatFin','fAmDeb','fAmFin'].forEach(id =>
   $(id).addEventListener('input', updateTotal)
 );
- 
+
 function selType(t) {
   selT = t;
   document.querySelectorAll('.tchip').forEach(c => c.classList.toggle('sel', c.dataset.t===t));
@@ -823,22 +891,22 @@ function selType(t) {
   $('rowNuit').style.display = t==='nuit'   ? 'flex' : 'none';
   $('rowSam').style.display  = t==='samedi' ? 'flex' : 'none';
 }
- 
+
 function togR() { hasRepas=!hasRepas; updateTog(); }
 function updateTog() { $('togRepas').classList.toggle('on', hasRepas); }
 function step(id, d) { const e=$(id); e.value=Math.max(0, Math.round((parseFloat(e.value)+d)*2)/2); }
- 
+
 // ══════════════════════════════
 // SAVE / DELETE
 // ══════════════════════════════
 function saveEntry() {
   const key = $('fDate').value;
   if (!key) { showToast('Sélectionne une date'); return; }
- 
+
   const md=$('fMatDeb').value, mf=$('fMatFin').value;
   const ad=$('fAmDeb').value,  af=$('fAmFin').value;
   const h = ['normal','nuit','samedi'].includes(selT) ? calcH(md,mf,ad,af) : 0;
- 
+
   entries[key] = {
     matDeb:md, matFin:mf, amDeb:ad, amFin:af,
     hours: h, repas: hasRepas, type: selT,
@@ -856,7 +924,7 @@ function saveEntry() {
   renderMonth();
   showToast('Journée enregistrée ✓');
 }
- 
+
 function deleteEntry() {
   if (!editKey) return;
   delete entries[editKey];
@@ -866,355 +934,206 @@ function deleteEntry() {
   renderMonth();
   showToast('Journée supprimée');
 }
- 
+
 // ══════════════════════════════
 // MODAL
 // ══════════════════════════════
 function openModal()  { $('overlay').classList.add('open'); }
 function closeModal() { $('overlay').classList.remove('open'); }
 function closeOverlay(e) { if(e.target===$('overlay')) closeModal(); }
- 
+
 function showToast(msg) {
   const t=$('toast'); t.textContent=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 2300);
 }
- 
- 
+
+
 // ══════════════════════════════
 // PDF EXPORT
 // ══════════════════════════════
 function exportPDF() {
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation:'landscape', unit:'mm', format:'a4' });
- 
-  const MOIS_NOM = ['Janvier','Février','Mars','Avril','Mai','Juin',
-                    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  const JOURS_INIT = ['D','L','M','M','J','V','S'];
- 
-  const mo = curMo; // 0-based
-  const year = excelYear||2026;
-  const dim = new Date(year, mo+1, 0).getDate();
-  const moNom = MOIS_NOM[mo];
- 
-  // Collect all days data
-  const days = {};
-  for (let d=1; d<=dim; d++) {
-    const day = getDay(mo, d);
-    if (day) days[d] = day;
+  const MOIS=['Janvier','Février','Mars','Avril','Mai','Juin',
+               'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const mo=curMo, year=excelYear||2026, moNom=MOIS[mo];
+  const dim=new Date(year,mo+1,0).getDate();
+  const days={};
+  for(let d=1;d<=dim;d++){const day=getDay(mo,d);if(day)days[d]=day;}
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const ML=7,MT=5,UW=289;
+  const WB=4,WC=27,WAI=0.5,WAJ=5.5,WAK=4.5,WAL=5.5,WAM=16;
+  const WDAY=(UW-WB-WC-WAI-WAJ-WAK-WAL-WAM)/31;
+  function rh(p){return p*0.84*0.353;}
+  const R={title:rh(18),jours:rh(9.75),sal:rh(9.75),vac:rh(9.75),cct:rh(21),
+            apm:rh(159.75),mat:rh(159),hrs:rh(34.5),repas:rh(34.5),nuit:rh(34.5),
+            sam:rh(34.5),dimr:rh(34.5),assur:rh(33.75),sig:rh(14)};
+  function cx(d){return ML+WB+WC+(d-1)*WDAY;}
+  function rjx(){return ML+WB+WC+31*WDAY+WAI;}
+  function rkx(){return rjx()+WAJ;}
+  function rlx(){return rkx()+WAK;}
+  function rmx(){return rlx()+WAL;}
+  const CW=[191,191,191],CV=[255,192,0],CN=[242,219,219],CF=[204,192,217];
+  const CA=[198,217,240],CY=[255,255,0],CWH=[255,255,255],CB=[170,170,170],CL=[224,224,224];
+  let y=MT;
+  function fr(x,y,w,h,col){doc.setFillColor(...col);doc.rect(x,y,w,h,'F');}
+  function sr(x,y,w,h,lw){doc.setDrawColor(...CB);doc.setLineWidth(lw||0.22);doc.rect(x,y,w,h,'S');}
+  function br(x,y,w,h,col,lw){fr(x,y,w,h,col);sr(x,y,w,h,lw);}
+  function df(d,e){
+    if(d>dim)return CL;
+    const dow=new Date(year,mo,d).getDay();
+    if(dow===0||dow===6)return CW;
+    if(e){if(['ferie','malade'].includes(e.type))return CF;if(['vacances','conge'].includes(e.type))return CV;}
+    const exMo=EXCEL_DATA?EXCEL_DATA[mo]:null;
+    if(exMo){const ex=exMo.days.find(dd=>dd.n===d);if(ex&&ex.h==='V')return CV;}
+    return CN;
   }
- 
-  // ── Layout constants (mm) ──
-  const ML = 10, MT = 10; // margins
-  const PW = 277; // usable width
-  const LABEL_W = 52;
-  const TOT_W = 20;
-  const DAY_W = (PW - LABEL_W - TOT_W) / 31;
- 
-  // Row heights
-  const R_TITLE = 8;
-  const R_HEAD  = 6;
-  const R_TIMES = 14; // AM + PM rows (tall)
-  const R_DATA  = 8;  // other rows
- 
-  let y = MT;
- 
-  // ── COLORS ──
-  const C_NAVY   = [27, 58, 107];
-  const C_TEAL   = [26, 127, 114];
-  const C_GOLD   = [240, 165, 0];
-  const C_LIGHT  = [235, 240, 248];
-  const C_BORDER = [200, 208, 218];
-  const C_WHITE  = [255, 255, 255];
-  const C_RED    = [229, 57, 53];
-  const C_GREEN  = [29, 111, 66];
- 
-  function colX(d) { return ML + LABEL_W + (d-1)*DAY_W; } // x for day d (1-based)
-  function totX()  { return ML + LABEL_W + 31*DAY_W; }
- 
-  function rect(x,y,w,h,fill,stroke) {
-    if(fill) { doc.setFillColor(...fill); doc.rect(x,y,w,h,'F'); }
-    if(stroke) { doc.setDrawColor(...stroke); doc.setLineWidth(0.2); doc.rect(x,y,w,h,'S'); }
+  function tt(x,y,w,h,s,fs,bold,col,align){
+    if(s===null||s===undefined||s==='')return;
+    doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(fs||5.5);
+    doc.setTextColor(...(col||[0,0,0]));
+    const tx=align==='l'?x+1.5:align==='r'?x+w-1.5:x+w/2;
+    doc.text(String(s),tx,y+h/2+((fs||5.5)*0.018),{align:align==='l'?'left':align==='r'?'right':'center',baseline:'middle'});
   }
-  function cell(x,y,w,h,txt,opts={}) {
-    const {fill,stroke,bold,size=7,color=[0,0,0],align='center',vpad=0} = opts;
-    if(fill) { doc.setFillColor(...fill); doc.rect(x,y,w,h,'F'); }
-    if(stroke!==false) {
-      doc.setDrawColor(...(stroke||C_BORDER)); doc.setLineWidth(0.15);
-      doc.rect(x,y,w,h,'S');
+  function vt(x,y,w,h,lines,fs){
+    const lh=(fs||5.5)*0.42,tl=lines.length*lh;
+    lines.forEach(function(ln,i){
+      doc.setFont('helvetica','normal');doc.setFontSize(fs||5.5);doc.setTextColor(0,0,0);
+      doc.text(ln,x+w/2,y+h/2+(tl/2)-(i+0.5)*lh,{angle:90,align:'center',baseline:'middle'});
+    });
+  }
+  sr(ML,y,UW,R.title,0.5);
+  const tstr='Feuille de présence '+moNom+' '+year+(params.nom?' — '+params.nom:'');
+  doc.setFont('helvetica','normal');doc.setFontSize(13);doc.setTextColor(0,0,0);
+  doc.text(tstr,ML+UW*0.47,y+R.title/2,{align:'center',baseline:'middle'});
+  doc.setFontSize(7);doc.text('T: travaillé',rmx()+1,y+R.title*0.68);
+  doc.text('A: Assurance',rmx()+1,y+R.title*0.32);
+  y+=R.title;
+  br(ML+WB+WC,y,31*WDAY,R.jours,CWH);tt(ML+WB+WC,y,31*WDAY,R.jours,'Jours',7,true);
+  br(rjx(),y,WAJ+WAK+WAL,R.jours,CWH);tt(rjx(),y,WAJ+WAK+WAL,R.jours,'Jours',6,true);
+  br(rmx(),y,WAM,R.jours,CWH);tt(rmx(),y,WAM,R.jours,'Total heures ou',5);
+  y+=R.jours;
+  br(ML,y,WB,R.sal,CWH);
+  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(0,0,0);
+  doc.text('Mois',ML+WB/2,y+R.sal/2,{angle:90,align:'center',baseline:'middle'});
+  br(ML+WB,y,WC,R.sal,CWH);tt(ML+WB,y,WC,R.sal,moNom,7);
+  for(let d=1;d<=31;d++){
+    const x=cx(d),fill=df(d,days[d]);br(x,y,WDAY,R.sal,fill);
+    if(d<=dim){doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(0,0,0);
+      doc.text(String(d),x+WDAY/2,y+R.sal*0.55,{align:'center',baseline:'middle'});}
+  }
+  [{x:rjx(),w:WAJ,l:'Total'},{x:rkx(),w:WAK,l:'T'},{x:rlx(),w:WAL,l:'A'}].forEach(function(o){br(o.x,y,o.w,R.sal,CWH);tt(o.x,y,o.w,R.sal,o.l,6);});
+  br(rmx(),y,WAM,R.sal,CWH);tt(rmx(),y,WAM,R.sal,'de repas',5);y+=R.sal;
+  br(ML,y,WB+WC,R.vac,CY);tt(ML+WB,y,WC,R.vac,'Vacances scolaire',6);
+  for(let d=1;d<=31;d++)br(cx(d),y,WDAY,R.vac,df(d,days[d]));
+  br(rjx(),y,WAJ+WAK+WAL,R.vac,CWH);br(rmx(),y,WAM,R.vac,CWH);y+=R.vac;
+  br(ML,y,WB+WC,R.cct,CWH);vt(ML+WB,y,WC,R.cct,['Heures CCT','prises en compte'],6);
+  let cntT=0,cntA=0,cntTot=0,totHH=0;
+  for(let d=1;d<=31;d++){
+    const x=cx(d),e=days[d],fill=df(d,e);br(x,y,WDAY,R.cct,fill);
+    if(d<=dim){const dow=new Date(year,mo,d).getDay();if(dow!==0&&dow!==6)vt(x,y,WDAY,R.cct,['7.75'],5.5);
+      if(e){cntTot++;if(['normal','nuit','samedi'].includes(e.type)){cntT++;totHH+=e.hours||0;}else if(e.type==='assurance')cntA++;}}
+  }
+  br(rjx(),y,WAJ+WAK+WAL,R.cct,CWH);
+  tt(rjx(),y,WAJ,R.cct,cntTot||'',6,true);tt(rkx(),y,WAK,R.cct,cntT||'',6,true);tt(rlx(),y,WAL,R.cct,cntA||'',6,true);
+  br(rmx(),y,WAM,R.cct,CWH);
+  const hh=Math.floor(totHH),hm=Math.round((totHH%1)*60);
+  tt(rmx(),y,WAM,R.cct,totHH>0?(hh+'h'+String(hm).padStart(2,'0')):'',7,true);y+=R.cct;
+  br(ML,y,WB,R.apm,CWH);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(0,0,0);
+  doc.text('Après - midi',ML+WB/2,y+R.apm/2,{angle:90,align:'center',baseline:'middle'});
+  br(ML+WB,y,WC,R.apm,CWH);vt(ML+WB,y,WC,R.apm,['Hres début et fin','ex.: 13h00 - 17h30'],7);
+  for(let d=1;d<=31;d++){
+    const x=cx(d),e=days[d],fill=df(d,e);br(x,y,WDAY,R.apm,fill);
+    if(d<=dim&&e){if(e.type==='vacances')vt(x,y,WDAY,R.apm,['V'],7);
+      else if(['ferie','malade'].includes(e.type))vt(x,y,WDAY,R.apm,['Fé'],6);
+      else if(e.amDeb&&e.amFin)vt(x,y,WDAY,R.apm,[e.amDeb,e.amFin],5.2);}
+  }
+  br(rjx(),y,WAJ+WAK+WAL,R.apm,CWH);br(rmx(),y,WAM,R.apm,CWH);y+=R.apm;
+  br(ML,y,WB,R.mat,CWH);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(0,0,0);
+  doc.text('Matin',ML+WB/2,y+R.mat/2,{angle:90,align:'center',baseline:'middle'});
+  br(ML+WB,y,WC,R.mat,CWH);vt(ML+WB,y,WC,R.mat,['Hres début et fin','ex.: 7h30 - 12h00','(Pause 9h00 comprise)'],6.5);
+  for(let d=1;d<=31;d++){
+    const x=cx(d),e=days[d],fill=df(d,e);br(x,y,WDAY,R.mat,fill);
+    if(d<=dim&&e){if(e.type==='vacances')vt(x,y,WDAY,R.mat,['V'],7);
+      else if(['ferie','malade'].includes(e.type))vt(x,y,WDAY,R.mat,['Fé'],6);
+      else if(e.matDeb&&e.matFin)vt(x,y,WDAY,R.mat,[e.matDeb,e.matFin],5.2);}
+  }
+  br(rjx(),y,WAJ+WAK+WAL,R.mat,CWH);br(rmx(),y,WAM,R.mat,CWH);y+=R.mat;
+  function drow(rkey,labels,valfn,totfn,rfill){
+    var h=R[rkey];br(ML,y,WB,h,CWH);br(ML+WB,y,WC,h,CWH);
+    var lhh=6*0.42,tl=labels.length*lhh;
+    labels.forEach(function(ln,i){doc.setFont('helvetica','normal');doc.setFontSize(6);doc.setTextColor(0,0,0);
+      doc.text(ln,ML+WB+WC/2,y+h/2+(tl/2)-(i+0.5)*lhh,{align:'center',baseline:'middle'});});
+    var tot=0;
+    for(var d2=1;d2<=31;d2++){var x2=cx(d2),e2=days[d2],f2=rfill||df(d2,e2);br(x2,y,WDAY,h,f2);
+      if(d2<=dim){var v=valfn(d2,e2);if(v!==''&&v!==null&&v!==undefined){vt(x2,y,WDAY,h,[String(v)],5.5);try{tot+=parseFloat(v);}catch(ee){}}}
     }
-    if(!txt && txt!==0) return;
-    doc.setFont('helvetica', bold?'bold':'normal');
-    doc.setFontSize(size);
-    doc.setTextColor(...color);
-    const tx = align==='left' ? x+1.5 : align==='right' ? x+w-1.5 : x+w/2;
-    doc.text(String(txt), tx, y+h/2+size*0.18+vpad,
-      {align: align==='left'?'left': align==='right'?'right':'center', baseline:'middle'});
+    br(rjx(),y,WAJ+WAK+WAL,h,rfill||CWH);br(rmx(),y,WAM,h,rfill||CWH);
+    var ts=totfn?totfn(tot):(tot>0?(Math.floor(tot)+'h'+String(Math.round((tot%1)*60)).padStart(2,'0')):'');
+    if(ts)tt(rmx(),y,WAM,h,ts,7,true);y+=h;
   }
- 
-  // ── TITLE ROW ──
-  rect(ML, y, PW, R_TITLE, C_NAVY);
-  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...C_WHITE);
-  const empNom = params.nom ? ` — ${params.nom}` : '';
-  doc.text(`Feuille de présence — ${moNom} ${year}${empNom}`, ML + PW/2, y + R_TITLE/2,
-    {align:'center', baseline:'middle'});
-  y += R_TITLE;
- 
-  // ── DAY NUMBERS HEADER ──
-  // Label cell
-  cell(ML, y, LABEL_W, R_HEAD, 'Mois', {fill:C_LIGHT, bold:true, size:7, color:C_NAVY});
-  // Day numbers
-  for (let d=1; d<=31; d++) {
-    const x = colX(d);
-    if (d > dim) {
-      rect(x, y, DAY_W, R_HEAD, [245,245,245]);
-      doc.setDrawColor(...C_BORDER); doc.setLineWidth(0.1); doc.rect(x,y,DAY_W,R_HEAD,'S');
-      continue;
-    }
-    const date = new Date(year, mo, d);
-    const dow = date.getDay(); // 0=sun
-    const isWknd = dow===0||dow===6;
-    const dayEntry = days[d];
-    let fill = isWknd ? [240,244,250] : C_WHITE;
-    if (dayEntry?.type==='ferie')   fill = [255,248,225];
-    if (dayEntry?.type==='vacances') fill = [232,245,233];
- 
-    cell(x, y, DAY_W, R_HEAD, d, {fill, bold:true, size:6.5, color: isWknd?[150,160,175]:C_NAVY});
-    // Day initial below
-    doc.setFont('helvetica','normal'); doc.setFontSize(5.5);
-    doc.setTextColor(150,160,175);
-    doc.text(JOURS_INIT[dow], x+DAY_W/2, y+R_HEAD-1.5, {align:'center'});
-  }
-  // Total header
-  cell(totX(), y, TOT_W, R_HEAD, 'TOTAL', {fill:C_LIGHT, bold:true, size:6.5, color:C_NAVY});
-  y += R_HEAD;
- 
-  // ── HELPER: draw a data row ──
-  function dataRow(labelTxt, rowH, getValue, getColor, opts={}) {
-    const {labelColor=C_NAVY, labelBold=false, labelSize=6.5} = opts;
-    cell(ML, y, LABEL_W, rowH, labelTxt,
-      {fill:[248,250,253], bold:labelBold, size:labelSize, color:labelColor, align:'left'});
- 
-    let total = 0; let totalStr = '';
-    for (let d=1; d<=31; d++) {
-      const x = colX(d);
-      if (d > dim) { rect(x,y,DAY_W,rowH,[250,250,250]); doc.setDrawColor(...C_BORDER);doc.setLineWidth(0.1);doc.rect(x,y,DAY_W,rowH,'S'); continue; }
-      const date = new Date(year,mo,d);
-      const dow = date.getDay();
-      const isWknd = dow===0||dow===6;
-      const dayEntry = days[d];
-      const val = getValue(d, dayEntry);
-      const col = getColor ? getColor(d, dayEntry, val) : (isWknd?[220,228,240]:C_WHITE);
-      const textCol = opts.textColor || [30,30,30];
-      const isNum = typeof val === 'number' && val > 0;
-      if (isNum) total += val;
-      cell(x, y, DAY_W, rowH, val||'', {fill:col, size:6, color:textCol, stroke:C_BORDER});
-    }
-    if (opts.showTotal !== false) {
-      totalStr = total > 0 ? fmtH(total) : '';
-      cell(totX(), y, TOT_W, rowH, totalStr,
-        {fill:C_LIGHT, bold:true, size:7, color:C_NAVY});
-    } else {
-      cell(totX(), y, TOT_W, rowH, '', {fill:C_LIGHT});
-    }
-    y += rowH;
-    return total;
-  }
- 
-  // ── APRÈS-MIDI ROW ──
-  cell(ML, y, LABEL_W, R_TIMES, 'Après-midi\nHres début et fin',
-    {fill:[248,250,253], bold:false, size:6.5, color:C_NAVY, align:'left'});
-  for (let d=1; d<=31; d++) {
-    const x = colX(d);
-    if (d>dim) { rect(x,y,DAY_W,R_TIMES,[250,250,250]); doc.setDrawColor(...C_BORDER);doc.setLineWidth(0.1);doc.rect(x,y,DAY_W,R_TIMES,'S'); continue; }
-    const date = new Date(year,mo,d);
-    const dow = date.getDay();
-    const isWknd = dow===0||dow===6;
-    const e = days[d];
-    let txt='', fill = isWknd?[240,244,250]:C_WHITE;
-    if(e) {
-      if(e.type==='vacances'||e.type==='conge') { txt='V'; fill=[232,245,233]; }
-      else if(e.type==='ferie') { txt='Fé'; fill=[255,248,225]; }
-      else if(e.amDeb&&e.amFin) txt=`${e.amDeb}\n${e.amFin}`;
-    }
-    cell(x, y, DAY_W, R_TIMES, txt, {fill, size:5.5, color:[40,40,40], stroke:C_BORDER});
-  }
-  cell(totX(), y, TOT_W, R_TIMES, '', {fill:C_LIGHT});
-  y += R_TIMES;
- 
-  // ── MATIN ROW ──
-  cell(ML, y, LABEL_W, R_TIMES, 'Matin\nHres début et fin',
-    {fill:[248,250,253], bold:false, size:6.5, color:C_NAVY, align:'left'});
-  for (let d=1; d<=31; d++) {
-    const x = colX(d);
-    if (d>dim) { rect(x,y,DAY_W,R_TIMES,[250,250,250]); doc.setDrawColor(...C_BORDER);doc.setLineWidth(0.1);doc.rect(x,y,DAY_W,R_TIMES,'S'); continue; }
-    const date = new Date(year,mo,d);
-    const dow = date.getDay();
-    const isWknd = dow===0||dow===6;
-    const e = days[d];
-    let txt='', fill = isWknd?[240,244,250]:C_WHITE;
-    if(e) {
-      if(e.type==='vacances'||e.type==='conge') { txt='V'; fill=[232,245,233]; }
-      else if(e.type==='ferie') { txt='Fé'; fill=[255,248,225]; }
-      else if(e.matDeb&&e.matFin) txt=`${e.matDeb}\n${e.matFin}`;
-    }
-    cell(x, y, DAY_W, R_TIMES, txt, {fill, size:5.5, color:[40,40,40], stroke:C_BORDER});
-  }
-  cell(totX(), y, TOT_W, R_TIMES, '', {fill:C_LIGHT});
-  y += R_TIMES;
- 
-  // ── HEURES TRAVAIL ──
-  let totH = dataRow('Heures de travail', R_DATA,
-    (d,e) => {
-      if(!e) return '';
-      if(e.type==='vacances') return 'V';
-      if(e.type==='ferie') return 'Fé';
-      if(e.type==='assurance') return 'A';
-      return e.hours>0 ? e.hours : '';
-    },
-    (d,e,v) => {
-      if(!e) return [250,250,250];
-      const dow=new Date(year,mo,d).getDay(), wknd=dow===0||dow===6;
-      if(e.type==='vacances') return [232,245,233];
-      if(e.type==='ferie') return [255,248,225];
-      if(e.type==='assurance') return [252,232,232];
-      return wknd?[240,244,250]:C_WHITE;
-    },
-    {labelBold:true, labelColor:C_NAVY, textColor:C_NAVY}
-  );
- 
-  // ── REPAS ──
-  let totR = dataRow('Repas', R_DATA,
-    (d,e) => e?.repas ? 1 : '',
-    (d,e,v) => v===1 ? [227,242,253] : [250,252,255],
-    {textColor:[21,101,192]}
-  );
- 
-  // ── HEURES NUIT ──
-  let totN = dataRow('Hres Travail 20h–5h (+50%)', R_DATA,
-    (d,e) => e?.nuitH>0 ? e.nuitH : '',
-    () => [255,250,250],
-    {textColor:[183,28,28]}
-  );
- 
-  // ── HEURES SAMEDI ──
-  dataRow('Hres samedi 5h–17h (+25%)', R_DATA,
-    (d,e) => e?.samH>0 ? e.samH : '',
-    () => [255,253,245],
-    {textColor:[230,81,0]}
-  );
- 
-  // ── HEURES DIM ──
-  dataRow('Hres sam 17h–lun 5h (+50%)', R_DATA,
-    (d,e) => e?.dimH>0 ? e.dimH : '',
-    () => [255,253,245],
-    {textColor:[230,81,0]}
-  );
- 
-  // ── ASSURANCE ──
-  dataRow('Assurance (1.00 / 0.50 / 0.25)', R_DATA,
-    (d,e) => e?.type==='assurance' ? ((e.assur||100)/100).toFixed(2) : '',
-    (d,e,v) => v ? [252,232,232] : [250,250,250],
-    {textColor:[183,28,28], showTotal:false}
-  );
- 
-  // ── TOTALS SUMMARY BOX ──
-  y += 2;
-  const sumW = 80, sumH = 7;
-  const sumX = ML + PW - sumW;
-  rect(sumX, y, sumW, sumH*3+2, C_NAVY);
-  doc.setFont('helvetica','bold'); doc.setFontSize(7); doc.setTextColor(...C_WHITE);
-  doc.text('RÉCAPITULATIF', sumX + sumW/2, y+3, {align:'center'});
-  y += 5;
-  const summaries = [
-    [`Jours travaillés :`, String(Object.values(days).filter(d=>['normal','nuit','samedi'].includes(d.type)).length)],
-    [`Heures totales :`, fmtH(totH)],
-    [`Repas :`, String(totR)],
-    totN>0 ? [`Heures de nuit :`, `${totN}h`] : null,
-  ].filter(Boolean);
-  summaries.forEach(([lbl,val]) => {
-    doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(...C_WHITE);
-    doc.text(lbl, sumX+3, y+3.5);
-    doc.setFont('helvetica','bold');
-    doc.text(val, sumX+sumW-3, y+3.5, {align:'right'});
-    y += 6;
-  });
- 
-  // ── SIGNATURE LINE ──
-  y += 3;
-  doc.setDrawColor(...C_BORDER); doc.setLineWidth(0.3);
-  doc.line(ML, y, ML+90, y);
-  doc.line(ML+100, y, ML+200, y);
-  doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(120,130,145);
-  doc.text(`Date : ______________________`, ML, y+4);
-  // Signature image if saved
-  if (sigDataURL) {
-    try {
-      doc.addImage(sigDataURL, 'PNG', ML+95, y-8, 50, 16);
-    } catch(e) {}
-  } else {
-    doc.text(`Signature : ___________________________`, ML+95, y+4);
-  }
- 
-  // ── PREVIEW instead of direct save ──
-  window._pdfDoc   = doc;
-  window._pdfName  = `Feuille_presence_${moNom}_${year}.pdf`;
-  showPdfPreview(doc, moNom, year);
+  drow('hrs',['Hres de travail salaire '+moNom],function(d,e){return !e?'':e.type==='vacances'?'V':['ferie','malade'].includes(e.type)?'Fé':e.type==='assurance'?'A':(e.hours||0)>0?e.hours:'';});
+  drow('repas',['Repas'],function(d,e){return e&&e.repas?1:'';},function(t){return t>0?String(Math.round(t)):'';});
+  drow('nuit',['Hres Travail entre 20h00 et 5h00','(+50%)'],function(d,e){return e&&(e.nuitH||0)>0?e.nuitH:'';},function(t){return t>0?String(t):'';});
+  drow('sam',['Hres samedi entre 5h00 et 17h00','(+25%)'],function(d,e){return e&&(e.samH||0)>0?e.samH:'';},function(t){return t>0?String(t):'';});
+  drow('dimr',['Hres entre samedi 17h00 et lundi 5h00','(+50%)'],function(d,e){return e&&(e.dimH||0)>0?e.dimH:'';},function(t){return t>0?String(t):'';});
+  drow('assur',['Assurance (100% = 1.00 // 50% = 0.50 // 25% = 0.25)'],function(d,e){return e&&e.type==='assurance'?((e.assur||100)/100).toFixed(2):'';},function(t){return '';},CA);
+  sr(ML,y,UW,R.sig,0.5);
+  var td=new Date(),ds=String(td.getDate()).padStart(2,'0')+'.'+String(td.getMonth()+1).padStart(2,'0')+'.'+td.getFullYear();
+  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(0,0,0);
+  doc.text('Date : '+ds,ML+2,y+R.sig/2,{baseline:'middle'});
+  doc.text('Signature employé',ML+32,y+R.sig/2,{baseline:'middle'});
+  doc.text('Signature responsable ................................',ML+130,y+R.sig/2,{baseline:'middle'});
+  if(sigDataURL){try{doc.addImage(sigDataURL,'PNG',ML+70,y+0.5,50,R.sig-1);}catch(ee){}}
+  else{doc.setDrawColor(...CB);doc.setLineWidth(0.4);doc.line(ML+70,y+R.sig-2,ML+120,y+R.sig-2);}
+  window._pdfDoc=doc;
+  window._pdfName='Feuille_presence_'+moNom+'_'+year+'.pdf';
+  showPdfPreview(doc,moNom,year);
 }
- 
-let _pdfRenderTask = null;
- 
-async function showPdfPreview(doc, moNom, year) {
-  // Get PDF as blob URL and render first page via pdf.js
-  const blob = doc.output('blob');
-  const url  = URL.createObjectURL(blob);
-  document.getElementById('pdfPreviewTitle').textContent = `${moNom} ${year}`;
+
+let _pdfRenderTask=null;
+
+async function showPdfPreview(doc,moNom,year){
+  const blob=doc.output('blob');
+  const url=URL.createObjectURL(blob);
+  document.getElementById('pdfPreviewTitle').textContent=moNom+' '+year;
   document.getElementById('pdfOverlay').classList.add('open');
- 
-  // Use pdf.js from CDN to render preview
-  if (!window.pdfjsLib) {
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-    s.onload = () => {
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      renderPreview(url);
+  if(!window.pdfjsLib){
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    s.onload=()=>{
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      renderPdfPreview(url);
     };
     document.head.appendChild(s);
-  } else {
-    renderPreview(url);
-  }
+  } else { renderPdfPreview(url); }
 }
- 
-async function renderPreview(url) {
-  try {
-    const pdf  = await pdfjsLib.getDocument(url).promise;
-    const page = await pdf.getPage(1);
-    const canvas = document.getElementById('pdfPreviewCanvas');
-    const container = canvas.parentElement;
-    const vw = Math.min(window.innerWidth - 32, 900);
-    const viewport = page.getViewport({scale: 1});
-    const scale = vw / viewport.width;
-    const scaled = page.getViewport({scale});
-    canvas.width  = scaled.width;
-    canvas.height = scaled.height;
-    canvas.style.width  = scaled.width + 'px';
-    canvas.style.height = scaled.height + 'px';
-    await page.render({canvasContext: canvas.getContext('2d'), viewport: scaled}).promise;
-  } catch(e) { console.error('PDF preview error', e); }
+
+async function renderPdfPreview(url){
+  try{
+    const pdf=await pdfjsLib.getDocument(url).promise;
+    const page=await pdf.getPage(1);
+    const canvas=document.getElementById('pdfPreviewCanvas');
+    const vw=Math.min(window.innerWidth-32,900);
+    const viewport=page.getViewport({scale:1});
+    const scale=vw/viewport.width;
+    const scaled=page.getViewport({scale});
+    canvas.width=scaled.width;canvas.height=scaled.height;
+    canvas.style.width=scaled.width+'px';canvas.style.height=scaled.height+'px';
+    await page.render({canvasContext:canvas.getContext('2d'),viewport:scaled}).promise;
+  }catch(e){console.error('PDF preview',e);}
 }
- 
-function downloadPDF() {
-  if (window._pdfDoc) {
-    window._pdfDoc.save(window._pdfName);
-    showToast('PDF téléchargé !');
-  }
+
+function downloadPDF(){
+  if(window._pdfDoc){window._pdfDoc.save(window._pdfName);showToast('PDF téléchargé !');}
 }
- 
-function closePdfPreview() {
+
+function closePdfPreview(){
   document.getElementById('pdfOverlay').classList.remove('open');
 }
- 
- 
+
+
 // ══════════════════════════════
 // PARAMÈTRES & SIGNATURE
 // ══════════════════════════════
@@ -1224,14 +1143,14 @@ let params = {
   eteMd:'07:30', eteMf:'12:00', eteAd:'13:00', eteAf:'17:30',
 };
 let sigDataURL = null; // base64 PNG of signature
- 
+
 function loadParams() {
   const p = localStorage.getItem('ch_params');
   if (p) params = {...params, ...JSON.parse(p)};
   const s = localStorage.getItem('ch_sig');
   if (s) sigDataURL = s;
 }
- 
+
 function saveParams() {
   params.nom         = document.getElementById('cfgNom').value;
   params.entreprise  = document.getElementById('cfgEntreprise').value;
@@ -1245,7 +1164,7 @@ function saveParams() {
   params.eteAf = document.getElementById('cfgEteAf').value;
   localStorage.setItem('ch_params', JSON.stringify(params));
 }
- 
+
 function loadParamsUI() {
   document.getElementById('cfgNom').value        = params.nom;
   document.getElementById('cfgEntreprise').value = params.entreprise;
@@ -1267,7 +1186,7 @@ function loadParamsUI() {
     img.src = sigDataURL;
   }
 }
- 
+
 // ── Signature Pad ──
 function initSigPad() {
   const canvas = document.getElementById('sigCanvas');
@@ -1282,9 +1201,9 @@ function initSigPad() {
   ctx.lineWidth   = 2.5;
   ctx.lineCap     = 'round';
   ctx.lineJoin    = 'round';
- 
+
   let drawing = false, lastX = 0, lastY = 0;
- 
+
   function getPos(e) {
     const r = canvas.getBoundingClientRect();
     const src = e.touches ? e.touches[0] : e;
@@ -1300,14 +1219,14 @@ function initSigPad() {
     canvas.classList.add('has-sig');
   }
   function end() { drawing=false; }
- 
+
   canvas.addEventListener('mousedown',  start);
   canvas.addEventListener('mousemove',  move);
   canvas.addEventListener('mouseup',    end);
   canvas.addEventListener('touchstart', start, {passive:false});
   canvas.addEventListener('touchmove',  move,  {passive:false});
   canvas.addEventListener('touchend',   end);
- 
+
   // Restore sig if exists
   if (sigDataURL) {
     const img = new Image();
@@ -1315,7 +1234,7 @@ function initSigPad() {
     img.src = sigDataURL;
   }
 }
- 
+
 function clearSig() {
   const canvas = document.getElementById('sigCanvas');
   const rect   = canvas.getBoundingClientRect();
@@ -1325,15 +1244,15 @@ function clearSig() {
   localStorage.removeItem('ch_sig');
   showToast('Signature effacée');
 }
- 
+
 function saveSig() {
   const canvas = document.getElementById('sigCanvas');
-  if (!canvas.classList.contains('has-sig')) { showToast('Signe dabord !'); return; }
+  if (!canvas.classList.contains('has-sig')) { showToast("Signe d'abord !"); return; }
   sigDataURL = canvas.toDataURL('image/png');
   localStorage.setItem('ch_sig', sigDataURL);
   showToast('Signature enregistrée ✓');
 }
- 
+
 // ── View switch ──
 function switchView(v) {
   document.querySelectorAll('.view').forEach(el => el.classList.remove('act'));
@@ -1342,12 +1261,281 @@ function switchView(v) {
   document.getElementById('nt-'+v).classList.add('act');
   if (v === 'params') setTimeout(initSigPad, 50);
 }
- 
+
+
+
+// ══════════════════════════════
+// PDF TEMPLATE (exact Excel output)
+// ══════════════════════════════
+const MOIS_NMS = ['Janvier','Février','Mars','Avril','Mai','Juin',
+                  'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+let monthPdfs = new Array(12).fill(null); // base64 per month
+
+function importMonthPdf(moIdx, file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const b64 = e.target.result.split(',')[1];
+    if (b64.length > 14000000) { showToast('PDF trop grand (max 10MB)'); return; }
+    monthPdfs[moIdx] = b64;
+    localStorage.setItem('ch_pdf_' + moIdx, b64);
+    updatePdfSlotUI(moIdx);
+    updateExportBtn();
+    showToast('✅ ' + MOIS_NMS[moIdx] + ' importé !');
+  };
+  reader.readAsDataURL(file);
+}
+
+function loadPdfTemplate() {
+  for (let i = 0; i < 12; i++) {
+    const stored = localStorage.getItem('ch_pdf_' + i);
+    if (stored) monthPdfs[i] = stored;
+    updatePdfSlotUI(i);
+  }
+  updateExportBtn();
+}
+
+function updatePdfSlotUI(moIdx) {
+  const el = document.getElementById('pdfStatus_' + moIdx);
+  if (!el) return;
+  if (monthPdfs[moIdx]) {
+    el.textContent = '✅';
+    el.style.color = 'var(--teal)';
+  } else {
+    el.textContent = '—';
+    el.style.color = 'var(--muted)';
+  }
+}
+
+function updateExportBtn() {
+  const btn  = document.getElementById('mainExportBtn');
+  const lbl  = document.getElementById('exportBtnLabel');
+  const mo   = document.getElementById('pdfMoLabel');
+  const moText = mo ? mo.textContent : '';
+  if (!btn || !lbl) return;
+  if (monthPdfs[curMo]) {
+    btn.style.background = '#1D6F42';
+    lbl.innerHTML = '📄 Générer PDF exact — <span id="pdfMoLabel">' + moText + '</span>';
+  } else {
+    btn.style.background = '#1A7F72';
+    lbl.innerHTML = '👁 Aperçu PDF — <span id="pdfMoLabel">' + moText + '</span>';
+  }
+}
+
+function smartExport() {
+  if (monthPdfs[curMo]) {
+    generateExactPdf();
+  } else {
+    exportPDF(); // fallback to jsPDF approximation
+  }
+}
+
+async function generateExactPdf() {
+  showToast('Génération en cours…');
+  
+  try {
+    // Load pdf-lib
+    if (!window.PDFLib) {
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js');
+    }
+    const { PDFDocument, rgb, degrees } = PDFLib;
+    
+    // Load the template PDF
+    const pdfBytes = Uint8Array.from(atob(monthPdfs[curMo]), c => c.charCodeAt(0));
+    const pdfDoc   = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
+    
+    const mo   = curMo;      // 0-based month
+    const year = excelYear || 2026;
+    const dim  = new Date(year, mo+1, 0).getDate();
+    
+    // Page structure: header on page mo, data rows on page mo+1
+    const pages     = pdfDoc.getPages();
+    // If 1-page PDF: data rows are on same page (bottom half)
+    // If multi-page PDF: data rows are on page mo+1
+    // If user uploads per-month PDF (2 pages), data is on page index 1
+    let dataPage;
+    if (pages.length === 1) {
+      dataPage = pages[0]; // single page export
+    } else if (pages.length === 2) {
+      dataPage = pages[1]; // 2-page month export (header p0, data p1)
+    } else {
+      dataPage = pages[mo + 1]; // full annual PDF
+    }
+    const pageHeight = dataPage.getHeight(); // usually 595.3 for A4 landscape
+    
+    // Coordinate system: pdf-lib uses bottom-left origin
+    // pymupdf used top-left, so we need to flip Y: pdfY = pageHeight - pymupdfY
+    const PH = pageHeight;
+    
+    // Day X centers (same across all months)
+    const DAY1_X    = 207.0;
+    const DAY_SPACE = 14.58;
+    function dayX(d) { return DAY1_X + (d-1)*DAY_SPACE; }
+    
+    // Row Y positions (in pymupdf coords, top-left origin)
+    // We flip: pdfY = PH - pymupdfY
+    const ROWS = {
+      apm_deb: PH - 121.4,
+      apm_fin: PH - 71.8,
+      mat_deb: PH - 240.9,
+      mat_fin: PH - 220.5,
+      hrs:     PH - 302.4,
+      repas:   PH - 328.3,
+      nuit:    PH - 351.0,
+      sam:     PH - 376.5,
+      dim_r:   PH - 402.5,
+      assur:   PH - 428.5,
+      sig:     PH - 464.0,
+    };
+    
+    // Font
+    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const FS   = 5.5;
+    
+    function writeCell(page, x, y, text, fs) {
+      if (!text && text !== 0) return;
+      page.drawText(String(text), {
+        x: x - (fs || FS) * 0.35,
+        y: y - 4,
+        size: fs || FS,
+        font,
+        color: rgb(0, 0, 0),
+        rotate: degrees(90),
+      });
+    }
+    
+    function writeH(page, x, y, text, fs) {
+      if (!text) return;
+      page.drawText(String(text), { x, y, size: fs || 7, font, color: rgb(0,0,0) });
+    }
+    
+    // Fill each day
+    for (let d = 1; d <= dim; d++) {
+      const entry = getDay(mo, d);
+      if (!entry) continue;
+      const x = dayX(d);
+      const t = entry.type || 'normal';
+      
+      if (t === 'vacances') {
+        writeCell(dataPage, x, ROWS.hrs,     'V');
+        writeCell(dataPage, x, ROWS.apm_deb, 'V');
+        writeCell(dataPage, x, ROWS.mat_deb, 'V');
+      } else if (t === 'malade' || t === 'ferie') {
+        writeCell(dataPage, x, ROWS.hrs, t === 'malade' ? 'Malade' : 'Férié', 4.5);
+      } else if (t === 'assurance') {
+        writeCell(dataPage, x, ROWS.assur, ((entry.assur||100)/100).toFixed(2));
+      } else {
+        // Normal, nuit, samedi
+        if (entry.amDeb && entry.amFin) {
+          writeCell(dataPage, x, ROWS.apm_deb, entry.amDeb);
+          writeCell(dataPage, x, ROWS.apm_fin, entry.amFin);
+        }
+        if (entry.matDeb && entry.matFin) {
+          writeCell(dataPage, x, ROWS.mat_deb, entry.matDeb);
+          writeCell(dataPage, x, ROWS.mat_fin, entry.matFin);
+        }
+        if (entry.hours > 0) writeCell(dataPage, x, ROWS.hrs, entry.hours);
+      }
+      if (entry.repas)         writeCell(dataPage, x, ROWS.repas, '1');
+      if ((entry.nuitH||0)>0) writeCell(dataPage, x, ROWS.nuit,  entry.nuitH);
+      if ((entry.samH||0)>0)  writeCell(dataPage, x, ROWS.sam,   entry.samH);
+      if ((entry.dimH||0)>0)  writeCell(dataPage, x, ROWS.dim_r, entry.dimH);
+    }
+    
+    // Signature date
+    const td = new Date();
+    const ds = String(td.getDate()).padStart(2,'0')+'.'+String(td.getMonth()+1).padStart(2,'0')+'.'+td.getFullYear();
+    writeH(dataPage, 130, ROWS.sig + 2, ds, 7);
+    
+    // Signature image
+    if (sigDataURL) {
+      try {
+        const sigBytes = Uint8Array.from(atob(sigDataURL.split(',')[1]), c => c.charCodeAt(0));
+        const sigImg   = await pdfDoc.embedPng(sigBytes);
+        dataPage.drawImage(sigImg, { x: 260, y: ROWS.sig - 8, width: 80, height: 20 });
+      } catch(e) { console.warn('Sig embed failed', e); }
+    }
+    
+    // Save and download
+    const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
+                  'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    const outBytes = await pdfDoc.save();
+    const blob = new Blob([outBytes], { type: 'application/pdf' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'Feuille_'+MOIS[mo]+'_'+year+'.pdf';
+    a.click();
+    showToast('✅ PDF exact téléchargé !');
+    
+  } catch(err) {
+    console.error('generateExactPdf error:', err);
+    showToast('Erreur: ' + err.message);
+    exportPDF(); // fallback
+  }
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+// ══════════════════════════════
+// EXPORT DATA + SCRIPT FOR EXACT PDF
+// ══════════════════════════════
+function exportDataAndScript() {
+  // Export ch_entries as JSON
+  const yr = excelYear||2026;
+  const mo = curMo+1; // 1-based
+  
+  // Build entries subset for current month
+  const prefix = `${yr}-${String(mo).padStart(2,'0')}-`;
+  const monthEntries = {};
+  Object.keys(entries).forEach(k => {
+    if(k.startsWith(prefix)) monthEntries[k] = entries[k];
+  });
+  
+  const payload = {
+    entries: monthEntries,
+    month: mo,
+    year: yr,
+    employee: params.nom||'',
+    generated: new Date().toISOString()
+  };
+  
+  const json = JSON.stringify(payload, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
+                'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  a.href = url;
+  a.download = `ch_entries_${MOIS[curMo]}_${yr}.json`;
+  a.click();
+  
+  showToast('Données exportées — utilise le script Python sur PC');
+  
+  // Show instructions
+  setTimeout(()=>{
+    alert(
+      'Pour générer le PDF exact :\n\n' +
+      '1. Copie generer_pdf.py et ton Excel dans un dossier\n' +
+      '2. Copie le fichier JSON téléchargé dans ce dossier\n' +
+      '3. Lance: python3 generer_pdf.py ch_entries_'+MOIS[curMo]+'_'+yr+'.json '+mo+' '+yr+'\n\n' +
+      'LibreOffice doit être installé sur le PC.'
+    );
+  }, 500);
+}
+
 // ══════════════════════════════
 // BOOT
 // ══════════════════════════════
 load();
-loadParams();       // doit être avant renderPicker/renderMonth (stdFor utilise params)
+loadParams();
+loadPdfTemplate();
 loadStoredExcel();
 updateImportBanner();
 loadParamsUI();
@@ -1357,5 +1545,19 @@ setTimeout(()=>{
   document.querySelectorAll('.mchip')[curMo]?.scrollIntoView({inline:'center',block:'nearest'});
 },80);
 </script>
+
+<!-- PDF PREVIEW -->
+<div class="pdf-overlay" id="pdfOverlay">
+  <div class="pdf-topbar">
+    <button class="pdf-topbar-btn" onclick="closePdfPreview()">✕</button>
+    <div class="pdf-topbar-title" id="pdfPreviewTitle">Aperçu PDF</div>
+    <button class="pdf-topbar-btn dl" onclick="downloadPDF()">⬇ Télécharger</button>
+  </div>
+  <div class="pdf-frame">
+    <div class="pdf-canvas-wrap">
+      <canvas id="pdfPreviewCanvas"></canvas>
+    </div>
+  </div>
+</div>
 </body>
 </html>
