@@ -1,8 +1,0 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "io.github.terrarisse.twa",
-        "sha256_cert_fingerprints": ["A3:7E:C3:17:04:31:71:AD:29:C5:1F:7D:53:9B:0C:8E:F9:72:62:48:64:CD:70:8F:32:07:CE:B1:17:7D:6F:72"]
-      }
-    }]
