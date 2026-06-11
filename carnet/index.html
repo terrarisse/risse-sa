@@ -54,6 +54,27 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   letter-spacing:.08em;padding:10px 2px 5px}
 
 /* DAY CARD */
+
+/* CALENDAR GRID */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);margin:10px 12px 0;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.cal-head{text-align:center;padding:6px 2px;font-size:10px;font-weight:700;color:var(--muted);background:var(--bg);text-transform:uppercase;letter-spacing:.04em}
+.cal-cell{min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:3px 1px;transition:background .1s}
+.cal-cell:nth-child(7n){border-right:none}
+.cal-cell:active{background:var(--bg)}
+.cal-cell.empty{cursor:default;background:var(--bg)}
+.cal-cell.wknd{background:#F7F9FC}
+.cal-cell.today .cal-num{background:var(--teal);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.cal-cell.has-entry{background:rgba(26,127,114,0.06)}
+.cal-cell.has-entry.wknd{background:rgba(191,191,191,0.15)}
+.cal-num{font-size:13px;font-weight:700;color:var(--text);line-height:1}
+.cal-hrs{font-size:9px;font-weight:700;color:var(--teal);margin-top:2px}
+.cal-cell.wknd .cal-num{color:var(--muted)}
+.days-list-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:14px 14px 6px}
+
+/* MONTH NAV */
+.month-nav-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 4px}
+.month-nav-lbl{font-size:18px;font-weight:800;color:var(--navy)}
+.month-nav-btn{background:var(--bg);border:none;color:var(--navy);width:32px;height:32px;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .day-card{background:var(--white);border-radius:var(--radius);margin-bottom:8px;
   box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
 .day-card:active{box-shadow:0 1px 3px rgba(0,0,0,0.1)}
@@ -720,6 +741,7 @@ function selMo(i) {
 function renderMonth() {
   const yr = excelYear||2026;
   $('hSub').textContent = `${MOIS[curMo]} ${yr}`;
+  const mnl=$('monthNavLbl'); if(mnl) mnl.textContent=`${MOIS[curMo]} ${yr}`;
   const plbl = $('pdfMoLabel'); if(plbl) plbl.textContent = MOIS[curMo];
   const dim = new Date(yr, curMo+1, 0).getDate();
 
@@ -749,28 +771,52 @@ function renderMonth() {
     return;
   }
 
-  let html = '';
-  let lastWeek = -1;
+  // ── CALENDAR GRID ──
+  const firstDow = (new Date(yr, curMo, 1).getDay()+6)%7; // Mon=0
+  const dayHeads = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
+  let calHtml = '<div class="cal-grid">';
+  dayHeads.forEach(h => { calHtml += `<div class="cal-head">${h}</div>`; });
+  for(let i=0;i<firstDow;i++) calHtml += '<div class="cal-cell empty"></div>';
+  for(let d2=1;d2<=dim;d2++){
+    const e2 = getDay(curMo, d2);
+    const dow2 = new Date(yr,curMo,d2).getDay();
+    const wknd2 = dow2===0||dow2===6;
+    const key2 = dKey(yr,curMo,d2);
+    const isToday2 = d2===new Date().getDate()&&curMo===new Date().getMonth()&&yr===new Date().getFullYear();
+    let cls='cal-cell'+(wknd2?' wknd':'')+(isToday2?' today':'')+(e2?' has-entry':'');
+    let inner='<span class="cal-num">'+d2+'</span>';
+    if(e2){
+      const t2=e2.type;
+      if(['normal','malade','nuit','samedi'].includes(t2)&&e2.hours>0)
+        inner+='<span class="cal-hrs">'+fmtH(e2.hours)+'</span>';
+      else if(t2==='vacances') inner+='<span class="cal-hrs">Vac</span>';
+      else if(t2==='ferie')    inner+='<span class="cal-hrs">Fér</span>';
+      else if(t2==='malade')   inner+='<span class="cal-hrs">Mal</span>';
+      else if(t2==='assurance') inner+='<span class="cal-hrs">Ass</span>';
+    }
+    calHtml += `<div class="${cls}" onclick="openDayEdit('${key2}',${d2})">${inner}</div>`;
+  }
+  calHtml += '</div>';
+
+  // ── DAY CARDS LIST (only filled days) ──
+  let html = calHtml;
+  if(days.length>0) html += '<div class="days-list-title">Détail des jours saisis</div>';
 
   days.forEach(({d, ...day}) => {
-    const date = new Date(excelYear||2026, curMo, d);
+    const date = new Date(yr, curMo, d);
     const dow = date.getDay();
     const wknd = dow===0||dow===6;
-    const week = Math.ceil((d + (new Date(yr,curMo,1).getDay()+6)%7) / 7);
-
-    if (week !== lastWeek) {
-      lastWeek = week;
-      html += `<div class="week-sep">Semaine ${week}</div>`;
-    }
 
     const t = day.type;
     let bdgCls = wknd ? 'wknd' : '';
     if (t==='ferie') bdgCls='ferie';
+    else if (t==='malade') bdgCls='abs';
     else if (t==='vacances'||t==='conge') bdgCls='vac';
     else if (t==='assurance') bdgCls='abs';
 
     let hoursHtml = '';
     if (t==='ferie') hoursHtml = '<span class="day-hours special">Férié</span>';
+    else if (t==='malade') hoursHtml = `<span class="day-hours">${fmtH(day.hours)}</span>`;
     else if (t==='vacances'||t==='conge') hoursHtml = '<span class="day-hours special">Vacances</span>';
     else if (t==='assurance') hoursHtml = '<span class="day-hours special">Ass.</span>';
     else if (t==='proche') hoursHtml = '<span class="day-hours special">Proche aidant</span>';
@@ -795,8 +841,8 @@ function renderMonth() {
     if (day._user) tags.push('<span class="tag tag-green">✏️ Saisi</span>');
     const tagsHtml = tags.length ? `<div class="day-tags">${tags.join('')}</div>` : '';
 
-    const key = day._key;
-    html += `<div class="day-card" onclick="openEdit('${key}',${d})">
+    const key = day._key || dKey(yr,curMo,d);
+    html += `<div class="day-card" onclick="openDayEdit('${key}',${d})">
       <div class="day-head">
         <div class="day-badge ${bdgCls}">${d}</div>
         <div><div class="day-dow">${JOURS[dow]}</div>${noteHtml}</div>
@@ -829,7 +875,7 @@ function openNew() {
   openModal();
 }
 
-function openEdit(key, dayNum) {
+function openDayEdit(key, dayNum) {
   editKey = key;
   $('btnDelete').style.display = 'block';
 
@@ -1366,28 +1412,28 @@ async function generateExactPdf() {
     const pageHeight = dataPage.getHeight(); // usually 595.3 for A4 landscape
     
     // Coordinate system: pdf-lib uses bottom-left origin
-    // pymupdf used top-left, so we need to flip Y: pdfY = pageHeight - pymupdfY
-    const PH = pageHeight;
+    const PH = pageHeight; // 595.3 for A4 landscape
     
-    // Day X centers (same across all months)
+    // Day X centers
     const DAY1_X    = 207.0;
     const DAY_SPACE = 14.58;
     function dayX(d) { return DAY1_X + (d-1)*DAY_SPACE; }
     
-    // Row Y positions (in pymupdf coords, top-left origin)
-    // We flip: pdfY = PH - pymupdfY
+    // Row Y positions (pdf-lib bottom-left origin = PH - pymupdf_top_origin)
+    // APM tall row spans y=71.8 to y=440 (pymupdf) → pdf-lib: PH-440 to PH-71.8
+    // We write at vertical CENTER of each sub-section within the tall rows
     const ROWS = {
-      apm_deb: PH - 121.4,
-      apm_fin: PH - 71.8,
-      mat_deb: PH - 240.9,
-      mat_fin: PH - 220.5,
-      hrs:     PH - 302.4,
-      repas:   PH - 328.3,
-      nuit:    PH - 351.0,
-      sam:     PH - 376.5,
-      dim_r:   PH - 402.5,
-      assur:   PH - 428.5,
-      sig:     PH - 464.0,
+      apm_fin: PH - 45,    // APM fin time (upper part of APM tall row)
+      apm_deb: PH - 115,   // APM deb time (lower part of APM tall row)
+      mat_fin: PH - 200,   // MAT fin time (upper part of MAT tall row)
+      mat_deb: PH - 235,   // MAT deb time (lower part of MAT tall row)
+      hrs:     PH - 300,   // Heures travail
+      repas:   PH - 326,   // Repas
+      nuit:    PH - 350,   // Heures nuit
+      sam:     PH - 375,   // Heures samedi
+      dim_r:   PH - 400,   // Heures dim
+      assur:   PH - 425,   // Assurance
+      sig:     PH - 462,   // Signature
     };
     
     // Font
@@ -1396,10 +1442,13 @@ async function generateExactPdf() {
     
     function writeCell(page, x, y, text, fs) {
       if (!text && text !== 0) return;
+      const sz = fs || FS;
+      // For rotated 90° text: x=center of column, y=bottom of text area
+      // pdf-lib rotates around the text origin point
       page.drawText(String(text), {
-        x: x - (fs || FS) * 0.35,
-        y: y - 4,
-        size: fs || FS,
+        x: x + sz * 0.35,
+        y: y,
+        size: sz,
         font,
         color: rgb(0, 0, 0),
         rotate: degrees(90),
@@ -1530,6 +1579,13 @@ function exportDataAndScript() {
       'LibreOffice doit être installé sur le PC.'
     );
   }, 500);
+}
+
+function changeMonth(d) {
+  curMo += d;
+  if(curMo<0){curMo=11;} if(curMo>11){curMo=0;}
+  renderMonth();
+  document.querySelectorAll('.mchip')[curMo]?.scrollIntoView({inline:'center',block:'nearest'});
 }
 
 // ══════════════════════════════
