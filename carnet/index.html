@@ -54,6 +54,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .tb-btn.green{background:var(--teal)}
 
 .pdf-scroll{overflow:auto;-webkit-overflow-scrolling:touch;padding:10px;background:#555;min-height:400px}
+.pdf-canvas-wrap{display:flex;justify-content:center;transform-origin:top center;transition:transform .1s}
 .pdf-canvas-wrap{display:flex;justify-content:center}
 #pdfCanvas{display:block;box-shadow:0 2px 12px rgba(0,0,0,0.4);border-radius:2px}
 
@@ -294,16 +295,16 @@ const PDF = {
   PAGE_H:   595.30,
   // Row Y positions (pymupdf top-left coords, found from actual data)
   ROWS: {
-    apm_fin: 91,    // Après-midi fin   e.g. 17h30
-    apm_deb: 113,   // Après-midi début e.g. 13h00
-    mat_fin: 212,   // Matin fin        e.g. 12h00
-    mat_deb: 234,   // Matin début      e.g. 7h30
-    hrs:     297,   // Heures travail
-    repas:   322,   // Repas (1)
-    nuit:    347,   // Heures nuit
-    sam:     373,   // Heures samedi
-    dim:     399,   // Heures dim
-    assur:   425,   // Assurance
+    apm_fin:  90,   // Après-midi fin   e.g. 17h30
+    apm_deb: 112,   // Après-midi début e.g. 13h00
+    mat_fin: 210,   // Matin fin        e.g. 12h00
+    mat_deb: 233,   // Matin début      e.g. 7h30
+    hrs:     295,   // Heures travail
+    repas:   317,   // Repas (1) - adjusted (Chômé/Férier row)
+    nuit:    349,   // Heures nuit
+    sam:     375,   // Heures samedi
+    dim:     401,   // Heures dim
+    assur:   426,   // Assurance
   }
 };
 
@@ -435,8 +436,12 @@ function openMonth(moIdx) {
   renderPdfPage(moIdx);
 }
 
+let pdfScale = 1;
+let pdfBaseScale = 1;
+let currentPdfPage = null;
+
 async function renderPdfPage(moIdx) {
-  $('pdfScroll').innerHTML = '<div class="pdf-canvas-wrap"><canvas id="pdfCanvas"></canvas></div>';
+  $('pdfScroll').innerHTML = '<div class="pdf-canvas-wrap" id="pdfWrap"><canvas id="pdfCanvas"></canvas></div>';
   
   try {
     const b64 = monthPdfs[moIdx];
@@ -446,25 +451,15 @@ async function renderPdfPage(moIdx) {
     const pdf = await pdfjsLib.getDocument({data: bytes}).promise;
     currentPdfDoc = pdf;
 
-    // Find the data page (page with APM/MAT/HRS rows = second page of 2-page month PDF)
-    const pageNum = pdf.numPages >= 2 ? 2 : 1;
-    const page = await pdf.getPage(pageNum);
+    // For 1-page PDF: page 1. For 2-page: page 1 has data rows at top.
+    // For 14-page annual: page moIdx+1 has data at top.
+    const pageNum = pdf.numPages >= 2 ? (pdf.numPages > 2 ? curMo+1 : 1) : 1;
+    currentPdfPage = await pdf.getPage(Math.min(pageNum, pdf.numPages));
 
-    const canvas = $('pdfCanvas');
-    const vw = Math.min(window.innerWidth - 20, 900);
-    const viewport = page.getViewport({scale: 1});
-    const scale = vw / viewport.width;
-    const scaled = page.getViewport({scale});
-
-    canvas.width  = scaled.width;
-    canvas.height = scaled.height;
-    canvas.style.width  = scaled.width + 'px';
-    canvas.style.height = scaled.height + 'px';
-
-    await page.render({canvasContext: canvas.getContext('2d'), viewport: scaled}).promise;
-    
-    // Draw user entries on top
-    drawEntriesOnCanvas(canvas, scale, moIdx);
+    pdfBaseScale = Math.min(window.innerWidth - 20, 900) / currentPdfPage.getViewport({scale:1}).width;
+    pdfScale = 1;
+    await renderAtScale(pdfBaseScale);
+    setupZoom();
 
   } catch(err) {
     console.error(err);
@@ -472,51 +467,123 @@ async function renderPdfPage(moIdx) {
   }
 }
 
+async function renderAtScale(scale) {
+  if(!currentPdfPage) return;
+  const canvas = $('pdfCanvas');
+  if(!canvas) return;
+  const vp = currentPdfPage.getViewport({scale});
+  canvas.width  = vp.width;
+  canvas.height = vp.height;
+  canvas.style.width  = vp.width + 'px';
+  canvas.style.height = vp.height + 'px';
+  await currentPdfPage.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise;
+  drawEntriesOnCanvas(canvas, scale, curMo);
+}
+
+function setupZoom() {
+  const scroll = $('pdfScroll');
+  if(!scroll || scroll._zoomSetup) return;
+  scroll._zoomSetup = true;
+
+  // Pinch-to-zoom
+  let startDist = 0, startScale = 1;
+  scroll.addEventListener('touchstart', e => {
+    if(e.touches.length===2){
+      startDist = Math.hypot(e.touches[0].clientX-e.touches[1].clientX,
+                             e.touches[0].clientY-e.touches[1].clientY);
+      startScale = pdfScale;
+      e.preventDefault();
+    }
+  }, {passive:false});
+
+  scroll.addEventListener('touchmove', e => {
+    if(e.touches.length===2){
+      e.preventDefault();
+      const dist = Math.hypot(e.touches[0].clientX-e.touches[1].clientX,
+                              e.touches[0].clientY-e.touches[1].clientY);
+      pdfScale = Math.max(0.5, Math.min(5, startScale * dist/startDist));
+      const canvas = $('pdfCanvas');
+      if(canvas){
+        canvas.style.transform = `scale(${pdfScale})`;
+        canvas.style.transformOrigin = 'top left';
+      }
+    }
+  }, {passive:false});
+
+  scroll.addEventListener('touchend', async e => {
+    if(e.touches.length<2 && pdfScale !== 1){
+      // Re-render at new scale for crisp text
+      const finalScale = pdfBaseScale * pdfScale;
+      pdfScale = 1;
+      await renderAtScale(finalScale);
+      pdfBaseScale = finalScale;
+    }
+  });
+
+  // Double-tap to zoom in/out
+  let lastTap = 0;
+  scroll.addEventListener('touchend', e => {
+    const now2 = Date.now();
+    if(now2 - lastTap < 300 && e.touches.length===0){
+      const newBase = pdfBaseScale > (window.innerWidth-20)/841 * 1.5
+        ? (window.innerWidth-20)/841
+        : pdfBaseScale * 2;
+      pdfBaseScale = newBase;
+      renderAtScale(newBase);
+    }
+    lastTap = now2;
+  });
+}
+
 function drawEntriesOnCanvas(canvas, scale, moIdx) {
   const ctx = canvas.getContext('2d');
   const prefix = `${curYear}-${String(moIdx+1).padStart(2,'0')}-`;
-  const entries = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix));
-  if (!entries.length) return;
+  const ents = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix));
+  if (!ents.length) return;
 
-  ctx.save();
-  ctx.font = `bold ${Math.round(5.5*scale)}px Arial`;
-  ctx.fillStyle = '#1A1A2E';
-  ctx.textAlign = 'center';
+  const fs = Math.max(6, Math.round(5.5 * scale));
 
-  entries.forEach(([key, e]) => {
+  function drawV(text, pyY, colX) {
+    if(!text && text!==0) return;
+    const s = String(text);
+    // Cell center X in canvas coords
+    const cx = colX * scale;
+    // Y position: the text is rotated 90° CCW (reading bottom-to-top like Excel)
+    // In canvas: translate to (cx, rowY), rotate -90°, draw text centered
+    const rowY = pyY * scale;
+    ctx.save();
+    ctx.translate(cx, rowY);
+    ctx.rotate(-Math.PI / 2);
+    ctx.font = `600 ${fs}px 'Arial', sans-serif`;
+    ctx.fillStyle = '#0D1B2A';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(s, 0, 0);
+    ctx.restore();
+  }
+
+  ents.forEach(([key, e]) => {
     const d = parseInt(key.split('-')[2]);
-    const cx = (PDF.DAY1_X + (d-1)*PDF.DAY_SPACE) * scale;
+    const colX = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE + PDF.DAY_SPACE/2; // center of cell
     const t = e.type || 'normal';
 
-    function drawV(text, pyY) {
-      // Draw rotated text at (cx, pyY*scale)
-      const x = cx, y = pyY * scale;
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(-Math.PI/2);
-      ctx.fillText(text, 0, 0);
-      ctx.restore();
-    }
-
     if(t==='vacances'){
-      drawV('V', PDF.ROWS.apm_deb); drawV('V', PDF.ROWS.mat_deb); drawV('V', PDF.ROWS.hrs);
-    } else if(t==='malade' || t==='ferie'){
-      ctx.save(); ctx.font = `bold ${Math.round(5*scale)}px Arial`;
-      drawV(t==='malade'?'Mal':'Fér', PDF.ROWS.hrs);
-      ctx.restore();
+      drawV('V', PDF.ROWS.apm_deb, colX);
+      drawV('V', PDF.ROWS.mat_deb, colX);
+      drawV('V', PDF.ROWS.hrs, colX);
+    } else if(t==='malade'){
+      drawV('Mal', PDF.ROWS.hrs, colX);
     } else if(t==='assurance'){
-      drawV(((e.assur||100)/100).toFixed(2), PDF.ROWS.assur);
+      drawV(((e.assur||100)/100).toFixed(2), PDF.ROWS.assur, colX);
     } else {
-      if(e.amDeb) drawV(fmtTime(e.amDeb), PDF.ROWS.apm_deb);
-      if(e.amFin) drawV(fmtTime(e.amFin), PDF.ROWS.apm_fin);
-      if(e.matDeb) drawV(fmtTime(e.matDeb), PDF.ROWS.mat_deb);
-      if(e.matFin) drawV(fmtTime(e.matFin), PDF.ROWS.mat_fin);
-      if(e.hours>0) drawV(String(e.hours), PDF.ROWS.hrs);
+      if(e.amDeb) drawV(fmtTime(e.amDeb), PDF.ROWS.apm_deb, colX);
+      if(e.amFin) drawV(fmtTime(e.amFin), PDF.ROWS.apm_fin, colX);
+      if(e.matDeb) drawV(fmtTime(e.matDeb), PDF.ROWS.mat_deb, colX);
+      if(e.matFin) drawV(fmtTime(e.matFin), PDF.ROWS.mat_fin, colX);
+      if(e.hours>0) drawV(String(e.hours), PDF.ROWS.hrs, colX);
     }
-    if(e.repas) drawV('1', PDF.ROWS.repas);
+    if(e.repas) drawV('1', PDF.ROWS.repas, colX);
   });
-
-  ctx.restore();
 }
 
 // ═══════════════════════════════════
@@ -659,9 +726,13 @@ async function downloadFilledPdf() {
       function wv(text, pyY, fs) {
         if(!text && text!==0) return;
         const sz=fs||FS;
+        // x = left edge of cell, text rotated 90° (bottom-to-top)
+        // In pdf-lib: rotate 90° means text goes upward from anchor point
+        // anchor: (x_cell_center, PH - row_y) in pdf-lib coords
+        const cellCenterX = x + PDF.DAY_SPACE/2;
         dataPage.drawText(String(text),{
-          x: x + sz*0.35,
-          y: PH - pyY,
+          x: cellCenterX - sz*0.35,
+          y: PH - pyY + 2,
           size: sz, font,
           color: rgb(0,0,0),
           rotate: degrees(90),
