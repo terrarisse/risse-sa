@@ -12,6 +12,10 @@
 <title>Risse S.A.</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+#authGuard{display:none;position:fixed;inset:0;background:var(--navy,#1B3A6B);z-index:9999;align-items:center;justify-content:center;}
+#authGuard.show{display:flex;}
+</style>
+<style>
 :root{
   --navy:#1B3A6B;--navy2:#122952;--yellow:#F0A500;--teal:#1A7F72;
   --red:#E53935;--orange:#E67E22;--green:#2E7D32;
@@ -96,6 +100,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 </head>
 <body>
  
+<!-- AUTH GUARD (écran de chargement pendant vérif) -->
+<div id="authGuard" class="show"></div>
+
 <!-- HEADER -->
 <div class="hub-header">
   <div class="hub-top">
@@ -107,6 +114,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   </div>
   <div class="hub-date-bar">
     <span class="hub-date-txt" id="hubDate"></span>
+    <span class="hub-date-txt" id="userEmail" style="color:rgba(255,255,255,.6);font-size:10px;"></span>
+    <button id="btnLogout" style="background:rgba(255,255,255,.12);border:none;color:rgba(255,255,255,.7);font-size:10px;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;">Déconnexion</button>
   </div>
 </div>
  
@@ -194,13 +203,47 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
  
 <div class="toast" id="toast"></div>
  
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
+  authDomain: "risse-sa.firebaseapp.com",
+  projectId: "risse-sa",
+  storageBucket: "risse-sa.firebasestorage.app",
+  messagingSenderId: "656425275771",
+  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Vérification auth
+onAuthStateChanged(auth, user => {
+  const guard = document.getElementById('authGuard');
+  if (!user) {
+    window.location.href = 'login.html';
+    return;
+  }
+  // Connecté → on affiche l'app
+  guard.classList.remove('show');
+  const emailEl = document.getElementById('userEmail');
+  if (emailEl) emailEl.textContent = user.email;
+});
+
+// Déconnexion
+document.getElementById('btnLogout').addEventListener('click', async () => {
+  await signOut(auth);
+  window.location.href = 'login.html';
+});
+
 // Date
 const d=new Date();
 const j=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][d.getDay()];
 const m=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][d.getMonth()];
 document.getElementById('hubDate').textContent=`${j} ${d.getDate()} ${m} ${d.getFullYear()}`;
- 
+
 // Compteurs depuis localStorage
 const KEYS={equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
 Object.entries(KEYS).forEach(([s,k])=>{
@@ -210,14 +253,7 @@ Object.entries(KEYS).forEach(([s,k])=>{
     if(el) el.textContent=data.length;
   }catch(e){}
 });
- 
-// Compteur chantiers actifs
-try{
-  const chantiers=JSON.parse(localStorage.getItem('rv6_chantiers_v1')||'[]');
-  const actifs=chantiers.filter(c=>c.statut==='actif'||!c.statut).length;
-  // Afficher sur la carte si on veut — pour l'instant on log juste
-}catch(e){}
- 
+
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('service-worker.js').catch(()=>{}); }
 </script>
 </body>
