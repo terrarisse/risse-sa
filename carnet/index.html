@@ -660,6 +660,7 @@ function getDay(mo0, dayNum) {
   // User entry takes priority
   if (entries[key]) return {...entries[key], _user: true, _key: key};
   // Fallback: Excel data
+  if (!EXCEL_DATA) return null;
   const exMo = EXCEL_DATA[mo0];
   if (!exMo) return null;
   const exDay = exMo ? exMo.days.find(d => d.n === dayNum) : null;
@@ -717,9 +718,10 @@ function selMo(i) {
 // RENDER MONTH
 // ══════════════════════════════
 function renderMonth() {
-  $('hSub').textContent = `${MOIS[curMo]} 2026`;
+  const yr = excelYear||2026;
+  $('hSub').textContent = `${MOIS[curMo]} ${yr}`;
   const plbl = $('pdfMoLabel'); if(plbl) plbl.textContent = MOIS[curMo];
-  const dim = new Date(2026, curMo+1, 0).getDate();
+  const dim = new Date(yr, curMo+1, 0).getDate();
 
   // Collect all days with data
   const days = [];
@@ -754,7 +756,7 @@ function renderMonth() {
     const date = new Date(excelYear||2026, curMo, d);
     const dow = date.getDay();
     const wknd = dow===0||dow===6;
-    const week = Math.ceil((d + (new Date(2026,curMo,1).getDay()+6)%7) / 7);
+    const week = Math.ceil((d + (new Date(yr,curMo,1).getDay()+6)%7) / 7);
 
     if (week !== lastWeek) {
       lastWeek = week;
@@ -905,7 +907,7 @@ function saveEntry() {
 
   const md=$('fMatDeb').value, mf=$('fMatFin').value;
   const ad=$('fAmDeb').value,  af=$('fAmFin').value;
-  const h = ['normal','nuit','samedi'].includes(selT) ? calcH(md,mf,ad,af) : 0;
+  const h = ['normal','nuit','samedi','malade'].includes(selT) ? calcH(md,mf,ad,af) : 0;
 
   entries[key] = {
     matDeb:md, matFin:mf, amDeb:ad, amFin:af,
