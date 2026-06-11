@@ -253,24 +253,24 @@ const MODES = {
     unit: 'ml',
     label: 'Total longueur',
     cardTitle: 'Lignes de calcul — Longueur',
-    shapes: ['—', '⌒', 'U'],
+    shapes: ['—', '○', '◐'],
     legend: [
       {s:'—', l:'Ligne droite'},
-      {s:'⌒', l:'Arc (π·r)'},
-      {s:'U',  l:'Périmètre rect.'},
+      {s:'○', l:'Cercle (2·π·r)'},
+      {s:'◐', l:'Demi-cercle (π·r)'},
     ],
     defs: {
       '—': {
         fields:[{key:'l', label:'L (m)', ph:'0.00'}],
         calc: v => (v.l||0)
       },
-      '⌒': {
-        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'},{key:'a', label:'Angle (°)', ph:'360'}],
-        calc: v => Math.PI * (v.r||0) * ((v.a||360)/180)
+      '○': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => 2 * Math.PI * (v.r||0)
       },
-      'U': {
-        fields:[{key:'l', label:'L (m)', ph:'0.00'},{key:'w', label:'l (m)', ph:'0.00'}],
-        calc: v => 2*((v.l||0)+(v.w||0))
+      '◐': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => Math.PI * (v.r||0)
       }
     }
   },
