@@ -123,6 +123,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .no-mat-icon{font-size:32px;margin-bottom:8px;}
 .no-mat-link{display:inline-block;margin-top:10px;color:var(--teal);font-weight:700;font-size:13px;text-decoration:none;background:rgba(26,127,114,.08);padding:8px 16px;border-radius:20px;}
 
+/* PENTE */
+.pente-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.pente-header{background:linear-gradient(135deg,rgba(240,165,0,.07),rgba(240,165,0,.02));border-bottom:1px solid var(--gray2);padding:14px 16px;}
+.pente-title{font-size:14px;font-weight:700;color:var(--navy);}
+.pente-body{padding:16px;}
+.pente-inputs{display:flex;gap:12px;margin-bottom:16px;}
+.pente-field{flex:1;}
+.pente-field label{font-size:11px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;}
+.pente-input-wrap{position:relative;}
+.pente-input{width:100%;padding:14px 44px 14px 14px;border:1.5px solid var(--gray2);border-radius:10px;font-size:18px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .15s;}
+.pente-input:focus{border-color:var(--teal);}
+.pente-unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--gray3);pointer-events:none;}
+.pente-schema{background:var(--gray1);border-radius:12px;padding:16px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;}
+.pente-result-card{border-radius:12px;overflow:hidden;border:2px solid var(--gray2);transition:border-color .25s;}
+.pente-result-card.active{border-color:var(--gold);}
+.pente-result-main{background:var(--gray1);padding:24px 20px;display:flex;align-items:baseline;gap:6px;justify-content:center;transition:background .25s;}
+.pente-result-card.active .pente-result-main{background:linear-gradient(135deg,#fffbf0,#fff8e0);}
+.pente-big{font-size:52px;font-weight:800;color:var(--navy);}
+.pente-pct{font-size:28px;font-weight:700;color:var(--gray3);}
+.pente-result-sub{background:#fff;padding:12px 20px;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--gray2);}
+.pente-qualify{display:inline-block;margin-top:12px;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;text-align:center;width:100%;}
+.pente-reset{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:12px;}
+
 /* TOAST */
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
@@ -135,12 +158,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
     <div>
       <div class="header-title">Calculatrice</div>
-      <div class="header-subtitle">Métrés &amp; poids matériaux</div>
+      <div class="header-subtitle">Métrés · Poids · Pentes</div>
     </div>
   </div>
   <div class="tabs-bar">
     <button class="tab-btn active" id="btn-metrees" onclick="switchTab('metrees')">📐 Métrés</button>
     <button class="tab-btn" id="btn-poids" onclick="switchTab('poids')">⚖️ Poids</button>
+    <button class="tab-btn" id="btn-pente" onclick="switchTab('pente')">📉 Pente</button>
   </div>
 </div>
 
@@ -235,6 +259,79 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB PENTE ── -->
+  <div class="tab-panel" id="panel-pente">
+    <div class="pente-card">
+      <div class="pente-header"><div class="pente-title">Calcul de pente</div></div>
+      <div class="pente-body">
+
+        <div class="pente-inputs">
+          <div class="pente-field">
+            <label>Distance horizontale</label>
+            <div class="pente-input-wrap">
+              <input class="pente-input" id="pente-dist" type="number" min="0" step="0.01" placeholder="0.00" oninput="calcPente()">
+              <span class="pente-unit">m</span>
+            </div>
+          </div>
+          <div class="pente-field">
+            <label>Dénivelée</label>
+            <div class="pente-input-wrap">
+              <input class="pente-input" id="pente-denv" type="number" min="0" step="1" placeholder="0" oninput="calcPente()">
+              <span class="pente-unit">cm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schéma SVG -->
+        <div class="pente-schema">
+          <svg id="pente-svg" width="280" height="100" viewBox="0 0 280 100">
+            <!-- fond -->
+            <rect width="280" height="100" fill="transparent"/>
+            <!-- ligne horizontale -->
+            <line x1="20" y1="80" x2="220" y2="80" stroke="#e2e4ec" stroke-width="2" stroke-dasharray="4,3"/>
+            <!-- pente (triangle) -->
+            <polygon id="pente-poly" points="20,80 220,80 220,80" fill="rgba(26,127,114,0.08)" stroke="var(--teal)" stroke-width="2"/>
+            <!-- flèche horizontale -->
+            <line x1="20" y1="88" x2="220" y2="88" stroke="#9ca3af" stroke-width="1.5"/>
+            <text x="120" y="98" text-anchor="middle" font-size="10" fill="#9ca3af" font-family="DM Sans">distance (m)</text>
+            <!-- flèche verticale -->
+            <line id="pente-vline" x1="220" y1="80" x2="220" y2="80" stroke="#e53e3e" stroke-width="2"/>
+            <text id="pente-vlabel" x="235" y="75" font-size="10" fill="#e53e3e" font-family="DM Sans">Δh</text>
+            <!-- angle label -->
+            <text id="pente-angle-label" x="50" y="75" font-size="11" fill="var(--teal)" font-weight="bold" font-family="DM Sans"></text>
+          </svg>
+        </div>
+
+        <!-- Résultat -->
+        <div class="pente-result-card" id="pente-result">
+          <div class="pente-result-main">
+            <span class="pente-big" id="pente-pct-val">—</span>
+            <span class="pente-pct">%</span>
+          </div>
+          <div class="pente-result-sub">
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="pente-sub-dist">—</div>
+              <div class="poids-sub-label">distance (m)</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="pente-sub-denv">—</div>
+              <div class="poids-sub-label">dénivelée (cm)</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="pente-sub-angle">—</div>
+              <div class="poids-sub-label">angle (°)</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="pente-qualify-wrap"></div>
+        <button class="pente-reset" onclick="resetPente()">🗑 Effacer</button>
       </div>
     </div>
   </div>
@@ -590,6 +687,84 @@ function switchTab(tab) {
   document.getElementById('panel-' + tab).classList.add('active');
   document.getElementById('btn-' + tab).classList.add('active');
   if (tab === 'poids') { buildMatSelector(); onMatChange(); }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCUL PENTE
+// ─────────────────────────────────────────────────────────────────
+function calcPente() {
+  const dist = parseFloat(document.getElementById('pente-dist').value) || 0;
+  const denv = parseFloat(document.getElementById('pente-denv').value) || 0; // en cm
+  const resultEl = document.getElementById('pente-result');
+  const qualifyWrap = document.getElementById('pente-qualify-wrap');
+
+  if (dist <= 0 || denv <= 0) {
+    resultEl.classList.remove('active');
+    document.getElementById('pente-pct-val').textContent = '—';
+    document.getElementById('pente-sub-dist').textContent = '—';
+    document.getElementById('pente-sub-denv').textContent = '—';
+    document.getElementById('pente-sub-angle').textContent = '—';
+    qualifyWrap.innerHTML = '';
+    updatePenteSVG(0, 0);
+    return;
+  }
+
+  const denvM = denv / 100; // cm → m
+  const pct = (denvM / dist) * 100;
+  const angle = Math.atan(denvM / dist) * (180 / Math.PI);
+
+  resultEl.classList.add('active');
+  document.getElementById('pente-pct-val').textContent = pct.toFixed(1);
+  document.getElementById('pente-sub-dist').textContent = fmt(dist) + ' m';
+  document.getElementById('pente-sub-denv').textContent = Math.round(denv) + ' cm';
+  document.getElementById('pente-sub-angle').textContent = angle.toFixed(1) + '°';
+
+  // Qualificatif
+  let label = '', color = '';
+  if (pct < 2)       { label = '✅ Très faible'; color = '#38a169'; }
+  else if (pct < 5)  { label = '✅ Faible'; color = '#38a169'; }
+  else if (pct < 10) { label = '🟡 Modérée'; color = '#d69e2e'; }
+  else if (pct < 20) { label = '🟠 Forte'; color = '#ed8936'; }
+  else               { label = '🔴 Très forte'; color = '#e53e3e'; }
+  qualifyWrap.innerHTML = `<div class="pente-qualify" style="background:${color}18;color:${color};border:1.5px solid ${color}40">${label} — ${pct.toFixed(1)}%</div>`;
+
+  updatePenteSVG(dist, denvM);
+}
+
+function updatePenteSVG(dist, denvM) {
+  const poly = document.getElementById('pente-poly');
+  const vline = document.getElementById('pente-vline');
+  const vlabel = document.getElementById('pente-vlabel');
+  const angleLabel = document.getElementById('pente-angle-label');
+
+  if (dist <= 0 || denvM <= 0) {
+    poly.setAttribute('points', '20,80 220,80 220,80');
+    vline.setAttribute('x1','220'); vline.setAttribute('y1','80');
+    vline.setAttribute('x2','220'); vline.setAttribute('y2','80');
+    vlabel.textContent = 'Δh';
+    angleLabel.textContent = '';
+    return;
+  }
+
+  // Normaliser la hauteur max à 55px (pour garder le triangle lisible)
+  const maxH = 55;
+  const ratio = denvM / dist;
+  const svgH = Math.min(ratio * 200, maxH); // 200 px = 1m de dist virtuelle
+  const topY = 80 - svgH;
+
+  poly.setAttribute('points', `20,80 220,80 220,${topY}`);
+  vline.setAttribute('x1','220'); vline.setAttribute('y1', String(topY));
+  vline.setAttribute('x2','220'); vline.setAttribute('y2','80');
+  vlabel.setAttribute('y', String(topY + (80 - topY) / 2));
+  vlabel.textContent = Math.round(denvM * 100) + 'cm';
+  const pct = ratio * 100;
+  angleLabel.textContent = pct.toFixed(1) + '%';
+}
+
+function resetPente() {
+  document.getElementById('pente-dist').value = '';
+  document.getElementById('pente-denv').value = '';
+  calcPente();
 }
 
 // ─────────────────────────────────────────────────────────────────
