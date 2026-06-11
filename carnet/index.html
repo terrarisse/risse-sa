@@ -290,21 +290,21 @@ const DOW_S  = ['Di','Lu','Ma','Me','Je','Ve','Sa'];
 
 // PDF cell coordinates (from analysis of real Excel PDF)
 const PDF = {
-  DAY1_X:   207.01,
-  DAY_SPACE: 14.58,
-  PAGE_H:   595.30,
-  // Row Y positions (pymupdf top-left coords, found from actual data)
+  DAY1_X:    184.05,  // center X of day 1 column
+  DAY_SPACE:  15.70,  // spacing between day columns
+  PAGE_H:    595.0,   // page height
+  // Row Y centers — measured from real PDF (top-left origin)
   ROWS: {
-    apm_fin:  90,   // Après-midi fin   e.g. 17h30
-    apm_deb: 112,   // Après-midi début e.g. 13h00
-    mat_fin: 210,   // Matin fin        e.g. 12h00
-    mat_deb: 233,   // Matin début      e.g. 7h30
-    hrs:     295,   // Heures travail
-    repas:   317,   // Repas (1) - adjusted (Chômé/Férier row)
-    nuit:    349,   // Heures nuit
-    sam:     375,   // Heures samedi
-    dim:     401,   // Heures dim
-    assur:   426,   // Assurance
+    apm_fin: 216.7,   // Après-midi fin   (17h30)
+    apm_deb: 243.6,   // Après-midi début (13h00)
+    mat_fin: 359.1,   // Matin fin        (12h00)
+    mat_deb: 378.9,   // Matin début      (7h30)
+    hrs:     410.7,   // Heures de travail
+    repas:   436.5,   // Repas
+    nuit:    462.4,   // Heures nuit (+50%)
+    sam:     488.3,   // Heures samedi (+25%)
+    dim:     514.1,   // Heures dim/sam soir (+50%)
+    assur:   540.0,   // Assurance
   }
 };
 
@@ -546,16 +546,15 @@ function drawEntriesOnCanvas(canvas, scale, moIdx) {
   function drawV(text, pyY, colX) {
     if(!text && text!==0) return;
     const s = String(text);
-    // Cell center X in canvas coords
-    const cx = colX * scale;
-    // Y position: the text is rotated 90° CCW (reading bottom-to-top like Excel)
-    // In canvas: translate to (cx, rowY), rotate -90°, draw text centered
-    const rowY = pyY * scale;
+    // colX = center of day column (in PDF points)
+    // pyY  = Y center of row (in PDF points, top-left origin)
+    const cx   = colX * scale;
+    const rowY = pyY  * scale;
     ctx.save();
     ctx.translate(cx, rowY);
-    ctx.rotate(-Math.PI / 2);
-    ctx.font = `600 ${fs}px 'Arial', sans-serif`;
-    ctx.fillStyle = '#0D1B2A';
+    ctx.rotate(-Math.PI / 2);  // rotate 90° CCW → text reads bottom-to-top
+    ctx.font = `700 ${fs}px Arial`;
+    ctx.fillStyle = '#000';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(s, 0, 0);
@@ -564,7 +563,7 @@ function drawEntriesOnCanvas(canvas, scale, moIdx) {
 
   ents.forEach(([key, e]) => {
     const d = parseInt(key.split('-')[2]);
-    const colX = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE + PDF.DAY_SPACE/2; // center of cell
+    const colX = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE; // already center X
     const t = e.type || 'normal';
 
     if(t==='vacances'){
@@ -720,19 +719,19 @@ async function downloadFilledPdf() {
     const prefix = `${curYear}-${String(curMo+1).padStart(2,'0')}-`;
     Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix)).forEach(([key,e])=>{
       const d = parseInt(key.split('-')[2]);
-      const x = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE;
+      const x = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE; // = center X of column
       const t = e.type||'normal';
 
       function wv(text, pyY, fs) {
         if(!text && text!==0) return;
         const sz=fs||FS;
-        // x = left edge of cell, text rotated 90° (bottom-to-top)
-        // In pdf-lib: rotate 90° means text goes upward from anchor point
-        // anchor: (x_cell_center, PH - row_y) in pdf-lib coords
-        const cellCenterX = x + PDF.DAY_SPACE/2;
+        // x is already DAY1_X + (d-1)*DAY_SPACE = center of column
+        // pdf-lib Y = PAGE_H - pymupdf_Y (flip vertical)
+        // rotate(90) in pdf-lib = text goes bottom-to-top
+        // anchor point = bottom-left of text when rotated
         dataPage.drawText(String(text),{
-          x: cellCenterX - sz*0.35,
-          y: PH - pyY + 2,
+          x: x - sz * 0.35,
+          y: PH - pyY + sz * 0.35,
           size: sz, font,
           color: rgb(0,0,0),
           rotate: degrees(90),
