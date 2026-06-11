@@ -1863,6 +1863,17 @@ function updateHeader() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  // Fix layout Samsung/Android PWA — force recalcul au premier rendu
+  requestAnimationFrame(() => {
+    document.body.style.height = window.innerHeight + 'px';
+    document.querySelector('.scroll-area').style.maxHeight =
+      (window.innerHeight
+        - (document.querySelector('.app-header')?.offsetHeight || 56)
+        - (document.querySelector('.step-bar')?.offsetHeight || 16)
+        - (document.querySelector('.tab-bar')?.offsetHeight || 64)
+      ) + 'px';
+  });
+
   // Charger les données depuis Ressources entreprise
   NOMS_PRESETS = getNomPresets();
   CHANTIERS    = getChantiersForRapport();
@@ -3727,6 +3738,19 @@ function confirmQuickAddFournit() {
   setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2200);
 }
 function fslug(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').substring(0,40); }
+
+// Recalculer le layout quand le clavier s'ouvre/ferme
+window.addEventListener('resize', () => {
+  document.body.style.height = window.innerHeight + 'px';
+  const scrollArea = document.querySelector('.scroll-area');
+  if (scrollArea) {
+    scrollArea.style.maxHeight = (window.innerHeight
+      - (document.querySelector('.app-header')?.offsetHeight || 56)
+      - (document.querySelector('.step-bar')?.offsetHeight || 16)
+      - (document.querySelector('.tab-bar')?.offsetHeight || 64)
+    ) + 'px';
+  }
+});
 
 // Auto-save every 60s
 setInterval(saveDraft, 60000);
