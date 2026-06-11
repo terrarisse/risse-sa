@@ -4,1618 +4,761 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Carnet d'heure — Risse S.A.</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
-:root {
-  --navy:#1B3A6B; --teal:#1A7F72; --gold:#F0A500;
-  --bg:#F5F6F8; --white:#fff; --text:#1A1A2E;
-  --muted:#6B7280; --border:#E2E5EA; --red:#E53935;
-  --radius:12px; --shadow:0 2px 8px rgba(27,58,107,0.09);
+:root{
+  --navy:#1B3A6B;--teal:#1A7F72;--gold:#F0A500;
+  --bg:#F5F6F8;--white:#fff;--text:#1A1A2E;
+  --muted:#6B7280;--border:#E2E5EA;--red:#E53935;
+  --radius:12px;--shadow:0 2px 8px rgba(27,58,107,0.10);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
 /* HEADER */
-.header{background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;
+.hdr{background:var(--navy);color:#fff;padding:14px 16px;display:flex;align-items:center;
   justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
-.header-left{display:flex;align-items:center;gap:10px}
-.back-btn{background:rgba(255,255,255,0.12);border:none;color:#fff;width:34px;height:34px;border-radius:8px;
-  font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer}
-.header-title{font-size:17px;font-weight:700}
-.header-sub{font-size:12px;opacity:0.6;margin-top:1px}
+.hdr-left{display:flex;align-items:center;gap:10px}
+.back-btn{background:rgba(255,255,255,0.13);border:none;color:#fff;width:34px;height:34px;
+  border-radius:8px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none}
+.hdr-title{font-size:17px;font-weight:700}
+.hdr-sub{font-size:12px;opacity:.65;margin-top:1px}
+.hdr-btn{background:rgba(255,255,255,0.13);border:none;color:#fff;padding:7px 12px;
+  border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
 
-/* MONTH PICKER */
-.month-picker{background:var(--white);padding:10px 12px;display:flex;gap:7px;overflow-x:auto;
-  scrollbar-width:none;border-bottom:1px solid var(--border);position:sticky;top:108px;z-index:89}
-.month-picker::-webkit-scrollbar{display:none}
-.mchip{flex-shrink:0;padding:6px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
-  border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;user-select:none}
-.mchip.has-data{border-color:rgba(26,127,114,0.4);color:var(--teal)}
-.mchip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.mchip.has-data.active{background:var(--teal);border-color:var(--teal)}
+/* VIEWS */
+.view{display:none;min-height:calc(100vh - 62px)}
+.view.active{display:block}
 
-/* STATS */
-.stats-bar{display:flex;gap:8px;padding:12px 12px 0}
-.stat-card{flex:1;background:var(--white);border-radius:var(--radius);padding:10px 6px;
-  text-align:center;box-shadow:var(--shadow)}
-.stat-val{font-size:17px;font-weight:800;color:var(--navy)}
-.stat-lbl{font-size:9px;color:var(--muted);margin-top:2px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+/* ── HOME: MONTH LIST ── */
+.month-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px}
+.month-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:16px 14px;cursor:pointer;transition:transform .12s,box-shadow .12s;
+  display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.month-card:active{transform:scale(0.97)}
+.month-card.current{border:2px solid var(--teal)}
+.month-card.has-pdf{background:linear-gradient(135deg,#fff 0%,#f0fdf9 100%)}
+.month-name{font-size:16px;font-weight:800;color:var(--navy)}
+.month-status{font-size:11px;color:var(--muted);font-weight:600}
+.month-card.current .month-name{color:var(--teal)}
+.month-pdf-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);
+  position:absolute;top:10px;right:10px}
+.month-card:not(.has-pdf){opacity:.6}
 
-/* ADD BTN */
-.add-btn-wrap{padding:10px 12px 0}
-.add-btn{width:100%;padding:15px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--teal);color:#fff;box-shadow:0 4px 14px rgba(26,127,114,0.3);
-  transition:transform .12s;font-family:inherit}
-.add-btn:active{transform:scale(0.97)}
+/* ── PDF VIEWER ── */
+.pdf-toolbar{background:var(--navy);padding:10px 14px;display:flex;align-items:center;gap:10px;
+  position:sticky;top:62px;z-index:90;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
+.pdf-month-lbl{color:#fff;font-size:15px;font-weight:700;flex:1}
+.tb-btn{background:rgba(255,255,255,0.15);border:none;color:#fff;padding:7px 12px;
+  border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.tb-btn.green{background:var(--teal)}
 
-/* DAYS LIST */
-.days-wrap{padding:10px 12px 90px}
-.week-sep{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;
-  letter-spacing:.08em;padding:10px 2px 5px}
+.pdf-scroll{overflow:auto;-webkit-overflow-scrolling:touch;padding:10px;background:#555;min-height:400px}
+.pdf-canvas-wrap{display:flex;justify-content:center}
+#pdfCanvas{display:block;box-shadow:0 2px 12px rgba(0,0,0,0.4);border-radius:2px}
 
-/* DAY CARD */
+.no-pdf-msg{padding:60px 20px;text-align:center;color:var(--muted)}
+.no-pdf-icon{font-size:48px;opacity:.3;margin-bottom:12px}
+.no-pdf-text{font-size:15px;margin-bottom:20px}
+.no-pdf-btn{display:inline-block;background:var(--teal);color:#fff;padding:12px 24px;
+  border-radius:var(--radius);font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit}
 
-/* CALENDAR GRID */
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);margin:10px 12px 0;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.cal-head{text-align:center;padding:6px 2px;font-size:10px;font-weight:700;color:var(--muted);background:var(--bg);text-transform:uppercase;letter-spacing:.04em}
-.cal-cell{min-height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:3px 1px;transition:background .1s}
-.cal-cell:nth-child(7n){border-right:none}
-.cal-cell:active{background:var(--bg)}
-.cal-cell.empty{cursor:default;background:var(--bg)}
-.cal-cell.wknd{background:#F7F9FC}
-.cal-cell.today .cal-num{background:var(--teal);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
-.cal-cell.has-entry{background:rgba(26,127,114,0.06)}
-.cal-cell.has-entry.wknd{background:rgba(191,191,191,0.15)}
-.cal-num{font-size:13px;font-weight:700;color:var(--text);line-height:1}
-.cal-hrs{font-size:9px;font-weight:700;color:var(--teal);margin-top:2px}
-.cal-cell.wknd .cal-num{color:var(--muted)}
-.days-list-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:14px 14px 6px}
-
-/* MONTH NAV */
-.month-nav-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 4px}
-.month-nav-lbl{font-size:18px;font-weight:800;color:var(--navy)}
-.month-nav-btn{background:var(--bg);border:none;color:var(--navy);width:32px;height:32px;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.day-card{background:var(--white);border-radius:var(--radius);margin-bottom:8px;
-  box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
-.day-card:active{box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-.day-head{display:flex;align-items:center;padding:10px 14px;gap:10px}
-.day-badge{width:38px;height:38px;border-radius:10px;background:var(--navy);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
-.day-badge.wknd{background:var(--border);color:var(--muted)}
-.day-badge.ferie{background:var(--gold);color:#fff}
-.day-badge.vac{background:var(--teal);color:#fff}
-.day-badge.abs{background:var(--red);color:#fff}
-.day-dow{font-size:12px;color:var(--muted);line-height:1.3}
-.day-note{font-size:12px;font-weight:600;color:var(--text);line-height:1.3}
-.day-hours{margin-left:auto;font-size:20px;font-weight:800;color:var(--teal);white-space:nowrap}
-.day-hours.special{color:var(--gold);font-size:14px}
-
-.day-times{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
-.time-blk{padding:8px 14px;border-right:1px solid var(--border)}
-.time-blk:last-child{border-right:none}
-.time-lbl{font-size:9px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
-.time-val{font-size:13px;font-weight:600;color:var(--text)}
-
-.day-tags{display:flex;gap:5px;flex-wrap:wrap;padding:7px 14px 9px;border-top:1px solid var(--border)}
-.tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px}
-.tag-blue{background:#E3F2FD;color:#1565C0}
-.tag-red{background:#FFEBEE;color:var(--red)}
-.tag-orange{background:#FFF3E0;color:#F57C00}
-.tag-purple{background:#F3E5F5;color:#6A1B9A}
-.tag-green{background:#E8F5E9;color:#2E7D32}
-
-.empty-mo{text-align:center;padding:60px 20px;color:var(--muted)}
-.empty-icon{font-size:48px;opacity:.25;margin-bottom:12px}
-
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;align-items:flex-end}
+/* ── MODAL SAISIE ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:flex-end}
 .overlay.open{display:flex}
 .modal{background:var(--white);width:100%;max-width:500px;border-radius:20px 20px 0 0;
-  padding-bottom:32px;max-height:93vh;overflow-y:auto;animation:up .22s ease}
+  padding-bottom:32px;max-height:90vh;overflow-y:auto;animation:up .22s ease}
 @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.m-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 0}
-.m-title{font-size:18px;font-weight:800;color:var(--navy);padding:14px 16px 12px;
-  border-bottom:1px solid var(--border)}
-.m-title small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+.mh{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto 0}
+.mt{font-size:17px;font-weight:800;color:var(--navy);padding:14px 16px 10px;border-bottom:1px solid var(--border)}
+.mt small{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
 
-/* FORM ROWS */
-.f-section{padding:12px 16px 0}
-.f-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
-  letter-spacing:.07em;margin-bottom:8px}
-.f-card{background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
-.f-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);gap:10px}
-.f-row:last-child{border-bottom:none}
-.f-rlabel{font-size:13px;color:var(--muted);flex-shrink:0;min-width:88px}
-.f-time{display:flex;align-items:center;gap:6px;flex:1}
+/* Day picker */
+.day-picker{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:12px 14px}
+.dp-head{text-align:center;font-size:10px;font-weight:700;color:var(--muted);padding:4px 0}
+.dp-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;color:var(--navy);
+  border:1px solid transparent;transition:all .12s}
+.dp-day:hover,.dp-day.sel{background:var(--teal);color:#fff}
+.dp-day.wknd{color:var(--muted);background:var(--bg)}
+.dp-day.wknd.sel{background:var(--teal);color:#fff}
+.dp-day.empty{cursor:default}
+.dp-day.filled{border-color:var(--teal);color:var(--teal)}
+.dp-day.filled.sel{background:var(--teal);color:#fff}
+
+/* Form */
+.form-sec{padding:10px 16px 0}
+.form-lbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.form-card{background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.form-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);gap:10px}
+.form-row:last-child{border-bottom:none}
+.form-rl{font-size:13px;color:var(--muted);min-width:80px;flex-shrink:0}
 .tfield{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:7px 10px;
   font-size:15px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
-.tsep{color:var(--muted);font-weight:600}
-.total-display{font-size:18px;font-weight:800;color:var(--teal);margin-left:auto}
+.tsep{color:var(--muted)}
+.total-lbl{font-size:18px;font-weight:800;color:var(--teal)}
+.std-btn{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
+  font-size:11px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit;margin-left:auto}
 
-/* TOGGLE */
-.tog-row{display:flex;align-items:center;padding:12px 14px;gap:10px;border-bottom:1px solid var(--border)}
-.tog-row:last-child{border-bottom:none}
+/* Type chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px}
+.chip{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
+  border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s}
+.chip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* Toggle repas */
+.tog-row{display:flex;align-items:center;padding:11px 16px;border-top:1px solid var(--border)}
 .tog-lbl{flex:1;font-size:14px;font-weight:600;color:var(--text)}
-.tog{width:44px;height:26px;border-radius:13px;border:none;cursor:pointer;position:relative;
-  background:var(--border);transition:background .2s;flex-shrink:0}
+.tog{width:44px;height:26px;border-radius:13px;border:none;cursor:pointer;
+  background:var(--border);position:relative;transition:background .2s;flex-shrink:0}
 .tog.on{background:var(--teal)}
-.tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
-  background:#fff;transition:left .2s;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;
+  border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
 .tog.on::after{left:21px}
 
-/* TYPE CHIPS */
-.type-row{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px 0}
-.tchip{padding:7px 13px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;
-  border:2px solid var(--border);background:var(--bg);color:var(--muted);transition:all .15s;user-select:none}
-.tchip.sel{background:var(--navy);color:#fff;border-color:var(--navy)}
-
-/* ACTION BTNS */
-.m-actions{display:flex;gap:8px;padding:16px 16px 0}
+/* Buttons */
+.m-actions{display:flex;gap:8px;padding:14px 16px 0}
 .m-btn{flex:1;padding:14px;border-radius:var(--radius);border:none;font-size:15px;font-weight:700;
-  cursor:pointer;font-family:inherit;transition:transform .1s}
-.m-btn:active{transform:scale(0.97)}
+  cursor:pointer;font-family:inherit}
 .m-btn.primary{background:var(--teal);color:#fff}
 .m-btn.secondary{background:var(--bg);color:var(--muted)}
 .m-btn.danger{background:#FFEBEE;color:var(--red)}
 
-/* TEXT INPUT */
-.f-input{flex:1;border:none;outline:none;font-size:14px;font-weight:600;color:var(--text);
-  background:transparent;font-family:inherit}
-
-
-/* NAV TABS */
-.nav-tabs{background:var(--white);display:flex;border-bottom:2px solid var(--border);
-  position:sticky;top:62px;z-index:91;}
-.ntab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:700;
-  color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;
-  transition:color .15s,border-color .15s;user-select:none}
-.ntab.act{color:var(--navy);border-bottom-color:var(--navy)}
-
-/* MAIN / PARAMS PAGES */
-.view{display:none}.view.act{display:block}
-
-/* PARAMS */
-.p-section{margin:12px 12px 0}
+/* ── PARAMS ── */
+.params-body{padding:14px}
+.p-sec{margin-bottom:16px}
 .p-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
-  letter-spacing:.08em;margin-bottom:8px;padding-left:2px}
-.p-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:4px}
-.p-row{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);gap:10px}
+  letter-spacing:.08em;margin-bottom:8px}
+.p-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.p-row{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);gap:10px;cursor:pointer}
 .p-row:last-child{border-bottom:none}
-.p-lbl{font-size:13px;color:var(--muted);flex-shrink:0;min-width:92px}
-.p-input{flex:1;border:none;outline:none;font-size:15px;font-weight:600;color:var(--text);
-  background:transparent;font-family:inherit}
-.p-tfield{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 10px;
-  font-size:14px;font-weight:700;color:var(--navy);outline:none;font-family:inherit;text-align:center;width:76px}
-.p-tsep{color:var(--muted);font-weight:600}
-
-/* SIGNATURE PAD */
-.sig-wrap{margin:12px 12px 0}
-.sig-canvas{display:block;width:100%;height:140px;border-radius:var(--radius);
-  border:2px dashed var(--border);background:var(--white);cursor:crosshair;touch-action:none}
-.sig-canvas.has-sig{border-color:var(--teal);border-style:solid}
-.sig-actions{display:flex;gap:8px;margin-top:8px}
-.sig-btn{flex:1;padding:11px;border-radius:var(--radius);border:none;font-size:13px;font-weight:700;
-  cursor:pointer;font-family:inherit;transition:transform .1s}
-.sig-btn.clear{background:var(--bg);color:var(--muted)}
-.sig-btn.save{background:var(--teal);color:#fff}
-
-
-/* PDF PREVIEW OVERLAY */
-.pdf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:300;flex-direction:column}
-.pdf-overlay.open{display:flex}
-.pdf-topbar{background:#1B3A6B;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
-.pdf-topbar-title{flex:1;font-size:15px;font-weight:700}
-.pdf-topbar-btn{padding:8px 14px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:rgba(255,255,255,0.15);color:#fff}
-.pdf-topbar-btn.dl{background:#1A7F72}
-.pdf-frame{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:16px;background:#666}
-.pdf-canvas-wrap{background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.4)}
-#pdfPreviewCanvas{display:block;max-width:100%}
-/* PDF BTN */
-.pdf-btn{width:100%;padding:14px;border-radius:var(--radius);border:none;font-size:14px;font-weight:700;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;
-  background:#1D6F42;color:#fff;box-shadow:0 4px 14px rgba(29,111,66,0.28);
-  transition:transform .12s;font-family:inherit}
-.pdf-btn:active{transform:scale(0.97)}
+.p-row-lbl{flex:1;font-size:14px;font-weight:600;color:var(--text)}
+.p-row-status{font-size:12px;color:var(--muted)}
+.p-row-status.ok{color:var(--teal);font-weight:700}
+.p-input{flex:1;border:none;outline:none;font-size:15px;font-weight:600;
+  color:var(--text);background:transparent;font-family:inherit}
 
 /* TOAST */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);
   background:var(--text);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;
   font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:500;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-left">
-    <a href="../" class="back-btn">‹</a>
+<!-- ═══ HEADER ═══ -->
+<div class="hdr">
+  <div class="hdr-left">
+    <a href="../" class="back-btn" id="backBtn">‹</a>
     <div>
-      <div class="header-title">Carnet d'heure</div>
-      <div class="header-sub" id="hSub">2026</div>
+      <div class="hdr-title">Carnet d'heure</div>
+      <div class="hdr-sub" id="hdrSub">2026</div>
     </div>
   </div>
-  <input type="file" id="fileInput" accept=".xlsx" style="display:none" onchange="importExcel(this.files[0])">
+  <button class="hdr-btn" id="paramsBtn" onclick="showParams()">⚙ Paramètres</button>
 </div>
 
-<div class="nav-tabs">
-  <div class="ntab act" id="nt-main" onclick="switchView('main')">📋 Heures</div>
-  <div class="ntab" id="nt-params" onclick="switchView('params')">⚙️ Paramètres</div>
+<!-- ═══ VIEW HOME: liste des mois ═══ -->
+<div class="view active" id="viewHome">
+  <div class="month-grid" id="monthGrid"></div>
 </div>
 
-<div class="view act" id="view-main">
-<div class="month-picker" id="mPicker"></div>
-
-<div class="stats-bar">
-  <div class="stat-card"><div class="stat-val" id="sJ">—</div><div class="stat-lbl">Jours T</div></div>
-  <div class="stat-card"><div class="stat-val" id="sH">—</div><div class="stat-lbl">Heures</div></div>
-  <div class="stat-card"><div class="stat-val" id="sR">—</div><div class="stat-lbl">Repas</div></div>
-  <div class="stat-card"><div class="stat-val" id="sN">—</div><div class="stat-lbl">H. nuit</div></div>
+<!-- ═══ VIEW PDF ═══ -->
+<div class="view" id="viewPdf">
+  <div class="pdf-toolbar">
+    <span class="pdf-month-lbl" id="pdfMonthLbl">Juin 2026</span>
+    <button class="tb-btn green" onclick="openDayPicker()">✏️ Saisir</button>
+    <button class="tb-btn" onclick="downloadFilledPdf()">⬇ Télécharger</button>
+  </div>
+  <div class="pdf-scroll" id="pdfScroll">
+    <div class="pdf-canvas-wrap">
+      <canvas id="pdfCanvas"></canvas>
+    </div>
+  </div>
 </div>
 
+<!-- ═══ VIEW PARAMS ═══ -->
+<div class="view" id="viewParams">
+  <div class="params-body">
 
-<div class="add-btn-wrap">
-  <button class="add-btn" onclick="openNew()">
-    <span style="font-size:22px">+</span> Ajouter une journée
-  </button>
+    <div class="p-sec">
+      <div class="p-title">👤 Informations</div>
+      <div class="p-card">
+        <div class="p-row" style="cursor:default">
+          <span class="p-row-lbl" style="font-weight:500;color:var(--muted);min-width:60px">Nom</span>
+          <input class="p-input" id="cfgNom" placeholder="Prénom Nom" onchange="saveCfg()">
+        </div>
+      </div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-title">⏰ Horaires standard</div>
+      <div class="p-card">
+        <div class="p-row" style="cursor:default">
+          <span class="p-row-lbl" style="font-size:12px;color:var(--muted)">🌅 Matin</span>
+          <input class="tfield" id="cfgMd" type="time" value="07:30" onchange="saveCfg()" style="width:70px">
+          <span class="tsep">–</span>
+          <input class="tfield" id="cfgMf" type="time" value="12:00" onchange="saveCfg()" style="width:70px">
+        </div>
+        <div class="p-row" style="cursor:default">
+          <span class="p-row-lbl" style="font-size:12px;color:var(--muted)">☀️ Après-m.</span>
+          <input class="tfield" id="cfgAd" type="time" value="13:00" onchange="saveCfg()" style="width:70px">
+          <span class="tsep">–</span>
+          <input class="tfield" id="cfgAf" type="time" value="17:30" onchange="saveCfg()" style="width:70px">
+        </div>
+      </div>
+    </div>
+
+    <div class="p-sec">
+      <div class="p-title">📄 PDF par mois (1 par mois)</div>
+      <div class="p-card" id="pdfSlots"></div>
+    </div>
+
+  </div>
 </div>
 
-<div style="padding:8px 12px 0;">
-  <button class="pdf-btn" id="mainExportBtn" onclick="smartExport()">
-    <span style="font-size:20px">📄</span>
-    <span id="exportBtnLabel">Exporter PDF — <span id="pdfMoLabel"></span></span>
-  </button>
-</div>
-<div class="days-wrap" id="daysWrap"></div>
-
-</div><!-- /view-main -->
-
-<!-- PARAMS VIEW -->
-<div class="view" id="view-params">
-
-  <!-- PDF TEMPLATE UPLOAD -->
-  <div class="p-section" style="margin-top:14px">
-    <div class="p-title">📄 Feuilles d'heure (1 PDF par mois)</div>
-    <div class="p-card">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_0').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Janvier</span>
-        <span id="pdfStatus_0" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_0" accept=".pdf" style="display:none" onchange="importMonthPdf(0, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_1').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Février</span>
-        <span id="pdfStatus_1" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_1" accept=".pdf" style="display:none" onchange="importMonthPdf(1, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_2').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Mars</span>
-        <span id="pdfStatus_2" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_2" accept=".pdf" style="display:none" onchange="importMonthPdf(2, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_3').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Avril</span>
-        <span id="pdfStatus_3" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_3" accept=".pdf" style="display:none" onchange="importMonthPdf(3, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_4').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Mai</span>
-        <span id="pdfStatus_4" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_4" accept=".pdf" style="display:none" onchange="importMonthPdf(4, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_5').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Juin</span>
-        <span id="pdfStatus_5" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_5" accept=".pdf" style="display:none" onchange="importMonthPdf(5, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_6').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Juillet</span>
-        <span id="pdfStatus_6" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_6" accept=".pdf" style="display:none" onchange="importMonthPdf(6, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_7').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Août</span>
-        <span id="pdfStatus_7" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_7" accept=".pdf" style="display:none" onchange="importMonthPdf(7, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_8').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Septembre</span>
-        <span id="pdfStatus_8" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_8" accept=".pdf" style="display:none" onchange="importMonthPdf(8, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_9').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Octobre</span>
-        <span id="pdfStatus_9" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_9" accept=".pdf" style="display:none" onchange="importMonthPdf(9, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_10').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Novembre</span>
-        <span id="pdfStatus_10" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_10" accept=".pdf" style="display:none" onchange="importMonthPdf(10, this.files[0])">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('pdfInput_11').click()">
-        <span style="flex:1;font-size:13px;font-weight:600;color:var(--text);">Décembre</span>
-        <span id="pdfStatus_11" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-      <input type="file" id="pdfInput_11" accept=".pdf" style="display:none" onchange="importMonthPdf(11, this.files[0])">
-    </div>
-  </div>
-
-  <div class="p-section" style="margin-top:12px">
-    <div class="p-title">📊 Données Excel annuelles</div>
-    <div class="p-card">
-      <div class="p-row" style="cursor:pointer;" onclick="document.getElementById('fileInput').click()">
-        <span style="flex:1;font-size:14px;font-weight:600;color:var(--text);" id="excelImportLabel">📂 Importer le fichier Excel</span>
-        <span id="excelImportStatus" style="font-size:11px;color:var(--muted);">—</span>
-        <span style="color:var(--muted);margin-left:6px;">›</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="p-section" style="margin-top:14px">
-    <div class="p-title">Informations personnelles</div>
-    <div class="p-card">
-      <div class="p-row"><span class="p-lbl">👤 Nom</span><input class="p-input" id="cfgNom" placeholder="Prénom Nom" onchange="saveParams()"></div>
-      <div class="p-row"><span class="p-lbl">🏢 Entreprise</span><input class="p-input" id="cfgEntreprise" placeholder="Risse S.A." onchange="saveParams()"></div>
-    </div>
-  </div>
-
-  <div class="p-section">
-    <div class="p-title">🌨 Horaire Hiver (Oct – Mars)</div>
-    <div class="p-card">
-      <div class="p-row"><span class="p-lbl">🌅 Matin</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgHivMd" type="time" value="07:30" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgHivMf" type="time" value="12:00" onchange="saveParams()"></div></div>
-      <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgHivAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgHivAf" type="time" value="17:30" onchange="saveParams()"></div></div>
-    </div>
-  </div>
-
-  <div class="p-section">
-    <div class="p-title">☀️ Horaire Été (Avr – Sept)</div>
-    <div class="p-card">
-      <div class="p-row"><span class="p-lbl">🌅 Matin</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgEteMd" type="time" value="07:30" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgEteMf" type="time" value="12:00" onchange="saveParams()"></div></div>
-      <div class="p-row"><span class="p-lbl">☀️ Après-m.</span><div style="display:flex;align-items:center;gap:6px"><input class="p-tfield" id="cfgEteAd" type="time" value="13:00" onchange="saveParams()"><span class="p-tsep">–</span><input class="p-tfield" id="cfgEteAf" type="time" value="17:30" onchange="saveParams()"></div></div>
-    </div>
-  </div>
-
-  <div class="sig-wrap">
-    <div class="p-title" style="padding-left:2px">✍️ Signature</div>
-    <canvas class="sig-canvas" id="sigCanvas" width="800" height="280"></canvas>
-    <div class="sig-actions">
-      <button class="sig-btn clear" onclick="clearSig()">🗑 Effacer</button>
-      <button class="sig-btn save" onclick="saveSig()">💾 Enregistrer la signature</button>
-    </div>
-  </div>
-
-  <div style="height:80px"></div>
-</div><!-- /view-params -->
-
-<!-- MODAL SAISIE / ÉDITION -->
+<!-- ═══ MODAL SAISIE JOUR ═══ -->
 <div class="overlay" id="overlay" onclick="closeOverlay(event)">
-<div class="modal" id="modal">
-  <div class="m-handle"></div>
-  <div class="m-title" id="mTitle">Nouvelle journée</div>
+<div class="modal">
+  <div class="mh"></div>
+  <div class="mt" id="modalTitle">Saisir les heures<small id="modalSub"></small></div>
 
-  <!-- Type de journée -->
-  <div class="type-row" id="typeRow">
-    <div class="tchip sel" data-t="normal"  onclick="selType('normal')">✅ Normal</div>
-    <div class="tchip"     data-t="vacances" onclick="selType('vacances')">🏖 Vacances</div>
-    <div class="tchip"     data-t="ferie"    onclick="selType('ferie')">🏛 Férié</div>
-    <div class="tchip"     data-t="assurance" onclick="selType('assurance')">🏥 Assurance</div>
-    <div class="tchip"     data-t="nuit"     onclick="selType('nuit')">🌙 Nuit</div>
-    <div class="tchip"     data-t="samedi"   onclick="selType('samedi')">📅 Samedi</div>
+  <!-- Sélecteur de jour -->
+  <div class="day-picker" id="dayPicker"></div>
+
+  <!-- Type -->
+  <div class="chips" id="typeChips">
+    <div class="chip sel" data-t="normal" onclick="selType('normal')">✅ Normal</div>
+    <div class="chip" data-t="vacances" onclick="selType('vacances')">🏖 Vacances</div>
+    <div class="chip" data-t="malade" onclick="selType('malade')">🤒 Malade</div>
+    <div class="chip" data-t="assurance" onclick="selType('assurance')">🏥 Assurance</div>
   </div>
 
-  <!-- Date -->
-  <div class="f-section" style="margin-top:12px">
-    <div class="f-label">Date</div>
-    <div class="f-card">
-      <div class="f-row">
-        <span class="f-rlabel">📅 Jour</span>
-        <input type="date" id="fDate" class="tfield" style="width:auto;flex:1">
-      </div>
-    </div>
-  </div>
-
-  <!-- Horaires (masqué si type spécial) -->
+  <!-- Horaires -->
   <div id="horaireSection">
-    <div class="f-section" style="margin-top:12px">
-      <div class="f-label">Horaires</div>
-      <div class="f-card">
-        <div class="f-row">
-          <span class="f-rlabel">🌅 Matin</span>
-          <div class="f-time">
-            <input class="tfield" id="fMatDeb" type="time">
-            <span class="tsep">–</span>
-            <input class="tfield" id="fMatFin" type="time">
-          </div>
+    <div class="form-sec">
+      <div class="form-card">
+        <div class="form-row">
+          <span class="form-rl">🌅 Matin</span>
+          <input class="tfield" id="fMd" type="time">
+          <span class="tsep">–</span>
+          <input class="tfield" id="fMf" type="time">
         </div>
-        <div class="f-row">
-          <span class="f-rlabel">☀️ Après-m.</span>
-          <div class="f-time">
-            <input class="tfield" id="fAmDeb" type="time">
-            <span class="tsep">–</span>
-            <input class="tfield" id="fAmFin" type="time">
-          </div>
+        <div class="form-row">
+          <span class="form-rl">☀️ Après-m.</span>
+          <input class="tfield" id="fAd" type="time">
+          <span class="tsep">–</span>
+          <input class="tfield" id="fAf" type="time">
         </div>
-        <div class="f-row">
-          <span class="f-rlabel">⏱ Total</span>
-          <span id="fTotal" class="total-display">0h00</span>
-          <button onclick="applyStd()" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--navy);cursor:pointer;font-family:inherit">Standard</button>
+        <div class="form-row">
+          <span class="form-rl">⏱ Total</span>
+          <span class="total-lbl" id="totalLbl">0h00</span>
+          <button class="std-btn" onclick="applyStd()">Standard</button>
         </div>
       </div>
     </div>
-
-    <!-- Repas -->
-    <div class="f-section" style="margin-top:10px">
-      <div class="f-card">
-        <div class="tog-row">
-          <span class="tog-lbl">🍽 Repas</span>
-          <button class="tog" id="togRepas" onclick="togR()"></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Heures spéciales (nuit/samedi) -->
-    <div id="specialSection" style="display:none">
-      <div class="f-section" style="margin-top:10px">
-        <div class="f-label">Heures spéciales</div>
-        <div class="f-card">
-          <div class="f-row" id="rowNuit" style="display:none">
-            <span class="f-rlabel">🌙 Heures nuit</span>
-            <div style="display:flex;align-items:center;gap:0;margin-left:auto">
-              <button onclick="step('fNuit',-0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:8px 0 0 8px;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">−</button>
-              <input id="fNuit" value="0" readonly style="width:44px;text-align:center;font-size:14px;font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-left:none;border-right:none;padding:6px 0;font-family:inherit">
-              <button onclick="step('fNuit',0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:0 8px 8px 0;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">+</button>
-            </div>
-          </div>
-          <div class="f-row" id="rowSam" style="display:none">
-            <span class="f-rlabel">📅 H. samedi</span>
-            <div style="display:flex;align-items:center;gap:0;margin-left:auto">
-              <button onclick="step('fSam',-0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:8px 0 0 8px;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">−</button>
-              <input id="fSam" value="0" readonly style="width:44px;text-align:center;font-size:14px;font-weight:700;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-left:none;border-right:none;padding:6px 0;font-family:inherit">
-              <button onclick="step('fSam',0.5)" style="width:30px;height:30px;border:1px solid var(--border);background:var(--bg);border-radius:0 8px 8px 0;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="tog-row">
+      <span class="tog-lbl">🍽 Repas</span>
+      <button class="tog" id="togRepas" onclick="togR()"></button>
     </div>
   </div>
 
-  <!-- Note -->
-  <div class="f-section" style="margin-top:10px">
-    <div class="f-card">
-      <div class="f-row">
-        <input class="f-input" id="fNote" placeholder="Note (chantier, info…)" maxlength="100">
-      </div>
-    </div>
-  </div>
-
-  <!-- Actions -->
   <div class="m-actions">
-    <button class="m-btn danger" id="btnDelete" onclick="deleteEntry()" style="display:none;flex:0.6">🗑</button>
     <button class="m-btn secondary" onclick="closeModal()">Annuler</button>
-    <button class="m-btn primary" onclick="saveEntry()">Enregistrer</button>
+    <button class="m-btn primary" onclick="saveDay()">Enregistrer dans le PDF</button>
   </div>
 </div>
 </div>
+
+<!-- Hidden file inputs for PDF upload -->
+<div id="pdfInputs" style="display:none"></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════
-// DONNÉES EXCEL (lecture seule)
-// ══════════════════════════════
-// ══════════════════════════════
-// DONNÉES EXCEL (dynamiques)
-// ══════════════════════════════
-let EXCEL_DATA = null;          // null = pas encore importé
-let excelYear  = null;
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-function parseExcelFile(buffer) {
-  const wb = XLSX.read(buffer, {type:'array'});
-  const ws = wb.Sheets[wb.SheetNames[0]];
-  
-  // Detect year from title cell C1
-  const titleCell = ws['C1'];
-  const titleStr  = titleCell ? String(titleCell.v) : '';
-  const yearMatch = titleStr.match(/20\d\d/);
-  excelYear = yearMatch ? parseInt(yearMatch[0]) : new Date().getFullYear();
-
-  // Month block start rows (1-based) — structure identique chaque année
-  const MONTH_STARTS = [1,25,48,71,94,117,140,163,186,209,232,255];
-  const MOIS_NAMES   = ['Janvier','Février','Mars','Avril','Mai','Juin',
-                        'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-
-  function cellVal(r, c) {
-    const addr = XLSX.utils.encode_cell({r: r-1, c: c-1});
-    const cell = ws[addr];
-    if (!cell) return null;
-    if (cell.v instanceof Date) return null; // ignore date objects
-    return cell.v;
-  }
-
-  const months = [];
-  for (let mi = 0; mi < 12; mi++) {
-    const s = MONTH_STARTS[mi];
-    const days = [];
-    for (let col = 4; col <= 34; col++) { // cols D(4) to AH(34)
-      const dayNum = cellVal(s+3, col);
-      if (dayNum === null) continue;
-      const n = typeof dayNum === 'number' ? Math.round(dayNum) : parseInt(dayNum);
-      if (isNaN(n) || n < 1 || n > 31) continue;
-      days.push({
-        n,
-        am:  cellVal(s+13, col),  // matin
-        pm:  cellVal(s+12, col),  // après-midi
-        h:   cellVal(s+14, col),  // heures
-        r:   cellVal(s+15, col),  // repas
-        nu:  cellVal(s+16, col),  // nuit
-        sa:  cellVal(s+17, col),  // samedi
-        di:  cellVal(s+18, col),  // dim
-        as:  cellVal(s+19, col),  // assurance
-      });
-    }
-    months.push({ m: MOIS_NAMES[mi], days });
-  }
-  return months;
-}
-
-function importExcel(file) {
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = new Uint8Array(e.target.result);
-      EXCEL_DATA = parseExcelFile(data);
-      localStorage.setItem('ch_excel', JSON.stringify({year: excelYear, data: EXCEL_DATA}));
-      updateImportBanner();
-      curMo = new Date().getMonth();
-      renderPicker();
-      renderMonth();
-      showToast(`✅ Excel ${excelYear} importé !`);
-    } catch(err) {
-      showToast('❌ Erreur lecture Excel');
-      console.error(err);
-    }
-  };
-  reader.readAsArrayBuffer(file);
-}
-
-function loadStoredExcel() {
-  const stored = localStorage.getItem('ch_excel');
-  if (stored) {
-    const {year, data} = JSON.parse(stored);
-    EXCEL_DATA = data;
-    excelYear  = year;
-  }
-}
-
-function updateImportBanner() {
-  const lbl    = document.getElementById('excelImportLabel');
-  const status = document.getElementById('excelImportStatus');
-  if (!lbl) return;
-  if (EXCEL_DATA && excelYear) {
-    lbl.textContent    = `✅ Excel ${excelYear} chargé`;
-    lbl.style.color    = 'var(--teal)';
-    if (status) { status.textContent = excelYear + ' ✓'; status.style.color = 'var(--teal)'; }
-  } else {
-    lbl.textContent    = '📂 Importer le fichier Excel';
-    lbl.style.color    = 'var(--text)';
-    if (status) { status.textContent = '—'; status.style.color = 'var(--muted)'; }
-  }
-}
-
+// ═══════════════════════════════════
+// CONSTANTS & STATE
+// ═══════════════════════════════════
 const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
               'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const DOW_S  = ['Di','Lu','Ma','Me','Je','Ve','Sa'];
 
-// Config horaires standard
-function stdFor(mo) {
-  const hiv = {md:params.hivMd||'07:30',mf:params.hivMf||'12:00',ad:params.hivAd||'13:00',af:params.hivAf||'17:30'};
-  const ete = {md:params.eteMd||'07:30',mf:params.eteMf||'12:00',ad:params.eteAd||'13:00',af:params.eteAf||'17:30'};
-  return (mo>=3&&mo<=8) ? ete : hiv;
-}
+// PDF cell coordinates (from analysis of real Excel PDF)
+const PDF = {
+  DAY1_X:   207.01,
+  DAY_SPACE: 14.58,
+  PAGE_H:   595.30,
+  // Row Y positions (pymupdf top-left coords, found from actual data)
+  ROWS: {
+    apm_fin: 91,    // Après-midi fin   e.g. 17h30
+    apm_deb: 113,   // Après-midi début e.g. 13h00
+    mat_fin: 212,   // Matin fin        e.g. 12h00
+    mat_deb: 234,   // Matin début      e.g. 7h30
+    hrs:     297,   // Heures travail
+    repas:   322,   // Repas (1)
+    nuit:    347,   // Heures nuit
+    sam:     373,   // Heures samedi
+    dim:     399,   // Heures dim
+    assur:   425,   // Assurance
+  }
+};
 
-// ══════════════════════════════
-// STATE
-// ══════════════════════════════
 const now = new Date();
-let curMo = now.getMonth();
-let entries = {}; // key = "YYYY-MM-DD"
-let selT = 'normal';
+let curYear  = now.getFullYear();
+let curView  = 'home';
+let curMo    = -1;   // current month being viewed
+let selDay   = -1;   // selected day in picker
+let selType_ = 'normal';
 let hasRepas = false;
-let editKey = null;
 
-// ══════════════════════════════
+// Storage
+let cfg = { nom:'', md:'07:30', mf:'12:00', ad:'13:00', af:'17:30' };
+let monthPdfs  = new Array(12).fill(null);   // base64 original PDFs per month
+let dayEntries = {};  // { "YYYY-MM-DD": {matDeb,matFin,amDeb,amFin,hours,type,repas} }
+let dirtyMonths = new Set(); // months with unsaved edits
+
+// ═══════════════════════════════════
 // PERSISTENCE
-// ══════════════════════════════
-function load() {
-  const e = localStorage.getItem('ch_e2');
-  if (e) entries = JSON.parse(e);
+// ═══════════════════════════════════
+function loadAll() {
+  const c = localStorage.getItem('ch3_cfg');
+  if(c) cfg = {...cfg, ...JSON.parse(c)};
+  const e = localStorage.getItem('ch3_entries');
+  if(e) dayEntries = JSON.parse(e);
+  for(let i=0;i<12;i++){
+    const p = localStorage.getItem('ch3_pdf_'+i);
+    if(p) monthPdfs[i] = p;
+  }
 }
-function persist() { localStorage.setItem('ch_e2', JSON.stringify(entries)); }
 
-// ══════════════════════════════
+function saveCfg() {
+  cfg.nom = $('cfgNom').value;
+  cfg.md  = $('cfgMd').value;  cfg.mf = $('cfgMf').value;
+  cfg.ad  = $('cfgAd').value;  cfg.af = $('cfgAf').value;
+  localStorage.setItem('ch3_cfg', JSON.stringify(cfg));
+}
+
+function saveEntries() {
+  localStorage.setItem('ch3_entries', JSON.stringify(dayEntries));
+}
+
+function savePdf(moIdx, b64) {
+  monthPdfs[moIdx] = b64;
+  localStorage.setItem('ch3_pdf_'+moIdx, b64);
+}
+
+// ═══════════════════════════════════
 // HELPERS
-// ══════════════════════════════
+// ═══════════════════════════════════
 const $ = id => document.getElementById(id);
-function toMin(t) { if(!t)return 0; const[h,m]=t.split(':').map(Number); return h*60+m; }
-function calcH(md,mf,ad,af) {
-  const raw = (Math.max(0,toMin(mf)-toMin(md)) + Math.max(0,toMin(af)-toMin(ad))) / 60;
-  return raw > 0 ? Math.max(0, raw - 0.25) : 0; // pause 9h00 = -15 min
+function toMin(t){if(!t)return 0;const[h,m]=t.split(':').map(Number);return h*60+m;}
+function calcH(md,mf,ad,af){
+  const raw=(Math.max(0,toMin(mf)-toMin(md))+Math.max(0,toMin(af)-toMin(ad)))/60;
+  return raw>0?Math.max(0,raw-0.25):0; // -15min pause
 }
-function fmtH(v) {
-  if(v===null||v===undefined) return '—';
-  if(typeof v==='string') return v;
-  const m=Math.round(v*60);
-  return `${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}`;
-}
-// Parse Excel time string "7h30 - 12h00" → "07:30"
-function parseExTime(s) {
-  if(!s||typeof s!=='string') return '';
-  const m = s.trim().match(/^(\d+)h(\d+)/);
-  if(!m) return '';
-  return `${String(m[1]).padStart(2,'0')}:${String(m[2]).padStart(2,'0')}`;
-}
-function dKey(y,mo,d) {
-  return `${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-}
-function keyToDate(k) { const[y,m,d]=k.split('-').map(Number); return new Date(y,m-1,d); }
+function fmtH(h){const m=Math.round(h*60);return `${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}`;}
+function fmtTime(t){if(!t)return '';const[h,m]=t.split(':');return `${parseInt(h)}h${m}`;}
+function dKey(y,mo,d){return `${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;}
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400);}
 
-// ══════════════════════════════
-// MERGER: Excel data + user entries
-// ══════════════════════════════
-function getDay(mo0, dayNum) {
-  // mo0 = 0-based month
-  const key = dKey(excelYear||2026, mo0, dayNum);
-  // User entry takes priority
-  if (entries[key]) return {...entries[key], _user: true, _key: key};
-  // Fallback: Excel data
-  if (!EXCEL_DATA) return null;
-  const exMo = EXCEL_DATA[mo0];
-  if (!exMo) return null;
-  const exDay = exMo ? exMo.days.find(d => d.n === dayNum) : null;
-  if (!exDay || (exDay.h===null&&exDay.am===null)) return null;
-  
-  // Convert Excel day to unified format
-  const amParts = exDay.am ? exDay.am.split(' - ') : [];
-  const pmParts = exDay.pm ? exDay.pm.split(' - ') : [];
-  
-  let type = 'normal';
-  if (exDay.h === 'V' || (exDay.am && exDay.am.toLowerCase().includes('vacances'))) type = 'vacances';
-  else if (exDay.h === 'Férié') type = 'ferie';
-  else if (exDay.as !== null && exDay.as !== undefined) type = 'assurance';
-  else if (exDay.am && exDay.am.toLowerCase().includes('proche')) type = 'proche';
-  else if (exDay.am && exDay.am.toLowerCase().includes('congé')) type = 'conge';
-  
-  return {
-    matDeb: parseExTime(amParts[0]),
-    matFin: parseExTime(amParts[1]),
-    amDeb:  parseExTime(pmParts[0]),
-    amFin:  parseExTime(pmParts[1]),
-    hours:  typeof exDay.h === 'number' ? exDay.h : 0,
-    repas:  !!exDay.r,
-    nuitH:  typeof exDay.nu === 'number' ? exDay.nu : 0,
-    samH:   typeof exDay.sa === 'number' ? exDay.sa : 0,
-    type,
-    note:   '',
-    _user:  false,
-    _key:   key,
-    _excel: true
+// ═══════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════
+function showView(v) {
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  $(v).classList.add('active');
+  curView = v;
+  const isHome = v==='viewHome';
+  const isPdf  = v==='viewPdf';
+  $('backBtn').style.display = isHome ? 'none' : 'flex';
+  $('paramsBtn').style.display = isPdf || isHome ? 'flex' : 'none';
+  $('backBtn').onclick = isHome ? null : () => {
+    if(v==='viewPdf') showView('viewHome');
+    else showView('viewHome');
   };
 }
 
-// ══════════════════════════════
-// RENDER PICKER
-// ══════════════════════════════
-function renderPicker() {
-  $('mPicker').innerHTML = MOIS.map((m,i) => {
-    const exFilled = EXCEL_DATA[i].days.filter(d=>d.h!==null).length;
-    const userFilled = Object.keys(entries).filter(k=>k.startsWith(`2026-${String(i+1).padStart(2,'0')}`)).length;
-    const hasDat = exFilled > 0 || userFilled > 0;
-    const cls = (hasDat?'has-data ':'') + (i===curMo?'active':'');
-    return `<div class="mchip ${cls}" onclick="selMo(${i})">${m.slice(0,4)}</div>`;
+function showParams() {
+  loadCfgUI();
+  renderPdfSlots();
+  showView('viewParams');
+  $('backBtn').onclick = () => showView('viewHome');
+  $('paramsBtn').style.display = 'none';
+}
+
+// ═══════════════════════════════════
+// HOME — MONTH LIST
+// ═══════════════════════════════════
+function renderHome() {
+  const grid = $('monthGrid');
+  grid.innerHTML = MOIS.map((m, i) => {
+    const isCur = i === now.getMonth() && curYear === now.getFullYear();
+    const hasPdf = !!monthPdfs[i];
+    const cls = 'month-card' + (isCur?' current':'') + (hasPdf?' has-pdf':'');
+    // Count entries this month
+    const prefix = `${curYear}-${String(i+1).padStart(2,'0')}-`;
+    const cnt = Object.keys(dayEntries).filter(k=>k.startsWith(prefix)).length;
+    return `<div class="${cls}" onclick="openMonth(${i})">
+      ${hasPdf?'<div class="month-pdf-dot"></div>':''}
+      <div class="month-name">${m}</div>
+      <div class="month-status">${hasPdf ? (cnt>0?`${cnt} jour${cnt>1?'s':''} saisi${cnt>1?'s':''}` : 'PDF prêt') : 'Pas de PDF'}</div>
+    </div>`;
   }).join('');
 }
 
-function selMo(i) {
-  curMo = i;
-  renderPicker();
-  renderMonth();
-  document.querySelectorAll('.mchip')[i]?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
-}
+// ═══════════════════════════════════
+// PDF VIEWER
+// ═══════════════════════════════════
+let currentPdfDoc = null;
+let currentPdfBytes = null; // original bytes
+let modifiedPdfBytes = null; // with user edits applied
 
-// ══════════════════════════════
-// RENDER MONTH
-// ══════════════════════════════
-function renderMonth() {
-  const yr = excelYear||2026;
-  $('hSub').textContent = `${MOIS[curMo]} ${yr}`;
-  const mnl=$('monthNavLbl'); if(mnl) mnl.textContent=`${MOIS[curMo]} ${yr}`;
-  const plbl = $('pdfMoLabel'); if(plbl) plbl.textContent = MOIS[curMo];
-  const dim = new Date(yr, curMo+1, 0).getDate();
+function openMonth(moIdx) {
+  curMo = moIdx;
+  $('pdfMonthLbl').textContent = `${MOIS[moIdx]} ${curYear}`;
+  $('hdrSub').textContent = `${MOIS[moIdx]} ${curYear}`;
+  showView('viewPdf');
 
-  // Collect all days with data
-  const days = [];
-  for (let d=1; d<=dim; d++) {
-    const day = getDay(curMo, d);
-    if (day) days.push({d, ...day});
-  }
-
-  // Stats (user entries + excel)
-  let totH=0, totR=0, totN=0, joursT=0;
-  for (let d=1; d<=dim; d++) {
-    const day = getDay(curMo, d);
-    if (!day) continue;
-    if (['normal','nuit','samedi'].includes(day.type)) { joursT++; totH += day.hours||0; }
-    if (day.repas) totR++;
-    totN += day.nuitH||0;
-  }
-  $('sJ').textContent = joursT||'—';
-  $('sH').textContent = joursT ? fmtH(totH) : '—';
-  $('sR').textContent = totR||'—';
-  $('sN').textContent = totN>0 ? `${totN}h` : '—';
-
-  if (days.length === 0) {
-    $('daysWrap').innerHTML = `<div class="empty-mo"><div class="empty-icon">📋</div>Aucune donnée — ajoute ta première journée !</div>`;
+  if (!monthPdfs[moIdx]) {
+    $('pdfScroll').innerHTML = `
+      <div class="no-pdf-msg">
+        <div class="no-pdf-icon">📄</div>
+        <div class="no-pdf-text">Aucun PDF pour ${MOIS[moIdx]}</div>
+        <button class="no-pdf-btn" onclick="goUploadPdf(${moIdx})">📂 Importer le PDF</button>
+      </div>`;
     return;
   }
+  renderPdfPage(moIdx);
+}
 
-  // ── CALENDAR GRID ──
-  const firstDow = (new Date(yr, curMo, 1).getDay()+6)%7; // Mon=0
-  const dayHeads = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
-  let calHtml = '<div class="cal-grid">';
-  dayHeads.forEach(h => { calHtml += `<div class="cal-head">${h}</div>`; });
-  for(let i=0;i<firstDow;i++) calHtml += '<div class="cal-cell empty"></div>';
-  for(let d2=1;d2<=dim;d2++){
-    const e2 = getDay(curMo, d2);
-    const dow2 = new Date(yr,curMo,d2).getDay();
-    const wknd2 = dow2===0||dow2===6;
-    const key2 = dKey(yr,curMo,d2);
-    const isToday2 = d2===new Date().getDate()&&curMo===new Date().getMonth()&&yr===new Date().getFullYear();
-    let cls='cal-cell'+(wknd2?' wknd':'')+(isToday2?' today':'')+(e2?' has-entry':'');
-    let inner='<span class="cal-num">'+d2+'</span>';
-    if(e2){
-      const t2=e2.type;
-      if(['normal','malade','nuit','samedi'].includes(t2)&&e2.hours>0)
-        inner+='<span class="cal-hrs">'+fmtH(e2.hours)+'</span>';
-      else if(t2==='vacances') inner+='<span class="cal-hrs">Vac</span>';
-      else if(t2==='ferie')    inner+='<span class="cal-hrs">Fér</span>';
-      else if(t2==='malade')   inner+='<span class="cal-hrs">Mal</span>';
-      else if(t2==='assurance') inner+='<span class="cal-hrs">Ass</span>';
-    }
-    calHtml += `<div class="${cls}" onclick="openDayEdit('${key2}',${d2})">${inner}</div>`;
+async function renderPdfPage(moIdx) {
+  $('pdfScroll').innerHTML = '<div class="pdf-canvas-wrap"><canvas id="pdfCanvas"></canvas></div>';
+  
+  try {
+    const b64 = monthPdfs[moIdx];
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    currentPdfBytes = bytes;
+
+    const pdf = await pdfjsLib.getDocument({data: bytes}).promise;
+    currentPdfDoc = pdf;
+
+    // Find the data page (page with APM/MAT/HRS rows = second page of 2-page month PDF)
+    const pageNum = pdf.numPages >= 2 ? 2 : 1;
+    const page = await pdf.getPage(pageNum);
+
+    const canvas = $('pdfCanvas');
+    const vw = Math.min(window.innerWidth - 20, 900);
+    const viewport = page.getViewport({scale: 1});
+    const scale = vw / viewport.width;
+    const scaled = page.getViewport({scale});
+
+    canvas.width  = scaled.width;
+    canvas.height = scaled.height;
+    canvas.style.width  = scaled.width + 'px';
+    canvas.style.height = scaled.height + 'px';
+
+    await page.render({canvasContext: canvas.getContext('2d'), viewport: scaled}).promise;
+    
+    // Draw user entries on top
+    drawEntriesOnCanvas(canvas, scale, moIdx);
+
+  } catch(err) {
+    console.error(err);
+    showToast('Erreur lecture PDF');
   }
-  calHtml += '</div>';
+}
 
-  // ── DAY CARDS LIST (only filled days) ──
-  let html = calHtml;
-  if(days.length>0) html += '<div class="days-list-title">Détail des jours saisis</div>';
+function drawEntriesOnCanvas(canvas, scale, moIdx) {
+  const ctx = canvas.getContext('2d');
+  const prefix = `${curYear}-${String(moIdx+1).padStart(2,'0')}-`;
+  const entries = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix));
+  if (!entries.length) return;
 
-  days.forEach(({d, ...day}) => {
-    const date = new Date(yr, curMo, d);
-    const dow = date.getDay();
-    const wknd = dow===0||dow===6;
+  ctx.save();
+  ctx.font = `bold ${Math.round(5.5*scale)}px Arial`;
+  ctx.fillStyle = '#1A1A2E';
+  ctx.textAlign = 'center';
 
-    const t = day.type;
-    let bdgCls = wknd ? 'wknd' : '';
-    if (t==='ferie') bdgCls='ferie';
-    else if (t==='malade') bdgCls='abs';
-    else if (t==='vacances'||t==='conge') bdgCls='vac';
-    else if (t==='assurance') bdgCls='abs';
+  entries.forEach(([key, e]) => {
+    const d = parseInt(key.split('-')[2]);
+    const cx = (PDF.DAY1_X + (d-1)*PDF.DAY_SPACE) * scale;
+    const t = e.type || 'normal';
 
-    let hoursHtml = '';
-    if (t==='ferie') hoursHtml = '<span class="day-hours special">Férié</span>';
-    else if (t==='malade') hoursHtml = `<span class="day-hours">${fmtH(day.hours)}</span>`;
-    else if (t==='vacances'||t==='conge') hoursHtml = '<span class="day-hours special">Vacances</span>';
-    else if (t==='assurance') hoursHtml = '<span class="day-hours special">Ass.</span>';
-    else if (t==='proche') hoursHtml = '<span class="day-hours special">Proche aidant</span>';
-    else if (day.hours>0) hoursHtml = `<span class="day-hours">${fmtH(day.hours)}</span>`;
-
-    const noteHtml = day.note ? `<div class="day-note">${day.note}</div>` : '';
-
-    let timesHtml = '';
-    if (day.matDeb||day.matFin||day.amDeb||day.amFin) {
-      const matStr = (day.matDeb&&day.matFin) ? `${day.matDeb} – ${day.matFin}` : '—';
-      const amStr  = (day.amDeb&&day.amFin)   ? `${day.amDeb} – ${day.amFin}`  : '—';
-      timesHtml = `<div class="day-times">
-        <div class="time-blk"><div class="time-lbl">🌅 Matin</div><div class="time-val">${matStr}</div></div>
-        <div class="time-blk"><div class="time-lbl">☀️ Après-m.</div><div class="time-val">${amStr}</div></div>
-      </div>`;
+    function drawV(text, pyY) {
+      // Draw rotated text at (cx, pyY*scale)
+      const x = cx, y = pyY * scale;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(-Math.PI/2);
+      ctx.fillText(text, 0, 0);
+      ctx.restore();
     }
 
-    const tags = [];
-    if (day.repas) tags.push('<span class="tag tag-blue">🍽 Repas</span>');
-    if ((day.nuitH||0)>0) tags.push(`<span class="tag tag-red">🌙 ${day.nuitH}h nuit</span>`);
-    if ((day.samH||0)>0)  tags.push(`<span class="tag tag-orange">📅 ${day.samH}h sam.</span>`);
-    if (day._user) tags.push('<span class="tag tag-green">✏️ Saisi</span>');
-    const tagsHtml = tags.length ? `<div class="day-tags">${tags.join('')}</div>` : '';
-
-    const key = day._key || dKey(yr,curMo,d);
-    html += `<div class="day-card" onclick="openDayEdit('${key}',${d})">
-      <div class="day-head">
-        <div class="day-badge ${bdgCls}">${d}</div>
-        <div><div class="day-dow">${JOURS[dow]}</div>${noteHtml}</div>
-        ${hoursHtml}
-      </div>
-      ${timesHtml}
-      ${tagsHtml}
-    </div>`;
+    if(t==='vacances'){
+      drawV('V', PDF.ROWS.apm_deb); drawV('V', PDF.ROWS.mat_deb); drawV('V', PDF.ROWS.hrs);
+    } else if(t==='malade' || t==='ferie'){
+      ctx.save(); ctx.font = `bold ${Math.round(5*scale)}px Arial`;
+      drawV(t==='malade'?'Mal':'Fér', PDF.ROWS.hrs);
+      ctx.restore();
+    } else if(t==='assurance'){
+      drawV(((e.assur||100)/100).toFixed(2), PDF.ROWS.assur);
+    } else {
+      if(e.amDeb) drawV(fmtTime(e.amDeb), PDF.ROWS.apm_deb);
+      if(e.amFin) drawV(fmtTime(e.amFin), PDF.ROWS.apm_fin);
+      if(e.matDeb) drawV(fmtTime(e.matDeb), PDF.ROWS.mat_deb);
+      if(e.matFin) drawV(fmtTime(e.matFin), PDF.ROWS.mat_fin);
+      if(e.hours>0) drawV(String(e.hours), PDF.ROWS.hrs);
+    }
+    if(e.repas) drawV('1', PDF.ROWS.repas);
   });
 
-  $('daysWrap').innerHTML = html;
+  ctx.restore();
 }
 
-// ══════════════════════════════
-// MODAL OPEN
-// ══════════════════════════════
-function openNew() {
-  editKey = null;
-  $('btnDelete').style.display = 'none';
-  $('mTitle').innerHTML = 'Nouvelle journée';
-
-  // Default date = today if in current month, else 1st
-  const yr = excelYear||2026; const d = (now.getFullYear()===yr && now.getMonth()===curMo) ? now : new Date(yr,curMo,1);
-  $('fDate').value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  applyStd();
-  hasRepas = false; updateTog();
-  selType('normal');
-  $('fNuit').value=0; $('fSam').value=0;
-  $('fNote').value='';
-  openModal();
+// ═══════════════════════════════════
+// DAY PICKER MODAL
+// ═══════════════════════════════════
+function openDayPicker() {
+  selDay = -1;
+  selType_ = 'normal';
+  hasRepas = false;
+  $('togRepas').classList.remove('on');
+  renderDayPicker();
+  selectDay(now.getMonth()===curMo ? now.getDate() : 1);
+  $('overlay').classList.add('open');
 }
 
-function openDayEdit(key, dayNum) {
-  editKey = key;
-  $('btnDelete').style.display = 'block';
+function renderDayPicker() {
+  const yr = curYear, mo = curMo;
+  const dim = new Date(yr, mo+1, 0).getDate();
+  const firstDow = (new Date(yr, mo, 1).getDay()+6)%7; // Mon=0
 
-  const [y,mo,d] = key.split('-').map(Number);
-  const date = new Date(y,mo-1,d);
-  const dow = JOURS[date.getDay()];
-  $('mTitle').innerHTML = `${dow} ${d} ${MOIS[mo-1]}<small>${y}</small>`;
-  $('fDate').value = key;
+  let html = DOW_S.map(d=>`<div class="dp-head">${d}</div>`).join('');
+  for(let i=0;i<firstDow;i++) html += '<div class="dp-day empty"></div>';
 
-  // Load existing user entry or excel data
-  let entry = entries[key];
-  if (!entry) {
-    const exDay = getDay(mo-1, d);
-    if (exDay) entry = exDay;
+  for(let d=1;d<=dim;d++){
+    const dow = new Date(yr,mo,d).getDay();
+    const wknd = dow===0||dow===6;
+    const key = dKey(yr,mo,d);
+    const filled = !!dayEntries[key];
+    let cls='dp-day'+(wknd?' wknd':'')+(filled?' filled':'');
+    html += `<div class="${cls}" id="dpd_${d}" onclick="selectDay(${d})">${d}</div>`;
   }
-  if (entry) {
-    $('fMatDeb').value = entry.matDeb||'';
-    $('fMatFin').value = entry.matFin||'';
-    $('fAmDeb').value  = entry.amDeb||'';
-    $('fAmFin').value  = entry.amFin||'';
-    hasRepas = entry.repas||false;
-    $('fNuit').value = entry.nuitH||0;
-    $('fSam').value  = entry.samH||0;
-    $('fNote').value = entry.note||'';
-    selType(entry.type||'normal');
+  $('dayPicker').innerHTML = html;
+}
+
+function selectDay(d) {
+  // Deselect previous
+  if(selDay>0) {
+    const prev=$(`dpd_${selDay}`);
+    if(prev) prev.classList.remove('sel');
+  }
+  selDay = d;
+  const el = $(`dpd_${d}`);
+  if(el) el.classList.add('sel');
+
+  // Update modal title
+  const date = new Date(curYear, curMo, d);
+  $('modalSub').textContent = `${JOURS[date.getDay()]} ${d} ${MOIS[curMo]}`;
+
+  // Load existing entry or apply standard
+  const key = dKey(curYear, curMo, d);
+  const existing = dayEntries[key];
+  if(existing) {
+    $('fMd').value = existing.matDeb||''; $('fMf').value = existing.matFin||'';
+    $('fAd').value = existing.amDeb||'';  $('fAf').value = existing.amFin||'';
+    hasRepas = existing.repas||false;
+    selType(existing.type||'normal');
   } else {
-    applyStd(); hasRepas=false; selType('normal');
-    $('fNuit').value=0; $('fSam').value=0; $('fNote').value='';
+    applyStd();
+    hasRepas=false; selType('normal');
   }
-  updateTog();
+  $('togRepas').classList.toggle('on', hasRepas);
   updateTotal();
-  openModal();
 }
 
-// ══════════════════════════════
-// FORM LOGIC
-// ══════════════════════════════
 function applyStd() {
-  const mo = curMo;
-  const s = stdFor(mo);
-  $('fMatDeb').value=s.md; $('fMatFin').value=s.mf;
-  $('fAmDeb').value=s.ad;  $('fAmFin').value=s.af;
+  $('fMd').value=cfg.md; $('fMf').value=cfg.mf;
+  $('fAd').value=cfg.ad; $('fAf').value=cfg.af;
   updateTotal();
 }
 
 function updateTotal() {
-  const h = calcH($('fMatDeb').value,$('fMatFin').value,$('fAmDeb').value,$('fAmFin').value);
-  $('fTotal').textContent = fmtH(h);
+  const h = calcH($('fMd').value,$('fMf').value,$('fAd').value,$('fAf').value);
+  $('totalLbl').textContent = fmtH(h);
 }
 
-['fMatDeb','fMatFin','fAmDeb','fAmFin'].forEach(id =>
-  $(id).addEventListener('input', updateTotal)
-);
+['fMd','fMf','fAd','fAf'].forEach(id=>$(id)?.addEventListener('input',updateTotal));
 
 function selType(t) {
-  selT = t;
-  document.querySelectorAll('.tchip').forEach(c => c.classList.toggle('sel', c.dataset.t===t));
-  const normal = ['normal','nuit','samedi'].includes(t);
-  $('horaireSection').style.display = normal ? 'block' : 'none';
-  $('specialSection').style.display = (t==='nuit'||t==='samedi') ? 'block' : 'none';
-  $('rowNuit').style.display = t==='nuit'   ? 'flex' : 'none';
-  $('rowSam').style.display  = t==='samedi' ? 'flex' : 'none';
+  selType_ = t;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',c.dataset.t===t));
+  const hasH = ['normal','malade'].includes(t);
+  $('horaireSection').style.display = hasH ? 'block' : 'none';
 }
 
-function togR() { hasRepas=!hasRepas; updateTog(); }
-function updateTog() { $('togRepas').classList.toggle('on', hasRepas); }
-function step(id, d) { const e=$(id); e.value=Math.max(0, Math.round((parseFloat(e.value)+d)*2)/2); }
+function togR(){ hasRepas=!hasRepas; $('togRepas').classList.toggle('on',hasRepas); }
 
-// ══════════════════════════════
-// SAVE / DELETE
-// ══════════════════════════════
-function saveEntry() {
-  const key = $('fDate').value;
-  if (!key) { showToast('Sélectionne une date'); return; }
+// ═══════════════════════════════════
+// SAVE DAY
+// ═══════════════════════════════════
+function saveDay() {
+  if(selDay<0){showToast('Sélectionne un jour');return;}
+  const key = dKey(curYear, curMo, selDay);
+  const md=$('fMd').value, mf=$('fMf').value;
+  const ad=$('fAd').value, af=$('fAf').value;
+  const hasH = ['normal','malade'].includes(selType_);
 
-  const md=$('fMatDeb').value, mf=$('fMatFin').value;
-  const ad=$('fAmDeb').value,  af=$('fAmFin').value;
-  const h = ['normal','nuit','samedi','malade'].includes(selT) ? calcH(md,mf,ad,af) : 0;
-
-  entries[key] = {
+  dayEntries[key] = {
     matDeb:md, matFin:mf, amDeb:ad, amFin:af,
-    hours: h, repas: hasRepas, type: selT,
-    nuitH: parseFloat($('fNuit').value)||0,
-    samH:  parseFloat($('fSam').value)||0,
-    note:  $('fNote').value
+    hours: hasH ? calcH(md,mf,ad,af) : 0,
+    repas: hasRepas,
+    type: selType_,
   };
-  persist();
+  saveEntries();
   closeModal();
-  
-  // Update curMo to match saved date
-  const [y,mo] = key.split('-').map(Number);
-  curMo = mo-1;
-  renderPicker();
-  renderMonth();
-  showToast('Journée enregistrée ✓');
+  showToast(`✅ ${selDay} ${MOIS[curMo]} enregistré`);
+  renderPdfPage(curMo); // refresh canvas with new entry
+  renderHome();
 }
 
-function deleteEntry() {
-  if (!editKey) return;
-  delete entries[editKey];
-  persist();
-  closeModal();
-  renderPicker();
-  renderMonth();
-  showToast('Journée supprimée');
-}
-
-// ══════════════════════════════
-// MODAL
-// ══════════════════════════════
-function openModal()  { $('overlay').classList.add('open'); }
-function closeModal() { $('overlay').classList.remove('open'); }
-function closeOverlay(e) { if(e.target===$('overlay')) closeModal(); }
-
-function showToast(msg) {
-  const t=$('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2300);
-}
-
-
-// ══════════════════════════════
-// PDF EXPORT
-// ══════════════════════════════
-function exportPDF() {
-  const { jsPDF } = window.jspdf;
-  const MOIS=['Janvier','Février','Mars','Avril','Mai','Juin',
-               'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  const mo=curMo, year=excelYear||2026, moNom=MOIS[mo];
-  const dim=new Date(year,mo+1,0).getDate();
-  const days={};
-  for(let d=1;d<=dim;d++){const day=getDay(mo,d);if(day)days[d]=day;}
-  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
-  const ML=7,MT=5,UW=289;
-  const WB=4,WC=27,WAI=0.5,WAJ=5.5,WAK=4.5,WAL=5.5,WAM=16;
-  const WDAY=(UW-WB-WC-WAI-WAJ-WAK-WAL-WAM)/31;
-  function rh(p){return p*0.84*0.353;}
-  const R={title:rh(18),jours:rh(9.75),sal:rh(9.75),vac:rh(9.75),cct:rh(21),
-            apm:rh(159.75),mat:rh(159),hrs:rh(34.5),repas:rh(34.5),nuit:rh(34.5),
-            sam:rh(34.5),dimr:rh(34.5),assur:rh(33.75),sig:rh(14)};
-  function cx(d){return ML+WB+WC+(d-1)*WDAY;}
-  function rjx(){return ML+WB+WC+31*WDAY+WAI;}
-  function rkx(){return rjx()+WAJ;}
-  function rlx(){return rkx()+WAK;}
-  function rmx(){return rlx()+WAL;}
-  const CW=[191,191,191],CV=[255,192,0],CN=[242,219,219],CF=[204,192,217];
-  const CA=[198,217,240],CY=[255,255,0],CWH=[255,255,255],CB=[170,170,170],CL=[224,224,224];
-  let y=MT;
-  function fr(x,y,w,h,col){doc.setFillColor(...col);doc.rect(x,y,w,h,'F');}
-  function sr(x,y,w,h,lw){doc.setDrawColor(...CB);doc.setLineWidth(lw||0.22);doc.rect(x,y,w,h,'S');}
-  function br(x,y,w,h,col,lw){fr(x,y,w,h,col);sr(x,y,w,h,lw);}
-  function df(d,e){
-    if(d>dim)return CL;
-    const dow=new Date(year,mo,d).getDay();
-    if(dow===0||dow===6)return CW;
-    if(e){if(['ferie','malade'].includes(e.type))return CF;if(['vacances','conge'].includes(e.type))return CV;}
-    const exMo=EXCEL_DATA?EXCEL_DATA[mo]:null;
-    if(exMo){const ex=exMo.days.find(dd=>dd.n===d);if(ex&&ex.h==='V')return CV;}
-    return CN;
-  }
-  function tt(x,y,w,h,s,fs,bold,col,align){
-    if(s===null||s===undefined||s==='')return;
-    doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(fs||5.5);
-    doc.setTextColor(...(col||[0,0,0]));
-    const tx=align==='l'?x+1.5:align==='r'?x+w-1.5:x+w/2;
-    doc.text(String(s),tx,y+h/2+((fs||5.5)*0.018),{align:align==='l'?'left':align==='r'?'right':'center',baseline:'middle'});
-  }
-  function vt(x,y,w,h,lines,fs){
-    const lh=(fs||5.5)*0.42,tl=lines.length*lh;
-    lines.forEach(function(ln,i){
-      doc.setFont('helvetica','normal');doc.setFontSize(fs||5.5);doc.setTextColor(0,0,0);
-      doc.text(ln,x+w/2,y+h/2+(tl/2)-(i+0.5)*lh,{angle:90,align:'center',baseline:'middle'});
+// ═══════════════════════════════════
+// DOWNLOAD FILLED PDF
+// ═══════════════════════════════════
+async function downloadFilledPdf() {
+  if(!monthPdfs[curMo]){showToast('Pas de PDF pour ce mois');return;}
+  if(!window.PDFLib){
+    await new Promise((res,rej)=>{
+      const s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';
+      s.onload=res;s.onerror=rej;document.head.appendChild(s);
     });
   }
-  sr(ML,y,UW,R.title,0.5);
-  const tstr='Feuille de présence '+moNom+' '+year+(params.nom?' — '+params.nom:'');
-  doc.setFont('helvetica','normal');doc.setFontSize(13);doc.setTextColor(0,0,0);
-  doc.text(tstr,ML+UW*0.47,y+R.title/2,{align:'center',baseline:'middle'});
-  doc.setFontSize(7);doc.text('T: travaillé',rmx()+1,y+R.title*0.68);
-  doc.text('A: Assurance',rmx()+1,y+R.title*0.32);
-  y+=R.title;
-  br(ML+WB+WC,y,31*WDAY,R.jours,CWH);tt(ML+WB+WC,y,31*WDAY,R.jours,'Jours',7,true);
-  br(rjx(),y,WAJ+WAK+WAL,R.jours,CWH);tt(rjx(),y,WAJ+WAK+WAL,R.jours,'Jours',6,true);
-  br(rmx(),y,WAM,R.jours,CWH);tt(rmx(),y,WAM,R.jours,'Total heures ou',5);
-  y+=R.jours;
-  br(ML,y,WB,R.sal,CWH);
-  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(0,0,0);
-  doc.text('Mois',ML+WB/2,y+R.sal/2,{angle:90,align:'center',baseline:'middle'});
-  br(ML+WB,y,WC,R.sal,CWH);tt(ML+WB,y,WC,R.sal,moNom,7);
-  for(let d=1;d<=31;d++){
-    const x=cx(d),fill=df(d,days[d]);br(x,y,WDAY,R.sal,fill);
-    if(d<=dim){doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(0,0,0);
-      doc.text(String(d),x+WDAY/2,y+R.sal*0.55,{align:'center',baseline:'middle'});}
-  }
-  [{x:rjx(),w:WAJ,l:'Total'},{x:rkx(),w:WAK,l:'T'},{x:rlx(),w:WAL,l:'A'}].forEach(function(o){br(o.x,y,o.w,R.sal,CWH);tt(o.x,y,o.w,R.sal,o.l,6);});
-  br(rmx(),y,WAM,R.sal,CWH);tt(rmx(),y,WAM,R.sal,'de repas',5);y+=R.sal;
-  br(ML,y,WB+WC,R.vac,CY);tt(ML+WB,y,WC,R.vac,'Vacances scolaire',6);
-  for(let d=1;d<=31;d++)br(cx(d),y,WDAY,R.vac,df(d,days[d]));
-  br(rjx(),y,WAJ+WAK+WAL,R.vac,CWH);br(rmx(),y,WAM,R.vac,CWH);y+=R.vac;
-  br(ML,y,WB+WC,R.cct,CWH);vt(ML+WB,y,WC,R.cct,['Heures CCT','prises en compte'],6);
-  let cntT=0,cntA=0,cntTot=0,totHH=0;
-  for(let d=1;d<=31;d++){
-    const x=cx(d),e=days[d],fill=df(d,e);br(x,y,WDAY,R.cct,fill);
-    if(d<=dim){const dow=new Date(year,mo,d).getDay();if(dow!==0&&dow!==6)vt(x,y,WDAY,R.cct,['7.75'],5.5);
-      if(e){cntTot++;if(['normal','nuit','samedi'].includes(e.type)){cntT++;totHH+=e.hours||0;}else if(e.type==='assurance')cntA++;}}
-  }
-  br(rjx(),y,WAJ+WAK+WAL,R.cct,CWH);
-  tt(rjx(),y,WAJ,R.cct,cntTot||'',6,true);tt(rkx(),y,WAK,R.cct,cntT||'',6,true);tt(rlx(),y,WAL,R.cct,cntA||'',6,true);
-  br(rmx(),y,WAM,R.cct,CWH);
-  const hh=Math.floor(totHH),hm=Math.round((totHH%1)*60);
-  tt(rmx(),y,WAM,R.cct,totHH>0?(hh+'h'+String(hm).padStart(2,'0')):'',7,true);y+=R.cct;
-  br(ML,y,WB,R.apm,CWH);
-  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(0,0,0);
-  doc.text('Après - midi',ML+WB/2,y+R.apm/2,{angle:90,align:'center',baseline:'middle'});
-  br(ML+WB,y,WC,R.apm,CWH);vt(ML+WB,y,WC,R.apm,['Hres début et fin','ex.: 13h00 - 17h30'],7);
-  for(let d=1;d<=31;d++){
-    const x=cx(d),e=days[d],fill=df(d,e);br(x,y,WDAY,R.apm,fill);
-    if(d<=dim&&e){if(e.type==='vacances')vt(x,y,WDAY,R.apm,['V'],7);
-      else if(['ferie','malade'].includes(e.type))vt(x,y,WDAY,R.apm,['Fé'],6);
-      else if(e.amDeb&&e.amFin)vt(x,y,WDAY,R.apm,[e.amDeb,e.amFin],5.2);}
-  }
-  br(rjx(),y,WAJ+WAK+WAL,R.apm,CWH);br(rmx(),y,WAM,R.apm,CWH);y+=R.apm;
-  br(ML,y,WB,R.mat,CWH);
-  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(0,0,0);
-  doc.text('Matin',ML+WB/2,y+R.mat/2,{angle:90,align:'center',baseline:'middle'});
-  br(ML+WB,y,WC,R.mat,CWH);vt(ML+WB,y,WC,R.mat,['Hres début et fin','ex.: 7h30 - 12h00','(Pause 9h00 comprise)'],6.5);
-  for(let d=1;d<=31;d++){
-    const x=cx(d),e=days[d],fill=df(d,e);br(x,y,WDAY,R.mat,fill);
-    if(d<=dim&&e){if(e.type==='vacances')vt(x,y,WDAY,R.mat,['V'],7);
-      else if(['ferie','malade'].includes(e.type))vt(x,y,WDAY,R.mat,['Fé'],6);
-      else if(e.matDeb&&e.matFin)vt(x,y,WDAY,R.mat,[e.matDeb,e.matFin],5.2);}
-  }
-  br(rjx(),y,WAJ+WAK+WAL,R.mat,CWH);br(rmx(),y,WAM,R.mat,CWH);y+=R.mat;
-  function drow(rkey,labels,valfn,totfn,rfill){
-    var h=R[rkey];br(ML,y,WB,h,CWH);br(ML+WB,y,WC,h,CWH);
-    var lhh=6*0.42,tl=labels.length*lhh;
-    labels.forEach(function(ln,i){doc.setFont('helvetica','normal');doc.setFontSize(6);doc.setTextColor(0,0,0);
-      doc.text(ln,ML+WB+WC/2,y+h/2+(tl/2)-(i+0.5)*lhh,{align:'center',baseline:'middle'});});
-    var tot=0;
-    for(var d2=1;d2<=31;d2++){var x2=cx(d2),e2=days[d2],f2=rfill||df(d2,e2);br(x2,y,WDAY,h,f2);
-      if(d2<=dim){var v=valfn(d2,e2);if(v!==''&&v!==null&&v!==undefined){vt(x2,y,WDAY,h,[String(v)],5.5);try{tot+=parseFloat(v);}catch(ee){}}}
-    }
-    br(rjx(),y,WAJ+WAK+WAL,h,rfill||CWH);br(rmx(),y,WAM,h,rfill||CWH);
-    var ts=totfn?totfn(tot):(tot>0?(Math.floor(tot)+'h'+String(Math.round((tot%1)*60)).padStart(2,'0')):'');
-    if(ts)tt(rmx(),y,WAM,h,ts,7,true);y+=h;
-  }
-  drow('hrs',['Hres de travail salaire '+moNom],function(d,e){return !e?'':e.type==='vacances'?'V':['ferie','malade'].includes(e.type)?'Fé':e.type==='assurance'?'A':(e.hours||0)>0?e.hours:'';});
-  drow('repas',['Repas'],function(d,e){return e&&e.repas?1:'';},function(t){return t>0?String(Math.round(t)):'';});
-  drow('nuit',['Hres Travail entre 20h00 et 5h00','(+50%)'],function(d,e){return e&&(e.nuitH||0)>0?e.nuitH:'';},function(t){return t>0?String(t):'';});
-  drow('sam',['Hres samedi entre 5h00 et 17h00','(+25%)'],function(d,e){return e&&(e.samH||0)>0?e.samH:'';},function(t){return t>0?String(t):'';});
-  drow('dimr',['Hres entre samedi 17h00 et lundi 5h00','(+50%)'],function(d,e){return e&&(e.dimH||0)>0?e.dimH:'';},function(t){return t>0?String(t):'';});
-  drow('assur',['Assurance (100% = 1.00 // 50% = 0.50 // 25% = 0.25)'],function(d,e){return e&&e.type==='assurance'?((e.assur||100)/100).toFixed(2):'';},function(t){return '';},CA);
-  sr(ML,y,UW,R.sig,0.5);
-  var td=new Date(),ds=String(td.getDate()).padStart(2,'0')+'.'+String(td.getMonth()+1).padStart(2,'0')+'.'+td.getFullYear();
-  doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(0,0,0);
-  doc.text('Date : '+ds,ML+2,y+R.sig/2,{baseline:'middle'});
-  doc.text('Signature employé',ML+32,y+R.sig/2,{baseline:'middle'});
-  doc.text('Signature responsable ................................',ML+130,y+R.sig/2,{baseline:'middle'});
-  if(sigDataURL){try{doc.addImage(sigDataURL,'PNG',ML+70,y+0.5,50,R.sig-1);}catch(ee){}}
-  else{doc.setDrawColor(...CB);doc.setLineWidth(0.4);doc.line(ML+70,y+R.sig-2,ML+120,y+R.sig-2);}
-  window._pdfDoc=doc;
-  window._pdfName='Feuille_presence_'+moNom+'_'+year+'.pdf';
-  showPdfPreview(doc,moNom,year);
-}
 
-let _pdfRenderTask=null;
+  showToast('Génération en cours…');
+  try {
+    const {PDFDocument, rgb, degrees, StandardFonts} = PDFLib;
+    const bytes = Uint8Array.from(atob(monthPdfs[curMo]), c=>c.charCodeAt(0));
+    const pdfDoc = await PDFDocument.load(bytes,{ignoreEncryption:true});
+    const pages  = pdfDoc.getPages();
+    const dataPage = pages.length>=2 ? pages[1] : pages[0];
+    const PH = dataPage.getHeight();
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const FS = 5.5;
 
-async function showPdfPreview(doc,moNom,year){
-  const blob=doc.output('blob');
-  const url=URL.createObjectURL(blob);
-  document.getElementById('pdfPreviewTitle').textContent=moNom+' '+year;
-  document.getElementById('pdfOverlay').classList.add('open');
-  if(!window.pdfjsLib){
-    const s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-    s.onload=()=>{
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      renderPdfPreview(url);
-    };
-    document.head.appendChild(s);
-  } else { renderPdfPreview(url); }
-}
+    const prefix = `${curYear}-${String(curMo+1).padStart(2,'0')}-`;
+    Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix)).forEach(([key,e])=>{
+      const d = parseInt(key.split('-')[2]);
+      const x = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE;
+      const t = e.type||'normal';
 
-async function renderPdfPreview(url){
-  try{
-    const pdf=await pdfjsLib.getDocument(url).promise;
-    const page=await pdf.getPage(1);
-    const canvas=document.getElementById('pdfPreviewCanvas');
-    const vw=Math.min(window.innerWidth-32,900);
-    const viewport=page.getViewport({scale:1});
-    const scale=vw/viewport.width;
-    const scaled=page.getViewport({scale});
-    canvas.width=scaled.width;canvas.height=scaled.height;
-    canvas.style.width=scaled.width+'px';canvas.style.height=scaled.height+'px';
-    await page.render({canvasContext:canvas.getContext('2d'),viewport:scaled}).promise;
-  }catch(e){console.error('PDF preview',e);}
-}
+      function wv(text, pyY, fs) {
+        if(!text && text!==0) return;
+        const sz=fs||FS;
+        dataPage.drawText(String(text),{
+          x: x + sz*0.35,
+          y: PH - pyY,
+          size: sz, font,
+          color: rgb(0,0,0),
+          rotate: degrees(90),
+        });
+      }
 
-function downloadPDF(){
-  if(window._pdfDoc){window._pdfDoc.save(window._pdfName);showToast('PDF téléchargé !');}
-}
+      if(t==='vacances'){
+        wv('V',PDF.ROWS.apm_deb);wv('V',PDF.ROWS.mat_deb);wv('V',PDF.ROWS.hrs);
+      } else if(t==='malade'){
+        wv('Malade',PDF.ROWS.hrs,4.5);
+      } else if(t==='assurance'){
+        wv(((e.assur||100)/100).toFixed(2),PDF.ROWS.assur);
+      } else {
+        if(e.amDeb) wv(fmtTime(e.amDeb),PDF.ROWS.apm_deb);
+        if(e.amFin) wv(fmtTime(e.amFin),PDF.ROWS.apm_fin);
+        if(e.matDeb) wv(fmtTime(e.matDeb),PDF.ROWS.mat_deb);
+        if(e.matFin) wv(fmtTime(e.matFin),PDF.ROWS.mat_fin);
+        if(e.hours>0) wv(e.hours,PDF.ROWS.hrs);
+      }
+      if(e.repas) wv('1',PDF.ROWS.repas);
+    });
 
-function closePdfPreview(){
-  document.getElementById('pdfOverlay').classList.remove('open');
-}
-
-
-// ══════════════════════════════
-// PARAMÈTRES & SIGNATURE
-// ══════════════════════════════
-let params = {
-  nom: '', entreprise: 'Risse S.A.',
-  hivMd:'07:30', hivMf:'12:00', hivAd:'13:00', hivAf:'17:30',
-  eteMd:'07:30', eteMf:'12:00', eteAd:'13:00', eteAf:'17:30',
-};
-let sigDataURL = null; // base64 PNG of signature
-
-function loadParams() {
-  const p = localStorage.getItem('ch_params');
-  if (p) params = {...params, ...JSON.parse(p)};
-  const s = localStorage.getItem('ch_sig');
-  if (s) sigDataURL = s;
-}
-
-function saveParams() {
-  params.nom         = document.getElementById('cfgNom').value;
-  params.entreprise  = document.getElementById('cfgEntreprise').value;
-  params.hivMd = document.getElementById('cfgHivMd').value;
-  params.hivMf = document.getElementById('cfgHivMf').value;
-  params.hivAd = document.getElementById('cfgHivAd').value;
-  params.hivAf = document.getElementById('cfgHivAf').value;
-  params.eteMd = document.getElementById('cfgEteMd').value;
-  params.eteMf = document.getElementById('cfgEteMf').value;
-  params.eteAd = document.getElementById('cfgEteAd').value;
-  params.eteAf = document.getElementById('cfgEteAf').value;
-  localStorage.setItem('ch_params', JSON.stringify(params));
-}
-
-function loadParamsUI() {
-  document.getElementById('cfgNom').value        = params.nom;
-  document.getElementById('cfgEntreprise').value = params.entreprise;
-  document.getElementById('cfgHivMd').value = params.hivMd;
-  document.getElementById('cfgHivMf').value = params.hivMf;
-  document.getElementById('cfgHivAd').value = params.hivAd;
-  document.getElementById('cfgHivAf').value = params.hivAf;
-  document.getElementById('cfgEteMd').value = params.eteMd;
-  document.getElementById('cfgEteMf').value = params.eteMf;
-  document.getElementById('cfgEteAd').value = params.eteAd;
-  document.getElementById('cfgEteAf').value = params.eteAf;
-  if (sigDataURL) {
-    const canvas = document.getElementById('sigCanvas');
-    const img = new Image();
-    img.onload = () => {
-      canvas.getContext('2d').drawImage(img, 0, 0);
-      canvas.classList.add('has-sig');
-    };
-    img.src = sigDataURL;
+    const outBytes = await pdfDoc.save();
+    const blob = new Blob([outBytes],{type:'application/pdf'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href=url; a.download=`Feuille_${MOIS[curMo]}_${curYear}.pdf`; a.click();
+    showToast('PDF téléchargé !');
+  } catch(err){
+    console.error(err);
+    showToast('Erreur: '+err.message);
   }
 }
 
-// ── Signature Pad ──
-function initSigPad() {
-  const canvas = document.getElementById('sigCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  // Scale canvas to real pixel size
-  const rect = canvas.getBoundingClientRect();
-  canvas.width  = rect.width  * window.devicePixelRatio;
-  canvas.height = rect.height * window.devicePixelRatio;
-  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-  ctx.strokeStyle = '#1B3A6B';
-  ctx.lineWidth   = 2.5;
-  ctx.lineCap     = 'round';
-  ctx.lineJoin    = 'round';
+// ═══════════════════════════════════
+// PARAMS — PDF SLOTS
+// ═══════════════════════════════════
+function renderPdfSlots() {
+  const container = $('pdfSlots');
+  container.innerHTML = MOIS.map((m,i)=>`
+    <div class="p-row" onclick="triggerPdfUpload(${i})">
+      <span class="p-row-lbl">${m}</span>
+      <span class="p-row-status ${monthPdfs[i]?'ok':''}" id="pst_${i}">${monthPdfs[i]?'✅ Importé':'—'}</span>
+      <span style="color:var(--muted);margin-left:6px">›</span>
+    </div>`).join('');
 
-  let drawing = false, lastX = 0, lastY = 0;
-
-  function getPos(e) {
-    const r = canvas.getBoundingClientRect();
-    const src = e.touches ? e.touches[0] : e;
-    return { x: src.clientX - r.left, y: src.clientY - r.top };
-  }
-  function start(e) { e.preventDefault(); drawing=true; const p=getPos(e); lastX=p.x; lastY=p.y; }
-  function move(e)  {
-    e.preventDefault();
-    if (!drawing) return;
-    const p=getPos(e);
-    ctx.beginPath(); ctx.moveTo(lastX,lastY); ctx.lineTo(p.x,p.y); ctx.stroke();
-    lastX=p.x; lastY=p.y;
-    canvas.classList.add('has-sig');
-  }
-  function end() { drawing=false; }
-
-  canvas.addEventListener('mousedown',  start);
-  canvas.addEventListener('mousemove',  move);
-  canvas.addEventListener('mouseup',    end);
-  canvas.addEventListener('touchstart', start, {passive:false});
-  canvas.addEventListener('touchmove',  move,  {passive:false});
-  canvas.addEventListener('touchend',   end);
-
-  // Restore sig if exists
-  if (sigDataURL) {
-    const img = new Image();
-    img.onload = () => { ctx.drawImage(img, 0, 0, rect.width, rect.height); canvas.classList.add('has-sig'); };
-    img.src = sigDataURL;
-  }
+  // Create hidden file inputs
+  $('pdfInputs').innerHTML = MOIS.map((_,i)=>
+    `<input type="file" id="pfi_${i}" accept=".pdf" onchange="onPdfUpload(${i},this.files[0])">`
+  ).join('');
 }
 
-function clearSig() {
-  const canvas = document.getElementById('sigCanvas');
-  const rect   = canvas.getBoundingClientRect();
-  canvas.getContext('2d').clearRect(0, 0, rect.width * window.devicePixelRatio, rect.height * window.devicePixelRatio);
-  canvas.classList.remove('has-sig');
-  sigDataURL = null;
-  localStorage.removeItem('ch_sig');
-  showToast('Signature effacée');
+function triggerPdfUpload(i) {
+  $(`pfi_${i}`).click();
 }
 
-function saveSig() {
-  const canvas = document.getElementById('sigCanvas');
-  if (!canvas.classList.contains('has-sig')) { showToast("Signe d'abord !"); return; }
-  sigDataURL = canvas.toDataURL('image/png');
-  localStorage.setItem('ch_sig', sigDataURL);
-  showToast('Signature enregistrée ✓');
-}
-
-// ── View switch ──
-function switchView(v) {
-  document.querySelectorAll('.view').forEach(el => el.classList.remove('act'));
-  document.querySelectorAll('.ntab').forEach(el => el.classList.remove('act'));
-  document.getElementById('view-'+v).classList.add('act');
-  document.getElementById('nt-'+v).classList.add('act');
-  if (v === 'params') setTimeout(initSigPad, 50);
-}
-
-
-
-// ══════════════════════════════
-// PDF TEMPLATE (exact Excel output)
-// ══════════════════════════════
-const MOIS_NMS = ['Janvier','Février','Mars','Avril','Mai','Juin',
-                  'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-let monthPdfs = new Array(12).fill(null); // base64 per month
-
-function importMonthPdf(moIdx, file) {
-  if (!file) return;
+function onPdfUpload(i, file) {
+  if(!file) return;
   const reader = new FileReader();
   reader.onload = e => {
     const b64 = e.target.result.split(',')[1];
-    if (b64.length > 14000000) { showToast('PDF trop grand (max 10MB)'); return; }
-    monthPdfs[moIdx] = b64;
-    localStorage.setItem('ch_pdf_' + moIdx, b64);
-    updatePdfSlotUI(moIdx);
-    updateExportBtn();
-    showToast('✅ ' + MOIS_NMS[moIdx] + ' importé !');
+    savePdf(i, b64);
+    const el=$(`pst_${i}`);
+    if(el){el.textContent='✅ Importé';el.classList.add('ok');}
+    renderHome();
+    showToast(`✅ PDF ${MOIS[i]} importé !`);
   };
   reader.readAsDataURL(file);
 }
 
-function loadPdfTemplate() {
-  for (let i = 0; i < 12; i++) {
-    const stored = localStorage.getItem('ch_pdf_' + i);
-    if (stored) monthPdfs[i] = stored;
-    updatePdfSlotUI(i);
-  }
-  updateExportBtn();
+function goUploadPdf(moIdx) {
+  showParams();
+  setTimeout(()=>triggerPdfUpload(moIdx), 300);
 }
 
-function updatePdfSlotUI(moIdx) {
-  const el = document.getElementById('pdfStatus_' + moIdx);
-  if (!el) return;
-  if (monthPdfs[moIdx]) {
-    el.textContent = '✅';
-    el.style.color = 'var(--teal)';
-  } else {
-    el.textContent = '—';
-    el.style.color = 'var(--muted)';
-  }
+// ═══════════════════════════════════
+// CONFIG UI
+// ═══════════════════════════════════
+function loadCfgUI() {
+  $('cfgNom').value = cfg.nom||'';
+  $('cfgMd').value  = cfg.md; $('cfgMf').value = cfg.mf;
+  $('cfgAd').value  = cfg.ad; $('cfgAf').value = cfg.af;
 }
 
-function updateExportBtn() {
-  const btn  = document.getElementById('mainExportBtn');
-  const lbl  = document.getElementById('exportBtnLabel');
-  const mo   = document.getElementById('pdfMoLabel');
-  const moText = mo ? mo.textContent : '';
-  if (!btn || !lbl) return;
-  if (monthPdfs[curMo]) {
-    btn.style.background = '#1D6F42';
-    lbl.innerHTML = '📄 Générer PDF exact — <span id="pdfMoLabel">' + moText + '</span>';
-  } else {
-    btn.style.background = '#1A7F72';
-    lbl.innerHTML = '👁 Aperçu PDF — <span id="pdfMoLabel">' + moText + '</span>';
-  }
-}
+// ═══════════════════════════════════
+// MODAL
+// ═══════════════════════════════════
+function closeModal(){ $('overlay').classList.remove('open'); }
+function closeOverlay(e){ if(e.target===$('overlay')) closeModal(); }
 
-function smartExport() {
-  if (monthPdfs[curMo]) {
-    generateExactPdf();
-  } else {
-    exportPDF(); // fallback to jsPDF approximation
-  }
-}
-
-async function generateExactPdf() {
-  showToast('Génération en cours…');
-  
-  try {
-    // Load pdf-lib
-    if (!window.PDFLib) {
-      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js');
-    }
-    const { PDFDocument, rgb, degrees } = PDFLib;
-    
-    // Load the template PDF
-    const pdfBytes = Uint8Array.from(atob(monthPdfs[curMo]), c => c.charCodeAt(0));
-    const pdfDoc   = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
-    
-    const mo   = curMo;      // 0-based month
-    const year = excelYear || 2026;
-    const dim  = new Date(year, mo+1, 0).getDate();
-    
-    // Page structure: header on page mo, data rows on page mo+1
-    const pages     = pdfDoc.getPages();
-    // If 1-page PDF: data rows are on same page (bottom half)
-    // If multi-page PDF: data rows are on page mo+1
-    // If user uploads per-month PDF (2 pages), data is on page index 1
-    let dataPage;
-    if (pages.length === 1) {
-      dataPage = pages[0]; // single page export
-    } else if (pages.length === 2) {
-      dataPage = pages[1]; // 2-page month export (header p0, data p1)
-    } else {
-      dataPage = pages[mo + 1]; // full annual PDF
-    }
-    const pageHeight = dataPage.getHeight(); // usually 595.3 for A4 landscape
-    
-    // Coordinate system: pdf-lib uses bottom-left origin
-    const PH = pageHeight; // 595.3 for A4 landscape
-    
-    // Day X centers
-    const DAY1_X    = 207.0;
-    const DAY_SPACE = 14.58;
-    function dayX(d) { return DAY1_X + (d-1)*DAY_SPACE; }
-    
-    // Row Y positions (pdf-lib bottom-left origin = PH - pymupdf_top_origin)
-    // APM tall row spans y=71.8 to y=440 (pymupdf) → pdf-lib: PH-440 to PH-71.8
-    // We write at vertical CENTER of each sub-section within the tall rows
-    const ROWS = {
-      apm_fin: PH - 45,    // APM fin time (upper part of APM tall row)
-      apm_deb: PH - 115,   // APM deb time (lower part of APM tall row)
-      mat_fin: PH - 200,   // MAT fin time (upper part of MAT tall row)
-      mat_deb: PH - 235,   // MAT deb time (lower part of MAT tall row)
-      hrs:     PH - 300,   // Heures travail
-      repas:   PH - 326,   // Repas
-      nuit:    PH - 350,   // Heures nuit
-      sam:     PH - 375,   // Heures samedi
-      dim_r:   PH - 400,   // Heures dim
-      assur:   PH - 425,   // Assurance
-      sig:     PH - 462,   // Signature
-    };
-    
-    // Font
-    const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
-    const FS   = 5.5;
-    
-    function writeCell(page, x, y, text, fs) {
-      if (!text && text !== 0) return;
-      const sz = fs || FS;
-      // For rotated 90° text: x=center of column, y=bottom of text area
-      // pdf-lib rotates around the text origin point
-      page.drawText(String(text), {
-        x: x + sz * 0.35,
-        y: y,
-        size: sz,
-        font,
-        color: rgb(0, 0, 0),
-        rotate: degrees(90),
-      });
-    }
-    
-    function writeH(page, x, y, text, fs) {
-      if (!text) return;
-      page.drawText(String(text), { x, y, size: fs || 7, font, color: rgb(0,0,0) });
-    }
-    
-    // Fill each day
-    for (let d = 1; d <= dim; d++) {
-      const entry = getDay(mo, d);
-      if (!entry) continue;
-      const x = dayX(d);
-      const t = entry.type || 'normal';
-      
-      if (t === 'vacances') {
-        writeCell(dataPage, x, ROWS.hrs,     'V');
-        writeCell(dataPage, x, ROWS.apm_deb, 'V');
-        writeCell(dataPage, x, ROWS.mat_deb, 'V');
-      } else if (t === 'malade' || t === 'ferie') {
-        writeCell(dataPage, x, ROWS.hrs, t === 'malade' ? 'Malade' : 'Férié', 4.5);
-      } else if (t === 'assurance') {
-        writeCell(dataPage, x, ROWS.assur, ((entry.assur||100)/100).toFixed(2));
-      } else {
-        // Normal, nuit, samedi
-        if (entry.amDeb && entry.amFin) {
-          writeCell(dataPage, x, ROWS.apm_deb, entry.amDeb);
-          writeCell(dataPage, x, ROWS.apm_fin, entry.amFin);
-        }
-        if (entry.matDeb && entry.matFin) {
-          writeCell(dataPage, x, ROWS.mat_deb, entry.matDeb);
-          writeCell(dataPage, x, ROWS.mat_fin, entry.matFin);
-        }
-        if (entry.hours > 0) writeCell(dataPage, x, ROWS.hrs, entry.hours);
-      }
-      if (entry.repas)         writeCell(dataPage, x, ROWS.repas, '1');
-      if ((entry.nuitH||0)>0) writeCell(dataPage, x, ROWS.nuit,  entry.nuitH);
-      if ((entry.samH||0)>0)  writeCell(dataPage, x, ROWS.sam,   entry.samH);
-      if ((entry.dimH||0)>0)  writeCell(dataPage, x, ROWS.dim_r, entry.dimH);
-    }
-    
-    // Signature date
-    const td = new Date();
-    const ds = String(td.getDate()).padStart(2,'0')+'.'+String(td.getMonth()+1).padStart(2,'0')+'.'+td.getFullYear();
-    writeH(dataPage, 130, ROWS.sig + 2, ds, 7);
-    
-    // Signature image
-    if (sigDataURL) {
-      try {
-        const sigBytes = Uint8Array.from(atob(sigDataURL.split(',')[1]), c => c.charCodeAt(0));
-        const sigImg   = await pdfDoc.embedPng(sigBytes);
-        dataPage.drawImage(sigImg, { x: 260, y: ROWS.sig - 8, width: 80, height: 20 });
-      } catch(e) { console.warn('Sig embed failed', e); }
-    }
-    
-    // Save and download
-    const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
-                  'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-    const outBytes = await pdfDoc.save();
-    const blob = new Blob([outBytes], { type: 'application/pdf' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = 'Feuille_'+MOIS[mo]+'_'+year+'.pdf';
-    a.click();
-    showToast('✅ PDF exact téléchargé !');
-    
-  } catch(err) {
-    console.error('generateExactPdf error:', err);
-    showToast('Erreur: ' + err.message);
-    exportPDF(); // fallback
-  }
-}
-
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = src; s.onload = resolve; s.onerror = reject;
-    document.head.appendChild(s);
-  });
-}
-
-// ══════════════════════════════
-// EXPORT DATA + SCRIPT FOR EXACT PDF
-// ══════════════════════════════
-function exportDataAndScript() {
-  // Export ch_entries as JSON
-  const yr = excelYear||2026;
-  const mo = curMo+1; // 1-based
-  
-  // Build entries subset for current month
-  const prefix = `${yr}-${String(mo).padStart(2,'0')}-`;
-  const monthEntries = {};
-  Object.keys(entries).forEach(k => {
-    if(k.startsWith(prefix)) monthEntries[k] = entries[k];
-  });
-  
-  const payload = {
-    entries: monthEntries,
-    month: mo,
-    year: yr,
-    employee: params.nom||'',
-    generated: new Date().toISOString()
-  };
-  
-  const json = JSON.stringify(payload, null, 2);
-  const blob = new Blob([json], {type:'application/json'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
-                'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  a.href = url;
-  a.download = `ch_entries_${MOIS[curMo]}_${yr}.json`;
-  a.click();
-  
-  showToast('Données exportées — utilise le script Python sur PC');
-  
-  // Show instructions
-  setTimeout(()=>{
-    alert(
-      'Pour générer le PDF exact :\n\n' +
-      '1. Copie generer_pdf.py et ton Excel dans un dossier\n' +
-      '2. Copie le fichier JSON téléchargé dans ce dossier\n' +
-      '3. Lance: python3 generer_pdf.py ch_entries_'+MOIS[curMo]+'_'+yr+'.json '+mo+' '+yr+'\n\n' +
-      'LibreOffice doit être installé sur le PC.'
-    );
-  }, 500);
-}
-
-function changeMonth(d) {
-  curMo += d;
-  if(curMo<0){curMo=11;} if(curMo>11){curMo=0;}
-  renderMonth();
-  document.querySelectorAll('.mchip')[curMo]?.scrollIntoView({inline:'center',block:'nearest'});
-}
-
-// ══════════════════════════════
+// ═══════════════════════════════════
 // BOOT
-// ══════════════════════════════
-load();
-loadParams();
-loadPdfTemplate();
-loadStoredExcel();
-updateImportBanner();
-loadParamsUI();
-renderPicker();
-renderMonth();
-setTimeout(()=>{
-  document.querySelectorAll('.mchip')[curMo]?.scrollIntoView({inline:'center',block:'nearest'});
-},80);
+// ═══════════════════════════════════
+loadAll();
+$('hdrSub').textContent = String(curYear);
+$('backBtn').style.display = 'none';
+renderHome();
 </script>
-
-<!-- PDF PREVIEW -->
-<div class="pdf-overlay" id="pdfOverlay">
-  <div class="pdf-topbar">
-    <button class="pdf-topbar-btn" onclick="closePdfPreview()">✕</button>
-    <div class="pdf-topbar-title" id="pdfPreviewTitle">Aperçu PDF</div>
-    <button class="pdf-topbar-btn dl" onclick="downloadPDF()">⬇ Télécharger</button>
-  </div>
-  <div class="pdf-frame">
-    <div class="pdf-canvas-wrap">
-      <canvas id="pdfPreviewCanvas"></canvas>
-    </div>
-  </div>
-</div>
 </body>
 </html>
