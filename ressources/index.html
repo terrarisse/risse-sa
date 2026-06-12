@@ -1380,12 +1380,39 @@ function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&
 document.getElementById('cat-new-name').addEventListener('keydown',e=>{ if(e.key==='Enter') addCategory(); });
  
 // ── INIT ────────────────────────────────────────────────
+// ── EXPOSE FONCTIONS AU HTML (nécessaire avec type="module") ──
 async function initApp(){
   await syncFromFirestore();
-  TABS.forEach(s=>renderContent(s,''));
+  TABS.forEach(s => renderContent(s,''));
   updateBadges();
   populateAllCatSelects();
 }
+
+window.switchTab         = switchTab;
+window.filterPage        = filterPage;
+window.openAdd           = openAdd;
+window.closeAdd          = closeAdd;
+window.saveItem          = saveItem;
+window.openCatMgr        = openCatMgr;
+window.closeCatMgr       = closeCatMgr;
+window.addCategory       = addCategory;
+window.deleteCategory    = deleteCategory;
+window.addSubCategory    = addSubCategory;
+window.deleteSubCategory = deleteSubCategory;
+window.openEmojiPickerForCat  = openEmojiPickerForCat;
+window.openEmojiPickerForItem = openEmojiPickerForItem;
+window.setEpickerCat     = setEpickerCat;
+window.filterEmojis      = filterEmojis;
+window.selectEmojiResult = selectEmojiResult;
+window.closeEmojiPicker  = closeEmojiPicker;
+window.selectColor       = selectColor;
+window.toggleAcc         = toggleAcc;
+window.openDetail        = openDetail;
+window.closeDetail       = closeDetail;
+window.editCurrentItem   = editCurrentItem;
+window.deleteCurrentItem = deleteCurrentItem;
+window.triggerPhoto      = triggerPhoto;
+window.clearMedia        = clearMedia;
 
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('../service-worker.js').catch(()=>{}); }
 </script>
