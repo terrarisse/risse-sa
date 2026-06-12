@@ -507,7 +507,30 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 <!-- ════════════════════════════════════════════════════════
      JAVASCRIPT
 ════════════════════════════════════════════════════════ -->
-<script>
+<script type="module">
+// ── FIREBASE ────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
+  authDomain: "risse-sa.firebaseapp.com",
+  projectId: "risse-sa",
+  storageBucket: "risse-sa.firebasestorage.app",
+  messagingSenderId: "656425275771",
+  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
+};
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// Auth guard
+onAuthStateChanged(auth, user => {
+  if (!user) { window.location.href = '../login.html'; return; }
+  initApp();
+});
+
 // ── CONFIG ──────────────────────────────────────────────
 const TABS    = ['equipe','machines','vehicules','materiel','materiaux'];
 const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux'};
@@ -571,11 +594,53 @@ let itemIcons  = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:''};
 let photoTargetSection = '';
 let emojiPickerCallback = null;
  
-// ── STORAGE ─────────────────────────────────────────────
+// ── STORAGE (double écriture localStorage + Firestore) ──
 function load(s){ try{ const r=localStorage.getItem(KEYS[s]); return r?JSON.parse(r):[]; }catch(e){ return []; } }
-function save(s,d){ localStorage.setItem(KEYS[s],JSON.stringify(d)); }
+
+function save(s,d){
+  // 1. localStorage (immédiat, pour compatibilité autres modules)
+  localStorage.setItem(KEYS[s],JSON.stringify(d));
+  // 2. Firestore (async, pas bloquant)
+  const user = auth.currentUser;
+  if(user){
+    setDoc(doc(db,'ressources',s), { items: d, updatedAt: Date.now() })
+      .catch(e => console.warn('Firestore save error:',e));
+  }
+}
+
 function loadCats(){ try{ const r=localStorage.getItem(CAT_KEY); return r?JSON.parse(r):{equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; }catch(e){ return {equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; } }
-function saveCats(d){ localStorage.setItem(CAT_KEY,JSON.stringify(d)); }
+
+function saveCats(d){
+  // 1. localStorage
+  localStorage.setItem(CAT_KEY,JSON.stringify(d));
+  // 2. Firestore
+  const user = auth.currentUser;
+  if(user){
+    setDoc(doc(db,'ressources','_categories'), { data: d, updatedAt: Date.now() })
+      .catch(e => console.warn('Firestore saveCats error:',e));
+  }
+}
+
+// ── SYNC FIRESTORE → localStorage au démarrage ──────────
+async function syncFromFirestore(){
+  try {
+    // Sync chaque section
+    for(const s of TABS){
+      const snap = await getDoc(doc(db,'ressources',s));
+      if(snap.exists()){
+        const items = snap.data().items || [];
+        localStorage.setItem(KEYS[s], JSON.stringify(items));
+      }
+    }
+    // Sync catégories
+    const catSnap = await getDoc(doc(db,'ressources','_categories'));
+    if(catSnap.exists()){
+      localStorage.setItem(CAT_KEY, JSON.stringify(catSnap.data().data));
+    }
+  } catch(e){
+    console.warn('Firestore sync error:',e);
+  }
+}
  
 // ── NAVIGATION ──────────────────────────────────────────
 function switchTab(tab){
@@ -1315,9 +1380,13 @@ function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&
 document.getElementById('cat-new-name').addEventListener('keydown',e=>{ if(e.key==='Enter') addCategory(); });
  
 // ── INIT ────────────────────────────────────────────────
-TABS.forEach(s=>renderContent(s,''));
-updateBadges();
-populateAllCatSelects();
+async function initApp(){
+  await syncFromFirestore();
+  TABS.forEach(s=>renderContent(s,''));
+  updateBadges();
+  populateAllCatSelects();
+}
+
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('../service-worker.js').catch(()=>{}); }
 </script>
 </body>
