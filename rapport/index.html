@@ -4256,40 +4256,32 @@ function saveEditedRapport() {
 // ─── SYNC FIRESTORE ────────────────────────────────────────────
 async function syncFromFirestore() {
   try {
-    // Lire les rapports validés depuis Firestore
+    // Rapports validés
     const snap = await getDoc(doc(_db, 'rapports', 'data'));
     if (snap.exists()) {
       const items = snap.data().items || [];
-      // Purge 30j côté local
       const now = Date.now();
       const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
       localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
     }
+    // Équipe depuis Ressources
+    const eSnap = await getDoc(doc(_db, 'ressources', 'equipe'));
+    if (eSnap.exists()) localStorage.setItem('rv6_equipe', JSON.stringify(eSnap.data().items || []));
+    // Chantiers
+    const cSnap = await getDoc(doc(_db, 'chantiers', 'data'));
+    if (cSnap.exists()) localStorage.setItem('rv6_chantiers_v1', JSON.stringify(cSnap.data().items || []));
   } catch(e) { console.warn('Firestore sync error:', e); }
-}
-
-// ─── PREFILL HEURES MACHINE ────────────────────────────────────
-function prefillMachineHours(itemId, total) {
-  if (!locSelection[itemId]) {
-    const item = LOC_ENGINS.find(i => i.id === itemId);
-    if (item) locSelection[itemId] = { label: item.label, unit: item.unit, qty: 0 };
-  }
-  if (locSelection[itemId]) {
-    locSelection[itemId].qty = parseFloat(total);
-    renderLocSelectionZone();
-    autoSaveDraft();
-  }
 }
 
 // ─── INIT ──────────────────────────────────────────────────────
 function initRapport() {
   purgeOld();
-  setDefaultDate();
   buildChantierChips();
   buildNomChips();
   buildLocationItems();
   buildMatChips();
-  loadDraft();
+  loadDraft(); // EN PREMIER — restaure date/chantier/etc.
+  if (!document.getElementById('rj-date').value) setDefaultDate(); // seulement si pas de brouillon
   renderEmployes();
   updateHeader();
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
