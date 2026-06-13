@@ -3454,7 +3454,35 @@ function buildRItem(item) {
 
 function buildFournitRow(catName, nom, defaultUnit) { /* compat */ }
 
-function toggleFournitSelect(key, catName, nom, defaultUnit) {
+function renderFournitSelectionZone() {
+  const zone = document.getElementById('fournit-selection-zone');
+  const list = document.getElementById('fournit-sel-list');
+  const keys = Object.keys(fournitSelection);
+  if (!keys.length) { zone.style.display = 'none'; return; }
+  zone.style.display = 'block';
+  list.innerHTML = '';
+  keys.forEach(key => {
+    const item = fournitSelection[key];
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 14px;border-top:1px solid rgba(255,255,255,0.08);';
+    row.innerHTML = `
+      <span style="flex:1;color:white;font-size:13px;font-weight:500;">${item.nom}</span>
+      <input type="number" min="0" step="0.5" placeholder="Qté"
+        style="width:60px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:6px;color:white;padding:4px 8px;font-size:13px;text-align:center;outline:none;"
+        value="${item.qty||''}"
+        oninput="fournitSelection['${key}'].qty=this.value;autoSaveDraft();">
+      <select style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:6px;color:white;padding:4px 6px;font-size:12px;outline:none;"
+        onchange="fournitSelection['${key}'].unit=this.value;autoSaveDraft();">
+        ${['pc','m','ml','m²','m³','kg','T','L','h','p/j','forfait'].map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
+      </select>
+      <button onclick="delete fournitSelection['${key}'];renderFournitSelectionZone();updateFournitCatCount();autoSaveDraft();"
+        style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;flex-shrink:0;">✕</button>
+    `;
+    list.appendChild(row);
+  });
+}
+
+
   if (fournitSelection[key]) {
     delete fournitSelection[key];
   } else {
@@ -4338,6 +4366,42 @@ window.openAnnotation       = openAnnotation;
 window.deletePhoto          = deletePhoto;
 window.addBon               = addBon;
 window.removeBon            = removeBon;
+// Manquants
+window.toggleAccord              = toggleAccord;
+window.openAddLoc                = openAddLoc;
+window.confirmAddLoc             = confirmAddLoc;
+window.addFournitRow             = addFournitRow;
+window.addMetreSub               = addMetreSub;
+window.delMetreCard              = delMetreCard;
+window.delMetreSub               = delMetreSub;
+window.delRow                    = delRow;
+window.delBon                    = delBon;
+window.delPhoto                  = delPhoto;
+window.cycleFormule              = cycleFormule;
+window.selectLocUnit             = selectLocUnit;
+window.setAnnoTool               = setAnnoTool;
+window.setMetreType              = setMetreType;
+window.setSketchEraser           = setSketchEraser;
+window.showRapTab                = showRapTab;
+window.closeOverlay              = closeOverlay;
+window.fournitSearch             = fournitSearch;
+window.fournitClearSearch        = fournitClearSearch;
+window.openFournitAddOverlay     = openFournitAddOverlay;
+window.deleteRapportInline       = deleteRapportInline;
+window.restoreRapportInline      = restoreRapportInline;
+window.modifierRapport           = modifierRapport;
+window.partagerRapport           = partagerRapport;
+window.openEditPage              = openEditPage;
+window.closeEditPage             = closeEditPage;
+window.selectEditChip            = selectEditChip;
+window.viderCorbeille            = viderCorbeille;
+window.toggleExtrasMenu          = toggleExtrasMenu;
+window.openAnnotate              = openAnnotate;
+window.closeAnnotate             = closeAnnotate;
+window.confirmAnnotate           = confirmAnnotate;
+window.renderFournitSelectionZone = renderFournitSelectionZone;
+window.updateFournitCatCount     = updateFournitCatCount;
+window.autoSaveDraft             = autoSaveDraft;
 
 </script>
 
