@@ -1180,6 +1180,58 @@ textarea { resize: none; }
 }
 .saved-toast.show { opacity: 1; }
 
+/* ── CARTES STYLE RESSOURCES ── */
+.res-card { background:white;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s; }
+.res-card:active { transform:scale(.98);background:var(--bg); }
+.res-card-icon { font-size:18px;flex-shrink:0;width:36px;height:36px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden; }
+.res-card-icon img { width:100%;height:100%;object-fit:cover; }
+.res-card-body { flex:1;min-width:0; }
+.res-card-name { font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.res-card-name.sel { color:var(--navy); }
+
+/* ── MODAL RESSOURCES ── */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:400;display:none;align-items:flex-end;}
+.modal-ov.open{display:flex;}
+.modal-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
+.modal-drag{padding:14px 16px 0;}
+.modal-handle-r{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 16px 14px;border-bottom:1px solid var(--border);}
+.modal-title-r{font-size:17px;font-weight:700;color:var(--navy);}
+.modal-close-r{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-body{flex:1;overflow-y:auto;padding:16px;}
+.modal-footer-r{padding:12px 16px 24px;border-top:1px solid var(--border);}
+.form-sec-label{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
+.form-sec-label:first-child{margin-top:0;}
+.form-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.rfield{margin-bottom:10px;}
+.rfield label{display:block;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
+.rfield input,.rfield select,.rfield textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:inherit;font-size:15px;font-weight:500;padding:11px 13px;border-radius:var(--radius-sm);-webkit-appearance:none;transition:border-color .15s;}
+.rfield select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
+.rfield textarea{min-height:72px;resize:vertical;line-height:1.5;}
+.rfield input:focus,.rfield select:focus,.rfield textarea:focus{outline:none;border-color:var(--navy);background:white;}
+.rfield-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.media-zone-r{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.media-prev-r{width:72px;height:72px;border-radius:var(--radius);background:var(--bg);border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;cursor:pointer;font-size:32px;}
+.media-prev-r img{width:100%;height:100%;object-fit:cover;}
+.media-btns-r{display:flex;flex-direction:column;gap:5px;}
+.media-btn-r{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 12px;font-family:inherit;font-size:11px;font-weight:600;color:var(--text-muted);cursor:pointer;}
+.btn-navy-r{width:100%;background:var(--navy);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;}
+.res-card-sub  { font-size:11px;color:var(--text-muted);margin-top:1px; }
+.res-card-check { font-size:18px;flex-shrink:0; }
+.res-acc-group { background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden; }
+.res-acc-header { display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid transparent; }
+.res-acc-header.open { border-bottom-color:var(--border); }
+.res-acc-cat-icon { width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;overflow:hidden; }
+.res-acc-cat-icon img { width:100%;height:100%;object-fit:cover; }
+.res-acc-title { flex:1;font-size:14px;font-weight:700;color:var(--text); }
+.res-acc-count { font-size:11px;font-weight:700;color:var(--text-muted);background:var(--bg);padding:3px 8px;border-radius:10px; }
+.res-acc-count.has-sel { background:#e8f5f3;color:var(--teal); }
+.res-acc-chevron { color:var(--text-light);font-size:12px;transition:transform 0.25s; }
+.res-acc-header.open .res-acc-chevron { transform:rotate(180deg); }
+.res-acc-body { max-height:0;overflow:hidden;transition:max-height 0.35s ease; }
+.res-acc-body.open { max-height:9999px; }
+.res-acc-inner { padding:10px 12px; }
+
 .info-row {
   display: flex;
   align-items: center;
@@ -1333,7 +1385,7 @@ textarea { resize: none; }
   ════════════════════════════════════ -->
   <div class="section" id="sec-2">
 
-    <!-- ZONE SÉLECTION (même principe que fournitures) -->
+    <!-- ZONE SÉLECTION -->
     <div id="loc-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
         <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.1);">
@@ -1343,48 +1395,15 @@ textarea { resize: none; }
       </div>
     </div>
 
-    <!-- CATALOGUE LOCATION -->
-    <div class="accord-group" id="accord-vehicules">
-      <div class="accord-header" onclick="toggleAccord('vehicules')">
-        <span class="accord-icon">🚛</span>
-        <span class="accord-title">Véhicules</span>
-        <span class="accord-chevron">▼</span>
-      </div>
-      <div class="accord-body" id="body-vehicules">
-        <div class="accord-inner" id="loc-vehicules"></div>
-        <div style="padding:0 0 10px;">
-          <button class="btn-add-loc" onclick="openAddLoc('vehicules','🚛')">➕ Ajouter un véhicule</button>
-        </div>
-      </div>
+    <!-- BARRE RECHERCHE -->
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;display:flex;gap:8px;align-items:center;padding:10px 12px;">
+      <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
+        type="text" placeholder="Rechercher…" id="loc-search" oninput="locSearch(this.value)">
+      <button onclick="locClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="loc-clear">✕</button>
     </div>
 
-    <div class="accord-group" id="accord-materiel">
-      <div class="accord-header" onclick="toggleAccord('materiel')">
-        <span class="accord-icon">🦺</span>
-        <span class="accord-title">Matériel & Outillage</span>
-        <span class="accord-chevron">▼</span>
-      </div>
-      <div class="accord-body" id="body-materiel">
-        <div class="accord-inner" id="loc-materiel"></div>
-        <div style="padding:0 0 10px;">
-          <button class="btn-add-loc" onclick="openAddLoc('materiel','🦺')">➕ Ajouter du matériel</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="accord-group" id="accord-engins">
-      <div class="accord-header" onclick="toggleAccord('engins')">
-        <span class="accord-icon">🚜</span>
-        <span class="accord-title">Engins</span>
-        <span class="accord-chevron">▼</span>
-      </div>
-      <div class="accord-body" id="body-engins">
-        <div class="accord-inner" id="loc-engins"></div>
-        <div style="padding:0 0 10px;">
-          <button class="btn-add-loc" onclick="openAddLoc('engins','🚜')">➕ Ajouter un engin</button>
-        </div>
-      </div>
-    </div>
+    <!-- CATALOGUE LOCATION (rempli par JS depuis Ressources) -->
+    <div id="loc-catalogue"></div>
 
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(1)">←</button>
@@ -1525,10 +1544,10 @@ textarea { resize: none; }
   ════════════════════════════════════ -->
   <div class="section" id="sec-4">
 
-    <!-- ZONE SÉLECTION (toujours visible en haut) -->
+    <!-- ZONE SÉLECTION -->
     <div id="fournit-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
-        <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);">
+        <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.1);">
           <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Fournitures / Évacuations</span>
         </div>
         <div id="fournit-sel-list"></div>
@@ -1540,13 +1559,11 @@ textarea { resize: none; }
       <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
         type="text" placeholder="Rechercher un produit…" id="fournit-search" oninput="fournitSearch(this.value)">
       <button onclick="fournitClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="fournit-clear">✕</button>
-      <button onclick="openQuickAddFournit()" style="background:var(--teal);color:#fff;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0;line-height:1;">+ Nouveau</button>
+      <button onclick="openAddMateriauOverlay()" style="background:var(--teal);color:white;border:none;font-family:inherit;font-size:13px;font-weight:700;padding:8px 12px;border-radius:var(--radius-sm);cursor:pointer;flex-shrink:0;">+ Nouveau</button>
     </div>
 
-    <!-- CATALOGUE FOURNITURES -->
+    <!-- CATALOGUE FOURNITURES (depuis rv6_materials) -->
     <div id="fournit-catalogue"></div>
-
-    <!-- RÉCAP + FINALISER -->
 
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(3)">←</button>
@@ -1756,6 +1773,10 @@ textarea { resize: none; }
 <script>
 // ─── DATA DEPUIS RESSOURCES ENTREPRISE ────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
+const REPORTS_KEY = 'rj_reports_v1';
+const TRASH_KEY   = 'rj_trash_v1';
+const MAX_DAYS    = 30;
+const TRASH_DAYS  = 7;
 
 // Lecture dynamique depuis les clés partagées du Hub Ressources
 function getResEquipe() {
@@ -1930,17 +1951,164 @@ function buildNomChips() {
   });
 }
 
-function buildLocationItems() {
-  // Charger les équipements custom sauvegardés
-  const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
-  if (ressources.vehicules) LOC_VEHICULES.push(...ressources.vehicules);
-  if (ressources.materiel)  LOC_MATERIEL.push(...ressources.materiel);
-  if (ressources.engins)    LOC_ENGINS.push(...ressources.engins);
-
-  buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
-  buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
-  buildLocGroup('loc-engins',    LOC_ENGINS,    'engins');
+// ─── HELPERS RESSOURCES ──────────────────────────────────────
+function resLoad(key) {
+  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) { return []; }
 }
+function resCats(section) {
+  const CAT_KEY = 'rv6_res_categories';
+  try {
+    const all = JSON.parse(localStorage.getItem(CAT_KEY) || '{}');
+    return all[section] || [];
+  } catch(e) { return []; }
+}
+function resCatIndicator(cat, size) {
+  const s = size || 28;
+  if (cat?.image) return `<div style="width:${s}px;height:${s}px;border-radius:6px;overflow:hidden;flex-shrink:0;"><img src="${cat.image}" style="width:100%;height:100%;object-fit:cover;"></div>`;
+  if (cat?.emoji) return `<div style="width:${s}px;height:${s}px;border-radius:6px;background:${cat.color||'#eee'}22;display:flex;align-items:center;justify-content:center;font-size:${Math.round(s*0.57)}px;flex-shrink:0;">${cat.emoji}</div>`;
+  return `<div style="width:${s}px;height:${s}px;border-radius:6px;background:${cat?.color||'#1B3A6B'}22;flex-shrink:0;"></div>`;
+}
+function resItemIcon(item, defaultIcon) {
+  if (item.photo) return `<div class="res-card-icon"><img src="${item.photo}"></div>`;
+  if (item.icon)  return `<div class="res-card-icon" style="font-size:20px;">${item.icon}</div>`;
+  return `<div class="res-card-icon" style="font-size:20px;">${defaultIcon||'📦'}</div>`;
+}
+
+function buildLocationItems() {
+  const container = document.getElementById('loc-catalogue');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const sections = [
+    { key: 'vehicules', label: '🚛 Véhicules',          storeKey: 'rv6_vehicles',   unit: 'p/j', sub: i => [i.type, i.immat].filter(Boolean).join(' · ') },
+    { key: 'materiel',  label: '🦺 Matériel & Outillage', storeKey: 'rv6_equipment',  unit: 'h',   sub: i => [i.type, i.marque].filter(Boolean).join(' · ') },
+    { key: 'machines',  label: '🚜 Engins',              storeKey: 'rv6_m',          unit: 'h',   sub: i => [i.type, i.annee].filter(Boolean).join(' · ') },
+  ];
+
+  sections.forEach(sec => {
+    const items = resLoad(sec.storeKey);
+    const cats  = resCats(sec.key === 'machines' ? 'machines' : sec.key);
+
+    // Grouper par catégorie
+    const withCat = cats.length > 0;
+    const grouped = {};
+    items.forEach(item => {
+      const catId = item.categorie || '__none__';
+      if (!grouped[catId]) grouped[catId] = [];
+      grouped[catId].push(item);
+    });
+
+    // Accordéon principal par section
+    const secDiv = document.createElement('div');
+    secDiv.className = 'res-acc-group';
+    secDiv.id = `loc-sec-${sec.key}`;
+
+    const secHeader = document.createElement('div');
+    secHeader.className = 'res-acc-header';
+    secHeader.innerHTML = `
+      <span style="font-size:20px;">${sec.label.split(' ')[0]}</span>
+      <span class="res-acc-title">${sec.label.substring(sec.label.indexOf(' ')+1)}</span>
+      <span class="res-acc-count" id="loc-cnt-${sec.key}">—</span>
+      <span class="res-acc-chevron">▼</span>
+    `;
+    const secBody = document.createElement('div');
+    secBody.className = 'res-acc-body';
+    secHeader.onclick = () => { secHeader.classList.toggle('open'); secBody.classList.toggle('open'); };
+    secDiv.appendChild(secHeader);
+
+    const inner = document.createElement('div');
+    inner.className = 'res-acc-inner';
+
+    if (items.length === 0) {
+      inner.innerHTML = `<p style="font-size:13px;color:var(--text-muted);text-align:center;padding:12px 0;">Aucun élément — ajouter dans Ressources</p>`;
+    } else if (withCat) {
+      // Sous-accordéons par catégorie
+      cats.forEach(cat => {
+        const catItems = grouped[cat.id] || [];
+        if (!catItems.length) return;
+        const catDiv = document.createElement('div');
+        catDiv.style.cssText = 'background:white;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:8px;overflow:hidden;';
+        const catH = document.createElement('div');
+        catH.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;';
+        catH.innerHTML = `
+          ${resCatIndicator(cat, 24)}
+          <span style="flex:1;font-size:13px;font-weight:700;">${cat.nom||cat.name||'—'}</span>
+          <span style="font-size:11px;color:var(--text-muted);">${catItems.length}</span>
+          <span style="font-size:11px;color:var(--text-light);">▼</span>
+        `;
+        const catB = document.createElement('div');
+        catB.style.cssText = 'max-height:0;overflow:hidden;transition:max-height 0.3s ease;';
+        catH.onclick = () => {
+          const isOpen = catB.style.maxHeight !== '0px' && catB.style.maxHeight !== '';
+          catB.style.maxHeight = isOpen ? '0' : '9999px';
+          catH.querySelector('span:last-child').textContent = isOpen ? '▼' : '▲';
+        };
+        catDiv.appendChild(catH);
+        catItems.forEach(item => catB.appendChild(buildLocCard(item, sec)));
+        catDiv.appendChild(catB);
+        inner.appendChild(catDiv);
+      });
+      // Items sans catégorie
+      (grouped['__none__'] || []).forEach(item => inner.appendChild(buildLocCard(item, sec)));
+    } else {
+      items.forEach(item => inner.appendChild(buildLocCard(item, sec)));
+    }
+
+    secBody.appendChild(inner);
+    secDiv.appendChild(secBody);
+    container.appendChild(secDiv);
+    updateLocCount(sec.key);
+  });
+}
+
+function buildLocCard(item, sec) {
+  const id = item.id || item.nom;
+  const isSelected = !!locSelection[id];
+  const card = document.createElement('div');
+  card.className = 'res-card';
+  card.dataset.id = id;
+  card.dataset.nom = item.nom || '';
+  const sub = sec.sub(item);
+  card.innerHTML = `
+    ${resItemIcon(item, sec.label.split(' ')[0])}
+    <div class="res-card-body">
+      <div class="res-card-name${isSelected?' sel':''}" id="locname-${id}">${item.nom||'—'}</div>
+      ${sub ? `<div class="res-card-sub">${sub}</div>` : ''}
+    </div>
+    <span id="locchk-${id}" style="font-size:18px;flex-shrink:0;">${isSelected?'✅':'⬜'}</span>
+  `;
+  const unit = item.unite || item.unit || sec.unit || 'h';
+  card.onclick = () => toggleLocSelect({ id, label: item.nom, unit });
+  return card;
+}
+
+function updateLocCount(secKey) {
+  const el = document.getElementById(`loc-cnt-${secKey}`);
+  if (!el) return;
+  const count = Object.keys(locSelection).length;
+  // Count only items from this section
+  const storeMap = { vehicules: 'rv6_vehicles', materiel: 'rv6_equipment', machines: 'rv6_m' };
+  const sectionItems = resLoad(storeMap[secKey] || '').map(i => i.id || i.nom);
+  const sectionSel = Object.keys(locSelection).filter(id => sectionItems.includes(id)).length;
+  el.textContent = sectionSel > 0 ? `${sectionSel} sél.` : '—';
+  el.classList.toggle('has-sel', sectionSel > 0);
+}
+
+// Recherche location
+function locSearch(q) {
+  document.getElementById('loc-clear').style.display = q ? 'block' : 'none';
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('#loc-catalogue .res-card').forEach(card => {
+    const match = !q || card.dataset.nom.toLowerCase().includes(q);
+    card.style.display = match ? '' : 'none';
+  });
+  if (q) document.querySelectorAll('#loc-catalogue .res-acc-header').forEach(h => {
+    h.classList.add('open'); h.nextElementSibling?.classList.add('open');
+  });
+}
+function locClearSearch() { document.getElementById('loc-search').value = ''; locSearch(''); }
+
+
 
 // État sélection location : { id: { label, unit, qty } }
 let locSelection = {};
@@ -2163,7 +2331,12 @@ function goSection(n) {
   state.currentSection = n;
   document.getElementById('main-scroll').scrollTop = 0;
   updateStepBar(n);
-  if (n === 4) { buildFournitCatalogue(); }
+  if (n === 4) {
+    // Toujours reconstruire depuis Ressources (données peuvent avoir changé)
+    const cat = document.getElementById('fournit-catalogue');
+    if (cat) cat.innerHTML = '';
+    buildFournitCatalogue();
+  }
   if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
 }
 
@@ -3298,97 +3471,117 @@ function buildResMatCategories(mats) {
 }
 
 function buildFournitCatalogue() {
-  fournitCustom = JSON.parse(localStorage.getItem(FOURNIT_CUSTOM_KEY) || '{}');
   const container = document.getElementById('fournit-catalogue');
   if (!container || container.children.length > 0) return;
 
-  // Matériaux depuis Ressources entreprise (rv6_materials) — unique source de vérité
-  const resMats = getResMateriaux();
-  if (!resMats.length) {
+  const items = resLoad('rv6_materials');
+  const cats  = resCats('materiaux');
+
+  if (!items.length) {
     container.innerHTML = `
       <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
         <div style="font-size:36px;margin-bottom:12px;">🪨</div>
         <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucun matériau enregistré</div>
-        <div style="font-size:12px;margin-bottom:16px;">Ajoutez des matériaux dans le module Ressources entreprise pour les retrouver ici.</div>
+        <div style="font-size:12px;margin-bottom:16px;">Ajoutez des matériaux dans le module Ressources pour les retrouver ici.</div>
         <a href="../ressources/index.html" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;">Ouvrir Ressources →</a>
       </div>`;
     return;
   }
 
-  const resCats = buildResMatCategories(resMats);
-  Object.entries(resCats).forEach(([catName, catData]) => {
-    container.appendChild(buildFournitAccord(catName, catData, fournitCustom[catName]||[]));
+  // Grouper par catégorie
+  const grouped = {};
+  items.forEach(item => {
+    const catId = item.categorie || '__none__';
+    if (!grouped[catId]) grouped[catId] = [];
+    grouped[catId].push(item);
   });
+
+  if (cats.length > 0) {
+    cats.forEach(cat => {
+      const catItems = grouped[cat.id] || [];
+      if (!catItems.length) return;
+      container.appendChild(buildFournitResAccord(cat, catItems));
+    });
+  }
+  // Items sans catégorie
+  const noCat = grouped['__none__'] || [];
+  if (noCat.length) {
+    const div = document.createElement('div');
+    div.className = 'res-acc-group';
+    div.style.marginBottom = '10px';
+    const h = document.createElement('div');
+    h.className = 'res-acc-header';
+    h.innerHTML = `<span class="res-acc-title">Autres matériaux</span><span class="res-acc-count" id="fcnt-__none__">—</span><span class="res-acc-chevron">▼</span>`;
+    const b = document.createElement('div');
+    b.className = 'res-acc-body';
+    h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
+    div.appendChild(h);
+    const inner = document.createElement('div');
+    inner.className = 'res-acc-inner';
+    noCat.forEach(item => inner.appendChild(buildFournitCard(item)));
+    b.appendChild(inner);
+    div.appendChild(b);
+    container.appendChild(div);
+  }
 }
 
-function buildFournitAccord(catName, catData, extra) {
-  const slug = fslug(catName);
+function buildFournitResAccord(cat, items) {
   const div = document.createElement('div');
-  div.className = 'accord-group';
+  div.className = 'res-acc-group';
   div.style.marginBottom = '10px';
-  div.id = 'fcat-' + slug;
+  div.id = 'fcat-' + (cat.id || fslug(cat.nom || 'cat'));
 
-  const header = document.createElement('div');
-  header.className = 'accord-header';
-  header.innerHTML = `
-    <span class="accord-title" style="font-size:14px;">${catName}</span>
-    <span class="accord-count" id="fcnt-${slug}">—</span>
-    <span class="accord-chevron">▼</span>
+  const h = document.createElement('div');
+  h.className = 'res-acc-header';
+  const selCount = items.filter(i => fournitSelection[i.id || i.nom]).length;
+  h.innerHTML = `
+    ${resCatIndicator(cat, 28)}
+    <span class="res-acc-title">${cat.nom || cat.name || '—'}</span>
+    <span class="res-acc-count${selCount > 0 ? ' has-sel' : ''}" id="fcnt-${cat.id || fslug(cat.nom)}">${selCount > 0 ? selCount + ' sél.' : '—'}</span>
+    <span class="res-acc-chevron">▼</span>
   `;
-  const body = document.createElement('div');
-  body.className = 'accord-body';
-  header.onclick = () => { header.classList.toggle('open'); body.classList.toggle('open'); };
-  div.appendChild(header);
+  const b = document.createElement('div');
+  b.className = 'res-acc-body';
+  h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
+  div.appendChild(h);
 
-  Object.entries(catData.subcats).forEach(([subName, prods]) => {
-    // Label sous-catégorie avec bouton + inline
-    const subDiv = document.createElement('div');
-    subDiv.style.cssText = 'display:flex;align-items:center;background:var(--bg);border-bottom:1px solid var(--border);padding:6px 14px 6px 14px;';
-    subDiv.dataset.subcatLabel = '1';
-    subDiv.innerHTML = `
-      <span style="flex:1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);">${subName}</span>
-      <button style="background:none;border:1.5px dashed var(--border);color:var(--teal);font-family:inherit;font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;cursor:pointer;">+ Ajouter</button>
-    `;
-    subDiv.querySelector('button').onclick = () => openFournitAddOverlay(catName, subName);
-    body.appendChild(subDiv);
-    prods.forEach(nom => body.appendChild(buildFournitRow(catName, nom)));
-  });
-
-  // Produits custom (sans sous-cat spécifique)
-  extra.forEach(p => body.appendChild(buildFournitRow(catName, p.nom, p.unit)));
-
-  // Bouton ajouter global en bas
-  const addBtn = document.createElement('button');
-  addBtn.style.cssText = 'width:100%;border:none;border-top:1.5px dashed var(--border);background:none;color:var(--teal);font-family:inherit;font-size:13px;font-weight:600;padding:10px 14px;cursor:pointer;text-align:left;';
-  addBtn.textContent = `+ Ajouter dans "${catName}"`;
-  addBtn.onclick = () => openFournitAddOverlay(catName, null);
-  body.appendChild(addBtn);
-
-  div.appendChild(body);
+  const inner = document.createElement('div');
+  inner.className = 'res-acc-inner';
+  items.forEach(item => inner.appendChild(buildFournitCard(item)));
+  b.appendChild(inner);
+  div.appendChild(b);
   return div;
 }
 
 let _frowId = 0;
 
-function buildFournitRow(catName, nom, defaultUnit) {
-  const key = catName + '|' + nom;
+function buildFournitCard(item) {
+  const key = item.id || item.nom;
   const isSelected = !!fournitSelection[key];
-  const uid = ++_frowId; // ID unique garanti
-  const row = document.createElement('div');
-  row.className = 'fournit-row';
-  row.dataset.nom = nom; row.dataset.cat = catName; row.dataset.key = key;
-  row.dataset.uid = uid;
-  row.style.cursor = 'pointer';
-  row.innerHTML = `
-    <span class="fournit-row-name${isSelected?' active':''}" id="fn-${uid}">${nom}</span>
+  const uid = ++_frowId;
+  const sub = [item.famille, item.unite].filter(Boolean).join(' · ');
+
+  const card = document.createElement('div');
+  card.className = 'res-card';
+  card.dataset.nom = item.nom || '';
+  card.dataset.key = key;
+  card.dataset.uid = uid;
+  card.innerHTML = `
+    ${resItemIcon(item, '📦')}
+    <div class="res-card-body">
+      <div class="res-card-name${isSelected?' sel':''}" id="fn-${uid}">${item.nom || '—'}</div>
+      ${sub ? `<div class="res-card-sub">${sub}</div>` : ''}
+    </div>
     <span id="fchk-${uid}" style="font-size:18px;flex-shrink:0;">${isSelected?'✅':'⬜'}</span>
   `;
-  // Stocker l'uid sur la clé pour retrouver l'élément
   if (!window._fournitUids) window._fournitUids = {};
   window._fournitUids[key] = uid;
-  row.onclick = () => toggleFournitSelect(key, catName, nom, defaultUnit||'pc');
-  return row;
+  const defaultUnit = item.unite || 'pc';
+  card.onclick = () => toggleFournitSelect(key, item.famille || 'Matériaux', item.nom, defaultUnit);
+  return card;
 }
+
+function buildFournitRow(catName, nom, defaultUnit) { /* compatibilité */ return buildFournitCard({nom, unite: defaultUnit}); }
 
 function toggleFournitSelect(key, catName, nom, defaultUnit) {
   if (fournitSelection[key]) {
@@ -3397,14 +3590,14 @@ function toggleFournitSelect(key, catName, nom, defaultUnit) {
     fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
   }
   const isNow = !!fournitSelection[key];
-  // Retrouver les éléments via uid stocké
   const uid = window._fournitUids?.[key];
   if (uid) {
     const nameEl = document.getElementById('fn-' + uid);
     const chkEl  = document.getElementById('fchk-' + uid);
-    nameEl?.classList.toggle('active', isNow);
+    nameEl?.classList.toggle('sel', isNow);
     if (chkEl) chkEl.textContent = isNow ? '✅' : '⬜';
   }
+  // Mettre à jour compteur de la cat
   updateFournitCatCount(catName);
   renderFournitSelectionZone();
   autoSaveDraft();
@@ -3468,46 +3661,26 @@ function updateFournitCatCount(catName) {
 function fournitSearch(q) {
   document.getElementById('fournit-clear').style.display = q ? 'block' : 'none';
   q = q.toLowerCase().trim();
-
   if (!q) {
-    // Tout fermer et tout réafficher
-    document.querySelectorAll('#fournit-catalogue .fournit-row').forEach(r => r.style.display = '');
-    document.querySelectorAll('#fournit-catalogue .accord-group').forEach(g => g.style.display = '');
-    document.querySelectorAll('#fournit-catalogue [data-subcat-label]').forEach(s => s.style.display = '');
-    document.querySelectorAll('#fournit-catalogue .accord-header').forEach(h => {
-      h.classList.remove('open');
-      h.nextElementSibling?.classList.remove('open');
+    document.querySelectorAll('#fournit-catalogue .res-card').forEach(r => r.style.display = '');
+    document.querySelectorAll('#fournit-catalogue .res-acc-group').forEach(g => g.style.display = '');
+    document.querySelectorAll('#fournit-catalogue .res-acc-header').forEach(h => {
+      h.classList.remove('open'); h.nextElementSibling?.classList.remove('open');
     });
     return;
   }
-
-  // Pour chaque accordéon, vérifier si au moins un produit correspond
-  document.querySelectorAll('#fournit-catalogue .accord-group').forEach(group => {
-    const rows = group.querySelectorAll('.fournit-row');
-    let groupHasMatch = false;
-
-    rows.forEach(row => {
-      const match = row.dataset.nom.toLowerCase().includes(q) || row.dataset.cat.toLowerCase().includes(q);
-      row.style.display = match ? '' : 'none';
-      if (match) groupHasMatch = true;
+  document.querySelectorAll('#fournit-catalogue .res-acc-group').forEach(group => {
+    const cards = group.querySelectorAll('.res-card');
+    let hasMatch = false;
+    cards.forEach(card => {
+      const match = card.dataset.nom?.toLowerCase().includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) hasMatch = true;
     });
-
-    // Cacher les labels de sous-cat qui n'ont plus de produits visibles
-    group.querySelectorAll('[data-subcat-label]').forEach(sub => {
-      let next = sub.nextElementSibling;
-      let hasVisible = false;
-      while (next && next.classList.contains('fournit-row')) {
-        if (next.style.display !== 'none') hasVisible = true;
-        next = next.nextElementSibling;
-      }
-      sub.style.display = hasVisible ? '' : 'none';
-    });
-
-    // Cacher le groupe entier si aucun produit ne correspond
-    group.style.display = groupHasMatch ? '' : 'none';
-    if (groupHasMatch) {
-      group.querySelector('.accord-header')?.classList.add('open');
-      group.querySelector('.accord-body')?.classList.add('open');
+    group.style.display = hasMatch ? '' : 'none';
+    if (hasMatch) {
+      group.querySelector('.res-acc-header')?.classList.add('open');
+      group.querySelector('.res-acc-body')?.classList.add('open');
     }
   });
 }
@@ -3737,7 +3910,114 @@ function confirmQuickAddFournit() {
   t.classList.add('show');
   setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2200);
 }
+// ─── AJOUT MATÉRIAU STYLE RESSOURCES ──────────────────────
+let _matPhoto = '';
+
+function openAddMateriauOverlay() {
+  // Reset form
+  ['mx-nom','mx-densite','mx-classe','mx-granulo','mx-fournisseur','mx-prix','mx-notes'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
+  });
+  ['mx-cat','mx-famille','mx-unite','mx-tva'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.selectedIndex = 0;
+  });
+  _matPhoto = '';
+  updateMatMediaPreview();
+
+  // Peupler le select catégorie
+  const cats = resCats('materiaux');
+  const sel = document.getElementById('mx-cat');
+  sel.innerHTML = '<option value="">— Sans catégorie —</option>';
+  cats.forEach(c => {
+    const o = document.createElement('option');
+    o.value = c.id; o.textContent = c.nom || c.name || '—';
+    sel.appendChild(o);
+  });
+
+  document.getElementById('modal-add-materiaux').classList.add('open');
+  setTimeout(() => document.getElementById('mx-nom')?.focus(), 150);
+}
+
+function updateMatMediaPreview() {
+  const prev = document.getElementById('media-prev-mat');
+  const del  = document.getElementById('media-del-mat');
+  if (!prev) return;
+  if (_matPhoto) {
+    prev.innerHTML = `<img src="${_matPhoto}">`;
+    if (del) del.style.display = 'block';
+  } else {
+    prev.innerHTML = '📷';
+    if (del) del.style.display = 'none';
+  }
+}
+
+function triggerMatPhoto() {
+  document.getElementById('mat-photo-input').click();
+}
+
+function onMatPhotoSelected(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => { _matPhoto = ev.target.result; updateMatMediaPreview(); };
+  reader.readAsDataURL(file);
+}
+
+function clearMatMedia() {
+  _matPhoto = '';
+  updateMatMediaPreview();
+}
+
+function saveMateriauFromRapport() {
+  const nom = (document.getElementById('mx-nom')?.value || '').trim();
+  if (!nom) {
+    const el = document.getElementById('mx-nom');
+    if (el) { el.style.borderColor = 'var(--danger)'; el.focus(); setTimeout(() => el.style.borderColor = '', 2000); }
+    return;
+  }
+
+  // Vérifier doublon
+  const mats = resLoad('rv6_materials');
+  if (mats.some(m => (m.nom||'').toLowerCase() === nom.toLowerCase())) {
+    showToast('⚠️ Ce matériau existe déjà dans Ressources');
+    return;
+  }
+
+  const catVal = document.getElementById('mx-cat')?.value || '';
+  const newMat = {
+    id: 'mat_' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    nom,
+    categorie: catVal || undefined,
+    famille:   document.getElementById('mx-famille')?.value || '',
+    unite:     document.getElementById('mx-unite')?.value   || '',
+    densite:   document.getElementById('mx-densite')?.value || '',
+    classe:    document.getElementById('mx-classe')?.value  || '',
+    granulo:   document.getElementById('mx-granulo')?.value || '',
+    fournisseur: document.getElementById('mx-fournisseur')?.value || '',
+    prix:      document.getElementById('mx-prix')?.value    || '',
+    tva:       document.getElementById('mx-tva')?.value     || '',
+    notes:     document.getElementById('mx-notes')?.value   || '',
+    photo:     _matPhoto || '',
+    createdAt: new Date().toISOString()
+  };
+
+  mats.push(newMat);
+  localStorage.setItem('rv6_materials', JSON.stringify(mats));
+
+  document.getElementById('modal-add-materiaux').classList.remove('open');
+
+  // Reconstruire catalogue et sélectionner
+  const cat = document.getElementById('fournit-catalogue');
+  if (cat) cat.innerHTML = '';
+  buildFournitCatalogue();
+  toggleFournitSelect(newMat.id, newMat.famille || 'Matériaux', nom, newMat.unite || 'pc');
+
+  showToast(`✅ "${nom}" créé dans Ressources`);
+}
+
 function fslug(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').substring(0,40); }
+
+
 
 // Recalculer le layout quand le clavier s'ouvre/ferme
 window.addEventListener('resize', () => {
@@ -3765,11 +4045,6 @@ function showRapTab(tab) {
   if (btnV) { btnV.style.background = isBrouillon ? 'var(--bg)' : 'var(--teal)'; btnV.style.color = isBrouillon ? 'var(--text-muted)' : 'white'; }
 }
 
-
-const REPORTS_KEY = 'rj_reports_v1';
-const TRASH_KEY   = 'rj_trash_v1';
-const MAX_DAYS    = 30;
-const TRASH_DAYS  = 7;
 
 function getReports() {
   return JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
@@ -4494,6 +4769,78 @@ window.addEventListener('DOMContentLoaded', () => {
     <button class="btn-sheet-confirm" onclick="confirmQuickAddFournit()">Ajouter ✓</button>
   </div>
 </div>
+
+<!-- MODAL AJOUT MATÉRIAU (identique module Ressources) -->
+<div class="modal-ov" id="modal-add-materiaux">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle-r"></div></div>
+    <div class="modal-hdr">
+      <div class="modal-title-r">🪨 Nouveau matériau</div>
+      <button class="modal-close-r" onclick="document.getElementById('modal-add-materiaux').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="media-zone-r">
+        <div class="media-prev-r" id="media-prev-mat" onclick="triggerMatPhoto()">📷</div>
+        <div class="media-btns-r">
+          <button class="media-btn-r" onclick="triggerMatPhoto()">📷 Photo</button>
+          <button class="media-btn-r" id="media-del-mat" style="display:none;color:var(--danger);" onclick="clearMatMedia()">✕ Supprimer</button>
+        </div>
+      </div>
+      <div class="form-sec-label">Catégorie</div>
+      <div class="rfield">
+        <label>Sous-catégorie</label>
+        <select id="mx-cat"><option value="">— Sans catégorie —</option></select>
+      </div>
+      <div class="form-sec-label">Identification</div>
+      <div class="rfield"><label>Nom / Désignation *</label><input type="text" id="mx-nom" placeholder="Béton C25/30" autocomplete="off"></div>
+      <div class="rfield-row">
+        <div class="rfield"><label>Famille</label>
+          <select id="mx-famille">
+            <option value="">—</option>
+            <option>Béton / mortier</option><option>Granulats / graviers</option>
+            <option>Sable</option><option>Terre / remblai</option><option>Bitume / enrobé</option>
+            <option>Acier / armatures</option><option>Bois / coffrages</option>
+            <option>Géotextile</option><option>Tuyaux</option><option>Produits chimiques</option>
+            <option>Isolation</option><option>Maçonnerie</option><option>Autre</option>
+          </select>
+        </div>
+        <div class="rfield"><label>Unité</label>
+          <select id="mx-unite">
+            <option value="">—</option>
+            <option>m³</option><option>tonne (t)</option><option>kg</option>
+            <option>m²</option><option>ml</option><option>pièce</option>
+            <option>litre</option><option>sac</option><option>rouleau</option><option>boîte</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-sec-label">Caractéristiques techniques</div>
+      <div class="rfield-row">
+        <div class="rfield"><label>Masse volumique (kg/m³)</label><input type="number" id="mx-densite" placeholder="2400" step="1" min="0" autocomplete="off"></div>
+        <div class="rfield"><label>Classe / Résistance</label><input type="text" id="mx-classe" placeholder="C25/30…" autocomplete="off"></div>
+      </div>
+      <div class="rfield-row">
+        <div class="rfield"><label>Granulométrie</label><input type="text" id="mx-granulo" placeholder="0/32 mm" autocomplete="off"></div>
+        <div class="rfield"><label>Fournisseur</label><input type="text" id="mx-fournisseur" placeholder="Holcim…" autocomplete="off"></div>
+      </div>
+      <div class="form-sec-label">Prix</div>
+      <div class="rfield-row">
+        <div class="rfield"><label>Prix unitaire HT (CHF)</label><input type="number" id="mx-prix" placeholder="95.00" step="0.01" min="0" autocomplete="off"></div>
+        <div class="rfield"><label>TVA (%)</label>
+          <select id="mx-tva">
+            <option value="">—</option><option value="0">0%</option>
+            <option value="2.6">2.6%</option><option value="8.1" selected>8.1%</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-sec-label">Notes</div>
+      <div class="rfield"><label>Notes libres</label><textarea id="mx-notes" placeholder="Livraison 48h, camion toupie…"></textarea></div>
+    </div>
+    <div class="modal-footer-r">
+      <button class="btn-navy-r" onclick="saveMateriauFromRapport()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+<input type="file" id="mat-photo-input" accept="image/*" style="display:none" onchange="onMatPhotoSelected(event)">
 
 <div class="saved-toast" id="toast">💾 Brouillon sauvegardé</div>
 
