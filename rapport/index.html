@@ -153,7 +153,6 @@ body {
 /* ── SCROLL AREA ── */
 .scroll-area {
   flex: 1;
-  min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: 12px 12px 24px;
@@ -893,6 +892,38 @@ textarea { resize: none; }
 }
 
 /* ── FOURNIT-ROW ── */
+/* ── ACCORDÉON STYLE RESSOURCES ── */
+.r-accordion { margin-bottom:10px; }
+.r-acc-header { background:#fff;border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;transition:all .15s;user-select:none;box-shadow:0 2px 12px rgba(27,58,107,.10); }
+.r-acc-header.open { border-radius:12px 12px 0 0;border-bottom-color:transparent;box-shadow:none; }
+.r-acc-dot { width:10px;height:10px;border-radius:50%;flex-shrink:0; }
+.r-acc-name { flex:1;font-size:14px;font-weight:700;color:var(--text); }
+.r-acc-count { font-size:11px;font-weight:700;color:var(--text-muted);background:var(--bg);padding:2px 8px;border-radius:10px; }
+.r-acc-count.sel { background:#e8f5f3;color:var(--teal); }
+.r-acc-chevron { font-size:14px;color:var(--text-light);transition:transform .22s; }
+.r-acc-header.open .r-acc-chevron { transform:rotate(90deg); }
+.r-acc-body { background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;overflow:hidden;max-height:0;transition:max-height .28s ease;box-shadow:0 2px 12px rgba(27,58,107,.10); }
+.r-acc-body.open { max-height:9999px; }
+.r-acc-inner { padding:10px 12px 12px; }
+.r-sub-header { display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;user-select:none;margin-bottom:4px; }
+.r-sub-header.open { border-radius:8px 8px 0 0; }
+.r-sub-dot { width:6px;height:6px;border-radius:50%;opacity:.6;flex-shrink:0; }
+.r-sub-name { flex:1;font-size:12px;font-weight:600;color:var(--text-muted); }
+.r-sub-count { font-size:10px;color:var(--text-light);font-weight:700;background:var(--bg);padding:1px 6px;border-radius:8px; }
+.r-sub-body { max-height:0;overflow:hidden;transition:max-height .25s ease;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;background:#fff;margin-bottom:6px; }
+.r-sub-body.open { max-height:9999px; }
+.r-sub-inner { padding:8px; }
+.r-item { background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s; }
+.r-item:last-child { margin-bottom:0; }
+.r-item:active { transform:scale(.98); }
+.r-item-icon { font-size:18px;flex-shrink:0;width:32px;height:32px;border-radius:8px;background:white;display:flex;align-items:center;justify-content:center;overflow:hidden; }
+.r-item-icon img { width:100%;height:100%;object-fit:cover; }
+.r-item-body { flex:1;min-width:0; }
+.r-item-name { font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.r-item-name.sel { color:var(--navy); }
+.r-item-sub { font-size:10px;color:var(--text-muted);margin-top:1px; }
+.r-item-check { font-size:18px;flex-shrink:0; }
+
 .fournit-row {
   display: flex;
   align-items: center;
@@ -1180,58 +1211,6 @@ textarea { resize: none; }
 }
 .saved-toast.show { opacity: 1; }
 
-/* ── CARTES STYLE RESSOURCES ── */
-.res-card { background:white;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s; }
-.res-card:active { transform:scale(.98);background:var(--bg); }
-.res-card-icon { font-size:18px;flex-shrink:0;width:36px;height:36px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden; }
-.res-card-icon img { width:100%;height:100%;object-fit:cover; }
-.res-card-body { flex:1;min-width:0; }
-.res-card-name { font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-.res-card-name.sel { color:var(--navy); }
-
-/* ── MODAL RESSOURCES ── */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:400;display:none;align-items:flex-end;}
-.modal-ov.open{display:flex;}
-.modal-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
-.modal-drag{padding:14px 16px 0;}
-.modal-handle-r{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 16px 14px;border-bottom:1px solid var(--border);}
-.modal-title-r{font-size:17px;font-weight:700;color:var(--navy);}
-.modal-close-r{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.modal-body{flex:1;overflow-y:auto;padding:16px;}
-.modal-footer-r{padding:12px 16px 24px;border-top:1px solid var(--border);}
-.form-sec-label{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
-.form-sec-label:first-child{margin-top:0;}
-.form-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
-.rfield{margin-bottom:10px;}
-.rfield label{display:block;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
-.rfield input,.rfield select,.rfield textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:inherit;font-size:15px;font-weight:500;padding:11px 13px;border-radius:var(--radius-sm);-webkit-appearance:none;transition:border-color .15s;}
-.rfield select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
-.rfield textarea{min-height:72px;resize:vertical;line-height:1.5;}
-.rfield input:focus,.rfield select:focus,.rfield textarea:focus{outline:none;border-color:var(--navy);background:white;}
-.rfield-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.media-zone-r{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.media-prev-r{width:72px;height:72px;border-radius:var(--radius);background:var(--bg);border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;cursor:pointer;font-size:32px;}
-.media-prev-r img{width:100%;height:100%;object-fit:cover;}
-.media-btns-r{display:flex;flex-direction:column;gap:5px;}
-.media-btn-r{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 12px;font-family:inherit;font-size:11px;font-weight:600;color:var(--text-muted);cursor:pointer;}
-.btn-navy-r{width:100%;background:var(--navy);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;}
-.res-card-sub  { font-size:11px;color:var(--text-muted);margin-top:1px; }
-.res-card-check { font-size:18px;flex-shrink:0; }
-.res-acc-group { background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden; }
-.res-acc-header { display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid transparent; }
-.res-acc-header.open { border-bottom-color:var(--border); }
-.res-acc-cat-icon { width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;overflow:hidden; }
-.res-acc-cat-icon img { width:100%;height:100%;object-fit:cover; }
-.res-acc-title { flex:1;font-size:14px;font-weight:700;color:var(--text); }
-.res-acc-count { font-size:11px;font-weight:700;color:var(--text-muted);background:var(--bg);padding:3px 8px;border-radius:10px; }
-.res-acc-count.has-sel { background:#e8f5f3;color:var(--teal); }
-.res-acc-chevron { color:var(--text-light);font-size:12px;transition:transform 0.25s; }
-.res-acc-header.open .res-acc-chevron { transform:rotate(180deg); }
-.res-acc-body { max-height:0;overflow:hidden;transition:max-height 0.35s ease; }
-.res-acc-body.open { max-height:9999px; }
-.res-acc-inner { padding:10px 12px; }
-
 .info-row {
   display: flex;
   align-items: center;
@@ -1310,16 +1289,17 @@ textarea { resize: none; }
 </div>
 
 <!-- STEP DOTS -->
-<div class="step-bar" id="step-bar" style="padding:8px 12px 0;background:white;flex-shrink:0;">
-  <div class="step-dot active" id="dot-0"></div>
-  <div class="step-dot" id="dot-1"></div>
-  <div class="step-dot" id="dot-2"></div>
-  <div class="step-dot" id="dot-3"></div>
-  <div class="step-dot" id="dot-4"></div>
-  <div class="step-dot" id="dot-5"></div>
-</div>
-
 <div class="scroll-area" id="main-scroll">
+
+  <!-- STEP INDICATOR -->
+  <div class="step-bar" id="step-bar">
+    <div class="step-dot active" id="dot-0"></div>
+    <div class="step-dot" id="dot-1"></div>
+    <div class="step-dot" id="dot-2"></div>
+    <div class="step-dot" id="dot-3"></div>
+    <div class="step-dot" id="dot-4"></div>
+    <div class="step-dot" id="dot-5"></div>
+  </div>
 
   <!-- ═══════════════════════════════════
        SECTION 0 : EN-TÊTE
@@ -1385,7 +1365,7 @@ textarea { resize: none; }
   ════════════════════════════════════ -->
   <div class="section" id="sec-2">
 
-    <!-- ZONE SÉLECTION -->
+    <!-- ZONE SÉLECTION (même principe que fournitures) -->
     <div id="loc-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
         <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.1);">
@@ -1395,15 +1375,48 @@ textarea { resize: none; }
       </div>
     </div>
 
-    <!-- BARRE RECHERCHE -->
-    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;display:flex;gap:8px;align-items:center;padding:10px 12px;">
-      <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
-        type="text" placeholder="Rechercher…" id="loc-search" oninput="locSearch(this.value)">
-      <button onclick="locClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="loc-clear">✕</button>
+    <!-- CATALOGUE LOCATION -->
+    <div class="accord-group" id="accord-vehicules">
+      <div class="accord-header" onclick="toggleAccord('vehicules')">
+        <span class="accord-icon">🚛</span>
+        <span class="accord-title">Véhicules</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-vehicules">
+        <div class="accord-inner" id="loc-vehicules"></div>
+        <div style="padding:0 0 10px;">
+          <button class="btn-add-loc" onclick="openAddLoc('vehicules','🚛')">➕ Ajouter un véhicule</button>
+        </div>
+      </div>
     </div>
 
-    <!-- CATALOGUE LOCATION (rempli par JS depuis Ressources) -->
-    <div id="loc-catalogue"></div>
+    <div class="accord-group" id="accord-materiel">
+      <div class="accord-header" onclick="toggleAccord('materiel')">
+        <span class="accord-icon">🦺</span>
+        <span class="accord-title">Matériel & Outillage</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-materiel">
+        <div class="accord-inner" id="loc-materiel"></div>
+        <div style="padding:0 0 10px;">
+          <button class="btn-add-loc" onclick="openAddLoc('materiel','🦺')">➕ Ajouter du matériel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="accord-group" id="accord-engins">
+      <div class="accord-header" onclick="toggleAccord('engins')">
+        <span class="accord-icon">🚜</span>
+        <span class="accord-title">Engins</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-engins">
+        <div class="accord-inner" id="loc-engins"></div>
+        <div style="padding:0 0 10px;">
+          <button class="btn-add-loc" onclick="openAddLoc('engins','🚜')">➕ Ajouter un engin</button>
+        </div>
+      </div>
+    </div>
 
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(1)">←</button>
@@ -1544,10 +1557,10 @@ textarea { resize: none; }
   ════════════════════════════════════ -->
   <div class="section" id="sec-4">
 
-    <!-- ZONE SÉLECTION -->
+    <!-- ZONE SÉLECTION (toujours visible en haut) -->
     <div id="fournit-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
-        <div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.1);">
+        <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);">
           <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Fournitures / Évacuations</span>
         </div>
         <div id="fournit-sel-list"></div>
@@ -1559,11 +1572,30 @@ textarea { resize: none; }
       <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
         type="text" placeholder="Rechercher un produit…" id="fournit-search" oninput="fournitSearch(this.value)">
       <button onclick="fournitClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="fournit-clear">✕</button>
-      <button onclick="openAddMateriauOverlay()" style="background:var(--teal);color:white;border:none;font-family:inherit;font-size:13px;font-weight:700;padding:8px 12px;border-radius:var(--radius-sm);cursor:pointer;flex-shrink:0;">+ Nouveau</button>
     </div>
 
-    <!-- CATALOGUE FOURNITURES (depuis rv6_materials) -->
+    <!-- CATALOGUE FOURNITURES -->
     <div id="fournit-catalogue"></div>
+
+    <!-- ÉVACUATIONS -->
+    <div class="accord-group" id="accord-evac">
+      <div class="accord-header" onclick="toggleAccord('evac')">
+        <span class="accord-title">Évacuations</span>
+        <span class="accord-summary empty" id="sum-evac">—</span>
+        <span class="accord-chevron">▼</span>
+      </div>
+      <div class="accord-body" id="body-evac">
+        <div style="padding:10px 14px;">
+          <div class="col-headers">
+            <span>Matériau</span><span>Qté</span><span>Unité</span><span></span>
+          </div>
+          <div id="evac-list"></div>
+          <button class="btn-add-row" onclick="addFournitRow('evac-list','sum-evac')">+ Ajouter évacuation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RÉCAP + FINALISER -->
 
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(3)">←</button>
@@ -1771,94 +1803,42 @@ textarea { resize: none; }
 </div>
 
 <script>
-// ─── DATA DEPUIS RESSOURCES ENTREPRISE ────────────────────────
+// ─── DATA ─────────────────────────────────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
 const REPORTS_KEY = 'rj_reports_v1';
 const TRASH_KEY   = 'rj_trash_v1';
 const MAX_DAYS    = 30;
 const TRASH_DAYS  = 7;
-
-// Lecture dynamique depuis les clés partagées du Hub Ressources
-function getResEquipe() {
-  try { return JSON.parse(localStorage.getItem('rv6_equipe') || '[]'); } catch(e) { return []; }
-}
-function getResChantiers() {
-  // Migration one-shot : ancienne clé rv6_c → rv6_chantiers_v1
-  if(!localStorage.getItem('rv6_c_migrated')){
-    try{
-      const old=localStorage.getItem('rv6_c');
-      if(old){
-        const arr=JSON.parse(old);
-        const existing=JSON.parse(localStorage.getItem('rv6_chantiers_v1')||'[]');
-        if(!existing.length && arr.length){
-          const objs=arr.map((c,i)=>typeof c==='string'?{id:'mig_'+i,nom:c,statut:'actif'}:c);
-          localStorage.setItem('rv6_chantiers_v1',JSON.stringify(objs));
-        }
-      }
-    }catch(e){}
-    localStorage.setItem('rv6_c_migrated','1');
-  }
-  try { return JSON.parse(localStorage.getItem('rv6_chantiers_v1') || '[]'); } catch(e) { return []; }
-}
-function getResMachines() {
-  try { return JSON.parse(localStorage.getItem('rv6_m') || '[]'); } catch(e) { return []; }
-}
-function getResVehicules() {
-  try { return JSON.parse(localStorage.getItem('rv6_vehicles') || '[]'); } catch(e) { return []; }
-}
-function getResMateriel() {
-  try { return JSON.parse(localStorage.getItem('rv6_equipment') || '[]'); } catch(e) { return []; }
-}
-
-// Noms des employés depuis Ressources
-function getNomPresets() {
-  const equipe = getResEquipe();
-  return equipe.map(e => e.nom || e.name || '').filter(Boolean);
-}
-let NOMS_PRESETS = [];
-
-// Chantiers depuis Ressources
-function getChantiersForRapport() {
-  const ch = getResChantiers();
-  return ch.map(c => typeof c === 'string' ? c : (c.nom||c.name||c)).filter(Boolean);
-}
-let CHANTIERS = [];
-
-// Équipements location — construits depuis Ressources
-function buildLocFromRessources() {
-  // Engins = machines depuis rv6_m
-  const machines = getResMachines();
-  const locEngins = machines.map(m => ({
-    id: m.id || ('m-' + (m.nom||m.name||'').replace(/\s/g,'_')),
-    label: m.nom || m.name || '—',
-    unit: 'h'
-  }));
-
-  // Véhicules depuis rv6_vehicles
-  const vehicules = getResVehicules();
-  const locVehicules = vehicules.map(v => ({
-    id: v.id || ('v-' + (v.nom||'').replace(/\s/g,'_')),
-    label: v.nom || '—',
-    unit: 'p/j'
-  }));
-
-  // Matériel depuis rv6_equipment
-  const materiel = getResMateriel();
-  const locMateriel = materiel.map(mt => ({
-    id: mt.id || ('mt-' + (mt.nom||'').replace(/\s/g,'_')),
-    label: mt.nom || '—',
-    unit: 'h'
-  }));
-
-  return { locEngins, locVehicules, locMateriel };
-}
-
-// Variables globales (peuplées à l'init)
-let LOC_VEHICULES = [];
-let LOC_MATERIEL  = [];
-let LOC_ENGINS    = [];
-
+const NOMS_PRESETS = ['Jonathan','Risse','Maxime','Pierre','André','Thomas'];
+const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport'];
 const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
+const MAT_FOURNITURES = ['Béton','Gravier 4/16','Gravier 0/40','Sable','Tout-venant','Enrobé','Bordures béton','Tuyaux PVC','Grillage','Géotextile','Câble électrique','Plaques acier','Sacs ciment'];
+const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé','Ferraille','Déchets chantier','Boue/sédiments','Bois'];
+
+const LOC_VEHICULES = [
+  {id:'camionnette', label:'Camionnette', unit:'p/j'},
+  {id:'camion-grue', label:'Camion grue', unit:'h'},
+];
+const LOC_MATERIEL = [
+  {id:'outillage-elec', label:'Outillage électrique', unit:'h'},
+  {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h'},
+  {id:'rouleau', label:'Rouleau', unit:'h'},
+  {id:'compresseur', label:'Compresseur', unit:'h'},
+  {id:'generatrice', label:'Génératrice', unit:'h'},
+  {id:'camera', label:'Caméra / Mat. détection', unit:'pc'},
+  {id:'scie', label:'Scie route / murale', unit:'ml'},
+  {id:'karcher', label:'Kärcher', unit:'h'},
+  {id:'carotteuse', label:'Carotteuse', unit:'forages'},
+  {id:'pont-lourd', label:'Déplacements pont lourd', unit:'pc'},
+];
+const LOC_ENGINS = [
+  {id:'mecalac', label:'Mecalac MWR7', unit:'h'},
+  {id:'dumper', label:'Dumper', unit:'h'},
+  {id:'pelle-5t', label:'5 tonnes', unit:'h'},
+  {id:'pelle-3t', label:'3 tonnes', unit:'h'},
+  {id:'pelle-1t5', label:'1.5 tonne', unit:'h'},
+];
+
 let state = {
   currentSection: 0,
   employes: [],
@@ -1879,30 +1859,9 @@ function updateHeader() {
   } else {
     subEl.textContent = 'Nouveau rapport';
   }
-  // Rafraîchir les badges d'heures dans l'accordéon engins
-  refreshEnginBadges();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  // Fix layout Samsung/Android PWA — force recalcul au premier rendu
-  requestAnimationFrame(() => {
-    document.body.style.height = window.innerHeight + 'px';
-    document.querySelector('.scroll-area').style.maxHeight =
-      (window.innerHeight
-        - (document.querySelector('.app-header')?.offsetHeight || 56)
-        - (document.querySelector('.step-bar')?.offsetHeight || 16)
-        - (document.querySelector('.tab-bar')?.offsetHeight || 64)
-      ) + 'px';
-  });
-
-  // Charger les données depuis Ressources entreprise
-  NOMS_PRESETS = getNomPresets();
-  CHANTIERS    = getChantiersForRapport();
-  const loc    = buildLocFromRessources();
-  LOC_VEHICULES = loc.locVehicules;
-  LOC_MATERIEL  = loc.locMateriel;
-  LOC_ENGINS    = loc.locEngins;
-
   setDefaultDate();
   buildChantierChips();
   buildNomChips();
@@ -1951,196 +1910,20 @@ function buildNomChips() {
   });
 }
 
-// ─── HELPERS RESSOURCES ──────────────────────────────────────
-function resLoad(key) {
-  try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch(e) { return []; }
-}
-function resCats(section) {
-  const CAT_KEY = 'rv6_res_categories';
-  try {
-    const all = JSON.parse(localStorage.getItem(CAT_KEY) || '{}');
-    return all[section] || [];
-  } catch(e) { return []; }
-}
-function resCatIndicator(cat, size) {
-  const s = size || 28;
-  if (cat?.image) return `<div style="width:${s}px;height:${s}px;border-radius:6px;overflow:hidden;flex-shrink:0;"><img src="${cat.image}" style="width:100%;height:100%;object-fit:cover;"></div>`;
-  if (cat?.emoji) return `<div style="width:${s}px;height:${s}px;border-radius:6px;background:${cat.color||'#eee'}22;display:flex;align-items:center;justify-content:center;font-size:${Math.round(s*0.57)}px;flex-shrink:0;">${cat.emoji}</div>`;
-  return `<div style="width:${s}px;height:${s}px;border-radius:6px;background:${cat?.color||'#1B3A6B'}22;flex-shrink:0;"></div>`;
-}
-function resItemIcon(item, defaultIcon) {
-  if (item.photo) return `<div class="res-card-icon"><img src="${item.photo}"></div>`;
-  if (item.icon)  return `<div class="res-card-icon" style="font-size:20px;">${item.icon}</div>`;
-  return `<div class="res-card-icon" style="font-size:20px;">${defaultIcon||'📦'}</div>`;
-}
-
 function buildLocationItems() {
-  const container = document.getElementById('loc-catalogue');
-  if (!container) return;
-  container.innerHTML = '';
+  // Charger les équipements custom sauvegardés
+  const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
+  if (ressources.vehicules) LOC_VEHICULES.push(...ressources.vehicules);
+  if (ressources.materiel)  LOC_MATERIEL.push(...ressources.materiel);
+  if (ressources.engins)    LOC_ENGINS.push(...ressources.engins);
 
-  const sections = [
-    { key: 'vehicules', label: '🚛 Véhicules',          storeKey: 'rv6_vehicles',   unit: 'p/j', sub: i => [i.type, i.immat].filter(Boolean).join(' · ') },
-    { key: 'materiel',  label: '🦺 Matériel & Outillage', storeKey: 'rv6_equipment',  unit: 'h',   sub: i => [i.type, i.marque].filter(Boolean).join(' · ') },
-    { key: 'machines',  label: '🚜 Engins',              storeKey: 'rv6_m',          unit: 'h',   sub: i => [i.type, i.annee].filter(Boolean).join(' · ') },
-  ];
-
-  sections.forEach(sec => {
-    const items = resLoad(sec.storeKey);
-    const cats  = resCats(sec.key === 'machines' ? 'machines' : sec.key);
-
-    // Grouper par catégorie
-    const withCat = cats.length > 0;
-    const grouped = {};
-    items.forEach(item => {
-      const catId = item.categorie || '__none__';
-      if (!grouped[catId]) grouped[catId] = [];
-      grouped[catId].push(item);
-    });
-
-    // Accordéon principal par section
-    const secDiv = document.createElement('div');
-    secDiv.className = 'res-acc-group';
-    secDiv.id = `loc-sec-${sec.key}`;
-
-    const secHeader = document.createElement('div');
-    secHeader.className = 'res-acc-header';
-    secHeader.innerHTML = `
-      <span style="font-size:20px;">${sec.label.split(' ')[0]}</span>
-      <span class="res-acc-title">${sec.label.substring(sec.label.indexOf(' ')+1)}</span>
-      <span class="res-acc-count" id="loc-cnt-${sec.key}">—</span>
-      <span class="res-acc-chevron">▼</span>
-    `;
-    const secBody = document.createElement('div');
-    secBody.className = 'res-acc-body';
-    secHeader.onclick = () => { secHeader.classList.toggle('open'); secBody.classList.toggle('open'); };
-    secDiv.appendChild(secHeader);
-
-    const inner = document.createElement('div');
-    inner.className = 'res-acc-inner';
-
-    if (items.length === 0) {
-      inner.innerHTML = `<p style="font-size:13px;color:var(--text-muted);text-align:center;padding:12px 0;">Aucun élément — ajouter dans Ressources</p>`;
-    } else if (withCat) {
-      // Sous-accordéons par catégorie
-      cats.forEach(cat => {
-        const catItems = grouped[cat.id] || [];
-        if (!catItems.length) return;
-        const catDiv = document.createElement('div');
-        catDiv.style.cssText = 'background:white;border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:8px;overflow:hidden;';
-        const catH = document.createElement('div');
-        catH.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;';
-        catH.innerHTML = `
-          ${resCatIndicator(cat, 24)}
-          <span style="flex:1;font-size:13px;font-weight:700;">${cat.nom||cat.name||'—'}</span>
-          <span style="font-size:11px;color:var(--text-muted);">${catItems.length}</span>
-          <span style="font-size:11px;color:var(--text-light);">▼</span>
-        `;
-        const catB = document.createElement('div');
-        catB.style.cssText = 'max-height:0;overflow:hidden;transition:max-height 0.3s ease;';
-        catH.onclick = () => {
-          const isOpen = catB.style.maxHeight !== '0px' && catB.style.maxHeight !== '';
-          catB.style.maxHeight = isOpen ? '0' : '9999px';
-          catH.querySelector('span:last-child').textContent = isOpen ? '▼' : '▲';
-        };
-        catDiv.appendChild(catH);
-        catItems.forEach(item => catB.appendChild(buildLocCard(item, sec)));
-        catDiv.appendChild(catB);
-        inner.appendChild(catDiv);
-      });
-      // Items sans catégorie
-      (grouped['__none__'] || []).forEach(item => inner.appendChild(buildLocCard(item, sec)));
-    } else {
-      items.forEach(item => inner.appendChild(buildLocCard(item, sec)));
-    }
-
-    secBody.appendChild(inner);
-    secDiv.appendChild(secBody);
-    container.appendChild(secDiv);
-    updateLocCount(sec.key);
-  });
+  buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
+  buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
+  buildLocGroup('loc-engins',    LOC_ENGINS,    'engins');
 }
-
-function buildLocCard(item, sec) {
-  const id = item.id || item.nom;
-  const isSelected = !!locSelection[id];
-  const card = document.createElement('div');
-  card.className = 'res-card';
-  card.dataset.id = id;
-  card.dataset.nom = item.nom || '';
-  const sub = sec.sub(item);
-  card.innerHTML = `
-    ${resItemIcon(item, sec.label.split(' ')[0])}
-    <div class="res-card-body">
-      <div class="res-card-name${isSelected?' sel':''}" id="locname-${id}">${item.nom||'—'}</div>
-      ${sub ? `<div class="res-card-sub">${sub}</div>` : ''}
-    </div>
-    <span id="locchk-${id}" style="font-size:18px;flex-shrink:0;">${isSelected?'✅':'⬜'}</span>
-  `;
-  const unit = item.unite || item.unit || sec.unit || 'h';
-  card.onclick = () => toggleLocSelect({ id, label: item.nom, unit });
-  return card;
-}
-
-function updateLocCount(secKey) {
-  const el = document.getElementById(`loc-cnt-${secKey}`);
-  if (!el) return;
-  const count = Object.keys(locSelection).length;
-  // Count only items from this section
-  const storeMap = { vehicules: 'rv6_vehicles', materiel: 'rv6_equipment', machines: 'rv6_m' };
-  const sectionItems = resLoad(storeMap[secKey] || '').map(i => i.id || i.nom);
-  const sectionSel = Object.keys(locSelection).filter(id => sectionItems.includes(id)).length;
-  el.textContent = sectionSel > 0 ? `${sectionSel} sél.` : '—';
-  el.classList.toggle('has-sel', sectionSel > 0);
-}
-
-// Recherche location
-function locSearch(q) {
-  document.getElementById('loc-clear').style.display = q ? 'block' : 'none';
-  q = q.toLowerCase().trim();
-  document.querySelectorAll('#loc-catalogue .res-card').forEach(card => {
-    const match = !q || card.dataset.nom.toLowerCase().includes(q);
-    card.style.display = match ? '' : 'none';
-  });
-  if (q) document.querySelectorAll('#loc-catalogue .res-acc-header').forEach(h => {
-    h.classList.add('open'); h.nextElementSibling?.classList.add('open');
-  });
-}
-function locClearSearch() { document.getElementById('loc-search').value = ''; locSearch(''); }
-
-
 
 // État sélection location : { id: { label, unit, qty } }
 let locSelection = {};
-
-// ─── HEURES MACHINES → LOCATION ──────────────────────────────
-// Retourne la somme des heures enregistrées dans rv6_e pour
-// cette machine à la date du rapport (toutes chantiers confondus)
-function getEnginHoursForDate(machineName) {
-  const date = document.getElementById('rj-date')?.value;
-  if (!date || !machineName) return 0;
-  try {
-    const entries = JSON.parse(localStorage.getItem('rv6_e') || '[]');
-    return entries
-      .filter(e => e.date === date && (e.machine||'').toLowerCase() === machineName.toLowerCase())
-      .reduce((s, e) => s + parseFloat(e.total || 0), 0);
-  } catch(e) { return 0; }
-}
-
-// Rafraîchit les badges d'heures dans l'accordéon engins (appelé quand la date change)
-function refreshEnginBadges() {
-  LOC_ENGINS.forEach(engin => {
-    const badge = document.getElementById(`engin-h-${engin.id}`);
-    if (!badge) return;
-    const h = getEnginHoursForDate(engin.label);
-    if (h > 0) {
-      badge.textContent = `${parseFloat(h.toFixed(2))} h`;
-      badge.style.display = 'inline-block';
-    } else {
-      badge.style.display = 'none';
-    }
-  });
-}
 
 function buildLocGroup(containerId, items, groupKey) {
   const c = document.getElementById(containerId);
@@ -2155,17 +1938,6 @@ function buildLocGroup(containerId, items, groupKey) {
     nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
     nameSpan.textContent = `${item.label} (${item.unit})`;
     nameSpan.id = `locname-${item.id}`;
-
-    // Badge heures machines (engins uniquement)
-    if (groupKey === 'engins') {
-      const h = getEnginHoursForDate(item.label);
-      const badge = document.createElement('span');
-      badge.id = `engin-h-${item.id}`;
-      badge.style.cssText = 'font-size:10px;font-weight:700;background:rgba(26,127,114,.15);color:#0F6E56;padding:2px 8px;border-radius:10px;margin-left:6px;flex-shrink:0;';
-      badge.style.display = h > 0 ? 'inline-block' : 'none';
-      if (h > 0) badge.textContent = `${parseFloat(h.toFixed(2))} h`;
-      nameSpan.appendChild(badge);
-    }
 
     const chk = document.createElement('span');
     chk.id = `locchk-${item.id}`;
@@ -2182,10 +1954,7 @@ function buildLocGroup(containerId, items, groupKey) {
 function toggleLocSelect(item) {
   const isNow = !locSelection[item.id];
   if (isNow) {
-    // Pré-remplir avec les heures machines du jour si disponibles
-    const machineH = getEnginHoursForDate(item.label);
-    const qty = machineH > 0 ? parseFloat(machineH.toFixed(2)) : 0;
-    locSelection[item.id] = { label: item.label, unit: item.unit, qty, fromMachines: machineH > 0 };
+    locSelection[item.id] = { label: item.label, unit: item.unit, qty: 0 };
   } else {
     delete locSelection[item.id];
   }
@@ -2214,7 +1983,7 @@ function renderLocSelectionZone() {
     const item = allItems.find(i => i.id === id);
 
     row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label}${sel.fromMachines ? ' <span style=\"font-size:9px;background:rgba(26,127,114,.5);color:#fff;padding:1px 5px;border-radius:8px;margin-left:5px;font-weight:700;letter-spacing:.3px;vertical-align:middle;\">🚜 auto</span>' : ''} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
       <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
       <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
       <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
@@ -2232,18 +2001,13 @@ function renderLocSelectionZone() {
 
     const updateQty = (val) => {
       locSelection[id].qty = Math.round(val * 4) / 4;
-      locSelection[id].fromMachines = false; // saisie manuelle — ne plus écraser
       input.value = locSelection[id].qty > 0 ? locSelection[id].qty : '';
       autoSaveDraft();
     };
     btnQrt.onclick  = () => updateQty((parseFloat(input.value)||0) + 0.25);
     btnHalf.onclick = () => updateQty((parseFloat(input.value)||0) + 0.5);
     btnOne.onclick  = () => updateQty((parseFloat(input.value)||0) + 1);
-    input.oninput   = () => {
-      locSelection[id].qty = parseFloat(input.value)||0;
-      locSelection[id].fromMachines = false; // saisie manuelle — ne plus écraser
-      autoSaveDraft();
-    };
+    input.oninput   = () => { locSelection[id].qty = parseFloat(input.value)||0; autoSaveDraft(); };
     btnDel.onclick  = () => {
       delete locSelection[id];
       const nameEl = document.getElementById(`locname-${id}`);
@@ -2308,6 +2072,8 @@ function updateLocSummary(groupKey) {
 }
 
 function buildMatChips() {
+  // quick-fournitures supprimé — uniquement les évacuations restent
+  buildMatChipGroup('quick-evacuations', MAT_EVACUATIONS, 'evac-list', 'badge-evac');
 }
 
 function buildMatChipGroup(containerId, items, listId, badgeId) {
@@ -2331,12 +2097,7 @@ function goSection(n) {
   state.currentSection = n;
   document.getElementById('main-scroll').scrollTop = 0;
   updateStepBar(n);
-  if (n === 4) {
-    // Toujours reconstruire depuis Ressources (données peuvent avoir changé)
-    const cat = document.getElementById('fournit-catalogue');
-    if (cat) cat.innerHTML = '';
-    buildFournitCatalogue();
-  }
+  if (n === 4) { buildFournitCatalogue(); }
   if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
 }
 
@@ -3167,6 +2928,8 @@ function buildRecapPreview() {
 
   const travaux = document.getElementById('tx-travaux').value || '';
   const nMetres = document.getElementById('metres-list')?.children.length || 0;
+  const nEvac = document.getElementById('evac-list')?.children.length || 0;
+
   // Location summary
   const locFilled = Object.entries(locSelection).filter(([,sel]) => sel.qty > 0);
 
@@ -3264,6 +3027,12 @@ function collectData() {
     fournitData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
   });
 
+  const evacData = [];
+  document.querySelectorAll('#evac-list .fournit-item').forEach(row => {
+    const inputs = row.querySelectorAll('input, select');
+    evacData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
+  });
+
   return {
     date: document.getElementById('rj-date').value,
     nom: document.getElementById('rj-nom').value,
@@ -3276,6 +3045,7 @@ function collectData() {
     metres: metresData,
     fournitures: fournitData,
     fournitSelection: fournitSelection,
+    evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
       cat: k.split('|')[0], nom: k.split('|')[1], qty: v.qty, unit: v.unit
     })),
@@ -3344,6 +3114,16 @@ function loadDraft() {
     }
 
     // Évacuations
+    if (d.evacuations) d.evacuations.forEach(e => {
+      addFournitRowWithMat('evac-list', 'sum-evac', e.mat);
+      const rows = document.querySelectorAll('#evac-list .fournit-item');
+      const last = rows[rows.length-1];
+      if (last) {
+        const inputs = last.querySelectorAll('input, select');
+        if (inputs[1]) inputs[1].value = e.qte;
+        if (inputs[2]) inputs[2].value = e.unite;
+      }
+    });
 
     updateHeader();
   } catch(e) { console.warn('Draft load error', e); }
@@ -3393,7 +3173,9 @@ function resetRapport() {
   renderFournitSelectionZone();
 
   // Évacuations
-  if (sumEvac) sumEvac.textContent = '—';
+  document.getElementById('evac-list').innerHTML = '';
+  const sumEvac = document.getElementById('sum-evac');
+  const sumEvacEl = document.getElementById('sum-evac'); if (sumEvacEl) sumEvacEl.textContent = '—';
 
   updateHeader();
 }
@@ -3427,6 +3209,7 @@ function finaliserRapport() {
 
 
 // ─── MODULE FOURNITURES ────────────────────────────────────────
+const FOURNIT_CATEGORIES = {"Protection":{"subcats":{"Scotch":["Scotch carossier 15mm","Scotch carossier 19mm","Scotch carossier 25mm","Scotch carossier 30mm","Scotch carossier 38mm","Scotch carossier 50mm","Scotch jaune","Papier de protection","Sicrall"],"Rouleau":["Plastique","Protection Floorliner permafix 1m","Protection Floorliner permafix 2m","Protection statique"]}},"Mortier":{"subcats":{"Mortier":["Weber multi 280","Webermur 920","Weberton 908","Weber ip 14","Weber NO MIX Béton","Holcim Optimo","StoCrete SM","StoCrete TM","Ciment rapide PROMPT","Chape ciment","Chape rapide"]}},"Canalisation PVC":{"subcats":{"PVC Ø 110":["Coude PVC Ø 110 mm 15°","Coude PVC Ø 110 mm 30°","Coude PVC Ø 110 mm 45°","Coude PVC Ø 110 mm 67°","Coude PVC Ø 110 mm 90°","Embranchement Y Ø 110 mm 45°","Embranchement T Ø 110 mm 90°","Bouchon PVC Ø 110 mm","Manchon PVC Ø 110 mm","Tuyau drainage PVC Ø 110 mm 5m","Tuyau PVC Ø 110 mm 5m"],"PVC Ø 125":["Coude PVC Ø 125 mm 45°","Coude PVC Ø 125 mm 90°","Bouchon PVC Ø 125 mm","Tuyau PVC Ø 125 mm 5m","Réduction PVC Ø 125/110 mm"],"PVC Ø 160":["Coude PVC Ø 160 mm 45°","Coude PVC Ø 160 mm 90°","Bouchon PVC Ø 160 mm","Tuyau PVC Ø 160 mm 5m","Réduction PVC Ø 160/110 mm","Réduction PVC Ø 160/125 mm"],"PVC Ø 200":["Coude PVC Ø 200 mm 45°","Bouchon PVC Ø 200 mm","Tuyau PVC Ø 200 mm 5m","Réduction PVC Ø 200/160 mm"],"PVC Ø 250":["Coude PVC Ø 250 mm 45°","Tuyau PVC Ø 250 mm 5m","Réduction PVC Ø 250/200 mm"],"Chambres béton":["Tuyaux béton Ø40 50cm","Tuyaux béton Ø40 100cm","Tuyaux béton Ø60 100cm","Tuyaux béton Ø80 100cm","Couvercle de regard"]}},"Bois":{"subcats":{"Bois":["Latte à tuile 4m","Lambourde 4m","Planche de 15 4m","Plateau raboté 4m","Panneau de coffrage 2m","Panneau de coffrage 2.5m","Poutrelle","Carelet 1m","Carelet 2m","Carelet 3m","Carelet 4m"]}},"Coffrage":{"subcats":{"Distanceur":["Distanceur 100mm","Distanceur 120mm","Distanceur 150mm","Distanceur 180mm","Distanceur 200mm","Distanceur 220mm","Distanceur 250mm","Distanceur 300mm"],"Autres":["Réglette d'espacement","Constri-Taquets","Goutte pendante","Liste d'angle haut de coffrage","Liste d'angle noyée"]}},"Isolation":{"subcats":{"XPS":["XPS 10mm","XPS 20mm","XPS 30mm","XPS 40mm","XPS 50mm","XPS 60mm","XPS 80mm","XPS 100mm","XPS 120mm","XPS 150mm","XPS 200mm"],"EPS":["EPS 10mm","EPS 20mm","EPS 30mm","EPS 40mm","EPS 50mm","EPS 80mm","EPS 100mm","EPS 120mm","EPS 150mm","EPS 200mm"],"Autre":["Bande de rive","Laine de verre","Laine de pierre","Plastimule"]}},"Alba":{"subcats":{"ALBA 40mm":["ALBA 50/100cm","ALBA Hydro 50/100cm"],"ALBA 60mm":["ALBA 50/66cm","ALBA Hydro 50/66cm","ALBA Light 50/66cm"],"ALBA 80mm":["ALBA 50/66cm (80mm)","ALBA Hydro 50/66cm (80mm)"],"ALBA 100mm":["ALBA 50/66cm (100mm)","ALBA Hydro 50/66cm (100mm)","ALBA Light 50/66cm (100mm)"],"Sacs & Colle":["Colle Enduit PF3","FIXIT 160","FIXIT 140"],"Autre":["Brique béton cellulaire 80mm 52/62"]}},"Crépis":{"subcats":{"Treillis":["Treillis d'armature renforcé","Treillis d'armature","Treillis d'angle","Profilé pour enduit"]}},"Pièce PE":{"subcats":{"PE Ø 40":["Tube PE Ø40","Coude PE 45° Ø40","Coude PE 90° Ø40","Manchon à emboîter PE Ø40"],"PE Ø 50":["Tube PE Ø50","Coude PE 45° Ø50","Coude PE 90° Ø50","Manchon à emboîter PE Ø50"],"PE Ø 56":["Tube PE Ø56","Coude PE 45° Ø56","Coude PE 90° Ø56","Embranchement 45° Ø56/56"],"PE Ø 63":["Tube PE Ø63","Coude PE 45° Ø63","Coude PE 90° Ø63","Embranchement 45° Ø63/56"],"PE Ø 75":["Tube PE Ø75","Coude PE 45° Ø75","Coude PE 90° Ø75","Embranchement 88.5° Ø75/75"],"PE Ø 90":["Tube PE Ø90","Coude PE 45° Ø90","Coude PE 90° Ø90","Embranchement 88.5° Ø90/90"],"PE Ø 110":["Tube PE Ø110","Coude PE 45° Ø110","Embranchement 45° Ø110/56","Embranchement 88.5° Ø110/110"],"PE Ø 125+":["Manchon électrique Ø125","Tube SILENTE Ø160","Coude PE 45° SILENTE Ø160","Coude PE 45° Ø200"]}},"Armature":{"subcats":{"Treillis":["K335","K188"],"Firipa":["Cage FIRIPA 90mm","Cage FIRIPA 130mm","Cage FIRIPA 150mm","Cage FIRIPA 180mm","Cage FIRIPA 190mm"],"Pannier":["Pannier avec bout caoutchouc","Pannier sans bout caoutchouc"]}},"Aménagement extérieur":{"subcats":{"Bordure":["Bordure béton 4cm","Bordure béton 6cm","Bordure béton 8cm","Bordure béton 10cm"],"Pavés & Dallage":["Pavés","Pierre naturelle","Dalle de jardin"],"Grille gazon":["Grille gazon 8cm","Grille gazon 6cm","Grille gazon plastique"]}}};
 const FOURNIT_UNITES = ['pc','m','ml','m²','m³','kg','T','L','sac','rouleau','barre','boîte','paquet','forfait'];
 const FOURNIT_CUSTOM_KEY = 'rv6_fournitures_custom_v1';
 
@@ -3434,154 +3217,155 @@ let fournitSelection = {};
 let fournitCustom = {};
 let fournitAddingCat = null;
 
-// ─── MATÉRIAUX DEPUIS RESSOURCES (rv6_materials) ──────────────
-function getResMateriaux() {
-  try { return JSON.parse(localStorage.getItem('rv6_materials') || '[]'); } catch(e) { return []; }
-}
-function buildResMatCategories(mats) {
-  // Supporte deux formats possibles du module Ressources :
-  // Format A (plat)   : [{nom, categorie?, sousCategorie?, unite?}]
-  // Format B (hiérar.): [{nom, items:[{nom,...}]}]  — catégorie = l'objet parent
-  const cats = {};
-  mats.forEach(m => {
-    if (!m || typeof m !== 'object') return;
-    if (Array.isArray(m.items)) {
-      // Format B : m est une catégorie, m.items sont les articles
-      const cat = m.nom || 'Matériaux entreprise';
-      if (!cats[cat]) cats[cat] = { subcats: {} };
-      m.items.forEach(item => {
-        const nom = item.nom || item.name || '';
-        if (!nom) return;
-        const sub = item.sousCategorie || item.sous_categorie || cat;
-        if (!cats[cat].subcats[sub]) cats[cat].subcats[sub] = [];
-        cats[cat].subcats[sub].push(nom);
-      });
-    } else {
-      // Format A : article plat avec champ categorie optionnel
-      const nom = m.nom || m.name || '';
-      if (!nom) return;
-      const cat = m.categorie || m.category || 'Matériaux entreprise';
-      const sub = m.sousCategorie || m.sous_categorie || m.subcategorie || cat;
-      if (!cats[cat]) cats[cat] = { subcats: {} };
-      if (!cats[cat].subcats[sub]) cats[cat].subcats[sub] = [];
-      cats[cat].subcats[sub].push(nom);
-    }
-  });
-  return cats;
-}
-
 function buildFournitCatalogue() {
   const container = document.getElementById('fournit-catalogue');
-  if (!container || container.children.length > 0) return;
+  if (!container) return;
+  container.innerHTML = '';
 
-  const items = resLoad('rv6_materials');
-  const cats  = resCats('materiaux');
+  const items = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
+  const catsData = (() => { try { return JSON.parse(localStorage.getItem('rv6_res_categories') || '{}'); } catch(e) { return {}; } })();
+  const cats = catsData.materiaux || [];
 
   if (!items.length) {
-    container.innerHTML = `
-      <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
-        <div style="font-size:36px;margin-bottom:12px;">🪨</div>
-        <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucun matériau enregistré</div>
-        <div style="font-size:12px;margin-bottom:16px;">Ajoutez des matériaux dans le module Ressources pour les retrouver ici.</div>
-        <a href="../ressources/index.html" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;">Ouvrir Ressources →</a>
-      </div>`;
+    container.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
+      <div style="font-size:36px;margin-bottom:12px;">🪨</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucun matériau enregistré</div>
+      <div style="font-size:12px;margin-bottom:16px;">Ajoutez des matériaux dans le module Ressources.</div>
+      <a href="../ressources/index.html" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;">Ouvrir Ressources →</a>
+    </div>`;
     return;
   }
 
-  // Grouper par catégorie
+  // Group items by category
   const grouped = {};
   items.forEach(item => {
-    const catId = item.categorie || '__none__';
-    if (!grouped[catId]) grouped[catId] = [];
-    grouped[catId].push(item);
+    const cid = item.catId || '__none__';
+    if (!grouped[cid]) grouped[cid] = { items: [], subGroups: {} };
+    const sid = item.subCatId || '__none__';
+    if (!grouped[cid].subGroups[sid]) grouped[cid].subGroups[sid] = [];
+    grouped[cid].subGroups[sid].push(item);
+    grouped[cid].items.push(item);
   });
 
-  if (cats.length > 0) {
-    cats.forEach(cat => {
-      const catItems = grouped[cat.id] || [];
-      if (!catItems.length) return;
-      container.appendChild(buildFournitResAccord(cat, catItems));
-    });
-  }
-  // Items sans catégorie
-  const noCat = grouped['__none__'] || [];
-  if (noCat.length) {
+  // Render categories
+  cats.forEach(cat => {
+    const group = grouped[cat.id];
+    if (!group || !group.items.length) return;
+    const subs = cat.children || [];
     const div = document.createElement('div');
-    div.className = 'res-acc-group';
-    div.style.marginBottom = '10px';
+    div.className = 'r-accordion';
+    div.id = 'fcat-' + cat.id;
+
+    const selCount = group.items.filter(i => fournitSelection[i.id]).length;
+    const dotColor = cat.color || '#9AA3BC';
+    const catIndicator = cat.image
+      ? `<div style="width:28px;height:28px;border-radius:6px;overflow:hidden;flex-shrink:0;"><img src="${cat.image}" style="width:100%;height:100%;object-fit:cover;"></div>`
+      : cat.emoji
+        ? `<div style="width:28px;height:28px;border-radius:6px;background:${dotColor}22;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">${cat.emoji}</div>`
+        : `<div class="r-acc-dot" style="background:${dotColor};"></div>`;
+
     const h = document.createElement('div');
-    h.className = 'res-acc-header';
-    h.innerHTML = `<span class="res-acc-title">Autres matériaux</span><span class="res-acc-count" id="fcnt-__none__">—</span><span class="res-acc-chevron">▼</span>`;
+    h.className = 'r-acc-header';
+    h.innerHTML = `${catIndicator}<span class="r-acc-name">${cat.name||cat.nom||'—'}</span><span class="r-acc-count${selCount>0?' sel':''}" id="fcnt-${cat.id}">${selCount>0?selCount+' sél.':group.items.length}</span><span class="r-acc-chevron">›</span>`;
     const b = document.createElement('div');
-    b.className = 'res-acc-body';
+    b.className = 'r-acc-body';
     h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
     div.appendChild(h);
+
     const inner = document.createElement('div');
-    inner.className = 'res-acc-inner';
-    noCat.forEach(item => inner.appendChild(buildFournitCard(item)));
+    inner.className = 'r-acc-inner';
+
+    if (subs.length > 0) {
+      // Sous-accordéons
+      subs.forEach(sub => {
+        const subItems = (group.subGroups[sub.id] || []);
+        if (!subItems.length) return;
+        const sh = document.createElement('div');
+        sh.className = 'r-sub-header';
+        const subSelCount = subItems.filter(i => fournitSelection[i.id]).length;
+        sh.innerHTML = `<div class="r-sub-dot" style="background:${dotColor};"></div><span class="r-sub-name">${sub.name}</span><span class="r-sub-count">${subItems.length}</span><span class="r-acc-chevron" style="font-size:12px;">›</span>`;
+        const sb = document.createElement('div');
+        sb.className = 'r-sub-body';
+        sh.onclick = () => { sh.classList.toggle('open'); sb.classList.toggle('open'); };
+        const si = document.createElement('div');
+        si.className = 'r-sub-inner';
+        subItems.forEach(item => si.appendChild(buildRItem(item)));
+        sb.appendChild(si);
+        inner.appendChild(sh);
+        inner.appendChild(sb);
+      });
+      // Items sans sous-cat
+      (group.subGroups['__none__'] || []).forEach(item => inner.appendChild(buildRItem(item)));
+    } else {
+      group.items.forEach(item => inner.appendChild(buildRItem(item)));
+    }
+
     b.appendChild(inner);
+    div.appendChild(b);
+    container.appendChild(div);
+  });
+
+  // Sans catégorie
+  const noCat = grouped['__none__'];
+  if (noCat && noCat.items.length) {
+    const div = document.createElement('div');
+    div.className = 'r-accordion';
+    div.id = 'fcat-__none__';
+    const selCount = noCat.items.filter(i => fournitSelection[i.id]).length;
+    const h = document.createElement('div');
+    h.className = 'r-acc-header';
+    h.innerHTML = `<div class="r-acc-dot" style="background:#9AA3BC;"></div><span class="r-acc-name">Sans catégorie</span><span class="r-acc-count${selCount>0?' sel':''}" id="fcnt-__none__">${selCount>0?selCount+' sél.':noCat.items.length}</span><span class="r-acc-chevron">›</span>`;
+    const b = document.createElement('div');
+    b.className = 'r-acc-body';
+    h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
+    const inner = document.createElement('div');
+    inner.className = 'r-acc-inner';
+    noCat.items.forEach(item => inner.appendChild(buildRItem(item)));
+    b.appendChild(inner);
+    div.appendChild(h);
     div.appendChild(b);
     container.appendChild(div);
   }
 }
 
-function buildFournitResAccord(cat, items) {
+let _frowId = 0;
+
+function buildRItem(item) {
+  const key = item.id;
+  const isSelected = !!fournitSelection[key];
+  const uid = ++_frowId;
+  if (!window._fournitUids) window._fournitUids = {};
+  window._fournitUids[key] = uid;
+
+  const sub = [item.famille, item.unite].filter(Boolean).join(' · ');
   const div = document.createElement('div');
-  div.className = 'res-acc-group';
-  div.style.marginBottom = '10px';
-  div.id = 'fcat-' + (cat.id || fslug(cat.nom || 'cat'));
+  div.className = 'r-item';
+  div.dataset.nom = item.nom || '';
+  div.dataset.key = key;
+  div.dataset.uid = uid;
 
-  const h = document.createElement('div');
-  h.className = 'res-acc-header';
-  const selCount = items.filter(i => fournitSelection[i.id || i.nom]).length;
-  h.innerHTML = `
-    ${resCatIndicator(cat, 28)}
-    <span class="res-acc-title">${cat.nom || cat.name || '—'}</span>
-    <span class="res-acc-count${selCount > 0 ? ' has-sel' : ''}" id="fcnt-${cat.id || fslug(cat.nom)}">${selCount > 0 ? selCount + ' sél.' : '—'}</span>
-    <span class="res-acc-chevron">▼</span>
+  let iconHtml = '';
+  if (item.photo) {
+    iconHtml = `<div class="r-item-icon"><img src="${item.photo}"></div>`;
+  } else if (item.icon) {
+    iconHtml = `<div class="r-item-icon" style="font-size:20px;">${item.icon}</div>`;
+  } else {
+    iconHtml = `<div class="r-item-icon" style="font-size:20px;">📦</div>`;
+  }
+
+  div.innerHTML = `
+    ${iconHtml}
+    <div class="r-item-body">
+      <div class="r-item-name${isSelected?' sel':''}" id="fn-${uid}">${item.nom||'—'}</div>
+      ${sub ? `<div class="r-item-sub">${sub}</div>` : ''}
+    </div>
+    <span id="fchk-${uid}" class="r-item-check">${isSelected?'✅':'⬜'}</span>
   `;
-  const b = document.createElement('div');
-  b.className = 'res-acc-body';
-  h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
-  div.appendChild(h);
-
-  const inner = document.createElement('div');
-  inner.className = 'res-acc-inner';
-  items.forEach(item => inner.appendChild(buildFournitCard(item)));
-  b.appendChild(inner);
-  div.appendChild(b);
+  div.onclick = () => toggleFournitSelect(key, item.famille||'Matériaux', item.nom, item.unite||'pc');
   return div;
 }
 
-let _frowId = 0;
-
-function buildFournitCard(item) {
-  const key = item.id || item.nom;
-  const isSelected = !!fournitSelection[key];
-  const uid = ++_frowId;
-  const sub = [item.famille, item.unite].filter(Boolean).join(' · ');
-
-  const card = document.createElement('div');
-  card.className = 'res-card';
-  card.dataset.nom = item.nom || '';
-  card.dataset.key = key;
-  card.dataset.uid = uid;
-  card.innerHTML = `
-    ${resItemIcon(item, '📦')}
-    <div class="res-card-body">
-      <div class="res-card-name${isSelected?' sel':''}" id="fn-${uid}">${item.nom || '—'}</div>
-      ${sub ? `<div class="res-card-sub">${sub}</div>` : ''}
-    </div>
-    <span id="fchk-${uid}" style="font-size:18px;flex-shrink:0;">${isSelected?'✅':'⬜'}</span>
-  `;
-  if (!window._fournitUids) window._fournitUids = {};
-  window._fournitUids[key] = uid;
-  const defaultUnit = item.unite || 'pc';
-  card.onclick = () => toggleFournitSelect(key, item.famille || 'Matériaux', item.nom, defaultUnit);
-  return card;
-}
-
-function buildFournitRow(catName, nom, defaultUnit) { /* compatibilité */ return buildFournitCard({nom, unite: defaultUnit}); }
+function buildFournitRow(catName, nom, defaultUnit) { /* compat */ }
 
 function toggleFournitSelect(key, catName, nom, defaultUnit) {
   if (fournitSelection[key]) {
@@ -3592,96 +3376,49 @@ function toggleFournitSelect(key, catName, nom, defaultUnit) {
   const isNow = !!fournitSelection[key];
   const uid = window._fournitUids?.[key];
   if (uid) {
-    const nameEl = document.getElementById('fn-' + uid);
-    const chkEl  = document.getElementById('fchk-' + uid);
-    nameEl?.classList.toggle('sel', isNow);
-    if (chkEl) chkEl.textContent = isNow ? '✅' : '⬜';
+    document.getElementById('fn-' + uid)?.classList.toggle('sel', isNow);
+    const chk = document.getElementById('fchk-' + uid);
+    if (chk) chk.textContent = isNow ? '✅' : '⬜';
   }
-  // Mettre à jour compteur de la cat
-  updateFournitCatCount(catName);
+  // Update cat count
+  updateFournitCatCount();
   renderFournitSelectionZone();
   autoSaveDraft();
 }
 
-function renderFournitSelectionZone() {
-  const zone  = document.getElementById('fournit-selection-zone');
-  const list  = document.getElementById('fournit-sel-list');
-  const count = document.getElementById('fournit-sel-count');
-  const items = Object.entries(fournitSelection);
-
-  if (items.length === 0) { zone.style.display = 'none'; return; }
-  zone.style.display = 'block';
-
-  list.innerHTML = '';
-  items.forEach(([key, sel]) => {
-    const nom  = sel.nom || key.split('|')[1];
-    const cat  = sel.cat || key.split('|')[0];
-    const row  = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.08);';
-    row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${nom}</span>
-      <button class="f-plus1" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
-      <input type="number" placeholder="0"
-        style="width:48px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:6px 4px;font-family:inherit;font-size:14px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
-        min="0" step="0.5" value="${sel.qty||''}">
-      <select style="width:62px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 2px;font-family:inherit;font-size:11px;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;">
-        ${FOURNIT_UNITES.map(u=>`<option style="color:var(--text)"${u===(sel.unit||'pc')?' selected':''}>${u}</option>`).join('')}
-      </select>
-      <button class="f-del" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:28px;height:28px;border-radius:6px;cursor:pointer;flex-shrink:0;line-height:1;">✕</button>
-    `;
-    const plusBtn  = row.querySelector('.f-plus1');
-    const qtyInput = row.querySelector('input');
-    const unitSel  = row.querySelector('select');
-    const delBtn   = row.querySelector('.f-del');
-    plusBtn.onclick  = () => { const v = (parseFloat(qtyInput.value)||0) + 1; qtyInput.value = v; setSrv(key, 'qty', String(v)); };
-    qtyInput.oninput = () => setSrv(key, 'qty', qtyInput.value);
-    unitSel.onchange = () => setSrv(key, 'unit', unitSel.value);
-    delBtn.onclick   = () => toggleFournitSelect(key, cat, nom, sel.unit||'pc');
-    list.appendChild(row);
-    list.appendChild(row);
+function updateFournitCatCount() {
+  // Update all category counters
+  document.querySelectorAll('#fournit-catalogue .r-accordion').forEach(acc => {
+    const catId = acc.id.replace('fcat-', '');
+    const items = acc.querySelectorAll('.r-item');
+    const selCount = [...items].filter(el => fournitSelection[el.dataset.key]).length;
+    const countEl = document.getElementById('fcnt-' + catId);
+    if (countEl) {
+      countEl.textContent = selCount > 0 ? selCount + ' sél.' : items.length;
+      countEl.classList.toggle('sel', selCount > 0);
+    }
   });
-}
-
-function setSrv(key, field, val) {
-  if (fournitSelection[key]) { fournitSelection[key][field] = val; autoSaveDraft(); }
-}
-
-function onFournitQty() {}
-function onFournitUnit(key, select) { if (fournitSelection[key]) fournitSelection[key].unit = select.value; }
-
-function updateFournitCatCount(catName) {
-  const count = Object.keys(fournitSelection).filter(k => k.startsWith(catName + '|')).length;
-  const el = document.getElementById('fcnt-' + fslug(catName));
-  if (!el) return;
-  el.textContent = count > 0 ? `${count} sél.` : '—';
-  el.style.background = count > 0 ? '#e8f5f3' : 'var(--bg)';
-  el.style.color = count > 0 ? 'var(--teal)' : 'var(--text-muted)';
 }
 
 function fournitSearch(q) {
   document.getElementById('fournit-clear').style.display = q ? 'block' : 'none';
   q = q.toLowerCase().trim();
   if (!q) {
-    document.querySelectorAll('#fournit-catalogue .res-card').forEach(r => r.style.display = '');
-    document.querySelectorAll('#fournit-catalogue .res-acc-group').forEach(g => g.style.display = '');
-    document.querySelectorAll('#fournit-catalogue .res-acc-header').forEach(h => {
-      h.classList.remove('open'); h.nextElementSibling?.classList.remove('open');
-    });
+    document.querySelectorAll('#fournit-catalogue .r-item').forEach(r => r.style.display = '');
+    document.querySelectorAll('#fournit-catalogue .r-accordion').forEach(g => g.style.display = '');
+    document.querySelectorAll('#fournit-catalogue .r-acc-header').forEach(h => { h.classList.remove('open'); h.nextElementSibling?.classList.remove('open'); });
     return;
   }
-  document.querySelectorAll('#fournit-catalogue .res-acc-group').forEach(group => {
-    const cards = group.querySelectorAll('.res-card');
+  document.querySelectorAll('#fournit-catalogue .r-accordion').forEach(group => {
+    const items = group.querySelectorAll('.r-item');
     let hasMatch = false;
-    cards.forEach(card => {
-      const match = card.dataset.nom?.toLowerCase().includes(q);
-      card.style.display = match ? '' : 'none';
+    items.forEach(item => {
+      const match = item.dataset.nom?.toLowerCase().includes(q);
+      item.style.display = match ? '' : 'none';
       if (match) hasMatch = true;
     });
     group.style.display = hasMatch ? '' : 'none';
-    if (hasMatch) {
-      group.querySelector('.res-acc-header')?.classList.add('open');
-      group.querySelector('.res-acc-body')?.classList.add('open');
-    }
+    if (hasMatch) { group.querySelector('.r-acc-header')?.classList.add('open'); group.querySelector('.r-acc-body')?.classList.add('open'); }
   });
 }
 function fournitClearSearch() { document.getElementById('fournit-search').value = ''; fournitSearch(''); }
@@ -3708,329 +3445,20 @@ function confirmFournitAdd() {
   if (!nom || !fournitAddingCat) return;
   const unit = document.querySelector('#fournit-new-unit-chips .chip.selected')?.textContent || 'pc';
   const catName = fournitAddingCat;
-
-  // 1. Sauvegarder dans le catalogue custom du rapport
   if (!fournitCustom[catName]) fournitCustom[catName] = [];
   fournitCustom[catName].push({ nom, unit });
   localStorage.setItem(FOURNIT_CUSTOM_KEY, JSON.stringify(fournitCustom));
-
-  // 2. Sync automatique → rv6_materials (si l'article n'existe pas encore)
-  try {
-    const mats = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
-    const exists = mats.some(m => {
-      const mNom = m.nom || m.name || '';
-      return mNom.toLowerCase() === nom.toLowerCase();
-    });
-    if (!exists) {
-      mats.push({ id: 'rj_' + Date.now(), nom, categorie: catName, unite: unit });
-      localStorage.setItem('rv6_materials', JSON.stringify(mats));
-    }
-  } catch(e) {}
-
-  // 3. Mettre à jour le DOM
   const body = document.querySelector('#fcat-' + fslug(catName) + ' .accord-body');
   const addBtn = body?.querySelector('button');
   if (addBtn) body.insertBefore(buildFournitRow(catName, nom, unit), addBtn);
   document.getElementById('overlay-fournit-add').classList.remove('open');
   const t = document.getElementById('toast');
-  t.textContent = `✅ "${nom}" ajouté dans Ressources`;
+  t.textContent = `✅ "${nom}" ajouté`;
   t.classList.add('show');
   setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2000);
 }
 function closeFournitOverlay(e) { if (e.target.classList.contains('overlay')) e.target.classList.remove('open'); }
-
-// ─── QUICK-ADD FOURNITURE ───────────────────────────────────────
-
-// Construit un chip de catégorie ou sous-catégorie
-function _qaChip(label, isNew, onClick) {
-  const b = document.createElement('button');
-  b.className = 'chip';
-  b.textContent = isNew ? '+ ' + label : label;
-  b.dataset.type = isNew ? 'new' : 'existing';
-  if (isNew) b.style.cssText = 'opacity:.65;border-style:dashed;';
-  b.onclick = onClick;
-  return b;
-}
-
-// Sélectionne un chip (désélectionne les autres dans le même conteneur)
-function _qaSelect(container, btn) {
-  container.querySelectorAll('.chip').forEach(x => x.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-// Affiche les sous-catégories quand une catégorie est choisie
-function _qaShowSubcats(catName, catData) {
-  const row       = document.getElementById('qa-subcat-row');
-  const chipsEl   = document.getElementById('qa-subcat-chips');
-  const inputEl   = document.getElementById('qa-subcat-input');
-  chipsEl.innerHTML = '';
-  inputEl.style.display = 'none';
-  inputEl.value = '';
-
-  // Sous-cats = toutes les clés de subcats sauf si unique et == catName
-  const subs = Object.keys(catData?.subcats || {}).filter(s => s !== catName);
-  if (!subs.length) { row.style.display = 'none'; return; }
-
-  row.style.display = '';
-  subs.forEach(sub => {
-    const b = _qaChip(sub, false, () => {
-      _qaSelect(chipsEl, b);
-      inputEl.style.display = 'none';
-      inputEl.value = sub;
-    });
-    chipsEl.appendChild(b);
-  });
-  // Chip "Nouvelle sous-catégorie"
-  const bNew = _qaChip('Nouvelle sous-catégorie', true, () => {
-    _qaSelect(chipsEl, bNew);
-    inputEl.value = '';
-    inputEl.style.display = '';
-    inputEl.focus();
-  });
-  chipsEl.appendChild(bNew);
-}
-
-function openQuickAddFournit() {
-  const catTree  = buildResMatCategories(getResMateriaux()); // utilise les fonctions existantes
-  const catNames = Object.keys(catTree);
-  const catChips = document.getElementById('qa-cat-chips');
-  const catInput = document.getElementById('qa-cat-input');
-
-  // Reset
-  catChips.innerHTML = '';
-  catInput.style.display = catNames.length ? 'none' : '';
-  catInput.value = '';
-  document.getElementById('qa-subcat-row').style.display = 'none';
-  document.getElementById('qa-subcat-chips').innerHTML = '';
-  document.getElementById('qa-subcat-input').value = '';
-  document.getElementById('qa-nom').value = '';
-  document.getElementById('qa-nom').style.borderColor = '';
-
-  // Chips catégories existantes
-  catNames.forEach(cat => {
-    const b = _qaChip(cat, false, () => {
-      _qaSelect(catChips, b);
-      catInput.style.display = 'none';
-      catInput.value = cat;
-      _qaShowSubcats(cat, catTree[cat]);
-    });
-    catChips.appendChild(b);
-  });
-
-  // Chip "Nouvelle catégorie"
-  const bNew = _qaChip('Nouvelle catégorie', true, () => {
-    _qaSelect(catChips, bNew);
-    catInput.value = '';
-    catInput.style.display = '';
-    catInput.focus();
-    document.getElementById('qa-subcat-row').style.display = 'none';
-  });
-  catChips.appendChild(bNew);
-
-  // Chips unités
-  const units = document.getElementById('qa-unit-chips');
-  units.innerHTML = '';
-  FOURNIT_UNITES.forEach(u => {
-    const b = document.createElement('button');
-    b.className = 'chip' + (u === 'pc' ? ' selected' : '');
-    b.textContent = u;
-    b.onclick = () => { units.querySelectorAll('.chip').forEach(x => x.classList.remove('selected')); b.classList.add('selected'); };
-    units.appendChild(b);
-  });
-
-  document.getElementById('overlay-qa-fournit').classList.add('open');
-  setTimeout(() => document.getElementById('qa-nom').focus(), 250);
-}
-
-function confirmQuickAddFournit() {
-  const nom  = document.getElementById('qa-nom').value.trim();
-  const unit = document.querySelector('#qa-unit-chips .chip.selected')?.textContent || 'pc';
-
-  // Lire catégorie : chip existant sélectionné ou input "nouvelle"
-  const catChipSel = document.querySelector('#qa-cat-chips .chip.selected[data-type="existing"]');
-  const cat = catChipSel
-    ? catChipSel.textContent
-    : (document.getElementById('qa-cat-input').value.trim() || 'Divers');
-
-  // Lire sous-catégorie : chip existant sélectionné ou input "nouvelle"
-  const subChipSel = document.querySelector('#qa-subcat-chips .chip.selected[data-type="existing"]');
-  const subInput   = document.getElementById('qa-subcat-input').value.trim();
-  const subcat     = subChipSel ? subChipSel.textContent : subInput;
-
-  if (!nom) {
-    document.getElementById('qa-nom').style.borderColor = '#E53935';
-    document.getElementById('qa-nom').focus();
-    return;
-  }
-  document.getElementById('qa-nom').style.borderColor = '';
-
-  // 1. Sync rv6_materials (Hub)
-  let addedToHub = false;
-  try {
-    const mats   = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
-    const exists = mats.some(m => (m.nom||m.name||'').toLowerCase() === nom.toLowerCase());
-    if (!exists) {
-      const entry = { id: 'rj_' + Date.now(), nom, categorie: cat, unite: unit };
-      if (subcat && subcat !== cat) entry.sousCategorie = subcat;
-      mats.push(entry);
-      localStorage.setItem('rv6_materials', JSON.stringify(mats));
-      addedToHub = true;
-    }
-  } catch(e) {}
-
-  // 2. Custom catalogue rapport
-  fournitCustom = JSON.parse(localStorage.getItem(FOURNIT_CUSTOM_KEY) || '{}');
-  if (!fournitCustom[cat]) fournitCustom[cat] = [];
-  if (!fournitCustom[cat].some(i => i.nom.toLowerCase() === nom.toLowerCase())) {
-    fournitCustom[cat].push({ nom, unit });
-    localStorage.setItem(FOURNIT_CUSTOM_KEY, JSON.stringify(fournitCustom));
-  }
-
-  // 3. Mise à jour DOM catalogue
-  const container = document.getElementById('fournit-catalogue');
-  const catSlug   = fslug(cat);
-  let   catEl     = document.getElementById('fcat-' + catSlug);
-  if (!catEl) {
-    const empty = container.querySelector('div[style*="text-align:center"]');
-    if (empty) empty.remove();
-    catEl = buildFournitAccord(cat, { subcats: { [cat]: [] } }, []);
-    container.appendChild(catEl);
-  }
-  const body   = catEl.querySelector('.accord-body');
-  const addBtn = body?.querySelector('button');
-  if (body && !body.querySelector(`[data-nom="${nom.replace(/"/g,'\"')}"]`)) {
-    const row = buildFournitRow(cat, nom, unit);
-    if (addBtn) body.insertBefore(row, addBtn);
-    else        body.appendChild(row);
-  }
-
-  document.getElementById('overlay-qa-fournit').classList.remove('open');
-  const t = document.getElementById('toast');
-  t.textContent = addedToHub ? `✅ "${nom}" ajouté dans Ressources` : `✅ "${nom}" ajouté au rapport`;
-  t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); t.textContent = '💾 Brouillon sauvegardé'; }, 2200);
-}
-// ─── AJOUT MATÉRIAU STYLE RESSOURCES ──────────────────────
-let _matPhoto = '';
-
-function openAddMateriauOverlay() {
-  // Reset form
-  ['mx-nom','mx-densite','mx-classe','mx-granulo','mx-fournisseur','mx-prix','mx-notes'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  ['mx-cat','mx-famille','mx-unite','mx-tva'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.selectedIndex = 0;
-  });
-  _matPhoto = '';
-  updateMatMediaPreview();
-
-  // Peupler le select catégorie
-  const cats = resCats('materiaux');
-  const sel = document.getElementById('mx-cat');
-  sel.innerHTML = '<option value="">— Sans catégorie —</option>';
-  cats.forEach(c => {
-    const o = document.createElement('option');
-    o.value = c.id; o.textContent = c.nom || c.name || '—';
-    sel.appendChild(o);
-  });
-
-  document.getElementById('modal-add-materiaux').classList.add('open');
-  setTimeout(() => document.getElementById('mx-nom')?.focus(), 150);
-}
-
-function updateMatMediaPreview() {
-  const prev = document.getElementById('media-prev-mat');
-  const del  = document.getElementById('media-del-mat');
-  if (!prev) return;
-  if (_matPhoto) {
-    prev.innerHTML = `<img src="${_matPhoto}">`;
-    if (del) del.style.display = 'block';
-  } else {
-    prev.innerHTML = '📷';
-    if (del) del.style.display = 'none';
-  }
-}
-
-function triggerMatPhoto() {
-  document.getElementById('mat-photo-input').click();
-}
-
-function onMatPhotoSelected(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => { _matPhoto = ev.target.result; updateMatMediaPreview(); };
-  reader.readAsDataURL(file);
-}
-
-function clearMatMedia() {
-  _matPhoto = '';
-  updateMatMediaPreview();
-}
-
-function saveMateriauFromRapport() {
-  const nom = (document.getElementById('mx-nom')?.value || '').trim();
-  if (!nom) {
-    const el = document.getElementById('mx-nom');
-    if (el) { el.style.borderColor = 'var(--danger)'; el.focus(); setTimeout(() => el.style.borderColor = '', 2000); }
-    return;
-  }
-
-  // Vérifier doublon
-  const mats = resLoad('rv6_materials');
-  if (mats.some(m => (m.nom||'').toLowerCase() === nom.toLowerCase())) {
-    showToast('⚠️ Ce matériau existe déjà dans Ressources');
-    return;
-  }
-
-  const catVal = document.getElementById('mx-cat')?.value || '';
-  const newMat = {
-    id: 'mat_' + Date.now().toString(36) + Math.random().toString(36).slice(2,5),
-    nom,
-    categorie: catVal || undefined,
-    famille:   document.getElementById('mx-famille')?.value || '',
-    unite:     document.getElementById('mx-unite')?.value   || '',
-    densite:   document.getElementById('mx-densite')?.value || '',
-    classe:    document.getElementById('mx-classe')?.value  || '',
-    granulo:   document.getElementById('mx-granulo')?.value || '',
-    fournisseur: document.getElementById('mx-fournisseur')?.value || '',
-    prix:      document.getElementById('mx-prix')?.value    || '',
-    tva:       document.getElementById('mx-tva')?.value     || '',
-    notes:     document.getElementById('mx-notes')?.value   || '',
-    photo:     _matPhoto || '',
-    createdAt: new Date().toISOString()
-  };
-
-  mats.push(newMat);
-  localStorage.setItem('rv6_materials', JSON.stringify(mats));
-
-  document.getElementById('modal-add-materiaux').classList.remove('open');
-
-  // Reconstruire catalogue et sélectionner
-  const cat = document.getElementById('fournit-catalogue');
-  if (cat) cat.innerHTML = '';
-  buildFournitCatalogue();
-  toggleFournitSelect(newMat.id, newMat.famille || 'Matériaux', nom, newMat.unite || 'pc');
-
-  showToast(`✅ "${nom}" créé dans Ressources`);
-}
-
 function fslug(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').substring(0,40); }
-
-
-
-// Recalculer le layout quand le clavier s'ouvre/ferme
-window.addEventListener('resize', () => {
-  document.body.style.height = window.innerHeight + 'px';
-  const scrollArea = document.querySelector('.scroll-area');
-  if (scrollArea) {
-    scrollArea.style.maxHeight = (window.innerHeight
-      - (document.querySelector('.app-header')?.offsetHeight || 56)
-      - (document.querySelector('.step-bar')?.offsetHeight || 16)
-      - (document.querySelector('.tab-bar')?.offsetHeight || 64)
-    ) + 'px';
-  }
-});
 
 // Auto-save every 60s
 setInterval(saveDraft, 60000);
@@ -4155,6 +3583,10 @@ function renderHistoriqueInline() {
       : null;
 
     // Évacuations
+    const evacItems = (r.evacuations||[]);
+    const evacContent = evacItems.length > 0
+      ? rows(evacItems.map(e=>[e.mat||'—', `${e.qte} ${e.unite}`]))
+      : null;
 
     html += `
     <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden;">
@@ -4184,7 +3616,7 @@ function renderHistoriqueInline() {
       ${section('🔧','Location interne', locContent)}
       ${section('🏗️','Travaux réalisés', travauxContent)}
       ${fournitContent ? section('📦','Fournitures', fournitContent) : ''}
-
+      ${evacContent ? section('🚮','Évacuations', evacContent) : ''}
       ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.notes}</p>`) : ''}
 
     </div>`;
@@ -4262,6 +3694,7 @@ function rapportToTexte(r) {
   const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
   const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
   const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
+  const evac = (r.evacuations||[]);
 
   let txt = `📋 RAPPORT JOURNALIER — RISSE S.A.\n`;
   txt += `${'─'.repeat(35)}\n`;
@@ -4328,6 +3761,7 @@ function partagerPDF(r) {
   const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
   const locFilled = Object.entries(r.location||{}).filter(([,v])=>v&&parseFloat(v)>0);
   const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
+  const evac = (r.evacuations||[]);
   const d = new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
   const rowsHTML = (items) => items.map(([k,v])=>`
@@ -4369,6 +3803,7 @@ function partagerPDF(r) {
     + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} métré(s)</td></tr>`:'')
   )}
   ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.nom||f.cat,`${f.qty} ${f.unit}`]))):''}
+  ${evac.length>0?section('🚮','Évacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
   ${r.notes?section('💬','Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
   <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — rapport généré le ${new Date().toLocaleDateString('fr-CH')}</p>
   </body></html>`;
@@ -4433,6 +3868,16 @@ function modifierRapport(e, id) {
     renderFournitSelectionZone();
   }
 
+  if (d.evacuations) d.evacuations.forEach(ev => {
+    addFournitRowWithMat('evac-list', 'sum-evac', ev.mat);
+    const rows = document.querySelectorAll('#evac-list .fournit-item');
+    const last = rows[rows.length-1];
+    if (last) {
+      const inputs = last.querySelectorAll('input, select');
+      if (inputs[1]) inputs[1].value = ev.qte;
+      if (inputs[2]) inputs[2].value = ev.unite;
+    }
+  });
 
   // Sauvegarder comme brouillon
   autoSaveDraft();
@@ -4539,6 +3984,7 @@ function renderHistorique() {
     const nEmp = (r.employes||[]).length;
     const nLoc = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
     const nFournit = (r.fournitures||[]).length;
+    const nEvac = (r.evacuations||[]).length;
     const age = Math.floor((Date.now() - new Date(r.savedAt).getTime()) / 86400000);
     const ageStr = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
 
@@ -4663,6 +4109,7 @@ function openEditPage(id) {
     <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} ligne(s)</span></div>
           ${(r.metres||[]).map(m => `<div class="info-row" style="padding-left:20px;"><span class="k" style="color:var(--text-muted);font-size:12px;">${m.article||'—'}</span><span class="v" style="font-size:12px;">${m.qte} ${m.unite}</span></div>`).join('')}
     <div class="info-row"><span class="k">📦 Fournitures</span><span class="v">${(r.fournitures||[]).length} article(s)</span></div>
+    <div class="info-row"><span class="k">🚮 Évacuations</span><span class="v">${(r.evacuations||[]).length} article(s)</span></div>
   `;
 
   document.getElementById('edit-page').classList.add('open');
@@ -4731,116 +4178,6 @@ window.addEventListener('DOMContentLoaded', () => {
     <button class="btn-sheet-confirm" onclick="confirmFournitAdd()">Ajouter ✓</button>
   </div>
 </div>
-
-<!-- QUICK-ADD FOURNITURE -->
-<div class="overlay" id="overlay-qa-fournit" onclick="if(event.target===this)this.classList.remove('open')">
-  <div class="bottom-sheet" style="max-height:88vh;overflow-y:auto;">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">+ Ajouter une fourniture</div>
-
-    <!-- Nom -->
-    <div class="form-row">
-      <label class="lbl">Nom du produit *</label>
-      <input type="text" id="qa-nom" placeholder="Ex: Béton B25, Coffrage bois…" autocomplete="off">
-    </div>
-
-    <!-- Catégorie : chips existantes + Nouvelle -->
-    <div class="form-row">
-      <label class="lbl">Catégorie</label>
-      <div id="qa-cat-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
-      <input type="text" id="qa-cat-input" placeholder="Saisir une nouvelle catégorie…"
-             autocomplete="off" style="display:none;margin-top:4px;">
-    </div>
-
-    <!-- Sous-catégorie (visible seulement si la catégorie a des sous-cats) -->
-    <div class="form-row" id="qa-subcat-row" style="display:none;">
-      <label class="lbl">Sous-catégorie</label>
-      <div id="qa-subcat-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
-      <input type="text" id="qa-subcat-input" placeholder="Saisir une nouvelle sous-catégorie…"
-             autocomplete="off" style="display:none;margin-top:4px;">
-    </div>
-
-    <!-- Unité -->
-    <div class="form-row">
-      <label class="lbl">Unité</label>
-      <div class="chips" id="qa-unit-chips"></div>
-    </div>
-
-    <button class="btn-sheet-confirm" onclick="confirmQuickAddFournit()">Ajouter ✓</button>
-  </div>
-</div>
-
-<!-- MODAL AJOUT MATÉRIAU (identique module Ressources) -->
-<div class="modal-ov" id="modal-add-materiaux">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle-r"></div></div>
-    <div class="modal-hdr">
-      <div class="modal-title-r">🪨 Nouveau matériau</div>
-      <button class="modal-close-r" onclick="document.getElementById('modal-add-materiaux').classList.remove('open')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="media-zone-r">
-        <div class="media-prev-r" id="media-prev-mat" onclick="triggerMatPhoto()">📷</div>
-        <div class="media-btns-r">
-          <button class="media-btn-r" onclick="triggerMatPhoto()">📷 Photo</button>
-          <button class="media-btn-r" id="media-del-mat" style="display:none;color:var(--danger);" onclick="clearMatMedia()">✕ Supprimer</button>
-        </div>
-      </div>
-      <div class="form-sec-label">Catégorie</div>
-      <div class="rfield">
-        <label>Sous-catégorie</label>
-        <select id="mx-cat"><option value="">— Sans catégorie —</option></select>
-      </div>
-      <div class="form-sec-label">Identification</div>
-      <div class="rfield"><label>Nom / Désignation *</label><input type="text" id="mx-nom" placeholder="Béton C25/30" autocomplete="off"></div>
-      <div class="rfield-row">
-        <div class="rfield"><label>Famille</label>
-          <select id="mx-famille">
-            <option value="">—</option>
-            <option>Béton / mortier</option><option>Granulats / graviers</option>
-            <option>Sable</option><option>Terre / remblai</option><option>Bitume / enrobé</option>
-            <option>Acier / armatures</option><option>Bois / coffrages</option>
-            <option>Géotextile</option><option>Tuyaux</option><option>Produits chimiques</option>
-            <option>Isolation</option><option>Maçonnerie</option><option>Autre</option>
-          </select>
-        </div>
-        <div class="rfield"><label>Unité</label>
-          <select id="mx-unite">
-            <option value="">—</option>
-            <option>m³</option><option>tonne (t)</option><option>kg</option>
-            <option>m²</option><option>ml</option><option>pièce</option>
-            <option>litre</option><option>sac</option><option>rouleau</option><option>boîte</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-sec-label">Caractéristiques techniques</div>
-      <div class="rfield-row">
-        <div class="rfield"><label>Masse volumique (kg/m³)</label><input type="number" id="mx-densite" placeholder="2400" step="1" min="0" autocomplete="off"></div>
-        <div class="rfield"><label>Classe / Résistance</label><input type="text" id="mx-classe" placeholder="C25/30…" autocomplete="off"></div>
-      </div>
-      <div class="rfield-row">
-        <div class="rfield"><label>Granulométrie</label><input type="text" id="mx-granulo" placeholder="0/32 mm" autocomplete="off"></div>
-        <div class="rfield"><label>Fournisseur</label><input type="text" id="mx-fournisseur" placeholder="Holcim…" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Prix</div>
-      <div class="rfield-row">
-        <div class="rfield"><label>Prix unitaire HT (CHF)</label><input type="number" id="mx-prix" placeholder="95.00" step="0.01" min="0" autocomplete="off"></div>
-        <div class="rfield"><label>TVA (%)</label>
-          <select id="mx-tva">
-            <option value="">—</option><option value="0">0%</option>
-            <option value="2.6">2.6%</option><option value="8.1" selected>8.1%</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-sec-label">Notes</div>
-      <div class="rfield"><label>Notes libres</label><textarea id="mx-notes" placeholder="Livraison 48h, camion toupie…"></textarea></div>
-    </div>
-    <div class="modal-footer-r">
-      <button class="btn-navy-r" onclick="saveMateriauFromRapport()">Enregistrer</button>
-    </div>
-  </div>
-</div>
-<input type="file" id="mat-photo-input" accept="image/*" style="display:none" onchange="onMatPhotoSelected(event)">
 
 <div class="saved-toast" id="toast">💾 Brouillon sauvegardé</div>
 
