@@ -400,7 +400,30 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
  
 <div class="toast" id="toast"></div>
  
-<script>
+<script type="module">
+// ── FIREBASE ─────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
+  authDomain: "risse-sa.firebaseapp.com",
+  projectId: "risse-sa",
+  storageBucket: "risse-sa.firebasestorage.app",
+  messagingSenderId: "656425275771",
+  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
+};
+const _app  = initializeApp(firebaseConfig);
+const _auth = getAuth(_app);
+const _db   = getFirestore(_app);
+
+// Auth guard
+onAuthStateChanged(_auth, user => {
+  if (!user) { window.location.href = '../login.html'; return; }
+  initApp();
+});
+
 // ── STORAGE KEYS ──
 const SK="rv6_e",MK="rv6_m",CK="rv6_chantiers_v1",DK="rv6_d",TK="rv6_t",MAINTK="rv6_mt",TYPEK="rv6_types";
 const ALERT_H=15;
@@ -418,7 +441,13 @@ function getMachines(){
     return data.map(m=>({name:m.nom||m.name||'', type:m.type||'', def:false, id:m.id}));
   }catch(e){return [];}
 }
-function saveMachines(m){localStorage.setItem(MK,JSON.stringify(m));}
+function saveMachines(m){
+  localStorage.setItem(MK,JSON.stringify(m));
+  if(_auth.currentUser){
+    setDoc(doc(_db,'ressources','machines'),{items:m,updatedAt:Date.now()})
+      .catch(e=>console.warn('Firestore saveMachines:',e));
+  }
+}
 // Chantiers : lus depuis rv6_chantiers_v1 (clé partagée — source de vérité : module Ressources)
 function migrateOldChantiers(){
   if(localStorage.getItem('rv6_c_migrated')) return;
@@ -450,23 +479,22 @@ function saveEntries(e){localStorage.setItem(SK,JSON.stringify(e));}
 function getTrash(){const s=localStorage.getItem(TK);if(!s)return[];let t=JSON.parse(s);const c=new Date();c.setDate(c.getDate()-7);t=t.filter(x=>new Date(x.deletedAt)>=c);localStorage.setItem(TK,JSON.stringify(t));return t;}
 function saveTrash(t){localStorage.setItem(TK,JSON.stringify(t));}
 function getMaintEntries(){const s=localStorage.getItem(MAINTK);return s?JSON.parse(s):[];}
-function saveMaintEntries(m){localStorage.setItem(MAINTK,JSON.stringify(m));}
+function saveMaintEntries(m){
+  localStorage.setItem(MAINTK,JSON.stringify(m));
+  if(_auth.currentUser){
+    setDoc(doc(_db,'machines_entretiens','data'),{items:m,updatedAt:Date.now()})
+      .catch(e=>console.warn('Firestore saveMaintEntries:',e));
+  }
+}
  
 // ── DRAFT ──
 function saveDraft(){localStorage.setItem(DK,JSON.stringify({machine:document.getElementById("sel-machine").value,date:document.getElementById("inp-date").value,start:document.getElementById("inp-start").value,end:document.getElementById("inp-end").value,ch:document.getElementById("inp-ch").value,selCh}));}
 function loadDraft(){const s=localStorage.getItem(DK);if(!s)return false;const d=JSON.parse(s);if(d.date)document.getElementById("inp-date").value=d.date;if(d.start)document.getElementById("inp-start").value=d.start;if(d.end)document.getElementById("inp-end").value=d.end;if(d.ch)document.getElementById("inp-ch").value=d.ch;if(d.selCh){selCh=d.selCh;refreshChips();}if(d.machine){const sel=document.getElementById("sel-machine");[...sel.options].forEach(o=>{if(o.value===d.machine)o.selected=true;});}calcTot();return true;}
 function clearDraft(){localStorage.removeItem(DK);}
  
-// ── INIT ──
-window.onload=function(){
-  updateDate();setInterval(updateDate,60000);
-  refreshMachSel();
-  const ok=loadDraft();if(!ok){setToday();prefillStart();}
-  refreshChips();
-  renderChList();renderMaintList();renderRapport();renderParams();
-  checkAlertDot();
-  if("serviceWorker"in navigator)navigator.serviceWorker.register("./service-worker.js");
-};
+ 
+// ── INIT géré par Firebase onAuthStateChanged ──
+
 function updateDate(){const d=new Date();document.getElementById("topbar-date").innerHTML=d.toLocaleDateString("fr-CH",{weekday:"short",day:"numeric",month:"short"})+"<br>"+d.toLocaleTimeString("fr-CH",{hour:"2-digit",minute:"2-digit"});}
 function setToday(){document.getElementById("inp-date").value=new Date().toISOString().split("T")[0];}
  
@@ -769,7 +797,68 @@ function confirmReset(){
   }
 }
 let tT;function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("show"),2500);}
+
+// ── SYNC FIRESTORE → localStorage ───────────────────────
+async function syncFromFirestore() {
+  try {
+    const mSnap = await getDoc(doc(_db,'ressources','machines'));
+    if(mSnap.exists()) localStorage.setItem(MK, JSON.stringify(mSnap.data().items||[]));
+    const cSnap = await getDoc(doc(_db,'chantiers','data'));
+    if(cSnap.exists()){
+      const items = cSnap.data().items||[];
+      localStorage.setItem(CK, JSON.stringify(items));
+      localStorage.setItem('rv6_c', JSON.stringify(items.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom)));
+    }
+    const eSnap = await getDoc(doc(_db,'machines_entretiens','data'));
+    if(eSnap.exists()) localStorage.setItem(MAINTK, JSON.stringify(eSnap.data().items||[]));
+  } catch(e){ console.warn('Firestore sync error:',e); }
+}
+
+// ── INIT ─────────────────────────────────────────────────
+async function initApp(){
+  await syncFromFirestore();
+  migrateOldChantiers();
+  updateDate();
+  setInterval(updateDate,60000);
+  setToday();
+  refreshMachSel();
+  refreshChips();
+  if(!loadDraft()) prefillStart();
+  renderChList();
+  renderMaintList();
+  renderRapport();
+  renderParams();
+  checkAlertDot();
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
+}
+
+// ── EXPOSE FONCTIONS AU HTML ──────────────────────────────
+window.navTo               = navTo;
+window.goBack              = goBack;
+window.saveEntry           = saveEntry;
+window.saveModalEntry      = saveModalEntry;
+window.resetForm           = resetForm;
+window.calcTot             = calcTot;
+window.calcMe              = calcMe;
+window.onMachChange        = onMachChange;
+window.onFreeCh            = onFreeCh;
+window.openChDetail        = openChDetail;
+window.refreshChModalDate  = refreshChModalDate;
+window.calcChRow           = calcChRow;
+window.saveChRow           = saveChRow;
+window.openModalEntry      = openModalEntry;
+window.openMaintDetail     = openMaintDetail;
+window.openModalMaint      = openModalMaint;
+window.saveMaintEntry      = saveMaintEntry;
+window.deleteMaintEntry    = deleteMaintEntry;
+window.setRptFilter        = setRptFilter;
+window.delEntry            = delEntry;
+window.restoreEntry        = restoreEntry;
+window.emptyTrash          = emptyTrash;
+window.addMaintType        = addMaintType;
+window.removeMaintType     = removeMaintType;
+window.closeModal          = closeModal;
+window.confirmReset        = confirmReset;
 </script>
 </body>
 </html>
- 
