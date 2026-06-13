@@ -4277,19 +4277,16 @@ function prefillMachineHours(itemId, total) {
 // ─── INIT ──────────────────────────────────────────────────────
 function initRapport() {
   purgeOld();
+  setDefaultDate();
   buildChantierChips();
   buildNomChips();
   buildLocationItems();
   buildMatChips();
-  loadDraft(); // charger le brouillon EN PREMIER
-  if (!document.getElementById('rj-date').value) setDefaultDate(); // date par défaut seulement si pas de brouillon
+  loadDraft();
   renderEmployes();
   updateHeader();
-  // Persistance brouillon sur chaque changement
-  document.getElementById('rj-chantier').addEventListener('input', () => { updateHeader(); autoSaveDraft(); });
-  document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); autoSaveDraft(); });
-  document.getElementById('rj-nom').addEventListener('input', autoSaveDraft);
-  document.getElementById('tx-travaux')?.addEventListener('input', autoSaveDraft);
+  document.getElementById('rj-chantier').addEventListener('input', updateHeader);
+  document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); });
   const reports = getReports();
   const badge = document.getElementById('histo-badge');
   if (reports.length > 0) { badge.style.display = 'inline-block'; badge.textContent = reports.length; }
@@ -4341,37 +4338,6 @@ window.openAnnotation       = openAnnotation;
 window.deletePhoto          = deletePhoto;
 window.addBon               = addBon;
 window.removeBon            = removeBon;
-// Fonctions manquantes
-window.toggleAccord         = toggleAccord;
-window.openAddLoc           = openAddLoc;
-window.confirmAddLoc        = confirmAddLoc;
-window.addFournitRow        = addFournitRow;
-window.addMetreSub          = addMetreSub;
-window.delMetreCard         = delMetreCard;
-window.delMetreSub          = delMetreSub;
-window.delRow               = delRow;
-window.delBon               = delBon;
-window.delPhoto             = delPhoto;
-window.cycleFormule         = cycleFormule;
-window.selectLocUnit        = selectLocUnit;
-window.setAnnoTool          = setAnnoTool;
-window.setMetreType         = setMetreType;
-window.setSketchEraser      = setSketchEraser;
-window.showRapTab           = showRapTab;
-window.closeOverlay         = closeOverlay;
-window.fournitClearSearch   = fournitClearSearch;
-window.deleteRapportInline  = deleteRapportInline;
-window.restoreRapportInline = restoreRapportInline;
-window.modifierRapport      = modifierRapport;
-window.partagerRapport      = partagerRapport;
-window.openEditPage         = openEditPage;
-window.closeEditPage        = closeEditPage;
-window.selectEditChip       = selectEditChip;
-window.viderCorbeille       = viderCorbeille;
-window.toggleExtrasMenu     = toggleExtrasMenu;
-window.openAnnotate         = openAnnotate;
-window.closeAnnotate        = closeAnnotate;
-window.confirmAnnotate      = confirmAnnotate;
 
 </script>
 
