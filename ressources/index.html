@@ -207,6 +207,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .epicker-footer{padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--border);display:flex;gap:8px;}
 .epicker-none{text-align:center;padding:30px;color:var(--text3);font-size:13px;}
  
+/* ── DRAG & DROP RÉORDONNANCEMENT ── */
+.draggable{touch-action:none;user-select:none;}
+.drag-handle{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:16px;cursor:grab;flex-shrink:0;border-radius:6px;transition:background .13s;}
+.drag-handle:active{cursor:grabbing;background:var(--bg2);}
+.drag-ghost{opacity:.4;background:var(--bg2)!important;border:2px dashed var(--border)!important;border-radius:var(--r)!important;}
+.drag-over{border-top:2px solid var(--teal)!important;}
+
 /* ── TOAST ── */
 .toast{position:fixed;bottom:calc(var(--safe-b) + var(--nb-h) + 10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
@@ -441,10 +448,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       <div class="field"><label>Sous-catégorie</label><select id="mx-cat"><option value="">— Sans catégorie —</option></select></div>
       <div class="form-sec-label">Identification</div>
       <div class="field"><label>Nom / Désignation *</label><input type="text" id="mx-nom" placeholder="Béton C25/30" autocomplete="off"></div>
-      <div class="field-row">
-        <div class="field"><label>Famille</label><select id="mx-famille"><option value="">—</option><option>Béton / mortier</option><option>Granulats / graviers</option><option>Sable</option><option>Terre / remblai</option><option>Bitume / enrobé</option><option>Acier / armatures</option><option>Bois / coffrages</option><option>Géotextile</option><option>Tuyaux</option><option>Produits chimiques</option><option>Autre</option></select></div>
-        <div class="field"><label>Unité</label><select id="mx-unite"><option value="">—</option><option>m³</option><option>tonne (t)</option><option>kg</option><option>m²</option><option>ml</option><option>pièce</option><option>litre</option><option>sac</option></select></div>
-      </div>
+      <div class="field"><label>Unité</label><select id="mx-unite"><option value="">—</option><option>m³</option><option>tonne (t)</option><option>kg</option><option>m²</option><option>ml</option><option>pièce</option><option>litre</option><option>sac</option></select></div>
       <div class="form-sec-label">Caractéristiques techniques</div>
       <div class="field-row">
         <div class="field"><label>Masse volumique (kg/m³)</label><input type="number" id="mx-densite" placeholder="2400" step="1" min="0" autocomplete="off"></div>
@@ -455,10 +459,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <div class="field"><label>Fournisseur</label><input type="text" id="mx-fournisseur" placeholder="Holcim…" autocomplete="off"></div>
       </div>
       <div class="form-sec-label">Prix</div>
-      <div class="field-row">
-        <div class="field"><label>Prix unitaire HT (CHF)</label><input type="number" id="mx-prix" placeholder="95.00" step="0.01" min="0" autocomplete="off"></div>
-        <div class="field"><label>TVA (%)</label><select id="mx-tva"><option value="">—</option><option value="0">0%</option><option value="2.6">2.6%</option><option value="8.1" selected>8.1%</option></select></div>
-      </div>
+      <div class="field"><label>Prix unitaire (CHF)</label><input type="number" id="mx-prix" placeholder="95.00" step="0.01" min="0" autocomplete="off"></div>
       <div class="form-sec-label">Notes</div>
       <div class="field"><label>Notes libres</label><textarea id="mx-notes" placeholder="Livraison 48h, camion toupie…"></textarea></div>
     </div>
@@ -701,8 +702,8 @@ function renderContent(section, filter){
           const subKey = section+'__'+cat.id+'__'+sub.id;
           const subOpen = openAccordions[subKey]||false;
           innerHtml += `
-          <div style="margin-bottom:6px;">
-            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:${subOpen?'var(--rs) var(--rs) 0 0':'var(--rs)'};cursor:pointer;user-select:none;" onclick="toggleAcc('${subKey}','${section}')">
+          <div class="sub-acc" data-sub-id="${sub.id}" style="margin-bottom:6px;">
+            <div class="sub-acc-header" style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:${subOpen?'var(--rs) var(--rs) 0 0':'var(--rs)'};cursor:pointer;user-select:none;" onclick="toggleAcc('${subKey}','${section}')">
               <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.6;flex-shrink:0;"></div>
               <div style="flex:1;font-size:12px;font-weight:600;color:var(--text2);">${esc(sub.name)}</div>
               <div style="font-size:10px;color:var(--text3);font-weight:700;background:var(--bg2);padding:1px 6px;border-radius:8px;">${subItems.length}</div>
@@ -743,6 +744,8 @@ function renderContent(section, filter){
   }
  
   el.innerHTML = html || `<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
+  // Attache les listeners drag & drop après rendu
+  requestAnimationFrame(()=>attachDragListeners(section));
 }
  
 // Helper: génère l'indicateur visuel (image > emoji > dot couleur)
@@ -756,7 +759,7 @@ function catIndicatorHTML(image, emoji, color, size){
 // Accordéon avec contenu HTML libre (pour les sous-accordéons)
 function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen){
   return `
-  <div class="accordion">
+  <div class="accordion" data-cat-id="${cat.id||''}">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
       ${catIndicatorHTML(cat.image, cat.emoji, cat.color)}
       <div class="acc-name">${esc(name)}</div>
@@ -773,7 +776,7 @@ function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen
  
 function renderAccordion(accKey, name, cat, items, icon, bgColor, section, isOpen){
   return `
-  <div class="accordion">
+  <div class="accordion" data-cat-id="${cat.id||''}">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
       ${catIndicatorHTML(cat.image, cat.emoji, cat.color)}
       <div class="acc-name">${esc(name)}</div>
@@ -803,7 +806,7 @@ function renderItemHTML(item, section, icon, color){
     iconHtml = `<div class="res-item-icon">${icon}</div>`;
   }
   return `
-  <div class="res-item" onclick="openDetail('${section}','${item.id}')">
+  <div class="res-item" data-id="${item.id}" onclick="openDetail('${section}','${item.id}')">
     ${iconHtml}
     <div class="res-item-body">
       <div class="res-item-name">${esc(item.nom||'—')}</div>
@@ -1132,7 +1135,7 @@ function saveItem(section){
   } else if(section==='materiaux'){
     if(!g('mx-nom')){ highlight('mx-nom'); return; }
     const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
-    item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), famille:g('mx-famille'), unite:g('mx-unite'), densite:g('mx-densite'), masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), tva:g('mx-tva'), notes:g('mx-notes') };
+    item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), unite:g('mx-unite'), densite:g('mx-densite')?parseFloat(g('mx-densite')):null, masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), notes:g('mx-notes') };
   }
  
   // Ajouter la photo et l'icône
@@ -1224,10 +1227,10 @@ function fillForm(s, item){
   }
   if(s==='materiaux'){
     const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
-    f('mx-cat',catVal); f('mx-nom',item.nom); f('mx-famille',item.famille);
+    f('mx-cat',catVal); f('mx-nom',item.nom);
     f('mx-unite',item.unite); f('mx-densite',item.masse_volumique||item.densite); f('mx-classe',item.classe);
     f('mx-granulo',item.granulo); f('mx-fournisseur',item.fournisseur);
-    f('mx-prix',item.prix); f('mx-tva',item.tva); f('mx-notes',item.notes);
+    f('mx-prix',item.prix); f('mx-notes',item.notes);
   }
 }
  
@@ -1300,7 +1303,7 @@ function getSubtitle(s,item){
   if(s==='machines') return [item.type,item.annee].filter(Boolean).join(' · ');
   if(s==='vehicules') return [item.type,item.immat].filter(Boolean).join(' · ');
   if(s==='materiel') return [item.type,item.marque].filter(Boolean).join(' · ');
-  if(s==='materiaux') return [item.famille,item.unite].filter(Boolean).join(' · ');
+  if(s==='materiaux') return [item.unite].filter(Boolean).join(' · ');
   return '';
 }
 function getPrice(s,item){
@@ -1352,7 +1355,7 @@ function getDetailRows(s,item){
   if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.poids)add('Poids véhicule',item.poids+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.pma)add('Poids maximum',item.pma+' t'); if(item.volume)add('Volume pont',item.volume+' m³'); add('Dimensions',item.dimensions); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='materiel'){ add('Catégorie',item.type); add('Marque',item.marque); add('Référence',item.ref); if(item.poids)add('Poids',item.poids+' kg'); if(item.puissance)add('Puissance',item.puissance+' W'); if(item.prix)add("Prix d'achat",'CHF '+item.prix); if(item.location)add('Location/jour','CHF '+item.location); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='materiaux'){ add('Famille',item.famille); add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.masse_volumique||item.densite){ const mv=item.masse_volumique||item.densite; add('Masse volumique',mv+' kg/m³'); } if(item.prix)add('Prix HT','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.tva)add('TVA',item.tva+'%'); if(item.prix&&item.tva){const ttc=(parseFloat(item.prix)*(1+parseFloat(item.tva)/100)).toFixed(2); add('Prix TTC','CHF '+ttc+'/'+(item.unite||'u.')); } if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='materiaux'){ add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.masse_volumique||item.densite){ const mv=item.masse_volumique||item.densite; add('Masse volumique',mv+' kg/m³'); } if(item.prix)add('Prix','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   return r;
 }
  
@@ -1381,6 +1384,241 @@ document.getElementById('cat-new-name').addEventListener('keydown',e=>{ if(e.key
  
 // ── INIT ────────────────────────────────────────────────
 // ── EXPOSE FONCTIONS AU HTML (nécessaire avec type="module") ──
+// ── DRAG & DROP RÉORDONNANCEMENT ────────────────────────
+// Gère le réordonnancement par appui prolongé + glisser
+// Fonctionne pour : items, catégories, sous-catégories
+
+let dragState = null;
+let longPressTimer = null;
+const LONG_PRESS_MS = 450;
+
+// Réordonne un tableau en déplaçant l'élément de fromIdx vers toIdx
+function reorder(arr, fromIdx, toIdx){
+  const copy = [...arr];
+  const [item] = copy.splice(fromIdx, 1);
+  copy.splice(toIdx, 0, item);
+  return copy;
+}
+
+// ── Drag items (equipe/machines/vehicules ou items dans catégorie) ──
+function initItemDrag(el, section, itemId){
+  let startY, startX, moved = false;
+
+  function onLongPress(){
+    longPressTimer = null;
+    el.classList.add('drag-ghost');
+    dragState = { type:'item', section, itemId, el, startY, startX };
+    navigator.vibrate&&navigator.vibrate(40);
+  }
+
+  el.addEventListener('touchstart', e=>{
+    if(e.touches.length!==1) return;
+    const t = e.touches[0];
+    startY = t.clientY; startX = t.clientX; moved = false;
+    longPressTimer = setTimeout(onLongPress, LONG_PRESS_MS);
+  }, {passive:true});
+
+  el.addEventListener('touchmove', e=>{
+    if(!dragState||dragState.el!==el){ clearTimeout(longPressTimer); return; }
+    e.preventDefault();
+    moved = true;
+    const t = e.touches[0];
+    // Trouver l'élément cible sous le doigt
+    el.style.visibility='hidden';
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    el.style.visibility='';
+    if(!target) return;
+    const targetItem = target.closest('.res-item[data-id]');
+    document.querySelectorAll('.res-item').forEach(i=>i.classList.remove('drag-over'));
+    if(targetItem && targetItem !== el) targetItem.classList.add('drag-over');
+  }, {passive:false});
+
+  el.addEventListener('touchend', e=>{
+    clearTimeout(longPressTimer);
+    if(!dragState||dragState.el!==el){ el.classList.remove('drag-ghost'); return; }
+    document.querySelectorAll('.res-item').forEach(i=>i.classList.remove('drag-over'));
+    if(moved){
+      const t = e.changedTouches[0];
+      el.style.visibility='hidden';
+      const target = document.elementFromPoint(t.clientX, t.clientY);
+      el.style.visibility='';
+      const targetItem = target&&target.closest('.res-item[data-id]');
+      if(targetItem && targetItem.dataset.id !== itemId){
+        const data = load(section);
+        const fromIdx = data.findIndex(i=>i.id===itemId);
+        const toIdx   = data.findIndex(i=>i.id===targetItem.dataset.id);
+        if(fromIdx!==-1 && toIdx!==-1){
+          save(section, reorder(data, fromIdx, toIdx));
+          renderContent(section, searchFilters[section]||'');
+          showToast('✓ Ordre mis à jour');
+        }
+      }
+    }
+    el.classList.remove('drag-ghost');
+    dragState = null;
+  });
+
+  el.addEventListener('touchcancel', ()=>{
+    clearTimeout(longPressTimer);
+    el.classList.remove('drag-ghost');
+    document.querySelectorAll('.res-item').forEach(i=>i.classList.remove('drag-over'));
+    dragState = null;
+  });
+}
+
+// ── Drag catégories ──
+function initCatDrag(el, section, catId){
+  let startY, startX, moved = false;
+
+  function onLongPress(){
+    longPressTimer = null;
+    el.classList.add('drag-ghost');
+    dragState = { type:'cat', section, catId, el };
+    navigator.vibrate&&navigator.vibrate(40);
+  }
+
+  el.addEventListener('touchstart', e=>{
+    if(e.touches.length!==1) return;
+    const t = e.touches[0];
+    startY = t.clientY; startX = t.clientX; moved = false;
+    longPressTimer = setTimeout(onLongPress, LONG_PRESS_MS);
+  }, {passive:true});
+
+  el.addEventListener('touchmove', e=>{
+    if(!dragState||dragState.el!==el){ clearTimeout(longPressTimer); return; }
+    e.preventDefault();
+    moved = true;
+    const t = e.touches[0];
+    el.style.visibility='hidden';
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    el.style.visibility='';
+    document.querySelectorAll('.accordion[data-cat-id]').forEach(a=>a.classList.remove('drag-over'));
+    if(target){
+      const acc = target.closest('.accordion[data-cat-id]');
+      if(acc && acc.dataset.catId !== catId) acc.classList.add('drag-over');
+    }
+  }, {passive:false});
+
+  el.addEventListener('touchend', e=>{
+    clearTimeout(longPressTimer);
+    if(!dragState||dragState.el!==el){ el.closest('.accordion')&&el.closest('.accordion').classList.remove('drag-ghost'); return; }
+    document.querySelectorAll('.accordion[data-cat-id]').forEach(a=>a.classList.remove('drag-over'));
+    if(moved){
+      const t = e.changedTouches[0];
+      el.style.visibility='hidden';
+      const target = document.elementFromPoint(t.clientX, t.clientY);
+      el.style.visibility='';
+      const acc = target&&target.closest('.accordion[data-cat-id]');
+      if(acc && acc.dataset.catId !== catId){
+        const allCats = loadCats();
+        const cats = allCats[section]||[];
+        const fromIdx = cats.findIndex(c=>c.id===catId);
+        const toIdx   = cats.findIndex(c=>c.id===acc.dataset.catId);
+        if(fromIdx!==-1 && toIdx!==-1){
+          allCats[section] = reorder(cats, fromIdx, toIdx);
+          saveCats(allCats);
+          renderContent(section, searchFilters[section]||'');
+          showToast('✓ Ordre catégories mis à jour');
+        }
+      }
+    }
+    el.closest('.accordion')&&el.closest('.accordion').classList.remove('drag-ghost');
+    dragState = null;
+  });
+
+  el.addEventListener('touchcancel', ()=>{
+    clearTimeout(longPressTimer);
+    document.querySelectorAll('.accordion[data-cat-id]').forEach(a=>a.classList.remove('drag-over'));
+    el.closest('.accordion')&&el.closest('.accordion').classList.remove('drag-ghost');
+    dragState = null;
+  });
+}
+
+// ── Drag sous-catégories ──
+function initSubCatDrag(el, section, catId, subId){
+  let moved = false;
+
+  function onLongPress(){
+    longPressTimer = null;
+    el.classList.add('drag-ghost');
+    dragState = { type:'subcat', section, catId, subId, el };
+    navigator.vibrate&&navigator.vibrate(40);
+  }
+
+  el.addEventListener('touchstart', e=>{
+    if(e.touches.length!==1) return;
+    moved = false;
+    longPressTimer = setTimeout(onLongPress, LONG_PRESS_MS);
+  }, {passive:true});
+
+  el.addEventListener('touchmove', e=>{
+    if(!dragState||dragState.el!==el){ clearTimeout(longPressTimer); return; }
+    e.preventDefault();
+    moved = true;
+    const t = e.touches[0];
+    el.style.visibility='hidden';
+    const target = document.elementFromPoint(t.clientX, t.clientY);
+    el.style.visibility='';
+    document.querySelectorAll('.sub-acc[data-sub-id]').forEach(a=>a.classList.remove('drag-over'));
+    if(target){
+      const sa = target.closest('.sub-acc[data-sub-id]');
+      if(sa && sa.dataset.subId !== subId) sa.classList.add('drag-over');
+    }
+  }, {passive:false});
+
+  el.addEventListener('touchend', e=>{
+    clearTimeout(longPressTimer);
+    if(!dragState||dragState.el!==el){ el.classList.remove('drag-ghost'); return; }
+    document.querySelectorAll('.sub-acc[data-sub-id]').forEach(a=>a.classList.remove('drag-over'));
+    if(moved){
+      const t = e.changedTouches[0];
+      el.style.visibility='hidden';
+      const target = document.elementFromPoint(t.clientX, t.clientY);
+      el.style.visibility='';
+      const sa = target&&target.closest('.sub-acc[data-sub-id]');
+      if(sa && sa.dataset.subId !== subId){
+        const allCats = loadCats();
+        const cat = (allCats[section]||[]).find(c=>c.id===catId);
+        if(cat&&cat.children){
+          const fromIdx = cat.children.findIndex(s=>s.id===subId);
+          const toIdx   = cat.children.findIndex(s=>s.id===sa.dataset.subId);
+          if(fromIdx!==-1 && toIdx!==-1){
+            cat.children = reorder(cat.children, fromIdx, toIdx);
+            saveCats(allCats);
+            renderContent(section, searchFilters[section]||'');
+            showToast('✓ Ordre sous-catégories mis à jour');
+          }
+        }
+      }
+    }
+    el.classList.remove('drag-ghost');
+    dragState = null;
+  });
+
+  el.addEventListener('touchcancel', ()=>{
+    clearTimeout(longPressTimer);
+    el.classList.remove('drag-ghost');
+    document.querySelectorAll('.sub-acc[data-sub-id]').forEach(a=>a.classList.remove('drag-over'));
+    dragState = null;
+  });
+}
+
+// Attache les listeners drag après chaque renderContent
+function attachDragListeners(section){
+  // Items
+  document.querySelectorAll(`#content-${section} .res-item[data-id]`).forEach(el=>{
+    initItemDrag(el, section, el.dataset.id);
+  });
+  // Catégories
+  document.querySelectorAll(`#content-${section} .accordion[data-cat-id] .acc-header`).forEach(el=>{
+    initCatDrag(el, section, el.closest('.accordion').dataset.catId);
+  });
+  // Sous-catégories
+  document.querySelectorAll(`#content-${section} .sub-acc[data-sub-id] .sub-acc-header`).forEach(el=>{
+    initSubCatDrag(el, section, el.closest('.accordion[data-cat-id]').dataset.catId, el.closest('.sub-acc').dataset.subId);
+  });
+}
+
 async function initApp(){
   await syncFromFirestore();
   TABS.forEach(s => renderContent(s,''));
