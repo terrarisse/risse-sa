@@ -277,7 +277,30 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   </div>
 </div>
  
-<script>
+<script type="module">
+// ── FIREBASE ────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
+  authDomain: "risse-sa.firebaseapp.com",
+  projectId: "risse-sa",
+  storageBucket: "risse-sa.firebasestorage.app",
+  messagingSenderId: "656425275771",
+  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
+};
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// Auth guard
+onAuthStateChanged(auth, user => {
+  if (!user) { window.location.href = '../login.html'; return; }
+  initApp();
+});
+
 // ════════════════════════════════════════════
 // CONFIG
 // ════════════════════════════════════════════
@@ -301,10 +324,31 @@ let currentPdf = null; // {name, size, data}
 // ════════════════════════════════════════════
 function load() { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch(e){ return []; } }
 function save(d) {
+  // 1. localStorage
   localStorage.setItem(KEY, JSON.stringify(d));
   // Sync liste simple rv6_c pour les autres modules
   const simple = d.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
   localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
+  // 2. Firestore (async, pas bloquant)
+  if (auth.currentUser) {
+    setDoc(doc(db, 'chantiers', 'data'), { items: d, updatedAt: Date.now() })
+      .catch(e => console.warn('Firestore save error:', e));
+  }
+}
+
+async function syncFromFirestore() {
+  try {
+    const snap = await getDoc(doc(db, 'chantiers', 'data'));
+    if (snap.exists()) {
+      const items = snap.data().items || [];
+      localStorage.setItem(KEY, JSON.stringify(items));
+      // Sync liste simple aussi
+      const simple = items.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
+      localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
+    }
+  } catch(e) {
+    console.warn('Firestore sync error:', e);
+  }
 }
  
 // ════════════════════════════════════════════
@@ -606,13 +650,29 @@ function migrateLegacyChantiers() {
   } catch(e) {}
 }
  
-migrateLegacyChantiers();
-renderList();
- 
+async function initApp() {
+  await syncFromFirestore();
+  migrateLegacyChantiers();
+  renderList();
+}
+
+// ── EXPOSE FONCTIONS AU HTML ─────────────────
+window.openAdd               = openAdd;
+window.closeAdd              = closeAdd;
+window.saveChantier          = saveChantier;
+window.setFilter             = setFilter;
+window.onSearch              = onSearch;
+window.selectColor           = selectColor;
+window.clearPdf              = clearPdf;
+window.viewPdf               = viewPdf;
+window.openDetail            = openDetail;
+window.closeDetail           = closeDetail;
+window.deleteCurrentChantier = deleteCurrentChantier;
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
 }
+
 </script>
 </body>
 </html>
- 
