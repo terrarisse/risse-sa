@@ -1960,97 +1960,83 @@ function buildNomChips() {
 }
 
 function buildLocationItems() {
-  // Construire les listes depuis Ressources
   LOC_VEHICULES = buildLOC_VEHICULES();
   LOC_MATERIEL  = buildLOC_MATERIEL();
   LOC_ENGINS    = buildLOC_MACHINES();
 
-  buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
-  buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
-  buildLocGroupMachines('loc-engins', LOC_ENGINS);
+  buildLocGroup('loc-vehicules', LOC_VEHICULES);
+  buildLocGroup('loc-materiel',  LOC_MATERIEL);
+  buildLocGroup('loc-engins',    LOC_ENGINS);
 }
 
-function buildLocGroupMachines(containerId, items) {
+function safeId(str) {
+  return String(str).replace(/[^a-zA-Z0-9_-]/g, '_');
+}
+
+function buildLocGroup(containerId, items) {
   const c = document.getElementById(containerId);
   if (!c) return;
   c.innerHTML = '';
-  const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
-  items.forEach(item => {
+  items.forEach((item, idx) => {
+    const sid = safeId(item.id || idx);
+    item._sid = sid; // stocker l'id sécurisé sur l'item
+
     const row = document.createElement('div');
     row.className = 'fournit-row';
-    row.style.cursor = 'pointer';
-    row.dataset.id = item.id;
+    row.style.cssText = 'cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);';
 
-    const isSelected = !!locSelection[item.id];
+    const isSelected = !!locSelection[sid];
+
     const nameSpan = document.createElement('span');
     nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
-    nameSpan.textContent = `${item.label} (${item.unit})`;
-    nameSpan.id = `locname-${item.id}`;
+    nameSpan.textContent = item.label + ' (' + item.unit + ')';
+    nameSpan.id = 'locname-' + sid;
 
     const chk = document.createElement('span');
-    chk.id = `locchk-${item.id}`;
-    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
+    chk.id = 'locchk-' + sid;
+    chk.style.cssText = 'font-size:20px;flex-shrink:0;';
     chk.textContent = isSelected ? '✅' : '⬜';
 
     row.appendChild(nameSpan);
     row.appendChild(chk);
-    row.addEventListener('click', () => toggleLocSelect(item));
+    row.addEventListener('click', function() { toggleLocSelectById(sid, item); });
     c.appendChild(row);
 
-    // Case heures si entrée machine ce jour-là
-    const entries = getEntriesMachineDate(item.label, date);
-    if (entries.length > 0) {
-      const hintDiv = document.createElement('div');
-      hintDiv.style.cssText = 'font-size:11px;color:var(--teal);padding:4px 8px 8px;';
-      const total = entries.reduce((s,e) => s + (e.total||0), 0);
-      hintDiv.innerHTML = `⏱ Entrée machine ce jour : <b>${total.toFixed(1)}h</b> — <button style="background:none;border:none;color:var(--teal);font-size:11px;font-weight:700;cursor:pointer;padding:0;" onclick="prefillMachineHours('${item.id}','${total}')">Utiliser</button>`;
-      c.appendChild(hintDiv);
+    // Hint heures machine si applicable
+    if (item.isMachine) {
+      const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
+      const entries = getEntriesMachineDate(item.label, date);
+      if (entries.length > 0) {
+        const total = entries.reduce((s,e) => s + (e.total||0), 0);
+        const hint = document.createElement('div');
+        hint.style.cssText = 'font-size:11px;color:var(--teal);padding:2px 14px 8px;';
+        hint.innerHTML = '⏱ Entrée ce jour : <b>' + total.toFixed(1) + 'h</b> — <button style="background:none;border:none;color:var(--teal);font-weight:700;cursor:pointer;font-size:11px;padding:0;" onclick="prefillMachineHours(\'' + sid + '\',' + total + ')">Utiliser</button>';
+        c.appendChild(hint);
+      }
     }
   });
 }
 
-// État sélection location : { id: { label, unit, qty } }
-let locSelection = {};
+// État sélection location : { sid: { label, unit, qty } }
 
-function buildLocGroup(containerId, items, groupKey) {
-  const c = document.getElementById(containerId);
-  items.forEach(item => {
-    const row = document.createElement('div');
-    row.className = 'fournit-row';
-    row.style.cursor = 'pointer';
-    row.dataset.id = item.id;
-
-    const isSelected = !!locSelection[item.id];
-    const nameSpan = document.createElement('span');
-    nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
-    nameSpan.textContent = `${item.label} (${item.unit})`;
-    nameSpan.id = `locname-${item.id}`;
-
-    const chk = document.createElement('span');
-    chk.id = `locchk-${item.id}`;
-    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
-    chk.textContent = isSelected ? '✅' : '⬜';
-
-    row.appendChild(nameSpan);
-    row.appendChild(chk);
-    row.onclick = () => toggleLocSelect(item);
-    c.appendChild(row);
-  });
-}
-
-function toggleLocSelect(item) {
-  const isNow = !locSelection[item.id];
+function toggleLocSelectById(sid, item) {
+  const isNow = !locSelection[sid];
   if (isNow) {
-    locSelection[item.id] = { label: item.label, unit: item.unit, qty: 0 };
+    locSelection[sid] = { label: item.label, unit: item.unit, qty: 0 };
   } else {
-    delete locSelection[item.id];
+    delete locSelection[sid];
   }
-  const nameEl = document.getElementById(`locname-${item.id}`);
-  const chkEl  = document.getElementById(`locchk-${item.id}`);
+  const nameEl = document.getElementById('locname-' + sid);
+  const chkEl  = document.getElementById('locchk-' + sid);
   if (nameEl) nameEl.classList.toggle('active', isNow);
   if (chkEl)  chkEl.textContent = isNow ? '✅' : '⬜';
   renderLocSelectionZone();
   autoSaveDraft();
+}
+
+function toggleLocSelect(item) {
+  const sid = item._sid || safeId(String(item.id || item.label));
+  toggleLocSelectById(sid, item);
 }
 
 function renderLocSelectionZone() {
