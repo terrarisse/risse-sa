@@ -3482,14 +3482,7 @@ function renderFournitSelectionZone() {
   });
 }
 
-
-  if (fournitSelection[key]) {
-    delete fournitSelection[key];
-  } else {
-    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
-  }
-  const isNow = !!fournitSelection[key];
-  const uid = window._fournitUids?.[key];
+function toggleFournitSelect(key, catName, nom, defaultUnit) {
   if (uid) {
     document.getElementById('fn-' + uid)?.classList.toggle('sel', isNow);
     const chk = document.getElementById('fchk-' + uid);
@@ -4321,87 +4314,88 @@ function initRapport() {
 }
 
 // ─── EXPOSE FONCTIONS AU HTML ──────────────────────────────────
-window.goSection            = goSection;
-window.updateHeader         = updateHeader;
-window.saveDraft            = saveDraft;
-window.finaliserRapport     = finaliserRapport;
-window.resetRapport         = resetRapport;
-window.toggleLocSelect      = toggleLocSelect;
-window.renderLocSelectionZone = renderLocSelectionZone;
-window.openAddEmploye       = openAddEmploye;
-window.closeAddEmploye      = closeAddEmploye;
-window.confirmAddEmploye    = confirmAddEmploye;
-window.addMetreRow          = addMetreRow;
-window.removeMetreRow       = removeMetreRow;
-window.toggleExtra          = toggleExtra;
-window.openSketch           = openSketch;
-window.closeSketch          = closeSketch;
-window.clearSketch          = clearSketch;
-window.saveSketch           = saveSketch;
-window.addFournitRowWithMat = addFournitRowWithMat;
-window.toggleFournitSelect  = toggleFournitSelect;
-window.openFournitOverlay   = openFournitOverlay;
-window.closeFournitOverlay  = closeFournitOverlay;
-window.confirmFournitAdd    = confirmFournitAdd;
-window.openHistorique       = openHistorique;
-window.closeHistorique      = closeHistorique;
-window.openRapportDetail    = openRapportDetail;
-window.closeRapportDetail   = closeRapportDetail;
-window.deleteRapport        = deleteRapport;
-window.restoreRapport       = restoreRapport;
-window.emptyTrash           = emptyTrash;
-window.renderHistorique     = renderHistorique;
-window.saveEditedRapport    = saveEditedRapport;
-window.prefillMachineHours  = prefillMachineHours;
-window.setMeteo             = setMeteo;
-window.setLocQty            = setLocQty;
-window.annoUndo             = annoUndo;
-window.annoRedo             = annoRedo;
-window.annoSetTool          = annoSetTool;
-window.annoSetColor         = annoSetColor;
-window.annoSetSize          = annoSetSize;
-window.saveAnnotation       = saveAnnotation;
-window.closeAnnotation      = closeAnnotation;
-window.openAnnotation       = openAnnotation;
-window.deletePhoto          = deletePhoto;
-window.addBon               = addBon;
-window.removeBon            = removeBon;
-// Manquants
-window.toggleAccord              = toggleAccord;
-window.openAddLoc                = openAddLoc;
-window.confirmAddLoc             = confirmAddLoc;
-window.addFournitRow             = addFournitRow;
-window.addMetreSub               = addMetreSub;
-window.delMetreCard              = delMetreCard;
-window.delMetreSub               = delMetreSub;
-window.delRow                    = delRow;
-window.delBon                    = delBon;
-window.delPhoto                  = delPhoto;
-window.cycleFormule              = cycleFormule;
-window.selectLocUnit             = selectLocUnit;
-window.setAnnoTool               = setAnnoTool;
-window.setMetreType              = setMetreType;
-window.setSketchEraser           = setSketchEraser;
-window.showRapTab                = showRapTab;
-window.closeOverlay              = closeOverlay;
-window.fournitSearch             = fournitSearch;
-window.fournitClearSearch        = fournitClearSearch;
-window.openFournitAddOverlay     = openFournitAddOverlay;
-window.deleteRapportInline       = deleteRapportInline;
-window.restoreRapportInline      = restoreRapportInline;
-window.modifierRapport           = modifierRapport;
-window.partagerRapport           = partagerRapport;
-window.openEditPage              = openEditPage;
-window.closeEditPage             = closeEditPage;
-window.selectEditChip            = selectEditChip;
-window.viderCorbeille            = viderCorbeille;
-window.toggleExtrasMenu          = toggleExtrasMenu;
-window.openAnnotate              = openAnnotate;
-window.closeAnnotate             = closeAnnotate;
-window.confirmAnnotate           = confirmAnnotate;
-window.renderFournitSelectionZone = renderFournitSelectionZone;
-window.updateFournitCatCount     = updateFournitCatCount;
-window.autoSaveDraft             = autoSaveDraft;
+document.addEventListener('DOMContentLoaded', () => {
+  window.goSection            = goSection;
+  window.updateHeader         = updateHeader;
+  window.saveDraft            = saveDraft;
+  window.finaliserRapport     = finaliserRapport;
+  window.resetRapport         = resetRapport;
+  window.toggleLocSelect      = toggleLocSelect;
+  window.renderLocSelectionZone = renderLocSelectionZone;
+  window.openAddEmploye       = openAddEmploye;
+  window.closeAddEmploye      = closeAddEmploye;
+  window.confirmAddEmploye    = confirmAddEmploye;
+  window.addMetreRow          = addMetreRow;
+  window.removeMetreRow       = removeMetreRow;
+  window.toggleExtra          = toggleExtra;
+  window.openSketch           = openSketch;
+  window.closeSketch          = closeSketch;
+  window.clearSketch          = clearSketch;
+  window.saveSketch           = saveSketch;
+  window.addFournitRowWithMat = addFournitRowWithMat;
+  window.toggleFournitSelect  = toggleFournitSelect;
+  window.openFournitOverlay   = openFournitOverlay;
+  window.closeFournitOverlay  = closeFournitOverlay;
+  window.confirmFournitAdd    = confirmFournitAdd;
+  window.openHistorique       = openHistorique;
+  window.closeHistorique      = closeHistorique;
+  window.openRapportDetail    = openRapportDetail;
+  window.closeRapportDetail   = closeRapportDetail;
+  window.deleteRapport        = deleteRapport;
+  window.restoreRapport       = restoreRapport;
+  window.emptyTrash           = emptyTrash;
+  window.renderHistorique     = renderHistorique;
+  window.saveEditedRapport    = saveEditedRapport;
+  window.prefillMachineHours  = prefillMachineHours;
+  window.setMeteo             = setMeteo;
+  window.setLocQty            = setLocQty;
+  window.annoUndo             = annoUndo;
+  window.annoRedo             = annoRedo;
+  window.annoSetTool          = annoSetTool;
+  window.annoSetColor         = annoSetColor;
+  window.annoSetSize          = annoSetSize;
+  window.saveAnnotation       = saveAnnotation;
+  window.closeAnnotation      = closeAnnotation;
+  window.openAnnotation       = openAnnotation;
+  window.deletePhoto          = deletePhoto;
+  window.addBon               = addBon;
+  window.removeBon            = removeBon;
+  window.toggleAccord         = toggleAccord;
+  window.openAddLoc           = openAddLoc;
+  window.confirmAddLoc        = confirmAddLoc;
+  window.addFournitRow        = addFournitRow;
+  window.addMetreSub          = addMetreSub;
+  window.delMetreCard         = delMetreCard;
+  window.delMetreSub          = delMetreSub;
+  window.delRow               = delRow;
+  window.delBon               = delBon;
+  window.delPhoto             = delPhoto;
+  window.cycleFormule         = cycleFormule;
+  window.selectLocUnit        = selectLocUnit;
+  window.setAnnoTool          = setAnnoTool;
+  window.setMetreType         = setMetreType;
+  window.setSketchEraser      = setSketchEraser;
+  window.showRapTab           = showRapTab;
+  window.closeOverlay         = closeOverlay;
+  window.fournitSearch        = fournitSearch;
+  window.fournitClearSearch   = fournitClearSearch;
+  window.openFournitAddOverlay = openFournitAddOverlay;
+  window.deleteRapportInline  = deleteRapportInline;
+  window.restoreRapportInline = restoreRapportInline;
+  window.modifierRapport      = modifierRapport;
+  window.partagerRapport      = partagerRapport;
+  window.openEditPage         = openEditPage;
+  window.closeEditPage        = closeEditPage;
+  window.selectEditChip       = selectEditChip;
+  window.viderCorbeille       = viderCorbeille;
+  window.toggleExtrasMenu     = toggleExtrasMenu;
+  window.openAnnotate         = openAnnotate;
+  window.closeAnnotate        = closeAnnotate;
+  window.confirmAnnotate      = confirmAnnotate;
+  window.renderFournitSelectionZone = renderFournitSelectionZone;
+  window.updateFournitCatCount = updateFournitCatCount;
+  window.autoSaveDraft        = autoSaveDraft;
+});
 
 </script>
 
