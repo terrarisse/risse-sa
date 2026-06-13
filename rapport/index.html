@@ -1407,7 +1407,7 @@ textarea { resize: none; }
     <div class="accord-group" id="accord-engins">
       <div class="accord-header" onclick="toggleAccord('engins')">
         <span class="accord-icon">🚜</span>
-        <span class="accord-title">Engins</span>
+        <span class="accord-title">Machines</span>
         <span class="accord-chevron">▼</span>
       </div>
       <div class="accord-body" id="body-engins">
@@ -1802,42 +1802,99 @@ textarea { resize: none; }
   </div>
 </div>
 
-<script>
+<script type="module">
+// ─── FIREBASE ────────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
+  authDomain: "risse-sa.firebaseapp.com",
+  projectId: "risse-sa",
+  storageBucket: "risse-sa.firebasestorage.app",
+  messagingSenderId: "656425275771",
+  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
+};
+const _app  = initializeApp(firebaseConfig);
+const _auth = getAuth(_app);
+const _db   = getFirestore(_app);
+
+onAuthStateChanged(_auth, user => {
+  if (!user) { window.location.href = '../login.html'; return; }
+  syncFromFirestore().then(() => initRapport());
+});
+
 // ─── DATA ─────────────────────────────────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
 const REPORTS_KEY = 'rj_reports_v1';
 const TRASH_KEY   = 'rj_trash_v1';
 const MAX_DAYS    = 30;
 const TRASH_DAYS  = 7;
-const NOMS_PRESETS = ['Jonathan','Risse','Maxime','Pierre','André','Thomas'];
-const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport'];
+const NOMS_PRESETS = ['Jonathan','Risse','Maxime','Pierre','André','Thomas']; // fallback
+const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport']; // fallback
 const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
 const MAT_FOURNITURES = ['Béton','Gravier 4/16','Gravier 0/40','Sable','Tout-venant','Enrobé','Bordures béton','Tuyaux PVC','Grillage','Géotextile','Câble électrique','Plaques acier','Sacs ciment'];
 const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé','Ferraille','Déchets chantier','Boue/sédiments','Bois'];
 
-const LOC_VEHICULES = [
-  {id:'camionnette', label:'Camionnette', unit:'p/j'},
-  {id:'camion-grue', label:'Camion grue', unit:'h'},
-];
-const LOC_MATERIEL = [
-  {id:'outillage-elec', label:'Outillage électrique', unit:'h'},
-  {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h'},
-  {id:'rouleau', label:'Rouleau', unit:'h'},
-  {id:'compresseur', label:'Compresseur', unit:'h'},
-  {id:'generatrice', label:'Génératrice', unit:'h'},
-  {id:'camera', label:'Caméra / Mat. détection', unit:'pc'},
-  {id:'scie', label:'Scie route / murale', unit:'ml'},
-  {id:'karcher', label:'Kärcher', unit:'h'},
-  {id:'carotteuse', label:'Carotteuse', unit:'forages'},
-  {id:'pont-lourd', label:'Déplacements pont lourd', unit:'pc'},
-];
-const LOC_ENGINS = [
-  {id:'mecalac', label:'Mecalac MWR7', unit:'h'},
-  {id:'dumper', label:'Dumper', unit:'h'},
-  {id:'pelle-5t', label:'5 tonnes', unit:'h'},
-  {id:'pelle-3t', label:'3 tonnes', unit:'h'},
-  {id:'pelle-1t5', label:'1.5 tonne', unit:'h'},
-];
+// Lecture dynamique depuis les modules Ressources / Chantiers
+function getEquipeFromRessources() {
+  try {
+    const items = JSON.parse(localStorage.getItem('rv6_equipe') || '[]');
+    return items.slice(0, 4).map(e => e.nom || e.name || String(e));
+  } catch(e) { return NOMS_PRESETS.slice(0,4); }
+}
+function getChantiersActifs() {
+  try {
+    const items = JSON.parse(localStorage.getItem('rv6_chantiers_v1') || '[]');
+    const actifs = items.filter(c => c.statut === 'actif' || !c.statut).map(c => c.nom);
+    return actifs.length ? actifs : CHANTIERS;
+  } catch(e) { return CHANTIERS; }
+}
+function getVehiculesFromRessources() {
+  try { return JSON.parse(localStorage.getItem('rv6_vehicles') || '[]'); } catch(e) { return []; }
+}
+function getMaterielFromRessources() {
+  try { return JSON.parse(localStorage.getItem('rv6_equipment') || '[]'); } catch(e) { return []; }
+}
+function getMachinesFromRessources() {
+  try { return JSON.parse(localStorage.getItem('rv6_m') || '[]'); } catch(e) { return []; }
+}
+function getEntriesMachineDate(machineName, date) {
+  try {
+    const entries = JSON.parse(localStorage.getItem('rv6_e') || '[]');
+    return entries.filter(e => e.machine === machineName && e.date === date);
+  } catch(e) { return []; }
+}
+
+// Listes location construites dynamiquement depuis Ressources
+function buildLOC_VEHICULES() {
+  const items = getVehiculesFromRessources();
+  if (items.length) return items.map(v => ({id: 'vh-' + (v.id||v.nom), label: v.nom||v.name, unit: 'p/j'}));
+  return [{id:'camionnette', label:'Camionnette', unit:'p/j'},{id:'camion-grue', label:'Camion grue', unit:'h'}];
+}
+function buildLOC_MATERIEL() {
+  const items = getMaterielFromRessources();
+  if (items.length) return items.map(m => ({id: 'mt-' + (m.id||m.nom), label: m.nom||m.name, unit: 'h'}));
+  return [
+    {id:'outillage-elec', label:'Outillage électrique', unit:'h'},
+    {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h'},
+    {id:'rouleau', label:'Rouleau', unit:'h'},
+    {id:'compresseur', label:'Compresseur', unit:'h'},
+    {id:'generatrice', label:'Génératrice', unit:'h'},
+    {id:'scie', label:'Scie route / murale', unit:'ml'},
+    {id:'karcher', label:'Kärcher', unit:'h'},
+  ];
+}
+function buildLOC_MACHINES() {
+  const items = getMachinesFromRessources();
+  if (items.length) return items.map(m => ({id: 'ma-' + (m.id||m.name), label: m.name||m.nom, unit: 'h', isMachine: true}));
+  return [{id:'mecalac', label:'Mecalac MWR7', unit:'h', isMachine: true}];
+}
+
+let LOC_VEHICULES = [];
+let LOC_MATERIEL  = [];
+let LOC_ENGINS    = []; // renommé Machines
 
 let state = {
   currentSection: 0,
@@ -1861,18 +1918,7 @@ function updateHeader() {
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  setDefaultDate();
-  buildChantierChips();
-  buildNomChips();
-  buildLocationItems();
-  buildMatChips();
-  loadDraft();
-  renderEmployes();
-  updateHeader();
-  document.getElementById('rj-chantier').addEventListener('input', updateHeader);
-  document.getElementById('rj-date').addEventListener('change', updateHeader);
-});
+// Init géré par Firebase onAuthStateChanged
 
 function setDefaultDate() {
   const d = document.getElementById('rj-date');
@@ -1881,45 +1927,85 @@ function setDefaultDate() {
 
 function buildChantierChips() {
   const c = document.getElementById('chantier-chips');
-  CHANTIERS.forEach(ch => {
+  c.innerHTML = '';
+  getChantiersActifs().forEach(ch => {
     const b = document.createElement('button');
     b.className = 'chip';
     b.textContent = ch;
-    b.onclick = () => {
+    b.addEventListener('click', () => {
       document.getElementById('rj-chantier').value = ch;
       c.querySelectorAll('.chip').forEach(x => x.classList.remove('selected'));
       b.classList.add('selected');
       updateHeader();
-    };
+    });
     c.appendChild(b);
   });
 }
 
 function buildNomChips() {
   const c = document.getElementById('nom-chips');
-  NOMS_PRESETS.slice(0,4).forEach(n => {
+  c.innerHTML = '';
+  getEquipeFromRessources().forEach(n => {
     const b = document.createElement('button');
     b.className = 'chip';
     b.textContent = n;
-    b.onclick = () => {
+    b.addEventListener('click', () => {
       document.getElementById('rj-nom').value = n;
       c.querySelectorAll('.chip').forEach(x => x.classList.remove('selected'));
       b.classList.add('selected');
-    };
+    });
     c.appendChild(b);
   });
 }
 
 function buildLocationItems() {
-  // Charger les équipements custom sauvegardés
-  const ressources = JSON.parse(localStorage.getItem('rv6_loc_custom') || '{}');
-  if (ressources.vehicules) LOC_VEHICULES.push(...ressources.vehicules);
-  if (ressources.materiel)  LOC_MATERIEL.push(...ressources.materiel);
-  if (ressources.engins)    LOC_ENGINS.push(...ressources.engins);
+  // Construire les listes depuis Ressources
+  LOC_VEHICULES = buildLOC_VEHICULES();
+  LOC_MATERIEL  = buildLOC_MATERIEL();
+  LOC_ENGINS    = buildLOC_MACHINES();
 
   buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
   buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
-  buildLocGroup('loc-engins',    LOC_ENGINS,    'engins');
+  buildLocGroupMachines('loc-engins', LOC_ENGINS);
+}
+
+function buildLocGroupMachines(containerId, items) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
+  items.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'fournit-row';
+    row.style.cursor = 'pointer';
+    row.dataset.id = item.id;
+
+    const isSelected = !!locSelection[item.id];
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
+    nameSpan.textContent = `${item.label} (${item.unit})`;
+    nameSpan.id = `locname-${item.id}`;
+
+    const chk = document.createElement('span');
+    chk.id = `locchk-${item.id}`;
+    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
+    chk.textContent = isSelected ? '✅' : '⬜';
+
+    row.appendChild(nameSpan);
+    row.appendChild(chk);
+    row.addEventListener('click', () => toggleLocSelect(item));
+    c.appendChild(row);
+
+    // Case heures si entrée machine ce jour-là
+    const entries = getEntriesMachineDate(item.label, date);
+    if (entries.length > 0) {
+      const hintDiv = document.createElement('div');
+      hintDiv.style.cssText = 'font-size:11px;color:var(--teal);padding:4px 8px 8px;';
+      const total = entries.reduce((s,e) => s + (e.total||0), 0);
+      hintDiv.innerHTML = `⏱ Entrée machine ce jour : <b>${total.toFixed(1)}h</b> — <button style="background:none;border:none;color:var(--teal);font-size:11px;font-weight:700;cursor:pointer;padding:0;" onclick="prefillMachineHours('${item.id}','${total}')">Utiliser</button>`;
+      c.appendChild(hintDiv);
+    }
+  });
 }
 
 // État sélection location : { id: { label, unit, qty } }
@@ -2127,7 +2213,7 @@ function renderEmployes() {
   if (totEl) totEl.textContent = total.toFixed(2);
   if (cntEl) cntEl.textContent = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
 
-  const tous = [...new Set([...NOMS_PRESETS, ...state.employes.map(e=>e.nom)])];
+  const tous = [...new Set([...getEquipeFromRessources(), ...state.employes.map(e=>e.nom)])];
 
   tous.forEach(nom => {
     const idx    = state.employes.findIndex(e => e.nom === nom);
@@ -2143,8 +2229,8 @@ function renderEmployes() {
 
     const btnDemi = document.createElement('button');
     btnDemi.className = 'mo-quick-btn';
-    btnDemi.textContent = '+4h45';
-    btnDemi.addEventListener('click', () => moAddHeures(nom, 4.75));
+    btnDemi.textContent = '+4h30';
+    btnDemi.addEventListener('click', () => moAddHeures(nom, 4.5));
 
     const btnJour = document.createElement('button');
     btnJour.className = 'mo-quick-btn jour';
@@ -2208,7 +2294,7 @@ function moSetHeures(nom, val) {
 function openAddEmploye() {
   const c = document.getElementById('employe-presets');
   c.innerHTML = '';
-  NOMS_PRESETS.forEach(n => {
+  getEquipeFromRessources().forEach(n => {
     const b = document.createElement('button');
     b.className = 'chip';
     b.textContent = n;
@@ -2242,7 +2328,7 @@ let currentLocGroup = null;
 
 function openAddLoc(groupKey, icon) {
   currentLocGroup = groupKey;
-  const titles = { vehicules: `${icon} Ajouter un véhicule`, materiel: `${icon} Ajouter du matériel`, engins: `${icon} Ajouter un engin` };
+  const titles = { vehicules: `${icon} Ajouter un véhicule`, materiel: `${icon} Ajouter du matériel`, engins: `${icon} Ajouter une machine` };
   document.getElementById('overlay-loc-title').textContent = titles[groupKey];
   document.getElementById('new-loc-nom').value = '';
   document.getElementById('new-loc-unit-custom').value = '';
@@ -3481,10 +3567,18 @@ function getTrash() {
   return JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
 }
 function saveReports(arr) {
-  localStorage.setItem(REPORTS_KEY, JSON.stringify(arr));
+  // Purge 30j
+  const now = Date.now();
+  const purged = arr.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
+  localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
+  if (_auth.currentUser) {
+    setDoc(doc(_db, 'rapports', 'data'), { items: purged, updatedAt: now })
+      .catch(e => console.warn('Firestore saveReports:', e));
+  }
 }
 function saveTrash(arr) {
   localStorage.setItem(TRASH_KEY, JSON.stringify(arr));
+  // Corbeille reste locale uniquement
 }
 
 function purgeOld() {
@@ -4151,15 +4245,99 @@ function saveEditedRapport() {
 }
 
 // Mise à jour badge au chargement
-window.addEventListener('DOMContentLoaded', () => {
+// ─── SYNC FIRESTORE ────────────────────────────────────────────
+async function syncFromFirestore() {
+  try {
+    // Lire les rapports validés depuis Firestore
+    const snap = await getDoc(doc(_db, 'rapports', 'data'));
+    if (snap.exists()) {
+      const items = snap.data().items || [];
+      // Purge 30j côté local
+      const now = Date.now();
+      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
+      localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
+    }
+  } catch(e) { console.warn('Firestore sync error:', e); }
+}
+
+// ─── PREFILL HEURES MACHINE ────────────────────────────────────
+function prefillMachineHours(itemId, total) {
+  if (!locSelection[itemId]) {
+    const item = LOC_ENGINS.find(i => i.id === itemId);
+    if (item) locSelection[itemId] = { label: item.label, unit: item.unit, qty: 0 };
+  }
+  if (locSelection[itemId]) {
+    locSelection[itemId].qty = parseFloat(total);
+    renderLocSelectionZone();
+    autoSaveDraft();
+  }
+}
+
+// ─── INIT ──────────────────────────────────────────────────────
+function initRapport() {
   purgeOld();
+  setDefaultDate();
+  buildChantierChips();
+  buildNomChips();
+  buildLocationItems();
+  buildMatChips();
+  loadDraft();
+  renderEmployes();
+  updateHeader();
+  document.getElementById('rj-chantier').addEventListener('input', updateHeader);
+  document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); });
   const reports = getReports();
   const badge = document.getElementById('histo-badge');
-  if (reports.length > 0) {
-    badge.style.display = 'inline-block';
-    badge.textContent = reports.length;
-  }
-});
+  if (reports.length > 0) { badge.style.display = 'inline-block'; badge.textContent = reports.length; }
+}
+
+// ─── EXPOSE FONCTIONS AU HTML ──────────────────────────────────
+window.goSection            = goSection;
+window.updateHeader         = updateHeader;
+window.saveDraft            = saveDraft;
+window.finaliserRapport     = finaliserRapport;
+window.resetRapport         = resetRapport;
+window.toggleLocSelect      = toggleLocSelect;
+window.renderLocSelectionZone = renderLocSelectionZone;
+window.openAddEmploye       = openAddEmploye;
+window.closeAddEmploye      = closeAddEmploye;
+window.confirmAddEmploye    = confirmAddEmploye;
+window.addMetreRow          = addMetreRow;
+window.removeMetreRow       = removeMetreRow;
+window.toggleExtra          = toggleExtra;
+window.openSketch           = openSketch;
+window.closeSketch          = closeSketch;
+window.clearSketch          = clearSketch;
+window.saveSketch           = saveSketch;
+window.addFournitRowWithMat = addFournitRowWithMat;
+window.toggleFournitSelect  = toggleFournitSelect;
+window.openFournitOverlay   = openFournitOverlay;
+window.closeFournitOverlay  = closeFournitOverlay;
+window.confirmFournitAdd    = confirmFournitAdd;
+window.openHistorique       = openHistorique;
+window.closeHistorique      = closeHistorique;
+window.openRapportDetail    = openRapportDetail;
+window.closeRapportDetail   = closeRapportDetail;
+window.deleteRapport        = deleteRapport;
+window.restoreRapport       = restoreRapport;
+window.emptyTrash           = emptyTrash;
+window.renderHistorique     = renderHistorique;
+window.saveEditedRapport    = saveEditedRapport;
+window.prefillMachineHours  = prefillMachineHours;
+window.setMeteo             = setMeteo;
+window.setLocQty            = setLocQty;
+window.annoUndo             = annoUndo;
+window.annoRedo             = annoRedo;
+window.annoSetTool          = annoSetTool;
+window.annoSetColor         = annoSetColor;
+window.annoSetSize          = annoSetSize;
+window.saveAnnotation       = saveAnnotation;
+window.closeAnnotation      = closeAnnotation;
+window.openAnnotation       = openAnnotation;
+window.deletePhoto          = deletePhoto;
+window.addBon               = addBon;
+window.removeBon            = removeBon;
+
 </script>
 
 <!-- OVERLAY AJOUT PRODUIT FOURNITURES -->
