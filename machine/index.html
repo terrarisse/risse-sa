@@ -475,9 +475,21 @@ function saveChantiers(c){localStorage.setItem(CK,JSON.stringify(c));}
 function getMaintTypes(){const s=localStorage.getItem(TYPEK);return s?JSON.parse(s):[];}
 function saveMaintTypes(t){localStorage.setItem(TYPEK,JSON.stringify(t));}
 function getEntries(){const s=localStorage.getItem(SK);if(!s)return[];let e=JSON.parse(s);const c=new Date();c.setDate(c.getDate()-30);e=e.filter(x=>new Date(x.date)>=c);localStorage.setItem(SK,JSON.stringify(e));return e;}
-function saveEntries(e){localStorage.setItem(SK,JSON.stringify(e));}
+function saveEntries(e){
+  localStorage.setItem(SK,JSON.stringify(e));
+  if(_auth.currentUser){
+    setDoc(doc(_db,'machines_entries','data'),{items:e,updatedAt:Date.now()})
+      .catch(err=>console.warn('Firestore saveEntries:',err));
+  }
+}
 function getTrash(){const s=localStorage.getItem(TK);if(!s)return[];let t=JSON.parse(s);const c=new Date();c.setDate(c.getDate()-7);t=t.filter(x=>new Date(x.deletedAt)>=c);localStorage.setItem(TK,JSON.stringify(t));return t;}
-function saveTrash(t){localStorage.setItem(TK,JSON.stringify(t));}
+function saveTrash(t){
+  localStorage.setItem(TK,JSON.stringify(t));
+  if(_auth.currentUser){
+    setDoc(doc(_db,'machines_trash','data'),{items:t,updatedAt:Date.now()})
+      .catch(err=>console.warn('Firestore saveTrash:',err));
+  }
+}
 function getMaintEntries(){const s=localStorage.getItem(MAINTK);return s?JSON.parse(s):[];}
 function saveMaintEntries(m){
   localStorage.setItem(MAINTK,JSON.stringify(m));
@@ -811,6 +823,10 @@ async function syncFromFirestore() {
     }
     const eSnap = await getDoc(doc(_db,'machines_entretiens','data'));
     if(eSnap.exists()) localStorage.setItem(MAINTK, JSON.stringify(eSnap.data().items||[]));
+    const entrSnap = await getDoc(doc(_db,'machines_entries','data'));
+    if(entrSnap.exists()) localStorage.setItem(SK, JSON.stringify(entrSnap.data().items||[]));
+    const trashSnap = await getDoc(doc(_db,'machines_trash','data'));
+    if(trashSnap.exists()) localStorage.setItem(TK, JSON.stringify(trashSnap.data().items||[]));
   } catch(e){ console.warn('Firestore sync error:',e); }
 }
 
