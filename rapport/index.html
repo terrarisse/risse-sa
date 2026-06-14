@@ -3239,15 +3239,15 @@ function resetRapport() {
 
   // Fournitures
   fournitSelection = {};
-  // Vider le catalogue (forcer reconstruction au prochain accès)
   const cat = document.getElementById('fournit-catalogue');
   if (cat) cat.innerHTML = '';
   renderFournitSelectionZone();
 
-  // Évacuations
-  document.getElementById('evac-list').innerHTML = '';
-  const sumEvac = document.getElementById('sum-evac');
-  const sumEvacEl = document.getElementById('sum-evac'); if (sumEvacEl) sumEvacEl.textContent = '—';
+  // Évacuations (supprimées mais garde la compat)
+  const evacList = document.getElementById('evac-list');
+  if (evacList) evacList.innerHTML = '';
+  const sumEvacEl = document.getElementById('sum-evac');
+  if (sumEvacEl) sumEvacEl.textContent = '—';
 
   updateHeader();
 }
@@ -3271,16 +3271,16 @@ function finaliserRapport() {
 
   // Sauvegarder localStorage
   localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
-  // Supprimer brouillon
   localStorage.removeItem(STORAGE_KEY);
 
-  // Sauvegarder Firestore
+  // Sauvegarder Firestore en arrière-plan (non bloquant)
   const user = _auth.currentUser;
   if (user) {
     _db.collection('rapports').doc('data').set({ items: purged, updatedAt: now })
       .catch(e => console.warn('Firestore finaliserRapport:', e));
   }
 
+  // Reset immédiat
   resetRapport();
 
   // Badge
