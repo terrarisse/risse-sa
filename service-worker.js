@@ -1,12 +1,17 @@
-const CACHE_NAME = 'risse-app-v4';
+const CACHE_NAME = 'risse-app-v5';
 const URLS = [
   './',
   './index.html',
+  './login.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
   './machine/index.html',
   './rapport/index.html',
+  './chantiers/index.html',
+  './ressources/index.html',
+  './carnet/index.html',
+  './calculatrice/index.html',
 ];
 
 self.addEventListener('install', e => {
