@@ -1822,7 +1822,14 @@ const _db   = getFirestore(_app);
 
 onAuthStateChanged(_auth, user => {
   if (!user) { window.location.href = '../login.html'; return; }
-  syncFromFirestore().then(() => initRapport());
+  syncFromFirestore().then(() => {
+    initRapport();
+    // Re-render les éléments dynamiques après sync Firestore
+    buildChantierChips();
+    buildNomChips();
+    buildLocationItems();
+    renderEmployes();
+  });
 });
 
 // ─── DATA ─────────────────────────────────────────────────────
@@ -1960,83 +1967,99 @@ function buildNomChips() {
 }
 
 function buildLocationItems() {
+  // Construire les listes depuis Ressources
   LOC_VEHICULES = buildLOC_VEHICULES();
   LOC_MATERIEL  = buildLOC_MATERIEL();
   LOC_ENGINS    = buildLOC_MACHINES();
 
-  buildLocGroup('loc-vehicules', LOC_VEHICULES);
-  buildLocGroup('loc-materiel',  LOC_MATERIEL);
-  buildLocGroup('loc-engins',    LOC_ENGINS);
+  buildLocGroup('loc-vehicules', LOC_VEHICULES, 'vehicules');
+  buildLocGroup('loc-materiel',  LOC_MATERIEL,  'materiel');
+  buildLocGroupMachines('loc-engins', LOC_ENGINS);
 }
 
-function safeId(str) {
-  return String(str).replace(/[^a-zA-Z0-9_-]/g, '_');
-}
-
-function buildLocGroup(containerId, items) {
+function buildLocGroupMachines(containerId, items) {
   const c = document.getElementById(containerId);
   if (!c) return;
   c.innerHTML = '';
-  items.forEach((item, idx) => {
-    const sid = safeId(item.id || idx);
-    item._sid = sid; // stocker l'id sécurisé sur l'item
-
+  const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
+  items.forEach(item => {
     const row = document.createElement('div');
     row.className = 'fournit-row';
-    row.style.cssText = 'cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);';
+    row.style.cursor = 'pointer';
+    row.dataset.id = item.id;
 
-    const isSelected = !!locSelection[sid];
-
+    const isSelected = !!locSelection[item.id];
     const nameSpan = document.createElement('span');
     nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
-    nameSpan.textContent = item.label + ' (' + item.unit + ')';
-    nameSpan.id = 'locname-' + sid;
+    nameSpan.textContent = `${item.label} (${item.unit})`;
+    nameSpan.id = `locname-${item.id}`;
 
     const chk = document.createElement('span');
-    chk.id = 'locchk-' + sid;
-    chk.style.cssText = 'font-size:20px;flex-shrink:0;';
+    chk.id = `locchk-${item.id}`;
+    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
     chk.textContent = isSelected ? '✅' : '⬜';
 
     row.appendChild(nameSpan);
     row.appendChild(chk);
-    row.addEventListener('click', function() { toggleLocSelectById(sid, item); });
+    row.addEventListener('click', () => toggleLocSelect(item));
     c.appendChild(row);
 
-    // Hint heures machine si applicable
-    if (item.isMachine) {
-      const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
-      const entries = getEntriesMachineDate(item.label, date);
-      if (entries.length > 0) {
-        const total = entries.reduce((s,e) => s + (e.total||0), 0);
-        const hint = document.createElement('div');
-        hint.style.cssText = 'font-size:11px;color:var(--teal);padding:2px 14px 8px;';
-        hint.innerHTML = '⏱ Entrée ce jour : <b>' + total.toFixed(1) + 'h</b> — <button style="background:none;border:none;color:var(--teal);font-weight:700;cursor:pointer;font-size:11px;padding:0;" onclick="prefillMachineHours(\'' + sid + '\',' + total + ')">Utiliser</button>';
-        c.appendChild(hint);
-      }
+    // Case heures si entrée machine ce jour-là
+    const entries = getEntriesMachineDate(item.label, date);
+    if (entries.length > 0) {
+      const hintDiv = document.createElement('div');
+      hintDiv.style.cssText = 'font-size:11px;color:var(--teal);padding:4px 8px 8px;';
+      const total = entries.reduce((s,e) => s + (e.total||0), 0);
+      hintDiv.innerHTML = `⏱ Entrée machine ce jour : <b>${total.toFixed(1)}h</b> — <button style="background:none;border:none;color:var(--teal);font-size:11px;font-weight:700;cursor:pointer;padding:0;" onclick="prefillMachineHours('${item.id}','${total}')">Utiliser</button>`;
+      c.appendChild(hintDiv);
     }
   });
 }
 
-// État sélection location : { sid: { label, unit, qty } }
+// État sélection location : { id: { label, unit, qty } }
+let locSelection = {};
 
-function toggleLocSelectById(sid, item) {
-  const isNow = !locSelection[sid];
+function buildLocGroup(containerId, items, groupKey) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  items.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'fournit-row';
+    row.style.cursor = 'pointer';
+    row.dataset.id = item.id;
+
+    const isSelected = !!locSelection[item.id];
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
+    nameSpan.textContent = `${item.label} (${item.unit})`;
+    nameSpan.id = `locname-${item.id}`;
+
+    const chk = document.createElement('span');
+    chk.id = `locchk-${item.id}`;
+    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
+    chk.textContent = isSelected ? '✅' : '⬜';
+
+    row.appendChild(nameSpan);
+    row.appendChild(chk);
+    row.addEventListener('click', () => toggleLocSelect(item));
+    c.appendChild(row);
+  });
+}
+
+function toggleLocSelect(item) {
+  const isNow = !locSelection[item.id];
   if (isNow) {
-    locSelection[sid] = { label: item.label, unit: item.unit, qty: 0 };
+    locSelection[item.id] = { label: item.label, unit: item.unit, qty: 0 };
   } else {
-    delete locSelection[sid];
+    delete locSelection[item.id];
   }
-  const nameEl = document.getElementById('locname-' + sid);
-  const chkEl  = document.getElementById('locchk-' + sid);
+  const nameEl = document.getElementById(`locname-${item.id}`);
+  const chkEl  = document.getElementById(`locchk-${item.id}`);
   if (nameEl) nameEl.classList.toggle('active', isNow);
   if (chkEl)  chkEl.textContent = isNow ? '✅' : '⬜';
   renderLocSelectionZone();
   autoSaveDraft();
-}
-
-function toggleLocSelect(item) {
-  const sid = item._sid || safeId(String(item.id || item.label));
-  toggleLocSelectById(sid, item);
 }
 
 function renderLocSelectionZone() {
@@ -3469,6 +3492,13 @@ function renderFournitSelectionZone() {
 }
 
 function toggleFournitSelect(key, catName, nom, defaultUnit) {
+  if (fournitSelection[key]) {
+    delete fournitSelection[key];
+  } else {
+    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
+  }
+  const isNow = !!fournitSelection[key];
+  const uid = window._fournitUids?.[key];
   if (uid) {
     document.getElementById('fn-' + uid)?.classList.toggle('sel', isNow);
     const chk = document.getElementById('fchk-' + uid);
@@ -4256,15 +4286,7 @@ function saveEditedRapport() {
 // ─── SYNC FIRESTORE ────────────────────────────────────────────
 async function syncFromFirestore() {
   try {
-    // Rapports validés
-    const snap = await getDoc(doc(_db, 'rapports', 'data'));
-    if (snap.exists()) {
-      const items = snap.data().items || [];
-      const now = Date.now();
-      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
-      localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
-    }
-    // Ressources partagées (mêmes clés que le module Ressources)
+    // Ressources partagées
     const sections = [
       { fire: 'equipe',    local: 'rv6_equipe'    },
       { fire: 'machines',  local: 'rv6_m'          },
@@ -4282,7 +4304,28 @@ async function syncFromFirestore() {
     // Entrées machines (pour hint heures)
     const mSnap = await getDoc(doc(_db, 'machines_entries', 'data'));
     if (mSnap.exists()) localStorage.setItem('rv6_e', JSON.stringify(mSnap.data().items || []));
+    // Rapports validés
+    const snap = await getDoc(doc(_db, 'rapports', 'data'));
+    if (snap.exists()) {
+      const items = snap.data().items || [];
+      const now = Date.now();
+      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
+      localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
+    }
   } catch(e) { console.warn('Firestore sync error:', e); }
+}
+
+// ─── PREFILL HEURES MACHINE ────────────────────────────────────
+function prefillMachineHours(itemId, total) {
+  if (!locSelection[itemId]) {
+    const item = LOC_ENGINS.find(i => i.id === itemId);
+    if (item) locSelection[itemId] = { label: item.label, unit: item.unit, qty: 0 };
+  }
+  if (locSelection[itemId]) {
+    locSelection[itemId].qty = parseFloat(total);
+    renderLocSelectionZone();
+    autoSaveDraft();
+  }
 }
 
 // ─── INIT ──────────────────────────────────────────────────────
@@ -4292,8 +4335,8 @@ function initRapport() {
   buildNomChips();
   buildLocationItems();
   buildMatChips();
-  loadDraft(); // EN PREMIER — restaure date/chantier/etc.
-  if (!document.getElementById('rj-date').value) setDefaultDate(); // seulement si pas de brouillon
+  loadDraft();
+  if (!document.getElementById('rj-date').value) setDefaultDate();
   renderEmployes();
   updateHeader();
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
@@ -4304,88 +4347,87 @@ function initRapport() {
 }
 
 // ─── EXPOSE FONCTIONS AU HTML ──────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  window.goSection            = goSection;
-  window.updateHeader         = updateHeader;
-  window.saveDraft            = saveDraft;
-  window.finaliserRapport     = finaliserRapport;
-  window.resetRapport         = resetRapport;
-  window.toggleLocSelect      = toggleLocSelect;
-  window.renderLocSelectionZone = renderLocSelectionZone;
-  window.openAddEmploye       = openAddEmploye;
-  window.closeAddEmploye      = closeAddEmploye;
-  window.confirmAddEmploye    = confirmAddEmploye;
-  window.addMetreRow          = addMetreRow;
-  window.removeMetreRow       = removeMetreRow;
-  window.toggleExtra          = toggleExtra;
-  window.openSketch           = openSketch;
-  window.closeSketch          = closeSketch;
-  window.clearSketch          = clearSketch;
-  window.saveSketch           = saveSketch;
-  window.addFournitRowWithMat = addFournitRowWithMat;
-  window.toggleFournitSelect  = toggleFournitSelect;
-  window.openFournitOverlay   = openFournitOverlay;
-  window.closeFournitOverlay  = closeFournitOverlay;
-  window.confirmFournitAdd    = confirmFournitAdd;
-  window.openHistorique       = openHistorique;
-  window.closeHistorique      = closeHistorique;
-  window.openRapportDetail    = openRapportDetail;
-  window.closeRapportDetail   = closeRapportDetail;
-  window.deleteRapport        = deleteRapport;
-  window.restoreRapport       = restoreRapport;
-  window.emptyTrash           = emptyTrash;
-  window.renderHistorique     = renderHistorique;
-  window.saveEditedRapport    = saveEditedRapport;
-  window.prefillMachineHours  = prefillMachineHours;
-  window.setMeteo             = setMeteo;
-  window.setLocQty            = setLocQty;
-  window.annoUndo             = annoUndo;
-  window.annoRedo             = annoRedo;
-  window.annoSetTool          = annoSetTool;
-  window.annoSetColor         = annoSetColor;
-  window.annoSetSize          = annoSetSize;
-  window.saveAnnotation       = saveAnnotation;
-  window.closeAnnotation      = closeAnnotation;
-  window.openAnnotation       = openAnnotation;
-  window.deletePhoto          = deletePhoto;
-  window.addBon               = addBon;
-  window.removeBon            = removeBon;
-  window.toggleAccord         = toggleAccord;
-  window.openAddLoc           = openAddLoc;
-  window.confirmAddLoc        = confirmAddLoc;
-  window.addFournitRow        = addFournitRow;
-  window.addMetreSub          = addMetreSub;
-  window.delMetreCard         = delMetreCard;
-  window.delMetreSub          = delMetreSub;
-  window.delRow               = delRow;
-  window.delBon               = delBon;
-  window.delPhoto             = delPhoto;
-  window.cycleFormule         = cycleFormule;
-  window.selectLocUnit        = selectLocUnit;
-  window.setAnnoTool          = setAnnoTool;
-  window.setMetreType         = setMetreType;
-  window.setSketchEraser      = setSketchEraser;
-  window.showRapTab           = showRapTab;
-  window.closeOverlay         = closeOverlay;
-  window.fournitSearch        = fournitSearch;
-  window.fournitClearSearch   = fournitClearSearch;
-  window.openFournitAddOverlay = openFournitAddOverlay;
-  window.deleteRapportInline  = deleteRapportInline;
-  window.restoreRapportInline = restoreRapportInline;
-  window.modifierRapport      = modifierRapport;
-  window.partagerRapport      = partagerRapport;
-  window.openEditPage         = openEditPage;
-  window.closeEditPage        = closeEditPage;
-  window.selectEditChip       = selectEditChip;
-  window.viderCorbeille       = viderCorbeille;
-  window.toggleExtrasMenu     = toggleExtrasMenu;
-  window.openAnnotate         = openAnnotate;
-  window.closeAnnotate        = closeAnnotate;
-  window.confirmAnnotate      = confirmAnnotate;
-  window.renderFournitSelectionZone = renderFournitSelectionZone;
-  window.updateFournitCatCount = updateFournitCatCount;
-  window.autoSaveDraft        = autoSaveDraft;
-});
+window.goSection            = goSection;
+window.updateHeader         = updateHeader;
+window.saveDraft            = saveDraft;
+window.finaliserRapport     = finaliserRapport;
+window.resetRapport         = resetRapport;
+window.toggleLocSelect      = toggleLocSelect;
+window.renderLocSelectionZone = renderLocSelectionZone;
+window.openAddEmploye       = openAddEmploye;
+window.closeAddEmploye      = closeAddEmploye;
+window.confirmAddEmploye    = confirmAddEmploye;
+window.addMetreRow          = addMetreRow;
+window.removeMetreRow       = removeMetreRow;
+window.toggleExtra          = toggleExtra;
+window.openSketch           = openSketch;
+window.closeSketch          = closeSketch;
+window.clearSketch          = clearSketch;
+window.saveSketch           = saveSketch;
+window.addFournitRowWithMat = addFournitRowWithMat;
+window.toggleFournitSelect  = toggleFournitSelect;
+window.openFournitOverlay   = openFournitOverlay;
+window.closeFournitOverlay  = closeFournitOverlay;
+window.confirmFournitAdd    = confirmFournitAdd;
+window.openHistorique       = openHistorique;
+window.closeHistorique      = closeHistorique;
+window.openRapportDetail    = openRapportDetail;
+window.closeRapportDetail   = closeRapportDetail;
+window.deleteRapport        = deleteRapport;
+window.restoreRapport       = restoreRapport;
+window.emptyTrash           = emptyTrash;
+window.renderHistorique     = renderHistorique;
+window.saveEditedRapport    = saveEditedRapport;
+window.prefillMachineHours  = prefillMachineHours;
+window.setMeteo             = setMeteo;
+window.setLocQty            = setLocQty;
+window.annoUndo             = annoUndo;
+window.annoRedo             = annoRedo;
+window.annoSetTool          = annoSetTool;
+window.annoSetColor         = annoSetColor;
+window.annoSetSize          = annoSetSize;
+window.saveAnnotation       = saveAnnotation;
+window.closeAnnotation      = closeAnnotation;
+window.openAnnotation       = openAnnotation;
+window.deletePhoto          = deletePhoto;
+window.addBon               = addBon;
+window.removeBon            = removeBon;
+// Manquants
+window.toggleAccord              = toggleAccord;
+window.openAddLoc                = openAddLoc;
+window.confirmAddLoc             = confirmAddLoc;
+window.addFournitRow             = addFournitRow;
+window.addMetreSub               = addMetreSub;
+window.delMetreCard              = delMetreCard;
+window.delMetreSub               = delMetreSub;
+window.delRow                    = delRow;
+window.delBon                    = delBon;
+window.delPhoto                  = delPhoto;
+window.cycleFormule              = cycleFormule;
+window.selectLocUnit             = selectLocUnit;
+window.setAnnoTool               = setAnnoTool;
+window.setMetreType              = setMetreType;
+window.setSketchEraser           = setSketchEraser;
+window.showRapTab                = showRapTab;
+window.closeOverlay              = closeOverlay;
+window.fournitSearch             = fournitSearch;
+window.fournitClearSearch        = fournitClearSearch;
+window.openFournitAddOverlay     = openFournitAddOverlay;
+window.deleteRapportInline       = deleteRapportInline;
+window.restoreRapportInline      = restoreRapportInline;
+window.modifierRapport           = modifierRapport;
+window.partagerRapport           = partagerRapport;
+window.openEditPage              = openEditPage;
+window.closeEditPage             = closeEditPage;
+window.selectEditChip            = selectEditChip;
+window.viderCorbeille            = viderCorbeille;
+window.toggleExtrasMenu          = toggleExtrasMenu;
+window.openAnnotate              = openAnnotate;
+window.closeAnnotate             = closeAnnotate;
+window.confirmAnnotate           = confirmAnnotate;
+window.renderFournitSelectionZone = renderFournitSelectionZone;
+window.updateFournitCatCount     = updateFournitCatCount;
+window.autoSaveDraft             = autoSaveDraft;
 
 </script>
 
