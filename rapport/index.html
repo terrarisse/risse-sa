@@ -3483,12 +3483,18 @@ function renderFournitSelectionZone() {
 }
 
 function toggleFournitSelect(key, catName, nom, defaultUnit) {
+  if (fournitSelection[key]) {
+    delete fournitSelection[key];
+  } else {
+    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
+  }
+  const isNow = !!fournitSelection[key];
+  const uid = window._fournitUids?.[key];
   if (uid) {
     document.getElementById('fn-' + uid)?.classList.toggle('sel', isNow);
     const chk = document.getElementById('fchk-' + uid);
     if (chk) chk.textContent = isNow ? '✅' : '⬜';
   }
-  // Update cat count
   updateFournitCatCount();
   renderFournitSelectionZone();
   autoSaveDraft();
