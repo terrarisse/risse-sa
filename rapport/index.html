@@ -1820,9 +1820,19 @@ const _app  = initializeApp(firebaseConfig);
 const _auth = getAuth(_app);
 const _db   = getFirestore(_app);
 
-// ─── EXPOSE FONCTIONS AU HTML (immédiat au chargement) ────────
-// Note: les déclarations function sont hoistées, donc disponibles ici
-document.addEventListener('DOMContentLoaded', () => {
+onAuthStateChanged(_auth, user => {
+  if (!user) { window.location.href = '../login.html'; return; }
+  syncFromFirestore().then(() => {
+    initRapport();
+    // Re-render les éléments dynamiques après sync Firestore
+    buildChantierChips();
+    buildNomChips();
+    buildLocationItems();
+    renderEmployes();
+  });
+});
+
+// ─── EXPOSE FONCTIONS AU HTML ──────────────────────────────────
 window.goSection            = goSection;
 window.updateHeader         = updateHeader;
 window.saveDraft            = saveDraft;
@@ -1868,54 +1878,42 @@ window.openAnnotation       = openAnnotation;
 window.deletePhoto          = deletePhoto;
 window.addBon               = addBon;
 window.removeBon            = removeBon;
-window.toggleAccord         = toggleAccord;
-window.openAddLoc           = openAddLoc;
-window.confirmAddLoc        = confirmAddLoc;
-window.addFournitRow        = addFournitRow;
-window.addMetreSub          = addMetreSub;
-window.delMetreCard         = delMetreCard;
-window.delMetreSub          = delMetreSub;
-window.delRow               = delRow;
-window.delBon               = delBon;
-window.delPhoto             = delPhoto;
-window.cycleFormule         = cycleFormule;
-window.selectLocUnit        = selectLocUnit;
-window.setAnnoTool          = setAnnoTool;
-window.setMetreType         = setMetreType;
-window.setSketchEraser      = setSketchEraser;
-window.showRapTab           = showRapTab;
-window.closeOverlay         = closeOverlay;
-window.fournitSearch        = fournitSearch;
-window.fournitClearSearch   = fournitClearSearch;
-window.openFournitAddOverlay = openFournitAddOverlay;
-window.deleteRapportInline  = deleteRapportInline;
-window.restoreRapportInline = restoreRapportInline;
-window.modifierRapport      = modifierRapport;
-window.partagerRapport      = partagerRapport;
-window.openEditPage         = openEditPage;
-window.closeEditPage        = closeEditPage;
-window.selectEditChip       = selectEditChip;
-window.viderCorbeille       = viderCorbeille;
-window.toggleExtrasMenu     = toggleExtrasMenu;
-window.openAnnotate         = openAnnotate;
-window.closeAnnotate        = closeAnnotate;
-window.confirmAnnotate      = confirmAnnotate;
+// Manquants
+window.toggleAccord              = toggleAccord;
+window.openAddLoc                = openAddLoc;
+window.confirmAddLoc             = confirmAddLoc;
+window.addFournitRow             = addFournitRow;
+window.addMetreSub               = addMetreSub;
+window.delMetreCard              = delMetreCard;
+window.delMetreSub               = delMetreSub;
+window.delRow                    = delRow;
+window.delBon                    = delBon;
+window.delPhoto                  = delPhoto;
+window.cycleFormule              = cycleFormule;
+window.selectLocUnit             = selectLocUnit;
+window.setAnnoTool               = setAnnoTool;
+window.setMetreType              = setMetreType;
+window.setSketchEraser           = setSketchEraser;
+window.showRapTab                = showRapTab;
+window.closeOverlay              = closeOverlay;
+window.fournitSearch             = fournitSearch;
+window.fournitClearSearch        = fournitClearSearch;
+window.openFournitAddOverlay     = openFournitAddOverlay;
+window.deleteRapportInline       = deleteRapportInline;
+window.restoreRapportInline      = restoreRapportInline;
+window.modifierRapport           = modifierRapport;
+window.partagerRapport           = partagerRapport;
+window.openEditPage              = openEditPage;
+window.closeEditPage             = closeEditPage;
+window.selectEditChip            = selectEditChip;
+window.viderCorbeille            = viderCorbeille;
+window.toggleExtrasMenu          = toggleExtrasMenu;
+window.openAnnotate              = openAnnotate;
+window.closeAnnotate             = closeAnnotate;
+window.confirmAnnotate           = confirmAnnotate;
 window.renderFournitSelectionZone = renderFournitSelectionZone;
-window.updateFournitCatCount = updateFournitCatCount;
-window.autoSaveDraft        = autoSaveDraft;
-});
-
-onAuthStateChanged(_auth, user => {
-  if (!user) { window.location.href = '../login.html'; return; }
-  syncFromFirestore().then(() => {
-    initRapport();
-    // Re-render les éléments dynamiques après sync Firestore
-    buildChantierChips();
-    buildNomChips();
-    buildLocationItems();
-    renderEmployes();
-  });
-});
+window.updateFournitCatCount     = updateFournitCatCount;
+window.autoSaveDraft             = autoSaveDraft;
 
 // ─── DATA ─────────────────────────────────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
@@ -4431,6 +4429,7 @@ function initRapport() {
   if (reports.length > 0) { badge.style.display = 'inline-block'; badge.textContent = reports.length; }
 }
 
+</script>
 
 <!-- OVERLAY AJOUT PRODUIT FOURNITURES -->
 <div class="overlay" id="overlay-fournit-add" onclick="closeFournitOverlay(event)">
