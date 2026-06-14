@@ -245,6 +245,9 @@ async function syncAllFromFirestore() {
       const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
       localStorage.setItem('rj_reports_v1', JSON.stringify(purged));
     }
+    // Catégories Ressources
+    const catSnap = await db.collection('ressources').doc('_categories').get();
+    if (catSnap.exists) localStorage.setItem('rv6_res_categories', JSON.stringify(catSnap.data().data || {}));
     console.log('[Hub] Sync OK');
   } catch(e) { console.warn('[Hub] Sync error:', e); }
 }
