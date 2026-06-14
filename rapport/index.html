@@ -3119,7 +3119,7 @@ function collectData() {
     fournitSelection: fournitSelection,
     evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
-      cat: k.split('|')[0], nom: k.split('|')[1], qty: v.qty, unit: v.unit
+      nom: v.nom || k, qty: v.qty, unit: v.unit, cat: v.cat || ''
     })),
   };
 }
@@ -3254,28 +3254,44 @@ function resetRapport() {
 
 function finaliserRapport() {
   const data = collectData();
-  const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+
+  // Validation minimale
+  if (!data.date) { showToast('⚠ Date manquante', '#E53935'); goSection(0); return; }
+  if (!data.chantier) { showToast('⚠ Chantier manquant', '#E53935'); goSection(0); return; }
+
   data.id = Date.now();
   data.savedAt = new Date().toISOString();
-  reports.unshift(data);
-  localStorage.setItem(REPORTS_KEY, JSON.stringify(reports));
-  localStorage.removeItem(STORAGE_KEY);
-  resetRapport();
-  // Refresh badge
-  const badge = document.getElementById('histo-badge');
-  badge.style.display = 'inline-block';
-  badge.textContent = reports.length;
 
-  const t = document.getElementById('toast');
-  t.textContent = '✅ Rapport enregistré!';
-  t.style.background = 'var(--teal)';
-  t.classList.add('show');
+  const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+  reports.unshift(data);
+
+  // Purge 30j
+  const now = Date.now();
+  const purged = reports.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
+
+  // Sauvegarder localStorage
+  localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
+  // Supprimer brouillon
+  localStorage.removeItem(STORAGE_KEY);
+
+  // Sauvegarder Firestore
+  const user = _auth.currentUser;
+  if (user) {
+    _db.collection('rapports').doc('data').set({ items: purged, updatedAt: now })
+      .catch(e => console.warn('Firestore finaliserRapport:', e));
+  }
+
+  resetRapport();
+
+  // Badge
+  const badge = document.getElementById('histo-badge');
+  if (badge) { badge.style.display = 'inline-block'; badge.textContent = purged.length; }
+
+  showToast('✅ Rapport enregistré!', 'var(--teal)');
   setTimeout(() => {
-    t.classList.remove('show');
-    t.textContent = '💾 Brouillon sauvegardé';
-    // Basculer sur l'onglet Validés
     renderHistoriqueInline();
     showRapTab('valides');
+    goSection(5);
   }, 1500);
 }
 
