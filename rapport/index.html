@@ -1802,12 +1802,11 @@ textarea { resize: none; }
   </div>
 </div>
 
-<script type="module">
-// ─── FIREBASE ────────────────────────────────────────────────
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
+<script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore-compat.js"></script>
+<script>
+// ─── FIREBASE ─────────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
   authDomain: "risse-sa.firebaseapp.com",
@@ -1816,104 +1815,15 @@ const firebaseConfig = {
   messagingSenderId: "656425275771",
   appId: "1:656425275771:web:b82c58557e41e6d1deadde"
 };
-const _app  = initializeApp(firebaseConfig);
-const _auth = getAuth(_app);
-const _db   = getFirestore(_app);
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const _auth = firebase.auth();
+const _db   = firebase.firestore();
 
-onAuthStateChanged(_auth, user => {
+// Auth guard
+firebase.auth().onAuthStateChanged(user => {
   if (!user) { window.location.href = '../login.html'; return; }
-  syncFromFirestore().then(() => {
-    initRapport();
-    // Re-render les éléments dynamiques après sync Firestore
-    buildChantierChips();
-    buildNomChips();
-    buildLocationItems();
-    renderEmployes();
-  });
+  initRapport();
 });
-
-// ─── EXPOSE FONCTIONS AU HTML ──────────────────────────────────
-window.goSection            = goSection;
-window.updateHeader         = updateHeader;
-window.saveDraft            = saveDraft;
-window.finaliserRapport     = finaliserRapport;
-window.resetRapport         = resetRapport;
-window.toggleLocSelect      = toggleLocSelect;
-window.renderLocSelectionZone = renderLocSelectionZone;
-window.openAddEmploye       = openAddEmploye;
-window.closeAddEmploye      = closeAddEmploye;
-window.confirmAddEmploye    = confirmAddEmploye;
-window.addMetreRow          = addMetreRow;
-window.removeMetreRow       = removeMetreRow;
-window.toggleExtra          = toggleExtra;
-window.openSketch           = openSketch;
-window.closeSketch          = closeSketch;
-window.clearSketch          = clearSketch;
-window.saveSketch           = saveSketch;
-window.addFournitRowWithMat = addFournitRowWithMat;
-window.toggleFournitSelect  = toggleFournitSelect;
-window.openFournitOverlay   = openFournitOverlay;
-window.closeFournitOverlay  = closeFournitOverlay;
-window.confirmFournitAdd    = confirmFournitAdd;
-window.openHistorique       = openHistorique;
-window.closeHistorique      = closeHistorique;
-window.openRapportDetail    = openRapportDetail;
-window.closeRapportDetail   = closeRapportDetail;
-window.deleteRapport        = deleteRapport;
-window.restoreRapport       = restoreRapport;
-window.emptyTrash           = emptyTrash;
-window.renderHistorique     = renderHistorique;
-window.saveEditedRapport    = saveEditedRapport;
-window.prefillMachineHours  = prefillMachineHours;
-window.setMeteo             = setMeteo;
-window.setLocQty            = setLocQty;
-window.annoUndo             = annoUndo;
-window.annoRedo             = annoRedo;
-window.annoSetTool          = annoSetTool;
-window.annoSetColor         = annoSetColor;
-window.annoSetSize          = annoSetSize;
-window.saveAnnotation       = saveAnnotation;
-window.closeAnnotation      = closeAnnotation;
-window.openAnnotation       = openAnnotation;
-window.deletePhoto          = deletePhoto;
-window.addBon               = addBon;
-window.removeBon            = removeBon;
-// Manquants
-window.toggleAccord              = toggleAccord;
-window.openAddLoc                = openAddLoc;
-window.confirmAddLoc             = confirmAddLoc;
-window.addFournitRow             = addFournitRow;
-window.addMetreSub               = addMetreSub;
-window.delMetreCard              = delMetreCard;
-window.delMetreSub               = delMetreSub;
-window.delRow                    = delRow;
-window.delBon                    = delBon;
-window.delPhoto                  = delPhoto;
-window.cycleFormule              = cycleFormule;
-window.selectLocUnit             = selectLocUnit;
-window.setAnnoTool               = setAnnoTool;
-window.setMetreType              = setMetreType;
-window.setSketchEraser           = setSketchEraser;
-window.showRapTab                = showRapTab;
-window.closeOverlay              = closeOverlay;
-window.fournitSearch             = fournitSearch;
-window.fournitClearSearch        = fournitClearSearch;
-window.openFournitAddOverlay     = openFournitAddOverlay;
-window.deleteRapportInline       = deleteRapportInline;
-window.restoreRapportInline      = restoreRapportInline;
-window.modifierRapport           = modifierRapport;
-window.partagerRapport           = partagerRapport;
-window.openEditPage              = openEditPage;
-window.closeEditPage             = closeEditPage;
-window.selectEditChip            = selectEditChip;
-window.viderCorbeille            = viderCorbeille;
-window.toggleExtrasMenu          = toggleExtrasMenu;
-window.openAnnotate              = openAnnotate;
-window.closeAnnotate             = closeAnnotate;
-window.confirmAnnotate           = confirmAnnotate;
-window.renderFournitSelectionZone = renderFournitSelectionZone;
-window.updateFournitCatCount     = updateFournitCatCount;
-window.autoSaveDraft             = autoSaveDraft;
 
 // ─── DATA ─────────────────────────────────────────────────────
 const STORAGE_KEY = 'rj_draft_v1';
@@ -2104,8 +2014,6 @@ let locSelection = {};
 
 function buildLocGroup(containerId, items, groupKey) {
   const c = document.getElementById(containerId);
-  if (!c) return;
-  c.innerHTML = '';
   items.forEach(item => {
     const row = document.createElement('div');
     row.className = 'fournit-row';
@@ -2125,7 +2033,7 @@ function buildLocGroup(containerId, items, groupKey) {
 
     row.appendChild(nameSpan);
     row.appendChild(chk);
-    row.addEventListener('click', () => toggleLocSelect(item));
+    row.onclick = () => toggleLocSelect(item);
     c.appendChild(row);
   });
 }
@@ -3575,13 +3483,6 @@ function renderFournitSelectionZone() {
 }
 
 function toggleFournitSelect(key, catName, nom, defaultUnit) {
-  if (fournitSelection[key]) {
-    delete fournitSelection[key];
-  } else {
-    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
-  }
-  const isNow = !!fournitSelection[key];
-  const uid = window._fournitUids?.[key];
   if (uid) {
     document.getElementById('fn-' + uid)?.classList.toggle('sel', isNow);
     const chk = document.getElementById('fchk-' + uid);
@@ -3688,12 +3589,13 @@ function getTrash() {
   return JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
 }
 function saveReports(arr) {
-  // Purge 30j
   const now = Date.now();
   const purged = arr.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
   localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
-  if (_auth.currentUser) {
-    setDoc(doc(_db, 'rapports', 'data'), { items: purged, updatedAt: now })
+  // Ecriture Firestore uniquement à la validation
+  const user = _auth.currentUser;
+  if (user) {
+    _db.collection('rapports').doc('data').set({ items: purged, updatedAt: now })
       .catch(e => console.warn('Firestore saveReports:', e));
   }
 }
@@ -4367,37 +4269,6 @@ function saveEditedRapport() {
 
 // Mise à jour badge au chargement
 // ─── SYNC FIRESTORE ────────────────────────────────────────────
-async function syncFromFirestore() {
-  try {
-    // Ressources partagées
-    const sections = [
-      { fire: 'equipe',    local: 'rv6_equipe'    },
-      { fire: 'machines',  local: 'rv6_m'          },
-      { fire: 'vehicules', local: 'rv6_vehicles'   },
-      { fire: 'materiel',  local: 'rv6_equipment'  },
-      { fire: 'materiaux', local: 'rv6_materials'  },
-    ];
-    for (const s of sections) {
-      const r = await getDoc(doc(_db, 'ressources', s.fire));
-      if (r.exists()) localStorage.setItem(s.local, JSON.stringify(r.data().items || []));
-    }
-    // Chantiers
-    const cSnap = await getDoc(doc(_db, 'chantiers', 'data'));
-    if (cSnap.exists()) localStorage.setItem('rv6_chantiers_v1', JSON.stringify(cSnap.data().items || []));
-    // Entrées machines (pour hint heures)
-    const mSnap = await getDoc(doc(_db, 'machines_entries', 'data'));
-    if (mSnap.exists()) localStorage.setItem('rv6_e', JSON.stringify(mSnap.data().items || []));
-    // Rapports validés
-    const snap = await getDoc(doc(_db, 'rapports', 'data'));
-    if (snap.exists()) {
-      const items = snap.data().items || [];
-      const now = Date.now();
-      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < MAX_DAYS * 86400000);
-      localStorage.setItem(REPORTS_KEY, JSON.stringify(purged));
-    }
-  } catch(e) { console.warn('Firestore sync error:', e); }
-}
-
 // ─── PREFILL HEURES MACHINE ────────────────────────────────────
 function prefillMachineHours(itemId, total) {
   if (!locSelection[itemId]) {
