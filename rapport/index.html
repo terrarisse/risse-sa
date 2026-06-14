@@ -1820,6 +1820,91 @@ const _app  = initializeApp(firebaseConfig);
 const _auth = getAuth(_app);
 const _db   = getFirestore(_app);
 
+// ─── EXPOSE FONCTIONS AU HTML (immédiat au chargement) ────────
+// Note: les déclarations function sont hoistées, donc disponibles ici
+document.addEventListener('DOMContentLoaded', () => {
+window.goSection            = goSection;
+window.updateHeader         = updateHeader;
+window.saveDraft            = saveDraft;
+window.finaliserRapport     = finaliserRapport;
+window.resetRapport         = resetRapport;
+window.toggleLocSelect      = toggleLocSelect;
+window.renderLocSelectionZone = renderLocSelectionZone;
+window.openAddEmploye       = openAddEmploye;
+window.closeAddEmploye      = closeAddEmploye;
+window.confirmAddEmploye    = confirmAddEmploye;
+window.addMetreRow          = addMetreRow;
+window.removeMetreRow       = removeMetreRow;
+window.toggleExtra          = toggleExtra;
+window.openSketch           = openSketch;
+window.closeSketch          = closeSketch;
+window.clearSketch          = clearSketch;
+window.saveSketch           = saveSketch;
+window.addFournitRowWithMat = addFournitRowWithMat;
+window.toggleFournitSelect  = toggleFournitSelect;
+window.openFournitOverlay   = openFournitOverlay;
+window.closeFournitOverlay  = closeFournitOverlay;
+window.confirmFournitAdd    = confirmFournitAdd;
+window.openHistorique       = openHistorique;
+window.closeHistorique      = closeHistorique;
+window.openRapportDetail    = openRapportDetail;
+window.closeRapportDetail   = closeRapportDetail;
+window.deleteRapport        = deleteRapport;
+window.restoreRapport       = restoreRapport;
+window.emptyTrash           = emptyTrash;
+window.renderHistorique     = renderHistorique;
+window.saveEditedRapport    = saveEditedRapport;
+window.prefillMachineHours  = prefillMachineHours;
+window.setMeteo             = setMeteo;
+window.setLocQty            = setLocQty;
+window.annoUndo             = annoUndo;
+window.annoRedo             = annoRedo;
+window.annoSetTool          = annoSetTool;
+window.annoSetColor         = annoSetColor;
+window.annoSetSize          = annoSetSize;
+window.saveAnnotation       = saveAnnotation;
+window.closeAnnotation      = closeAnnotation;
+window.openAnnotation       = openAnnotation;
+window.deletePhoto          = deletePhoto;
+window.addBon               = addBon;
+window.removeBon            = removeBon;
+window.toggleAccord         = toggleAccord;
+window.openAddLoc           = openAddLoc;
+window.confirmAddLoc        = confirmAddLoc;
+window.addFournitRow        = addFournitRow;
+window.addMetreSub          = addMetreSub;
+window.delMetreCard         = delMetreCard;
+window.delMetreSub          = delMetreSub;
+window.delRow               = delRow;
+window.delBon               = delBon;
+window.delPhoto             = delPhoto;
+window.cycleFormule         = cycleFormule;
+window.selectLocUnit        = selectLocUnit;
+window.setAnnoTool          = setAnnoTool;
+window.setMetreType         = setMetreType;
+window.setSketchEraser      = setSketchEraser;
+window.showRapTab           = showRapTab;
+window.closeOverlay         = closeOverlay;
+window.fournitSearch        = fournitSearch;
+window.fournitClearSearch   = fournitClearSearch;
+window.openFournitAddOverlay = openFournitAddOverlay;
+window.deleteRapportInline  = deleteRapportInline;
+window.restoreRapportInline = restoreRapportInline;
+window.modifierRapport      = modifierRapport;
+window.partagerRapport      = partagerRapport;
+window.openEditPage         = openEditPage;
+window.closeEditPage        = closeEditPage;
+window.selectEditChip       = selectEditChip;
+window.viderCorbeille       = viderCorbeille;
+window.toggleExtrasMenu     = toggleExtrasMenu;
+window.openAnnotate         = openAnnotate;
+window.closeAnnotate        = closeAnnotate;
+window.confirmAnnotate      = confirmAnnotate;
+window.renderFournitSelectionZone = renderFournitSelectionZone;
+window.updateFournitCatCount = updateFournitCatCount;
+window.autoSaveDraft        = autoSaveDraft;
+});
+
 onAuthStateChanged(_auth, user => {
   if (!user) { window.location.href = '../login.html'; return; }
   syncFromFirestore().then(() => {
@@ -1847,14 +1932,8 @@ const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé'
 // Lecture dynamique depuis les modules Ressources / Chantiers
 function getEquipeFromRessources() {
   try {
-    const raw = localStorage.getItem('rv6_equipe');
-    if (!raw) return NOMS_PRESETS;
-    const items = JSON.parse(raw);
-    if (!items.length) return NOMS_PRESETS;
-    const noms = items.map(e => {
-      if (typeof e === 'string') return e;
-      return e.nom || e.name || e.label || Object.values(e).find(v => typeof v === 'string') || '';
-    }).filter(n => n.length > 0);
+    const items = JSON.parse(localStorage.getItem('rv6_equipe') || '[]');
+    const noms = items.map(e => e.nom || e.name || String(e));
     return noms.length ? noms : NOMS_PRESETS;
   } catch(e) { return NOMS_PRESETS; }
 }
@@ -2229,9 +2308,7 @@ function renderEmployes() {
   if (totEl) totEl.textContent = total.toFixed(2);
   if (cntEl) cntEl.textContent = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
 
-  // Toujours afficher au minimum les presets si Ressources vide
-  const equipe = getEquipeFromRessources();
-  const tous = [...new Set([...equipe, ...state.employes.map(e=>e.nom)])];
+  const tous = [...new Set([...getEquipeFromRessources(), ...state.employes.map(e=>e.nom)])];
 
   tous.forEach(nom => {
     const idx    = state.employes.findIndex(e => e.nom === nom);
@@ -4304,13 +4381,7 @@ async function syncFromFirestore() {
     ];
     for (const s of sections) {
       const r = await getDoc(doc(_db, 'ressources', s.fire));
-      if (r.exists()) {
-        const data = r.data().items || [];
-        console.log('[Firestore sync]', s.fire, '→', data.length, 'items', data);
-        localStorage.setItem(s.local, JSON.stringify(data));
-      } else {
-        console.log('[Firestore sync]', s.fire, '→ document inexistant');
-      }
+      if (r.exists()) localStorage.setItem(s.local, JSON.stringify(r.data().items || []));
     }
     // Chantiers
     const cSnap = await getDoc(doc(_db, 'chantiers', 'data'));
@@ -4360,90 +4431,6 @@ function initRapport() {
   if (reports.length > 0) { badge.style.display = 'inline-block'; badge.textContent = reports.length; }
 }
 
-// ─── EXPOSE FONCTIONS AU HTML ──────────────────────────────────
-window.goSection            = goSection;
-window.updateHeader         = updateHeader;
-window.saveDraft            = saveDraft;
-window.finaliserRapport     = finaliserRapport;
-window.resetRapport         = resetRapport;
-window.toggleLocSelect      = toggleLocSelect;
-window.renderLocSelectionZone = renderLocSelectionZone;
-window.openAddEmploye       = openAddEmploye;
-window.closeAddEmploye      = closeAddEmploye;
-window.confirmAddEmploye    = confirmAddEmploye;
-window.addMetreRow          = addMetreRow;
-window.removeMetreRow       = removeMetreRow;
-window.toggleExtra          = toggleExtra;
-window.openSketch           = openSketch;
-window.closeSketch          = closeSketch;
-window.clearSketch          = clearSketch;
-window.saveSketch           = saveSketch;
-window.addFournitRowWithMat = addFournitRowWithMat;
-window.toggleFournitSelect  = toggleFournitSelect;
-window.openFournitOverlay   = openFournitOverlay;
-window.closeFournitOverlay  = closeFournitOverlay;
-window.confirmFournitAdd    = confirmFournitAdd;
-window.openHistorique       = openHistorique;
-window.closeHistorique      = closeHistorique;
-window.openRapportDetail    = openRapportDetail;
-window.closeRapportDetail   = closeRapportDetail;
-window.deleteRapport        = deleteRapport;
-window.restoreRapport       = restoreRapport;
-window.emptyTrash           = emptyTrash;
-window.renderHistorique     = renderHistorique;
-window.saveEditedRapport    = saveEditedRapport;
-window.prefillMachineHours  = prefillMachineHours;
-window.setMeteo             = setMeteo;
-window.setLocQty            = setLocQty;
-window.annoUndo             = annoUndo;
-window.annoRedo             = annoRedo;
-window.annoSetTool          = annoSetTool;
-window.annoSetColor         = annoSetColor;
-window.annoSetSize          = annoSetSize;
-window.saveAnnotation       = saveAnnotation;
-window.closeAnnotation      = closeAnnotation;
-window.openAnnotation       = openAnnotation;
-window.deletePhoto          = deletePhoto;
-window.addBon               = addBon;
-window.removeBon            = removeBon;
-// Manquants
-window.toggleAccord              = toggleAccord;
-window.openAddLoc                = openAddLoc;
-window.confirmAddLoc             = confirmAddLoc;
-window.addFournitRow             = addFournitRow;
-window.addMetreSub               = addMetreSub;
-window.delMetreCard              = delMetreCard;
-window.delMetreSub               = delMetreSub;
-window.delRow                    = delRow;
-window.delBon                    = delBon;
-window.delPhoto                  = delPhoto;
-window.cycleFormule              = cycleFormule;
-window.selectLocUnit             = selectLocUnit;
-window.setAnnoTool               = setAnnoTool;
-window.setMetreType              = setMetreType;
-window.setSketchEraser           = setSketchEraser;
-window.showRapTab                = showRapTab;
-window.closeOverlay              = closeOverlay;
-window.fournitSearch             = fournitSearch;
-window.fournitClearSearch        = fournitClearSearch;
-window.openFournitAddOverlay     = openFournitAddOverlay;
-window.deleteRapportInline       = deleteRapportInline;
-window.restoreRapportInline      = restoreRapportInline;
-window.modifierRapport           = modifierRapport;
-window.partagerRapport           = partagerRapport;
-window.openEditPage              = openEditPage;
-window.closeEditPage             = closeEditPage;
-window.selectEditChip            = selectEditChip;
-window.viderCorbeille            = viderCorbeille;
-window.toggleExtrasMenu          = toggleExtrasMenu;
-window.openAnnotate              = openAnnotate;
-window.closeAnnotate             = closeAnnotate;
-window.confirmAnnotate           = confirmAnnotate;
-window.renderFournitSelectionZone = renderFournitSelectionZone;
-window.updateFournitCatCount     = updateFournitCatCount;
-window.autoSaveDraft             = autoSaveDraft;
-
-</script>
 
 <!-- OVERLAY AJOUT PRODUIT FOURNITURES -->
 <div class="overlay" id="overlay-fournit-add" onclick="closeFournitOverlay(event)">
