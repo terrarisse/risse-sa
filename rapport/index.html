@@ -1847,8 +1847,14 @@ const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé'
 // Lecture dynamique depuis les modules Ressources / Chantiers
 function getEquipeFromRessources() {
   try {
-    const items = JSON.parse(localStorage.getItem('rv6_equipe') || '[]');
-    const noms = items.map(e => e.nom || e.name || String(e));
+    const raw = localStorage.getItem('rv6_equipe');
+    if (!raw) return NOMS_PRESETS;
+    const items = JSON.parse(raw);
+    if (!items.length) return NOMS_PRESETS;
+    const noms = items.map(e => {
+      if (typeof e === 'string') return e;
+      return e.nom || e.name || e.label || Object.values(e).find(v => typeof v === 'string') || '';
+    }).filter(n => n.length > 0);
     return noms.length ? noms : NOMS_PRESETS;
   } catch(e) { return NOMS_PRESETS; }
 }
@@ -2223,7 +2229,9 @@ function renderEmployes() {
   if (totEl) totEl.textContent = total.toFixed(2);
   if (cntEl) cntEl.textContent = state.employes.filter(e => parseFloat(e.heures||0) > 0).length;
 
-  const tous = [...new Set([...getEquipeFromRessources(), ...state.employes.map(e=>e.nom)])];
+  // Toujours afficher au minimum les presets si Ressources vide
+  const equipe = getEquipeFromRessources();
+  const tous = [...new Set([...equipe, ...state.employes.map(e=>e.nom)])];
 
   tous.forEach(nom => {
     const idx    = state.employes.findIndex(e => e.nom === nom);
@@ -4296,7 +4304,13 @@ async function syncFromFirestore() {
     ];
     for (const s of sections) {
       const r = await getDoc(doc(_db, 'ressources', s.fire));
-      if (r.exists()) localStorage.setItem(s.local, JSON.stringify(r.data().items || []));
+      if (r.exists()) {
+        const data = r.data().items || [];
+        console.log('[Firestore sync]', s.fire, '→', data.length, 'items', data);
+        localStorage.setItem(s.local, JSON.stringify(data));
+      } else {
+        console.log('[Firestore sync]', s.fire, '→ document inexistant');
+      }
     }
     // Chantiers
     const cSnap = await getDoc(doc(_db, 'chantiers', 'data'));
