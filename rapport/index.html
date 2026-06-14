@@ -1572,29 +1572,14 @@ textarea { resize: none; }
       <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;outline:none;"
         type="text" placeholder="Rechercher un produit…" id="fournit-search" oninput="fournitSearch(this.value)">
       <button onclick="fournitClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="fournit-clear">✕</button>
+      <button onclick="openAddMateriauRapport()" style="background:var(--teal);color:white;border:none;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;">+ Matériau</button>
     </div>
 
     <!-- CATALOGUE FOURNITURES -->
     <div id="fournit-catalogue"></div>
 
     <!-- ÉVACUATIONS -->
-    <div class="accord-group" id="accord-evac">
-      <div class="accord-header" onclick="toggleAccord('evac')">
-        <span class="accord-title">Évacuations</span>
-        <span class="accord-summary empty" id="sum-evac">—</span>
-        <span class="accord-chevron">▼</span>
-      </div>
-      <div class="accord-body" id="body-evac">
-        <div style="padding:10px 14px;">
-          <div class="col-headers">
-            <span>Matériau</span><span>Qté</span><span>Unité</span><span></span>
-          </div>
-          <div id="evac-list"></div>
-          <button class="btn-add-row" onclick="addFournitRow('evac-list','sum-evac')">+ Ajouter évacuation</button>
-        </div>
-      </div>
-    </div>
-
+    
     <!-- RÉCAP + FINALISER -->
 
     <div class="nav-btns">
@@ -3478,7 +3463,7 @@ function renderFournitSelectionZone() {
         onchange="fournitSelection['${key}'].unit=this.value;autoSaveDraft();">
         ${['pc','m','ml','m²','m³','kg','T','L','h','p/j','palette','sac','forfait'].map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
       </select>
-      <button onclick="delete fournitSelection['${key}'];renderFournitSelectionZone();updateFournitCatCount();autoSaveDraft();"
+      <button onclick="delete fournitSelection['${key}'];renderFournitSelectionZone();updateFournitCatCount();const uid=window._fournitUids?.['${key}'];if(uid){const n=document.getElementById('fn-'+uid);const c=document.getElementById('fchk-'+uid);if(n)n.classList.remove('sel');if(c)c.textContent='⬜';}autoSaveDraft();"
         style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;flex-shrink:0;">✕</button>
     `;
     list.appendChild(row);
@@ -4278,7 +4263,73 @@ function saveEditedRapport() {
 
 // Mise à jour badge au chargement
 // ─── SYNC FIRESTORE ────────────────────────────────────────────
-// ─── PREFILL HEURES MACHINE ────────────────────────────────────
+// ── AJOUT RAPIDE MATÉRIAU DEPUIS RAPPORT ─────────────────────
+function openAddMateriauRapport() {
+  // Peupler le select catégories
+  const sel = document.getElementById('rap-mx-cat');
+  try {
+    const cats = JSON.parse(localStorage.getItem('rv6_res_categories') || '{}').materiaux || [];
+    let html = '<option value="">— Sans catégorie —</option>';
+    cats.forEach(c => {
+      const subs = c.children || [];
+      if (subs.length) {
+        html += `<optgroup label="${c.emoji?c.emoji+' ':''}${c.name}">`;
+        html += `<option value="${c.id}">${c.emoji?c.emoji+' ':''}${c.name} (général)</option>`;
+        subs.forEach(s => { html += `<option value="${c.id}|${s.id}">&nbsp;&nbsp;↳ ${s.name}</option>`; });
+        html += '</optgroup>';
+      } else {
+        html += `<option value="${c.id}">${c.emoji?c.emoji+' ':''}${c.name}</option>`;
+      }
+    });
+    sel.innerHTML = html;
+  } catch(e) {}
+  document.getElementById('rap-mx-nom').value = '';
+  document.getElementById('rap-mx-unite').value = '';
+  document.getElementById('rap-mx-error').style.display = 'none';
+  const modal = document.getElementById('modal-add-mat-rapide');
+  modal.style.display = 'flex';
+  setTimeout(() => document.getElementById('rap-mx-nom').focus(), 100);
+}
+
+function closeAddMateriauRapport() {
+  document.getElementById('modal-add-mat-rapide').style.display = 'none';
+}
+
+function saveMateriauRapport() {
+  const nom = document.getElementById('rap-mx-nom').value.trim();
+  const errEl = document.getElementById('rap-mx-error');
+  if (!nom) { errEl.textContent = 'Le nom est obligatoire.'; errEl.style.display = 'block'; return; }
+
+  // Vérifier doublon
+  const existing = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
+  const doublon = existing.find(i => (i.nom||'').toLowerCase() === nom.toLowerCase());
+  if (doublon) { errEl.textContent = '⚠ "' + nom + '" existe déjà dans les matériaux.'; errEl.style.display = 'block'; return; }
+
+  const catVal = document.getElementById('rap-mx-cat').value;
+  const [cId, sId] = catVal.includes('|') ? catVal.split('|') : [catVal, ''];
+  const unite = document.getElementById('rap-mx-unite').value;
+
+  const item = {
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    nom, unite, catId: cId, subCatId: sId, photo: '', icon: ''
+  };
+
+  // Sauvegarder localStorage
+  existing.push(item);
+  localStorage.setItem('rv6_materials', JSON.stringify(existing));
+
+  // Sauvegarder Firestore
+  const user = _auth.currentUser;
+  if (user) {
+    _db.collection('ressources').doc('materiaux').set({ items: existing, updatedAt: Date.now() })
+      .catch(e => console.warn('Firestore saveMateriauRapport:', e));
+  }
+
+  closeAddMateriauRapport();
+  buildFournitCatalogue(); // Recharger le catalogue
+  showToast('🪨 ' + nom + ' ajouté', 'var(--teal)');
+}
+
 function prefillMachineHours(itemId, total) {
   if (!locSelection[itemId]) {
     const item = LOC_ENGINS.find(i => i.id === itemId);
@@ -4325,6 +4376,41 @@ function initRapport() {
       <div class="chips" id="fournit-new-unit-chips"></div>
     </div>
     <button class="btn-sheet-confirm" onclick="confirmFournitAdd()">Ajouter ✓</button>
+  </div>
+</div>
+
+<!-- ── MODAL AJOUT RAPIDE MATÉRIAU ─────────────────────────── -->
+<div id="modal-add-mat-rapide" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:flex-end;justify-content:center;">
+  <div style="background:white;border-radius:16px 16px 0 0;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:700;color:var(--navy);">🪨 Nouveau matériau</div>
+      <button onclick="closeAddMateriauRapport()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-muted);">✕</button>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px;">Catégorie</label>
+      <select id="rap-mx-cat" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:14px;outline:none;">
+        <option value="">— Sans catégorie —</option>
+      </select>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px;">Nom / Désignation *</label>
+      <input type="text" id="rap-mx-nom" placeholder="Béton C25/30…" autocomplete="off"
+        style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:14px;outline:none;box-sizing:border-box;">
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:4px;">Unité</label>
+      <select id="rap-mx-unite" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:14px;outline:none;">
+        <option value="">—</option>
+        <option>pc</option><option>m³</option><option>T</option><option>kg</option>
+        <option>m²</option><option>ml</option><option>m</option><option>L</option>
+        <option>sac</option><option>palette</option><option>forfait</option>
+      </select>
+    </div>
+    <div id="rap-mx-error" style="color:#E53935;font-size:13px;margin-bottom:8px;display:none;"></div>
+    <button onclick="saveMateriauRapport()"
+      style="width:100%;background:var(--navy);color:white;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">
+      Enregistrer ✓
+    </button>
   </div>
 </div>
 
