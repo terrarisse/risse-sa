@@ -3706,7 +3706,7 @@ function renderHistoriqueInline() {
     // Fournitures catalogue
     const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
     const fournitContent = fournitCat.length > 0
-      ? rows(fournitCat.map(f=>[f.nom||f.cat, `${f.qty} ${f.unit}`]))
+      ? rows(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : f.nom, `${f.qty} ${f.unit}`]))
       : null;
 
     // Évacuations
