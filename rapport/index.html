@@ -3119,7 +3119,7 @@ function collectData() {
     fournitSelection: fournitSelection,
     evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
-      nom: v.nom || k, qty: v.qty, unit: v.unit, cat: v.cat || ''
+      nom: v.subCat ? v.subCat + ' ' + v.nom : v.nom, qty: v.qty, unit: v.unit, cat: v.cat || ''
     })),
   };
 }
@@ -3377,7 +3377,7 @@ function buildFournitCatalogue() {
         sh.onclick = () => { sh.classList.toggle('open'); sb.classList.toggle('open'); };
         const si = document.createElement('div');
         si.className = 'r-sub-inner';
-        subItems.forEach(item => si.appendChild(buildRItem(item)));
+        subItems.forEach(item => si.appendChild(buildRItem(item, sub.name)));
         sb.appendChild(si);
         inner.appendChild(sh);
         inner.appendChild(sb);
@@ -3418,7 +3418,7 @@ function buildFournitCatalogue() {
 
 let _frowId = 0;
 
-function buildRItem(item) {
+function buildRItem(item, subName) {
   const key = item.id;
   const isSelected = !!fournitSelection[key];
   const uid = ++_frowId;
@@ -3449,7 +3449,7 @@ function buildRItem(item) {
     </div>
     <span id="fchk-${uid}" class="r-item-check">${isSelected?'✅':'⬜'}</span>
   `;
-  div.onclick = () => toggleFournitSelect(key, item.famille||'Matériaux', item.nom, item.unite||'pc');
+  div.onclick = () => toggleFournitSelect(key, item.famille||'Matériaux', item.nom, item.unite||'pc', subName||'');
   return div;
 }
 
@@ -3467,7 +3467,7 @@ function renderFournitSelectionZone() {
     const row = document.createElement('div');
     row.style.cssText = 'display:flex;align-items:center;gap:6px;padding:8px 14px;border-top:1px solid rgba(255,255,255,0.08);';
     row.innerHTML = `
-      <span style="flex:1;color:white;font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.nom}</span>
+      <span style="flex:1;color:white;font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.subCat ? item.subCat + ' ' + item.nom : item.nom}</span>
       <button onclick="var q=parseFloat(fournitSelection['${key}'].qty||0)+1;fournitSelection['${key}'].qty=q;document.getElementById('fqty-${key.replace(/'/g,'')}').value=q;autoSaveDraft();"
         style="background:var(--yellow);border:none;color:var(--navy);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;flex-shrink:0;">+1</button>
       <input type="number" min="0" step="0.5" placeholder="Qté"
@@ -3486,11 +3486,11 @@ function renderFournitSelectionZone() {
   });
 }
 
-function toggleFournitSelect(key, catName, nom, defaultUnit) {
+function toggleFournitSelect(key, catName, nom, defaultUnit, subCat) {
   if (fournitSelection[key]) {
     delete fournitSelection[key];
   } else {
-    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName };
+    fournitSelection[key] = { qty: '', unit: defaultUnit || 'pc', nom, cat: catName, subCat: subCat||'' };
   }
   const isNow = !!fournitSelection[key];
   const uid = window._fournitUids?.[key];
