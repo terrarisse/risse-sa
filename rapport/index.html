@@ -3119,7 +3119,7 @@ function collectData() {
     fournitSelection: fournitSelection,
     evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
-      nom: v.subCat ? v.subCat + ' ' + v.nom : v.nom, qty: v.qty, unit: v.unit, cat: v.cat || ''
+      nom: v.subCat ? v.subCat + ' ' + v.nom : v.nom, qty: v.qty, unit: v.unit, cat: v.cat || '', subCat: v.subCat || ''
     })),
   };
 }
@@ -3852,7 +3852,7 @@ function rapportToTexte(r) {
 
   if (fournitCat.length > 0) {
     txt += `📦 FOURNITURES\n`;
-    fournitCat.forEach(f => txt += `  ${f.nom||f.cat} : ${f.qty} ${f.unit}\n`);
+    fournitCat.forEach(f => txt += `  ${f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat)} : ${f.qty} ${f.unit}\n`);
     txt += '\n';
   }
 
@@ -3929,7 +3929,7 @@ function partagerPDF(r) {
     `<tr><td style="padding:8px;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
     + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} métré(s)</td></tr>`:'')
   )}
-  ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.nom||f.cat,`${f.qty} ${f.unit}`]))):''}
+  ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat),`${f.qty} ${f.unit}`]))):''}
   ${evac.length>0?section('🚮','Évacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
   ${r.notes?section('💬','Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
   <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — rapport généré le ${new Date().toLocaleDateString('fr-CH')}</p>
