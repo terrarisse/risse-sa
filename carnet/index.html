@@ -296,6 +296,7 @@ const PDF = {
   DAY1_X:    184.05,  // center X of day 1 column
   DAY_SPACE:  15.70,  // spacing between day columns
   PAGE_H:    595.0,   // page height
+  TOTAL_X:   672.0,   // X center of "T" (Total) column on the right
   // Row Y centers — measured from real PDF (top-left origin)
   ROWS: {
     apm_fin: 216.7,   // Après-midi fin   (17h30)
@@ -601,6 +602,35 @@ function drawEntriesOnCanvas(canvas, scale, moIdx) {
     }
     if(e.repas) drawV('1', PDF.ROWS.repas, colX);
   });
+
+  // Draw monthly totals in the T (Total) column
+  const prefix2 = `${curYear}-${String(moIdx+1).padStart(2,'0')}-`;
+  const allEnts = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix2));
+  let totalH = 0, totalRepas = 0;
+  allEnts.forEach(([,e]) => {
+    if(['normal','malade'].includes(e.type||'normal')) totalH += e.hours||0;
+    if(e.repas) totalRepas++;
+  });
+  if(totalH > 0 || totalRepas > 0) {
+    const tx = PDF.TOTAL_X * scale;
+    const fsT = Math.max(6, Math.round(6 * scale));
+    // Total heures — green
+    ctx.save();
+    ctx.font = `700 ${fsT}px Arial`;
+    ctx.fillStyle = '#1A7F72';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(fmtH(totalH), tx, PDF.ROWS.hrs * scale);
+    ctx.restore();
+    // Total repas — red
+    ctx.save();
+    ctx.font = `700 ${fsT}px Arial`;
+    ctx.fillStyle = '#cc2200';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(String(totalRepas), tx, PDF.ROWS.repas * scale);
+    ctx.restore();
+  }
 }
 
 // ═══════════════════════════════════
@@ -770,6 +800,31 @@ async function downloadFilledPdf() {
         if(e.hours>0) wv(e.hours,PDF.ROWS.hrs);
       }
       if(e.repas) wv('1',PDF.ROWS.repas);
+    });
+
+    // Write monthly totals in the T (Total) column — horizontal text
+    const prefix2 = `${curYear}-${String(curMo+1).padStart(2,'0')}-`;
+    const allEnts2 = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix2));
+    let totalH = 0, totalRepas = 0;
+    allEnts2.forEach(([,e]) => {
+      if(['normal','malade'].includes(e.type||'normal')) totalH += e.hours||0;
+      if(e.repas) totalRepas++;
+    });
+    const tx = PDF.TOTAL_X;
+    const FS_TOT = 6.5;
+    // Total heures (green)
+    dataPage.drawText(fmtH(totalH), {
+      x: tx - 10,
+      y: PH - PDF.ROWS.hrs + 2,
+      size: FS_TOT, font,
+      color: rgb(0.1, 0.5, 0.45),
+    });
+    // Total repas (red)
+    dataPage.drawText(String(totalRepas), {
+      x: tx - 4,
+      y: PH - PDF.ROWS.repas + 2,
+      size: FS_TOT, font,
+      color: rgb(0.8, 0.13, 0.0),
     });
 
     const outBytes = await pdfDoc.save();
