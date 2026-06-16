@@ -3665,12 +3665,8 @@ function renderHistoriqueInline() {
     return;
   }
 
-  const rows = (arr, style='') => arr.map(([k,v]) =>
-    `<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;${style}">
-      <span style="color:var(--text-muted);flex:1;">${k}</span>
-      <span style="font-weight:600;color:var(--text);text-align:right;">${v}</span>
-    </div>`
-  ).join('');
+  const infoRow = (k, v) =>
+    `<div class="info-row"><span class="k">${k}</span><span class="v">${v}</span></div>`;
 
   const section = (icon, title, content) => content ? `
     <div style="margin-bottom:0;">
@@ -3681,91 +3677,90 @@ function renderHistoriqueInline() {
   let html = '';
 
   reports.forEach(r => {
-    const d = new Date((r.date||'') + 'T12:00:00');
-    const dateStr  = d.toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-    const day      = d.toLocaleDateString('fr-CH',{day:'2-digit'});
-    const month    = d.toLocaleDateString('fr-CH',{month:'short'});
-    const age      = Math.floor((Date.now()-new Date(r.savedAt).getTime())/86400000);
-    const ageStr   = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
+    const d      = new Date((r.date||'') + 'T12:00:00');
+    const day    = d.toLocaleDateString('fr-CH',{day:'2-digit'});
+    const month  = d.toLocaleDateString('fr-CH',{month:'short'});
+    const weekday= d.toLocaleDateString('fr-CH',{weekday:'short'});
+    const age    = Math.floor((Date.now()-new Date(r.savedAt).getTime())/86400000);
+    const ageStr = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
+    const totalMO = (r.employes||[]).reduce((s,e)=>s+parseFloat(e.heures||0),0);
+    const nEmp   = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0).length;
+    const nLoc   = Object.values(r.location||{}).filter(v=>v&&parseFloat(v)>0).length;
+    const nFournit = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0).length;
+    const nEvac  = (r.evacuations||[]).length;
 
-    // MO
+    // Build detail content (hidden by default)
     const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
-    const totalMO   = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
-    const moContent = empActifs.length > 0
-      ? rows(empActifs.map(e=>[e.nom, `${parseFloat(e.heures).toFixed(2)} h`])) +
-        `<div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-top:2px solid var(--border);margin-top:2px;">
-          <span style="font-weight:700;color:var(--navy);">Total</span>
-          <span style="font-weight:700;color:var(--teal);">${totalMO.toFixed(2)} h</span>
+    const moRows = empActifs.length > 0
+      ? empActifs.map(e => infoRow(e.nom, `${parseFloat(e.heures).toFixed(2)} h`)).join('') +
+        `<div class="info-row" style="border-top:1.5px solid var(--border);margin-top:4px;padding-top:8px;">
+          <span class="k" style="font-weight:700">Total</span>
+          <span class="v" style="color:var(--teal)">${totalMO.toFixed(2)} h</span>
         </div>`
-      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune main d\'œuvre</p>';
+      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;padding:4px 0;">Aucune main d\'œuvre</p>';
 
-    // Location
     const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
     const locEntries  = Object.entries(r.location||{})
       .filter(([,v])=>v&&parseFloat(v)>0)
-      .map(([k,v])=>{
-        const item = allLocItems.find(i=>i.id===k);
-        return item ? [item.label, `${v} ${item.unit}`] : [k, v];
-      });
-    const locContent = locEntries.length > 0
-      ? rows(locEntries)
-      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune location</p>';
+      .map(([k,v])=>{ const item=allLocItems.find(i=>i.id===k); return item?[item.label,`${v} ${item.unit}`]:[k,v]; });
+    const locRows = locEntries.length > 0
+      ? locEntries.map(([k,v]) => infoRow(k,v)).join('')
+      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;padding:4px 0;">Aucune location</p>';
 
-    // Travaux
-    const metresRows = (r.metres||[]).map(m => `
-      <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;">
-        <span style="color:var(--text-muted);">${m.desc||'Métré'} <span style="font-size:11px;">(${(m.subStrings||m.subs||[]).join(' + ')})</span></span>
-        <span style="font-weight:600;color:var(--text);">${m.total} ${m.unit}</span>
-      </div>`).join('');
+    const metresRows = (r.metres||[]).map(m =>
+      infoRow(`${m.desc||'Métré'} <span style="font-size:11px;opacity:0.7;">(${(m.subStrings||m.subs||[]).join(' + ')})</span>`, `${m.total} ${m.unit}`)
+    ).join('');
+    const travauxRows = r.travaux || (r.metres||[]).length > 0
+      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;white-space:pre-wrap;">${r.travaux}</p>` : ''}${metresRows}`
+      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;padding:4px 0;">Aucune description</p>';
 
-    const travauxContent = r.travaux || (r.metres||[]).length > 0
-      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;white-space:pre-wrap;">${r.travaux}</p>` : ''}
-         ${(r.metres||[]).length > 0 ? metresRows : ''}`
-      : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune description</p>';
-
-    // Fournitures catalogue
     const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
-    const fournitContent = fournitCat.length > 0
-      ? rows(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : f.nom, `${f.qty} ${f.unit}`]))
+    const fournitRows = fournitCat.length > 0
+      ? fournitCat.map(f => infoRow(f.subCat ? f.subCat + ' ' + f.nom : f.nom, `${f.qty} ${f.unit}`)).join('')
       : null;
 
-    // Évacuations
     const evacItems = (r.evacuations||[]);
-    const evacContent = evacItems.length > 0
-      ? rows(evacItems.map(e=>[e.mat||'—', `${e.qte} ${e.unite}`]))
+    const evacRows = evacItems.length > 0
+      ? evacItems.map(e => infoRow(e.mat||'—', `${e.qte} ${e.unite}`)).join('')
       : null;
 
     html += `
-    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:14px;">
-
-      <!-- EN-TÊTE CARTE -->
-      <div style="background:var(--navy);padding:12px 14px;display:flex;align-items:center;gap:12px;border-radius:var(--radius) var(--radius) 0 0;">
-        <div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 10px;text-align:center;flex-shrink:0;">
-          <div style="color:white;font-size:22px;font-weight:700;line-height:1;">${day}</div>
-          <div style="color:rgba(255,255,255,0.7);font-size:10px;font-weight:600;text-transform:uppercase;">${month}</div>
+    <div class="rapport-card" id="rcard-${r.id}">
+      <div class="rapport-card-header" onclick="toggleRapportCard('${r.id}')">
+        <div class="rapport-card-date">
+          <div class="day">${day}</div>
+          <div class="month">${month}</div>
         </div>
-        <div style="flex:1;min-width:0;">
-          <div style="color:white;font-size:16px;font-weight:700;">${r.chantier||'Sans chantier'}</div>
-          <div style="color:rgba(255,255,255,0.65);font-size:12px;margin-top:2px;">${r.nom||'—'}</div>
+        <div class="rapport-card-info">
+          <div class="chantier">${r.chantier || 'Sans chantier'}</div>
+          <div class="meta">${weekday} · ${r.nom||'—'} · ${ageStr}</div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:5px;">
-          <button onclick="partagerRapport(event,'${r.id}')"
-            style="background:var(--yellow);border:none;color:var(--navy);font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">⬆️</button>
-          <button onclick="modifierRapport(event,'${r.id}')"
-            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:white;font-size:13px;font-weight:700;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">✏️</button>
-          <button onclick="deleteRapportInline(event,'${r.id}')"
-            style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:14px;width:34px;height:34px;border-radius:8px;cursor:pointer;flex-shrink:0;">🗑️</button>
+        <div class="rapport-card-actions">
+          ${totalMO > 0 ? `<span class="badge-mo">${totalMO.toFixed(2)}h MO</span>` : ''}
+          <button onclick="deleteRapportInline(event,'${r.id}')" style="background:none;border:none;color:var(--text-muted);font-size:16px;cursor:pointer;padding:2px 4px;">🗑️</button>
+        </div>
+        <span class="rapport-chevron">›</span>
+      </div>
+      <div class="rapport-card-chips collapsed" id="rchips-${r.id}">
+        ${nEmp>0 ? `<span class="rc-chip blue">👷 ${nEmp} emp.</span>` : ''}
+        ${nLoc>0 ? `<span class="rc-chip blue">🔧 ${nLoc} engin(s)</span>` : ''}
+        ${(r.metres||[]).length>0 ? `<span class="rc-chip green">📐 ${r.metres.length} métré(s)</span>` : ''}
+        ${nFournit>0 ? `<span class="rc-chip green">📦 ${nFournit} fournit.</span>` : ''}
+        ${nEvac>0 ? `<span class="rc-chip green">🚮 ${nEvac} évac.</span>` : ''}
+        ${r.meteo ? `<span class="rc-chip">${r.meteo}</span>` : ''}
+        <div style="width:100%;margin-top:6px;">
+          ${section('👷','Main d\'œuvre', moRows)}
+          ${section('🔧','Location interne', locRows)}
+          ${section('🏗️','Travaux réalisés', travauxRows)}
+          ${fournitRows ? section('📦','Fournitures', fournitRows) : ''}
+          ${evacRows ? section('🚮','Évacuations', evacRows) : ''}
+          ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;white-space:pre-wrap;">${r.notes}</p>`) : ''}
+          <div style="padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:8px;">
+            <button onclick="partagerRapport(event,'${r.id}')" style="flex:1;background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:13px;font-weight:700;padding:10px;border-radius:8px;cursor:pointer;">⬆️ Exporter</button>
+            <button onclick="modifierRapport(event,'${r.id}')" style="flex:1;background:var(--teal);border:none;color:white;font-family:inherit;font-size:13px;font-weight:700;padding:10px;border-radius:8px;cursor:pointer;">✏️ Modifier</button>
+          </div>
         </div>
       </div>
-
-      <!-- SECTIONS DÉTAIL -->
-      ${section('👷','Main d\'œuvre', moContent)}
-      ${section('🔧','Location interne', locContent)}
-      ${section('🏗️','Travaux réalisés', travauxContent)}
-      ${fournitContent ? section('📦','Fournitures', fournitContent) : ''}
-      ${evacContent ? section('🚮','Évacuations', evacContent) : ''}
-      ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;">${r.notes}</p>`) : ''}
-
     </div>`;
   });
 
