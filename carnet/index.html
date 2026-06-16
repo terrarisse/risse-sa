@@ -40,6 +40,9 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .month-card.has-pdf{background:linear-gradient(135deg,#fff 0%,#f0fdf9 100%)}
 .month-name{font-size:16px;font-weight:800;color:var(--navy)}
 .month-status{font-size:11px;color:var(--muted);font-weight:600}
+.month-totals{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;}
+.mt-h{font-size:12px;font-weight:700;color:var(--teal);background:#e8f5f3;padding:2px 8px;border-radius:8px;}
+.mt-r{font-size:12px;font-weight:700;color:var(--navy);background:#eef1f8;padding:2px 8px;border-radius:8px;}
 .month-card.current .month-name{color:var(--teal)}
 .month-pdf-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);
   position:absolute;top:10px;right:10px}
@@ -286,7 +289,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin',
               'Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const JOURS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-const DOW_S  = ['Di','Lu','Ma','Me','Je','Ve','Sa'];
+const DOW_S  = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
 
 // PDF cell coordinates (from analysis of real Excel PDF)
 const PDF = {
@@ -400,13 +403,28 @@ function renderHome() {
     const isCur = i === now.getMonth() && curYear === now.getFullYear();
     const hasPdf = !!monthPdfs[i];
     const cls = 'month-card' + (isCur?' current':'') + (hasPdf?' has-pdf':'');
-    // Count entries this month
+    // Count entries and compute totals for this month
     const prefix = `${curYear}-${String(i+1).padStart(2,'0')}-`;
-    const cnt = Object.keys(dayEntries).filter(k=>k.startsWith(prefix)).length;
+    const entries = Object.entries(dayEntries).filter(([k]) => k.startsWith(prefix));
+    const cnt = entries.length;
+    let totalH = 0, totalRepas = 0;
+    entries.forEach(([, e]) => {
+      if (['normal','malade'].includes(e.type||'normal')) {
+        totalH += calcH(e.matDeb||'', e.matFin||'', e.amDeb||'', e.amFin||'');
+      }
+      if (e.repas) totalRepas++;
+    });
+    const totalsHtml = cnt > 0
+      ? `<div class="month-totals">
+           <span class="mt-h">⏱ ${fmtH(totalH)}</span>
+           <span class="mt-r">🍽 ${totalRepas} repas</span>
+         </div>`
+      : '';
     return `<div class="${cls}" onclick="openMonth(${i})">
       ${hasPdf?'<div class="month-pdf-dot"></div>':''}
       <div class="month-name">${m}</div>
       <div class="month-status">${hasPdf ? (cnt>0?`${cnt} jour${cnt>1?'s':''} saisi${cnt>1?'s':''}` : 'PDF prêt') : 'Pas de PDF'}</div>
+      ${totalsHtml}
     </div>`;
   }).join('');
 }
