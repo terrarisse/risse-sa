@@ -1095,6 +1095,19 @@ textarea { resize: none; }
   padding: 8px 14px;
   flex-wrap: wrap;
 }
+.rapport-card-chips.collapsed {
+  display: none;
+}
+.rapport-chevron {
+  font-size: 16px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  padding: 2px 0;
+}
+.rapport-card.expanded .rapport-chevron {
+  transform: rotate(90deg);
+}
 .rc-chip {
   font-size: 11px;
   font-weight: 600;
@@ -1648,10 +1661,9 @@ textarea { resize: none; }
     <span class="tab-icon">📦</span>
     Fournit.
   </button>
-  <button class="tab-item" onclick="goSection(5)" id="tab-5" style="position:relative;">
+  <button class="tab-item" onclick="goSection(5)" id="tab-5">
     <span class="tab-icon">📂</span>
     Rapports
-    <span id="histo-badge" style="display:none;position:absolute;top:6px;right:6px;background:var(--yellow);color:var(--navy);font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;padding:0 3px;line-height:16px;text-align:center;"></span>
   </button>
 </div>
 
@@ -2055,7 +2067,8 @@ function renderLocSelectionZone() {
     const item = allItems.find(i => i.id === id);
 
     row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;">(${sel.unit})</span></span>
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;" id="loc-unit-label-${id}">(${sel.unit})</span></span>
+      <button class="loc-unit-btn" id="loc-unit-btn-${id}" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.8);font-family:inherit;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;cursor:pointer;flex-shrink:0;">${sel.unit}</button>
       <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
       <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
       <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
@@ -2070,6 +2083,19 @@ function renderLocSelectionZone() {
     const btnOne  = row.querySelector('.loc-plus-one');
     const input   = row.querySelector('input');
     const btnDel  = row.querySelector('.loc-del');
+    const btnUnit = row.querySelector('.loc-unit-btn');
+
+    const LOC_UNITS_CYCLE = ['h', 'p/j', 'ml', 'm', 'm²', 'm³', 'kg', 'T', 'L', 'pc', 'km', 'forfait'];
+    btnUnit.onclick = () => {
+      const currentUnit = locSelection[id].unit;
+      const idx = LOC_UNITS_CYCLE.indexOf(currentUnit);
+      const nextUnit = LOC_UNITS_CYCLE[(idx + 1) % LOC_UNITS_CYCLE.length];
+      locSelection[id].unit = nextUnit;
+      btnUnit.textContent = nextUnit;
+      const labelEl = document.getElementById('loc-unit-label-' + id);
+      if (labelEl) labelEl.textContent = '(' + nextUnit + ')';
+      autoSaveDraft();
+    };
 
     const updateQty = (val) => {
       locSelection[id].qty = Math.round(val * 4) / 4;
@@ -3039,7 +3065,7 @@ function buildRecapPreview() {
     </div>
     <div class="preview-section">
       <h4>🏗️ Travaux réalisés</h4>
-      <p>${travaux || '<span class="preview-empty">Aucune description</span>'}</p>
+      <p style="white-space:pre-wrap;">${travaux || '<span class="preview-empty">Aucune description</span>'}</p>
       ${nMetres > 0 ? (() => {
         const ms = collectData().metres;
         return ms.map(m => `
@@ -3283,9 +3309,7 @@ function finaliserRapport() {
   // Reset immédiat
   resetRapport();
 
-  // Badge
-  const badge = document.getElementById('histo-badge');
-  if (badge) { badge.style.display = 'inline-block'; badge.textContent = purged.length; }
+
 
   showToast('✅ Rapport enregistré!', 'var(--teal)');
   setTimeout(() => {
@@ -3633,10 +3657,6 @@ function renderHistoriqueInline() {
   const trash   = getTrash();
   const container = document.getElementById('histo-inline');
 
-  // Badge
-  const badge = document.getElementById('histo-badge');
-  badge.style.display = reports.length > 0 ? 'inline-block' : 'none';
-  badge.textContent = reports.length;
   const subtitle = document.getElementById('histo-subtitle');
   if (subtitle) subtitle.textContent = `${reports.length} rapport${reports.length>1?'s':''} · 30 derniers jours`;
 
@@ -3699,7 +3719,7 @@ function renderHistoriqueInline() {
       </div>`).join('');
 
     const travauxContent = r.travaux || (r.metres||[]).length > 0
-      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;">${r.travaux}</p>` : ''}
+      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;white-space:pre-wrap;">${r.travaux}</p>` : ''}
          ${(r.metres||[]).length > 0 ? metresRows : ''}`
       : '<p style="font-size:13px;color:var(--text-light);font-style:italic;">Aucune description</p>';
 
@@ -3823,20 +3843,20 @@ function rapportToTexte(r) {
   const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
   const evac = (r.evacuations||[]);
 
-  let txt = `📋 RAPPORT JOURNALIER — RISSE S.A.\n`;
+  let txt = `RAPPORT JOURNALIER — RISSE S.A.\n`;
   txt += `${'─'.repeat(35)}\n`;
-  txt += `📅 ${d}\n`;
-  txt += `🏗️ Chantier : ${r.chantier||'—'}\n`;
-  txt += `👤 Responsable : ${r.nom||'—'}\n\n`;
+  txt += `${d}\n`;
+  txt += `Chantier : ${r.chantier||'—'}\n`;
+  txt += `Responsable : ${r.nom||'—'}\n\n`;
 
-  txt += `👷 MAIN D'ŒUVRE\n`;
+  txt += `MAIN D'OEUVRE\n`;
   if (empActifs.length > 0) {
     empActifs.forEach(e => txt += `  ${e.nom} : ${parseFloat(e.heures).toFixed(2)} h\n`);
     txt += `  Total : ${totalMO.toFixed(2)} h\n`;
   } else txt += `  Aucune\n`;
   txt += '\n';
 
-  txt += `🔧 LOCATION INTERNE\n`;
+  txt += `LOCATION INTERNE\n`;
   if (locFilled.length > 0) {
     locFilled.forEach(([k,v]) => {
       const item = allLocItems.find(i=>i.id===k);
@@ -3845,24 +3865,28 @@ function rapportToTexte(r) {
   } else txt += `  Aucune\n`;
   txt += '\n';
 
-  txt += `🏗️ TRAVAUX RÉALISÉS\n`;
-  txt += r.travaux ? `  ${r.travaux}\n` : `  Aucune description\n`;
-  if ((r.metres||[]).length > 0) txt += `  + ${r.metres.length} métré(s)\n`;
+  txt += `TRAVAUX REALISES\n`;
+  if (r.travaux) {
+    r.travaux.split('\n').forEach(line => txt += `  ${line}\n`);
+  } else {
+    txt += `  Aucune description\n`;
+  }
+  if ((r.metres||[]).length > 0) txt += `  + ${r.metres.length} metre(s)\n`;
   txt += '\n';
 
   if (fournitCat.length > 0) {
-    txt += `📦 FOURNITURES\n`;
+    txt += `FOURNITURES\n`;
     fournitCat.forEach(f => txt += `  ${f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat)} : ${f.qty} ${f.unit}\n`);
     txt += '\n';
   }
 
   if (evac.length > 0) {
-    txt += `🚮 ÉVACUATIONS\n`;
+    txt += `EVACUATIONS\n`;
     evac.forEach(e => txt += `  ${e.mat||'—'} : ${e.qte} ${e.unite}\n`);
     txt += '\n';
   }
 
-  if (r.notes) txt += `💬 NOTES\n  ${r.notes}\n\n`;
+  if (r.notes) txt += `NOTES\n  ${r.notes}\n\n`;
   txt += `${'─'.repeat(35)}\nRisse S.A.`;
   return txt;
 }
@@ -3895,9 +3919,9 @@ function partagerPDF(r) {
     <tr><td style="padding:5px 8px;color:#555;border-bottom:1px solid #eee;">${k}</td>
         <td style="padding:5px 8px;font-weight:600;text-align:right;border-bottom:1px solid #eee;">${v}</td></tr>`).join('');
 
-  const section = (icon, title, content) => `
+  const section = (title, content) => `
     <div style="margin-bottom:16px;">
-      <div style="background:#1B3A6B;color:white;padding:6px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">${icon} ${title}</div>
+      <div style="background:#1B3A6B;color:white;padding:6px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">${title}</div>
       <table style="width:100%;border-collapse:collapse;">${content}</table>
     </div>`;
 
@@ -3920,18 +3944,18 @@ function partagerPDF(r) {
   p{font-size:13px;line-height:1.6;padding:8px;color:#333;}</style>
   </head><body>
   <div class="header">
-    <h1>📋 Rapport Journalier — Risse S.A.</h1>
+    <h1>Rapport Journalier — Risse S.A.</h1>
     <div class="meta">${d} · ${r.chantier||'—'} · ${r.nom||'—'}</div>
   </div>
-  ${section('👷','Main d\'œuvre', moRows)}
-  ${section('🔧','Location interne', locRows)}
-  ${section('🏗️','Travaux réalisés',
-    `<tr><td style="padding:8px;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
-    + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} métré(s)</td></tr>`:'')
+  ${section('Main d\'oeuvre', moRows)}
+  ${section('Location interne', locRows)}
+  ${section('Travaux realises',
+    `<tr><td style="padding:8px;white-space:pre-wrap;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
+    + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} metre(s)</td></tr>`:'')
   )}
-  ${fournitCat.length>0?section('📦','Fournitures',rowsHTML(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat),`${f.qty} ${f.unit}`]))):''}
-  ${evac.length>0?section('🚮','Évacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
-  ${r.notes?section('💬','Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
+  ${fournitCat.length>0?section('Fournitures',rowsHTML(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat),`${f.qty} ${f.unit}`]))):''}
+  ${evac.length>0?section('Evacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
+  ${r.notes?section('Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
   <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — rapport généré le ${new Date().toLocaleDateString('fr-CH')}</p>
   </body></html>`;
 
@@ -4079,15 +4103,6 @@ function renderHistorique() {
   const scroll  = document.getElementById('histo-scroll');
   const countEl = document.getElementById('histo-count');
 
-  // Update badge
-  const badge = document.getElementById('histo-badge');
-  if (reports.length > 0) {
-    badge.style.display = 'flex';
-    badge.textContent = reports.length;
-  } else {
-    badge.style.display = 'none';
-  }
-
   countEl.textContent = `${reports.length} rapport${reports.length>1?'s':''}`;
 
   if (reports.length === 0 && trash.length === 0) {
@@ -4116,8 +4131,8 @@ function renderHistorique() {
     const ageStr = age === 0 ? "Aujourd'hui" : age === 1 ? 'Hier' : `il y a ${age}j`;
 
     html += `
-    <div class="rapport-card" onclick="openEditPage('${r.id}')">
-      <div class="rapport-card-header">
+    <div class="rapport-card" id="rcard-${r.id}">
+      <div class="rapport-card-header" onclick="toggleRapportCard('${r.id}')">
         <div class="rapport-card-date">
           <div class="day">${day}</div>
           <div class="month">${month}</div>
@@ -4130,14 +4145,16 @@ function renderHistorique() {
           ${totalMO > 0 ? `<span class="badge-mo">${totalMO.toFixed(2)}h MO</span>` : ''}
           <button class="btn-del-rapport" onclick="deleteRapport(event,'${r.id}')">🗑️</button>
         </div>
+        <span class="rapport-chevron">›</span>
       </div>
-      <div class="rapport-card-chips">
+      <div class="rapport-card-chips collapsed" id="rchips-${r.id}">
         ${nEmp>0 ? `<span class="rc-chip blue">👷 ${nEmp} emp.</span>` : ''}
         ${nLoc>0 ? `<span class="rc-chip blue">🔧 ${nLoc} engin(s)</span>` : ''}
         ${(r.metres||[]).length>0 ? `<span class="rc-chip green">📐 ${r.metres.length} métré(s)</span>` : ''}
         ${nFournit>0 ? `<span class="rc-chip green">📦 ${nFournit} fournit.</span>` : ''}
         ${nEvac>0 ? `<span class="rc-chip green">🚮 ${nEvac} évac.</span>` : ''}
         ${r.meteo ? `<span class="rc-chip">${r.meteo}</span>` : ''}
+        <button onclick="openEditPage('${r.id}')" style="margin-left:auto;background:var(--teal);color:white;border:none;font-family:inherit;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;">✏️ Ouvrir</button>
       </div>
     </div>`;
   });
@@ -4204,6 +4221,20 @@ function restoreRapport(e, id) {
 
 // ─── EDIT PAGE ─────────────────────────────────────────────────
 let currentEditId = null;
+
+function toggleRapportCard(id) {
+  const card  = document.getElementById('rcard-' + id);
+  const chips = document.getElementById('rchips-' + id);
+  if (!card || !chips) return;
+  const isOpen = card.classList.contains('expanded');
+  if (isOpen) {
+    card.classList.remove('expanded');
+    chips.classList.add('collapsed');
+  } else {
+    card.classList.add('expanded');
+    chips.classList.remove('collapsed');
+  }
+}
 
 function openEditPage(id) {
   const reports = getReports();
@@ -4371,9 +4402,6 @@ function initRapport() {
   updateHeader();
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
   document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); });
-  const reports = getReports();
-  const badge = document.getElementById('histo-badge');
-  if (reports.length > 0) { badge.style.display = 'inline-block'; badge.textContent = reports.length; }
 }
 
 </script>
