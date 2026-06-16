@@ -1065,10 +1065,11 @@ textarea { resize: none; }
   align-items: center;
   padding: 12px 14px;
   gap: 10px;
-  border-bottom: 1px solid var(--border);
+  background: var(--navy);
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 .rapport-card-date {
-  background: var(--navy);
+  background: rgba(255,255,255,0.15);
   color: white;
   border-radius: 8px;
   padding: 6px 10px;
@@ -1078,8 +1079,8 @@ textarea { resize: none; }
 .rapport-card-date .day { font-size: 20px; font-weight: 700; line-height: 1; }
 .rapport-card-date .month { font-size: 10px; font-weight: 600; opacity: 0.75; text-transform: uppercase; }
 .rapport-card-info { flex: 1; }
-.rapport-card-info .chantier { font-weight: 700; font-size: 15px; color: var(--text); }
-.rapport-card-info .meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.rapport-card-info .chantier { font-weight: 700; font-size: 15px; color: white; }
+.rapport-card-info .meta { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
 .rapport-card-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
 .badge-mo {
   background: var(--teal);
@@ -1100,7 +1101,7 @@ textarea { resize: none; }
 }
 .rapport-chevron {
   font-size: 16px;
-  color: var(--text-muted);
+  color: rgba(255,255,255,0.6);
   transition: transform 0.2s;
   flex-shrink: 0;
   padding: 2px 0;
@@ -3737,7 +3738,7 @@ function renderHistoriqueInline() {
         </div>
         <div class="rapport-card-actions">
           ${totalMO > 0 ? `<span class="badge-mo">${totalMO.toFixed(2)}h MO</span>` : ''}
-          <button onclick="deleteRapportInline(event,'${r.id}')" style="background:none;border:none;color:var(--text-muted);font-size:16px;cursor:pointer;padding:2px 4px;">🗑️</button>
+          <button onclick="deleteRapportInline(event,'${r.id}')" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;padding:2px 4px;">🗑️</button>
         </div>
         <span class="rapport-chevron">›</span>
       </div>
