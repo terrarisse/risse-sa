@@ -218,6 +218,35 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db   = firebase.firestore();
 
+// ─── FORCE RECONNEXION SUR NOUVELLE VERSION ─────────────────────
+// Incrémenter APP_VERSION à chaque déploiement majeur pour forcer
+// tout le monde à se reconnecter (même valeur dans TOUS les modules).
+const APP_VERSION = 'v8';
+const VERSION_KEY = 'rv6_app_version';
+
+function checkVersionAndMaybeSignOut() {
+  const stored = localStorage.getItem(VERSION_KEY);
+  if (stored && stored !== APP_VERSION) {
+    localStorage.setItem(VERSION_KEY, APP_VERSION);
+    auth.signOut().finally(() => { window.location.href = 'login.html'; });
+    return true; // déconnexion en cours
+  }
+  localStorage.setItem(VERSION_KEY, APP_VERSION);
+  return false;
+}
+const _forcingReconnect = checkVersionAndMaybeSignOut();
+
+// Le service worker prévient aussi en direct si une page reste ouverte
+// pendant qu'une nouvelle version s'active en arrière-plan.
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data && e.data.type === 'SW_UPDATED') {
+      localStorage.setItem(VERSION_KEY, APP_VERSION);
+      auth.signOut().finally(() => { window.location.href = 'login.html'; });
+    }
+  });
+}
+
 async function syncAllFromFirestore() {
   try {
     const sections = [
@@ -259,6 +288,7 @@ async function syncAllFromFirestore() {
 }
 
 auth.onAuthStateChanged(async user => {
+  if (_forcingReconnect) return; // une déconnexion forcée est déjà en cours
   const guard = document.getElementById('authGuard');
   if (!user) { window.location.href = 'login.html'; return; }
   await syncAllFromFirestore();
