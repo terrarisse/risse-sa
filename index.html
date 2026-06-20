@@ -150,12 +150,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       <div class="mod-name">Calculatrice</div>
       <div class="mod-desc">Métrés & poids</div>
     </a>
-    <div class="mod-card dev">
-      <div class="mod-dev-tag">Bientôt</div>
+    <a class="mod-card is-active" href="bons/index.html">
       <div class="mod-icon" style="background:#FFF1F2;">📦</div>
-      <div class="mod-name">Stock</div>
-      <div class="mod-desc">Matériaux & seuils</div>
-    </div>
+      <div class="mod-name">Bons de régie</div>
+      <div class="mod-desc">Numéroté & signé</div>
+    </a>
   </div>
  
   <!-- RESSOURCES ENTREPRISE -->
@@ -244,6 +243,13 @@ async function syncAllFromFirestore() {
       const now = Date.now();
       const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
       localStorage.setItem('rj_reports_v1', JSON.stringify(purged));
+    }
+    const bSnap = await db.collection('bons').doc('data').get();
+    if (bSnap.exists) {
+      const items = bSnap.data().items || [];
+      const now = Date.now();
+      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
+      localStorage.setItem('rb_bons_v1', JSON.stringify(purged));
     }
     // Catégories Ressources
     const catSnap = await db.collection('ressources').doc('_categories').get();
