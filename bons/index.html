@@ -1970,19 +1970,15 @@ const TRASH_KEY   = 'rb_trash_v1';
 const COUNTER_KEY = 'rb_counter_v1';
 const MAX_DAYS    = 30;
 const TRASH_DAYS  = 7;
-const NOMS_PRESETS = ['Jonathan','Risse','Maxime','Pierre','André','Thomas']; // fallback
+const NOMS_PRESETS = ['Maçon','Machiniste','Chef d\'équipe','Contremaître','Aide Maçon'];
 const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport']; // fallback
 const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
 const MAT_FOURNITURES = ['Béton','Gravier 4/16','Gravier 0/40','Sable','Tout-venant','Enrobé','Bordures béton','Tuyaux PVC','Grillage','Géotextile','Câble électrique','Plaques acier','Sacs ciment'];
 const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé','Ferraille','Déchets chantier','Boue/sédiments','Bois'];
 
-// Lecture dynamique depuis les modules Ressources / Chantiers
+// M.O. du module Bons : postes/fonctions pré-enregistrés (pas l'équipe nominative de Ressources)
 function getEquipeFromRessources() {
-  try {
-    const items = JSON.parse(localStorage.getItem('rv6_equipe') || '[]');
-    const noms = items.map(e => e.nom || e.name || String(e));
-    return noms.length ? noms : NOMS_PRESETS;
-  } catch(e) { return NOMS_PRESETS; }
+  return NOMS_PRESETS;
 }
 function getChantiersActifs() {
   try {
@@ -3477,19 +3473,32 @@ function finaliserRapport() {
   openSignPage();
 }
 
+function getMaxBonNumero() {
+  // Dérivé de la liste des bons connue (synchronisée via Firestore au login),
+  // plus robuste qu'un compteur local isolé entre appareils.
+  let maxN = parseInt(localStorage.getItem(COUNTER_KEY) || '0', 10);
+  if (isNaN(maxN)) maxN = 0;
+  try {
+    const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+    reports.forEach(r => {
+      if (r.numero) {
+        const m = String(r.numero).match(/(\d+)$/);
+        if (m) { const n = parseInt(m[1], 10); if (n > maxN) maxN = n; }
+      }
+    });
+  } catch(e) {}
+  return maxN;
+}
+
 function getNextBonNumero() {
   // Compteur global auto-incrémenté, jamais décrémenté, jamais réutilisé
-  let n = parseInt(localStorage.getItem(COUNTER_KEY) || '0', 10);
-  if (isNaN(n)) n = 0;
-  n += 1;
+  const n = getMaxBonNumero() + 1;
   localStorage.setItem(COUNTER_KEY, String(n));
   return 'BON-' + String(n).padStart(4, '0');
 }
 
 function peekNextBonNumero() {
-  let n = parseInt(localStorage.getItem(COUNTER_KEY) || '0', 10);
-  if (isNaN(n)) n = 0;
-  return 'BON-' + String(n + 1).padStart(4, '0');
+  return 'BON-' + String(getMaxBonNumero() + 1).padStart(4, '0');
 }
 
 function openSignPage() {
