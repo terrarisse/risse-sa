@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v7';
+const CACHE_NAME = 'risse-app-v8';
 const URLS = [
   './',
   './index.html',
@@ -24,11 +24,20 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+    caches.keys()
+      .then(keys =>
+        Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      )
+      .then(() => self.clients.claim())
+      .then(() => self.clients.matchAll())
+      .then(clientsList => {
+        // Prévient toutes les pages ouvertes qu'une nouvelle version vient
+        // de prendre le relais, pour qu'elles forcent la déconnexion + reload.
+        clientsList.forEach(client => {
+          client.postMessage({ type: 'SW_UPDATED', version: CACHE_NAME });
+        });
+      })
   );
-  self.clients.claim();
 });
 
 // Network first → cache fallback
