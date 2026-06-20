@@ -147,9 +147,19 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   background:var(--text);color:#fff;padding:10px 18px;border-radius:20px;font-size:13px;
   font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:500;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* AUTH GUARD */
+#authGuard{display:none;position:fixed;inset:0;background:var(--navy);z-index:9999;align-items:center;justify-content:center;}
+#authGuard.show{display:flex;}
+#authGuard .spin{width:34px;height:34px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
+
+<!-- AUTH GUARD (écran de chargement pendant vérif + sync Firestore) -->
+<div id="authGuard" class="show"><div class="spin"></div></div>
+
 
 <!-- ═══ HEADER ═══ -->
 <div class="hdr">
@@ -231,46 +241,57 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
   <!-- Sélecteur de jour -->
   <div class="day-picker" id="dayPicker"></div>
 
-  <!-- Type -->
-  <div class="chips" id="typeChips">
-    <div class="chip sel" data-t="normal" onclick="selType('normal')">✅ Normal</div>
-    <div class="chip" data-t="vacances" onclick="selType('vacances')">🏖 Vacances</div>
-    <div class="chip" data-t="malade" onclick="selType('malade')">🤒 Malade</div>
-    <div class="chip" data-t="accident" onclick="selType('accident')">🚑 Accident</div>
-    <div class="chip" data-t="assurance" onclick="selType('assurance')">🏥 Assurance</div>
+  <!-- Matin -->
+  <div class="form-sec">
+    <div class="form-lbl">🌅 Matin</div>
+    <div class="chips" id="amChips" style="padding:0 0 8px">
+      <div class="chip sel" data-t="normal" onclick="selHalfType('am','normal')">✅ Normal</div>
+      <div class="chip" data-t="vacances" onclick="selHalfType('am','vacances')">🏖 Vacances</div>
+      <div class="chip" data-t="malade" onclick="selHalfType('am','malade')">🤒 Malade</div>
+      <div class="chip" data-t="accident" onclick="selHalfType('am','accident')">🚑 Accident</div>
+    </div>
+    <div class="form-card" id="amHoraire">
+      <div class="form-row">
+        <span class="form-rl">Début–Fin</span>
+        <input class="tfield" id="fMd" type="time">
+        <span class="tsep">–</span>
+        <input class="tfield" id="fMf" type="time">
+      </div>
+    </div>
   </div>
 
-  <!-- Horaires -->
-  <div id="horaireSection">
-    <div class="form-sec">
-      <div class="form-card">
-        <div class="form-row">
-          <span class="form-rl">🌅 Matin</span>
-          <input class="tfield" id="fMd" type="time">
-          <span class="tsep">–</span>
-          <input class="tfield" id="fMf" type="time">
-        </div>
-        <div class="form-row">
-          <span class="form-rl">☀️ Après-m.</span>
-          <input class="tfield" id="fAd" type="time">
-          <span class="tsep">–</span>
-          <input class="tfield" id="fAf" type="time">
-        </div>
-        <div class="form-row">
-          <span class="form-rl">⏱ Total</span>
-          <span class="total-lbl" id="totalLbl">0h00</span>
-          <button class="std-btn" onclick="applyStd()">Standard</button>
-        </div>
+  <!-- Après-midi -->
+  <div class="form-sec">
+    <div class="form-lbl">☀️ Après-midi</div>
+    <div class="chips" id="pmChips" style="padding:0 0 8px">
+      <div class="chip sel" data-t="normal" onclick="selHalfType('pm','normal')">✅ Normal</div>
+      <div class="chip" data-t="vacances" onclick="selHalfType('pm','vacances')">🏖 Vacances</div>
+      <div class="chip" data-t="malade" onclick="selHalfType('pm','malade')">🤒 Malade</div>
+      <div class="chip" data-t="accident" onclick="selHalfType('pm','accident')">🚑 Accident</div>
+    </div>
+    <div class="form-card" id="pmHoraire">
+      <div class="form-row">
+        <span class="form-rl">Début–Fin</span>
+        <input class="tfield" id="fAd" type="time">
+        <span class="tsep">–</span>
+        <input class="tfield" id="fAf" type="time">
+      </div>
+    </div>
+  </div>
+
+  <!-- Total + Standard + Repas -->
+  <div class="form-sec">
+    <div class="form-card">
+      <div class="form-row">
+        <span class="form-rl">⏱ Total</span>
+        <span class="total-lbl" id="totalLbl">0h00</span>
+        <button class="std-btn" onclick="applyStd()">Standard</button>
       </div>
     </div>
     <div class="tog-row">
       <span class="tog-lbl">🍽 Repas</span>
       <button class="tog" id="togRepas" onclick="togR()"></button>
     </div>
-  </div>
-
-  <div id="specialTypeMsg" style="display:none;padding:14px 16px;font-size:13px;color:var(--muted);text-align:center">
-    Le mot sera inscrit dans les cases Matin et Après-midi de ce jour, sans heures.
   </div>
 
   <div class="m-actions">
@@ -284,6 +305,24 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 <div id="pdfInputs" style="display:none"></div>
 
 <div class="toast" id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
+  authDomain: "risse-sa.firebaseapp.com",
+  projectId: "risse-sa",
+  storageBucket: "risse-sa.firebasestorage.app",
+  messagingSenderId: "656425275771",
+  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
+};
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db   = firebase.firestore();
+let currentUid = null;
+</script>
 
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -314,6 +353,11 @@ const PDF = {
     sam:     488.3,   // Heures samedi (+25%)
     dim:     514.1,   // Heures dim/sam soir (+50%)
     assur:   540.0,   // Assurance
+  },
+  // Vertical center between début/fin rows, used to write a single word for a half-day off
+  ROWS_CENTER: {
+    apm: 230.15,  // center between apm_fin (216.7) and apm_deb (243.6)
+    mat: 369.0,   // center between mat_fin (359.1) and mat_deb (378.9)
   }
 };
 
@@ -322,7 +366,8 @@ let curYear  = now.getFullYear();
 let curView  = 'home';
 let curMo    = -1;   // current month being viewed
 let selDay   = -1;   // selected day in picker
-let selType_ = 'normal';
+let selAmType = 'normal'; // type for matin
+let selPmType = 'normal'; // type for après-midi
 let hasRepas = false;
 
 // Storage
@@ -335,6 +380,7 @@ let dirtyMonths = new Set(); // months with unsaved edits
 // PERSISTENCE
 // ═══════════════════════════════════
 function loadAll() {
+  // Local-first: read whatever is cached on this device immediately.
   const c = localStorage.getItem('ch3_cfg');
   if(c) cfg = {...cfg, ...JSON.parse(c)};
   const e = localStorage.getItem('ch3_entries');
@@ -345,20 +391,67 @@ function loadAll() {
   }
 }
 
+// ── Firestore sync (scoped per user via currentUid) ──────────
+async function syncFromFirestore() {
+  if(!currentUid) return;
+  try {
+    const mainSnap = await db.collection('carnet_heures').doc(currentUid).get();
+    if (mainSnap.exists) {
+      const data = mainSnap.data();
+      if (data.cfg) { cfg = {...cfg, ...data.cfg}; localStorage.setItem('ch3_cfg', JSON.stringify(cfg)); }
+      if (data.entries) { dayEntries = data.entries; localStorage.setItem('ch3_entries', JSON.stringify(dayEntries)); }
+    }
+    // PDFs: one doc per month, only fetch the ones we don't already have locally
+    // (avoids re-downloading 12 PDFs on every login once they're cached on this device)
+    const fetches = [];
+    for (let i=0;i<12;i++){
+      if (!monthPdfs[i]) {
+        fetches.push(
+          db.collection('carnet_heures_pdfs').doc(`${currentUid}_${i}`).get()
+            .then(snap => { if (snap.exists) { monthPdfs[i] = snap.data().pdf; localStorage.setItem('ch3_pdf_'+i, monthPdfs[i]); } })
+        );
+      }
+    }
+    await Promise.all(fetches);
+    console.log('[Carnet] Sync OK');
+  } catch(err) {
+    console.warn('[Carnet] Sync error:', err);
+  }
+}
+
+let saveCfgTimer = null, saveEntriesTimer = null;
+
 function saveCfg() {
   cfg.nom = $('cfgNom').value;
   cfg.md  = $('cfgMd').value;  cfg.mf = $('cfgMf').value;
   cfg.ad  = $('cfgAd').value;  cfg.af = $('cfgAf').value;
   localStorage.setItem('ch3_cfg', JSON.stringify(cfg));
+  // Debounce Firestore write
+  clearTimeout(saveCfgTimer);
+  saveCfgTimer = setTimeout(() => {
+    if(!currentUid) return;
+    db.collection('carnet_heures').doc(currentUid).set({cfg}, {merge:true})
+      .catch(err => console.warn('[Carnet] saveCfg error:', err));
+  }, 600);
 }
 
 function saveEntries() {
   localStorage.setItem('ch3_entries', JSON.stringify(dayEntries));
+  clearTimeout(saveEntriesTimer);
+  saveEntriesTimer = setTimeout(() => {
+    if(!currentUid) return;
+    db.collection('carnet_heures').doc(currentUid).set({entries: dayEntries}, {merge:true})
+      .catch(err => console.warn('[Carnet] saveEntries error:', err));
+  }, 600);
 }
 
 function savePdf(moIdx, b64) {
   monthPdfs[moIdx] = b64;
   localStorage.setItem('ch3_pdf_'+moIdx, b64);
+  if(!currentUid) return;
+  db.collection('carnet_heures_pdfs').doc(`${currentUid}_${moIdx}`).set({pdf: b64})
+    .then(() => showToast('☁️ PDF synchronisé'))
+    .catch(err => { console.warn('[Carnet] savePdf error:', err); showToast('⚠️ Sync échouée (sauvé en local)'); });
 }
 
 // ═══════════════════════════════════
@@ -366,9 +459,14 @@ function savePdf(moIdx, b64) {
 // ═══════════════════════════════════
 const $ = id => document.getElementById(id);
 function toMin(t){if(!t)return 0;const[h,m]=t.split(':').map(Number);return h*60+m;}
-function calcH(md,mf,ad,af){
-  const raw=(Math.max(0,toMin(mf)-toMin(md))+Math.max(0,toMin(af)-toMin(ad)))/60;
-  return raw>0?Math.max(0,raw-0.25):0; // -15min pause
+function calcH(md,mf,ad,af,amType,pmType){
+  // amType/pmType: 'normal' = compute from times, anything else = 0h for that half
+  const amH = (amType===undefined || amType==='normal') ? Math.max(0,toMin(mf)-toMin(md))/60 : 0;
+  const pmH = (pmType===undefined || pmType==='normal') ? Math.max(0,toMin(af)-toMin(ad))/60 : 0;
+  const raw = amH + pmH;
+  // Only deduct the 15min pause if both halves were actually worked
+  const bothWorked = amH>0 && pmH>0;
+  return raw>0 ? Math.max(0, raw - (bothWorked?0.25:0)) : 0;
 }
 function fmtH(h){const m=Math.round(h*60);return `${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}`;}
 function fmtTime(t){if(!t)return '';const[h,m]=t.split(':');return `${parseInt(h)}h${m}`;}
@@ -415,9 +513,7 @@ function renderHome() {
     const cnt = entries.length;
     let totalH = 0, totalRepas = 0;
     entries.forEach(([, e]) => {
-      if ((e.type||'normal')==='normal') {
-        totalH += calcH(e.matDeb||'', e.matFin||'', e.amDeb||'', e.amFin||'');
-      }
+      totalH += e.hours||0;
       if (e.repas) totalRepas++;
     });
     const totalsHtml = cnt > 0
@@ -569,19 +665,18 @@ function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
   const ents = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix));
 
   const fs = Math.max(6, Math.round(5.5 * scale));
+  const SPECIAL_LABEL = { vacances:'Vac', malade:'Malade', accident:'Accident' };
 
-  function drawV(text, pyY, colX, color, fsize) {
+  function drawV(text, pyY, colX, fsize) {
     if(!text && text!==0) return;
     const s = String(text);
-    // colX = center of day column (in PDF points)
-    // pyY  = Y center of row (in PDF points, top-left origin)
     const cx   = colX * scale;
     const rowY = pyY  * scale;
     ctx.save();
     ctx.translate(cx, rowY);
     ctx.rotate(-Math.PI / 2);  // rotate 90° CCW → text reads bottom-to-top
     ctx.font = `700 ${fsize||fs}px Arial`;
-    ctx.fillStyle = color||'#000';
+    ctx.fillStyle = '#000';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(s, 0, 0);
@@ -591,32 +686,31 @@ function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
   ents.forEach(([key, e]) => {
     const d = parseInt(key.split('-')[2]);
     const colX = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE; // already center X
-    const t = e.type || 'normal';
+    const amType = e.amType || e.type || 'normal'; // amType = matin
+    const pmType = e.pmType || (e.type ? e.type : 'normal'); // pmType = après-midi
 
-    if(t==='vacances'){
-      drawV('Vac', PDF.ROWS.apm_deb, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
-      drawV('Vac', PDF.ROWS.apm_fin, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
-      drawV('Vac', PDF.ROWS.mat_deb, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
-      drawV('Vac', PDF.ROWS.mat_fin, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
-    } else if(t==='malade'){
-      drawV('Malade', PDF.ROWS.apm_deb, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
-      drawV('Malade', PDF.ROWS.apm_fin, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
-      drawV('Malade', PDF.ROWS.mat_deb, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
-      drawV('Malade', PDF.ROWS.mat_fin, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
-    } else if(t==='accident'){
-      drawV('Accident', PDF.ROWS.apm_deb, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
-      drawV('Accident', PDF.ROWS.apm_fin, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
-      drawV('Accident', PDF.ROWS.mat_deb, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
-      drawV('Accident', PDF.ROWS.mat_fin, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
-    } else if(t==='assurance'){
-      drawV(((e.assur||100)/100).toFixed(2), PDF.ROWS.assur, colX);
-    } else {
-      if(e.amDeb) drawV(fmtTime(e.amDeb), PDF.ROWS.apm_deb, colX);
-      if(e.amFin) drawV(fmtTime(e.amFin), PDF.ROWS.apm_fin, colX);
+    // Matin (mat_deb / mat_fin)
+    if(amType==='normal'){
       if(e.matDeb) drawV(fmtTime(e.matDeb), PDF.ROWS.mat_deb, colX);
       if(e.matFin) drawV(fmtTime(e.matFin), PDF.ROWS.mat_fin, colX);
-      if(e.hours>0) drawV(String(e.hours), PDF.ROWS.hrs, colX);
+    } else if(SPECIAL_LABEL[amType]){
+      const lbl = SPECIAL_LABEL[amType];
+      const fsize = lbl.length>=7 ? Math.max(4,Math.round(3.2*scale)) : lbl.length>=5 ? Math.max(4,Math.round(3.6*scale)) : Math.max(5,Math.round(4.5*scale));
+      drawV(lbl, PDF.ROWS_CENTER.mat, colX, fsize);
     }
+
+    // Après-midi (apm_deb / apm_fin)
+    if(pmType==='normal'){
+      if(e.amDeb) drawV(fmtTime(e.amDeb), PDF.ROWS.apm_deb, colX);
+      if(e.amFin) drawV(fmtTime(e.amFin), PDF.ROWS.apm_fin, colX);
+    } else if(SPECIAL_LABEL[pmType]){
+      const lbl = SPECIAL_LABEL[pmType];
+      const fsize = lbl.length>=7 ? Math.max(4,Math.round(3.2*scale)) : lbl.length>=5 ? Math.max(4,Math.round(3.6*scale)) : Math.max(5,Math.round(4.5*scale));
+      drawV(lbl, PDF.ROWS_CENTER.apm, colX, fsize);
+    }
+
+    // Heures travaillées du jour
+    if(e.hours>0) drawV(String(e.hours), PDF.ROWS.hrs, colX);
     if(e.repas) drawV('1', PDF.ROWS.repas, colX);
   });
 
@@ -624,7 +718,7 @@ function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
   // covering the original printed placeholder values (e.g. 26,25 / 0,00) first.
   let totalH = 0, totalRepas = 0;
   ents.forEach(([,e]) => {
-    if((e.type||'normal')==='normal') totalH += e.hours||0;
+    totalH += e.hours||0;
     if(e.repas) totalRepas++;
   });
 
@@ -637,7 +731,7 @@ function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
   ctx.fillStyle = '#fff';
   ctx.fillRect(tx - boxW/2, PDF.ROWS.hrs*scale - boxH/2, boxW, boxH);
   ctx.font = `700 ${fsT}px Arial`;
-  ctx.fillStyle = '#1A7F72';
+  ctx.fillStyle = '#000';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(fmtH(totalH), tx, PDF.ROWS.hrs * scale);
@@ -648,7 +742,7 @@ function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
   ctx.fillStyle = '#fff';
   ctx.fillRect(tx - boxW/2, PDF.ROWS.repas*scale - boxH/2, boxW, boxH);
   ctx.font = `700 ${fsT}px Arial`;
-  ctx.fillStyle = '#cc2200';
+  ctx.fillStyle = '#000';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText(String(totalRepas), tx, PDF.ROWS.repas * scale);
@@ -660,7 +754,8 @@ function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
 // ═══════════════════════════════════
 function openDayPicker() {
   selDay = -1;
-  selType_ = 'normal';
+  selAmType = 'normal';
+  selPmType = 'normal';
   hasRepas = false;
   $('togRepas').classList.remove('on');
   renderDayPicker();
@@ -708,10 +803,13 @@ function selectDay(d) {
     $('fMd').value = existing.matDeb||''; $('fMf').value = existing.matFin||'';
     $('fAd').value = existing.amDeb||'';  $('fAf').value = existing.amFin||'';
     hasRepas = existing.repas||false;
-    selType(existing.type||'normal');
+    selHalfType('am', existing.amType||'normal');
+    selHalfType('pm', existing.pmType||'normal');
   } else {
     applyStd();
-    hasRepas=false; selType('normal');
+    hasRepas=false;
+    selHalfType('am','normal');
+    selHalfType('pm','normal');
   }
   $('togRepas').classList.toggle('on', hasRepas);
   updateTotal();
@@ -724,18 +822,20 @@ function applyStd() {
 }
 
 function updateTotal() {
-  const h = calcH($('fMd').value,$('fMf').value,$('fAd').value,$('fAf').value);
+  const h = calcH($('fMd').value,$('fMf').value,$('fAd').value,$('fAf').value,selAmType,selPmType);
   $('totalLbl').textContent = fmtH(h);
 }
 
 ['fMd','fMf','fAd','fAf'].forEach(id=>$(id)?.addEventListener('input',updateTotal));
 
-function selType(t) {
-  selType_ = t;
-  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',c.dataset.t===t));
-  const hasH = t==='normal';
-  $('horaireSection').style.display = hasH ? 'block' : 'none';
-  $('specialTypeMsg').style.display = (t==='vacances'||t==='malade'||t==='accident') ? 'block' : 'none';
+function selHalfType(half, t) {
+  if(half==='am'){ selAmType = t; }
+  else { selPmType = t; }
+  const chipsId = half==='am' ? 'amChips' : 'pmChips';
+  document.querySelectorAll(`#${chipsId} .chip`).forEach(c=>c.classList.toggle('sel',c.dataset.t===t));
+  const horaireId = half==='am' ? 'amHoraire' : 'pmHoraire';
+  $(horaireId).style.display = t==='normal' ? 'block' : 'none';
+  updateTotal();
 }
 
 function togR(){ hasRepas=!hasRepas; $('togRepas').classList.toggle('on',hasRepas); }
@@ -748,13 +848,16 @@ function saveDay() {
   const key = dKey(curYear, curMo, selDay);
   const md=$('fMd').value, mf=$('fMf').value;
   const ad=$('fAd').value, af=$('fAf').value;
-  const hasH = selType_==='normal';
 
   dayEntries[key] = {
-    matDeb:md, matFin:mf, amDeb:ad, amFin:af,
-    hours: hasH ? calcH(md,mf,ad,af) : 0,
+    matDeb: selAmType==='normal' ? md : '',
+    matFin: selAmType==='normal' ? mf : '',
+    amDeb:  selPmType==='normal' ? ad : '',
+    amFin:  selPmType==='normal' ? af : '',
+    hours: calcH(md,mf,ad,af,selAmType,selPmType),
     repas: hasRepas,
-    type: selType_,
+    amType: selAmType,
+    pmType: selPmType,
   };
   saveEntries();
   closeModal();
@@ -790,12 +893,15 @@ async function downloadFilledPdf() {
     const FS = 5.5;
 
     const prefix = `${curYear}-${String(curMo+1).padStart(2,'0')}-`;
+    const SPECIAL_LABEL = { vacances:'Vac', malade:'Malade', accident:'Accident' };
+    const BLACK = rgb(0,0,0);
     Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix)).forEach(([key,e])=>{
       const d = parseInt(key.split('-')[2]);
       const x = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE; // = center X of column
-      const t = e.type||'normal';
+      const amType = e.amType || e.type || 'normal';
+      const pmType = e.pmType || (e.type ? e.type : 'normal');
 
-      function wv(text, pyY, fs, color) {
+      function wv(text, pyY, fs) {
         if(!text && text!==0) return;
         const sz=fs||FS;
         // x is already DAY1_X + (d-1)*DAY_SPACE = center of column
@@ -806,35 +912,32 @@ async function downloadFilledPdf() {
           x: x - sz * 0.35,
           y: PH - pyY + sz * 0.35,
           size: sz, font: fontBold,
-          color: color||rgb(0,0,0),
+          color: BLACK,
           rotate: degrees(90),
         });
       }
 
-      if(t==='vacances'){
-        wv('Vac',PDF.ROWS.apm_deb,4.5,rgb(0.1,0.5,0.45));
-        wv('Vac',PDF.ROWS.apm_fin,4.5,rgb(0.1,0.5,0.45));
-        wv('Vac',PDF.ROWS.mat_deb,4.5,rgb(0.1,0.5,0.45));
-        wv('Vac',PDF.ROWS.mat_fin,4.5,rgb(0.1,0.5,0.45));
-      } else if(t==='malade'){
-        wv('Malade',PDF.ROWS.apm_deb,3.6,rgb(0.8,0.13,0.0));
-        wv('Malade',PDF.ROWS.apm_fin,3.6,rgb(0.8,0.13,0.0));
-        wv('Malade',PDF.ROWS.mat_deb,3.6,rgb(0.8,0.13,0.0));
-        wv('Malade',PDF.ROWS.mat_fin,3.6,rgb(0.8,0.13,0.0));
-      } else if(t==='accident'){
-        wv('Accident',PDF.ROWS.apm_deb,3.2,rgb(0.8,0.13,0.0));
-        wv('Accident',PDF.ROWS.apm_fin,3.2,rgb(0.8,0.13,0.0));
-        wv('Accident',PDF.ROWS.mat_deb,3.2,rgb(0.8,0.13,0.0));
-        wv('Accident',PDF.ROWS.mat_fin,3.2,rgb(0.8,0.13,0.0));
-      } else if(t==='assurance'){
-        wv(((e.assur||100)/100).toFixed(2),PDF.ROWS.assur);
-      } else {
-        if(e.amDeb) wv(fmtTime(e.amDeb),PDF.ROWS.apm_deb);
-        if(e.amFin) wv(fmtTime(e.amFin),PDF.ROWS.apm_fin);
+      // Matin
+      if(amType==='normal'){
         if(e.matDeb) wv(fmtTime(e.matDeb),PDF.ROWS.mat_deb);
         if(e.matFin) wv(fmtTime(e.matFin),PDF.ROWS.mat_fin);
-        if(e.hours>0) wv(e.hours,PDF.ROWS.hrs);
+      } else if(SPECIAL_LABEL[amType]){
+        const lbl = SPECIAL_LABEL[amType];
+        const fsz = lbl.length>=7?3.2:lbl.length>=5?3.6:4.5;
+        wv(lbl, PDF.ROWS_CENTER.mat, fsz);
       }
+
+      // Après-midi
+      if(pmType==='normal'){
+        if(e.amDeb) wv(fmtTime(e.amDeb),PDF.ROWS.apm_deb);
+        if(e.amFin) wv(fmtTime(e.amFin),PDF.ROWS.apm_fin);
+      } else if(SPECIAL_LABEL[pmType]){
+        const lbl = SPECIAL_LABEL[pmType];
+        const fsz = lbl.length>=7?3.2:lbl.length>=5?3.6:4.5;
+        wv(lbl, PDF.ROWS_CENTER.apm, fsz);
+      }
+
+      if(e.hours>0) wv(e.hours,PDF.ROWS.hrs);
       if(e.repas) wv('1',PDF.ROWS.repas);
     });
 
@@ -844,14 +947,14 @@ async function downloadFilledPdf() {
     const allEnts2 = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix2));
     let totalH = 0, totalRepas = 0;
     allEnts2.forEach(([,e]) => {
-      if((e.type||'normal')==='normal') totalH += e.hours||0;
+      totalH += e.hours||0;
       if(e.repas) totalRepas++;
     });
     const tx = PDF.TOTAL_X;
     const FS_TOT = 8;
     const boxW = 36, boxH = 12;
 
-    // Cover + write total heures (green)
+    // Cover + write total heures (black)
     dataPage.drawRectangle({
       x: tx - boxW/2, y: PH - PDF.ROWS.hrs - boxH/2,
       width: boxW, height: boxH, color: rgb(1,1,1),
@@ -860,10 +963,10 @@ async function downloadFilledPdf() {
       x: tx - (fmtH(totalH).length * FS_TOT * 0.28),
       y: PH - PDF.ROWS.hrs - FS_TOT*0.35,
       size: FS_TOT, font: fontBold,
-      color: rgb(0.1, 0.5, 0.45),
+      color: BLACK,
     });
 
-    // Cover + write total repas (red)
+    // Cover + write total repas (black)
     dataPage.drawRectangle({
       x: tx - boxW/2, y: PH - PDF.ROWS.repas - boxH/2,
       width: boxW, height: boxH, color: rgb(1,1,1),
@@ -872,7 +975,7 @@ async function downloadFilledPdf() {
       x: tx - (String(totalRepas).length * FS_TOT * 0.28),
       y: PH - PDF.ROWS.repas - FS_TOT*0.35,
       size: FS_TOT, font: fontBold,
-      color: rgb(0.8, 0.13, 0.0),
+      color: BLACK,
     });
 
     const outBytes = await pdfDoc.save();
@@ -944,12 +1047,22 @@ function closeModal(){ $('overlay').classList.remove('open'); }
 function closeOverlay(e){ if(e.target===$('overlay')) closeModal(); }
 
 // ═══════════════════════════════════
-// BOOT
+// BOOT — gated by Firebase Auth
 // ═══════════════════════════════════
-loadAll();
 $('hdrSub').textContent = String(curYear);
 $('backBtn').style.display = 'none';
+
+loadAll();        // local-first: show cached data immediately if any
 renderHome();
+
+auth.onAuthStateChanged(async user => {
+  if (!user) { window.location.href = '../login.html'; return; }
+  currentUid = user.uid;
+  await syncFromFirestore();
+  $('authGuard').classList.remove('show');
+  renderHome();           // refresh with synced data
+  if (curView === 'viewPdf' && curMo >= 0) renderPdfPage(curMo);
+});
 </script>
 </body>
 </html>
