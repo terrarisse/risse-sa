@@ -1018,6 +1018,19 @@ textarea { resize: none; }
   border-bottom: 1px solid var(--border);
 }
 .fournit-row:last-child { border-bottom: none; }
+.fournit-row-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.fournit-row-icon img { width: 100%; height: 100%; object-fit: cover; }
 .fournit-row-name {
   flex: 1;
   font-size: 13px;
@@ -1903,6 +1916,10 @@ textarea { resize: none; }
 
     <div class="sign-recap-box" id="sign-recap-box"></div>
 
+    <button class="btn-sheet-confirm" style="background:var(--bg);color:var(--navy);border:1.5px solid var(--border);margin-top:0;margin-bottom:14px;" onclick="previewBonPDF()">
+      👁️ Revoir l'aperçu du PDF
+    </button>
+
     <div class="sign-block">
       <div class="sign-block-head">
         <span class="lbl-sign">✍️ Signature Risse S.A.</span>
@@ -1979,6 +1996,14 @@ const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé'
 // M.O. du module Bons : postes/fonctions pré-enregistrés (pas l'équipe nominative de Ressources)
 function getEquipeFromRessources() {
   return NOMS_PRESETS;
+}
+// Champ Responsable (En-tête) : noms réels de l'équipe, lus depuis Ressources
+function getEquipeNomsFromRessources() {
+  try {
+    const items = JSON.parse(localStorage.getItem('rv6_equipe') || '[]');
+    const noms = items.map(e => e.nom || e.name || String(e));
+    return noms.length ? noms : NOMS_PRESETS;
+  } catch(e) { return NOMS_PRESETS; }
 }
 function getChantiersActifs() {
   try {
@@ -2081,7 +2106,7 @@ function buildChantierChips() {
 function buildNomChips() {
   const c = document.getElementById('nom-chips');
   c.innerHTML = '';
-  getEquipeFromRessources().forEach(n => {
+  getEquipeNomsFromRessources().forEach(n => {
     const b = document.createElement('button');
     b.className = 'chip';
     b.textContent = n;
@@ -2428,7 +2453,7 @@ function renderEmployes() {
   const addBtn = document.createElement('button');
   addBtn.className = 'btn-add-employe';
   addBtn.style.margin = '10px 0 2px';
-  addBtn.textContent = '➕ Autre employé';
+  addBtn.textContent = '➕ Autre';
   addBtn.addEventListener('click', openAddEmploye);
   c.appendChild(addBtn);
 }
@@ -3474,19 +3499,25 @@ function finaliserRapport() {
 }
 
 function getMaxBonNumero() {
-  // Dérivé de la liste des bons connue (synchronisée via Firestore au login),
-  // plus robuste qu'un compteur local isolé entre appareils.
+  // Le compteur persistant (COUNTER_KEY) est la seule source de vérité :
+  // il ne baisse jamais, même si des bons sont supprimés ou mis à la corbeille.
+  // On le complète avec le max vu dans les bons actifs ET dans la corbeille,
+  // pour rattraper un cas de sync multi-appareil où le compteur local serait en retard.
   let maxN = parseInt(localStorage.getItem(COUNTER_KEY) || '0', 10);
   if (isNaN(maxN)) maxN = 0;
   try {
     const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
-    reports.forEach(r => {
+    const trash   = JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
+    [...reports, ...trash].forEach(r => {
       if (r.numero) {
         const m = String(r.numero).match(/(\d+)$/);
         if (m) { const n = parseInt(m[1], 10); if (n > maxN) maxN = n; }
       }
     });
   } catch(e) {}
+  // On persiste immédiatement le max constaté : le compteur ne redescend jamais
+  // après une suppression, même définitive (corbeille vidée).
+  localStorage.setItem(COUNTER_KEY, String(maxN));
   return maxN;
 }
 
@@ -3516,6 +3547,9 @@ function openSignPage() {
     initSignCanvas('interne');
     initSignCanvas('client');
   }, 50);
+
+  // Aperçu automatique du PDF avant signature
+  previewBonPDF();
 }
 
 function closeSignPage() {
@@ -4231,7 +4265,7 @@ function copyToClipboard(txt) {
     .catch(() => showToast('⚠️ Impossible de copier'));
 }
 
-function partagerPDF(r) {
+function bonToHTML(r, isPreview) {
   const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
   const empActifs = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
   const totalMO = empActifs.reduce((s,e)=>s+parseFloat(e.heures||0),0);
@@ -4259,9 +4293,9 @@ function partagerPDF(r) {
     ? rowsHTML(locFilled.map(([k,v])=>{ const item=allLocItems.find(i=>i.id===k); return [item?.label||k,`${v} ${item?.unit||''}`]; }))
     : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
 
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8">
   <title>Bon de régie ${r.numero||''} - ${r.chantier}</title>
-  <style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#222;}
+  <style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#222;position:relative;}
   h1{color:#1B3A6B;font-size:20px;margin:0;}
   .header{background:#1B3A6B;color:white;padding:16px 20px;border-radius:8px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;}
   .meta{color:rgba(255,255,255,0.75);font-size:13px;margin-top:4px;}
@@ -4273,14 +4307,17 @@ function partagerPDF(r) {
   .sign-col img{max-width:100%;height:90px;object-fit:contain;border:1px solid #ddd;border-radius:6px;background:#fafbfc;}
   .sign-col .sign-name{font-size:12px;font-weight:600;color:#1B3A6B;margin-top:6px;}
   .sign-col .sign-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.4px;}
+  .preview-banner{position:sticky;top:0;background:#F0A500;color:#1B3A6B;text-align:center;font-weight:700;font-size:12px;padding:8px;letter-spacing:0.4px;text-transform:uppercase;margin:-20px -20px 20px;}
+  @media print{.preview-banner{display:none;}}
   </style>
   </head><body>
+  ${isPreview ? `<div class="preview-banner">⚠ Aperçu avant signature — document non définitif</div>` : ''}
   <div class="header">
     <div>
       <h1>Bon de régie — Risse S.A.</h1>
       <div class="meta">${d} · ${r.chantier||'—'} · ${r.nom||'—'}</div>
     </div>
-    ${r.numero ? `<span class="numero-badge">${r.numero}</span>` : ''}
+    ${r.numero ? `<span class="numero-badge">${r.numero}</span>` : (isPreview ? `<span class="numero-badge">${peekNextBonNumero()}</span>` : '')}
   </div>
   ${section('Main d\'oeuvre', moRows)}
   ${section('Location interne', locRows)}
@@ -4291,7 +4328,7 @@ function partagerPDF(r) {
   ${fournitCat.length>0?section('Fournitures',rowsHTML(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat),`${f.qty} ${f.unit}`]))):''}
   ${evac.length>0?section('Evacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
   ${r.notes?section('Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
-  ${(r.signatureInterne||r.signatureClient)?`
+  ${(r.signatureInterne||r.signatureClient||isPreview)?`
   <div style="margin-bottom:16px;">
     <div style="background:#1B3A6B;color:white;padding:6px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Signatures</div>
     <div class="sign-row" style="padding:14px 8px;">
@@ -4309,7 +4346,10 @@ function partagerPDF(r) {
   </div>`:''}
   <p style="text-align:center;color:#aaa;font-size:11px;margin-top:24px;">Risse S.A. — bon généré le ${new Date().toLocaleDateString('fr-CH')}</p>
   </body></html>`;
+}
 
+function partagerPDF(r) {
+  const html = bonToHTML(r, false);
   const win = window.open('', '_blank');
   if (win) {
     win.document.write(html);
@@ -4317,6 +4357,18 @@ function partagerPDF(r) {
     setTimeout(() => win.print(), 500);
   } else {
     showToast('⚠️ Autorisez les popups pour générer le PDF');
+  }
+}
+
+function previewBonPDF() {
+  if (!pendingBonData) return;
+  const html = bonToHTML(pendingBonData, true);
+  const win = window.open('', '_blank');
+  if (win) {
+    win.document.write(html);
+    win.document.close();
+  } else {
+    showToast('⚠️ Autorisez les popups pour voir l\'aperçu');
   }
 }
 
