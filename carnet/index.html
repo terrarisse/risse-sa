@@ -236,6 +236,7 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
     <div class="chip sel" data-t="normal" onclick="selType('normal')">✅ Normal</div>
     <div class="chip" data-t="vacances" onclick="selType('vacances')">🏖 Vacances</div>
     <div class="chip" data-t="malade" onclick="selType('malade')">🤒 Malade</div>
+    <div class="chip" data-t="accident" onclick="selType('accident')">🚑 Accident</div>
     <div class="chip" data-t="assurance" onclick="selType('assurance')">🏥 Assurance</div>
   </div>
 
@@ -268,6 +269,10 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
     </div>
   </div>
 
+  <div id="specialTypeMsg" style="display:none;padding:14px 16px;font-size:13px;color:var(--muted);text-align:center">
+    Le mot sera inscrit dans les cases Matin et Après-midi de ce jour, sans heures.
+  </div>
+
   <div class="m-actions">
     <button class="m-btn secondary" onclick="closeModal()">Annuler</button>
     <button class="m-btn primary" onclick="saveDay()">Enregistrer dans le PDF</button>
@@ -294,9 +299,9 @@ const DOW_S  = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
 // PDF cell coordinates (from analysis of real Excel PDF)
 const PDF = {
   DAY1_X:    184.05,  // center X of day 1 column
-  DAY_SPACE:  15.70,  // spacing between day columns
+  DAY_SPACE:  15.745, // spacing between day columns
   PAGE_H:    595.0,   // page height
-  TOTAL_X:   672.0,   // X center of "T" (Total) column on the right
+  TOTAL_X:   747.5,  // X center of "Total heures ou de repas" column on the right
   // Row Y centers — measured from real PDF (top-left origin)
   ROWS: {
     apm_fin: 216.7,   // Après-midi fin   (17h30)
@@ -410,7 +415,7 @@ function renderHome() {
     const cnt = entries.length;
     let totalH = 0, totalRepas = 0;
     entries.forEach(([, e]) => {
-      if (['normal','malade'].includes(e.type||'normal')) {
+      if ((e.type||'normal')==='normal') {
         totalH += calcH(e.matDeb||'', e.matFin||'', e.amDeb||'', e.amFin||'');
       }
       if (e.repas) totalRepas++;
@@ -490,13 +495,17 @@ async function renderAtScale(scale) {
   if(!currentPdfPage) return;
   const canvas = $('pdfCanvas');
   if(!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
   const vp = currentPdfPage.getViewport({scale});
-  canvas.width  = vp.width;
-  canvas.height = vp.height;
+  // Render at full device pixel density so text stays crisp on high-DPI screens (Samsung etc.)
+  canvas.width  = Math.round(vp.width  * dpr);
+  canvas.height = Math.round(vp.height * dpr);
   canvas.style.width  = vp.width + 'px';
   canvas.style.height = vp.height + 'px';
-  await currentPdfPage.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise;
-  drawEntriesOnCanvas(canvas, scale, curMo);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  await currentPdfPage.render({canvasContext: ctx, viewport: vp}).promise;
+  drawEntriesOnCanvas(canvas, scale, curMo, dpr);
 }
 
 function setupZoom() {
@@ -554,15 +563,14 @@ function setupZoom() {
   });
 }
 
-function drawEntriesOnCanvas(canvas, scale, moIdx) {
+function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
   const ctx = canvas.getContext('2d');
   const prefix = `${curYear}-${String(moIdx+1).padStart(2,'0')}-`;
   const ents = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix));
-  if (!ents.length) return;
 
   const fs = Math.max(6, Math.round(5.5 * scale));
 
-  function drawV(text, pyY, colX) {
+  function drawV(text, pyY, colX, color, fsize) {
     if(!text && text!==0) return;
     const s = String(text);
     // colX = center of day column (in PDF points)
@@ -572,8 +580,8 @@ function drawEntriesOnCanvas(canvas, scale, moIdx) {
     ctx.save();
     ctx.translate(cx, rowY);
     ctx.rotate(-Math.PI / 2);  // rotate 90° CCW → text reads bottom-to-top
-    ctx.font = `700 ${fs}px Arial`;
-    ctx.fillStyle = '#000';
+    ctx.font = `700 ${fsize||fs}px Arial`;
+    ctx.fillStyle = color||'#000';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(s, 0, 0);
@@ -586,11 +594,20 @@ function drawEntriesOnCanvas(canvas, scale, moIdx) {
     const t = e.type || 'normal';
 
     if(t==='vacances'){
-      drawV('V', PDF.ROWS.apm_deb, colX);
-      drawV('V', PDF.ROWS.mat_deb, colX);
-      drawV('V', PDF.ROWS.hrs, colX);
+      drawV('Vac', PDF.ROWS.apm_deb, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
+      drawV('Vac', PDF.ROWS.apm_fin, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
+      drawV('Vac', PDF.ROWS.mat_deb, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
+      drawV('Vac', PDF.ROWS.mat_fin, colX, '#1A7F72', Math.max(5,Math.round(4.5*scale)));
     } else if(t==='malade'){
-      drawV('Mal', PDF.ROWS.hrs, colX);
+      drawV('Malade', PDF.ROWS.apm_deb, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
+      drawV('Malade', PDF.ROWS.apm_fin, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
+      drawV('Malade', PDF.ROWS.mat_deb, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
+      drawV('Malade', PDF.ROWS.mat_fin, colX, '#cc2200', Math.max(4,Math.round(3.6*scale)));
+    } else if(t==='accident'){
+      drawV('Accident', PDF.ROWS.apm_deb, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
+      drawV('Accident', PDF.ROWS.apm_fin, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
+      drawV('Accident', PDF.ROWS.mat_deb, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
+      drawV('Accident', PDF.ROWS.mat_fin, colX, '#cc2200', Math.max(4,Math.round(3.2*scale)));
     } else if(t==='assurance'){
       drawV(((e.assur||100)/100).toFixed(2), PDF.ROWS.assur, colX);
     } else {
@@ -603,34 +620,39 @@ function drawEntriesOnCanvas(canvas, scale, moIdx) {
     if(e.repas) drawV('1', PDF.ROWS.repas, colX);
   });
 
-  // Draw monthly totals in the T (Total) column
-  const prefix2 = `${curYear}-${String(moIdx+1).padStart(2,'0')}-`;
-  const allEnts = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix2));
+  // Draw monthly totals in the right-hand "Total heures ou de repas" column,
+  // covering the original printed placeholder values (e.g. 26,25 / 0,00) first.
   let totalH = 0, totalRepas = 0;
-  allEnts.forEach(([,e]) => {
-    if(['normal','malade'].includes(e.type||'normal')) totalH += e.hours||0;
+  ents.forEach(([,e]) => {
+    if((e.type||'normal')==='normal') totalH += e.hours||0;
     if(e.repas) totalRepas++;
   });
-  if(totalH > 0 || totalRepas > 0) {
-    const tx = PDF.TOTAL_X * scale;
-    const fsT = Math.max(6, Math.round(6 * scale));
-    // Total heures — green
-    ctx.save();
-    ctx.font = `700 ${fsT}px Arial`;
-    ctx.fillStyle = '#1A7F72';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(fmtH(totalH), tx, PDF.ROWS.hrs * scale);
-    ctx.restore();
-    // Total repas — red
-    ctx.save();
-    ctx.font = `700 ${fsT}px Arial`;
-    ctx.fillStyle = '#cc2200';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(String(totalRepas), tx, PDF.ROWS.repas * scale);
-    ctx.restore();
-  }
+
+  const tx = PDF.TOTAL_X * scale;
+  const fsT = Math.max(7, Math.round(7 * scale));
+  const boxW = 34 * scale, boxH = 11 * scale;
+
+  // Cover original printed value for "Hres de travail" then write our total
+  ctx.save();
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(tx - boxW/2, PDF.ROWS.hrs*scale - boxH/2, boxW, boxH);
+  ctx.font = `700 ${fsT}px Arial`;
+  ctx.fillStyle = '#1A7F72';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(fmtH(totalH), tx, PDF.ROWS.hrs * scale);
+  ctx.restore();
+
+  // Cover original printed value for "Repas" then write our total
+  ctx.save();
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(tx - boxW/2, PDF.ROWS.repas*scale - boxH/2, boxW, boxH);
+  ctx.font = `700 ${fsT}px Arial`;
+  ctx.fillStyle = '#cc2200';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(String(totalRepas), tx, PDF.ROWS.repas * scale);
+  ctx.restore();
 }
 
 // ═══════════════════════════════════
@@ -711,8 +733,9 @@ function updateTotal() {
 function selType(t) {
   selType_ = t;
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('sel',c.dataset.t===t));
-  const hasH = ['normal','malade'].includes(t);
+  const hasH = t==='normal';
   $('horaireSection').style.display = hasH ? 'block' : 'none';
+  $('specialTypeMsg').style.display = (t==='vacances'||t==='malade'||t==='accident') ? 'block' : 'none';
 }
 
 function togR(){ hasRepas=!hasRepas; $('togRepas').classList.toggle('on',hasRepas); }
@@ -725,7 +748,7 @@ function saveDay() {
   const key = dKey(curYear, curMo, selDay);
   const md=$('fMd').value, mf=$('fMf').value;
   const ad=$('fAd').value, af=$('fAf').value;
-  const hasH = ['normal','malade'].includes(selType_);
+  const hasH = selType_==='normal';
 
   dayEntries[key] = {
     matDeb:md, matFin:mf, amDeb:ad, amFin:af,
@@ -759,9 +782,11 @@ async function downloadFilledPdf() {
     const bytes = Uint8Array.from(atob(monthPdfs[curMo]), c=>c.charCodeAt(0));
     const pdfDoc = await PDFDocument.load(bytes,{ignoreEncryption:true});
     const pages  = pdfDoc.getPages();
-    const dataPage = pages.length>=2 ? pages[1] : pages[0];
+    // This PDF template is a single landscape page with the data grid directly on it.
+    const dataPage = pages[0];
     const PH = dataPage.getHeight();
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const FS = 5.5;
 
     const prefix = `${curYear}-${String(curMo+1).padStart(2,'0')}-`;
@@ -770,7 +795,7 @@ async function downloadFilledPdf() {
       const x = PDF.DAY1_X + (d-1)*PDF.DAY_SPACE; // = center X of column
       const t = e.type||'normal';
 
-      function wv(text, pyY, fs) {
+      function wv(text, pyY, fs, color) {
         if(!text && text!==0) return;
         const sz=fs||FS;
         // x is already DAY1_X + (d-1)*DAY_SPACE = center of column
@@ -780,16 +805,27 @@ async function downloadFilledPdf() {
         dataPage.drawText(String(text),{
           x: x - sz * 0.35,
           y: PH - pyY + sz * 0.35,
-          size: sz, font,
-          color: rgb(0,0,0),
+          size: sz, font: fontBold,
+          color: color||rgb(0,0,0),
           rotate: degrees(90),
         });
       }
 
       if(t==='vacances'){
-        wv('V',PDF.ROWS.apm_deb);wv('V',PDF.ROWS.mat_deb);wv('V',PDF.ROWS.hrs);
+        wv('Vac',PDF.ROWS.apm_deb,4.5,rgb(0.1,0.5,0.45));
+        wv('Vac',PDF.ROWS.apm_fin,4.5,rgb(0.1,0.5,0.45));
+        wv('Vac',PDF.ROWS.mat_deb,4.5,rgb(0.1,0.5,0.45));
+        wv('Vac',PDF.ROWS.mat_fin,4.5,rgb(0.1,0.5,0.45));
       } else if(t==='malade'){
-        wv('Malade',PDF.ROWS.hrs,4.5);
+        wv('Malade',PDF.ROWS.apm_deb,3.6,rgb(0.8,0.13,0.0));
+        wv('Malade',PDF.ROWS.apm_fin,3.6,rgb(0.8,0.13,0.0));
+        wv('Malade',PDF.ROWS.mat_deb,3.6,rgb(0.8,0.13,0.0));
+        wv('Malade',PDF.ROWS.mat_fin,3.6,rgb(0.8,0.13,0.0));
+      } else if(t==='accident'){
+        wv('Accident',PDF.ROWS.apm_deb,3.2,rgb(0.8,0.13,0.0));
+        wv('Accident',PDF.ROWS.apm_fin,3.2,rgb(0.8,0.13,0.0));
+        wv('Accident',PDF.ROWS.mat_deb,3.2,rgb(0.8,0.13,0.0));
+        wv('Accident',PDF.ROWS.mat_fin,3.2,rgb(0.8,0.13,0.0));
       } else if(t==='assurance'){
         wv(((e.assur||100)/100).toFixed(2),PDF.ROWS.assur);
       } else {
@@ -802,28 +838,40 @@ async function downloadFilledPdf() {
       if(e.repas) wv('1',PDF.ROWS.repas);
     });
 
-    // Write monthly totals in the T (Total) column — horizontal text
+    // Write monthly totals in the "Total heures ou de repas" column on the right.
+    // First cover the template's static printed values with a white box, then write ours.
     const prefix2 = `${curYear}-${String(curMo+1).padStart(2,'0')}-`;
     const allEnts2 = Object.entries(dayEntries).filter(([k])=>k.startsWith(prefix2));
     let totalH = 0, totalRepas = 0;
     allEnts2.forEach(([,e]) => {
-      if(['normal','malade'].includes(e.type||'normal')) totalH += e.hours||0;
+      if((e.type||'normal')==='normal') totalH += e.hours||0;
       if(e.repas) totalRepas++;
     });
     const tx = PDF.TOTAL_X;
-    const FS_TOT = 6.5;
-    // Total heures (green)
+    const FS_TOT = 8;
+    const boxW = 36, boxH = 12;
+
+    // Cover + write total heures (green)
+    dataPage.drawRectangle({
+      x: tx - boxW/2, y: PH - PDF.ROWS.hrs - boxH/2,
+      width: boxW, height: boxH, color: rgb(1,1,1),
+    });
     dataPage.drawText(fmtH(totalH), {
-      x: tx - 10,
-      y: PH - PDF.ROWS.hrs + 2,
-      size: FS_TOT, font,
+      x: tx - (fmtH(totalH).length * FS_TOT * 0.28),
+      y: PH - PDF.ROWS.hrs - FS_TOT*0.35,
+      size: FS_TOT, font: fontBold,
       color: rgb(0.1, 0.5, 0.45),
     });
-    // Total repas (red)
+
+    // Cover + write total repas (red)
+    dataPage.drawRectangle({
+      x: tx - boxW/2, y: PH - PDF.ROWS.repas - boxH/2,
+      width: boxW, height: boxH, color: rgb(1,1,1),
+    });
     dataPage.drawText(String(totalRepas), {
-      x: tx - 4,
-      y: PH - PDF.ROWS.repas + 2,
-      size: FS_TOT, font,
+      x: tx - (String(totalRepas).length * FS_TOT * 0.28),
+      y: PH - PDF.ROWS.repas - FS_TOT*0.35,
+      size: FS_TOT, font: fontBold,
       color: rgb(0.8, 0.13, 0.0),
     });
 
