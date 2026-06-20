@@ -1628,6 +1628,12 @@ textarea { resize: none; }
           ✅ Valider & Enregistrer
         </button>
       </div>
+      <div style="margin-top:8px;">
+        <button onclick="confirmDeleteDraft()"
+          style="width:100%;background:#fff0f0;border:1.5px solid #fcc;color:var(--danger);font-family:inherit;font-weight:700;font-size:14px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
+          🗑️ Supprimer le brouillon
+        </button>
+      </div>
     </div>
 
     <!-- PANNEAU VALIDÉS -->
@@ -1869,26 +1875,26 @@ function getEntriesMachineDate(machineName, date) {
 // Listes location construites dynamiquement depuis Ressources
 function buildLOC_VEHICULES() {
   const items = getVehiculesFromRessources();
-  if (items.length) return items.map(v => ({id: 'vh-' + (v.id||v.nom), label: v.nom||v.name, unit: 'p/j'}));
-  return [{id:'camionnette', label:'Camionnette', unit:'p/j'},{id:'camion-grue', label:'Camion grue', unit:'h'}];
+  if (items.length) return items.map(v => ({id: 'vh-' + (v.id||v.nom), label: v.nom||v.name, unit: 'p/j', photo: v.photo||'', icon: v.icon||''}));
+  return [{id:'camionnette', label:'Camionnette', unit:'p/j', icon:'🚛'},{id:'camion-grue', label:'Camion grue', unit:'h', icon:'🚛'}];
 }
 function buildLOC_MATERIEL() {
   const items = getMaterielFromRessources();
-  if (items.length) return items.map(m => ({id: 'mt-' + (m.id||m.nom), label: m.nom||m.name, unit: 'h'}));
+  if (items.length) return items.map(m => ({id: 'mt-' + (m.id||m.nom), label: m.nom||m.name, unit: 'h', photo: m.photo||'', icon: m.icon||''}));
   return [
-    {id:'outillage-elec', label:'Outillage électrique', unit:'h'},
-    {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h'},
-    {id:'rouleau', label:'Rouleau', unit:'h'},
-    {id:'compresseur', label:'Compresseur', unit:'h'},
-    {id:'generatrice', label:'Génératrice', unit:'h'},
-    {id:'scie', label:'Scie route / murale', unit:'ml'},
-    {id:'karcher', label:'Kärcher', unit:'h'},
+    {id:'outillage-elec', label:'Outillage électrique', unit:'h', icon:'🦺'},
+    {id:'plaque-vib', label:'Plaque vibrante / Dameuse', unit:'h', icon:'🦺'},
+    {id:'rouleau', label:'Rouleau', unit:'h', icon:'🦺'},
+    {id:'compresseur', label:'Compresseur', unit:'h', icon:'🦺'},
+    {id:'generatrice', label:'Génératrice', unit:'h', icon:'🦺'},
+    {id:'scie', label:'Scie route / murale', unit:'ml', icon:'🦺'},
+    {id:'karcher', label:'Kärcher', unit:'h', icon:'🦺'},
   ];
 }
 function buildLOC_MACHINES() {
   const items = getMachinesFromRessources();
-  if (items.length) return items.map(m => ({id: 'ma-' + (m.id||m.name), label: m.name||m.nom, unit: 'h', isMachine: true}));
-  return [{id:'mecalac', label:'Mecalac MWR7', unit:'h', isMachine: true}];
+  if (items.length) return items.map(m => ({id: 'ma-' + (m.id||m.name), label: m.name||m.nom, unit: 'h', isMachine: true, photo: m.photo||'', icon: m.icon||''}));
+  return [{id:'mecalac', label:'Mecalac MWR7', unit:'h', isMachine: true, icon:'🚜'}];
 }
 
 let LOC_VEHICULES = [];
@@ -1980,6 +1986,11 @@ function buildLocGroupMachines(containerId, items) {
     row.dataset.id = item.id;
 
     const isSelected = !!locSelection[item.id];
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'fournit-row-icon';
+    iconSpan.innerHTML = item.photo ? `<img src="${item.photo}">` : (item.icon || '🚜');
+
     const nameSpan = document.createElement('span');
     nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
     nameSpan.textContent = `${item.label} (${item.unit})`;
@@ -1990,6 +2001,7 @@ function buildLocGroupMachines(containerId, items) {
     chk.style.cssText = 'font-size:18px;flex-shrink:0;';
     chk.textContent = isSelected ? '✅' : '⬜';
 
+    row.appendChild(iconSpan);
     row.appendChild(nameSpan);
     row.appendChild(chk);
     row.addEventListener('click', () => toggleLocSelect(item));
@@ -2019,6 +2031,11 @@ function buildLocGroup(containerId, items, groupKey) {
     row.dataset.id = item.id;
 
     const isSelected = !!locSelection[item.id];
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'fournit-row-icon';
+    iconSpan.innerHTML = item.photo ? `<img src="${item.photo}">` : (item.icon || (groupKey === 'vehicules' ? '🚛' : '🦺'));
+
     const nameSpan = document.createElement('span');
     nameSpan.className = 'fournit-row-name' + (isSelected ? ' active' : '');
     nameSpan.textContent = `${item.label} (${item.unit})`;
@@ -2029,6 +2046,7 @@ function buildLocGroup(containerId, items, groupKey) {
     chk.style.cssText = 'font-size:18px;flex-shrink:0;';
     chk.textContent = isSelected ? '✅' : '⬜';
 
+    row.appendChild(iconSpan);
     row.appendChild(nameSpan);
     row.appendChild(chk);
     row.onclick = () => toggleLocSelect(item);
@@ -3226,6 +3244,34 @@ function loadDraft() {
 
     updateHeader();
   } catch(e) { console.warn('Draft load error', e); }
+}
+
+function confirmDeleteDraft() {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;display:flex;align-items:flex-end;';
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:20px 20px 0 0;width:100%;padding:20px 16px 36px;">
+      <div style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;"></div>
+      <div style="font-size:16px;font-weight:700;margin-bottom:8px;">Supprimer le brouillon</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px;">Tout le rapport en cours d'écriture sera effacé (en-tête, main d'œuvre, location, travaux, fournitures). Cette action est irréversible.</div>
+      <button id="btn-confirm-del-draft" style="width:100%;background:#dc2626;color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
+        🗑️ Supprimer définitivement
+      </button>
+      <button id="btn-cancel-del-draft" style="width:100%;background:var(--bg);color:var(--text-muted);border:none;font-family:inherit;font-weight:600;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
+        Annuler
+      </button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.getElementById('btn-confirm-del-draft').onclick = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    resetRapport();
+    document.body.removeChild(overlay);
+    buildRecapPreview();
+    showToast('🗑️ Brouillon supprimé');
+  };
+  document.getElementById('btn-cancel-del-draft').onclick = () => document.body.removeChild(overlay);
+  overlay.onclick = e => { if (e.target === overlay) document.body.removeChild(overlay); };
 }
 
 function resetRapport() {
