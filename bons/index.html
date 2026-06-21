@@ -1966,6 +1966,8 @@ textarea { resize: none; }
 <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 // ─── FIREBASE ─────────────────────────────────────────────────
 const firebaseConfig = {
@@ -2023,7 +2025,7 @@ const MAX_DAYS    = 30;
 const TRASH_DAYS  = 7;
 const NOMS_PRESETS = ['Maçon','Machiniste','Chef d\'équipe','Contremaître','Aide Maçon'];
 const CHANTIERS = ['Dépôt','Intern','Concassage','Biolette','Transport']; // fallback
-const UNITES = ['m','ml','h','m²','m³','kg','T','L','pc','p/j','forfait'];
+const UNITES = ['m','ml','h','m²','m³','kg','T','L','km','pc','p/j','forfait'];
 const MAT_FOURNITURES = ['Béton','Gravier 4/16','Gravier 0/40','Sable','Tout-venant','Enrobé','Bordures béton','Tuyaux PVC','Grillage','Géotextile','Câble électrique','Plaques acier','Sacs ciment'];
 const MAT_EVACUATIONS = ['Gravats','Déblais terre','Enrobé','Béton concassé','Ferraille','Déchets chantier','Boue/sédiments','Bois'];
 
@@ -2259,6 +2261,8 @@ function toggleLocSelect(item) {
   autoSaveDraft();
 }
 
+const LOC_UNITS_CYCLE = ['h', 'p/j', 'ml', 'm', 'm²', 'm³', 'kg', 'T', 'L', 'pc', 'km', 'forfait'];
+
 function renderLocSelectionZone() {
   const zone = document.getElementById('loc-selection-zone');
   const list = document.getElementById('loc-sel-list');
@@ -2276,8 +2280,11 @@ function renderLocSelectionZone() {
     const item = allItems.find(i => i.id === id);
 
     row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;" id="loc-unit-label-${id}">(${sel.unit})</span></span>
-      <button class="loc-unit-btn" id="loc-unit-btn-${id}" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.8);font-family:inherit;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;cursor:pointer;flex-shrink:0;">${sel.unit}</button>
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label}</span>
+      <select class="loc-unit-select" id="loc-unit-select-${id}"
+        style="width:64px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:6px;color:white;padding:5px 3px;font-family:inherit;font-size:11px;outline:none;flex-shrink:0;">
+        ${LOC_UNITS_CYCLE.map(u=>`<option value="${u}" ${sel.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
+      </select>
       <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
       <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
       <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
@@ -2292,17 +2299,10 @@ function renderLocSelectionZone() {
     const btnOne  = row.querySelector('.loc-plus-one');
     const input   = row.querySelector('input');
     const btnDel  = row.querySelector('.loc-del');
-    const btnUnit = row.querySelector('.loc-unit-btn');
+    const selUnit = row.querySelector('.loc-unit-select');
 
-    const LOC_UNITS_CYCLE = ['h', 'p/j', 'ml', 'm', 'm²', 'm³', 'kg', 'T', 'L', 'pc', 'km', 'forfait'];
-    btnUnit.onclick = () => {
-      const currentUnit = locSelection[id].unit;
-      const idx = LOC_UNITS_CYCLE.indexOf(currentUnit);
-      const nextUnit = LOC_UNITS_CYCLE[(idx + 1) % LOC_UNITS_CYCLE.length];
-      locSelection[id].unit = nextUnit;
-      btnUnit.textContent = nextUnit;
-      const labelEl = document.getElementById('loc-unit-label-' + id);
-      if (labelEl) labelEl.textContent = '(' + nextUnit + ')';
+    selUnit.onchange = () => {
+      locSelection[id].unit = selUnit.value;
       autoSaveDraft();
     };
 
@@ -3733,7 +3733,7 @@ function enregistrerBon(data) {
 
 // ─── MODULE FOURNITURES ────────────────────────────────────────
 const FOURNIT_CATEGORIES = {"Protection":{"subcats":{"Scotch":["Scotch carossier 15mm","Scotch carossier 19mm","Scotch carossier 25mm","Scotch carossier 30mm","Scotch carossier 38mm","Scotch carossier 50mm","Scotch jaune","Papier de protection","Sicrall"],"Rouleau":["Plastique","Protection Floorliner permafix 1m","Protection Floorliner permafix 2m","Protection statique"]}},"Mortier":{"subcats":{"Mortier":["Weber multi 280","Webermur 920","Weberton 908","Weber ip 14","Weber NO MIX Béton","Holcim Optimo","StoCrete SM","StoCrete TM","Ciment rapide PROMPT","Chape ciment","Chape rapide"]}},"Canalisation PVC":{"subcats":{"PVC Ø 110":["Coude PVC Ø 110 mm 15°","Coude PVC Ø 110 mm 30°","Coude PVC Ø 110 mm 45°","Coude PVC Ø 110 mm 67°","Coude PVC Ø 110 mm 90°","Embranchement Y Ø 110 mm 45°","Embranchement T Ø 110 mm 90°","Bouchon PVC Ø 110 mm","Manchon PVC Ø 110 mm","Tuyau drainage PVC Ø 110 mm 5m","Tuyau PVC Ø 110 mm 5m"],"PVC Ø 125":["Coude PVC Ø 125 mm 45°","Coude PVC Ø 125 mm 90°","Bouchon PVC Ø 125 mm","Tuyau PVC Ø 125 mm 5m","Réduction PVC Ø 125/110 mm"],"PVC Ø 160":["Coude PVC Ø 160 mm 45°","Coude PVC Ø 160 mm 90°","Bouchon PVC Ø 160 mm","Tuyau PVC Ø 160 mm 5m","Réduction PVC Ø 160/110 mm","Réduction PVC Ø 160/125 mm"],"PVC Ø 200":["Coude PVC Ø 200 mm 45°","Bouchon PVC Ø 200 mm","Tuyau PVC Ø 200 mm 5m","Réduction PVC Ø 200/160 mm"],"PVC Ø 250":["Coude PVC Ø 250 mm 45°","Tuyau PVC Ø 250 mm 5m","Réduction PVC Ø 250/200 mm"],"Chambres béton":["Tuyaux béton Ø40 50cm","Tuyaux béton Ø40 100cm","Tuyaux béton Ø60 100cm","Tuyaux béton Ø80 100cm","Couvercle de regard"]}},"Bois":{"subcats":{"Bois":["Latte à tuile 4m","Lambourde 4m","Planche de 15 4m","Plateau raboté 4m","Panneau de coffrage 2m","Panneau de coffrage 2.5m","Poutrelle","Carelet 1m","Carelet 2m","Carelet 3m","Carelet 4m"]}},"Coffrage":{"subcats":{"Distanceur":["Distanceur 100mm","Distanceur 120mm","Distanceur 150mm","Distanceur 180mm","Distanceur 200mm","Distanceur 220mm","Distanceur 250mm","Distanceur 300mm"],"Autres":["Réglette d'espacement","Constri-Taquets","Goutte pendante","Liste d'angle haut de coffrage","Liste d'angle noyée"]}},"Isolation":{"subcats":{"XPS":["XPS 10mm","XPS 20mm","XPS 30mm","XPS 40mm","XPS 50mm","XPS 60mm","XPS 80mm","XPS 100mm","XPS 120mm","XPS 150mm","XPS 200mm"],"EPS":["EPS 10mm","EPS 20mm","EPS 30mm","EPS 40mm","EPS 50mm","EPS 80mm","EPS 100mm","EPS 120mm","EPS 150mm","EPS 200mm"],"Autre":["Bande de rive","Laine de verre","Laine de pierre","Plastimule"]}},"Alba":{"subcats":{"ALBA 40mm":["ALBA 50/100cm","ALBA Hydro 50/100cm"],"ALBA 60mm":["ALBA 50/66cm","ALBA Hydro 50/66cm","ALBA Light 50/66cm"],"ALBA 80mm":["ALBA 50/66cm (80mm)","ALBA Hydro 50/66cm (80mm)"],"ALBA 100mm":["ALBA 50/66cm (100mm)","ALBA Hydro 50/66cm (100mm)","ALBA Light 50/66cm (100mm)"],"Sacs & Colle":["Colle Enduit PF3","FIXIT 160","FIXIT 140"],"Autre":["Brique béton cellulaire 80mm 52/62"]}},"Crépis":{"subcats":{"Treillis":["Treillis d'armature renforcé","Treillis d'armature","Treillis d'angle","Profilé pour enduit"]}},"Pièce PE":{"subcats":{"PE Ø 40":["Tube PE Ø40","Coude PE 45° Ø40","Coude PE 90° Ø40","Manchon à emboîter PE Ø40"],"PE Ø 50":["Tube PE Ø50","Coude PE 45° Ø50","Coude PE 90° Ø50","Manchon à emboîter PE Ø50"],"PE Ø 56":["Tube PE Ø56","Coude PE 45° Ø56","Coude PE 90° Ø56","Embranchement 45° Ø56/56"],"PE Ø 63":["Tube PE Ø63","Coude PE 45° Ø63","Coude PE 90° Ø63","Embranchement 45° Ø63/56"],"PE Ø 75":["Tube PE Ø75","Coude PE 45° Ø75","Coude PE 90° Ø75","Embranchement 88.5° Ø75/75"],"PE Ø 90":["Tube PE Ø90","Coude PE 45° Ø90","Coude PE 90° Ø90","Embranchement 88.5° Ø90/90"],"PE Ø 110":["Tube PE Ø110","Coude PE 45° Ø110","Embranchement 45° Ø110/56","Embranchement 88.5° Ø110/110"],"PE Ø 125+":["Manchon électrique Ø125","Tube SILENTE Ø160","Coude PE 45° SILENTE Ø160","Coude PE 45° Ø200"]}},"Armature":{"subcats":{"Treillis":["K335","K188"],"Firipa":["Cage FIRIPA 90mm","Cage FIRIPA 130mm","Cage FIRIPA 150mm","Cage FIRIPA 180mm","Cage FIRIPA 190mm"],"Pannier":["Pannier avec bout caoutchouc","Pannier sans bout caoutchouc"]}},"Aménagement extérieur":{"subcats":{"Bordure":["Bordure béton 4cm","Bordure béton 6cm","Bordure béton 8cm","Bordure béton 10cm"],"Pavés & Dallage":["Pavés","Pierre naturelle","Dalle de jardin"],"Grille gazon":["Grille gazon 8cm","Grille gazon 6cm","Grille gazon plastique"]}}};
-const FOURNIT_UNITES = ['pc','m','ml','m²','m³','kg','T','L','sac','rouleau','barre','boîte','paquet','forfait'];
+const FOURNIT_UNITES = ['pc','m','ml','m²','m³','kg','T','L','km','sac','rouleau','barre','boîte','paquet','forfait'];
 const FOURNIT_CUSTOM_KEY = 'rv6_fournitures_custom_v1';
 
 let fournitSelection = {};
@@ -3912,7 +3912,7 @@ function renderFournitSelectionZone() {
         oninput="fournitSelection['${key}'].qty=this.value;autoSaveDraft();">
       <select style="width:58px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:6px;color:white;padding:4px 4px;font-size:11px;outline:none;"
         onchange="fournitSelection['${key}'].unit=this.value;autoSaveDraft();">
-        ${['pc','m','ml','m²','m³','kg','T','L','h','p/j','palette','sac','forfait'].map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
+        ${['pc','m','ml','m²','m³','kg','T','L','km','h','p/j','palette','sac','forfait'].map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
       </select>
       <button onclick="delete fournitSelection['${key}'];renderFournitSelectionZone();updateFournitCatCount();const uid=window._fournitUids?.['${key}'];if(uid){const n=document.getElementById('fn-'+uid);const c=document.getElementById('fchk-'+uid);if(n)n.classList.remove('sel');if(c)c.textContent='⬜';}autoSaveDraft();"
         style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;flex-shrink:0;">✕</button>
@@ -4219,11 +4219,14 @@ function partagerRapport(e, id) {
       <div style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;"></div>
       <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Partager le bon</div>
       <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">${r.chantier||'Sans chantier'} · ${new Date((r.date||'')+'T12:00:00').toLocaleDateString('fr-CH')}</div>
-      <button id="btn-share-text" style="width:100%;background:var(--navy);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
-        📝 Partager en texte
+      <button id="btn-share-pdf" style="width:100%;background:var(--teal);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
+        📤 Partager le PDF
       </button>
-      <button id="btn-share-pdf" style="width:100%;background:var(--teal);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
-        📄 Partager en PDF
+      <button id="btn-download-pdf" style="width:100%;background:var(--navy);color:white;border:none;font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;margin-bottom:10px;">
+        ⬇️ Télécharger le PDF
+      </button>
+      <button id="btn-share-text" style="width:100%;background:var(--bg);color:var(--navy);border:1.5px solid var(--border);font-family:inherit;font-weight:700;font-size:15px;padding:14px;border-radius:var(--radius-sm);cursor:pointer;">
+        📝 Partager en texte
       </button>
     </div>
   `;
@@ -4236,7 +4239,11 @@ function partagerRapport(e, id) {
   };
   document.getElementById('btn-share-pdf').onclick = () => {
     document.body.removeChild(overlay);
-    partagerPDF(r);
+    partagerPDFNatif(r);
+  };
+  document.getElementById('btn-download-pdf').onclick = () => {
+    document.body.removeChild(overlay);
+    telechargerPDF(r);
   };
 }
 
@@ -4350,7 +4357,8 @@ function bonToHTML(r, isPreview) {
 
   return `<!DOCTYPE html><html><head><meta charset="UTF-8">
   <title>Bon de régie ${r.numero||''} - ${r.chantier}</title>
-  <style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#222;position:relative;}
+  <style>* { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
+  body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#222;position:relative;}
   h1{color:#1B3A6B;font-size:18px;margin:0;}
   .logo-bar{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
   .logo-bar img{width:64px;height:64px;border-radius:8px;flex-shrink:0;}
@@ -4412,7 +4420,99 @@ function bonToHTML(r, isPreview) {
   </body></html>`;
 }
 
-function partagerPDF(r) {
+// Génère un vrai fichier PDF (Blob) à partir du rendu HTML du bon,
+// en passant par un iframe caché + html2canvas + jsPDF pour garder
+// fidèlement les couleurs, le logo et la mise en page existants.
+function genererBonPDFBlob(r) {
+  return new Promise((resolve, reject) => {
+    if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
+      reject(new Error('Librairies PDF non chargées'));
+      return;
+    }
+    const html = bonToHTML(r, false);
+    const iframe = document.createElement('iframe');
+    iframe.style.cssText = 'position:fixed;left:-9999px;top:0;width:760px;height:1px;border:none;visibility:hidden;';
+    document.body.appendChild(iframe);
+    iframe.srcdoc = html;
+
+    iframe.onload = () => {
+      // Laisse le temps au logo (base64) et aux signatures de se peindre
+      setTimeout(() => {
+        const doc = iframe.contentDocument;
+        const target = doc.body;
+        target.style.width = '760px';
+        target.style.margin = '0 auto';
+        // Ajuste l'iframe à la hauteur réelle du contenu avant capture,
+        // sinon html2canvas peut tronquer le rendu sur certains navigateurs.
+        const fullHeight = Math.max(target.scrollHeight, doc.documentElement.scrollHeight);
+        iframe.style.height = fullHeight + 'px';
+        html2canvas(target, { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 760, height: fullHeight })
+          .then(canvas => {
+            document.body.removeChild(iframe);
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ unit: 'px', format: [canvas.width, canvas.height] });
+            const imgData = canvas.toDataURL('image/jpeg', 0.92);
+            pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
+            resolve(pdf.output('blob'));
+          })
+          .catch(err => { document.body.removeChild(iframe); reject(err); });
+      }, 300);
+    };
+  });
+}
+
+function bonFileName(r) {
+  const safe = (r.chantier || 'bon').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  return `${r.numero || 'bon'}-${safe || 'chantier'}.pdf`;
+}
+
+async function partagerPDFNatif(r) {
+  showToast('⏳ Génération du PDF…');
+  try {
+    const blob = await genererBonPDFBlob(r);
+    const file = new File([blob], bonFileName(r), { type: 'application/pdf' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: `Bon ${r.numero||''} — ${r.chantier||''}`,
+        text: `Bon de régie ${r.numero||''} — ${r.chantier||''} — Risse S.A.`
+      });
+    } else {
+      // Pas de partage de fichier natif dispo (vieux navigateur) → fallback impression
+      showToast('⚠️ Partage de fichier non supporté, ouverture pour impression');
+      partagerPDFImpression(r);
+    }
+  } catch (err) {
+    if (err?.name === 'AbortError') return; // l'utilisateur a annulé le partage, rien à faire
+    console.warn('partagerPDFNatif:', err);
+    showToast('⚠️ Échec génération PDF, ouverture pour impression');
+    partagerPDFImpression(r);
+  }
+}
+
+async function telechargerPDF(r) {
+  showToast('⏳ Génération du PDF…');
+  try {
+    const blob = await genererBonPDFBlob(r);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = bonFileName(r);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    showToast('✅ PDF téléchargé');
+  } catch (err) {
+    console.warn('telechargerPDF:', err);
+    showToast('⚠️ Échec génération PDF, ouverture pour impression');
+    partagerPDFImpression(r);
+  }
+}
+
+// Ancienne méthode (page HTML imprimable) — conservée comme filet de sécurité
+function partagerPDFImpression(r) {
   const html = bonToHTML(r, false);
   const win = window.open('', '_blank');
   if (win) {
