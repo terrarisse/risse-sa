@@ -979,6 +979,65 @@ textarea { resize: none; }
   flex-shrink: 0;
 }
 
+/* ── ACCESSOIRES MACHINE (mini-accordéon imbriqué dans Location) ── */
+.machine-row-wrap { border-bottom: 1px solid var(--border); }
+.machine-row-wrap:last-child { border-bottom: none; }
+.machine-row-wrap .fournit-row { border-bottom: none; padding-right: 6px; }
+.acc-toggle-chevron {
+  font-size: 11px;
+  color: var(--text-light);
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: transform 0.25s, background 0.15s;
+  cursor: pointer;
+}
+.acc-toggle-chevron.open { transform: rotate(180deg); background: var(--bg); }
+.machine-accessoires-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #f8fafc;
+}
+.machine-accessoires-body.open { max-height: 9999px; }
+.acc-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 40px;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+}
+.acc-row-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: white;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.acc-row-icon img { width: 100%; height: 100%; object-fit: cover; }
+.acc-row-name {
+  flex: 1;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.acc-row-name.active { font-weight: 700; color: var(--teal); }
+.acc-row-check { font-size: 15px; flex-shrink: 0; }
+
 
 .prod-row {
   display: flex;
@@ -1910,8 +1969,8 @@ function buildLOC_MATERIEL() {
 }
 function buildLOC_MACHINES() {
   const items = getMachinesFromRessources();
-  if (items.length) return items.map(m => ({id: 'ma-' + (m.id||m.name), label: m.name||m.nom, unit: 'h', isMachine: true, photo: m.photo||'', icon: m.icon||''}));
-  return [{id:'mecalac', label:'Mecalac MWR7', unit:'h', isMachine: true, icon:'🚜'}];
+  if (items.length) return items.map(m => ({id: 'ma-' + (m.id||m.name), label: m.name||m.nom, unit: 'h', isMachine: true, photo: m.photo||'', icon: m.icon||'', accessoires: Array.isArray(m.accessoires) ? m.accessoires : []}));
+  return [{id:'mecalac', label:'Mecalac MWR7', unit:'h', isMachine: true, icon:'🚜', accessoires: []}];
 }
 
 let LOC_VEHICULES = [];
@@ -1997,6 +2056,9 @@ function buildLocGroupMachines(containerId, items) {
   c.innerHTML = '';
   const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
   items.forEach(item => {
+    const wrap = document.createElement('div');
+    wrap.className = 'machine-row-wrap';
+
     const row = document.createElement('div');
     row.className = 'fournit-row';
     row.style.cursor = 'pointer';
@@ -2022,7 +2084,63 @@ function buildLocGroupMachines(containerId, items) {
     row.appendChild(nameSpan);
     row.appendChild(chk);
     row.addEventListener('click', () => toggleLocSelect(item));
-    c.appendChild(row);
+    wrap.appendChild(row);
+
+    // Mini-accordéon accessoires (seulement si la machine en a)
+    const accessoires = Array.isArray(item.accessoires) ? item.accessoires : [];
+    if (accessoires.length > 0) {
+      const chevron = document.createElement('span');
+      chevron.className = 'acc-toggle-chevron';
+      chevron.textContent = '▼';
+      chevron.id = `acc-chevron-${item.id}`;
+      chevron.addEventListener('click', (e) => { e.stopPropagation(); toggleMachineAccessoires(item.id); });
+      row.appendChild(chevron);
+
+      const body = document.createElement('div');
+      body.className = 'machine-accessoires-body';
+      body.id = `acc-body-${item.id}`;
+
+      let hasSelectedAcc = false;
+
+      accessoires.forEach(acc => {
+        const accId = `acc-${item.id}-${acc.id}`;
+        const accLabel = `${acc.name || acc.nom || 'Accessoire'} (${item.label})`;
+        const isAccSelected = !!locSelection[accId];
+        if (isAccSelected) hasSelectedAcc = true;
+
+        const accRow = document.createElement('div');
+        accRow.className = 'acc-row';
+        accRow.dataset.id = accId;
+
+        const accIcon = document.createElement('span');
+        accIcon.className = 'acc-row-icon';
+        accIcon.innerHTML = acc.photo ? `<img src="${acc.photo}">` : (acc.icon || '🔩');
+
+        const accName = document.createElement('span');
+        accName.className = 'acc-row-name' + (isAccSelected ? ' active' : '');
+        accName.textContent = acc.name || acc.nom || 'Accessoire';
+        accName.id = `locname-${accId}`;
+
+        const accChk = document.createElement('span');
+        accChk.className = 'acc-row-check';
+        accChk.id = `locchk-${accId}`;
+        accChk.textContent = isAccSelected ? '✅' : '⬜';
+
+        accRow.appendChild(accIcon);
+        accRow.appendChild(accName);
+        accRow.appendChild(accChk);
+        accRow.addEventListener('click', () => toggleLocSelect({ id: accId, label: accLabel, unit: 'h' }));
+        body.appendChild(accRow);
+      });
+
+      wrap.appendChild(body);
+      if (hasSelectedAcc) {
+        chevron.classList.add('open');
+        body.classList.add('open');
+      }
+    }
+
+    c.appendChild(wrap);
 
     // Case heures si entrée machine ce jour-là
     const entries = getEntriesMachineDate(item.label, date);
@@ -2031,9 +2149,29 @@ function buildLocGroupMachines(containerId, items) {
       hintDiv.style.cssText = 'font-size:11px;color:var(--teal);padding:4px 8px 8px;';
       const total = entries.reduce((s,e) => s + (e.total||0), 0);
       hintDiv.innerHTML = `⏱ Entrée machine ce jour : <b>${total.toFixed(1)}h</b> — <button style="background:none;border:none;color:var(--teal);font-size:11px;font-weight:700;cursor:pointer;padding:0;" onclick="prefillMachineHours('${item.id}','${total}')">Utiliser</button>`;
-      c.appendChild(hintDiv);
+      wrap.appendChild(hintDiv);
     }
   });
+}
+
+// Résout le label/unité d'un item de location (machine, véhicule, matériel ou accessoire)
+// en priorité depuis r.locSelection (toujours fiable, y compris pour les accessoires
+// qui n'existent pas dans les listes LOC_* en mémoire), avec fallback sur allLocItems.
+function getLocLabel(r, id, allLocItems) {
+  const sel = (r.locSelection || {})[id];
+  if (sel && sel.label) return { label: sel.label, unit: sel.unit || '' };
+  const item = allLocItems.find(i => i.id === id);
+  if (item) return { label: item.label, unit: item.unit || '' };
+  return { label: id, unit: '' };
+}
+
+function toggleMachineAccessoires(machineId) {
+  const chevron = document.getElementById(`acc-chevron-${machineId}`);
+  const body = document.getElementById(`acc-body-${machineId}`);
+  if (!chevron || !body) return;
+  const isOpen = body.classList.contains('open');
+  chevron.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
 }
 
 // État sélection location : { id: { label, unit, qty } }
@@ -3766,7 +3904,7 @@ function renderHistoriqueInline() {
     const allLocItems = [...LOC_VEHICULES,...LOC_MATERIEL,...LOC_ENGINS];
     const locEntries  = Object.entries(r.location||{})
       .filter(([,v])=>v&&parseFloat(v)>0)
-      .map(([k,v])=>{ const item=allLocItems.find(i=>i.id===k); return item?[item.label,`${v} ${item.unit}`]:[k,v]; });
+      .map(([k,v])=>{ const lbl=getLocLabel(r,k,allLocItems); return [lbl.label,`${v} ${lbl.unit}`]; });
     const locRows = locEntries.length > 0
       ? locEntries.map(([k,v]) => infoRow(k,v)).join('')
       : '<p style="font-size:13px;color:var(--text-light);font-style:italic;padding:4px 0;">Aucune location</p>';
@@ -3918,8 +4056,8 @@ function rapportToTexte(r) {
   txt += `LOCATION INTERNE\n`;
   if (locFilled.length > 0) {
     locFilled.forEach(([k,v]) => {
-      const item = allLocItems.find(i=>i.id===k);
-      txt += `  ${item?.label||k} : ${v} ${item?.unit||''}\n`;
+      const lbl = getLocLabel(r, k, allLocItems);
+      txt += `  ${lbl.label} : ${v} ${lbl.unit}\n`;
     });
   } else txt += `  Aucune\n`;
   txt += '\n';
@@ -3990,7 +4128,7 @@ function partagerPDF(r) {
     : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
 
   const locRows = locFilled.length > 0
-    ? rowsHTML(locFilled.map(([k,v])=>{ const item=allLocItems.find(i=>i.id===k); return [item?.label||k,`${v} ${item?.unit||''}`]; }))
+    ? rowsHTML(locFilled.map(([k,v])=>{ const lbl=getLocLabel(r,k,allLocItems); return [lbl.label,`${v} ${lbl.unit}`]; }))
     : `<tr><td style="padding:8px;color:#aaa;font-style:italic;">Aucune</td></tr>`;
 
   const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
