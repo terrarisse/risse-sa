@@ -3697,25 +3697,49 @@ function renderFournitSelectionZone() {
   list.innerHTML = '';
   keys.forEach(key => {
     const item = fournitSelection[key];
+    const fullName = item.subCat ? item.subCat + ' ' + item.nom : item.nom;
     const row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:6px;padding:8px 14px;border-top:1px solid rgba(255,255,255,0.08);';
+    row.style.cssText = 'display:flex;align-items:center;gap:5px;padding:6px 10px;border-top:1px solid rgba(255,255,255,0.08);';
     row.innerHTML = `
-      <span style="flex:1;color:white;font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${item.subCat ? item.subCat + ' ' + item.nom : item.nom}</span>
+      <span class="fournit-sel-name" style="flex:1;color:white;font-weight:500;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.2;font-size:13px;max-height:31.2px;">${fullName}</span>
       <button onclick="var q=parseFloat(fournitSelection['${key}'].qty||0)+1;fournitSelection['${key}'].qty=q;document.getElementById('fqty-${key.replace(/'/g,'')}').value=q;autoSaveDraft();"
-        style="background:var(--yellow);border:none;color:var(--navy);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;flex-shrink:0;">+1</button>
+        style="background:var(--yellow);border:none;color:var(--navy);border-radius:5px;width:24px;height:24px;cursor:pointer;font-size:11px;font-weight:700;flex-shrink:0;padding:0;">+1</button>
       <input type="number" min="0" step="0.5" placeholder="Qté"
         id="fqty-${key.replace(/'/g,'')}"
-        style="width:52px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:6px;color:white;padding:4px 6px;font-size:13px;text-align:center;outline:none;"
+        style="width:42px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:5px;color:white;padding:3px 2px;font-size:12px;text-align:center;outline:none;flex-shrink:0;"
         value="${item.qty||''}"
         oninput="fournitSelection['${key}'].qty=this.value;autoSaveDraft();">
-      <select style="width:58px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:6px;color:white;padding:4px 4px;font-size:11px;outline:none;"
+      <select style="width:48px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:5px;color:white;padding:3px 1px;font-size:10px;outline:none;flex-shrink:0;"
         onchange="fournitSelection['${key}'].unit=this.value;autoSaveDraft();">
         ${['pc','m','ml','m²','m³','kg','T','L','h','p/j','palette','sac','forfait'].map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
       </select>
       <button onclick="delete fournitSelection['${key}'];renderFournitSelectionZone();updateFournitCatCount();const uid=window._fournitUids?.['${key}'];if(uid){const n=document.getElementById('fn-'+uid);const c=document.getElementById('fchk-'+uid);if(n)n.classList.remove('sel');if(c)c.textContent='⬜';}autoSaveDraft();"
-        style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;flex-shrink:0;">✕</button>
+        style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:5px;width:24px;height:24px;cursor:pointer;font-size:12px;flex-shrink:0;padding:0;">✕</button>
     `;
     list.appendChild(row);
+
+    // Réduit progressivement la police du nom si le texte (sur 2 lignes) dépasse
+    // la largeur disponible, jusqu'à un plancher de 8.5px. Mesure faite sur un clone
+    // temporaire en une seule ligne (white-space:nowrap) pour ne pas dépendre du
+    // comportement de -webkit-line-clamp, variable selon les navigateurs.
+    const nameEl = row.querySelector('.fournit-sel-name');
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;left:-9999px;font-weight:500;';
+    probe.textContent = fullName;
+    document.body.appendChild(probe);
+    let fontSize = 13;
+    const availableWidth = () => nameEl.getBoundingClientRect().width;
+    // Largeur dispo pour 2 lignes ≈ 2x la largeur de la ligne (approximation suffisante
+    // pour un nom de produit sans retour à la ligne naturel).
+    while (fontSize > 8.5) {
+      probe.style.fontSize = fontSize + 'px';
+      const w = availableWidth();
+      if (probe.scrollWidth <= w * 2 || w === 0) break;
+      fontSize -= 0.5;
+    }
+    document.body.removeChild(probe);
+    nameEl.style.fontSize = fontSize + 'px';
+    nameEl.style.maxHeight = (fontSize * 1.2 * 2) + 'px';
   });
 }
 
