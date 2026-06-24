@@ -88,6 +88,36 @@ body {
 }
 .btn-save-draft:active { opacity: 0.7; }
 
+/* ── BARRE "+ LIGNE" AU-DESSUS DU CLAVIER (métrés) ── */
+.metre-kbd-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #2C2C2E;
+  flex-shrink: 0;
+  order: 1;
+}
+.metre-kbd-bar-label {
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  font-weight: 600;
+}
+.metre-kbd-bar-btn {
+  background: var(--navy);
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.metre-kbd-bar-btn:active { opacity: 0.8; }
+
 /* ── TAB BAR ── */
 .tab-bar {
   display: flex;
@@ -487,29 +517,21 @@ textarea { resize: none; }
 }
 .metre-formule-sel:focus { border-color: var(--navy); }
 
-.metre-type-btns {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 8px;
-}
-.metre-type-btn {
-  flex: 1;
-  padding: 7px 4px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: white;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.15s;
-}
-.metre-type-btn.active {
+.btn-metre-type {
   background: var(--navy);
-  border-color: var(--navy);
+  border: none;
   color: white;
+  font-size: 15px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: inherit;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .metre-inputs {
   display: flex;
@@ -521,7 +543,7 @@ textarea { resize: none; }
   border-radius: 6px;
   padding: 6px 2px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
   text-align: center;
   background: white;
@@ -1723,6 +1745,12 @@ textarea { resize: none; }
 
 </div><!-- /scroll-area -->
 
+<!-- BARRE "+ LIGNE" AU-DESSUS DU CLAVIER (métrés) -->
+<div id="metre-kbd-bar" class="metre-kbd-bar" style="display:none;">
+  <span class="metre-kbd-bar-label">Dernière ligne</span>
+  <button type="button" class="metre-kbd-bar-btn" onmousedown="event.preventDefault();" onclick="metreKbdAddLine()">＋ Ligne</button>
+</div>
+
 <!-- BOTTOM TAB BAR -->
 <div class="tab-bar">
   <button class="tab-item active" onclick="goSection(0)" id="tab-0">
@@ -2172,6 +2200,42 @@ function getLocLabel(r, id, allLocItems) {
   return { label: id, unit: '' };
 }
 
+// Construit le détail des métrés d'un rapport : pour chaque métré, sa description
+// puis chacune de ses lignes de calcul (sans le sous-total par ligne), et enfin
+// le total général (somme de tous les métrés, toutes unités confondues affichées
+// séparément si elles diffèrent). Utilisé par l'historique, l'export texte et le PDF.
+function metresTotalGeneral(metres) {
+  const totals = {};
+  metres.forEach(m => {
+    const v = parseFloat(String(m.total).replace(',', '.'));
+    if (!isNaN(v)) totals[m.unit] = (totals[m.unit] || 0) + v;
+  });
+  return Object.entries(totals).map(([unit, val]) => `${fmtNum(val)} ${unit}`).join(' + ');
+}
+
+function metresDetailHTML(metres) {
+  if (!metres || !metres.length) return '';
+  const items = metres.map(m => `
+    <div style="margin-bottom:8px;">
+      <div style="font-weight:700;color:#1B3A6B;font-size:13px;margin-bottom:2px;">${m.desc || 'Métré'}</div>
+      ${(m.subStrings||[]).map(s => `<div style="font-size:12px;color:#666;padding-left:8px;">${s}</div>`).join('')}
+    </div>`).join('');
+  const total = metresTotalGeneral(metres);
+  return items + (total ? `<div style="font-weight:700;color:#1A7F72;font-size:13px;margin-top:4px;">Total général : ${total}</div>` : '');
+}
+
+function metresDetailTexte(metres) {
+  if (!metres || !metres.length) return '';
+  let out = '';
+  metres.forEach(m => {
+    out += `  ${m.desc || 'Métré'}\n`;
+    (m.subStrings||[]).forEach(s => out += `    ${s}\n`);
+  });
+  const total = metresTotalGeneral(metres);
+  if (total) out += `  Total général : ${total}\n`;
+  return out;
+}
+
 function toggleMachineAccessoires(machineId) {
   const chevron = document.getElementById(`acc-chevron-${machineId}`);
   const body = document.getElementById(`acc-body-${machineId}`);
@@ -2244,37 +2308,27 @@ function renderLocSelectionZone() {
     const row = document.createElement('div');
     row.style.cssText = 'display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,0.08);';
 
-    const allItems = [...LOC_VEHICULES, ...LOC_MATERIEL, ...LOC_ENGINS];
-    const item = allItems.find(i => i.id === id);
-
     row.innerHTML = `
-      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label} <span style="opacity:0.6;font-size:11px;" id="loc-unit-label-${id}">(${sel.unit})</span></span>
-      <button class="loc-unit-btn" id="loc-unit-btn-${id}" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.8);font-family:inherit;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;cursor:pointer;flex-shrink:0;">${sel.unit}</button>
-      <button class="loc-plus-qrt" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.25</button>
-      <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:11px;font-weight:700;width:40px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
-      <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:12px;font-weight:700;width:32px;height:32px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
+      <span style="flex:1;font-size:13px;color:white;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${sel.label}</span>
+      <select class="loc-unit-sel" id="loc-unit-sel-${id}" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:white;font-family:inherit;font-size:10px;font-weight:700;padding:3px 1px;border-radius:6px;cursor:pointer;flex-shrink:0;width:38px;outline:none;">
+        ${['h','p/j','ml','m','m²','m³','kg','T','L','pc','km','forfait'].map(u=>`<option value="${u}" ${sel.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
+      </select>
+      <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:30px;height:26px;border-radius:6px;cursor:pointer;flex-shrink:0;">+.5</button>
+      <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:11px;font-weight:700;width:26px;height:26px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
       <input type="number" placeholder="0" min="0" step="0.5"
-        style="width:50px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:6px 4px;font-family:inherit;font-size:14px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
+        style="width:38px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 3px;font-family:inherit;font-size:13px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
         value="${sel.qty > 0 ? sel.qty : ''}">
       <button class="loc-del" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;padding:2px 4px;flex-shrink:0;">✕</button>
     `;
 
-    const btnQrt  = row.querySelector('.loc-plus-qrt');
     const btnHalf = row.querySelector('.loc-plus-half');
     const btnOne  = row.querySelector('.loc-plus-one');
     const input   = row.querySelector('input');
     const btnDel  = row.querySelector('.loc-del');
-    const btnUnit = row.querySelector('.loc-unit-btn');
+    const selUnit = row.querySelector('.loc-unit-sel');
 
-    const LOC_UNITS_CYCLE = ['h', 'p/j', 'ml', 'm', 'm²', 'm³', 'kg', 'T', 'L', 'pc', 'km', 'forfait'];
-    btnUnit.onclick = () => {
-      const currentUnit = locSelection[id].unit;
-      const idx = LOC_UNITS_CYCLE.indexOf(currentUnit);
-      const nextUnit = LOC_UNITS_CYCLE[(idx + 1) % LOC_UNITS_CYCLE.length];
-      locSelection[id].unit = nextUnit;
-      btnUnit.textContent = nextUnit;
-      const labelEl = document.getElementById('loc-unit-label-' + id);
-      if (labelEl) labelEl.textContent = '(' + nextUnit + ')';
+    selUnit.onchange = () => {
+      locSelection[id].unit = selUnit.value;
       autoSaveDraft();
     };
 
@@ -2283,7 +2337,6 @@ function renderLocSelectionZone() {
       input.value = locSelection[id].qty > 0 ? locSelection[id].qty : '';
       autoSaveDraft();
     };
-    btnQrt.onclick  = () => updateQty((parseFloat(input.value)||0) + 0.25);
     btnHalf.onclick = () => updateQty((parseFloat(input.value)||0) + 0.5);
     btnOne.onclick  = () => updateQty((parseFloat(input.value)||0) + 1);
     input.oninput   = () => { locSelection[id].qty = parseFloat(input.value)||0; autoSaveDraft(); };
@@ -2902,18 +2955,16 @@ function addMetreRow(data = {}) {
   const type = data.type || 'coupe';
   metreTypes[id] = type;
 
+  const typeIcon = (t) => t==='coupe' ? '📏' : t==='volume' ? '📦' : '📐';
+
   const div = document.createElement('div');
   div.className = 'metre-card';
   div.id = `mc-${id}`;
   div.innerHTML = `
     <div class="metre-card-top">
       <input class="metre-desc" type="text" placeholder="Description…" value="${data.desc||''}">
+      <button class="btn-metre-type" id="mtb-${id}" onclick="cycleMetreType(${id},this)">${typeIcon(type)}</button>
       <button class="btn-del-metre" onclick="delMetreCard('mc-${id}')">✕</button>
-    </div>
-    <div class="metre-type-btns">
-      <button class="metre-type-btn ${type==='coupe'?'active':''}"   onclick="setMetreType(${id},'coupe',this)">📏 Longueur ml</button>
-      <button class="metre-type-btn ${type==='surface'?'active':''}" onclick="setMetreType(${id},'surface',this)">📐 Surface m²</button>
-      <button class="metre-type-btn ${type==='volume'?'active':''}"  onclick="setMetreType(${id},'volume',this)">📦 Volume m³</button>
     </div>
     <div class="metre-sublines" id="msubs-${id}"></div>
     <div class="metre-add-sub">
@@ -3020,6 +3071,40 @@ function metreNav(e, input) {
   }
 }
 
+// ─── BARRE "+ LIGNE" AU-DESSUS DU CLAVIER (métrés) ──────────────
+// N'apparaît que lorsque le champ actif est le dernier input de
+// dimension affiché à l'écran (dernière sous-ligne du dernier métré).
+let metreKbdBarCardId = null;
+function metreKbdBarCheck(input, cardId) {
+  const allInputs = [...document.querySelectorAll('.metre-dim')];
+  const isLast = allInputs.length > 0 && allInputs[allInputs.length - 1] === input;
+  const bar = document.getElementById('metre-kbd-bar');
+  if (!bar) return;
+  if (isLast) {
+    metreKbdBarCardId = cardId;
+    bar.style.display = 'flex';
+  } else {
+    bar.style.display = 'none';
+  }
+}
+function metreKbdBarHide() {
+  const bar = document.getElementById('metre-kbd-bar');
+  if (bar) bar.style.display = 'none';
+}
+function metreKbdAddLine() {
+  if (metreKbdBarCardId == null) return;
+  const cardId = metreKbdBarCardId;
+  addMetreSub(cardId);
+  metreKbdBarHide();
+  // Focus le premier champ de la nouvelle ligne pour enchaîner la saisie.
+  requestAnimationFrame(() => {
+    const container = document.getElementById(`msubs-${cardId}`);
+    const lastRow = container ? container.lastElementChild : null;
+    const firstField = lastRow ? lastRow.querySelector('.metre-dim') : null;
+    if (firstField) { firstField.focus(); firstField.select(); }
+  });
+}
+
 const subFormules = {};
 
 function buildSubDims(sid, cardId, cardType, formule, data = {}) {
@@ -3027,7 +3112,8 @@ function buildSubDims(sid, cardId, cardType, formule, data = {}) {
     `<input id="${idName}" type="text" inputmode="decimal" class="metre-dim"
       placeholder="${ph}" value="${val ? fmtInput(val) : ''}"
       oninput="calcSub(${sid},${cardId})"
-      onblur="fmtInputEl(this); calcSub(${sid},${cardId})"
+      onfocus="metreKbdBarCheck(this,${cardId})"
+      onblur="fmtInputEl(this); calcSub(${sid},${cardId}); metreKbdBarHide()"
       onkeydown="metreNav(event,this)">`;
   const x = `<span class="metre-dim-sep">×</span>`;
   if (formule === 'cercle' || formule === 'demicercle') {
@@ -3127,11 +3213,14 @@ function calcMetreTotal(cardId) {
 
 
 
-function setMetreType(id, type, btn) {
-  btn.closest('.metre-type-btns').querySelectorAll('.metre-type-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  metreTypes[id] = type;
-  document.getElementById(`mt-unit-${id}`).textContent = type==='coupe'?'ml':type==='volume'?'m³':'m²';
+function cycleMetreType(id, btn) {
+  const order = ['coupe', 'surface', 'volume'];
+  const icons = { coupe: '📏', surface: '📐', volume: '📦' };
+  const current = metreTypes[id] || 'coupe';
+  const next = order[(order.indexOf(current) + 1) % order.length];
+  metreTypes[id] = next;
+  btn.textContent = icons[next];
+  document.getElementById(`mt-unit-${id}`).textContent = next==='coupe'?'ml':next==='volume'?'m³':'m²';
   // Vider et recréer une sous-ligne vide
   const container = document.getElementById(`msubs-${id}`);
   const count = container.children.length || 1;
@@ -3248,15 +3337,24 @@ function buildRecapPreview() {
     <div class="preview-section">
       <h4>🏗️ Travaux réalisés</h4>
       <p style="white-space:pre-wrap;">${travaux || '<span class="preview-empty">Aucune description</span>'}</p>
-      ${nMetres > 0 ? (() => {
-        const ms = collectData().metres;
-        return ms.map(m => `
-          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;">
-            <span style="color:var(--text-muted);">${m.desc||'Métré'} <span style="font-size:11px;">(${(m.subStrings||m.subs||[]).join(' + ')})</span></span>
-            <span style="font-weight:600;">${m.total} ${m.unit}</span>
-          </div>`).join('');
-      })() : ''}
     </div>
+    ${nMetres > 0 ? `
+    <div class="preview-section">
+      <h4>📐 Métrés</h4>
+      ${(() => {
+        const ms = collectData().metres;
+        const lines = ms.map(m => `
+          <div style="margin-bottom:6px;">
+            <div style="font-weight:600;color:var(--navy);">${m.desc||'Métré'}</div>
+            ${(m.subStrings||m.subs||[]).map(s => `<div style="font-size:12px;color:var(--text-muted);padding-left:8px;">${s}</div>`).join('')}
+          </div>`).join('');
+        const total = metresTotalGeneral(ms);
+        return lines + (total ? `<div class="info-row" style="border-top:1.5px solid var(--border);margin-top:4px;padding-top:8px;">
+          <span class="k" style="font-weight:700">Total général</span>
+          <span class="v" style="color:var(--teal)">${total}</span>
+        </div>` : '');
+      })()}
+    </div>` : ''}
     <div class="preview-section">
       <h4>📦 Fournitures</h4>
       ${fournitItems.length === 0 ? '<p class="preview-empty">Aucune fourniture</p>' :
@@ -3291,11 +3389,21 @@ function collectData() {
     const subStrings = [];
     card.querySelectorAll('.metre-subline').forEach(sub => {
       const sid = sub.id.replace('msub-','');
-      const l = document.getElementById(`msl-${sid}`)?.value || '';
-      const w = document.getElementById(`msw-${sid}`)?.value || '';
-      const h = document.getElementById(`msh-${sid}`)?.value || '';
-      subs.push({ l, w, h });
-      const parts = [l, w, h].filter(v => v);
+      const l  = document.getElementById(`msl-${sid}`)?.value || '';
+      const w  = document.getElementById(`msw-${sid}`)?.value || '';
+      const h  = document.getElementById(`msh-${sid}`)?.value || '';
+      const d  = document.getElementById(`msd-${sid}`)?.value || '';
+      const b1 = document.getElementById(`msb1-${sid}`)?.value || '';
+      const b2 = document.getElementById(`msb2-${sid}`)?.value || '';
+      const formule = subFormules[sid] || 'rect';
+      const result = document.getElementById(`msr-${sid}`)?.textContent || '';
+      subs.push({ l, w, h, d, b1, b2, formule, result });
+      // Construit la formule affichable selon la forme (ordre cohérent avec buildSubDims)
+      let parts;
+      if (formule === 'cercle' || formule === 'demicercle') parts = [d ? 'Ø'+d : '', l].filter(v=>v);
+      else if (formule === 'triangle') parts = [b1, h, l].filter(v=>v);
+      else if (formule === 'trapeze') parts = [b1, b2, h, l].filter(v=>v);
+      else parts = [l, w, h].filter(v=>v);
       if (parts.length) subStrings.push(parts.join(' × '));
     });
     metresData.push({ desc, type, unit, total: totalVal, subs, subStrings });
@@ -3962,11 +4070,9 @@ function renderHistoriqueInline() {
       ? locEntries.map(([k,v]) => infoRow(k,v)).join('')
       : '<p style="font-size:13px;color:var(--text-light);font-style:italic;padding:4px 0;">Aucune location</p>';
 
-    const metresRows = (r.metres||[]).map(m =>
-      infoRow(`${m.desc||'Métré'} <span style="font-size:11px;opacity:0.7;">(${(m.subStrings||m.subs||[]).join(' + ')})</span>`, `${m.total} ${m.unit}`)
-    ).join('');
-    const travauxRows = r.travaux || (r.metres||[]).length > 0
-      ? `${r.travaux ? `<p style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:6px;white-space:pre-wrap;">${r.travaux}</p>` : ''}${metresRows}`
+    const metresRows = metresDetailHTML(r.metres||[]);
+    const travauxRows = r.travaux
+      ? `<p style="font-size:13px;color:var(--text);line-height:1.5;white-space:pre-wrap;">${r.travaux}</p>`
       : '<p style="font-size:13px;color:var(--text-light);font-style:italic;padding:4px 0;">Aucune description</p>';
 
     const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
@@ -4007,6 +4113,7 @@ function renderHistoriqueInline() {
           ${section('👷','Main d\'œuvre', moRows)}
           ${section('🔧','Location interne', locRows)}
           ${section('🏗️','Travaux réalisés', travauxRows)}
+          ${metresRows ? section('📐','Métrés', metresRows) : ''}
           ${fournitRows ? section('📦','Fournitures', fournitRows) : ''}
           ${evacRows ? section('🚮','Évacuations', evacRows) : ''}
           ${r.notes ? section('💬','Notes', `<p style="font-size:13px;color:var(--text);line-height:1.5;white-space:pre-wrap;">${r.notes}</p>`) : ''}
@@ -4121,8 +4228,13 @@ function rapportToTexte(r) {
   } else {
     txt += `  Aucune description\n`;
   }
-  if ((r.metres||[]).length > 0) txt += `  + ${r.metres.length} metre(s)\n`;
   txt += '\n';
+
+  if ((r.metres||[]).length > 0) {
+    txt += `METRES\n`;
+    txt += metresDetailTexte(r.metres);
+    txt += '\n';
+  }
 
   if (fournitCat.length > 0) {
     txt += `FOURNITURES\n`;
@@ -4201,8 +4313,8 @@ function partagerPDF(r) {
   ${section('Location interne', locRows)}
   ${section('Travaux realises',
     `<tr><td style="padding:8px;white-space:pre-wrap;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
-    + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} metre(s)</td></tr>`:'')
   )}
+  ${(r.metres||[]).length>0?section('Métrés', `<tr><td style="padding:4px 8px;">${metresDetailHTML(r.metres)}</td></tr>`):''}
   ${fournitCat.length>0?section('Fournitures',rowsHTML(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat),`${f.qty} ${f.unit}`]))):''}
   ${evac.length>0?section('Evacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
   ${r.notes?section('Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
@@ -4514,8 +4626,8 @@ function openEditPage(id) {
   document.getElementById('ed-recap').innerHTML = `
     <div class="info-row"><span class="k">👷 MO total</span><span class="v">${totalMO.toFixed(2)} h (${(r.employes||[]).length} pers.)</span></div>
     <div class="info-row"><span class="k">🔧 Location</span><span class="v">${nLoc} équipement(s)</span></div>
-    <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} ligne(s)</span></div>
-          ${(r.metres||[]).map(m => `<div class="info-row" style="padding-left:20px;"><span class="k" style="color:var(--text-muted);font-size:12px;">${m.article||'—'}</span><span class="v" style="font-size:12px;">${m.qte} ${m.unite}</span></div>`).join('')}
+    <div class="info-row"><span class="k">📐 Métrés</span><span class="v">${(r.metres||[]).length} métré(s)</span></div>
+          ${(r.metres||[]).length ? `<div style="padding-left:20px;font-size:12px;">${metresDetailHTML(r.metres)}</div>` : ''}
     <div class="info-row"><span class="k">📦 Fournitures</span><span class="v">${(r.fournitures||[]).length} article(s)</span></div>
     <div class="info-row"><span class="k">🚮 Évacuations</span><span class="v">${(r.evacuations||[]).length} article(s)</span></div>
   `;
