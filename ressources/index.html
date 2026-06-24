@@ -102,24 +102,22 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
  
 /* ── MACHINE CARD + ACCESSOIRES ── */
 .machine-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;box-shadow:var(--sh);overflow:hidden;}
-.machine-card .res-item{margin-bottom:0;background:#fff;border:none;border-radius:0;}
-.acc-acc-toggle{display:flex;align-items:center;gap:8px;padding:9px 14px;border-top:1px solid var(--border);cursor:pointer;transition:background .13s;user-select:none;background:var(--bg);}
-.acc-acc-toggle:active{background:var(--bg2);}
-.acc-acc-toggle .acc-acc-icon{font-size:13px;flex-shrink:0;}
-.acc-acc-toggle .acc-acc-label{flex:1;font-size:12px;font-weight:700;color:var(--text2);}
-.acc-acc-toggle .acc-acc-count{font-size:10px;font-weight:700;color:var(--text3);background:#fff;border:1px solid var(--border);padding:1px 7px;border-radius:10px;}
-.acc-acc-toggle .acc-chevron{font-size:13px;color:var(--text3);transition:transform .22s;}
-.acc-acc-toggle.open .acc-chevron{transform:rotate(90deg);}
+.machine-row{margin-bottom:0;background:#fff;border:none;border-radius:0;cursor:pointer;transition:background .13s;}
+.machine-row:active{background:var(--bg);}
+.machine-row .acc-chevron{font-size:14px;color:var(--text3);transition:transform .22s;flex-shrink:0;}
+.machine-row.open .acc-chevron{transform:rotate(90deg);}
+.machine-edit-btn{background:var(--bg);border:1px solid var(--border);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;flex-shrink:0;transition:background .13s;}
+.machine-edit-btn:active{background:var(--bg2);}
 .acc-acc-body{max-height:0;overflow:hidden;transition:max-height .26s ease;background:#fff;border-top:1px solid var(--border);}
-.acc-acc-body.open{max-height:2000px;}
-.acc-acc-inner{padding:8px 10px;}
-.accessoire-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:9px 11px;display:flex;align-items:center;gap:9px;margin-bottom:6px;cursor:pointer;transition:all .13s;}
+.acc-acc-body.open{max-height:2000px;border-top:1px solid var(--border);}
+.acc-acc-inner{padding:8px 10px;background:var(--bg);}
+.accessoire-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:9px 11px;display:flex;align-items:center;gap:9px;margin-bottom:6px;cursor:pointer;transition:all .13s;}
 .accessoire-item:last-child{margin-bottom:0;}
 .accessoire-item:active{transform:scale(.98);background:var(--bg2);}
 .accessoire-item .res-item-icon{font-size:16px;width:24px;}
 .accessoire-item .res-item-name{font-size:12.5px;}
 .accessoire-item .res-item-sub{font-size:9.5px;}
-.acc-add-accessoire{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;margin-top:2px;border-radius:var(--rs);border:1.5px dashed var(--border);cursor:pointer;transition:all .13s;}
+.acc-add-accessoire{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;margin-top:2px;border-radius:var(--rs);border:1.5px dashed var(--border);cursor:pointer;transition:all .13s;background:#fff;}
 .acc-add-accessoire:active{background:var(--bg2);}
 .acc-add-accessoire span{font-size:12px;font-weight:700;color:var(--teal);}
  
@@ -879,20 +877,32 @@ function renderItemHTML(item, section, icon, color){
 
 // ── CARTE MACHINE + ACCORDÉON ACCESSOIRES ───────────────
 function renderMachineCardHTML(item, icon, color){
+  const sub = getSubtitle('machines', item);
   const accessoires = item.accessoires || [];
   const accOpen = openAccessoireAccs[item.id] || false;
   const innerHtml = accessoires.length
     ? accessoires.map(acs=>renderAccessoireItemHTML(item.id, acs)).join('')
     : `<div class="acc-empty">Aucun accessoire</div>`;
 
+  let iconHtml = '';
+  if(item.photo){
+    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`;
+  } else if(item.icon){
+    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${item.icon}</div>`;
+  } else {
+    iconHtml = `<div class="res-item-icon">${icon}</div>`;
+  }
+
   return `
   <div class="machine-card" data-id="${item.id}">
-    ${renderItemHTML(item, 'machines', icon, color)}
-    <div class="acc-acc-toggle${accOpen?' open':''}" onclick="toggleAccessoireAcc('${item.id}')">
-      <div class="acc-acc-icon">🧰</div>
-      <div class="acc-acc-label">Accessoires</div>
-      <div class="acc-acc-count">${accessoires.length}</div>
+    <div class="res-item machine-row${accOpen?' open':''}" onclick="toggleAccessoireAcc('${item.id}')">
+      ${iconHtml}
+      <div class="res-item-body">
+        <div class="res-item-name">${esc(item.nom||'—')}</div>
+        ${sub?`<div class="res-item-sub">${esc(sub)}</div>`:''}
+      </div>
       <div class="acc-chevron">›</div>
+      <button class="machine-edit-btn" onclick="event.stopPropagation();openDetail('machines','${item.id}')">✏️</button>
     </div>
     <div class="acc-acc-body${accOpen?' open':''}" id="acc-acc-body-${item.id}">
       <div class="acc-acc-inner">
@@ -1442,12 +1452,42 @@ function openDetail(section, id){
     [getSubtitle(section,item), catLabel].filter(Boolean).join(' · ');
  
   const photoHtml = item.photo ? `<img class="detail-photo" src="${item.photo}">` : '';
-  document.getElementById('det-body').innerHTML = photoHtml + getDetailRows(section,item).map(r=>{
+  let bodyHtml = photoHtml + getDetailRows(section,item).map(r=>{
     if(r.type==='note') return `<div style="margin-top:8px"><div class="detail-label" style="margin-bottom:6px">${r.label}</div><div class="detail-notes">${esc(r.val)}</div></div>`;
     return `<div class="detail-row"><span class="detail-label">${r.label}</span><span class="detail-val">${esc(r.val)}</span></div>`;
   }).join('');
+
+  if(section==='machines'){
+    bodyHtml += renderDetailAccessoiresHTML(item.accessoires||[]);
+  }
+
+  document.getElementById('det-body').innerHTML = bodyHtml;
  
   document.getElementById('detail-ov').classList.add('open');
+}
+
+function renderDetailAccessoiresHTML(accessoires){
+  const rows = accessoires.length
+    ? accessoires.map(acs=>{
+        const sub = [acs.type, acs.annee].filter(Boolean).join(' · ');
+        const iconTxt = acs.icon || '🧰';
+        const imgHtml = acs.photo
+          ? `<div style="width:28px;height:28px;border-radius:6px;overflow:hidden;flex-shrink:0;"><img src="${acs.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`
+          : `<div style="width:28px;height:28px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">${iconTxt}</div>`;
+        return `<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--bg2);">
+          ${imgHtml}
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:12.5px;font-weight:600;color:var(--text);">${esc(acs.nom||'—')}</div>
+            ${sub?`<div style="font-size:10px;color:var(--text3);margin-top:1px;">${esc(sub)}</div>`:''}
+          </div>
+        </div>`;
+      }).join('')
+    : `<div style="font-size:12px;color:var(--text3);text-align:center;padding:10px 0;">Aucun accessoire</div>`;
+
+  return `<div style="margin-top:14px;">
+    <div class="detail-label" style="margin-bottom:6px;">🧰 Accessoires (${accessoires.length})</div>
+    <div>${rows}</div>
+  </div>`;
 }
  
 function getCatLabel(section, item){
@@ -1709,6 +1749,8 @@ function reorder(arr, fromIdx, toIdx){
 // ── Drag items (equipe/machines/vehicules ou items dans catégorie) ──
 function initItemDrag(el, section, itemId){
   let startY, startX, moved = false;
+  const itemSel = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
+  const itemCls = section==='machines' ? '.machine-card' : '.res-item';
 
   function onLongPress(){
     longPressTimer = null;
@@ -1734,21 +1776,21 @@ function initItemDrag(el, section, itemId){
     const target = document.elementFromPoint(t.clientX, t.clientY);
     el.style.visibility='';
     if(!target) return;
-    const targetItem = target.closest('.res-item[data-id]');
-    document.querySelectorAll('.res-item').forEach(i=>i.classList.remove('drag-over'));
+    const targetItem = target.closest(itemSel);
+    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
     if(targetItem && targetItem !== el) targetItem.classList.add('drag-over');
   }, {passive:false});
 
   el.addEventListener('touchend', e=>{
     clearTimeout(longPressTimer);
     if(!dragState||dragState.el!==el){ el.classList.remove('drag-ghost'); return; }
-    document.querySelectorAll('.res-item').forEach(i=>i.classList.remove('drag-over'));
+    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
     if(moved){
       const t = e.changedTouches[0];
       el.style.visibility='hidden';
       const target = document.elementFromPoint(t.clientX, t.clientY);
       el.style.visibility='';
-      const targetItem = target&&target.closest('.res-item[data-id]');
+      const targetItem = target&&target.closest(itemSel);
       if(targetItem && targetItem.dataset.id !== itemId){
         const data = load(section);
         const fromIdx = data.findIndex(i=>i.id===itemId);
@@ -1767,7 +1809,7 @@ function initItemDrag(el, section, itemId){
   el.addEventListener('touchcancel', ()=>{
     clearTimeout(longPressTimer);
     el.classList.remove('drag-ghost');
-    document.querySelectorAll('.res-item').forEach(i=>i.classList.remove('drag-over'));
+    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
     dragState = null;
   });
 }
@@ -1911,8 +1953,9 @@ function initSubCatDrag(el, section, catId, subId){
 
 // Attache les listeners drag après chaque renderContent
 function attachDragListeners(section){
-  // Items
-  document.querySelectorAll(`#content-${section} .res-item[data-id]`).forEach(el=>{
+  // Items (les machines utilisent .machine-card comme conteneur draggable)
+  const itemSelector = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
+  document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
     initItemDrag(el, section, el.dataset.id);
   });
   // Catégories
