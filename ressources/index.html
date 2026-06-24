@@ -236,6 +236,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .drag-handle:active{cursor:grabbing;background:var(--bg2);}
 .drag-ghost{opacity:.4;background:var(--bg2)!important;border:2px dashed var(--border)!important;border-radius:var(--r)!important;}
 .drag-over{border-top:2px solid var(--teal)!important;}
+.drop-target{background:var(--teal)!important;box-shadow:0 0 0 2px var(--teal) inset!important;}
+.drop-target.acc-header .acc-name{color:#fff!important;}
+.drop-target.acc-header .acc-count{background:rgba(255,255,255,.25)!important;color:#fff!important;}
+.drop-target.sub-acc-header > div{color:#fff!important;}
+.drop-target.sub-acc-header > div[style*="background:var(--bg2)"]{background:rgba(255,255,255,.25)!important;}
+body.mat-dragging{cursor:grabbing!important;}
+body.mat-dragging *{cursor:grabbing!important;}
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:calc(var(--safe-b) + var(--nb-h) + 10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
@@ -1828,6 +1835,78 @@ function initItemDrag(el, section, itemId){
   });
 }
 
+// ── Drag souris desktop (Matériaux) : déplace un item vers une autre
+// catégorie/sous-catégorie en le déposant sur son en-tête, ouvert ou fermé.
+// Système indépendant du drag tactile ci-dessus (qui reste pour le réordre mobile).
+const MOUSE_DRAG_THRESHOLD = 5;
+
+function initMaterialMouseDrag(el, itemId){
+  let startX, startY, dragging = false, moved = false;
+
+  el.addEventListener('mousedown', e=>{
+    if(e.button!==0) return;
+    startX = e.clientX; startY = e.clientY;
+    moved = false; dragging = false;
+
+    const onMove = (ev)=>{
+      const dx = ev.clientX-startX, dy = ev.clientY-startY;
+      if(!dragging && Math.hypot(dx,dy) > MOUSE_DRAG_THRESHOLD){
+        dragging = true;
+        moved = true;
+        el.classList.add('drag-ghost');
+        document.body.classList.add('mat-dragging');
+      }
+      if(!dragging) return;
+      ev.preventDefault();
+      el.style.visibility='hidden';
+      const target = document.elementFromPoint(ev.clientX, ev.clientY);
+      el.style.visibility='';
+      document.querySelectorAll('.acc-header, .sub-acc-header').forEach(h=>h.classList.remove('drop-target'));
+      if(target){
+        const hdr = target.closest('.acc-header, .sub-acc-header');
+        if(hdr) hdr.classList.add('drop-target');
+      }
+    };
+
+    const onUp = (ev)=>{
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      document.querySelectorAll('.acc-header, .sub-acc-header').forEach(h=>h.classList.remove('drop-target'));
+      el.classList.remove('drag-ghost');
+      document.body.classList.remove('mat-dragging');
+      if(!moved) return;
+      el.style.visibility='hidden';
+      const target = document.elementFromPoint(ev.clientX, ev.clientY);
+      el.style.visibility='';
+      if(!target) return;
+      const subHdr = target.closest('.sub-acc-header');
+      const catHdr = !subHdr && target.closest('.acc-header');
+      let newCatId = null, newSubId = '';
+      if(subHdr){
+        const subAcc = subHdr.closest('.sub-acc[data-sub-id]');
+        const accordion = subHdr.closest('.accordion[data-cat-id]');
+        if(subAcc && accordion){ newCatId = accordion.dataset.catId; newSubId = subAcc.dataset.subId; }
+      } else if(catHdr){
+        const accordion = catHdr.closest('.accordion[data-cat-id]');
+        if(accordion) newCatId = accordion.dataset.catId || ''; // '' = "Sans catégorie"
+      }
+      if(newCatId===null) return; // pas déposé sur une cible valide
+      const data = load('materiaux');
+      const item = data.find(i=>i.id===itemId);
+      if(!item) return;
+      if(item.catId===newCatId && (item.subCatId||'')===newSubId) return; // déjà là
+      item.catId = newCatId;
+      item.subCatId = newSubId;
+      save('materiaux', data);
+      renderContent('materiaux', searchFilters['materiaux']||'');
+      showToast(newCatId ? '✓ Déplacé' : '✓ Retiré de la catégorie');
+    };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  });
+}
+
 // ── Drag catégories ──
 function initCatDrag(el, section, catId){
   let startY, startX, moved = false;
@@ -1980,6 +2059,12 @@ function attachDragListeners(section){
   document.querySelectorAll(`#content-${section} .sub-acc[data-sub-id] .sub-acc-header`).forEach(el=>{
     initSubCatDrag(el, section, el.closest('.accordion[data-cat-id]').dataset.catId, el.closest('.sub-acc').dataset.subId);
   });
+  // Drag souris desktop (changement de catégorie) — Matériaux uniquement
+  if(section==='materiaux'){
+    document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
+      initMaterialMouseDrag(el, el.dataset.id);
+    });
+  }
 }
 
 async function initApp(){
