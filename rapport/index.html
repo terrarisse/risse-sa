@@ -3326,7 +3326,7 @@ function collectData() {
     fournitSelection: fournitSelection,
     evacuations: evacData,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
-      nom: v.subCat ? v.subCat + ' ' + v.nom : v.nom, qty: v.qty, unit: v.unit, cat: v.cat || '', subCat: v.subCat || ''
+      nom: v.nom, qty: v.qty, unit: v.unit, cat: v.cat || '', subCat: v.subCat || ''
     })),
   };
 }
@@ -3826,7 +3826,27 @@ function showRapTab(tab) {
 
 
 function getReports() {
-  return JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+  const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
+  let fixed = false;
+  reports.forEach(r => {
+    (r.fournitures_catalogue || []).forEach(f => {
+      // Corrige les anciens rapports où "nom" avait été enregistré déjà préfixé
+      // par "subCat" (bug de double affichage : "subCat subCat nom").
+      if (f.subCat && f.nom && f.nom.startsWith(f.subCat + ' ')) {
+        const stripped = f.nom.slice(f.subCat.length + 1);
+        if (stripped) { f.nom = stripped; fixed = true; }
+      }
+    });
+  });
+  if (fixed) {
+    localStorage.setItem(REPORTS_KEY, JSON.stringify(reports));
+    const user = _auth.currentUser;
+    if (user) {
+      _db.collection('rapports').doc('data').set({ items: reports, updatedAt: Date.now() })
+        .catch(e => console.warn('Firestore getReports fix:', e));
+    }
+  }
+  return reports;
 }
 function getTrash() {
   return JSON.parse(localStorage.getItem(TRASH_KEY) || '[]');
