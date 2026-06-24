@@ -1847,8 +1847,24 @@ textarea { resize: none; }
   </div>
 </div>
 
-
-
+<!-- ═══ OVERLAY SCAN — RECADRAGE TYPE SCANNER ═══ -->
+<div class="overlay" id="scan-overlay" style="align-items:stretch;flex-direction:column;background:#111;">
+  <div style="background:#1B3A6B;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <button onclick="closeScanCrop()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:16px;width:36px;height:36px;border-radius:8px;cursor:pointer;">←</button>
+    <span style="color:white;font-weight:700;font-size:14px;flex:1;">Ajuster le cadrage</span>
+    <button onclick="resetScanCorners()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;">↺ Réinit.</button>
+    <button onclick="confirmScanCrop()" style="background:#F0A500;border:none;color:#1B3A6B;font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;">✓ Valider</button>
+  </div>
+  <div style="flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#1a1a1a;padding:8px;position:relative;">
+    <div id="scan-crop-wrap" style="position:relative;touch-action:none;">
+      <canvas id="scan-crop-canvas" style="display:block;max-width:100%;"></canvas>
+      <svg id="scan-crop-svg" style="position:absolute;top:0;left:0;touch-action:none;"></svg>
+    </div>
+  </div>
+  <div style="background:#1B3A6B;padding:10px 14px;text-align:center;flex-shrink:0;">
+    <span style="color:rgba(255,255,255,0.7);font-size:12px;">Glissez les coins pour ajuster le cadrage du document</span>
+  </div>
+</div>
 
 <!-- ═══ PAGE HISTORIQUE ═══ -->
 <div class="histo-page" id="histo-page">
@@ -2763,24 +2779,296 @@ function delPhoto(idx) { photosData[idx] = null; document.getElementById(`photo-
 
 // ── BONS ──
 function handleBons(input) {
+  const isCamera = input.id === 'bon-input-cam';
   const grid = document.getElementById('bons-grid');
   [...input.files].forEach(async file => {
+    // PDF importés depuis la galerie : comportement inchangé, ajout direct.
+    if (file.type === 'application/pdf') {
+      addBonDirect(await fileToDataURL(file), grid);
+      return;
+    }
+    if (isCamera) {
+      // Photo prise à la caméra : passe par l'éditeur de recadrage type scan.
+      openScanCrop(file);
+      return;
+    }
+    // Image importée depuis la galerie (pas la caméra) : comportement inchangé.
     const compressed = await compressImage(file, 1600, 0.85);
-    const idx = bonsData.length;
-    bonsData.push(compressed);
-    const div = document.createElement('div');
-    div.className = 'bon-thumb';
-    div.id = `bon-${idx}`;
-    div.innerHTML = `
-      <img src="${compressed}" onclick="openAnnotate(${idx},'bon')">
-      <button class="del-bon" onclick="delBon(${idx})">✕</button>
-      <div class="photo-annotate-btn" onclick="openAnnotate(${idx},'bon')">✏️</div>
-    `;
-    grid.appendChild(div);
+    addBonDirect(compressed, grid);
   });
   input.value = '';
 }
+function addBonDirect(dataUrl, grid) {
+  grid = grid || document.getElementById('bons-grid');
+  const idx = bonsData.length;
+  bonsData.push(dataUrl);
+  const div = document.createElement('div');
+  div.className = 'bon-thumb';
+  div.id = `bon-${idx}`;
+  div.innerHTML = `
+    <img src="${dataUrl}" onclick="openAnnotate(${idx},'bon')">
+    <button class="del-bon" onclick="delBon(${idx})">✕</button>
+    <div class="photo-annotate-btn" onclick="openAnnotate(${idx},'bon')">✏️</div>
+  `;
+  grid.appendChild(div);
+}
+function fileToDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
 function delBon(idx) { bonsData[idx] = null; document.getElementById(`bon-${idx}`)?.remove(); }
+
+// ── SCAN : DÉTECTION DE BORDS + RECADRAGE + PERSPECTIVE ──
+let scanImg = null;        // Image source (résolution complète)
+let scanCanvasScale = 1;   // Ratio entre la taille affichée et la résolution réelle
+let scanCorners = [];      // 4 coins en coordonnées image réelle : [{x,y}, ...] ordre TL,TR,BR,BL
+let scanDraggingIdx = null;
+
+function openScanCrop(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      scanImg = img;
+      document.getElementById('scan-overlay').classList.add('open');
+      renderScanCropCanvas();
+      const detected = detectDocumentCorners(img);
+      scanCorners = detected || defaultScanCorners(img);
+      drawScanHandles();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function defaultScanCorners(img) {
+  // Filet de sécurité : un cadre à 6% de marge si la détection échoue.
+  const mx = img.width * 0.06, my = img.height * 0.06;
+  return [
+    { x: mx, y: my },
+    { x: img.width - mx, y: my },
+    { x: img.width - mx, y: img.height - my },
+    { x: mx, y: img.height - my },
+  ];
+}
+
+function renderScanCropCanvas() {
+  const canvas = document.getElementById('scan-crop-canvas');
+  const wrap = document.getElementById('scan-crop-wrap');
+  const maxW = window.innerWidth - 16;
+  const maxH = window.innerHeight - 160;
+  const scale = Math.min(maxW / scanImg.width, maxH / scanImg.height, 1);
+  scanCanvasScale = scale;
+  canvas.width = Math.round(scanImg.width * scale);
+  canvas.height = Math.round(scanImg.height * scale);
+  canvas.getContext('2d').drawImage(scanImg, 0, 0, canvas.width, canvas.height);
+  wrap.style.width = canvas.width + 'px';
+  wrap.style.height = canvas.height + 'px';
+  const svg = document.getElementById('scan-crop-svg');
+  svg.setAttribute('width', canvas.width);
+  svg.setAttribute('height', canvas.height);
+  svg.setAttribute('viewBox', `0 0 ${canvas.width} ${canvas.height}`);
+}
+
+function drawScanHandles() {
+  const svg = document.getElementById('scan-crop-svg');
+  const s = scanCanvasScale;
+  const pts = scanCorners.map(c => ({ x: c.x * s, y: c.y * s }));
+  const poly = pts.map(p => `${p.x},${p.y}`).join(' ');
+  svg.innerHTML = `
+    <polygon points="${poly}" fill="rgba(240,165,0,0.18)" stroke="#F0A500" stroke-width="2"></polygon>
+    ${pts.map((p, i) => `<circle data-idx="${i}" cx="${p.x}" cy="${p.y}" r="14" fill="#F0A500" stroke="white" stroke-width="2" style="touch-action:none;cursor:grab;"></circle>`).join('')}
+  `;
+  svg.querySelectorAll('circle').forEach(c => {
+    c.addEventListener('pointerdown', onScanHandleDown);
+  });
+}
+
+function onScanHandleDown(e) {
+  e.preventDefault();
+  scanDraggingIdx = parseInt(e.target.dataset.idx);
+  const svg = document.getElementById('scan-crop-svg');
+  const move = (ev) => onScanHandleMove(ev, svg);
+  const up = () => {
+    scanDraggingIdx = null;
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', up);
+  };
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', up);
+}
+
+function onScanHandleMove(e, svg) {
+  if (scanDraggingIdx == null) return;
+  const rect = svg.getBoundingClientRect();
+  const s = scanCanvasScale;
+  let x = (e.clientX - rect.left) / s;
+  let y = (e.clientY - rect.top) / s;
+  x = Math.max(0, Math.min(scanImg.width, x));
+  y = Math.max(0, Math.min(scanImg.height, y));
+  scanCorners[scanDraggingIdx] = { x, y };
+  drawScanHandles();
+}
+
+function resetScanCorners() {
+  const detected = detectDocumentCorners(scanImg);
+  scanCorners = detected || defaultScanCorners(scanImg);
+  drawScanHandles();
+}
+
+function closeScanCrop() {
+  document.getElementById('scan-overlay').classList.remove('open');
+  scanImg = null;
+  scanCorners = [];
+}
+
+function confirmScanCrop() {
+  const warped = warpPerspective(scanImg, scanCorners);
+  addBonDirect(warped);
+  document.getElementById('scan-overlay').classList.remove('open');
+  scanImg = null;
+  scanCorners = [];
+}
+
+// Détection automatique des 4 coins du document par analyse de contraste.
+// Approche simplifiée (sans librairie externe) : on travaille sur une version
+// réduite et en niveaux de gris de l'image, on calcule un gradient (Sobel) pour
+// repérer les bords forts, puis on cherche le plus grand rectangle de contenu
+// par balayage de lignes/colonnes à fort gradient cumulé. Fiable surtout quand
+// le document contraste bien avec son fond (table sombre, sol, etc.) ; sinon,
+// l'ajustement manuel des poignées prend le relai.
+function detectDocumentCorners(img) {
+  try {
+    const W = 300;
+    const scale = W / img.width;
+    const H = Math.round(img.height * scale);
+    if (H < 20) return null;
+
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, W, H);
+    const data = ctx.getImageData(0, 0, W, H).data;
+
+    const gray = new Float32Array(W * H);
+    for (let i = 0; i < W * H; i++) {
+      const r = data[i*4], g = data[i*4+1], b = data[i*4+2];
+      gray[i] = 0.299*r + 0.587*g + 0.114*b;
+    }
+
+    // Gradient de Sobel (magnitude) pour repérer les bords du document.
+    const grad = new Float32Array(W * H);
+    for (let y = 1; y < H-1; y++) {
+      for (let x = 1; x < W-1; x++) {
+        const i = y*W+x;
+        const gx = gray[i-1-W] - gray[i+1-W] + 2*gray[i-1] - 2*gray[i+1] + gray[i-1+W] - gray[i+1+W];
+        const gy = gray[i-W-1] + 2*gray[i-W] + gray[i-W+1] - gray[i+W-1] - 2*gray[i+W] - gray[i+W+1];
+        grad[i] = Math.sqrt(gx*gx + gy*gy);
+      }
+    }
+
+    // Profils de gradient cumulé par ligne et colonne pour trouver les bords
+    // du document (zones de fort contraste = transition fond/document).
+    const rowSum = new Float32Array(H);
+    const colSum = new Float32Array(W);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const v = grad[y*W+x];
+      rowSum[y] += v;
+      colSum[x] += v;
+    }
+
+    const findBand = (arr, total) => {
+      // Cherche la zone centrale [start,end] qui contient l'essentiel du
+      // contenu à fort gradient, en ignorant les marges peu contrastées.
+      const sum = arr.reduce((a,b) => a+b, 0);
+      if (sum < 1) return null;
+      let acc = 0, start = 0, end = total - 1;
+      const lo = sum * 0.04;
+      for (let i = 0; i < total; i++) { acc += arr[i]; if (acc >= lo) { start = i; break; } }
+      acc = 0;
+      for (let i = total - 1; i >= 0; i--) { acc += arr[i]; if (acc >= sum * 0.04) { end = i; break; } }
+      return { start, end };
+    };
+
+    const rowBand = findBand(rowSum, H);
+    const colBand = findBand(colSum, W);
+    if (!rowBand || !colBand) return null;
+    if (colBand.end - colBand.start < W * 0.3 || rowBand.end - rowBand.start < H * 0.3) return null;
+
+    const inv = 1 / scale;
+    const x0 = colBand.start * inv, x1 = colBand.end * inv;
+    const y0 = rowBand.start * inv, y1 = rowBand.end * inv;
+    return [
+      { x: x0, y: y0 }, { x: x1, y: y0 },
+      { x: x1, y: y1 }, { x: x0, y: y1 },
+    ];
+  } catch (e) {
+    console.warn('Détection bords échouée:', e);
+    return null;
+  }
+}
+
+// Corrige la perspective : transforme le quadrilatère scanCorners en un
+// rectangle plein cadre, par découpage en triangles (technique standard pour
+// approximer une transformation projective avec le Canvas 2D, qui ne supporte
+// nativement que les transformations affines).
+function warpPerspective(img, corners) {
+  const [tl, tr, br, bl] = corners;
+  const wTop = Math.hypot(tr.x-tl.x, tr.y-tl.y);
+  const wBot = Math.hypot(br.x-bl.x, br.y-bl.y);
+  const hLeft = Math.hypot(bl.x-tl.x, bl.y-tl.y);
+  const hRight = Math.hypot(br.x-tr.x, br.y-tr.y);
+  const outW = Math.round(Math.max(wTop, wBot));
+  const outH = Math.round(Math.max(hLeft, hRight));
+
+  const out = document.createElement('canvas');
+  out.width = outW; out.height = outH;
+  const octx = out.getContext('2d');
+
+  // Découpage en grille fine de quads → 2 triangles chacun, chaque triangle
+  // mappé par transformation affine (interpolation bilinéaire des 4 coins).
+  const N = 24;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ptAt = (u, v) => {
+    const top = { x: lerp(tl.x, tr.x, u), y: lerp(tl.y, tr.y, u) };
+    const bot = { x: lerp(bl.x, br.x, u), y: lerp(bl.y, br.y, u) };
+    return { x: lerp(top.x, bot.x, v), y: lerp(top.y, bot.y, v) };
+  };
+  const drawTri = (s0,s1,s2, d0,d1,d2) => {
+    octx.save();
+    octx.beginPath();
+    octx.moveTo(d0.x,d0.y); octx.lineTo(d1.x,d1.y); octx.lineTo(d2.x,d2.y);
+    octx.closePath();
+    octx.clip();
+    const denom = s0.x*(s1.y-s2.y) + s1.x*(s2.y-s0.y) + s2.x*(s0.y-s1.y);
+    if (Math.abs(denom) < 1e-6) { octx.restore(); return; }
+    const a = (d0.x*(s1.y-s2.y) + d1.x*(s2.y-s0.y) + d2.x*(s0.y-s1.y)) / denom;
+    const b = (d0.y*(s1.y-s2.y) + d1.y*(s2.y-s0.y) + d2.y*(s0.y-s1.y)) / denom;
+    const cc = (d0.x*(s2.x-s1.x) + d1.x*(s0.x-s2.x) + d2.x*(s1.x-s0.x)) / denom;
+    const dd = (d0.y*(s2.x-s1.x) + d1.y*(s0.x-s2.x) + d2.y*(s1.x-s0.x)) / denom;
+    const e = (d0.x*(s1.x*s2.y-s2.x*s1.y) + d1.x*(s2.x*s0.y-s0.x*s2.y) + d2.x*(s0.x*s1.y-s1.x*s0.y)) / denom;
+    const f = (d0.y*(s1.x*s2.y-s2.x*s1.y) + d1.y*(s2.x*s0.y-s0.x*s2.y) + d2.y*(s0.x*s1.y-s1.x*s0.y)) / denom;
+    octx.transform(a,b,cc,dd,e,f);
+    octx.drawImage(img, 0, 0);
+    octx.restore();
+  };
+
+  for (let j = 0; j < N; j++) {
+    for (let i = 0; i < N; i++) {
+      const u0=i/N, u1=(i+1)/N, v0=j/N, v1=(j+1)/N;
+      const s00=ptAt(u0,v0), s10=ptAt(u1,v0), s01=ptAt(u0,v1), s11=ptAt(u1,v1);
+      const d00={x:u0*outW,y:v0*outH}, d10={x:u1*outW,y:v0*outH}, d01={x:u0*outW,y:v1*outH}, d11={x:u1*outW,y:v1*outH};
+      drawTri(s00,s10,s01, d00,d10,d01);
+      drawTri(s10,s11,s01, d10,d11,d01);
+    }
+  }
+
+  return out.toDataURL('image/jpeg', 0.88);
+}
 
 // ── ÉDITEUR D'ANNOTATION ──
 let annotateIdx = null, annotateType = null;
