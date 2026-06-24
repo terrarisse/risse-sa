@@ -2311,10 +2311,32 @@ function toggleLocSelect(item) {
   autoSaveDraft();
 }
 
+// Construit l'ordre de référence des ids de location (véhicules, matériel,
+// machines, puis pour chaque machine ses accessoires juste après elle) — afin
+// que la zone de sélection affiche toujours les items dans l'ordre des
+// catégories sources, et non dans l'ordre où ils ont été cochés.
+function buildLocOrderIndex() {
+  const order = [];
+  LOC_VEHICULES.forEach(v => order.push(v.id));
+  LOC_MATERIEL.forEach(m => order.push(m.id));
+  LOC_ENGINS.forEach(m => {
+    order.push(m.id);
+    (m.accessoires||[]).forEach(acc => order.push(`acc-${m.id}-${acc.id}`));
+  });
+  return order;
+}
+
 function renderLocSelectionZone() {
   const zone = document.getElementById('loc-selection-zone');
   const list = document.getElementById('loc-sel-list');
-  const items = Object.entries(locSelection);
+  const orderIndex = buildLocOrderIndex();
+  const items = Object.entries(locSelection).sort(([idA], [idB]) => {
+    const iA = orderIndex.indexOf(idA), iB = orderIndex.indexOf(idB);
+    if (iA === -1 && iB === -1) return 0;
+    if (iA === -1) return 1;
+    if (iB === -1) return -1;
+    return iA - iB;
+  });
 
   if (items.length === 0) { zone.style.display = 'none'; return; }
   zone.style.display = 'block';
@@ -4008,15 +4030,15 @@ function buildFournitCatalogue() {
         sh.onclick = () => { sh.classList.toggle('open'); sb.classList.toggle('open'); };
         const si = document.createElement('div');
         si.className = 'r-sub-inner';
-        subItems.forEach(item => si.appendChild(buildRItem(item, sub.name)));
+        subItems.forEach(item => si.appendChild(buildRItem(item, sub.name, cat.name||cat.nom)));
         sb.appendChild(si);
         inner.appendChild(sh);
         inner.appendChild(sb);
       });
       // Items sans sous-cat
-      (group.subGroups['__none__'] || []).forEach(item => inner.appendChild(buildRItem(item)));
+      (group.subGroups['__none__'] || []).forEach(item => inner.appendChild(buildRItem(item, null, cat.name||cat.nom)));
     } else {
-      group.items.forEach(item => inner.appendChild(buildRItem(item)));
+      group.items.forEach(item => inner.appendChild(buildRItem(item, null, cat.name||cat.nom)));
     }
 
     b.appendChild(inner);
@@ -4049,7 +4071,7 @@ function buildFournitCatalogue() {
 
 let _frowId = 0;
 
-function buildRItem(item, subName) {
+function buildRItem(item, subName, catName) {
   const key = item.id;
   const isSelected = !!fournitSelection[key];
   const uid = ++_frowId;
@@ -4059,7 +4081,10 @@ function buildRItem(item, subName) {
   const sub = [item.famille, item.unite].filter(Boolean).join(' · ');
   const div = document.createElement('div');
   div.className = 'r-item';
-  div.dataset.nom = item.nom || '';
+  // Inclut catégorie + sous-catégorie dans la chaîne recherchable, pour
+  // pouvoir retrouver un item par "PVC 125 manchon" même si "PVC" et "125"
+  // viennent du nom de la catégorie/sous-catégorie et non de item.nom.
+  div.dataset.nom = [catName, subName, item.nom].filter(Boolean).join(' ');
   div.dataset.key = key;
   div.dataset.uid = uid;
 
@@ -4086,10 +4111,38 @@ function buildRItem(item, subName) {
 
 function buildFournitRow(catName, nom, defaultUnit) { /* compat */ }
 
+// Construit l'ordre de référence des ids de matériaux (catégories dans leur
+// ordre, sous-catégories dans leur ordre, puis items dans l'ordre de
+// rv6_materials) — pour que la zone de sélection suive l'ordre du catalogue
+// plutôt que l'ordre où les items ont été cochés.
+function buildFournitOrderIndex() {
+  const items = JSON.parse(localStorage.getItem('rv6_materials') || '[]');
+  const catsData = (() => { try { return JSON.parse(localStorage.getItem('rv6_res_categories') || '{}'); } catch(e) { return {}; } })();
+  const cats = catsData.materiaux || [];
+  const order = [];
+  const used = new Set();
+  cats.forEach(cat => {
+    const subs = cat.children || [];
+    subs.forEach(sub => {
+      items.filter(i => i.catId===cat.id && i.subCatId===sub.id).forEach(i => { order.push(i.id); used.add(i.id); });
+    });
+    items.filter(i => i.catId===cat.id && (!i.subCatId || !subs.find(s=>s.id===i.subCatId))).forEach(i => { order.push(i.id); used.add(i.id); });
+  });
+  items.forEach(i => { if (!used.has(i.id)) order.push(i.id); });
+  return order;
+}
+
 function renderFournitSelectionZone() {
   const zone = document.getElementById('fournit-selection-zone');
   const list = document.getElementById('fournit-sel-list');
-  const keys = Object.keys(fournitSelection);
+  const orderIndex = buildFournitOrderIndex();
+  const keys = Object.keys(fournitSelection).sort((a, b) => {
+    const iA = orderIndex.indexOf(a), iB = orderIndex.indexOf(b);
+    if (iA === -1 && iB === -1) return 0;
+    if (iA === -1) return 1;
+    if (iB === -1) return -1;
+    return iA - iB;
+  });
   if (!keys.length) { zone.style.display = 'none'; return; }
   zone.style.display = 'block';
   list.innerHTML = '';
@@ -4182,16 +4235,28 @@ function fournitSearch(q) {
     document.querySelectorAll('#fournit-catalogue .r-acc-header').forEach(h => { h.classList.remove('open'); h.nextElementSibling?.classList.remove('open'); });
     return;
   }
+  // Recherche multi-mots : chaque mot tapé doit être présent (peu importe
+  // l'ordre) dans le nom complet de l'item (catégorie + sous-catégorie + nom).
+  const words = q.split(/\s+/).filter(Boolean);
   document.querySelectorAll('#fournit-catalogue .r-accordion').forEach(group => {
     const items = group.querySelectorAll('.r-item');
     let hasMatch = false;
     items.forEach(item => {
-      const match = item.dataset.nom?.toLowerCase().includes(q);
+      const nom = item.dataset.nom?.toLowerCase() || '';
+      const match = words.every(w => nom.includes(w));
       item.style.display = match ? '' : 'none';
       if (match) hasMatch = true;
     });
     group.style.display = hasMatch ? '' : 'none';
     if (hasMatch) { group.querySelector('.r-acc-header')?.classList.add('open'); group.querySelector('.r-acc-body')?.classList.add('open'); }
+    // Ouvre aussi chaque sous-accordéon qui contient un item filtré, sinon
+    // l'item reste caché derrière une sous-catégorie repliée.
+    group.querySelectorAll('.r-sub-header').forEach(sh => {
+      const sb = sh.nextElementSibling;
+      const subHasMatch = sb && [...sb.querySelectorAll('.r-item')].some(i => i.style.display !== 'none');
+      sh.classList.toggle('open', !!subHasMatch);
+      if (sb) sb.classList.toggle('open', !!subHasMatch);
+    });
   });
 }
 function fournitClearSearch() { document.getElementById('fournit-search').value = ''; fournitSearch(''); }
