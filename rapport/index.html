@@ -997,6 +997,7 @@ textarea { resize: none; }
   cursor: pointer;
 }
 .acc-toggle-chevron.open { transform: rotate(180deg); background: var(--bg); }
+.acc-toggle-chevron.placeholder { cursor: default; visibility: hidden; }
 .machine-accessoires-body {
   max-height: 0;
   overflow: hidden;
@@ -2080,22 +2081,28 @@ function buildLocGroupMachines(containerId, items) {
     chk.style.cssText = 'font-size:18px;flex-shrink:0;';
     chk.textContent = isSelected ? '✅' : '⬜';
 
+    // Chevron toujours présent dans le DOM (espace réservé) pour aligner
+    // les coches entre les machines avec et sans accessoires.
+    const accessoires = Array.isArray(item.accessoires) ? item.accessoires : [];
+    const chevron = document.createElement('span');
+    chevron.className = 'acc-toggle-chevron';
+    if (accessoires.length === 0) {
+      chevron.classList.add('placeholder');
+    } else {
+      chevron.textContent = '▼';
+      chevron.id = `acc-chevron-${item.id}`;
+      chevron.addEventListener('click', (e) => { e.stopPropagation(); toggleMachineAccessoires(item.id); });
+    }
+
     row.appendChild(iconSpan);
     row.appendChild(nameSpan);
     row.appendChild(chk);
+    row.appendChild(chevron);
     row.addEventListener('click', () => toggleLocSelect(item));
     wrap.appendChild(row);
 
     // Mini-accordéon accessoires (seulement si la machine en a)
-    const accessoires = Array.isArray(item.accessoires) ? item.accessoires : [];
     if (accessoires.length > 0) {
-      const chevron = document.createElement('span');
-      chevron.className = 'acc-toggle-chevron';
-      chevron.textContent = '▼';
-      chevron.id = `acc-chevron-${item.id}`;
-      chevron.addEventListener('click', (e) => { e.stopPropagation(); toggleMachineAccessoires(item.id); });
-      row.appendChild(chevron);
-
       const body = document.createElement('div');
       body.className = 'machine-accessoires-body';
       body.id = `acc-body-${item.id}`;
