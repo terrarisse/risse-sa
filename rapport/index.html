@@ -1524,7 +1524,7 @@ textarea { resize: none; }
     <div class="card">
       <div class="card-header"><span class="icon">📝</span><h2>Description</h2></div>
       <div class="card-body">
-        <textarea id="tx-travaux" rows="4" placeholder="Décrire les travaux effectués aujourd'hui…"></textarea>
+        <textarea id="tx-travaux" rows="8" style="overflow-y:hidden;" placeholder="Décrire les travaux effectués aujourd'hui…" oninput="autoGrowTravaux()"></textarea>
       </div>
     </div>
 
@@ -2376,6 +2376,7 @@ function goSection(n) {
   state.currentSection = n;
   document.getElementById('main-scroll').scrollTop = 0;
   updateStepBar(n);
+  if (n === 3) { autoGrowTravaux(); }
   if (n === 4) { buildFournitCatalogue(); }
   if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
 }
@@ -3378,7 +3379,7 @@ function loadDraft() {
     }
 
     // Travaux
-    if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
+    if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
 
     // Métrés
     if (d.metres && d.metres.length > 0) {
@@ -3466,6 +3467,7 @@ function resetRapport() {
 
   // Travaux
   document.getElementById('tx-travaux').value = '';
+  document.getElementById('tx-travaux').style.height = 'auto';
 
   // Métrés — fermer le bloc et vider la liste
   if (extrasState.metres) toggleExtra('metres');
@@ -4255,7 +4257,7 @@ function modifierRapport(e, id) {
     renderLocSelectionZone();
   }
 
-  if (d.travaux) document.getElementById('tx-travaux').value = d.travaux;
+  if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
 
   if (d.metres && d.metres.length > 0) {
     if (!extrasState.metres) toggleExtra('metres');
@@ -4640,6 +4642,15 @@ function prefillMachineHours(itemId, total) {
     renderLocSelectionZone();
     autoSaveDraft();
   }
+}
+
+// ─── AUTO-GROW DESCRIPTION TRAVAUX ─────────────────────────────
+// Le textarea grandit avec son contenu pour ne jamais avoir besoin de scroller.
+function autoGrowTravaux() {
+  const el = document.getElementById('tx-travaux');
+  if (!el) return;
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
 }
 
 // ─── INIT ──────────────────────────────────────────────────────
