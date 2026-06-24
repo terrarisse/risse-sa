@@ -4582,12 +4582,17 @@ function saveMateriauRapport() {
 }
 
 function prefillMachineHours(itemId, total) {
-  if (!locSelection[itemId]) {
+  const wasSelected = !!locSelection[itemId];
+  if (!wasSelected) {
     const item = LOC_ENGINS.find(i => i.id === itemId);
     if (item) locSelection[itemId] = { label: item.label, unit: item.unit, qty: 0 };
   }
   if (locSelection[itemId]) {
     locSelection[itemId].qty = parseFloat(total);
+    const nameEl = document.getElementById(`locname-${itemId}`);
+    const chkEl  = document.getElementById(`locchk-${itemId}`);
+    if (nameEl) nameEl.classList.add('active');
+    if (chkEl)  chkEl.textContent = '✅';
     renderLocSelectionZone();
     autoSaveDraft();
   }
