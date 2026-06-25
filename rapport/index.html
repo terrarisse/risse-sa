@@ -1850,7 +1850,7 @@ textarea { resize: none; }
 
 <!-- ═══ OVERLAY SCAN — RECADRAGE TYPE SCANNER ═══ -->
 <div class="overlay" id="scan-overlay" style="align-items:stretch;flex-direction:column;background:#111;">
-  <div style="background:#1B3A6B;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+  <div style="background:#1B3A6B;padding:10px 20px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
     <button onclick="closeScanCrop()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:16px;width:36px;height:36px;border-radius:8px;cursor:pointer;">←</button>
     <span style="color:white;font-weight:700;font-size:14px;flex:1;">Ajuster le cadrage</span>
     <button onclick="resetScanCorners()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;">↺ Réinit.</button>
@@ -1864,6 +1864,24 @@ textarea { resize: none; }
   </div>
   <div style="background:#1B3A6B;padding:10px 14px;text-align:center;flex-shrink:0;">
     <span style="color:rgba(255,255,255,0.7);font-size:12px;">Glissez les coins pour ajuster le cadrage du document</span>
+  </div>
+</div>
+
+<!-- ═══ OVERLAY SCAN — APERÇU + FILTRE ═══ -->
+<div class="overlay" id="scan-filter-overlay" style="align-items:stretch;flex-direction:column;background:#111;">
+  <div style="background:#1B3A6B;padding:10px 20px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <button onclick="backToScanCrop()" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;font-size:16px;width:36px;height:36px;border-radius:8px;cursor:pointer;">←</button>
+    <span style="color:white;font-weight:700;font-size:14px;flex:1;">Aperçu</span>
+    <button onclick="finishScanFilter()" style="background:#F0A500;border:none;color:#1B3A6B;font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;">✓ Terminer</button>
+  </div>
+  <div style="flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;background:#1a1a1a;padding:12px;">
+    <canvas id="scan-filter-canvas" style="display:block;max-width:100%;max-height:100%;box-shadow:0 4px 20px rgba(0,0,0,0.4);"></canvas>
+  </div>
+  <div style="background:#1B3A6B;padding:12px 14px;flex-shrink:0;">
+    <div style="display:flex;gap:8px;">
+      <button id="scan-filter-btn-bw" onclick="applyScanFilter('bw')" style="flex:1;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:white;font-size:13px;font-weight:700;padding:10px 6px;border-radius:10px;cursor:pointer;font-family:inherit;">⬛ Noir et blanc</button>
+      <button id="scan-filter-btn-color" onclick="applyScanFilter('color')" style="flex:1;background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:white;font-size:13px;font-weight:700;padding:10px 6px;border-radius:10px;cursor:pointer;font-family:inherit;">🎨 Couleur améliorée</button>
+    </div>
   </div>
 </div>
 
@@ -2879,10 +2897,15 @@ function defaultScanCorners(img) {
   ];
 }
 
+// Marge de sécurité horizontale pour ne jamais placer une poignée tactile
+// dans la zone de geste "retour" d'Android/iOS (bords gauche/droit de l'écran),
+// qui sinon intercepte le toucher et ferme l'app au lieu de déplacer le coin.
+const SCAN_EDGE_SAFE_MARGIN = 32;
+
 function renderScanCropCanvas() {
   const canvas = document.getElementById('scan-crop-canvas');
   const wrap = document.getElementById('scan-crop-wrap');
-  const maxW = window.innerWidth - 16;
+  const maxW = window.innerWidth - SCAN_EDGE_SAFE_MARGIN * 2;
   const maxH = window.innerHeight - 160;
   const scale = Math.min(maxW / scanImg.width, maxH / scanImg.height, 1);
   scanCanvasScale = scale;
@@ -2973,12 +2996,142 @@ function closeScanCrop() {
   scanCorners = [];
 }
 
+// Canvas issu du recadrage (avant filtre), conservé pour pouvoir basculer
+// entre les 2 filtres sans refaire le recadrage, et pour "← Retour" vers
+// l'écran de recadrage sans perdre le travail déjà fait sur les coins.
+let scanCroppedCanvas = null;
+let scanFilterMode = null;
+
 function confirmScanCrop() {
-  const warped = warpPerspective(scanImg, scanCorners);
-  addBonDirect(warped);
+  scanCroppedCanvas = warpPerspective(scanImg, scanCorners);
   document.getElementById('scan-overlay').classList.remove('open');
+  document.getElementById('scan-filter-overlay').classList.add('open');
+  scanFilterMode = null;
+  applyScanFilter('bw');
+}
+
+function backToScanCrop() {
+  document.getElementById('scan-filter-overlay').classList.remove('open');
+  document.getElementById('scan-overlay').classList.add('open');
+  renderScanCropCanvas();
+  drawScanHandles();
+}
+
+function finishScanFilter() {
+  const canvas = document.getElementById('scan-filter-canvas');
+  addBonDirect(canvas.toDataURL('image/jpeg', 0.9));
+  document.getElementById('scan-filter-overlay').classList.remove('open');
   scanImg = null;
   scanCorners = [];
+  scanCroppedCanvas = null;
+  scanFilterMode = null;
+}
+
+function applyScanFilter(mode) {
+  if (!scanCroppedCanvas) return;
+  scanFilterMode = mode;
+  document.getElementById('scan-filter-btn-bw').style.background = mode==='bw' ? '#F0A500' : 'rgba(255,255,255,0.12)';
+  document.getElementById('scan-filter-btn-bw').style.color = mode==='bw' ? '#1B3A6B' : 'white';
+  document.getElementById('scan-filter-btn-color').style.background = mode==='color' ? '#F0A500' : 'rgba(255,255,255,0.12)';
+  document.getElementById('scan-filter-btn-color').style.color = mode==='color' ? '#1B3A6B' : 'white';
+
+  const out = document.getElementById('scan-filter-canvas');
+  out.width = scanCroppedCanvas.width;
+  out.height = scanCroppedCanvas.height;
+  const octx = out.getContext('2d');
+  octx.drawImage(scanCroppedCanvas, 0, 0);
+
+  if (mode === 'bw') adaptiveThresholdFilter(out);
+  else enhanceColorFilter(out);
+}
+
+// ── Filtres "type scanner" par seuillage adaptatif local ──
+// Plutôt qu'un contraste/luminosité global, on calcule pour chaque pixel un
+// seuil basé sur la luminosité MOYENNE de son voisinage (fenêtre glissante via
+// une image intégrale, donc rapide même sur une grande photo). Ça corrige les
+// éclairages inégaux (ombre d'un côté, lumière de l'autre) bien mieux qu'un
+// simple ajustement global — c'est la technique utilisée par les vrais
+// scanners et apps comme CamScanner/Adobe Scan.
+
+function adaptiveThresholdFilter(canvas) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const imgData = ctx.getImageData(0, 0, w, h);
+  const data = imgData.data;
+
+  const gray = new Float64Array(w*h);
+  for (let i = 0; i < w*h; i++) {
+    gray[i] = 0.299*data[i*4] + 0.587*data[i*4+1] + 0.114*data[i*4+2];
+  }
+
+  // Image intégrale construite proprement (somme cumulée 2D classique).
+  const integral = new Float64Array((w+1)*(h+1));
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      integral[(y+1)*(w+1)+(x+1)] = gray[y*w+x] + integral[y*(w+1)+(x+1)] + integral[(y+1)*(w+1)+x] - integral[y*(w+1)+x];
+    }
+  }
+  const areaSum = (x0,y0,x1,y1) => integral[y1*(w+1)+x1] - integral[y0*(w+1)+x1] - integral[y1*(w+1)+x0] + integral[y0*(w+1)+x0];
+
+  // Taille de fenêtre proportionnelle à l'image (couvre bien les variations
+  // d'éclairage sans être trop locale, ce qui créerait du bruit sur le texte).
+  const radius = Math.max(15, Math.round(Math.min(w, h) * 0.04));
+  const C = 8; // décalage : un pixel doit être notablement plus sombre que sa moyenne locale pour devenir noir
+
+  for (let y = 0; y < h; y++) {
+    const y0 = Math.max(0, y-radius), y1 = Math.min(h, y+radius+1);
+    for (let x = 0; x < w; x++) {
+      const x0 = Math.max(0, x-radius), x1 = Math.min(w, x+radius+1);
+      const area = (x1-x0)*(y1-y0);
+      const mean = areaSum(x0,y0,x1,y1) / area;
+      const i = y*w+x;
+      const v = gray[i] < (mean - C) ? 0 : 255;
+      const idx = i*4;
+      data[idx] = data[idx+1] = data[idx+2] = v;
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+function enhanceColorFilter(canvas) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const imgData = ctx.getImageData(0, 0, w, h);
+  const data = imgData.data;
+
+  const gray = new Float64Array(w*h);
+  for (let i = 0; i < w*h; i++) {
+    gray[i] = 0.299*data[i*4] + 0.587*data[i*4+1] + 0.114*data[i*4+2];
+  }
+  const integral = new Float64Array((w+1)*(h+1));
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      integral[(y+1)*(w+1)+(x+1)] = gray[y*w+x] + integral[y*(w+1)+(x+1)] + integral[(y+1)*(w+1)+x] - integral[y*(w+1)+x];
+    }
+  }
+  const areaSum = (x0,y0,x1,y1) => integral[y1*(w+1)+x1] - integral[y0*(w+1)+x1] - integral[y1*(w+1)+x0] + integral[y0*(w+1)+x0];
+  const radius = Math.max(20, Math.round(Math.min(w, h) * 0.08));
+
+  for (let y = 0; y < h; y++) {
+    const y0 = Math.max(0, y-radius), y1 = Math.min(h, y+radius+1);
+    for (let x = 0; x < w; x++) {
+      const x0 = Math.max(0, x-radius), x1 = Math.min(w, x+radius+1);
+      const area = (x1-x0)*(y1-y0);
+      const localMean = areaSum(x0,y0,x1,y1) / area;
+      const i = y*w+x;
+      const idx = i*4;
+      // Éclaircit le fond local vers le blanc tout en préservant les couleurs
+      // du contenu (gain inversement proportionnel à la luminosité locale du
+      // fond), puis renforce légèrement le contraste global.
+      const gain = Math.min(1.6, 235 / Math.max(80, localMean));
+      for (let c = 0; c < 3; c++) {
+        let v = data[idx+c] * gain;
+        v = (v - 128) * 1.15 + 128; // contraste global léger
+        data[idx+c] = Math.max(0, Math.min(255, v));
+      }
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
 }
 
 // Détection automatique des 4 coins du document par analyse de contraste.
@@ -3114,7 +3267,7 @@ function warpPerspective(img, corners) {
     }
   }
 
-  return out.toDataURL('image/jpeg', 0.88);
+  return out;
 }
 
 // ── ÉDITEUR D'ANNOTATION ──
