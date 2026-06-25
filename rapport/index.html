@@ -42,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 15px;
+  overscroll-behavior: none;
 }
 
 /* ── HEADER ── */
@@ -2910,22 +2911,46 @@ function drawScanHandles() {
   });
 }
 
+// Met à jour uniquement les positions (cx/cy du cercle, points du polygone)
+// sans jamais recréer les éléments DOM — appelée à chaque pointermove pour
+// éviter de réattacher des listeners en boucle pendant le glissement, ce qui
+// provoquait un ralentissement puis un crash de la page sur mobile.
+function updateScanHandlesPosition() {
+  const svg = document.getElementById('scan-crop-svg');
+  const s = scanCanvasScale;
+  const pts = scanCorners.map(c => ({ x: c.x * s, y: c.y * s }));
+  const polygon = svg.querySelector('polygon');
+  if (polygon) polygon.setAttribute('points', pts.map(p => `${p.x},${p.y}`).join(' '));
+  svg.querySelectorAll('circle').forEach(c => {
+    const i = parseInt(c.dataset.idx);
+    c.setAttribute('cx', pts[i].x);
+    c.setAttribute('cy', pts[i].y);
+  });
+}
+
 function onScanHandleDown(e) {
   e.preventDefault();
-  scanDraggingIdx = parseInt(e.target.dataset.idx);
-  const svg = document.getElementById('scan-crop-svg');
-  const move = (ev) => onScanHandleMove(ev, svg);
-  const up = () => {
+  e.stopPropagation();
+  const idx = parseInt(e.target.dataset.idx);
+  if (isNaN(idx)) return;
+  scanDraggingIdx = idx;
+  const move = (ev) => onScanHandleMove(ev);
+  const up = (ev) => {
+    ev.preventDefault();
     scanDraggingIdx = null;
     window.removeEventListener('pointermove', move);
     window.removeEventListener('pointerup', up);
+    window.removeEventListener('pointercancel', up);
   };
   window.addEventListener('pointermove', move);
   window.addEventListener('pointerup', up);
+  window.addEventListener('pointercancel', up);
 }
 
-function onScanHandleMove(e, svg) {
-  if (scanDraggingIdx == null) return;
+function onScanHandleMove(e) {
+  if (scanDraggingIdx == null || !scanImg) return;
+  e.preventDefault();
+  const svg = document.getElementById('scan-crop-svg');
   const rect = svg.getBoundingClientRect();
   const s = scanCanvasScale;
   let x = (e.clientX - rect.left) / s;
@@ -2933,7 +2958,7 @@ function onScanHandleMove(e, svg) {
   x = Math.max(0, Math.min(scanImg.width, x));
   y = Math.max(0, Math.min(scanImg.height, y));
   scanCorners[scanDraggingIdx] = { x, y };
-  drawScanHandles();
+  updateScanHandlesPosition();
 }
 
 function resetScanCorners() {
