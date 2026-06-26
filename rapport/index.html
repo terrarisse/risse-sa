@@ -936,7 +936,7 @@ textarea { resize: none; }
 .r-sub-body { max-height:0;overflow:hidden;transition:max-height .25s ease;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;background:#fff;margin-bottom:6px; }
 .r-sub-body.open { max-height:9999px; }
 .r-sub-inner { padding:8px; }
-.r-item { background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s; }
+.r-item { background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;transition:all .13s; }
 .r-item:last-child { margin-bottom:0; }
 .r-item:active { transform:scale(.98); }
 .r-item-icon { font-size:18px;flex-shrink:0;width:32px;height:32px;border-radius:8px;background:white;display:flex;align-items:center;justify-content:center;overflow:hidden; }
@@ -945,7 +945,13 @@ textarea { resize: none; }
 .r-item-name { font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
 .r-item-name.sel { color:var(--navy); }
 .r-item-sub { font-size:10px;color:var(--text-muted);margin-top:1px; }
-.r-item-check { font-size:18px;flex-shrink:0; }
+.r-item-check { font-size:18px;flex-shrink:0;padding:4px;cursor:pointer; }
+.r-item-controls { display:flex;align-items:center;gap:4px;flex-shrink:0; }
+.r-item-controls select { width:34px;border:1.5px solid var(--border);border-radius:6px;padding:4px 1px;font-family:inherit;font-size:9px;font-weight:700;background:white;color:var(--text);outline:none;flex-shrink:0; }
+.r-item-controls .ric-btn { background:var(--bg);border:1.5px solid var(--border);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:26px;height:24px;border-radius:6px;cursor:pointer;flex-shrink:0;padding:0; }
+.r-item-controls .ric-btn.plus-one { background:var(--yellow);border-color:var(--yellow);color:var(--navy); }
+.r-item-controls .ric-qty { width:30px;border:1.5px solid var(--teal);border-radius:6px;padding:4px 1px;font-family:inherit;font-size:12px;font-weight:700;text-align:center;background:#e8f5f3;color:var(--teal);outline:none;flex-shrink:0; }
+.r-item-controls .ric-del { background:none;border:none;color:var(--text-light);font-size:14px;cursor:pointer;padding:2px 3px;flex-shrink:0; }
 
 .fournit-row {
   display: flex;
@@ -2125,7 +2131,6 @@ function buildLocGroupMachines(containerId, items) {
 
     const row = document.createElement('div');
     row.className = 'fournit-row';
-    row.style.cursor = 'pointer';
     row.dataset.id = item.id;
 
     const isSelected = !!locSelection[item.id];
@@ -2139,10 +2144,9 @@ function buildLocGroupMachines(containerId, items) {
     nameSpan.textContent = `${item.label} (${item.unit})`;
     nameSpan.id = `locname-${item.id}`;
 
-    const chk = document.createElement('span');
-    chk.id = `locchk-${item.id}`;
-    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
-    chk.textContent = isSelected ? '✅' : '⬜';
+    const chkWrap = document.createElement('span');
+    chkWrap.id = `locwrap-${item.id}`;
+    chkWrap.innerHTML = isSelected ? locControlsHTML(item.id) : `<span id="locchk-${item.id}" class="r-item-check">⬜</span>`;
 
     // Chevron toujours présent dans le DOM (espace réservé) pour aligner
     // les coches entre les machines avec et sans accessoires.
@@ -2159,10 +2163,15 @@ function buildLocGroupMachines(containerId, items) {
 
     row.appendChild(iconSpan);
     row.appendChild(nameSpan);
-    row.appendChild(chk);
+    row.appendChild(chkWrap);
     row.appendChild(chevron);
-    row.addEventListener('click', () => toggleLocSelect(item));
     wrap.appendChild(row);
+    if (isSelected) {
+      wireLocInlineControls(item.id);
+    } else {
+      const chkEl = chkWrap.querySelector('.r-item-check');
+      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item); };
+    }
 
     // Mini-accordéon accessoires (seulement si la machine en a)
     if (accessoires.length > 0) {
@@ -2191,16 +2200,21 @@ function buildLocGroupMachines(containerId, items) {
         accName.textContent = acc.name || acc.nom || 'Accessoire';
         accName.id = `locname-${accId}`;
 
-        const accChk = document.createElement('span');
-        accChk.className = 'acc-row-check';
-        accChk.id = `locchk-${accId}`;
-        accChk.textContent = isAccSelected ? '✅' : '⬜';
+        const accChkWrap = document.createElement('span');
+        accChkWrap.id = `locwrap-${accId}`;
+        accChkWrap.innerHTML = isAccSelected ? locControlsHTML(accId) : `<span id="locchk-${accId}" class="r-item-check">⬜</span>`;
 
         accRow.appendChild(accIcon);
         accRow.appendChild(accName);
-        accRow.appendChild(accChk);
-        accRow.addEventListener('click', () => toggleLocSelect({ id: accId, label: accLabel, unit: 'h' }));
+        accRow.appendChild(accChkWrap);
         body.appendChild(accRow);
+        const accItem = { id: accId, label: accLabel, unit: 'h' };
+        if (isAccSelected) {
+          wireLocInlineControls(accId);
+        } else {
+          const accChkEl = accChkWrap.querySelector('.r-item-check');
+          if (accChkEl) accChkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(accItem); };
+        }
       });
 
       wrap.appendChild(body);
@@ -2283,12 +2297,56 @@ function toggleMachineAccessoires(machineId) {
 // État sélection location : { id: { label, unit, qty } }
 let locSelection = {};
 
+// Génère le HTML des contrôles inline (select unité + .5 + 1 + qté + ✕) qui
+// remplacent la case ⬜/✅ une fois l'item de location sélectionné dans la liste.
+function locControlsHTML(id) {
+  const sel = locSelection[id];
+  if (!sel) return `<span id="locchk-${id}" class="r-item-check">⬜</span>`;
+  return `
+    <span class="r-item-controls" id="locctrl-${id}">
+      <select id="locctrl-unit-${id}">
+        ${['h','p/j','ml','m','m²','m³','kg','T','L','pc','km','forfait'].map(u=>`<option value="${u}" ${sel.unit===u?'selected':''}>${u}</option>`).join('')}
+      </select>
+      <button type="button" class="ric-btn" id="locctrl-half-${id}">+0.5</button>
+      <button type="button" class="ric-btn plus-one" id="locctrl-one-${id}">+1</button>
+      <input type="number" min="0" step="0.5" class="ric-qty" id="locctrl-qty-${id}" value="${sel.qty>0?sel.qty:''}" placeholder="0">
+      <button type="button" class="ric-del" id="locctrl-del-${id}">✕</button>
+    </span>
+  `;
+}
+
+// Branche les écouteurs des contrôles inline pour un item de location donné.
+function wireLocInlineControls(id) {
+  const unitSel = document.getElementById(`locctrl-unit-${id}`);
+  const btnHalf = document.getElementById(`locctrl-half-${id}`);
+  const btnOne  = document.getElementById(`locctrl-one-${id}`);
+  const qtyInp  = document.getElementById(`locctrl-qty-${id}`);
+  const btnDel  = document.getElementById(`locctrl-del-${id}`);
+  if (!unitSel) return;
+
+  const stop = (e) => e.stopPropagation();
+  [unitSel, btnHalf, btnOne, qtyInp, btnDel].forEach(el => el.addEventListener('click', stop));
+
+  unitSel.onchange = () => { locSelection[id].unit = unitSel.value; syncLocNavyUnit(id); autoSaveDraft(); };
+
+  const updateQty = (val) => {
+    const q = Math.round(val * 4) / 4;
+    locSelection[id].qty = q;
+    qtyInp.value = q > 0 ? q : '';
+    syncLocNavyQty(id);
+    autoSaveDraft();
+  };
+  btnHalf.onclick = () => updateQty((parseFloat(qtyInp.value)||0) + 0.5);
+  btnOne.onclick  = () => updateQty((parseFloat(qtyInp.value)||0) + 1);
+  qtyInp.oninput  = () => { locSelection[id].qty = parseFloat(qtyInp.value)||0; syncLocNavyQty(id); autoSaveDraft(); };
+  btnDel.onclick  = () => toggleLocSelect({ id });
+}
+
 function buildLocGroup(containerId, items, groupKey) {
   const c = document.getElementById(containerId);
   items.forEach(item => {
     const row = document.createElement('div');
     row.className = 'fournit-row';
-    row.style.cursor = 'pointer';
     row.dataset.id = item.id;
 
     const isSelected = !!locSelection[item.id];
@@ -2302,16 +2360,20 @@ function buildLocGroup(containerId, items, groupKey) {
     nameSpan.textContent = `${item.label} (${item.unit})`;
     nameSpan.id = `locname-${item.id}`;
 
-    const chk = document.createElement('span');
-    chk.id = `locchk-${item.id}`;
-    chk.style.cssText = 'font-size:18px;flex-shrink:0;';
-    chk.textContent = isSelected ? '✅' : '⬜';
+    const chkWrap = document.createElement('span');
+    chkWrap.id = `locwrap-${item.id}`;
+    chkWrap.innerHTML = isSelected ? locControlsHTML(item.id) : `<span id="locchk-${item.id}" class="r-item-check">⬜</span>`;
 
     row.appendChild(iconSpan);
     row.appendChild(nameSpan);
-    row.appendChild(chk);
-    row.onclick = () => toggleLocSelect(item);
+    row.appendChild(chkWrap);
     c.appendChild(row);
+    if (isSelected) {
+      wireLocInlineControls(item.id);
+    } else {
+      const chkEl = chkWrap.querySelector('.r-item-check');
+      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item); };
+    }
   });
 }
 
@@ -2323,9 +2385,17 @@ function toggleLocSelect(item) {
     delete locSelection[item.id];
   }
   const nameEl = document.getElementById(`locname-${item.id}`);
-  const chkEl  = document.getElementById(`locchk-${item.id}`);
   if (nameEl) nameEl.classList.toggle('active', isNow);
-  if (chkEl)  chkEl.textContent = isNow ? '✅' : '⬜';
+  const wrap = document.getElementById(`locwrap-${item.id}`);
+  if (wrap) {
+    wrap.innerHTML = isNow ? locControlsHTML(item.id) : `<span id="locchk-${item.id}" class="r-item-check">⬜</span>`;
+    if (isNow) {
+      wireLocInlineControls(item.id);
+    } else {
+      const chkEl = wrap.querySelector('.r-item-check');
+      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item); };
+    }
+  }
   renderLocSelectionZone();
   autoSaveDraft();
 }
@@ -2370,7 +2440,7 @@ function renderLocSelectionZone() {
       <select class="loc-unit-sel" id="loc-unit-sel-${id}" style="background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:white;font-family:inherit;font-size:10px;font-weight:700;padding:3px 1px;border-radius:6px;cursor:pointer;flex-shrink:0;width:38px;outline:none;">
         ${['h','p/j','ml','m','m²','m³','kg','T','L','pc','km','forfait'].map(u=>`<option value="${u}" ${sel.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
       </select>
-      <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:30px;height:26px;border-radius:6px;cursor:pointer;flex-shrink:0;">+.5</button>
+      <button class="loc-plus-half" style="background:var(--bg);border:1.5px solid rgba(255,255,255,0.2);color:var(--text-muted);font-family:inherit;font-size:10px;font-weight:700;width:30px;height:26px;border-radius:6px;cursor:pointer;flex-shrink:0;">+0.5</button>
       <button class="loc-plus-one" style="background:var(--yellow);border:none;color:var(--navy);font-family:inherit;font-size:11px;font-weight:700;width:26px;height:26px;border-radius:6px;cursor:pointer;flex-shrink:0;">+1</button>
       <input type="number" placeholder="0" min="0" step="0.5"
         style="width:38px;border:1.5px solid rgba(255,255,255,0.25);border-radius:6px;padding:5px 3px;font-family:inherit;font-size:13px;font-weight:600;text-align:center;background:rgba(255,255,255,0.12);color:white;outline:none;flex-shrink:0;"
@@ -2386,29 +2456,48 @@ function renderLocSelectionZone() {
 
     selUnit.onchange = () => {
       locSelection[id].unit = selUnit.value;
+      syncLocInlineUnit(id);
       autoSaveDraft();
     };
 
     const updateQty = (val) => {
       locSelection[id].qty = Math.round(val * 4) / 4;
       input.value = locSelection[id].qty > 0 ? locSelection[id].qty : '';
+      syncLocInlineQty(id);
       autoSaveDraft();
     };
     btnHalf.onclick = () => updateQty((parseFloat(input.value)||0) + 0.5);
     btnOne.onclick  = () => updateQty((parseFloat(input.value)||0) + 1);
-    input.oninput   = () => { locSelection[id].qty = parseFloat(input.value)||0; autoSaveDraft(); };
+    input.oninput   = () => { locSelection[id].qty = parseFloat(input.value)||0; syncLocInlineQty(id); autoSaveDraft(); };
     btnDel.onclick  = () => {
       delete locSelection[id];
       const nameEl = document.getElementById(`locname-${id}`);
-      const chkEl  = document.getElementById(`locchk-${id}`);
       if (nameEl) nameEl.classList.remove('active');
-      if (chkEl)  chkEl.textContent = '⬜';
+      const wrap = document.getElementById(`locwrap-${id}`);
+      if (wrap) wrap.innerHTML = `<span id="locchk-${id}" class="r-item-check">⬜</span>`;
       renderLocSelectionZone();
       autoSaveDraft();
     };
 
     list.appendChild(row);
   });
+}
+
+// Synchronise les contrôles inline du catalogue Location (qté/unité) quand
+// la modification vient de la zone de sélection navy du bas.
+function syncLocInlineQty(id) {
+  const inp = document.getElementById('locctrl-qty-' + id);
+  if (inp) inp.value = locSelection[id]?.qty > 0 ? locSelection[id].qty : '';
+}
+function syncLocInlineUnit(id) {
+  const sel = document.getElementById('locctrl-unit-' + id);
+  if (sel) sel.value = locSelection[id]?.unit || 'h';
+}
+function syncLocNavyQty(id) {
+  renderLocSelectionZone();
+}
+function syncLocNavyUnit(id) {
+  renderLocSelectionZone();
 }
 
 
@@ -4275,16 +4364,66 @@ function buildRItem(item, subName, catName) {
     iconHtml = `<div class="r-item-icon" style="font-size:20px;">📦</div>`;
   }
 
+  const defaultUnit = item.unite || 'pc';
   div.innerHTML = `
     ${iconHtml}
     <div class="r-item-body">
       <div class="r-item-name${isSelected?' sel':''}" id="fn-${uid}">${item.nom||'—'}</div>
       ${sub ? `<div class="r-item-sub">${sub}</div>` : ''}
     </div>
-    <span id="fchk-${uid}" class="r-item-check">${isSelected?'✅':'⬜'}</span>
+    <span id="fwrap-${uid}">${isSelected ? fournitControlsHTML(key, uid) : `<span id="fchk-${uid}" class="r-item-check">⬜</span>`}</span>
   `;
-  div.onclick = () => toggleFournitSelect(key, item.famille||'Matériaux', item.nom, item.unite||'pc', subName||'');
+  const chkEl = div.querySelector('.r-item-check');
+  if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleFournitSelect(key, item.famille||'Matériaux', item.nom, defaultUnit, subName||''); };
+  if (isSelected) wireFournitInlineControls(key, uid);
   return div;
+}
+
+// Génère le HTML des contrôles inline (select unité + .5 + 1 + qté + ✕) qui
+// remplacent la case ⬜/✅ une fois l'item sélectionné dans la liste catalogue.
+function fournitControlsHTML(key, uid) {
+  const sel = fournitSelection[key];
+  if (!sel) return `<span id="fchk-${uid}" class="r-item-check">⬜</span>`;
+  return `
+    <span class="r-item-controls" id="fctrl-${uid}">
+      <select id="fctrl-unit-${uid}">
+        ${['pc','m','ml','m²','m³','kg','T','L','h','p/j','palette','sac','forfait'].map(u=>`<option value="${u}" ${sel.unit===u?'selected':''}>${u}</option>`).join('')}
+      </select>
+      <button type="button" class="ric-btn" id="fctrl-half-${uid}">+0.5</button>
+      <button type="button" class="ric-btn plus-one" id="fctrl-one-${uid}">+1</button>
+      <input type="number" min="0" step="0.5" class="ric-qty" id="fctrl-qty-${uid}" value="${sel.qty||''}" placeholder="0">
+      <button type="button" class="ric-del" id="fctrl-del-${uid}">✕</button>
+    </span>
+  `;
+}
+
+// Branche les écouteurs des contrôles inline pour un item donné. Appelé après
+// insertion du HTML (au build initial si déjà sélectionné, ou lors du passage
+// case → contrôles via toggleFournitSelect).
+function wireFournitInlineControls(key, uid) {
+  const unitSel = document.getElementById(`fctrl-unit-${uid}`);
+  const btnHalf = document.getElementById(`fctrl-half-${uid}`);
+  const btnOne  = document.getElementById(`fctrl-one-${uid}`);
+  const qtyInp  = document.getElementById(`fctrl-qty-${uid}`);
+  const btnDel  = document.getElementById(`fctrl-del-${uid}`);
+  if (!unitSel) return;
+
+  const stop = (e) => e.stopPropagation();
+  [unitSel, btnHalf, btnOne, qtyInp, btnDel].forEach(el => el.addEventListener('click', stop));
+
+  unitSel.onchange = () => { fournitSelection[key].unit = unitSel.value; renderFournitSelectionZone(); autoSaveDraft(); };
+
+  const updateQty = (val) => {
+    const q = Math.round(val * 4) / 4;
+    fournitSelection[key].qty = q;
+    qtyInp.value = q > 0 ? q : '';
+    renderFournitSelectionZone();
+    autoSaveDraft();
+  };
+  btnHalf.onclick = () => updateQty((parseFloat(qtyInp.value)||0) + 0.5);
+  btnOne.onclick  = () => updateQty((parseFloat(qtyInp.value)||0) + 1);
+  qtyInp.oninput  = () => { fournitSelection[key].qty = parseFloat(qtyInp.value)||0; renderFournitSelectionZone(); autoSaveDraft(); };
+  btnDel.onclick  = () => toggleFournitSelect(key);
 }
 
 function buildFournitRow(catName, nom, defaultUnit) { /* compat */ }
@@ -4331,18 +4470,20 @@ function renderFournitSelectionZone() {
     row.style.cssText = 'display:flex;align-items:center;gap:5px;padding:6px 10px;border-top:1px solid rgba(255,255,255,0.08);';
     row.innerHTML = `
       <span class="fournit-sel-name" style="flex:1;color:white;font-weight:500;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.2;font-size:13px;max-height:31.2px;">${fullName}</span>
-      <button onclick="var q=parseFloat(fournitSelection['${key}'].qty||0)+1;fournitSelection['${key}'].qty=q;document.getElementById('fqty-${key.replace(/'/g,'')}').value=q;autoSaveDraft();"
+      <button onclick="var q=Math.round((parseFloat(fournitSelection['${key}'].qty||0)+0.5)*4)/4;fournitSelection['${key}'].qty=q;document.getElementById('fqty-${key.replace(/'/g,'')}').value=q;syncFournitInlineQty('${key}');autoSaveDraft();"
+        style="background:var(--bg-light,rgba(255,255,255,0.15));border:1px solid rgba(255,255,255,0.3);color:white;border-radius:5px;width:26px;height:24px;cursor:pointer;font-size:10px;font-weight:700;flex-shrink:0;padding:0;">+0.5</button>
+      <button onclick="var q=parseFloat(fournitSelection['${key}'].qty||0)+1;fournitSelection['${key}'].qty=q;document.getElementById('fqty-${key.replace(/'/g,'')}').value=q;syncFournitInlineQty('${key}');autoSaveDraft();"
         style="background:var(--yellow);border:none;color:var(--navy);border-radius:5px;width:24px;height:24px;cursor:pointer;font-size:11px;font-weight:700;flex-shrink:0;padding:0;">+1</button>
       <input type="number" min="0" step="0.5" placeholder="Qté"
         id="fqty-${key.replace(/'/g,'')}"
         style="width:42px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:5px;color:white;padding:3px 2px;font-size:12px;text-align:center;outline:none;flex-shrink:0;"
         value="${item.qty||''}"
-        oninput="fournitSelection['${key}'].qty=this.value;autoSaveDraft();">
+        oninput="fournitSelection['${key}'].qty=this.value;syncFournitInlineQty('${key}');autoSaveDraft();">
       <select style="width:48px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:5px;color:white;padding:3px 1px;font-size:10px;outline:none;flex-shrink:0;"
-        onchange="fournitSelection['${key}'].unit=this.value;autoSaveDraft();">
+        onchange="fournitSelection['${key}'].unit=this.value;syncFournitInlineUnit('${key}');autoSaveDraft();">
         ${['pc','m','ml','m²','m³','kg','T','L','h','p/j','palette','sac','forfait'].map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
       </select>
-      <button onclick="delete fournitSelection['${key}'];renderFournitSelectionZone();updateFournitCatCount();const uid=window._fournitUids?.['${key}'];if(uid){const n=document.getElementById('fn-'+uid);const c=document.getElementById('fchk-'+uid);if(n)n.classList.remove('sel');if(c)c.textContent='⬜';}autoSaveDraft();"
+      <button onclick="toggleFournitSelect('${key}')"
         style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:5px;width:24px;height:24px;cursor:pointer;font-size:12px;flex-shrink:0;padding:0;">✕</button>
     `;
     list.appendChild(row);
@@ -4372,6 +4513,21 @@ function renderFournitSelectionZone() {
   });
 }
 
+// Synchronise l'input qté affiché dans la liste catalogue (contrôles inline)
+// quand la quantité est modifiée depuis la zone de sélection navy du bas.
+function syncFournitInlineQty(key) {
+  const uid = window._fournitUids?.[key];
+  if (!uid) return;
+  const inp = document.getElementById('fctrl-qty-' + uid);
+  if (inp) inp.value = fournitSelection[key]?.qty || '';
+}
+function syncFournitInlineUnit(key) {
+  const uid = window._fournitUids?.[key];
+  if (!uid) return;
+  const sel = document.getElementById('fctrl-unit-' + uid);
+  if (sel) sel.value = fournitSelection[key]?.unit || 'pc';
+}
+
 function toggleFournitSelect(key, catName, nom, defaultUnit, subCat) {
   if (fournitSelection[key]) {
     delete fournitSelection[key];
@@ -4382,8 +4538,11 @@ function toggleFournitSelect(key, catName, nom, defaultUnit, subCat) {
   const uid = window._fournitUids?.[key];
   if (uid) {
     document.getElementById('fn-' + uid)?.classList.toggle('sel', isNow);
-    const chk = document.getElementById('fchk-' + uid);
-    if (chk) chk.textContent = isNow ? '✅' : '⬜';
+    const wrap = document.getElementById('fwrap-' + uid);
+    if (wrap) {
+      wrap.innerHTML = isNow ? fournitControlsHTML(key, uid) : `<span id="fchk-${uid}" class="r-item-check">⬜</span>`;
+      if (isNow) wireFournitInlineControls(key, uid);
+    }
   }
   updateFournitCatCount();
   renderFournitSelectionZone();
