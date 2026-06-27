@@ -2124,6 +2124,7 @@ function buildLocGroupMachines(containerId, items) {
   const c = document.getElementById(containerId);
   if (!c) return;
   c.innerHTML = '';
+  if (!window._locMeta) window._locMeta = {};
   const date = document.getElementById('rj-date')?.value || new Date().toISOString().split('T')[0];
   items.forEach(item => {
     const wrap = document.createElement('div');
@@ -2166,11 +2167,14 @@ function buildLocGroupMachines(containerId, items) {
     row.appendChild(chkWrap);
     row.appendChild(chevron);
     wrap.appendChild(row);
+
+    window._locMeta[item.id] = { label: item.label, unit: item.unit };
+
     if (isSelected) {
       wireLocInlineControls(item.id);
     } else {
       const chkEl = chkWrap.querySelector('.r-item-check');
-      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item); };
+      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item.id); };
     }
 
     // Mini-accordéon accessoires (seulement si la machine en a)
@@ -2208,12 +2212,12 @@ function buildLocGroupMachines(containerId, items) {
         accRow.appendChild(accName);
         accRow.appendChild(accChkWrap);
         body.appendChild(accRow);
-        const accItem = { id: accId, label: accLabel, unit: 'h' };
+        window._locMeta[accId] = { label: accLabel, unit: 'h' };
         if (isAccSelected) {
           wireLocInlineControls(accId);
         } else {
           const accChkEl = accChkWrap.querySelector('.r-item-check');
-          if (accChkEl) accChkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(accItem); };
+          if (accChkEl) accChkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(accId); };
         }
       });
 
@@ -2339,11 +2343,12 @@ function wireLocInlineControls(id) {
   btnHalf.onclick = () => updateQty((parseFloat(qtyInp.value)||0) + 0.5);
   btnOne.onclick  = () => updateQty((parseFloat(qtyInp.value)||0) + 1);
   qtyInp.oninput  = () => { locSelection[id].qty = parseFloat(qtyInp.value)||0; syncLocNavyQty(id); autoSaveDraft(); };
-  btnDel.onclick  = () => toggleLocSelect({ id });
+  btnDel.onclick  = () => toggleLocSelect(id);
 }
 
 function buildLocGroup(containerId, items, groupKey) {
   const c = document.getElementById(containerId);
+  if (!window._locMeta) window._locMeta = {};
   items.forEach(item => {
     const row = document.createElement('div');
     row.className = 'fournit-row';
@@ -2368,32 +2373,43 @@ function buildLocGroup(containerId, items, groupKey) {
     row.appendChild(nameSpan);
     row.appendChild(chkWrap);
     c.appendChild(row);
+
+    // Registre persistant label/unit, indexé par id : permet à toggleLocSelect
+    // de re-sélectionner correctement même appelée avec id seul (bouton ✕).
+    window._locMeta[item.id] = { label: item.label, unit: item.unit };
+
     if (isSelected) {
       wireLocInlineControls(item.id);
     } else {
       const chkEl = chkWrap.querySelector('.r-item-check');
-      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item); };
+      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item.id); };
     }
   });
 }
 
-function toggleLocSelect(item) {
-  const isNow = !locSelection[item.id];
+function toggleLocSelect(itemOrId) {
+  // Accepte soit un id (string) soit un objet {id,label,unit} pour compat.
+  // Le registre _locMeta (rempli au rendu de chaque ligne) est la source
+  // fiable de label/unit, pour que la re-sélection après un ✕ fonctionne
+  // même si l'appelant ne passe que l'id.
+  const id = typeof itemOrId === 'string' ? itemOrId : itemOrId.id;
+  const meta = window._locMeta?.[id] || (typeof itemOrId === 'object' ? itemOrId : null);
+  const isNow = !locSelection[id];
   if (isNow) {
-    locSelection[item.id] = { label: item.label, unit: item.unit, qty: 0 };
+    locSelection[id] = { label: meta?.label, unit: meta?.unit, qty: 0 };
   } else {
-    delete locSelection[item.id];
+    delete locSelection[id];
   }
-  const nameEl = document.getElementById(`locname-${item.id}`);
+  const nameEl = document.getElementById(`locname-${id}`);
   if (nameEl) nameEl.classList.toggle('active', isNow);
-  const wrap = document.getElementById(`locwrap-${item.id}`);
+  const wrap = document.getElementById(`locwrap-${id}`);
   if (wrap) {
-    wrap.innerHTML = isNow ? locControlsHTML(item.id) : `<span id="locchk-${item.id}" class="r-item-check">⬜</span>`;
+    wrap.innerHTML = isNow ? locControlsHTML(id) : `<span id="locchk-${id}" class="r-item-check">⬜</span>`;
     if (isNow) {
-      wireLocInlineControls(item.id);
+      wireLocInlineControls(id);
     } else {
       const chkEl = wrap.querySelector('.r-item-check');
-      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(item); };
+      if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(id); };
     }
   }
   renderLocSelectionZone();
@@ -2474,7 +2490,11 @@ function renderLocSelectionZone() {
       const nameEl = document.getElementById(`locname-${id}`);
       if (nameEl) nameEl.classList.remove('active');
       const wrap = document.getElementById(`locwrap-${id}`);
-      if (wrap) wrap.innerHTML = `<span id="locchk-${id}" class="r-item-check">⬜</span>`;
+      if (wrap) {
+        wrap.innerHTML = `<span id="locchk-${id}" class="r-item-check">⬜</span>`;
+        const chkEl = wrap.querySelector('.r-item-check');
+        if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleLocSelect(id); };
+      }
       renderLocSelectionZone();
       autoSaveDraft();
     };
@@ -4365,6 +4385,13 @@ function buildRItem(item, subName, catName) {
   }
 
   const defaultUnit = item.unite || 'pc';
+  // Registre persistant des métadonnées de l'item, indexé par key. Permet à
+  // toggleFournitSelect de retrouver nom/catégorie/unité même quand elle est
+  // appelée seulement avec key (bouton ✕ inline ou ✕ zone navy du bas), et
+  // donc de pouvoir re-sélectionner correctement après une désélection.
+  if (!window._fournitMeta) window._fournitMeta = {};
+  window._fournitMeta[key] = { catName: item.famille||'Matériaux', nom: item.nom, defaultUnit, subCat: subName||'' };
+
   div.innerHTML = `
     ${iconHtml}
     <div class="r-item-body">
@@ -4374,7 +4401,7 @@ function buildRItem(item, subName, catName) {
     <span id="fwrap-${uid}">${isSelected ? fournitControlsHTML(key, uid) : `<span id="fchk-${uid}" class="r-item-check">⬜</span>`}</span>
   `;
   const chkEl = div.querySelector('.r-item-check');
-  if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleFournitSelect(key, item.famille||'Matériaux', item.nom, defaultUnit, subName||''); };
+  if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleFournitSelect(key); };
   if (isSelected) wireFournitInlineControls(key, uid);
   return div;
 }
@@ -4529,6 +4556,14 @@ function syncFournitInlineUnit(key) {
 }
 
 function toggleFournitSelect(key, catName, nom, defaultUnit, subCat) {
+  // Le registre _fournitMeta (rempli au rendu de chaque ligne) est la source
+  // fiable : les arguments catName/nom/defaultUnit/subCat ne sont fournis que
+  // lors du premier rendu, pas lors des appels ✕ (key seul). Sans ce filet,
+  // une re-sélection après désélection perdait nom/catégorie/unité.
+  const meta = window._fournitMeta?.[key];
+  if (meta) {
+    catName = meta.catName; nom = meta.nom; defaultUnit = meta.defaultUnit; subCat = meta.subCat;
+  }
   if (fournitSelection[key]) {
     delete fournitSelection[key];
   } else {
@@ -4541,7 +4576,12 @@ function toggleFournitSelect(key, catName, nom, defaultUnit, subCat) {
     const wrap = document.getElementById('fwrap-' + uid);
     if (wrap) {
       wrap.innerHTML = isNow ? fournitControlsHTML(key, uid) : `<span id="fchk-${uid}" class="r-item-check">⬜</span>`;
-      if (isNow) wireFournitInlineControls(key, uid);
+      if (isNow) {
+        wireFournitInlineControls(key, uid);
+      } else {
+        const chkEl = wrap.querySelector('.r-item-check');
+        if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleFournitSelect(key); };
+      }
     }
   }
   updateFournitCatCount();
