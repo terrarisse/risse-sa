@@ -25,7 +25,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 /* MAIN TABS (Métrés / Poids) */
 .tabs-bar{display:flex;padding:0 16px 12px;gap:0;}
-.tab-btn{flex:1;background:rgba(255,255,255,.10);border:none;color:rgba(255,255,255,.65);padding:8px 10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s;}
+.tab-btn{flex:1;background:rgba(255,255,255,.10);border:none;color:rgba(255,255,255,.65);padding:8px 4px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s;white-space:nowrap;}
 .tab-btn:first-child{border-radius:10px 0 0 10px;}
 .tab-btn:last-child{border-radius:0 10px 10px 0;}
 .tab-btn.active{background:var(--gold);color:var(--navy);}
@@ -146,9 +146,39 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .pente-qualify{display:inline-block;margin-top:12px;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;text-align:center;width:100%;}
 .pente-reset{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:12px;}
 
+/* ANGLE 90° */
+.angle-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.angle-header{background:linear-gradient(135deg,rgba(27,58,107,.07),rgba(27,58,107,.02));border-bottom:1px solid var(--gray2);padding:14px 16px;}
+.angle-title{font-size:14px;font-weight:700;color:var(--navy);}
+.angle-body{padding:16px;}
+.angle-hint{font-size:12px;color:var(--gray3);margin-bottom:14px;line-height:1.4;}
+.angle-schema-wrap{background:var(--gray1);border-radius:12px;padding:18px 12px 40px;margin-bottom:16px;}
+.angle-schema-pos{position:relative;}
+.angle-field{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;transform:translate(-50%,-50%);}
+.angle-field-label{font-size:9.5px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;}
+.angle-input{width:70px;padding:7px 4px;border:1.5px solid var(--gray2);border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;text-align:center;transition:border-color .15s,background .15s;}
+.angle-input:focus{border-color:var(--teal);}
+.angle-input.is-computed{background:rgba(26,127,114,.08);border-color:var(--teal);color:var(--teal);}
+/* Côté A : base horizontale, milieu (200,210) sur viewBox 360x260 → 55.6%, 80.8% */
+.angle-field-a{left:55.6%;top:80.8%;}
+/* Côté B : vertical gauche, milieu (90,125) sur viewBox 360x260 → 25%, 48.1% */
+.angle-field-b{left:25%;top:48.1%;}
+/* Diagonale C : milieu (200,125), décalée perpendiculairement vers le haut-droite → 67%, 32% */
+.angle-field-c{left:67%;top:32%;}
+.angle-reset-prompt{display:none;align-items:center;gap:10px;background:rgba(240,165,0,.1);border:1.5px solid rgba(240,165,0,.35);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12.5px;color:#8a6300;}
+.angle-reset-prompt.show{display:flex;}
+.angle-reset-prompt button{flex-shrink:0;background:var(--gold);border:none;color:var(--navy);font-weight:700;font-size:12px;padding:7px 12px;border-radius:8px;cursor:pointer;font-family:inherit;}
+.angle-reset{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px;}
+
 /* TOAST */
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* QUICK ADD BAR (au-dessus du clavier) */
+.quickadd-bar{position:fixed;left:0;right:0;bottom:0;z-index:998;background:var(--white);border-top:1px solid var(--gray2);box-shadow:0 -2px 10px rgba(27,58,107,.10);padding:8px 12px;display:flex;justify-content:center;transform:translateY(100%);transition:transform .15s ease-out;}
+.quickadd-bar.show{transform:translateY(0);}
+.quickadd-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;max-width:420px;padding:11px;background:var(--teal);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+.quickadd-btn:active{background:#156158;}
 </style>
 </head>
 <body>
@@ -158,13 +188,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
     <div>
       <div class="header-title">Calculatrice</div>
-      <div class="header-subtitle">Métrés · Poids · Pentes</div>
+      <div class="header-subtitle">Métrés · Poids · Pentes · Angles</div>
     </div>
   </div>
   <div class="tabs-bar">
     <button class="tab-btn active" id="btn-metrees" onclick="switchTab('metrees')">📐 Métrés</button>
     <button class="tab-btn" id="btn-poids" onclick="switchTab('poids')">⚖️ Poids</button>
     <button class="tab-btn" id="btn-pente" onclick="switchTab('pente')">📉 Pente</button>
+    <button class="tab-btn" id="btn-angle" onclick="switchTab('angle')">📏 Angle 90°</button>
   </div>
 </div>
 
@@ -336,9 +367,58 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
     </div>
   </div>
 
+  <!-- ── TAB ANGLE 90° ── -->
+  <div class="tab-panel" id="panel-angle">
+    <div class="angle-card">
+      <div class="angle-header"><div class="angle-title">Vérifier / tracer un angle droit</div></div>
+      <div class="angle-body">
+
+        <div class="angle-hint">Remplis 2 des 3 longueurs (les 2 côtés ou un côté + la diagonale), la 3ème se calcule automatiquement.</div>
+
+        <div class="angle-reset-prompt" id="angle-reset-prompt">
+          <span>Les 3 valeurs sont remplies. Efface pour resaisir.</span>
+          <button onclick="resetAngle()">🗑 Effacer</button>
+        </div>
+
+        <!-- Schéma SVG -->
+        <div class="angle-schema-wrap" id="angle-schema-wrap">
+          <div class="angle-schema-pos">
+            <svg id="angle-svg" viewBox="0 0 360 260" preserveAspectRatio="none" style="display:block;width:100%;aspect-ratio:360/260;">
+              <polygon points="90,210 310,210 90,40" fill="rgba(27,58,107,0.06)" stroke="var(--navy)" stroke-width="2"/>
+              <!-- marqueur angle droit -->
+              <rect x="90" y="194" width="16" height="16" fill="none" stroke="var(--navy)" stroke-width="1.5"/>
+            </svg>
+
+            <!-- Côté A : base horizontale, du point (90,210) au point (310,210) → milieu (200,210) -->
+            <div class="angle-field angle-field-a">
+              <span class="angle-field-label">Côté A (m)</span>
+              <input class="angle-input" id="angle-a" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="onAngleInput('a')">
+            </div>
+            <!-- Côté B : vertical gauche, du point (90,40) au point (90,210) → milieu (90,125) -->
+            <div class="angle-field angle-field-b">
+              <span class="angle-field-label">Côté B (m)</span>
+              <input class="angle-input" id="angle-b" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="onAngleInput('b')">
+            </div>
+            <!-- Diagonale C : du point (310,210) au point (90,40) → milieu (200,125), décalée perpendiculairement -->
+            <div class="angle-field angle-field-c">
+              <span class="angle-field-label">Diagonale C (m)</span>
+              <input class="angle-input" id="angle-c" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="onAngleInput('c')">
+            </div>
+          </div>
+        </div>
+
+        <button class="angle-reset" onclick="resetAngle()">🗑 Effacer les 3 valeurs</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="quickadd-bar" id="quickadd-bar">
+  <button class="quickadd-btn" id="quickadd-btn" type="button">＋ Nouvelle ligne (même forme)</button>
+</div>
 
 <script>
 // ─────────────────────────────────────────────────────────────────
@@ -464,6 +544,7 @@ function switchMode(mode) {
   currentMode = mode;
   rows = [];
   rowCounter = 0;
+  hideQuickAdd();
   document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('mode-btn-' + mode).classList.add('active');
   const m = MODES[mode];
@@ -505,6 +586,50 @@ function resetRows() {
   renderRows(); updateTotal();
 }
 
+// ─────────────────────────────────────────────────────────────────
+// QUICK ADD (barre au-dessus du clavier sur le dernier champ)
+// ─────────────────────────────────────────────────────────────────
+let quickAddRowId = null; // ligne dont le dernier champ a le focus
+let quickAddBlurTimer = null;
+
+function onFieldFocus(el) {
+  if (el.dataset.lastField !== '1') { hideQuickAdd(); return; }
+  quickAddRowId = parseInt(el.dataset.rowId, 10);
+  showQuickAdd();
+}
+
+function onFieldBlur(el) {
+  // Délai court : si le blur est causé par le tap sur le bouton quickadd,
+  // le mousedown/click du bouton a déjà fait son travail avant que ce timer se déclenche.
+  clearTimeout(quickAddBlurTimer);
+  quickAddBlurTimer = setTimeout(hideQuickAdd, 150);
+}
+
+function showQuickAdd() {
+  clearTimeout(quickAddBlurTimer);
+  document.getElementById('quickadd-bar').classList.add('show');
+}
+
+function hideQuickAdd() {
+  document.getElementById('quickadd-bar').classList.remove('show');
+  quickAddRowId = null;
+}
+
+function quickAddRow() {
+  const sourceRow = rows.find(r => r.id === quickAddRowId);
+  const shape = sourceRow ? sourceRow.shape : MODES[currentMode].shapes[0];
+  const row = { id: ++rowCounter, shape, vals: {} };
+  rows.push(row);
+  renderRows();
+  updateTotal();
+  // Focus sur le premier champ de la nouvelle ligne pour enchaîner la saisie
+  const firstInput = document.querySelector(`#row-${row.id} .metree-input`);
+  if (firstInput) firstInput.focus();
+}
+
+document.getElementById('quickadd-btn').addEventListener('mousedown', e => e.preventDefault());
+document.getElementById('quickadd-btn').addEventListener('click', quickAddRow);
+
 function cycleShape(id) {
   const row = rows.find(r => r.id === id);
   if (!row) return;
@@ -537,11 +662,14 @@ function renderRows() {
   container.innerHTML = rows.map(row => {
     const def = MODES[currentMode].defs[row.shape];
     const result = def.calc(row.vals);
-    const fieldsHtml = def.fields.map(f => `
+    const lastIdx = def.fields.length - 1;
+    const fieldsHtml = def.fields.map((f, i) => `
       <div class="metree-field">
         <span class="metree-field-label">${f.label}</span>
         <input class="metree-input" type="number" min="0" step="0.01"
                placeholder="${f.ph}" value="${row.vals[f.key]||''}"
+               data-row-id="${row.id}" data-field-idx="${i}" ${i === lastIdx ? 'data-last-field="1"' : ''}
+               onfocus="onFieldFocus(this)" onblur="onFieldBlur(this)"
                oninput="onInputChange(${row.id},'${f.key}',this.value)">
       </div>`).join('');
     return `<div class="metree-row" id="row-${row.id}">
@@ -564,17 +692,42 @@ function updateTotal() {
 }
 
 // ─────────────────────────────────────────────────────────────────
-// MATÉRIAUX
+// MATÉRIAUX (lus depuis le module Ressources)
 // ─────────────────────────────────────────────────────────────────
+function loadMatCategories() {
+  try {
+    const cats = JSON.parse(localStorage.getItem('rv6_res_categories')) || {};
+    return cats.materiaux || [];
+  } catch { return []; }
+}
+
+function resolveCatLabel(cats, item) {
+  const cat = cats.find(c => c.id === item.catId);
+  if (!cat) return 'Sans catégorie';
+  let label = (cat.emoji ? cat.emoji + ' ' : '') + (cat.name || '');
+  if (item.subCatId && cat.children) {
+    const sub = cat.children.find(s => s.id === item.subCatId);
+    if (sub) label += ' → ' + sub.name;
+  }
+  return label || 'Sans catégorie';
+}
+
 function loadMateriaux() {
   try {
     const data = JSON.parse(localStorage.getItem('rv6_materials')) || [];
+    const cats = loadMatCategories();
     const all = [];
-    data.forEach(cat => {
-      (cat.items||[]).forEach(item => {
-        const mv = item.masse_volumique || (item.densite ? parseFloat(item.densite) : null);
-        if (mv) all.push({ id: item.id, name: item.nom||item.name, masse_volumique: mv, cat: cat.name, color: cat.color });
-      });
+    data.forEach(item => {
+      const mv = item.masse_volumique || (item.densite ? parseFloat(item.densite) : null);
+      if (mv) {
+        all.push({
+          id: item.id,
+          name: item.nom || item.name || 'Sans nom',
+          masse_volumique: parseFloat(mv),
+          unite: item.unite || '',
+          cat: resolveCatLabel(cats, item)
+        });
+      }
     });
     return all;
   } catch { return []; }
@@ -587,7 +740,7 @@ function buildMatSelector() {
     wrap.innerHTML = `<div class="no-mat-state">
       <div class="no-mat-icon">🪨</div>
       Aucun matériau avec masse volumique.<br>
-      Allez dans <strong>Ressources → Matériaux</strong> pour en ajouter.
+      Allez dans <strong>Ressources → Matériaux</strong> et renseigne la "Masse volumique (kg/m³)" d'au moins un matériau.
       <br><a class="no-mat-link" href="../ressources/index.html">Ouvrir Ressources</a>
     </div>`;
     return;
@@ -598,7 +751,7 @@ function buildMatSelector() {
   Object.entries(groups).forEach(([cat, items]) => {
     optHtml += `<optgroup label="${esc(cat)}">`;
     items.forEach(m => {
-      optHtml += `<option value="${m.id}" data-mv="${m.masse_volumique}" data-color="${m.color||'#ccc'}">${esc(m.name)} (${m.masse_volumique} kg/m³)</option>`;
+      optHtml += `<option value="${m.id}" data-mv="${m.masse_volumique}">${esc(m.name)} (${m.masse_volumique.toLocaleString('fr-CH')} kg/m³)</option>`;
     });
     optHtml += `</optgroup>`;
   });
@@ -613,12 +766,11 @@ function onMatChange() {
   if (!sel) return;
   const opt = sel.options[sel.selectedIndex];
   const mv = parseFloat(opt.dataset.mv) || null;
-  const color = opt.dataset.color || '#ccc';
   const infoEl = document.getElementById('density-info');
   const dotEl = infoEl.querySelector('.density-dot');
   if (mv) {
     infoEl.classList.add('has-density');
-    dotEl.style.background = color;
+    dotEl.style.background = 'var(--teal)';
     document.getElementById('density-text').textContent = `Masse volumique : ${mv.toLocaleString('fr-CH')} kg/m³`;
   } else {
     infoEl.classList.remove('has-density');
@@ -682,6 +834,7 @@ function importFromMetrees() {
 // TAB SWITCH
 // ─────────────────────────────────────────────────────────────────
 function switchTab(tab) {
+  hideQuickAdd();
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + tab).classList.add('active');
@@ -765,6 +918,72 @@ function resetPente() {
   document.getElementById('pente-dist').value = '';
   document.getElementById('pente-denv').value = '';
   calcPente();
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCUL ANGLE 90° (triangle rectangle — Pythagore)
+// ─────────────────────────────────────────────────────────────────
+const ANGLE_KEYS = ['a', 'b', 'c'];
+let angleLastComputed = null; // quelle case a été calculée en dernier (pour le style "is-computed")
+
+function angleInputEl(key) { return document.getElementById('angle-' + key); }
+
+function onAngleInput(changedKey) {
+  const vals = {};
+  ANGLE_KEYS.forEach(k => {
+    const raw = angleInputEl(k).value;
+    vals[k] = raw === '' ? null : parseFloat(raw);
+  });
+
+  const filled = ANGLE_KEYS.filter(k => vals[k] !== null && vals[k] > 0);
+
+  // Si les 3 cases sont remplies → on ne recalcule pas, on propose d'effacer
+  if (filled.length === 3) {
+    showAngleResetPrompt(true);
+    clearAngleComputedStyle();
+    return;
+  }
+  showAngleResetPrompt(false);
+
+  if (filled.length !== 2) {
+    clearAngleComputedStyle();
+    return;
+  }
+
+  // Les 2 cases remplies sont connues ; on calcule celle qui manque
+  const missing = ANGLE_KEYS.find(k => !filled.includes(k));
+  let result = null;
+
+  if (missing === 'c') {
+    result = Math.sqrt(vals.a * vals.a + vals.b * vals.b);
+  } else if (missing === 'a') {
+    if (vals.c <= vals.b) { clearAngleComputedStyle(); return; } // diagonale doit être > côté
+    result = Math.sqrt(vals.c * vals.c - vals.b * vals.b);
+  } else if (missing === 'b') {
+    if (vals.c <= vals.a) { clearAngleComputedStyle(); return; }
+    result = Math.sqrt(vals.c * vals.c - vals.a * vals.a);
+  }
+
+  if (result === null || isNaN(result)) { clearAngleComputedStyle(); return; }
+
+  angleInputEl(missing).value = fmt(result);
+  clearAngleComputedStyle();
+  angleInputEl(missing).classList.add('is-computed');
+  angleLastComputed = missing;
+}
+
+function clearAngleComputedStyle() {
+  ANGLE_KEYS.forEach(k => angleInputEl(k).classList.remove('is-computed'));
+}
+
+function showAngleResetPrompt(show) {
+  document.getElementById('angle-reset-prompt').classList.toggle('show', show);
+}
+
+function resetAngle() {
+  ANGLE_KEYS.forEach(k => { angleInputEl(k).value = ''; angleInputEl(k).classList.remove('is-computed'); });
+  showAngleResetPrompt(false);
+  angleLastComputed = null;
 }
 
 // ─────────────────────────────────────────────────────────────────
