@@ -256,49 +256,67 @@ async function syncAllFromFirestore() {
       { fire: 'materiel',  local: 'rv6_equipment'  },
       { fire: 'materiaux', local: 'rv6_materials'  },
     ];
-    for (const s of sections) {
+    const sectionPromises = sections.map(async s => {
       const snap = await db.collection('ressources').doc(s.fire).get();
       if (snap.exists) localStorage.setItem(s.local, JSON.stringify(snap.data().items || []));
-    }
-    const cSnap = await db.collection('chantiers').doc('data').get();
-    if (cSnap.exists) localStorage.setItem('rv6_chantiers_v1', JSON.stringify(cSnap.data().items || []));
-    const eSnap = await db.collection('machines_entretiens').doc('data').get();
-    if (eSnap.exists) localStorage.setItem('rv6_mt', JSON.stringify(eSnap.data().items || []));
-    const hSnap = await db.collection('machines_entries').doc('data').get();
-    if (hSnap.exists) localStorage.setItem('rv6_e', JSON.stringify(hSnap.data().items || []));
-    const rSnap = await db.collection('rapports').doc('data').get();
-    if (rSnap.exists) {
-      const items = rSnap.data().items || [];
-      const now = Date.now();
-      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
-      localStorage.setItem('rj_reports_v1', JSON.stringify(purged));
-    }
-    const bSnap = await db.collection('bons').doc('data').get();
-    if (bSnap.exists) {
-      const items = bSnap.data().items || [];
-      const now = Date.now();
-      const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
-      localStorage.setItem('rb_bons_v1', JSON.stringify(purged));
-    }
-    // Catégories Ressources
-    const catSnap = await db.collection('ressources').doc('_categories').get();
-    if (catSnap.exists) localStorage.setItem('rv6_res_categories', JSON.stringify(catSnap.data().data || {}));
+    });
+
+    const cPromise = db.collection('chantiers').doc('data').get().then(cSnap => {
+      if (cSnap.exists) localStorage.setItem('rv6_chantiers_v1', JSON.stringify(cSnap.data().items || []));
+    });
+    const ePromise = db.collection('machines_entretiens').doc('data').get().then(eSnap => {
+      if (eSnap.exists) localStorage.setItem('rv6_mt', JSON.stringify(eSnap.data().items || []));
+    });
+    const hPromise = db.collection('machines_entries').doc('data').get().then(hSnap => {
+      if (hSnap.exists) localStorage.setItem('rv6_e', JSON.stringify(hSnap.data().items || []));
+    });
+    const rPromise = db.collection('rapports').doc('data').get().then(rSnap => {
+      if (rSnap.exists) {
+        const items = rSnap.data().items || [];
+        const now = Date.now();
+        const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
+        localStorage.setItem('rj_reports_v1', JSON.stringify(purged));
+      }
+    });
+    const bPromise = db.collection('bons').doc('data').get().then(bSnap => {
+      if (bSnap.exists) {
+        const items = bSnap.data().items || [];
+        const now = Date.now();
+        const purged = items.filter(r => (now - new Date(r.savedAt).getTime()) < 30 * 86400000);
+        localStorage.setItem('rb_bons_v1', JSON.stringify(purged));
+      }
+    });
+    const catPromise = db.collection('ressources').doc('_categories').get().then(catSnap => {
+      if (catSnap.exists) localStorage.setItem('rv6_res_categories', JSON.stringify(catSnap.data().data || {}));
+    });
+
+    await Promise.all([...sectionPromises, cPromise, ePromise, hPromise, rPromise, bPromise, catPromise]);
     console.log('[Hub] Sync OK');
   } catch(e) { console.warn('[Hub] Sync error:', e); }
+}
+
+function updateResourceCounts() {
+  const KEYS = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
+  Object.entries(KEYS).forEach(([s,k]) => {
+    try { const el = document.getElementById('cnt-'+s); if(el) el.textContent = JSON.parse(localStorage.getItem(k)||'[]').length; } catch(e) {}
+  });
 }
 
 auth.onAuthStateChanged(async user => {
   if (_forcingReconnect) return; // une déconnexion forcée est déjà en cours
   const guard = document.getElementById('authGuard');
   if (!user) { window.location.href = 'login.html'; return; }
-  await syncAllFromFirestore();
+
+  // Affichage optimiste : on cache le guard tout de suite avec les
+  // données locales déjà présentes, sans attendre la sync Firestore.
   guard.classList.remove('show');
   const emailEl = document.getElementById('userEmail');
   if (emailEl) emailEl.textContent = user.email;
-  const KEYS = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
-  Object.entries(KEYS).forEach(([s,k]) => {
-    try { const el = document.getElementById('cnt-'+s); if(el) el.textContent = JSON.parse(localStorage.getItem(k)||'[]').length; } catch(e) {}
-  });
+  updateResourceCounts();
+
+  // Sync Firestore en arrière-plan ; les compteurs se mettent à jour
+  // silencieusement à la fin, sans rebloquer l'UI.
+  syncAllFromFirestore().then(updateResourceCounts);
 });
 
 document.getElementById('btnLogout').addEventListener('click', async () => {
