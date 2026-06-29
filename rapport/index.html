@@ -76,18 +76,69 @@ body {
   font-weight: 600;
   letter-spacing: 0.2px;
 }
-.btn-save-draft {
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.btn-header-icon {
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.2);
   color: white;
-  font-size: 12px;
+  font-size: 15px;
   font-family: inherit;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn-header-icon:active { opacity: 0.7; }
+
+/* ── POPUP CALCULATRICE ── */
+.calc-display {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+  text-align: right;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.calc-btn {
+  border: none;
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 0;
+  border-radius: var(--radius-sm);
   cursor: pointer;
 }
-.btn-save-draft:active { opacity: 0.7; }
+.calc-btn:active { opacity: 0.7; }
+.calc-btn.op {
+  background: var(--navy);
+  color: white;
+}
+.calc-btn.eq {
+  background: var(--yellow);
+  color: var(--navy);
+  grid-row: span 2;
+}
+.calc-btn.span2 { grid-column: span 2; }
 
 /* ── BARRE "+ LIGNE" AU-DESSUS DU CLAVIER (métrés) ── */
 .metre-kbd-bar {
@@ -1405,7 +1456,10 @@ textarea { resize: none; }
       <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:2px;" id="header-sub">Nouveau rapport</div>
     </div>
   </div>
-  <button class="btn-save-draft" onclick="saveDraft()">💾 Brouillon</button>
+  <div class="header-actions">
+    <button class="btn-header-icon" onclick="saveDraft()" aria-label="Sauvegarder le brouillon">💾</button>
+    <button class="btn-header-icon" onclick="openCalculatrice()" aria-label="Calculatrice">🧮</button>
+  </div>
 </div>
 
 <!-- STEP DOTS -->
@@ -5495,6 +5549,69 @@ function autoGrowTravaux() {
   el.style.height = el.scrollHeight + 'px';
 }
 
+// ─── CALCULATRICE POPUP ─────────────────────────────────────────
+let calcExpr = '';
+
+function openCalculatrice() {
+  calcExpr = '';
+  document.getElementById('calc-display').textContent = '0';
+  document.getElementById('overlay-calc').classList.add('open');
+}
+
+function closeCalculatrice(e) {
+  if (e && e.target.id !== 'overlay-calc') return;
+  document.getElementById('overlay-calc').classList.remove('open');
+}
+
+function calcRefreshDisplay() {
+  const d = document.getElementById('calc-display');
+  d.textContent = calcExpr === '' ? '0' : calcExpr.replace(/\*/g, '×').replace(/\//g, '÷');
+}
+
+function calcDigit(d) {
+  if (d === '.' ) {
+    const parts = calcExpr.split(/[+\-*/]/);
+    const last = parts[parts.length - 1];
+    if (last.includes('.')) return;
+    if (last === '') calcExpr += '0';
+  }
+  calcExpr += d;
+  calcRefreshDisplay();
+}
+
+function calcOp(op) {
+  if (calcExpr === '') return;
+  const lastChar = calcExpr.slice(-1);
+  if ('+-*/'.includes(lastChar)) {
+    calcExpr = calcExpr.slice(0, -1) + op;
+  } else {
+    calcExpr += op;
+  }
+  calcRefreshDisplay();
+}
+
+function calcClear() {
+  calcExpr = '';
+  calcRefreshDisplay();
+}
+
+function calcEquals() {
+  if (calcExpr === '') return;
+  let safeExpr = calcExpr.replace(/[+\-*/]+$/, '');
+  if (!/^[0-9.+\-*/]+$/.test(safeExpr)) { calcClear(); return; }
+  try {
+    const result = Function('"use strict"; return (' + safeExpr + ')')();
+    if (!isFinite(result)) { document.getElementById('calc-display').textContent = 'Erreur'; calcExpr = ''; return; }
+    const rounded = Math.round(result * 100000) / 100000;
+    calcExpr = String(rounded);
+    calcRefreshDisplay();
+  } catch(e) {
+    document.getElementById('calc-display').textContent = 'Erreur';
+    calcExpr = '';
+  }
+}
+
+
 // ─── INIT ──────────────────────────────────────────────────────
 function initRapport() {
   purgeOld();
@@ -5561,6 +5678,34 @@ function initRapport() {
       style="width:100%;background:var(--navy);color:white;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">
       Enregistrer ✓
     </button>
+  </div>
+</div>
+
+<!-- OVERLAY CALCULATRICE -->
+<div class="overlay" id="overlay-calc" onclick="closeCalculatrice(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">🧮 Calculatrice</div>
+    <div class="calc-display" id="calc-display">0</div>
+    <div class="calc-grid">
+      <button class="calc-btn span2" onclick="calcClear()">C</button>
+      <button class="calc-btn op" onclick="calcOp('/')">÷</button>
+      <button class="calc-btn op" onclick="calcOp('*')">×</button>
+      <button class="calc-btn" onclick="calcDigit('7')">7</button>
+      <button class="calc-btn" onclick="calcDigit('8')">8</button>
+      <button class="calc-btn" onclick="calcDigit('9')">9</button>
+      <button class="calc-btn op" onclick="calcOp('-')">−</button>
+      <button class="calc-btn" onclick="calcDigit('4')">4</button>
+      <button class="calc-btn" onclick="calcDigit('5')">5</button>
+      <button class="calc-btn" onclick="calcDigit('6')">6</button>
+      <button class="calc-btn op" onclick="calcOp('+')">+</button>
+      <button class="calc-btn" onclick="calcDigit('1')">1</button>
+      <button class="calc-btn" onclick="calcDigit('2')">2</button>
+      <button class="calc-btn" onclick="calcDigit('3')">3</button>
+      <button class="calc-btn eq" onclick="calcEquals()">=</button>
+      <button class="calc-btn span2" onclick="calcDigit('0')">0</button>
+      <button class="calc-btn" onclick="calcDigit('.')">.</button>
+    </div>
   </div>
 </div>
 
