@@ -100,18 +100,60 @@ body {
 .btn-header-icon:active { opacity: 0.7; }
 
 /* ── POPUP CALCULATRICE ── */
+.calc-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.btn-calc-clear-hist {
+  border: none;
+  background: none;
+  font-size: 16px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.btn-calc-clear-hist:active { opacity: 0.6; }
+.calc-expr-line {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: right;
+  min-height: 16px;
+  padding: 0 14px;
+}
 .calc-display {
   background: var(--bg);
   border-radius: var(--radius-sm);
-  padding: 16px 14px;
+  padding: 10px 14px 16px;
   text-align: right;
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--text);
   overflow-x: auto;
   white-space: nowrap;
 }
+.calc-history-box {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  margin-bottom: 10px;
+  max-height: 110px;
+  overflow-y: auto;
+}
+.calc-history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+}
+.calc-history-row:first-child { border-top: none; }
+.calc-history-row:active { opacity: 0.6; }
+.calc-history-expr { font-size: 12px; color: var(--text-muted); }
+.calc-history-result { font-size: 12px; font-weight: 700; color: var(--text); }
 .calc-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -5551,10 +5593,64 @@ function autoGrowTravaux() {
 
 // ─── CALCULATRICE POPUP ─────────────────────────────────────────
 let calcExpr = '';
+let calcShowingResult = false;
+const CALC_HISTORY_KEY = 'rv6_calc_history';
+const CALC_HISTORY_MAX_DAYS = 3;
+
+function calcPurgeHistory() {
+  let hist = [];
+  try { hist = JSON.parse(localStorage.getItem(CALC_HISTORY_KEY)) || []; } catch(e) { hist = []; }
+  const limit = Date.now() - (CALC_HISTORY_MAX_DAYS * 24 * 60 * 60 * 1000);
+  hist = hist.filter(h => h.ts >= limit);
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify(hist));
+  return hist;
+}
+
+function calcGetHistory() {
+  try { return JSON.parse(localStorage.getItem(CALC_HISTORY_KEY)) || []; } catch(e) { return []; }
+}
+
+function calcAddToHistory(expr, result) {
+  const hist = calcGetHistory();
+  hist.unshift({ expr, result, ts: Date.now() });
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify(hist.slice(0, 50)));
+  calcRenderHistory();
+}
+
+function calcRenderHistory() {
+  const box = document.getElementById('calc-history-list');
+  if (!box) return;
+  const hist = calcGetHistory();
+  if (hist.length === 0) {
+    box.innerHTML = '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:6px 0;">Aucun calcul récent</div>';
+    return;
+  }
+  box.innerHTML = hist.map(h => {
+    const exprDisp = h.expr.replace(/\*/g, '×').replace(/\//g, '÷');
+    return `<div class="calc-history-row" onclick="calcUseHistory('${h.result}')">
+      <span class="calc-history-expr">${exprDisp} =</span>
+      <span class="calc-history-result">${h.result}</span>
+    </div>`;
+  }).join('');
+}
+
+function calcUseHistory(result) {
+  calcExpr = String(result);
+  calcShowingResult = true;
+  calcRefreshDisplay();
+}
+
+function calcClearHistory() {
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify([]));
+  calcRenderHistory();
+}
 
 function openCalculatrice() {
   calcExpr = '';
-  document.getElementById('calc-display').textContent = '0';
+  calcShowingResult = false;
+  calcPurgeHistory();
+  calcRefreshDisplay();
+  calcRenderHistory();
   document.getElementById('overlay-calc').classList.add('open');
 }
 
@@ -5564,11 +5660,19 @@ function closeCalculatrice(e) {
 }
 
 function calcRefreshDisplay() {
+  const line = document.getElementById('calc-expr-line');
   const d = document.getElementById('calc-display');
-  d.textContent = calcExpr === '' ? '0' : calcExpr.replace(/\*/g, '×').replace(/\//g, '÷');
+  if (calcExpr === '') {
+    line.textContent = '';
+    d.textContent = '0';
+    return;
+  }
+  line.textContent = '';
+  d.textContent = calcExpr.replace(/\*/g, '×').replace(/\//g, '÷');
 }
 
 function calcDigit(d) {
+  if (calcShowingResult) { calcExpr = ''; calcShowingResult = false; }
   if (d === '.' ) {
     const parts = calcExpr.split(/[+\-*/]/);
     const last = parts[parts.length - 1];
@@ -5581,6 +5685,7 @@ function calcDigit(d) {
 
 function calcOp(op) {
   if (calcExpr === '') return;
+  if (calcShowingResult) { calcShowingResult = false; }
   const lastChar = calcExpr.slice(-1);
   if ('+-*/'.includes(lastChar)) {
     calcExpr = calcExpr.slice(0, -1) + op;
@@ -5592,22 +5697,34 @@ function calcOp(op) {
 
 function calcClear() {
   calcExpr = '';
+  calcShowingResult = false;
   calcRefreshDisplay();
 }
 
 function calcEquals() {
-  if (calcExpr === '') return;
+  if (calcExpr === '' || calcShowingResult) return;
   let safeExpr = calcExpr.replace(/[+\-*/]+$/, '');
   if (!/^[0-9.+\-*/]+$/.test(safeExpr)) { calcClear(); return; }
   try {
     const result = Function('"use strict"; return (' + safeExpr + ')')();
-    if (!isFinite(result)) { document.getElementById('calc-display').textContent = 'Erreur'; calcExpr = ''; return; }
+    if (!isFinite(result)) {
+      document.getElementById('calc-expr-line').textContent = '';
+      document.getElementById('calc-display').textContent = 'Erreur';
+      calcExpr = '';
+      return;
+    }
     const rounded = Math.round(result * 100000) / 100000;
+    const exprForHistory = safeExpr;
+    document.getElementById('calc-expr-line').textContent = safeExpr.replace(/\*/g, '×').replace(/\//g, '÷') + ' =';
+    document.getElementById('calc-display').textContent = String(rounded);
     calcExpr = String(rounded);
-    calcRefreshDisplay();
+    calcShowingResult = true;
+    calcAddToHistory(exprForHistory, rounded);
   } catch(e) {
+    document.getElementById('calc-expr-line').textContent = '';
     document.getElementById('calc-display').textContent = 'Erreur';
     calcExpr = '';
+    calcShowingResult = false;
   }
 }
 
@@ -5685,8 +5802,13 @@ function initRapport() {
 <div class="overlay" id="overlay-calc" onclick="closeCalculatrice(event)">
   <div class="bottom-sheet">
     <div class="sheet-handle"></div>
-    <div class="sheet-title">🧮 Calculatrice</div>
+    <div class="calc-sheet-header">
+      <div class="sheet-title" style="margin-bottom:0;">🧮 Calculatrice</div>
+      <button class="btn-calc-clear-hist" onclick="calcClearHistory()" aria-label="Vider l'historique">🗑️</button>
+    </div>
+    <div class="calc-expr-line" id="calc-expr-line"></div>
     <div class="calc-display" id="calc-display">0</div>
+    <div class="calc-history-box" id="calc-history-list"></div>
     <div class="calc-grid">
       <button class="calc-btn span2" onclick="calcClear()">C</button>
       <button class="calc-btn op" onclick="calcOp('/')">÷</button>
