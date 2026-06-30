@@ -5635,8 +5635,12 @@ function calcRenderHistory() {
 }
 
 function calcUseHistory(result) {
-  calcExpr = String(result);
-  calcShowingResult = true;
+  if (calcExpr === '' || calcShowingResult) {
+    calcExpr = String(result);
+  } else {
+    calcExpr += String(result);
+  }
+  calcShowingResult = false;
   calcRefreshDisplay();
 }
 
@@ -5698,6 +5702,16 @@ function calcOp(op) {
 function calcClear() {
   calcExpr = '';
   calcShowingResult = false;
+  calcRefreshDisplay();
+}
+
+function calcBackspace() {
+  if (calcShowingResult) {
+    calcExpr = '';
+    calcShowingResult = false;
+  } else {
+    calcExpr = calcExpr.slice(0, -1);
+  }
   calcRefreshDisplay();
 }
 
@@ -5810,7 +5824,8 @@ function initRapport() {
     <div class="calc-display" id="calc-display">0</div>
     <div class="calc-history-box" id="calc-history-list"></div>
     <div class="calc-grid">
-      <button class="calc-btn span2" onclick="calcClear()">C</button>
+      <button class="calc-btn" onclick="calcClear()">C</button>
+      <button class="calc-btn" onclick="calcBackspace()" aria-label="Effacer le dernier caractère">⌫</button>
       <button class="calc-btn op" onclick="calcOp('/')">÷</button>
       <button class="calc-btn op" onclick="calcOp('*')">×</button>
       <button class="calc-btn" onclick="calcDigit('7')">7</button>
