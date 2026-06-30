@@ -168,6 +168,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .angle-reset-prompt{display:none;align-items:center;gap:10px;background:rgba(240,165,0,.1);border:1.5px solid rgba(240,165,0,.35);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12.5px;color:#8a6300;}
 .angle-reset-prompt.show{display:flex;}
 .angle-reset-prompt button{flex-shrink:0;background:var(--gold);border:none;color:var(--navy);font-weight:700;font-size:12px;padding:7px 12px;border-radius:8px;cursor:pointer;font-family:inherit;}
+.angle-calc-btn{width:100%;padding:13px;background:var(--teal);border:none;border-radius:10px;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:background .15s,opacity .15s;}
+.angle-calc-btn:disabled{background:var(--gray2);color:var(--gray3);cursor:not-allowed;opacity:.7;}
+.angle-calc-btn:not(:disabled):active{background:#156158;}
 .angle-reset{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px;}
 
 /* TOAST */
@@ -373,7 +376,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       <div class="angle-header"><div class="angle-title">Vérifier / tracer un angle droit</div></div>
       <div class="angle-body">
 
-        <div class="angle-hint">Remplis 2 des 3 longueurs (les 2 côtés ou un côté + la diagonale), la 3ème se calcule automatiquement.</div>
+        <div class="angle-hint">Remplis 2 des 3 longueurs (les 2 côtés ou un côté + la diagonale), puis appuie sur "Calculer".</div>
 
         <div class="angle-reset-prompt" id="angle-reset-prompt">
           <span>Les 3 valeurs sont remplies. Efface pour resaisir.</span>
@@ -392,21 +395,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
             <!-- Côté A : base horizontale, du point (90,210) au point (310,210) → milieu (200,210) -->
             <div class="angle-field angle-field-a">
               <span class="angle-field-label">Côté A (m)</span>
-              <input class="angle-input" id="angle-a" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="onAngleInput('a')">
+              <input class="angle-input" id="angle-a" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
             </div>
             <!-- Côté B : vertical gauche, du point (90,40) au point (90,210) → milieu (90,125) -->
             <div class="angle-field angle-field-b">
               <span class="angle-field-label">Côté B (m)</span>
-              <input class="angle-input" id="angle-b" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="onAngleInput('b')">
+              <input class="angle-input" id="angle-b" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
             </div>
             <!-- Diagonale C : du point (310,210) au point (90,40) → milieu (200,125), décalée perpendiculairement -->
             <div class="angle-field angle-field-c">
               <span class="angle-field-label">Diagonale C (m)</span>
-              <input class="angle-input" id="angle-c" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="onAngleInput('c')">
+              <input class="angle-input" id="angle-c" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
             </div>
           </div>
         </div>
 
+        <button class="angle-calc-btn" id="angle-calc-btn" onclick="calcAngle()" disabled>🧮 Calculer</button>
         <button class="angle-reset" onclick="resetAngle()">🗑 Effacer les 3 valeurs</button>
       </div>
     </div>
@@ -924,52 +928,68 @@ function resetPente() {
 // CALCUL ANGLE 90° (triangle rectangle — Pythagore)
 // ─────────────────────────────────────────────────────────────────
 const ANGLE_KEYS = ['a', 'b', 'c'];
-let angleLastComputed = null; // quelle case a été calculée en dernier (pour le style "is-computed")
 
 function angleInputEl(key) { return document.getElementById('angle-' + key); }
 
-function onAngleInput(changedKey) {
+function getAngleFilled() {
   const vals = {};
   ANGLE_KEYS.forEach(k => {
     const raw = angleInputEl(k).value;
     vals[k] = raw === '' ? null : parseFloat(raw);
   });
-
   const filled = ANGLE_KEYS.filter(k => vals[k] !== null && vals[k] > 0);
+  return { vals, filled };
+}
 
-  // Si les 3 cases sont remplies → on ne recalcule pas, on propose d'effacer
+// Appelé à chaque frappe : met juste à jour l'état du bouton "Calculer" et le bandeau,
+// ne calcule jamais automatiquement pendant la saisie.
+function updateAngleBtnState() {
+  const { filled } = getAngleFilled();
+  const btn = document.getElementById('angle-calc-btn');
+
+  clearAngleComputedStyle();
+
   if (filled.length === 3) {
     showAngleResetPrompt(true);
-    clearAngleComputedStyle();
+    btn.disabled = true;
+  } else if (filled.length === 2) {
+    showAngleResetPrompt(false);
+    btn.disabled = false;
+  } else {
+    showAngleResetPrompt(false);
+    btn.disabled = true;
+  }
+}
+
+// Appelé uniquement au clic sur "Calculer".
+function calcAngle() {
+  const { vals, filled } = getAngleFilled();
+
+  if (filled.length === 3) {
+    showAngleResetPrompt(true);
     return;
   }
-  showAngleResetPrompt(false);
+  if (filled.length !== 2) return; // bouton désactivé normalement, sécurité
 
-  if (filled.length !== 2) {
-    clearAngleComputedStyle();
-    return;
-  }
-
-  // Les 2 cases remplies sont connues ; on calcule celle qui manque
   const missing = ANGLE_KEYS.find(k => !filled.includes(k));
   let result = null;
 
   if (missing === 'c') {
     result = Math.sqrt(vals.a * vals.a + vals.b * vals.b);
   } else if (missing === 'a') {
-    if (vals.c <= vals.b) { clearAngleComputedStyle(); return; } // diagonale doit être > côté
+    if (vals.c <= vals.b) { return; } // diagonale doit être > côté, triangle impossible
     result = Math.sqrt(vals.c * vals.c - vals.b * vals.b);
   } else if (missing === 'b') {
-    if (vals.c <= vals.a) { clearAngleComputedStyle(); return; }
+    if (vals.c <= vals.a) { return; }
     result = Math.sqrt(vals.c * vals.c - vals.a * vals.a);
   }
 
-  if (result === null || isNaN(result)) { clearAngleComputedStyle(); return; }
+  if (result === null || isNaN(result)) return;
 
   angleInputEl(missing).value = fmt(result);
   clearAngleComputedStyle();
   angleInputEl(missing).classList.add('is-computed');
-  angleLastComputed = missing;
+  updateAngleBtnState();
 }
 
 function clearAngleComputedStyle() {
@@ -983,7 +1003,7 @@ function showAngleResetPrompt(show) {
 function resetAngle() {
   ANGLE_KEYS.forEach(k => { angleInputEl(k).value = ''; angleInputEl(k).classList.remove('is-computed'); });
   showAngleResetPrompt(false);
-  angleLastComputed = null;
+  document.getElementById('angle-calc-btn').disabled = true;
 }
 
 // ─────────────────────────────────────────────────────────────────
