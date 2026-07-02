@@ -152,6 +152,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .maint-card-status{font-size:12px;font-weight:600;margin-top:4px;}
 .maint-card-status.ok{color:var(--green);}
 .maint-card-status.warn{color:var(--orange);}
+.draggable{touch-action:none;user-select:none;}
+.drag-ghost{opacity:.4;background:var(--bg2)!important;border:2px dashed var(--border)!important;border-radius:var(--r)!important;}
+.drag-over{border-top:2px solid var(--teal)!important;}
 .maint-card-status.alert{color:var(--red);}
 .maint-card-arrow{font-size:16px;color:var(--text3);flex-shrink:0;}
  
@@ -283,6 +286,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <div id="view-entretiens" class="view">
     <div class="page-head"><div class="page-title">Entretiens</div><div class="page-sub">Carnet de suivi par machine</div></div>
     <div id="maint-list"></div>
+    <button class="btn btn-teal" onclick="openPickMachineModal()" style="margin-top:10px">+ Ajouter un carnet</button>
   </div>
  
   <!-- ══ ENTRETIEN DETAIL ══ -->
@@ -411,6 +415,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   </div>
 </div>
  
+<!-- MODAL: choisir une machine pour un nouveau carnet -->
+<div class="modal-ov" id="modal-pick-machine" onclick="closeModal('modal-pick-machine',event)">
+  <div class="modal-sh">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Ajouter un carnet</div>
+    <div id="pick-machine-list"></div>
+  </div>
+</div>
+ 
 <div class="toast" id="toast"></div>
  
 <!-- OVERLAY CALCULATRICE -->
@@ -472,7 +485,7 @@ onAuthStateChanged(_auth, user => {
 });
 
 // ── STORAGE KEYS ──
-const SK="rv6_e",MK="rv6_m",CK="rv6_chantiers_v1",DK="rv6_d",TK="rv6_t",MAINTK="rv6_mt",TYPEK="rv6_types",HK="rv6_ch_hidden";
+const SK="rv6_e",MK="rv6_m",CK="rv6_chantiers_v1",DK="rv6_d",TK="rv6_t",MAINTK="rv6_mt",TYPEK="rv6_types",HK="rv6_ch_hidden",MTORDER_K="rv6_mt_order";
 const ALERT_H=15;
 let selCh="", modalChantier="", navStack=[], currentMainView="saisie";
  
@@ -494,6 +507,24 @@ function saveMachines(m){
     setDoc(doc(_db,'ressources','machines'),{items:m,updatedAt:Date.now()})
       .catch(e=>console.warn('Firestore saveMachines:',e));
   }
+}
+// Machines + accessoires (module Ressources) — utilisé uniquement pour les carnets d'entretien.
+// Un accessoire est traité comme une "machine" pour le suivi entretien (même système de nom).
+function getMachinesAndAccessoires(){
+  try{
+    const s=localStorage.getItem(MK);
+    if(!s) return [];
+    const data=JSON.parse(s);
+    const list=[];
+    data.forEach(m=>{
+      const mName=m.nom||m.name||'';
+      list.push({name:mName, type:m.type||'', kind:'machine', parent:''});
+      (m.accessoires||[]).forEach(acs=>{
+        list.push({name:acs.nom||'', type:acs.type||'Accessoire', kind:'accessoire', parent:mName});
+      });
+    });
+    return list.filter(x=>x.name);
+  }catch(e){return [];}
 }
 // Chantiers : lus depuis rv6_chantiers_v1 (clé partagée — source de vérité : module Ressources)
 function migrateOldChantiers(){
@@ -771,7 +802,134 @@ function checkAlertDot(){let has=false;getMachines().forEach(m=>{const cur=getMa
  
 function getMaintStatus(mName){const cur=getMachLastHours(mName);if(cur===null)return{cls:"ok",text:"Aucune entrée heures",icon:"⚙"};const last=getMachLastMaint(mName);const since=last?cur-last.hours:null;if(since===null)return{cls:"warn",text:"Aucun entretien enregistré",icon:"🟠"};if(since>=ALERT_H*1.5)return{cls:"alert",text:"⚠ Entretien urgent — "+since.toFixed(1)+"h depuis dernier",icon:"🔴"};if(since>=ALERT_H)return{cls:"warn",text:"Entretien recommandé — "+since.toFixed(1)+"h depuis dernier",icon:"🟠"};return{cls:"ok",text:"À jour — "+since.toFixed(1)+"h depuis dernier",icon:"✅"};}
  
-function renderMaintList(){const machines=getMachines();const el=document.getElementById("maint-list");el.innerHTML=machines.map(m=>{const st=getMaintStatus(m.name);const cur=getMachLastHours(m.name);return `<div class="maint-card" onclick="openMaintDetail('${m.name}')"><div class="maint-card-icon ${st.cls}">${st.icon}</div><div class="maint-card-body"><div class="maint-card-name">Carnet — ${m.name}</div><div class="maint-card-sub">${m.type||""}${cur!==null?" · Compteur : "+cur+"h":""}</div><div class="maint-card-status ${st.cls}">${st.text}</div></div><div class="maint-card-arrow">›</div></div>`;}).join("");}
+function hasCarnet(mName){return getMaintEntries().some(x=>x.machine===mName);}
+
+// ── ORDRE MANUEL DES CARNETS ──
+function getMaintOrder(){try{return JSON.parse(localStorage.getItem(MTORDER_K))||[];}catch(e){return [];}}
+function saveMaintOrder(order){localStorage.setItem(MTORDER_K,JSON.stringify(order));}
+function sortByMaintOrder(items){
+  const order=getMaintOrder();
+  const idx=name=>{const i=order.indexOf(name);return i===-1?9999:i;};
+  return [...items].sort((a,b)=>idx(a.name)-idx(b.name));
+}
+
+function renderMaintList(){
+  const all=getMachinesAndAccessoires().filter(item=>hasCarnet(item.name));
+  const el=document.getElementById("maint-list");
+  if(!all.length){
+    el.innerHTML='<div class="empty"><div class="empty-i">🔧</div><div class="empty-t">Aucun carnet pour l\'instant. Utilise "+ Ajouter un carnet" pour en créer un.</div></div>';
+    return;
+  }
+  const items=sortByMaintOrder(all);
+  el.innerHTML=items.map(item=>{
+    const st=getMaintStatus(item.name);
+    const cur=getMachLastHours(item.name);
+    const subParts=[];
+    if(item.kind==='accessoire')subParts.push('🧰 Accessoire de '+item.parent);
+    else if(item.type)subParts.push(item.type);
+    if(cur!==null)subParts.push('Compteur : '+cur+'h');
+    return `<div class="maint-card draggable" data-id="${item.name}" onclick="openMaintDetail('${item.name}')"><div class="maint-card-icon ${st.cls}">${st.icon}</div><div class="maint-card-body"><div class="maint-card-name">Carnet — ${item.name}</div><div class="maint-card-sub">${subParts.join(' · ')}</div><div class="maint-card-status ${st.cls}">${st.text}</div></div><div class="maint-card-arrow">›</div></div>`;
+  }).join("");
+  attachMaintDragListeners();
+}
+
+// ── DRAG & DROP RÉORDONNANCEMENT (appui prolongé + glisser, identique à Ressources) ──
+let maintDragState=null;
+let maintLongPressTimer=null;
+const MAINT_LONG_PRESS_MS=450;
+
+function reorderArr(arr,fromIdx,toIdx){
+  const copy=[...arr];
+  const [item]=copy.splice(fromIdx,1);
+  copy.splice(toIdx,0,item);
+  return copy;
+}
+
+function attachMaintDragListeners(){
+  document.querySelectorAll('#maint-list .maint-card[data-id]').forEach(el=>{
+    initMaintItemDrag(el,el.dataset.id);
+  });
+}
+
+function initMaintItemDrag(el,itemName){
+  let startY,startX,moved=false;
+
+  function onLongPress(){
+    maintLongPressTimer=null;
+    el.classList.add('drag-ghost');
+    maintDragState={el,startY,startX};
+    navigator.vibrate&&navigator.vibrate(40);
+  }
+
+  el.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1)return;
+    const t=e.touches[0];
+    startY=t.clientY;startX=t.clientX;moved=false;
+    maintLongPressTimer=setTimeout(onLongPress,MAINT_LONG_PRESS_MS);
+  },{passive:true});
+
+  el.addEventListener('touchmove',e=>{
+    if(!maintDragState||maintDragState.el!==el){clearTimeout(maintLongPressTimer);return;}
+    e.preventDefault();
+    moved=true;
+    const t=e.touches[0];
+    el.style.visibility='hidden';
+    const target=document.elementFromPoint(t.clientX,t.clientY);
+    el.style.visibility='';
+    if(!target)return;
+    const targetItem=target.closest('.maint-card[data-id]');
+    document.querySelectorAll('.maint-card').forEach(i=>i.classList.remove('drag-over'));
+    if(targetItem&&targetItem!==el)targetItem.classList.add('drag-over');
+  },{passive:false});
+
+  el.addEventListener('touchend',e=>{
+    clearTimeout(maintLongPressTimer);
+    if(!maintDragState||maintDragState.el!==el){el.classList.remove('drag-ghost');return;}
+    document.querySelectorAll('.maint-card').forEach(i=>i.classList.remove('drag-over'));
+    if(moved){
+      const t=e.changedTouches[0];
+      el.style.visibility='hidden';
+      const target=document.elementFromPoint(t.clientX,t.clientY);
+      el.style.visibility='';
+      const targetItem=target&&target.closest('.maint-card[data-id]');
+      if(targetItem&&targetItem.dataset.id!==itemName){
+        const all=getMachinesAndAccessoires().filter(item=>hasCarnet(item.name));
+        const currentOrder=sortByMaintOrder(all).map(i=>i.name);
+        const fromIdx=currentOrder.indexOf(itemName);
+        const toIdx=currentOrder.indexOf(targetItem.dataset.id);
+        if(fromIdx!==-1&&toIdx!==-1){
+          saveMaintOrder(reorderArr(currentOrder,fromIdx,toIdx));
+          renderMaintList();
+          toast('✓ Ordre mis à jour');
+        }
+      }
+    }
+    el.classList.remove('drag-ghost');
+    maintDragState=null;
+  });
+
+  el.addEventListener('touchcancel',()=>{
+    clearTimeout(maintLongPressTimer);
+    el.classList.remove('drag-ghost');
+    document.querySelectorAll('.maint-card').forEach(i=>i.classList.remove('drag-over'));
+    maintDragState=null;
+  });
+}
+
+function openPickMachineModal(){
+  const remaining=getMachinesAndAccessoires().filter(item=>!hasCarnet(item.name));
+  const el=document.getElementById("pick-machine-list");
+  if(!remaining.length){
+    el.innerHTML='<div class="empty"><div class="empty-i">✅</div><div class="empty-t">Toutes les machines et accessoires ont déjà un carnet.</div></div>';
+  }else{
+    el.innerHTML=remaining.map(item=>`<button class="btn btn-navy btn-sm" style="margin-bottom:8px" onclick="selectMachineForCarnet('${item.name}')">${item.kind==='accessoire'?'🧰':'🚜'} ${item.name}${item.kind==='accessoire'?' <span style="opacity:.7;font-weight:400">— '+item.parent+'</span>':''}</button>`).join("");
+  }
+  document.getElementById("modal-pick-machine").classList.add("open");
+}
+function selectMachineForCarnet(mName){
+  closeModal("modal-pick-machine");
+  openMaintDetail(mName);
+}
  
 // ── ENTRETIEN DETAIL ──
 function openMaintDetail(mName){renderMaintDetail(mName);pushDetail("maint-detail","🔧 "+mName,"Carnet d'entretien");}
@@ -1096,6 +1254,8 @@ window.calcClear           = calcClear;
 window.calcBackspace       = calcBackspace;
 window.calcEquals          = calcEquals;
 window.removeMachineFromChantier = removeMachineFromChantier;
+window.openPickMachineModal = openPickMachineModal;
+window.selectMachineForCarnet = selectMachineForCarnet;
 </script>
 </body>
 </html>
