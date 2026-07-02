@@ -10,7 +10,8 @@
   --navy:#1B3A6B; --teal:#1A7F72; --gold:#F0A500;
   --bg:#f5f6fa; --white:#fff;
   --gray1:#f0f1f5; --gray2:#e2e4ec; --gray3:#9ca3af;
-  --text:#1a1f2e; --radius:12px;
+  --text:#1a1f2e; --radius:12px; --radius-sm:8px;
+  --header-h:56px;
   --shadow:0 2px 12px rgba(27,58,107,.10);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -18,10 +19,38 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 /* HEADER */
 .header{background:var(--navy);position:sticky;top:0;z-index:100;}
-.header-top{display:flex;align-items:center;gap:12px;padding:14px 16px 10px;}
-.back-btn{background:rgba(255,255,255,.12);border:none;color:#fff;width:36px;height:36px;border-radius:10px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.header-title{color:#fff;font-size:18px;font-weight:700;flex:1;}
-.header-subtitle{color:rgba(255,255,255,.6);font-size:12px;}
+.header-top{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);padding:0 16px;}
+.header-top .logo-area{display:flex;align-items:center;gap:10px;min-width:0;}
+.back-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-title{color:#fff;font-size:17px;font-weight:700;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.header-subtitle{color:rgba(255,255,255,.6);font-size:12px;margin-top:2px;}
+.header-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.btn-header-icon{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:15px;font-family:inherit;width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.btn-header-icon:active{opacity:.7;}
+
+/* OVERLAY CALCULATRICE (popup, identique au module Rapport) */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;}
+.overlay.open{display:flex;}
+.bottom-sheet{background:var(--white);border-radius:20px 20px 0 0;width:100%;padding:20px 16px 32px;max-height:88vh;overflow-y:auto;}
+.sheet-handle{width:36px;height:4px;background:var(--gray2);border-radius:2px;margin:0 auto 16px;}
+.calc-sheet-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.calc-sheet-title{font-size:16px;font-weight:700;color:var(--text);}
+.btn-calc-clear-hist{border:none;background:none;font-size:16px;color:var(--gray3);cursor:pointer;padding:4px 6px;}
+.btn-calc-clear-hist:active{opacity:.6;}
+.calc-expr-line{font-size:13px;color:var(--gray3);text-align:right;min-height:16px;padding:0 14px;}
+.calc-display{background:var(--bg);border-radius:var(--radius-sm);padding:10px 14px 16px;text-align:right;font-size:28px;font-weight:700;margin-bottom:10px;color:var(--text);overflow-x:auto;white-space:nowrap;}
+.calc-history-box{background:var(--bg);border-radius:var(--radius-sm);padding:6px 12px;margin-bottom:10px;max-height:110px;overflow-y:auto;}
+.calc-history-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--gray2);cursor:pointer;}
+.calc-history-row:first-child{border-top:none;}
+.calc-history-row:active{opacity:.6;}
+.calc-history-expr{font-size:12px;color:var(--gray3);}
+.calc-history-result{font-size:12px;font-weight:700;color:var(--text);}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.calc-btn{border:none;background:var(--bg);color:var(--text);font-family:inherit;font-size:18px;font-weight:600;padding:16px 0;border-radius:var(--radius-sm);cursor:pointer;}
+.calc-btn:active{opacity:.7;}
+.calc-btn.op{background:var(--navy);color:#fff;}
+.calc-btn.eq{background:var(--gold);color:var(--navy);grid-row:span 2;}
+.calc-btn.span2{grid-column:span 2;}
 
 /* MAIN TABS (Métrés / Poids) */
 .tabs-bar{display:flex;padding:0 16px 12px;gap:0;}
@@ -152,19 +181,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .angle-title{font-size:14px;font-weight:700;color:var(--navy);}
 .angle-body{padding:16px;}
 .angle-hint{font-size:12px;color:var(--gray3);margin-bottom:14px;line-height:1.4;}
-.angle-schema-wrap{background:var(--gray1);border-radius:12px;padding:18px 12px 40px;margin-bottom:16px;}
+.angle-schema-wrap{background:var(--gray1);border-radius:12px;padding:18px 12px 54px;margin-bottom:16px;}
 .angle-schema-pos{position:relative;}
 .angle-field{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;transform:translate(-50%,-50%);}
 .angle-field-label{font-size:9.5px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;}
 .angle-input{width:70px;padding:7px 4px;border:1.5px solid var(--gray2);border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;text-align:center;transition:border-color .15s,background .15s;}
 .angle-input:focus{border-color:var(--teal);}
 .angle-input.is-computed{background:rgba(26,127,114,.08);border-color:var(--teal);color:var(--teal);}
-/* Côté A : base horizontale, milieu (200,210) sur viewBox 360x260 → 55.6%, 80.8% */
-.angle-field-a{left:55.6%;top:80.8%;}
-/* Côté B : vertical gauche, milieu (90,125) sur viewBox 360x260 → 25%, 48.1% */
-.angle-field-b{left:25%;top:48.1%;}
+/* Côté A : base horizontale, décalée sous le triangle pour ne pas chevaucher le trait → 55.6%, 106% */
+.angle-field-a{left:55.6%;top:106%;}
+/* Côté B : vertical gauche, décalée à gauche du trait pour ne pas le chevaucher → 9%, 48.1% */
+.angle-field-b{left:9%;top:48.1%;}
 /* Diagonale C : milieu (200,125), décalée perpendiculairement vers le haut-droite → 67%, 32% */
 .angle-field-c{left:67%;top:32%;}
+.angle-deg-result{background:var(--white);border:1.5px solid var(--gray2);border-radius:10px;padding:12px 20px;display:flex;justify-content:space-around;align-items:center;margin-bottom:14px;}
 .angle-reset-prompt{display:none;align-items:center;gap:10px;background:rgba(240,165,0,.1);border:1.5px solid rgba(240,165,0,.35);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12.5px;color:#8a6300;}
 .angle-reset-prompt.show{display:flex;}
 .angle-reset-prompt button{flex-shrink:0;background:var(--gold);border:none;color:var(--navy);font-weight:700;font-size:12px;padding:7px 12px;border-radius:8px;cursor:pointer;font-family:inherit;}
@@ -188,10 +218,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 <div class="header">
   <div class="header-top">
-    <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
-    <div>
-      <div class="header-title">Calculatrice</div>
-      <div class="header-subtitle">Métrés · Poids · Pentes · Angles</div>
+    <div class="logo-area">
+      <button class="back-btn" onclick="window.location.href='../index.html'" aria-label="Retour au menu">🏠</button>
+      <div style="min-width:0;">
+        <div class="header-title">Calculatrice</div>
+        <div class="header-subtitle" id="header-sub"></div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-header-icon" onclick="openCalculatrice()" aria-label="Calculatrice">🧮</button>
     </div>
   </div>
   <div class="tabs-bar">
@@ -394,19 +429,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
             <!-- Côté A : base horizontale, du point (90,210) au point (310,210) → milieu (200,210) -->
             <div class="angle-field angle-field-a">
-              <span class="angle-field-label">Côté A (m)</span>
+              <span class="angle-field-label">Côté A (cm)</span>
               <input class="angle-input" id="angle-a" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
             </div>
             <!-- Côté B : vertical gauche, du point (90,40) au point (90,210) → milieu (90,125) -->
             <div class="angle-field angle-field-b">
-              <span class="angle-field-label">Côté B (m)</span>
+              <span class="angle-field-label">Côté B (cm)</span>
               <input class="angle-input" id="angle-b" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
             </div>
             <!-- Diagonale C : du point (310,210) au point (90,40) → milieu (200,125), décalée perpendiculairement -->
             <div class="angle-field angle-field-c">
-              <span class="angle-field-label">Diagonale C (m)</span>
+              <span class="angle-field-label">Diagonale C (cm)</span>
               <input class="angle-input" id="angle-c" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
             </div>
+          </div>
+        </div>
+
+        <!-- Angles calculés, affichés en dessous du schéma -->
+        <div class="angle-deg-result" id="angle-deg-result">
+          <div class="poids-sub-item">
+            <div class="poids-sub-val" id="angle-deg-r-val">—</div>
+            <div class="poids-sub-label">angle B/C (°)</div>
+          </div>
+          <div class="poids-divider"></div>
+          <div class="poids-sub-item">
+            <div class="poids-sub-val" id="angle-deg-q-val">—</div>
+            <div class="poids-sub-label">angle A/C (°)</div>
           </div>
         </div>
 
@@ -419,6 +467,40 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- OVERLAY CALCULATRICE -->
+<div class="overlay" id="overlay-calc" onclick="closeCalculatrice(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="calc-sheet-header">
+      <div class="calc-sheet-title">🧮 Calculatrice</div>
+      <button class="btn-calc-clear-hist" onclick="calcClearHistory()" aria-label="Vider l'historique">🗑️</button>
+    </div>
+    <div class="calc-expr-line" id="calc-expr-line"></div>
+    <div class="calc-display" id="calc-display">0</div>
+    <div class="calc-history-box" id="calc-history-list"></div>
+    <div class="calc-grid">
+      <button class="calc-btn" onclick="calcClear()">C</button>
+      <button class="calc-btn" onclick="calcBackspace()" aria-label="Effacer le dernier caractère">⌫</button>
+      <button class="calc-btn op" onclick="calcOp('/')">÷</button>
+      <button class="calc-btn op" onclick="calcOp('*')">×</button>
+      <button class="calc-btn" onclick="calcDigit('7')">7</button>
+      <button class="calc-btn" onclick="calcDigit('8')">8</button>
+      <button class="calc-btn" onclick="calcDigit('9')">9</button>
+      <button class="calc-btn op" onclick="calcOp('-')">−</button>
+      <button class="calc-btn" onclick="calcDigit('4')">4</button>
+      <button class="calc-btn" onclick="calcDigit('5')">5</button>
+      <button class="calc-btn" onclick="calcDigit('6')">6</button>
+      <button class="calc-btn op" onclick="calcOp('+')">+</button>
+      <button class="calc-btn" onclick="calcDigit('1')">1</button>
+      <button class="calc-btn" onclick="calcDigit('2')">2</button>
+      <button class="calc-btn" onclick="calcDigit('3')">3</button>
+      <button class="calc-btn eq" onclick="calcEquals()">=</button>
+      <button class="calc-btn span2" onclick="calcDigit('0')">0</button>
+      <button class="calc-btn" onclick="calcDigit('.')">.</button>
+    </div>
+  </div>
+</div>
 
 <div class="quickadd-bar" id="quickadd-bar">
   <button class="quickadd-btn" id="quickadd-btn" type="button">＋ Nouvelle ligne (même forme)</button>
@@ -948,6 +1030,7 @@ function updateAngleBtnState() {
   const btn = document.getElementById('angle-calc-btn');
 
   clearAngleComputedStyle();
+  clearAngleDegrees();
 
   if (filled.length === 3) {
     showAngleResetPrompt(true);
@@ -989,7 +1072,26 @@ function calcAngle() {
   angleInputEl(missing).value = fmt(result);
   clearAngleComputedStyle();
   angleInputEl(missing).classList.add('is-computed');
+  updateAngleDegrees(vals, missing, result);
   updateAngleBtnState();
+}
+
+// Calcule les 2 angles aigus (en degrés) une fois les 3 côtés connus.
+function updateAngleDegrees(vals, missing, result) {
+  const a = missing === 'a' ? result : vals.a;
+  const b = missing === 'b' ? result : vals.b;
+  if (!(a > 0) || !(b > 0)) { clearAngleDegrees(); return; }
+
+  const angleQ = Math.atan2(b, a) * 180 / Math.PI; // sommet entre côté A et diagonale C
+  const angleR = 90 - angleQ;                       // sommet entre côté B et diagonale C
+
+  document.getElementById('angle-deg-q-val').textContent = fmt(angleQ) + '°';
+  document.getElementById('angle-deg-r-val').textContent = fmt(angleR) + '°';
+}
+
+function clearAngleDegrees() {
+  document.getElementById('angle-deg-q-val').textContent = '—';
+  document.getElementById('angle-deg-r-val').textContent = '—';
 }
 
 function clearAngleComputedStyle() {
@@ -1003,6 +1105,7 @@ function showAngleResetPrompt(show) {
 function resetAngle() {
   ANGLE_KEYS.forEach(k => { angleInputEl(k).value = ''; angleInputEl(k).classList.remove('is-computed'); });
   showAngleResetPrompt(false);
+  clearAngleDegrees();
   document.getElementById('angle-calc-btn').disabled = true;
 }
 
@@ -1020,8 +1123,171 @@ function showToast(msg) {
 }
 
 // ─────────────────────────────────────────────────────────────────
+// EN-TÊTE — date du jour
+// ─────────────────────────────────────────────────────────────────
+function updateHeaderDate() {
+  const sub = document.getElementById('header-sub');
+  const str = new Date().toLocaleDateString('fr-CH', {weekday:'long', day:'numeric', month:'long'});
+  sub.textContent = str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCULATRICE POPUP (identique au module Rapport, historique partagé)
+// ─────────────────────────────────────────────────────────────────
+let calcExpr = '';
+let calcShowingResult = false;
+const CALC_HISTORY_KEY = 'rv6_calc_history';
+const CALC_HISTORY_MAX_DAYS = 3;
+
+function calcPurgeHistory() {
+  let hist = [];
+  try { hist = JSON.parse(localStorage.getItem(CALC_HISTORY_KEY)) || []; } catch(e) { hist = []; }
+  const limit = Date.now() - (CALC_HISTORY_MAX_DAYS * 24 * 60 * 60 * 1000);
+  hist = hist.filter(h => h.ts >= limit);
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify(hist));
+  return hist;
+}
+
+function calcGetHistory() {
+  try { return JSON.parse(localStorage.getItem(CALC_HISTORY_KEY)) || []; } catch(e) { return []; }
+}
+
+function calcAddToHistory(expr, result) {
+  const hist = calcGetHistory();
+  hist.unshift({ expr, result, ts: Date.now() });
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify(hist.slice(0, 50)));
+  calcRenderHistory();
+}
+
+function calcRenderHistory() {
+  const box = document.getElementById('calc-history-list');
+  if (!box) return;
+  const hist = calcGetHistory();
+  if (hist.length === 0) {
+    box.innerHTML = '<div style="font-size:12px;color:var(--gray3);text-align:center;padding:6px 0;">Aucun calcul récent</div>';
+    return;
+  }
+  box.innerHTML = hist.map(h => {
+    const exprDisp = h.expr.replace(/\*/g, '×').replace(/\//g, '÷');
+    return `<div class="calc-history-row" onclick="calcUseHistory('${h.result}')">
+      <span class="calc-history-expr">${exprDisp} =</span>
+      <span class="calc-history-result">${h.result}</span>
+    </div>`;
+  }).join('');
+}
+
+function calcUseHistory(result) {
+  if (calcExpr === '' || calcShowingResult) {
+    calcExpr = String(result);
+  } else {
+    calcExpr += String(result);
+  }
+  calcShowingResult = false;
+  calcRefreshDisplay();
+}
+
+function calcClearHistory() {
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify([]));
+  calcRenderHistory();
+}
+
+function openCalculatrice() {
+  calcExpr = '';
+  calcShowingResult = false;
+  calcPurgeHistory();
+  calcRefreshDisplay();
+  calcRenderHistory();
+  document.getElementById('overlay-calc').classList.add('open');
+}
+
+function closeCalculatrice(e) {
+  if (e && e.target.id !== 'overlay-calc') return;
+  document.getElementById('overlay-calc').classList.remove('open');
+}
+
+function calcRefreshDisplay() {
+  const line = document.getElementById('calc-expr-line');
+  const d = document.getElementById('calc-display');
+  if (calcExpr === '') {
+    line.textContent = '';
+    d.textContent = '0';
+    return;
+  }
+  line.textContent = '';
+  d.textContent = calcExpr.replace(/\*/g, '×').replace(/\//g, '÷');
+}
+
+function calcDigit(d) {
+  if (calcShowingResult) { calcExpr = ''; calcShowingResult = false; }
+  if (d === '.' ) {
+    const parts = calcExpr.split(/[+\-*/]/);
+    const last = parts[parts.length - 1];
+    if (last.includes('.')) return;
+    if (last === '') calcExpr += '0';
+  }
+  calcExpr += d;
+  calcRefreshDisplay();
+}
+
+function calcOp(op) {
+  if (calcExpr === '') return;
+  if (calcShowingResult) { calcShowingResult = false; }
+  const lastChar = calcExpr.slice(-1);
+  if ('+-*/'.includes(lastChar)) {
+    calcExpr = calcExpr.slice(0, -1) + op;
+  } else {
+    calcExpr += op;
+  }
+  calcRefreshDisplay();
+}
+
+function calcClear() {
+  calcExpr = '';
+  calcShowingResult = false;
+  calcRefreshDisplay();
+}
+
+function calcBackspace() {
+  if (calcShowingResult) {
+    calcExpr = '';
+    calcShowingResult = false;
+  } else {
+    calcExpr = calcExpr.slice(0, -1);
+  }
+  calcRefreshDisplay();
+}
+
+function calcEquals() {
+  if (calcExpr === '' || calcShowingResult) return;
+  let safeExpr = calcExpr.replace(/[+\-*/]+$/, '');
+  if (!/^[0-9.+\-*/]+$/.test(safeExpr)) { calcClear(); return; }
+  try {
+    const result = Function('"use strict"; return (' + safeExpr + ')')();
+    if (!isFinite(result)) {
+      document.getElementById('calc-expr-line').textContent = '';
+      document.getElementById('calc-display').textContent = 'Erreur';
+      calcExpr = '';
+      return;
+    }
+    const rounded = Math.round(result * 100000) / 100000;
+    const exprForHistory = safeExpr;
+    document.getElementById('calc-expr-line').textContent = safeExpr.replace(/\*/g, '×').replace(/\//g, '÷') + ' =';
+    document.getElementById('calc-display').textContent = String(rounded);
+    calcExpr = String(rounded);
+    calcShowingResult = true;
+    calcAddToHistory(exprForHistory, rounded);
+  } catch(e) {
+    document.getElementById('calc-expr-line').textContent = '';
+    document.getElementById('calc-display').textContent = 'Erreur';
+    calcExpr = '';
+    calcShowingResult = false;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────────────────────
+updateHeaderDate();
 renderLegend();
 addRow();
 </script>
