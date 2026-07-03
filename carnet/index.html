@@ -442,14 +442,40 @@ let dirtyMonths = new Set(); // months with unsaved edits
 // ═══════════════════════════════════
 // PERSISTENCE
 // ═══════════════════════════════════
-function loadAll() {
-  // Local-first: read whatever is cached on this device immediately.
-  const c = localStorage.getItem('ch3_cfg');
+// ── Clés locales namespacées par utilisateur (évite tout mélange si le même
+//    appareil sert à plusieurs comptes) ──────────────────────────────────
+function lsKeyCfg(uid){ return 'ch3_cfg_'+uid; }
+function lsKeyEntries(uid){ return 'ch3_entries_'+uid; }
+function lsKeyPdf(uid,i){ return 'ch3_pdf_'+uid+'_'+i; }
+
+// Migration one-shot des anciennes clés globales (ch3_cfg, ch3_entries, ch3_pdf_N)
+// vers les nouvelles clés namespacées, pour ne pas perdre les données déjà
+// présentes sur l'appareil au moment du passage au multi-compte.
+function migrateLegacyLocalKeys(uid){
+  if(!localStorage.getItem(lsKeyCfg(uid))){
+    const old=localStorage.getItem('ch3_cfg');
+    if(old){ localStorage.setItem(lsKeyCfg(uid), old); localStorage.removeItem('ch3_cfg'); }
+  }
+  if(!localStorage.getItem(lsKeyEntries(uid))){
+    const old=localStorage.getItem('ch3_entries');
+    if(old){ localStorage.setItem(lsKeyEntries(uid), old); localStorage.removeItem('ch3_entries'); }
+  }
+  for(let i=0;i<12;i++){
+    if(!localStorage.getItem(lsKeyPdf(uid,i))){
+      const old=localStorage.getItem('ch3_pdf_'+i);
+      if(old){ localStorage.setItem(lsKeyPdf(uid,i), old); localStorage.removeItem('ch3_pdf_'+i); }
+    }
+  }
+}
+
+function loadAll(uid) {
+  migrateLegacyLocalKeys(uid);
+  const c = localStorage.getItem(lsKeyCfg(uid));
   if(c) cfg = {...cfg, ...JSON.parse(c)};
-  const e = localStorage.getItem('ch3_entries');
+  const e = localStorage.getItem(lsKeyEntries(uid));
   if(e) dayEntries = JSON.parse(e);
   for(let i=0;i<12;i++){
-    const p = localStorage.getItem('ch3_pdf_'+i);
+    const p = localStorage.getItem(lsKeyPdf(uid,i));
     if(p) monthPdfs[i] = p;
   }
 }
@@ -461,17 +487,17 @@ async function syncFromFirestore() {
     const mainSnap = await db.collection('carnet_heures').doc(currentUid).get();
     if (mainSnap.exists) {
       const data = mainSnap.data();
-      if (data.cfg) { cfg = {...cfg, ...data.cfg}; localStorage.setItem('ch3_cfg', JSON.stringify(cfg)); }
-      if (data.entries) { dayEntries = data.entries; localStorage.setItem('ch3_entries', JSON.stringify(dayEntries)); }
+      if (data.cfg) { cfg = {...cfg, ...data.cfg}; localStorage.setItem(lsKeyCfg(currentUid), JSON.stringify(cfg)); }
+      if (data.entries) { dayEntries = data.entries; localStorage.setItem(lsKeyEntries(currentUid), JSON.stringify(dayEntries)); }
     }
-    // PDFs: one doc per month, only fetch the ones we don't already have locally
-    // (avoids re-downloading 12 PDFs on every login once they're cached on this device)
+    // PDFs: one doc par mois, seulement ceux pas déjà en cache localement
+    // (évite de retélécharger 12 PDF à chaque connexion une fois mis en cache sur l'appareil)
     const fetches = [];
     for (let i=0;i<12;i++){
       if (!monthPdfs[i]) {
         fetches.push(
           db.collection('carnet_heures_pdfs').doc(`${currentUid}_${i}`).get()
-            .then(snap => { if (snap.exists) { monthPdfs[i] = snap.data().pdf; localStorage.setItem('ch3_pdf_'+i, monthPdfs[i]); } })
+            .then(snap => { if (snap.exists) { monthPdfs[i] = snap.data().pdf; localStorage.setItem(lsKeyPdf(currentUid,i), monthPdfs[i]); } })
         );
       }
     }
@@ -485,24 +511,24 @@ async function syncFromFirestore() {
 let saveCfgTimer = null, saveEntriesTimer = null;
 
 function saveCfg() {
+  if(!currentUid) return;
   cfg.nom = $('cfgNom').value;
   cfg.md  = $('cfgMd').value;  cfg.mf = $('cfgMf').value;
   cfg.ad  = $('cfgAd').value;  cfg.af = $('cfgAf').value;
-  localStorage.setItem('ch3_cfg', JSON.stringify(cfg));
+  localStorage.setItem(lsKeyCfg(currentUid), JSON.stringify(cfg));
   // Debounce Firestore write
   clearTimeout(saveCfgTimer);
   saveCfgTimer = setTimeout(() => {
-    if(!currentUid) return;
     db.collection('carnet_heures').doc(currentUid).set({cfg}, {merge:true})
       .catch(err => console.warn('[Carnet] saveCfg error:', err));
   }, 600);
 }
 
 function saveEntries() {
-  localStorage.setItem('ch3_entries', JSON.stringify(dayEntries));
+  if(!currentUid) return;
+  localStorage.setItem(lsKeyEntries(currentUid), JSON.stringify(dayEntries));
   clearTimeout(saveEntriesTimer);
   saveEntriesTimer = setTimeout(() => {
-    if(!currentUid) return;
     db.collection('carnet_heures').doc(currentUid).set({entries: dayEntries}, {merge:true})
       .catch(err => console.warn('[Carnet] saveEntries error:', err));
   }, 600);
@@ -539,8 +565,8 @@ async function loadDefaultPdfsIfNeeded(){
 function savePdf(moIdx, b64) {
   monthPdfs[moIdx] = b64;
   isDefaultPdf[moIdx] = false;
-  localStorage.setItem('ch3_pdf_'+moIdx, b64);
   if(!currentUid) return;
+  localStorage.setItem(lsKeyPdf(currentUid, moIdx), b64);
   db.collection('carnet_heures_pdfs').doc(`${currentUid}_${moIdx}`).set({pdf: b64})
     .then(() => showToast('☁️ PDF synchronisé'))
     .catch(err => { console.warn('[Carnet] savePdf error:', err); showToast('⚠️ Sync échouée (sauvé en local)'); });
@@ -1273,16 +1299,17 @@ function calcEquals(){
 // BOOT — gated by Firebase Auth
 // ═══════════════════════════════════
 $('hdrSub').textContent = String(curYear);
-
-loadAll();        // local-first: show cached data immediately if any
-renderHome();
-loadDefaultPdfsIfNeeded().then(renderHome); // complète avec les modèles par défaut, puis rafraîchit
+// Rien n'est visible avant la fin de l'auth (authGuard plein écran), donc on
+// attend de connaître l'utilisateur avant de charger quoi que ce soit — ça
+// évite tout risque de lire les données d'un autre compte sur le même appareil.
 
 auth.onAuthStateChanged(async user => {
   if (!user) { window.location.href = '../login.html'; return; }
   currentUid = user.uid;
+  loadAll(currentUid);    // local-first : données déjà en cache pour CET utilisateur
+  renderHome();
   await syncFromFirestore();
-  await loadDefaultPdfsIfNeeded(); // au cas où un mois manquerait encore après la sync
+  await loadDefaultPdfsIfNeeded(); // complète avec les modèles par défaut si besoin
   $('authGuard').classList.remove('show');
   renderHome();           // refresh with synced data
   if (curView === 'viewPdf' && curMo >= 0) renderPdfPage(curMo);
