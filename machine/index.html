@@ -676,7 +676,11 @@ function renderChList(){
   });
   const sorted=Object.entries(map).sort((a,b)=>b[1].lastSaved-a[1].lastSaved).slice(0,3);
   el.innerHTML=sorted.map(([ch,d])=>{
-    const machPills=[...d.machines].map(m=>`<span style="background:var(--navy);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px;">${m}</span>`).join("");
+    const hidden=getHiddenChMachines().filter(h=>h.ch===ch).map(h=>h.mach);
+    const activeMachines=[...d.machines].filter(m=>!hidden.includes(m));
+    const machPills=activeMachines.length
+      ? activeMachines.map(m=>`<span style="display:inline-flex;align-items:center;gap:5px;background:var(--navy);color:#fff;font-size:11px;font-weight:600;padding:3px 6px 3px 9px;border-radius:5px;">${m}<button onclick="event.stopPropagation();removeMachineFromChantier('${ch}','${m}')" title="Retour au dépôt" style="background:rgba(255,255,255,.2);border:none;color:#fff;font-size:10px;width:16px;height:16px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0">✕</button></span>`).join("")
+      : `<span style="font-size:11px;color:var(--text3);font-style:italic">Aucune machine active</span>`;
     return `<div class="ch-card" onclick="openChDetail('${ch}')">
       <div class="ch-card-body" style="flex:1">
         <div class="ch-card-name">${ch}</div>
@@ -784,12 +788,11 @@ function unhideChMachine(ch,mach){
 }
  
 function removeMachineFromChantier(ch,mach){
-  if(!confirm(`Retirer "${mach}" de l'affichage du chantier "${ch}" ?\nLes heures déjà enregistrées ne sont pas supprimées.`))return;
+  if(!confirm(`Retour au dépôt pour "${mach}" ?\nElle ne sera plus affichée comme active sur "${ch}". Les heures déjà enregistrées ne sont pas supprimées.`))return;
   const list=getHiddenChMachines();
   if(!list.some(h=>h.ch===ch&&h.mach===mach))list.push({ch,mach});
   saveHiddenChMachines(list);
-  toast(`👁️‍🗨️ ${mach} masquée sur ${ch}`);
-  renderChDetail(ch);
+  toast(`🚛 ${mach} — retour au dépôt`);
   renderChList();
 }
  
