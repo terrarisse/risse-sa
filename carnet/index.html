@@ -25,6 +25,30 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 .hdr-sub{font-size:12px;opacity:.65;margin-top:1px}
 .hdr-btn{background:rgba(255,255,255,0.13);border:none;color:#fff;padding:7px 12px;
   border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.hdr-actions{display:flex;align-items:center;gap:6px}
+.hdr-btn-icon{background:rgba(255,255,255,0.13);border:none;color:#fff;width:34px;height:34px;
+  border-radius:8px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+
+/* CALCULATRICE (popup, réutilise .overlay/.modal/.mh/.mt) */
+.calc-sheet-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0}
+.calc-sheet-header .mt{padding:0;border-bottom:none}
+.btn-calc-clear-hist{border:none;background:none;font-size:16px;color:var(--muted);cursor:pointer;padding:4px 6px}
+.btn-calc-clear-hist:active{opacity:.6}
+.calc-body{padding:10px 16px 24px}
+.calc-expr-line{font-size:13px;color:var(--muted);text-align:right;min-height:16px;padding:0 4px}
+.calc-display{background:var(--bg);border-radius:8px;padding:10px 14px 16px;text-align:right;font-size:28px;font-weight:700;margin-bottom:10px;color:var(--text);overflow-x:auto;white-space:nowrap}
+.calc-history-box{background:var(--bg);border-radius:8px;padding:6px 12px;margin-bottom:10px;max-height:110px;overflow-y:auto}
+.calc-history-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border);cursor:pointer}
+.calc-history-row:first-child{border-top:none}
+.calc-history-row:active{opacity:.6}
+.calc-history-expr{font-size:12px;color:var(--muted)}
+.calc-history-result{font-size:12px;font-weight:700;color:var(--text)}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.calc-btn{border:none;background:var(--bg);color:var(--text);font-family:inherit;font-size:18px;font-weight:600;padding:16px 0;border-radius:8px;cursor:pointer}
+.calc-btn:active{opacity:.7}
+.calc-btn.op{background:var(--navy);color:#fff}
+.calc-btn.eq{background:var(--gold);color:var(--navy);grid-row:span 2}
+.calc-btn.span2{grid-column:span 2}
 
 /* VIEWS */
 .view{display:none;min-height:calc(100vh - 62px)}
@@ -164,13 +188,16 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
 <!-- ═══ HEADER ═══ -->
 <div class="hdr">
   <div class="hdr-left">
-    <a href="../" class="back-btn" id="backBtn">‹</a>
+    <button class="back-btn" id="backBtn" onclick="handleHeaderHome()">🏠</button>
     <div>
       <div class="hdr-title">Carnet d'heure</div>
       <div class="hdr-sub" id="hdrSub">2026</div>
     </div>
   </div>
-  <button class="hdr-btn" id="paramsBtn" onclick="showParams()">⚙ Paramètres</button>
+  <div class="hdr-actions">
+    <button class="hdr-btn-icon" id="paramsBtn" onclick="showParams()" title="Paramètres">⚙</button>
+    <button class="hdr-btn-icon" onclick="openCalculatrice()" title="Calculatrice">🧮</button>
+  </div>
 </div>
 
 <!-- ═══ VIEW HOME: liste des mois ═══ -->
@@ -299,6 +326,42 @@ body{font-family:'DM Sans','Inter',system-ui,sans-serif;background:var(--bg);col
     <button class="m-btn primary" onclick="saveDay()">Enregistrer dans le PDF</button>
   </div>
 </div>
+</div>
+
+<!-- ═══ OVERLAY CALCULATRICE ═══ -->
+<div class="overlay" id="overlay-calc" onclick="closeCalculatrice(event)">
+  <div class="modal">
+    <div class="mh"></div>
+    <div class="calc-sheet-header">
+      <div class="mt">🧮 Calculatrice</div>
+      <button class="btn-calc-clear-hist" onclick="calcClearHistory()">🗑️</button>
+    </div>
+    <div class="calc-body">
+      <div class="calc-expr-line" id="calc-expr-line"></div>
+      <div class="calc-display" id="calc-display">0</div>
+      <div class="calc-history-box" id="calc-history-list"></div>
+      <div class="calc-grid">
+        <button class="calc-btn" onclick="calcClear()">C</button>
+        <button class="calc-btn" onclick="calcBackspace()">⌫</button>
+        <button class="calc-btn op" onclick="calcOp('/')">÷</button>
+        <button class="calc-btn op" onclick="calcOp('*')">×</button>
+        <button class="calc-btn" onclick="calcDigit('7')">7</button>
+        <button class="calc-btn" onclick="calcDigit('8')">8</button>
+        <button class="calc-btn" onclick="calcDigit('9')">9</button>
+        <button class="calc-btn op" onclick="calcOp('-')">−</button>
+        <button class="calc-btn" onclick="calcDigit('4')">4</button>
+        <button class="calc-btn" onclick="calcDigit('5')">5</button>
+        <button class="calc-btn" onclick="calcDigit('6')">6</button>
+        <button class="calc-btn op" onclick="calcOp('+')">+</button>
+        <button class="calc-btn" onclick="calcDigit('1')">1</button>
+        <button class="calc-btn" onclick="calcDigit('2')">2</button>
+        <button class="calc-btn" onclick="calcDigit('3')">3</button>
+        <button class="calc-btn eq" onclick="calcEquals()">=</button>
+        <button class="calc-btn span2" onclick="calcDigit('0')">0</button>
+        <button class="calc-btn" onclick="calcDigit('.')">.</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Hidden file inputs for PDF upload -->
@@ -445,8 +508,37 @@ function saveEntries() {
   }, 600);
 }
 
+// ── PDF PAR DÉFAUT (modèles annuels intégrés à l'app, mis à jour 1x/an) ──
+const isDefaultPdf = new Array(12).fill(false);
+function defaultPdfPath(i){ return `../assets/pdf-templates/${String(i+1).padStart(2,'0')}.pdf`; }
+function arrayBufferToBase64(buffer){
+  let binary=''; const bytes=new Uint8Array(buffer); const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){ binary+=String.fromCharCode.apply(null, bytes.subarray(i,i+chunk)); }
+  return btoa(binary);
+}
+async function fetchDefaultPdf(i){
+  try{
+    const res=await fetch(defaultPdfPath(i));
+    if(!res.ok) return null;
+    const buf=await res.arrayBuffer();
+    return arrayBufferToBase64(buf);
+  }catch(e){ console.warn('[Carnet] Modèle par défaut introuvable pour le mois', i+1, e); return null; }
+}
+async function loadDefaultPdfsIfNeeded(){
+  const fetches=[];
+  for(let i=0;i<12;i++){
+    if(!monthPdfs[i]){
+      fetches.push(fetchDefaultPdf(i).then(b64=>{
+        if(b64){ monthPdfs[i]=b64; isDefaultPdf[i]=true; }
+      }));
+    }
+  }
+  await Promise.all(fetches);
+}
+
 function savePdf(moIdx, b64) {
   monthPdfs[moIdx] = b64;
+  isDefaultPdf[moIdx] = false;
   localStorage.setItem('ch3_pdf_'+moIdx, b64);
   if(!currentUid) return;
   db.collection('carnet_heures_pdfs').doc(`${currentUid}_${moIdx}`).set({pdf: b64})
@@ -480,21 +572,20 @@ function showView(v) {
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
   $(v).classList.add('active');
   curView = v;
-  const isHome = v==='viewHome';
   const isPdf  = v==='viewPdf';
-  $('backBtn').style.display = isHome ? 'none' : 'flex';
+  const isHome = v==='viewHome';
   $('paramsBtn').style.display = isPdf || isHome ? 'flex' : 'none';
-  $('backBtn').onclick = isHome ? null : () => {
-    if(v==='viewPdf') showView('viewHome');
-    else showView('viewHome');
-  };
+}
+
+function handleHeaderHome() {
+  if (curView === 'viewHome') { window.location.href = '../index.html'; }
+  else { showView('viewHome'); }
 }
 
 function showParams() {
   loadCfgUI();
   renderPdfSlots();
   showView('viewParams');
-  $('backBtn').onclick = () => showView('viewHome');
   $('paramsBtn').style.display = 'none';
 }
 
@@ -538,11 +629,16 @@ let currentPdfDoc = null;
 let currentPdfBytes = null; // original bytes
 let modifiedPdfBytes = null; // with user edits applied
 
-function openMonth(moIdx) {
+async function openMonth(moIdx) {
   curMo = moIdx;
   $('pdfMonthLbl').textContent = `${MOIS[moIdx]} ${curYear}`;
   $('hdrSub').textContent = `${MOIS[moIdx]} ${curYear}`;
   showView('viewPdf');
+
+  if (!monthPdfs[moIdx]) {
+    const b64 = await fetchDefaultPdf(moIdx);
+    if (b64) { monthPdfs[moIdx] = b64; isDefaultPdf[moIdx] = true; }
+  }
 
   if (!monthPdfs[moIdx]) {
     $('pdfScroll').innerHTML = `
@@ -995,12 +1091,19 @@ async function downloadFilledPdf() {
 // ═══════════════════════════════════
 function renderPdfSlots() {
   const container = $('pdfSlots');
-  container.innerHTML = MOIS.map((m,i)=>`
+  container.innerHTML = MOIS.map((m,i)=>{
+    let status='—', cls='';
+    if(monthPdfs[i]){
+      if(isDefaultPdf[i]){ status='🗂️ Modèle par défaut'; cls='ok'; }
+      else { status='✅ Importé'; cls='ok'; }
+    }
+    return `
     <div class="p-row" onclick="triggerPdfUpload(${i})">
       <span class="p-row-lbl">${m}</span>
-      <span class="p-row-status ${monthPdfs[i]?'ok':''}" id="pst_${i}">${monthPdfs[i]?'✅ Importé':'—'}</span>
+      <span class="p-row-status ${cls}" id="pst_${i}">${status}</span>
       <span style="color:var(--muted);margin-left:6px">›</span>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   // Create hidden file inputs
   $('pdfInputs').innerHTML = MOIS.map((_,i)=>
@@ -1047,18 +1150,139 @@ function closeModal(){ $('overlay').classList.remove('open'); }
 function closeOverlay(e){ if(e.target===$('overlay')) closeModal(); }
 
 // ═══════════════════════════════════
+// CALCULATRICE POPUP (historique partagé avec les autres modules)
+// ═══════════════════════════════════
+let calcExpr='';
+let calcShowingResult=false;
+const CALC_HISTORY_KEY='rv6_calc_history';
+const CALC_HISTORY_MAX_DAYS=3;
+
+function calcPurgeHistory(){
+  let hist=[];
+  try{hist=JSON.parse(localStorage.getItem(CALC_HISTORY_KEY))||[];}catch(e){hist=[];}
+  const limit=Date.now()-(CALC_HISTORY_MAX_DAYS*24*60*60*1000);
+  hist=hist.filter(h=>h.ts>=limit);
+  localStorage.setItem(CALC_HISTORY_KEY,JSON.stringify(hist));
+  return hist;
+}
+function calcGetHistory(){try{return JSON.parse(localStorage.getItem(CALC_HISTORY_KEY))||[];}catch(e){return [];}}
+function calcAddToHistory(expr,result){
+  const hist=calcGetHistory();
+  hist.unshift({expr,result,ts:Date.now()});
+  localStorage.setItem(CALC_HISTORY_KEY,JSON.stringify(hist.slice(0,50)));
+  calcRenderHistory();
+}
+function calcRenderHistory(){
+  const box=document.getElementById('calc-history-list');
+  if(!box)return;
+  const hist=calcGetHistory();
+  if(hist.length===0){
+    box.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:6px 0;">Aucun calcul récent</div>';
+    return;
+  }
+  box.innerHTML=hist.map(h=>{
+    const exprDisp=h.expr.replace(/\*/g,'×').replace(/\//g,'÷');
+    return `<div class="calc-history-row" onclick="calcUseHistory('${h.result}')">
+      <span class="calc-history-expr">${exprDisp} =</span>
+      <span class="calc-history-result">${h.result}</span>
+    </div>`;
+  }).join('');
+}
+function calcUseHistory(result){
+  if(calcExpr===''||calcShowingResult){calcExpr=String(result);}
+  else{calcExpr+=String(result);}
+  calcShowingResult=false;
+  calcRefreshDisplay();
+}
+function calcClearHistory(){
+  localStorage.setItem(CALC_HISTORY_KEY,JSON.stringify([]));
+  calcRenderHistory();
+}
+function openCalculatrice(){
+  calcExpr='';
+  calcShowingResult=false;
+  calcPurgeHistory();
+  calcRefreshDisplay();
+  calcRenderHistory();
+  document.getElementById('overlay-calc').classList.add('open');
+}
+function closeCalculatrice(e){
+  if(e&&e.target.id!=='overlay-calc')return;
+  document.getElementById('overlay-calc').classList.remove('open');
+}
+function calcRefreshDisplay(){
+  const line=document.getElementById('calc-expr-line');
+  const d=document.getElementById('calc-display');
+  if(calcExpr===''){line.textContent='';d.textContent='0';return;}
+  line.textContent='';
+  d.textContent=calcExpr.replace(/\*/g,'×').replace(/\//g,'÷');
+}
+function calcDigit(d){
+  if(calcShowingResult){calcExpr='';calcShowingResult=false;}
+  if(d==='.'){
+    const parts=calcExpr.split(/[+\-*/]/);
+    const last=parts[parts.length-1];
+    if(last.includes('.'))return;
+    if(last==='')calcExpr+='0';
+  }
+  calcExpr+=d;
+  calcRefreshDisplay();
+}
+function calcOp(op){
+  if(calcExpr==='')return;
+  if(calcShowingResult){calcShowingResult=false;}
+  const lastChar=calcExpr.slice(-1);
+  if('+-*/'.includes(lastChar)){calcExpr=calcExpr.slice(0,-1)+op;}
+  else{calcExpr+=op;}
+  calcRefreshDisplay();
+}
+function calcClear(){calcExpr='';calcShowingResult=false;calcRefreshDisplay();}
+function calcBackspace(){
+  if(calcShowingResult){calcExpr='';calcShowingResult=false;}
+  else{calcExpr=calcExpr.slice(0,-1);}
+  calcRefreshDisplay();
+}
+function calcEquals(){
+  if(calcExpr===''||calcShowingResult)return;
+  let safeExpr=calcExpr.replace(/[+\-*/]+$/,'');
+  if(!/^[0-9.+\-*/]+$/.test(safeExpr)){calcClear();return;}
+  try{
+    const result=Function('"use strict"; return ('+safeExpr+')')();
+    if(!isFinite(result)){
+      document.getElementById('calc-expr-line').textContent='';
+      document.getElementById('calc-display').textContent='Erreur';
+      calcExpr='';
+      return;
+    }
+    const rounded=Math.round(result*100000)/100000;
+    const exprForHistory=safeExpr;
+    document.getElementById('calc-expr-line').textContent=safeExpr.replace(/\*/g,'×').replace(/\//g,'÷')+' =';
+    document.getElementById('calc-display').textContent=String(rounded);
+    calcExpr=String(rounded);
+    calcShowingResult=true;
+    calcAddToHistory(exprForHistory,rounded);
+  }catch(e){
+    document.getElementById('calc-expr-line').textContent='';
+    document.getElementById('calc-display').textContent='Erreur';
+    calcExpr='';
+    calcShowingResult=false;
+  }
+}
+
+// ═══════════════════════════════════
 // BOOT — gated by Firebase Auth
 // ═══════════════════════════════════
 $('hdrSub').textContent = String(curYear);
-$('backBtn').style.display = 'none';
 
 loadAll();        // local-first: show cached data immediately if any
 renderHome();
+loadDefaultPdfsIfNeeded().then(renderHome); // complète avec les modèles par défaut, puis rafraîchit
 
 auth.onAuthStateChanged(async user => {
   if (!user) { window.location.href = '../login.html'; return; }
   currentUid = user.uid;
   await syncFromFirestore();
+  await loadDefaultPdfsIfNeeded(); // au cas où un mois manquerait encore après la sync
   $('authGuard').classList.remove('show');
   renderHome();           // refresh with synced data
   if (curView === 'viewPdf' && curMo >= 0) renderPdfPage(curMo);
