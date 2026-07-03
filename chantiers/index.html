@@ -31,6 +31,32 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .header-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px;}
 .header-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.8px;text-transform:uppercase;}
 .header-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;}
+.calc-btn-header{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
+.calc-btn-header:active{background:rgba(255,255,255,.25);}
+
+/* ── OVERLAY CALCULATRICE ── */
+.overlay-calc{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;display:none;align-items:flex-end;}
+.overlay-calc.open{display:flex;}
+.calc-sheet{background:var(--card);border-radius:20px 20px 0 0;width:100%;padding:20px 16px 32px;max-height:88vh;overflow-y:auto;}
+.calc-sheet-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;}
+.calc-sheet-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.calc-sheet-title{font-size:16px;font-weight:700;color:var(--text);}
+.btn-calc-clear-hist{border:none;background:none;font-size:16px;color:var(--text3);cursor:pointer;padding:4px 6px;}
+.btn-calc-clear-hist:active{opacity:.6;}
+.calc-expr-line{font-size:13px;color:var(--text3);text-align:right;min-height:16px;padding:0 14px;}
+.calc-display{background:var(--bg);border-radius:var(--rs);padding:10px 14px 16px;text-align:right;font-size:28px;font-weight:700;margin-bottom:10px;color:var(--text);overflow-x:auto;white-space:nowrap;}
+.calc-history-box{background:var(--bg);border-radius:var(--rs);padding:6px 12px;margin-bottom:10px;max-height:110px;overflow-y:auto;}
+.calc-history-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border);cursor:pointer;}
+.calc-history-row:first-child{border-top:none;}
+.calc-history-row:active{opacity:.6;}
+.calc-history-expr{font-size:12px;color:var(--text3);}
+.calc-history-result{font-size:12px;font-weight:700;color:var(--text);}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.calc-btn{border:none;background:var(--bg);color:var(--text);font-family:inherit;font-size:18px;font-weight:600;padding:16px 0;border-radius:var(--rs);cursor:pointer;}
+.calc-btn:active{opacity:.7;}
+.calc-btn.op{background:var(--navy);color:#fff;}
+.calc-btn.eq{background:var(--yellow);color:var(--navy);grid-row:span 2;}
+.calc-btn.span2{grid-column:span 2;}
  
 /* ── SCROLL ── */
 .scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:16px 14px calc(var(--safe-b)+20px);}
@@ -115,23 +141,39 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .color-dot.sel{border-color:var(--navy);transform:scale(1.18);}
  
 /* ── DETAIL SHEET ── */
-.detail-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
+/* ═══ CHANTIER DETAIL — page plein écran avec onglets ═══ */
+.detail-ov{position:fixed;inset:0;background:var(--bg);z-index:250;display:none;flex-direction:column;}
 .detail-ov.open{display:flex;}
-.detail-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
-.detail-drag{padding:14px 16px 0;}
-.det-head{padding:0 16px 14px;border-bottom:1px solid var(--border);}
-.det-name{font-size:20px;font-weight:700;color:var(--text);}
-.det-meta{font-size:12px;color:var(--text3);margin-top:3px;}
-.det-body{flex:1;overflow-y:auto;padding:16px;}
+.det-header{background:var(--navy);flex-shrink:0;padding-top:var(--safe-t);box-shadow:0 2px 14px rgba(0,0,0,.28);}
+.det-header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;}
+.det-header-titles{flex:1;min-width:0;}
+.det-header-name{font-size:17px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.det-header-meta{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px;display:flex;align-items:center;gap:6px;}
+.det-tabs{display:flex;gap:6px;padding:0 12px 12px;}
+.det-tab{flex:1;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;border-radius:8px;padding:9px 4px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;}
+.det-tab.active{background:var(--yellow);color:var(--navy);}
+.det-tab-content{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;}
 .det-row{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--bg2);}
 .det-row:last-child{border-bottom:none;}
 .det-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;}
 .det-val{font-size:14px;font-weight:600;color:var(--text);text-align:right;max-width:55%;}
-.det-notes{background:var(--bg);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:4px;}
-.det-soon{background:var(--bg);border:1.5px dashed var(--border);border-radius:var(--rs);padding:14px;text-align:center;margin-top:4px;}
-.det-soon-icon{font-size:28px;margin-bottom:6px;}
-.det-soon-txt{font-size:12px;color:var(--text3);font-weight:600;}
-.det-footer{padding:12px 16px calc(12px + var(--safe-b));display:flex;gap:8px;border-top:1px solid var(--border);}
+.det-notes{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:12px;}
+.det-info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:4px 14px;box-shadow:var(--sh);}
+.det-file-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);margin-bottom:12px;flex-shrink:0;}
+.det-file-icon{font-size:30px;flex-shrink:0;}
+.det-file-info{flex:1;min-width:0;}
+.det-file-name{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.det-file-size{font-size:11px;color:var(--text3);margin-top:2px;}
+.det-file-actions{display:flex;gap:6px;flex-shrink:0;}
+.det-file-btn{border:none;border-radius:var(--rs);padding:8px 12px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;cursor:pointer;}
+.det-file-btn.primary{background:var(--navy);color:#fff;}
+.det-file-btn.ghost{background:var(--bg2);color:var(--text2);}
+.det-pdf-frame{width:100%;flex:1;min-height:0;border:none;border-radius:var(--rs);background:var(--bg2);}
+.det-empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:20px;}
+.det-empty-icon{font-size:44px;opacity:.5;}
+.det-empty-text{font-size:13px;color:var(--text3);font-weight:600;}
+.det-empty-btn{background:var(--navy);color:#fff;border:none;border-radius:var(--rs);padding:12px 20px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.det-footer{padding:12px 0 4px;flex-shrink:0;}
  
 /* ── STATUT COLOR MAP ── */
  
@@ -145,12 +187,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 <!-- HEADER -->
 <div class="header">
   <div class="header-inner">
-    <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
+    <button class="back-btn" onclick="window.location.href='../index.html'">🏠</button>
     <div class="header-titles">
       <div class="header-title">Chantiers</div>
-      <div class="header-sub">Risse S.A.</div>
+      <div class="header-sub" id="hdrSub"></div>
     </div>
     <div class="header-count" id="hdrCount">0</div>
+    <button class="calc-btn-header" onclick="openCalculatrice()" title="Calculatrice">🧮</button>
   </div>
 </div>
  
@@ -250,29 +293,70 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   </div>
 </div>
  
-<!-- ═══ DETAIL SHEET ═══ -->
+<!-- ═══ CHANTIER DETAIL — page plein écran ═══ -->
 <div class="detail-ov" id="detail-ov">
-  <div class="detail-sh">
-    <div class="detail-drag"><div class="modal-handle"></div></div>
-    <div class="det-head">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-        <div id="det-color-dot" style="width:14px;height:14px;border-radius:50%;flex-shrink:0;"></div>
-        <div class="det-name" id="det-nom"></div>
-        <div id="det-status-badge" class="card-status-badge" style="margin-left:auto;"></div>
-      </div>
-      <div class="det-meta" id="det-meta"></div>
-    </div>
-    <div class="det-body">
-      <div id="det-rows"></div>
-      <!-- Zone "à venir" pour les futures fonctionnalités -->
-      <div class="det-soon" style="margin-top:12px;">
-        <div class="det-soon-icon">🚀</div>
-        <div class="det-soon-txt">Documents, photos, plans et suivi<br>seront disponibles dans une prochaine version</div>
+  <div class="det-header">
+    <div class="det-header-inner">
+      <button class="back-btn" onclick="closeDetail()">←</button>
+      <div class="det-header-titles">
+        <div class="det-header-name" id="det-nom"></div>
+        <div class="det-header-meta">
+          <span id="det-status-badge" class="card-status-badge"></span>
+          <span id="det-meta"></span>
+        </div>
       </div>
     </div>
+    <div class="det-tabs">
+      <button class="det-tab active" id="det-tab-btn-plan" onclick="switchDetTab('plan')">📐 Plan</button>
+      <button class="det-tab" id="det-tab-btn-devis" onclick="switchDetTab('devis')">📄 Devis</button>
+      <button class="det-tab" id="det-tab-btn-infos" onclick="switchDetTab('infos')">ℹ️ Infos</button>
+    </div>
+  </div>
+
+  <div class="det-tab-content" id="det-tab-plan"></div>
+  <div class="det-tab-content" id="det-tab-devis" style="display:none"></div>
+  <div class="det-tab-content" id="det-tab-infos" style="display:none">
+    <div class="det-info-card"><div id="det-rows"></div></div>
+    <div id="det-notes-wrap"></div>
     <div class="det-footer">
-      <button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteCurrentChantier()">🗑 Supprimer</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeDetail()">Fermer</button>
+      <button class="btn btn-danger btn-sm" style="width:100%" onclick="deleteCurrentChantier()">🗑 Supprimer ce chantier</button>
+    </div>
+  </div>
+
+  <input type="file" id="det-plan-input" accept="application/pdf" style="display:none" onchange="handleDetFileUpload(event,'plan')">
+  <input type="file" id="det-devis-input" accept="application/pdf" style="display:none" onchange="handleDetFileUpload(event,'pdf')">
+</div>
+ 
+<!-- OVERLAY CALCULATRICE -->
+<div class="overlay-calc" id="overlay-calc" onclick="closeCalculatrice(event)">
+  <div class="calc-sheet">
+    <div class="calc-sheet-handle"></div>
+    <div class="calc-sheet-header">
+      <div class="calc-sheet-title">🧮 Calculatrice</div>
+      <button class="btn-calc-clear-hist" onclick="calcClearHistory()">🗑️</button>
+    </div>
+    <div class="calc-expr-line" id="calc-expr-line"></div>
+    <div class="calc-display" id="calc-display">0</div>
+    <div class="calc-history-box" id="calc-history-list"></div>
+    <div class="calc-grid">
+      <button class="calc-btn" onclick="calcClear()">C</button>
+      <button class="calc-btn" onclick="calcBackspace()">⌫</button>
+      <button class="calc-btn op" onclick="calcOp('/')">÷</button>
+      <button class="calc-btn op" onclick="calcOp('*')">×</button>
+      <button class="calc-btn" onclick="calcDigit('7')">7</button>
+      <button class="calc-btn" onclick="calcDigit('8')">8</button>
+      <button class="calc-btn" onclick="calcDigit('9')">9</button>
+      <button class="calc-btn op" onclick="calcOp('-')">−</button>
+      <button class="calc-btn" onclick="calcDigit('4')">4</button>
+      <button class="calc-btn" onclick="calcDigit('5')">5</button>
+      <button class="calc-btn" onclick="calcDigit('6')">6</button>
+      <button class="calc-btn op" onclick="calcOp('+')">+</button>
+      <button class="calc-btn" onclick="calcDigit('1')">1</button>
+      <button class="calc-btn" onclick="calcDigit('2')">2</button>
+      <button class="calc-btn" onclick="calcDigit('3')">3</button>
+      <button class="calc-btn eq" onclick="calcEquals()">=</button>
+      <button class="calc-btn span2" onclick="calcDigit('0')">0</button>
+      <button class="calc-btn" onclick="calcDigit('.')">.</button>
     </div>
   </div>
 </div>
@@ -389,6 +473,7 @@ function renderList() {
     if (c.fin) pills.push({ label: '→ '+fmtDate(c.fin) });
     if (c.montant) pills.push({ label: 'CHF '+Number(c.montant).toLocaleString('fr-CH'), accent: true });
     if (c.marche) pills.push({ label: c.marche });
+    if (c.plan && c.plan.data) pills.push({ label: '📐 Plan' });
     if (c.pdf && c.pdf.data) pills.push({ label: '📄 Devis' });
  
     return `
@@ -480,6 +565,7 @@ function saveChantier() {
     color:    selectedColor,
     notes:    g('add-notes'),
     pdf:      currentPdf,
+    plan:     null,
     createdAt: new Date().toISOString(),
     // Structure pour la suite
     documents: [],
@@ -549,27 +635,35 @@ function updatePdfPreview(){
 function viewPdf(chId){
   const c = load().find(x=>x.id===chId);
   if(!c || !c.pdf || !c.pdf.data) return;
-  // Ouvrir le PDF dans un nouvel onglet
   const w = window.open('');
   if(w){
     w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0;"><embed src="${c.pdf.data}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
   }
 }
- 
+function viewPlan(chId){
+  const c = load().find(x=>x.id===chId);
+  if(!c || !c.plan || !c.plan.data) return;
+  const w = window.open('');
+  if(w){
+    w.document.write(`<html><head><title>${esc(c.plan.name)}</title></head><body style="margin:0;"><embed src="${c.plan.data}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
+  }
+}
+
 // ════════════════════════════════════════════
-// DETAIL
+// DETAIL — page plein écran à onglets (Plan / Devis / Infos)
 // ════════════════════════════════════════════
+let currentDetTab = 'plan';
+
 function openDetail(id) {
   const c = load().find(x=>x.id===id);
   if (!c) return;
   currentDetailId = id;
- 
-  document.getElementById('det-color-dot').style.background = c.color||COLORS[0];
+
   document.getElementById('det-nom').textContent = c.nom;
   document.getElementById('det-status-badge').textContent = STATUS_LABEL[c.statut]||'Actif';
   document.getElementById('det-status-badge').className = 'card-status-badge '+(STATUS_CLASS[c.statut]||'status-actif');
   document.getElementById('det-meta').textContent = c.commune||'';
- 
+
   const rows = [];
   const add = (l,v) => { if(v) rows.push(`<div class="det-row"><span class="det-label">${l}</span><span class="det-val">${esc(v)}</span></div>`); };
   add('Client',c.client);
@@ -579,28 +673,93 @@ function openDetail(id) {
   add('Date fin prévue',c.fin?fmtDateLong(c.fin):'');
   add('Montant devis',c.montant?'CHF '+Number(c.montant).toLocaleString('fr-CH'):'');
   add('Type de marché',c.marche);
- 
-  // PDF devis
-  let pdfHtml = '';
-  if(c.pdf && c.pdf.data){
-    pdfHtml = `<div style="margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:12px;display:flex;align-items:center;gap:10px;">
-      <span style="font-size:28px;">📄</span>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;font-weight:600;color:var(--text);">${esc(c.pdf.name)}</div>
-        <div style="font-size:10px;color:var(--text3);">${c.pdf.size}</div>
-      </div>
-      <button onclick="viewPdf('${c.id}')" style="background:var(--navy);color:#fff;border:none;border-radius:var(--rs);padding:8px 12px;font-family:'Inter',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">Ouvrir</button>
-    </div>`;
-  }
- 
-  const notesHtml = c.notes ? `<div style="margin-top:8px"><div class="det-label" style="margin-bottom:6px">Notes</div><div class="det-notes">${esc(c.notes)}</div></div>` : '';
- 
-  document.getElementById('det-rows').innerHTML = rows.join('') + pdfHtml + notesHtml;
+  document.getElementById('det-rows').innerHTML = rows.join('');
+  document.getElementById('det-notes-wrap').innerHTML = c.notes
+    ? `<div class="det-label" style="margin-top:12px;margin-bottom:6px">Notes</div><div class="det-notes">${esc(c.notes)}</div>`
+    : '';
+
+  currentDetTab = 'plan';
+  renderDetTabButtons();
+  renderDetFileTab('plan');
+  renderDetFileTab('devis');
+  document.getElementById('det-tab-plan').style.display = '';
+  document.getElementById('det-tab-devis').style.display = 'none';
+  document.getElementById('det-tab-infos').style.display = 'none';
+
   document.getElementById('detail-ov').classList.add('open');
 }
+
+function switchDetTab(tab){
+  currentDetTab = tab;
+  renderDetTabButtons();
+  document.getElementById('det-tab-plan').style.display  = tab==='plan'  ? '' : 'none';
+  document.getElementById('det-tab-devis').style.display = tab==='devis' ? '' : 'none';
+  document.getElementById('det-tab-infos').style.display = tab==='infos' ? '' : 'none';
+}
+function renderDetTabButtons(){
+  ['plan','devis','infos'].forEach(t=>{
+    document.getElementById('det-tab-btn-'+t).classList.toggle('active', t===currentDetTab);
+  });
+}
+
+// field = 'plan' ou 'pdf' (pdf = devis, nom historique du champ) ; tabKey = 'plan' ou 'devis'
+function renderDetFileTab(tabKey){
+  const field = tabKey==='plan' ? 'plan' : 'pdf';
+  const label = tabKey==='plan' ? 'plan' : 'devis';
+  const c = load().find(x=>x.id===currentDetailId);
+  const file = c && c[field];
+  const el = document.getElementById('det-tab-'+tabKey);
+
+  if(!file || !file.data){
+    el.innerHTML = `<div class="det-empty-state">
+      <div class="det-empty-icon">📄</div>
+      <div class="det-empty-text">Aucun ${label} pour l'instant</div>
+      <button class="det-empty-btn" onclick="document.getElementById('det-${field==='plan'?'plan':'devis'}-input').click()">📂 Importer le ${label}</button>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="det-file-card">
+      <span class="det-file-icon">📄</span>
+      <div class="det-file-info">
+        <div class="det-file-name">${esc(file.name)}</div>
+        <div class="det-file-size">${file.size}</div>
+      </div>
+      <div class="det-file-actions">
+        <button class="det-file-btn ghost" onclick="document.getElementById('det-${field==='plan'?'plan':'devis'}-input').click()">Remplacer</button>
+        <button class="det-file-btn primary" onclick="${field==='plan'?'viewPlan':'viewPdf'}('${currentDetailId}')">Agrandir</button>
+      </div>
+    </div>
+    <iframe class="det-pdf-frame" src="${file.data}"></iframe>
+  `;
+}
+
+function handleDetFileUpload(event, field){
+  const file = event.target.files[0];
+  if(!file) return;
+  if(file.size > 2 * 1024 * 1024){
+    showToast('⚠️ Fichier trop lourd (max 2 Mo)');
+    event.target.value='';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const data = [...load()];
+    const idx = data.findIndex(x=>x.id===currentDetailId);
+    if(idx===-1) return;
+    data[idx] = {...data[idx], [field]: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result }};
+    save(data);
+    renderDetFileTab(field==='plan' ? 'plan' : 'devis');
+    renderList();
+    showToast(`✓ ${field==='plan'?'Plan':'Devis'} enregistré`);
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
+}
+
 function closeDetail() { document.getElementById('detail-ov').classList.remove('open'); }
-document.getElementById('detail-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('detail-ov')) closeDetail(); });
- 
+
 function deleteCurrentChantier() {
   if (!currentDetailId) return;
   const data = load().filter(c=>c.id!==currentDetailId);
@@ -656,6 +815,133 @@ async function initApp() {
   renderList();
 }
 
+// ── CALCULATRICE POPUP (historique partagé avec les autres modules) ──
+let calcExpr='';
+let calcShowingResult=false;
+const CALC_HISTORY_KEY='rv6_calc_history';
+const CALC_HISTORY_MAX_DAYS=3;
+
+function calcPurgeHistory(){
+  let hist=[];
+  try{hist=JSON.parse(localStorage.getItem(CALC_HISTORY_KEY))||[];}catch(e){hist=[];}
+  const limit=Date.now()-(CALC_HISTORY_MAX_DAYS*24*60*60*1000);
+  hist=hist.filter(h=>h.ts>=limit);
+  localStorage.setItem(CALC_HISTORY_KEY,JSON.stringify(hist));
+  return hist;
+}
+function calcGetHistory(){try{return JSON.parse(localStorage.getItem(CALC_HISTORY_KEY))||[];}catch(e){return [];}}
+function calcAddToHistory(expr,result){
+  const hist=calcGetHistory();
+  hist.unshift({expr,result,ts:Date.now()});
+  localStorage.setItem(CALC_HISTORY_KEY,JSON.stringify(hist.slice(0,50)));
+  calcRenderHistory();
+}
+function calcRenderHistory(){
+  const box=document.getElementById('calc-history-list');
+  if(!box)return;
+  const hist=calcGetHistory();
+  if(hist.length===0){
+    box.innerHTML='<div style="font-size:12px;color:var(--text3);text-align:center;padding:6px 0;">Aucun calcul récent</div>';
+    return;
+  }
+  box.innerHTML=hist.map(h=>{
+    const exprDisp=h.expr.replace(/\*/g,'×').replace(/\//g,'÷');
+    return `<div class="calc-history-row" onclick="calcUseHistory('${h.result}')">
+      <span class="calc-history-expr">${exprDisp} =</span>
+      <span class="calc-history-result">${h.result}</span>
+    </div>`;
+  }).join('');
+}
+function calcUseHistory(result){
+  if(calcExpr===''||calcShowingResult){calcExpr=String(result);}
+  else{calcExpr+=String(result);}
+  calcShowingResult=false;
+  calcRefreshDisplay();
+}
+function calcClearHistory(){
+  localStorage.setItem(CALC_HISTORY_KEY,JSON.stringify([]));
+  calcRenderHistory();
+}
+function openCalculatrice(){
+  calcExpr='';
+  calcShowingResult=false;
+  calcPurgeHistory();
+  calcRefreshDisplay();
+  calcRenderHistory();
+  document.getElementById('overlay-calc').classList.add('open');
+}
+function closeCalculatrice(e){
+  if(e&&e.target.id!=='overlay-calc')return;
+  document.getElementById('overlay-calc').classList.remove('open');
+}
+function calcRefreshDisplay(){
+  const line=document.getElementById('calc-expr-line');
+  const d=document.getElementById('calc-display');
+  if(calcExpr===''){line.textContent='';d.textContent='0';return;}
+  line.textContent='';
+  d.textContent=calcExpr.replace(/\*/g,'×').replace(/\//g,'÷');
+}
+function calcDigit(d){
+  if(calcShowingResult){calcExpr='';calcShowingResult=false;}
+  if(d==='.'){
+    const parts=calcExpr.split(/[+\-*/]/);
+    const last=parts[parts.length-1];
+    if(last.includes('.'))return;
+    if(last==='')calcExpr+='0';
+  }
+  calcExpr+=d;
+  calcRefreshDisplay();
+}
+function calcOp(op){
+  if(calcExpr==='')return;
+  if(calcShowingResult){calcShowingResult=false;}
+  const lastChar=calcExpr.slice(-1);
+  if('+-*/'.includes(lastChar)){calcExpr=calcExpr.slice(0,-1)+op;}
+  else{calcExpr+=op;}
+  calcRefreshDisplay();
+}
+function calcClear(){calcExpr='';calcShowingResult=false;calcRefreshDisplay();}
+function calcBackspace(){
+  if(calcShowingResult){calcExpr='';calcShowingResult=false;}
+  else{calcExpr=calcExpr.slice(0,-1);}
+  calcRefreshDisplay();
+}
+function calcEquals(){
+  if(calcExpr===''||calcShowingResult)return;
+  let safeExpr=calcExpr.replace(/[+\-*/]+$/,'');
+  if(!/^[0-9.+\-*/]+$/.test(safeExpr)){calcClear();return;}
+  try{
+    const result=Function('"use strict"; return ('+safeExpr+')')();
+    if(!isFinite(result)){
+      document.getElementById('calc-expr-line').textContent='';
+      document.getElementById('calc-display').textContent='Erreur';
+      calcExpr='';
+      return;
+    }
+    const rounded=Math.round(result*100000)/100000;
+    const exprForHistory=safeExpr;
+    document.getElementById('calc-expr-line').textContent=safeExpr.replace(/\*/g,'×').replace(/\//g,'÷')+' =';
+    document.getElementById('calc-display').textContent=String(rounded);
+    calcExpr=String(rounded);
+    calcShowingResult=true;
+    calcAddToHistory(exprForHistory,rounded);
+  }catch(e){
+    document.getElementById('calc-expr-line').textContent='';
+    document.getElementById('calc-display').textContent='Erreur';
+    calcExpr='';
+    calcShowingResult=false;
+  }
+}
+
+// ── DATE DU HEADER ──
+function updateHeaderDate(){
+  const el=document.getElementById('hdrSub');
+  if(!el)return;
+  const str=new Date().toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long'});
+  el.textContent=str.charAt(0).toUpperCase()+str.slice(1);
+}
+updateHeaderDate();
+
 // ── EXPOSE FONCTIONS AU HTML ─────────────────
 window.openAdd               = openAdd;
 window.closeAdd              = closeAdd;
@@ -664,10 +950,22 @@ window.setFilter             = setFilter;
 window.onSearch              = onSearch;
 window.selectColor           = selectColor;
 window.clearPdf              = clearPdf;
-window.viewPdf               = viewPdf;
+window.viewPdf                = viewPdf;
 window.openDetail            = openDetail;
 window.closeDetail           = closeDetail;
 window.deleteCurrentChantier = deleteCurrentChantier;
+window.switchDetTab          = switchDetTab;
+window.handleDetFileUpload   = handleDetFileUpload;
+window.viewPlan              = viewPlan;
+window.openCalculatrice      = openCalculatrice;
+window.closeCalculatrice     = closeCalculatrice;
+window.calcClearHistory      = calcClearHistory;
+window.calcUseHistory        = calcUseHistory;
+window.calcDigit             = calcDigit;
+window.calcOp                = calcOp;
+window.calcClear             = calcClear;
+window.calcBackspace         = calcBackspace;
+window.calcEquals            = calcEquals;
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
