@@ -164,6 +164,7 @@
     <div id="empty-state">
       <b id="empty-title">Chargement du plan…</b>
       <div id="empty-sub">Le plan de ce chantier va s'afficher automatiquement.</div>
+      <button id="empty-retry-btn" onclick="location.reload()" style="display:none;margin-top:14px;padding:10px 18px;border:none;border-radius:8px;background:#3ecfd6;color:#0d1116;font-weight:700;font-family:inherit;cursor:pointer;">🔄 Réessayer</button>
     </div>
     <div id="stage" style="display:none;">
       <canvas id="plan"></canvas>
@@ -231,9 +232,12 @@ function currentItems(){
 // ---------- Chargement piloté par la page parente (module Chantiers) ----------
 // Le parent envoie : { type:'coteur-init', planData: <data URI base64>, items: <itemsByPage sauvegardé ou null>, chantierNom: <string> }
 // On renvoie au parent à chaque modification : { type:'coteur-items-update', items: itemsByPage }
+let initReceived = false;
 window.addEventListener('message', async (e)=>{
   const msg = e.data;
   if(!msg || msg.type !== 'coteur-init') return;
+  initReceived = true;
+  console.log('[Coteur] coteur-init reçu', {hasPlan: !!msg.planData, chantier: msg.chantierNom});
   if(msg.chantierNom) document.getElementById('brand-sub').textContent = msg.chantierNom;
   itemsByPage = msg.items && typeof msg.items === 'object' ? msg.items : {};
   // Recalcule nextId au-dessus de tout ce qui existe déjà, pour ne jamais réutiliser un id
@@ -242,14 +246,16 @@ window.addEventListener('message', async (e)=>{
   nextId = maxId + 1;
 
   if(!msg.planData){
-    document.getElementById('empty-title').textContent = 'Aucun plan pour ce chantier';
-    document.getElementById('empty-sub').textContent = 'Importe un plan depuis l\'onglet Plan pour commencer.';
+    setEmptyState('Aucun plan pour ce chantier', 'Importe un plan depuis l\'onglet Plan pour commencer.');
     return;
   }
   try{
+    console.log('[Coteur] fetch du plan…');
     const res = await fetch(msg.planData);
     const buf = await res.arrayBuffer();
+    console.log('[Coteur] plan récupéré,', buf.byteLength, 'octets — chargement pdf.js…');
     pdfDoc = await pdfjsLib.getDocument({data: buf}).promise;
+    console.log('[Coteur] PDF chargé,', pdfDoc.numPages, 'page(s)');
     currentPageNum = 1;
     pxPerMeter = null; calibrationLine = null;
     updateScaleBadge();
@@ -261,14 +267,34 @@ window.addEventListener('message', async (e)=>{
     await renderPage();
     renderList();
   }catch(err){
-    console.warn('[Coteur] Erreur chargement plan:', err);
-    document.getElementById('empty-title').textContent = 'Erreur de chargement du plan';
-    document.getElementById('empty-sub').textContent = 'Réessaie de rouvrir l\'onglet Plan.';
+    console.error('[Coteur] Erreur chargement plan:', err);
+    setEmptyState('Erreur de chargement du plan', (err && err.message ? err.message+' — ' : '')+'Réessaie ci-dessous.', true);
   }
 });
 
+function setEmptyState(title, sub, showRetry){
+  document.getElementById('empty-title').textContent = title;
+  document.getElementById('empty-sub').textContent = sub;
+  const btn = document.getElementById('empty-retry-btn');
+  if(btn) btn.style.display = showRetry ? 'inline-block' : 'none';
+}
+
 // Prévient le parent que le coteur est prêt à recevoir le plan
-if(window.parent !== window) window.parent.postMessage({type:'coteur-ready'}, '*');
+if(window.parent !== window){
+  window.parent.postMessage({type:'coteur-ready'}, '*');
+  console.log('[Coteur] coteur-ready envoyé au parent, en attente du plan…');
+}
+
+// Filet de sécurité : si rien n'est arrivé après 6s, on affiche un message clair
+// au lieu de rester bloqué indéfiniment sur "Chargement du plan…", et on relance
+// la demande au parent au cas où le tout premier postMessage se serait perdu.
+setTimeout(()=>{
+  if(!initReceived && window.parent !== window){
+    console.warn('[Coteur] Aucune réponse du parent après 6s, nouvelle tentative…');
+    setEmptyState('Ça prend plus de temps que prévu…', 'Nouvel essai en cours. Si ça persiste, réouvre l\'onglet Plan.', true);
+    window.parent.postMessage({type:'coteur-ready'}, '*');
+  }
+}, 6000);
 
 // Renvoie les mesures/cotes/notes au parent (debounce léger pour éviter de spammer pendant le tracé)
 let notifyTimer = null;
