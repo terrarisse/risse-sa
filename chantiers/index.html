@@ -566,6 +566,7 @@ function saveChantier() {
     notes:    g('add-notes'),
     pdf:      currentPdf,
     plan:     null,
+    planMeasures: null,
     createdAt: new Date().toISOString(),
     // Structure pour la suite
     documents: [],
@@ -731,9 +732,45 @@ function renderDetFileTab(tabKey){
         <button class="det-file-btn primary" onclick="${field==='plan'?'viewPlan':'viewPdf'}('${currentDetailId}')">Agrandir</button>
       </div>
     </div>
-    <iframe class="det-pdf-frame" src="${file.data}"></iframe>
+    ${tabKey==='plan'
+      ? `<iframe class="det-pdf-frame" id="det-coteur-frame" src="plan/index.html" onload="initCoteurFrame()"></iframe>`
+      : `<iframe class="det-pdf-frame" src="${file.data}"></iframe>`}
   `;
 }
+
+// ── Pont postMessage avec l'outil Coteur de plans (iframe) ──────────
+let coteurReady = false;
+function initCoteurFrame(){
+  coteurReady = true;
+  sendPlanToCoteur();
+}
+function sendPlanToCoteur(){
+  const frame = document.getElementById('det-coteur-frame');
+  const c = load().find(x=>x.id===currentDetailId);
+  if(!frame || !coteurReady || !c || !c.plan || !c.plan.data) return;
+  frame.contentWindow.postMessage({
+    type: 'coteur-init',
+    planData: c.plan.data,
+    items: c.planMeasures || null,
+    chantierNom: c.nom
+  }, '*');
+}
+let coteurSaveTimer = null;
+window.addEventListener('message', (e)=>{
+  const msg = e.data;
+  if(!msg) return;
+  if(msg.type === 'coteur-ready'){ sendPlanToCoteur(); return; }
+  if(msg.type === 'coteur-items-update' && currentDetailId){
+    clearTimeout(coteurSaveTimer);
+    coteurSaveTimer = setTimeout(()=>{
+      const data = [...load()];
+      const idx = data.findIndex(x=>x.id===currentDetailId);
+      if(idx===-1) return;
+      data[idx] = {...data[idx], planMeasures: msg.items};
+      save(data);
+    }, 400);
+  }
+});
 
 function handleDetFileUpload(event, field){
   const file = event.target.files[0];
@@ -748,8 +785,11 @@ function handleDetFileUpload(event, field){
     const data = [...load()];
     const idx = data.findIndex(x=>x.id===currentDetailId);
     if(idx===-1) return;
-    data[idx] = {...data[idx], [field]: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result }};
+    const patch = { [field]: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result } };
+    if(field==='plan') patch.planMeasures = null; // nouveau plan = anciennes mesures obsolètes (pixels différents)
+    data[idx] = {...data[idx], ...patch};
     save(data);
+    coteurReady = false; // le prochain onload du frame Coteur renverra ce nouveau plan
     renderDetFileTab(field==='plan' ? 'plan' : 'devis');
     renderList();
     showToast(`✓ ${field==='plan'?'Plan':'Devis'} enregistré`);
