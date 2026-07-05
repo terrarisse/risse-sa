@@ -54,6 +54,19 @@
   .tool[data-color="green"].active{border-color:var(--green); color:var(--green); background:rgba(125,214,106,.08);}
   .tool[data-color="yellow"].active{border-color:var(--yellow); color:var(--yellow); background:rgba(232,197,71,.08);}
 
+  #dim-options{
+    display:none; gap:14px; padding:8px 10px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); flex-shrink:0; align-items:center; flex-wrap:wrap;
+  }
+  #dim-options .seg-label{font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.4px;}
+  #dim-options .seg-group{display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  #dim-options .seg-btn{
+    background:transparent; border:none; color:var(--text-dim); font-size:12px; font-family:var(--sans);
+    padding:6px 12px; cursor:pointer;
+  }
+  #dim-options .seg-btn + .seg-btn{border-left:1px solid var(--line);}
+  #dim-options .seg-btn.active{background:var(--orange); color:#1a1204;}
+
   #viewport{
     flex:1; overflow:auto; position:relative; background:#111214;
     background-image: radial-gradient(circle, #23262a 1px, transparent 1px);
@@ -160,6 +173,19 @@
     <button class="tool" data-mode="note" data-color="yellow"><span class="dot"></span>Note</button>
   </div>
 
+  <div id="dim-options">
+    <span class="seg-label">Angle</span>
+    <div class="seg-group" data-setting="angle">
+      <button class="seg-btn active" data-value="90">90°</button>
+      <button class="seg-btn" data-value="libre">Libre</button>
+    </div>
+    <span class="seg-label">Pose</span>
+    <div class="seg-group" data-setting="input">
+      <button class="seg-btn active" data-value="drag">Glisser</button>
+      <button class="seg-btn" data-value="points">2 points</button>
+    </div>
+  </div>
+
   <div id="viewport">
     <div id="empty-state">
       <b id="empty-title">Chargement du plan…</b>
@@ -216,6 +242,8 @@ let nextId = 1;
 let currentRenderScale = 1;      // pixels canvas par point PDF, recalculé à chaque rendu de page
 let pageCalib = {};              // {pageNum: {ratio:number|null, pxPerMeter:number|null, calibrationLine:{p1,p2}|null}}
 const METERS_PER_PDF_POINT = 0.0254/72; // 1 point PDF = 1/72 pouce
+let dimAngleMode = '90';         // '90' (aimanté horizontal/vertical) | 'libre'
+let dimInputMode = 'drag';       // 'drag' (glisser) | 'points' (poser 2 points)
 let liveHudPoint = null;
 
 const planCanvas = document.getElementById('plan');
@@ -374,6 +402,7 @@ document.querySelectorAll('.tool').forEach(btn=>{
     pending = [];
     hud.style.display = 'none';
     redraw();
+    document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
     const labels = {
       pan: 'Mode Déplacer — visualisation seule.',
       calibrate: 'Mode Calibrer — clique 2 points d’une cote connue sur le plan.',
@@ -382,6 +411,20 @@ document.querySelectorAll('.tool').forEach(btn=>{
       note: 'Mode Note — clique un point pour ajouter une remarque chantier.'
     };
     document.getElementById('status-text').innerHTML = '<b>'+btn.textContent.trim()+'</b> — '+labels[mode].split('— ')[1];
+  });
+});
+
+document.querySelectorAll('#dim-options .seg-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.closest('.seg-group');
+    const setting = group.dataset.setting;
+    group.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    pending = [];
+    hud.style.display = 'none';
+    redraw();
+    if(setting==='angle') dimAngleMode = btn.dataset.value;
+    else if(setting==='input') dimInputMode = btn.dataset.value;
   });
 });
 document.querySelector('.tool[data-mode="pan"]').classList.add('active');
@@ -451,10 +494,38 @@ function setPageScaleRatio(ratio){
 // ---------- Pointer handling ----------
 let dragging = false;
 
+// Si le mode "90°" est actif, force le 2e point sur l'axe horizontal ou vertical
+// (celui le plus proche du geste), en gardant le 1er point fixe.
+function applyAngleSnap(p1, p2){
+  if(dimAngleMode !== '90') return p2;
+  const dx = Math.abs(p2.x-p1.x), dy = Math.abs(p2.y-p1.y);
+  return dx >= dy ? {x:p2.x, y:p1.y} : {x:p1.x, y:p2.y};
+}
+
+function finalizeMeasure(p1,p2){
+  currentItems().push({id:nextId++, type:'measure', p1, p2, value: dist(p1,p2)});
+  redraw(); renderList(); notifyParent();
+}
+function finalizeDimension(p1,p2){
+  openModal({
+    title:'Libellé de la cote',
+    subtitle:'Distance mesurée : '+formatReal(dist(p1,p2))+(pxPerMeter?'':' (calibre d’abord pour une valeur réelle)'),
+    fields:[{name:'label', type:'text', placeholder:'ex. Mur façade nord (optionnel)'}],
+    onSubmit:(v)=>{
+      currentItems().push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:v.label||''});
+      redraw(); renderList(); notifyParent();
+    },
+    onCancel:()=>{
+      currentItems().push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:''});
+      redraw(); renderList(); notifyParent();
+    }
+  });
+}
+
 overlay.addEventListener('pointerdown', (e)=>{
   if(!pdfDoc || mode==='pan') return;
   const p = getPos(e);
-  dragging = true;
+
   if(mode==='note'){
     openModal({
       title:'Nouvelle note',
@@ -465,16 +536,34 @@ overlay.addEventListener('pointerdown', (e)=>{
         redraw(); renderList(); notifyParent();
       }
     });
-    dragging=false;
     return;
   }
+
+  // Mode "2 points" : chaque tap pose un point, pas de glisser nécessaire.
+  if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){
+    if(pending.length===0){
+      pending = [p];
+      redraw();
+    } else {
+      const p1 = pending[0];
+      const p2 = applyAngleSnap(p1, p);
+      pending = [];
+      hud.style.display = 'none';
+      if(mode==='measure') finalizeMeasure(p1,p2); else finalizeDimension(p1,p2);
+    }
+    return;
+  }
+
+  dragging = true;
   pending = [p];
 });
 
 overlay.addEventListener('pointermove', (e)=>{
   if(!pdfDoc || mode==='pan' || mode==='note') return;
-  if(!dragging || pending.length===0) return;
-  const p = getPos(e);
+  if(pending.length===0) return;
+  if(dimInputMode==='drag' && !dragging) return;
+  const raw = getPos(e);
+  const p = (mode==='measure'||mode==='dimension') ? applyAngleSnap(pending[0], raw) : raw;
   liveHudPoint = p;
   redraw(pending[0], p);
   const d = dist(pending[0], p);
@@ -485,12 +574,14 @@ overlay.addEventListener('pointermove', (e)=>{
 
 overlay.addEventListener('pointerup', (e)=>{
   if(!pdfDoc || mode==='pan' || mode==='note') return;
+  if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){ return; } // finalisé au pointerdown
   if(!dragging || pending.length===0) return;
   dragging = false;
-  const p2 = getPos(e);
+  const raw = getPos(e);
   const p1 = pending[0];
   hud.style.display = 'none';
-  if(dist(p1,p2) < 4){ pending=[]; redraw(); return; } // ignore accidental taps
+  if(dist(p1,raw) < 4){ pending=[]; redraw(); return; } // ignore accidental taps
+  const p2 = (mode==='measure'||mode==='dimension') ? applyAngleSnap(p1, raw) : raw;
 
   if(mode==='calibrate'){
     const pxDist = dist(p1,p2);
@@ -511,22 +602,9 @@ overlay.addEventListener('pointerup', (e)=>{
       onCancel:()=>{ pending=[]; redraw(); }
     });
   } else if(mode==='measure'){
-    currentItems().push({id:nextId++, type:'measure', p1, p2, value: dist(p1,p2)});
-    pending=[]; redraw(); renderList(); notifyParent();
+    pending=[]; finalizeMeasure(p1,p2);
   } else if(mode==='dimension'){
-    openModal({
-      title:'Libellé de la cote',
-      subtitle:'Distance mesurée : '+formatReal(dist(p1,p2))+(pxPerMeter?'':' (calibre d’abord pour une valeur réelle)'),
-      fields:[{name:'label', type:'text', placeholder:'ex. Mur façade nord (optionnel)'}],
-      onSubmit:(v)=>{
-        currentItems().push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:v.label||''});
-        pending=[]; redraw(); renderList(); notifyParent();
-      },
-      onCancel:()=>{
-        currentItems().push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:''});
-        pending=[]; redraw(); renderList(); notifyParent();
-      }
-    });
+    pending=[]; finalizeDimension(p1,p2);
   }
 });
 
@@ -551,6 +629,12 @@ function redraw(livePA, livePB){
   if(livePA && livePB){
     const color = mode==='calibrate' ? '#3ecfd6' : (mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)');
     drawLine(livePA, livePB, color, mode!=='dimension');
+  } else if(pending.length===1 && dimInputMode==='points' && (mode==='measure'||mode==='dimension')){
+    const color = mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)';
+    octx.save();
+    octx.fillStyle = color;
+    octx.beginPath(); octx.arc(pending[0].x, pending[0].y, 5, 0, Math.PI*2); octx.fill();
+    octx.restore();
   }
 }
 
