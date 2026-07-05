@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v8';
+const CACHE_NAME = 'risse-app-v9';
 const URLS = [
   './',
   './index.html',
@@ -10,9 +10,22 @@ const URLS = [
   './rapport/index.html',
   './bons/index.html',
   './chantiers/index.html',
+  './chantiers/plan/index.html',
   './ressources/index.html',
   './carnet/index.html',
   './calculatrice/index.html',
+  './assets/pdf-templates/01.pdf',
+  './assets/pdf-templates/02.pdf',
+  './assets/pdf-templates/03.pdf',
+  './assets/pdf-templates/04.pdf',
+  './assets/pdf-templates/05.pdf',
+  './assets/pdf-templates/06.pdf',
+  './assets/pdf-templates/07.pdf',
+  './assets/pdf-templates/08.pdf',
+  './assets/pdf-templates/09.pdf',
+  './assets/pdf-templates/10.pdf',
+  './assets/pdf-templates/11.pdf',
+  './assets/pdf-templates/12.pdf',
 ];
 
 self.addEventListener('install', e => {
@@ -40,8 +53,11 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Network first → cache fallback
+// Network first → cache fallback (uniquement pour les requêtes GET —
+// l'API Cache ne supporte pas les autres méthodes, ex. les écritures Firestore en POST)
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return; // laisse passer normalement, pas d'interception
+
   e.respondWith(
     fetch(e.request)
       .then(response => {
