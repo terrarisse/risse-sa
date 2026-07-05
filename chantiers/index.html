@@ -416,9 +416,15 @@ function save(d) {
   // 2. Firestore (async, pas bloquant)
   if (auth.currentUser) {
     const issue = findNestedArrayIssue(d, 'items');
-    if (issue) console.warn('🔎 [Diagnostic] Structure suspecte pour Firestore, trouvée à :', issue);
+    if (issue) {
+      console.warn('🔎 [Diagnostic] Structure suspecte pour Firestore, trouvée à :', issue);
+      showToast('🔎 Diagnostic : '+issue, 6000);
+    }
     setDoc(doc(db, 'chantiers', 'data'), { items: d, updatedAt: Date.now() })
-      .catch(e => console.warn('Firestore save error:', e));
+      .catch(e => {
+        console.warn('Firestore save error:', e);
+        if (!issue) showToast('⚠️ Sync Firestore échouée : '+e.message, 6000);
+      });
   }
 }
 
@@ -843,7 +849,7 @@ function fmtDateLong(d) {
 function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
  
 let toastTimer;
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
+function showToast(msg, duration){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),duration||2200); }
  
 // ════════════════════════════════════════════
 // INIT
