@@ -415,9 +415,29 @@ function save(d) {
   localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
   // 2. Firestore (async, pas bloquant)
   if (auth.currentUser) {
+    const issue = findNestedArrayIssue(d, 'items');
+    if (issue) console.warn('🔎 [Diagnostic] Structure suspecte pour Firestore, trouvée à :', issue);
     setDoc(doc(db, 'chantiers', 'data'), { items: d, updatedAt: Date.now() })
       .catch(e => console.warn('Firestore save error:', e));
   }
+}
+
+// Repère un tableau qui contient directement un autre tableau (interdit par Firestore),
+// et retourne le chemin exact où ça se produit, pour cibler le champ fautif.
+function findNestedArrayIssue(val, path) {
+  if (Array.isArray(val)) {
+    for (let i=0; i<val.length; i++) {
+      if (Array.isArray(val[i])) return path+'['+i+'] (tableau direct dans un tableau)';
+      const r = findNestedArrayIssue(val[i], path+'['+i+']');
+      if (r) return r;
+    }
+  } else if (val && typeof val === 'object') {
+    for (const k of Object.keys(val)) {
+      const r = findNestedArrayIssue(val[k], path+'.'+k);
+      if (r) return r;
+    }
+  }
+  return null;
 }
 
 async function syncFromFirestore() {
@@ -997,6 +1017,7 @@ window.deleteCurrentChantier = deleteCurrentChantier;
 window.switchDetTab          = switchDetTab;
 window.handleDetFileUpload   = handleDetFileUpload;
 window.viewPlan              = viewPlan;
+window.initCoteurFrame       = initCoteurFrame;
 window.openCalculatrice      = openCalculatrice;
 window.closeCalculatrice     = closeCalculatrice;
 window.calcClearHistory      = calcClearHistory;
