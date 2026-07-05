@@ -134,7 +134,7 @@
   }
   #modal-box h3{margin:0 0 4px; font-size:14px;}
   #modal-box p{margin:0 0 14px; font-size:12px; color:var(--text-dim);}
-  #modal-box input, #modal-box textarea{
+  #modal-box input, #modal-box textarea, #modal-box select{
     width:100%; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; color:var(--text);
     padding:10px; font-size:15px; font-family:var(--mono); margin-bottom:12px;
   }
@@ -175,7 +175,7 @@
       <span id="page-label">1 / 1</span>
       <button id="next-page">›</button>
     </div>
-    <div id="scale-badge">Échelle <b id="scale-val">—</b></div>
+    <div id="scale-badge" onclick="openScaleChooser()" style="cursor:pointer;">Échelle <b id="scale-val">—</b> <span style="opacity:.6">✎</span></div>
     <div id="hud"><span id="hud-label">DISTANCE</span><span id="hud-val" style="font-size:22px; color:var(--orange);">—</span></div>
     <div id="zoom-ctrl">
       <button id="zoom-in">+</button>
@@ -207,12 +207,15 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 // ---------- State ----------
 let pdfDoc = null;
 let currentPageNum = 1;
-let pxPerMeter = null;          // calibration
+let pxPerMeter = null;          // calibration active de la page courante
 let calibrationLine = null;
 let mode = 'pan';
 let pending = [];                // points collected for current action
 let itemsByPage = {};            // {pageNum: [ {type, p1,p2,label,value} ] }
 let nextId = 1;
+let currentRenderScale = 1;      // pixels canvas par point PDF, recalculé à chaque rendu de page
+let pageCalib = {};              // {pageNum: {ratio:number|null, pxPerMeter:number|null, calibrationLine:{p1,p2}|null}}
+const METERS_PER_PDF_POINT = 0.0254/72; // 1 point PDF = 1/72 pouce
 let liveHudPoint = null;
 
 const planCanvas = document.getElementById('plan');
@@ -230,8 +233,8 @@ function currentItems(){
 }
 
 // ---------- Chargement piloté par la page parente (module Chantiers) ----------
-// Le parent envoie : { type:'coteur-init', planData: <data URI base64>, items: <itemsByPage sauvegardé ou null>, chantierNom: <string> }
-// On renvoie au parent à chaque modification : { type:'coteur-items-update', items: itemsByPage }
+// Le parent envoie : { type:'coteur-init', planData: <data URI base64>, items: <{itemsByPage, pageCalib} sauvegardé ou null>, chantierNom: <string> }
+// On renvoie au parent à chaque modification : { type:'coteur-items-update', items: {itemsByPage, pageCalib} }
 let initReceived = false;
 window.addEventListener('message', async (e)=>{
   const msg = e.data;
@@ -239,7 +242,11 @@ window.addEventListener('message', async (e)=>{
   initReceived = true;
   console.log('[Coteur] coteur-init reçu', {hasPlan: !!msg.planData, chantier: msg.chantierNom});
   if(msg.chantierNom) document.getElementById('brand-sub').textContent = msg.chantierNom;
-  itemsByPage = msg.items && typeof msg.items === 'object' ? msg.items : {};
+  const saved = msg.items && typeof msg.items === 'object' ? msg.items : {};
+  // Compat : anciennes sauvegardes = itemsByPage directement (pas encore de pageCalib)
+  const looksLikeOldFormat = saved && !saved.itemsByPage && !saved.pageCalib;
+  itemsByPage = looksLikeOldFormat ? saved : (saved.itemsByPage || {});
+  pageCalib = looksLikeOldFormat ? {} : (saved.pageCalib || {});
   // Recalcule nextId au-dessus de tout ce qui existe déjà, pour ne jamais réutiliser un id
   let maxId = 0;
   Object.values(itemsByPage).forEach(arr => (arr||[]).forEach(it => { if(it.id > maxId) maxId = it.id; }));
@@ -302,7 +309,7 @@ function notifyParent(){
   if(window.parent === window) return; // ouvert seul, hors iframe : rien à notifier
   clearTimeout(notifyTimer);
   notifyTimer = setTimeout(()=>{
-    window.parent.postMessage({type:'coteur-items-update', items: itemsByPage}, '*');
+    window.parent.postMessage({type:'coteur-items-update', items: {itemsByPage, pageCalib}}, '*');
   }, 500);
 }
 
@@ -312,6 +319,7 @@ async function renderPage(){
   const desiredWidth = Math.min(1400, viewport.clientWidth - 40);
   const scale = desiredWidth / naturalViewport.width;
   const pv = page.getViewport({scale});
+  currentRenderScale = scale;
 
   planCanvas.width = pv.width; planCanvas.height = pv.height;
   overlay.width = pv.width; overlay.height = pv.height;
@@ -323,7 +331,26 @@ async function renderPage(){
   await page.render({canvasContext: ctx, viewport: pv}).promise;
 
   document.getElementById('page-label').textContent = currentPageNum+' / '+pdfDoc.numPages;
+  applyStoredCalibForCurrentPage();
   redraw();
+}
+
+// Réapplique la calibration propre à la page affichée (échelle auto ou calibration
+// manuelle précédemment faite sur CETTE page) — recalculée à chaque rendu pour rester
+// juste même après un redimensionnement/rotation de l'écran.
+function applyStoredCalibForCurrentPage(){
+  const stored = pageCalib[currentPageNum];
+  if(stored && stored.ratio){
+    pxPerMeter = currentRenderScale / (METERS_PER_PDF_POINT * stored.ratio);
+    calibrationLine = null;
+  } else if(stored && stored.pxPerMeter){
+    pxPerMeter = stored.pxPerMeter;
+    calibrationLine = stored.calibrationLine || null;
+  } else {
+    pxPerMeter = null;
+    calibrationLine = null;
+  }
+  updateScaleBadge();
 }
 
 document.getElementById('prev-page').onclick = ()=>{ if(currentPageNum>1){currentPageNum--; renderPage();} };
@@ -378,7 +405,47 @@ function formatReal(pxDist){
 }
 function updateScaleBadge(){
   const el = document.getElementById('scale-val');
-  el.textContent = pxPerMeter ? pxPerMeter.toFixed(1)+' px/m' : 'non calibré';
+  const stored = pageCalib[currentPageNum];
+  if(stored && stored.ratio) el.textContent = '1:'+stored.ratio+' (auto)';
+  else if(pxPerMeter) el.textContent = pxPerMeter.toFixed(1)+' px/m';
+  else el.textContent = 'non calibré';
+}
+
+const COMMON_SCALES = [20,50,100,200,500];
+function openScaleChooser(){
+  if(!pdfDoc) return;
+  openModal({
+    title:'Échelle de cette page',
+    subtitle:'Indique l\'échelle imprimée sur le plan (cartouche "Ech. 1:XX") — la calibration se fait alors automatiquement, sans clic.',
+    fields:[{name:'ratio', type:'select', options:[
+      ...COMMON_SCALES.map(r=>({value:r, label:'1 : '+r})),
+      {value:'custom', label:'Autre valeur…'}
+    ]}],
+    okText:'Appliquer',
+    onSubmit:(v)=>{
+      if(v.ratio==='custom'){
+        openModal({
+          title:'Échelle personnalisée',
+          subtitle:'Le "X" du ratio 1:X imprimé sur le plan :',
+          fields:[{name:'ratio', type:'number', placeholder:'ex. 33.33', step:'any'}],
+          onSubmit:(v2)=>{
+            const r = parseFloat(v2.ratio);
+            if(!r || r<=0) return;
+            setPageScaleRatio(r);
+          }
+        });
+      } else {
+        setPageScaleRatio(parseFloat(v.ratio));
+      }
+    }
+  });
+}
+
+function setPageScaleRatio(ratio){
+  pageCalib[currentPageNum] = { ratio, pxPerMeter:null, calibrationLine:null };
+  applyStoredCalibForCurrentPage();
+  redraw();
+  notifyParent();
 }
 
 // ---------- Pointer handling ----------
@@ -436,8 +503,10 @@ overlay.addEventListener('pointerup', (e)=>{
         if(!m || m<=0) return;
         pxPerMeter = pxDist / m;
         calibrationLine = {p1,p2};
+        pageCalib[currentPageNum] = { ratio:null, pxPerMeter, calibrationLine };
         updateScaleBadge();
         pending=[]; redraw();
+        notifyParent();
       },
       onCancel:()=>{ pending=[]; redraw(); }
     });
@@ -599,12 +668,13 @@ function openModal({title, subtitle, fields, onSubmit, onCancel, okText}){
   if(subtitle) html += '<p>'+subtitle+'</p>';
   fields.forEach(f=>{
     if(f.type==='textarea') html += '<textarea name="'+f.name+'" placeholder="'+(f.placeholder||'')+'" autofocus></textarea>';
+    else if(f.type==='select') html += '<select name="'+f.name+'" autofocus>'+f.options.map(o=>'<option value="'+o.value+'"'+(o.selected?' selected':'')+'>'+o.label+'</option>').join('')+'</select>';
     else html += '<input name="'+f.name+'" type="'+f.type+'" step="'+(f.step||'any')+'" placeholder="'+(f.placeholder||'')+'" autofocus>';
   });
   html += '<div class="row"><button id="modal-cancel">Annuler</button><button id="modal-ok">'+(okText||'Valider')+'</button></div>';
   box.innerHTML = html;
   overlayEl.style.display = 'flex';
-  const firstInput = box.querySelector('input,textarea');
+  const firstInput = box.querySelector('input,textarea,select');
   if(firstInput) setTimeout(()=>firstInput.focus(), 50);
 
   function close(){ overlayEl.style.display='none'; }
