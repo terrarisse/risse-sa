@@ -382,6 +382,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+// Firebase Storage mis de côté pour l'instant (nécessite le plan payant Blaze) —
+// les PDF (plans/devis) sont stockés en local via IndexedDB, voir plus bas.
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
@@ -422,6 +424,71 @@ let currentPdf = null; // {name, size, data}
 // ════════════════════════════════════════════
 // STORAGE
 // ════════════════════════════════════════════
+
+// ── IndexedDB pour les fichiers PDF (plans + devis) ──────────────────────
+// Évite la limite ~5-10 Mo de localStorage/Firestore : les PDF ne quittent
+// jamais l'appareil pour l'instant (pas de synchro cloud), juste stockés en
+// local dans une vraie base de données de fichiers, prévue pour ça.
+const PDF_DB_NAME = 'risse_pdfs';
+const PDF_STORE = 'pdfs';
+let pdfDbPromise = null;
+function openPdfDb(){
+  if(pdfDbPromise) return pdfDbPromise;
+  pdfDbPromise = new Promise((resolve, reject)=>{
+    const req = indexedDB.open(PDF_DB_NAME, 1);
+    req.onupgradeneeded = ()=>{ req.result.createObjectStore(PDF_STORE); };
+    req.onsuccess = ()=>resolve(req.result);
+    req.onerror = ()=>reject(req.error);
+  });
+  return pdfDbPromise;
+}
+async function savePdfBlob(key, blob){
+  const dbase = await openPdfDb();
+  return new Promise((resolve, reject)=>{
+    const tx = dbase.transaction(PDF_STORE, 'readwrite');
+    tx.objectStore(PDF_STORE).put(blob, key);
+    tx.oncomplete = ()=>resolve();
+    tx.onerror = ()=>reject(tx.error);
+  });
+}
+async function getPdfBlob(key){
+  const dbase = await openPdfDb();
+  return new Promise((resolve, reject)=>{
+    const tx = dbase.transaction(PDF_STORE, 'readonly');
+    const req = tx.objectStore(PDF_STORE).get(key);
+    req.onsuccess = ()=>resolve(req.result || null);
+    req.onerror = ()=>reject(req.error);
+  });
+}
+async function deletePdfBlob(key){
+  const dbase = await openPdfDb();
+  return new Promise((resolve, reject)=>{
+    const tx = dbase.transaction(PDF_STORE, 'readwrite');
+    tx.objectStore(PDF_STORE).delete(key);
+    tx.oncomplete = ()=>resolve();
+    tx.onerror = ()=>reject(tx.error);
+  });
+}
+// Cache des URL objet déjà créées cette session, pour ne pas en recréer à chaque appel
+const blobUrlCache = {};
+async function getPdfObjectUrl(key){
+  if(blobUrlCache[key]) return blobUrlCache[key];
+  const blob = await getPdfBlob(key);
+  if(!blob) return null;
+  const url = URL.createObjectURL(blob);
+  blobUrlCache[key] = url;
+  return url;
+}
+// Résout une URL utilisable pour un fichier (plan ou devis), quel que soit son mode
+// de stockage : nouveau (IndexedDB, via pdfKey) ou ancien (base64 direct ou URL
+// Firebase Storage encore présente dans `data`, pour la rétrocompatibilité).
+async function getFileUrl(fileObj){
+  if(!fileObj) return null;
+  if(fileObj.pdfKey) return await getPdfObjectUrl(fileObj.pdfKey);
+  if(fileObj.data) return fileObj.data;
+  return null;
+}
+
 function load() { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch(e){ return []; } }
 function save(d) {
   // 1. localStorage
@@ -682,12 +749,14 @@ function updatePdfPreview(){
   }
 }
  
-function viewPdf(chId){
+async function viewPdf(chId){
   const c = load().find(x=>x.id===chId);
-  if(!c || !c.pdf || !c.pdf.data) return;
+  if(!c || !c.pdf) return;
+  const url = await getFileUrl(c.pdf);
+  if(!url) { showToast('❌ Fichier introuvable en local'); return; }
   const w = window.open('');
   if(w){
-    w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0;"><embed src="${c.pdf.data}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
+    w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0;"><embed src="${url}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
   }
 }
 
@@ -750,18 +819,28 @@ function renderDetTabButtons(){
 
 // tabKey = 'plan' ou 'devis'. Le Devis reste un fichier unique ; le Plan est
 // maintenant une liste de plans (voir renderPlanList / openPlanCoteur).
-function renderDetFileTab(tabKey){
+async function renderDetFileTab(tabKey){
   if(tabKey==='plan'){ renderPlanList(); return; }
 
   const c = load().find(x=>x.id===currentDetailId);
   const file = c && c.pdf;
   const el = document.getElementById('det-tab-devis');
 
-  if(!file || !file.data){
+  if(!file){
     el.innerHTML = `<div class="det-empty-state">
       <div class="det-empty-icon">📄</div>
       <div class="det-empty-text">Aucun devis pour l'instant</div>
       <button class="det-empty-btn" onclick="document.getElementById('det-devis-input').click()">📂 Importer le devis</button>
+    </div>`;
+    return;
+  }
+
+  const url = await getFileUrl(file);
+  if(!url){
+    el.innerHTML = `<div class="det-empty-state">
+      <div class="det-empty-icon">⚠️</div>
+      <div class="det-empty-text">Fichier introuvable en local</div>
+      <button class="det-empty-btn" onclick="document.getElementById('det-devis-input').click()">📂 Réimporter le devis</button>
     </div>`;
     return;
   }
@@ -778,7 +857,7 @@ function renderDetFileTab(tabKey){
         <button class="det-file-btn primary" onclick="viewPdf('${currentDetailId}')">Agrandir</button>
       </div>
     </div>
-    <iframe class="det-pdf-frame" src="${file.data}"></iframe>
+    <iframe class="det-pdf-frame" src="${url}"></iframe>
   `;
 }
 
@@ -822,12 +901,18 @@ function deletePlan(planId){
   const data = [...load()];
   const idx = data.findIndex(x=>x.id===currentDetailId);
   if(idx===-1) return;
+  const target = getPlansOf(data[idx]).find(p=>p.id===planId);
   const plans = getPlansOf(data[idx]).filter(p=>p.id!==planId);
   data[idx] = {...data[idx], plans, plan: undefined, planMeasures: undefined}; // nettoie aussi l'ancien format legacy
   save(data);
   renderPlanList();
   renderList();
   showToast('🗑 Plan supprimé');
+  // Nettoyage du fichier dans IndexedDB (best-effort, n'empêche pas la suppression si ça échoue)
+  if(target && target.pdfKey){
+    delete blobUrlCache[target.pdfKey];
+    deletePdfBlob(target.pdfKey).catch(e=>console.warn('[Chantiers] Suppression IndexedDB échouée:', e));
+  }
 }
 
 // ── Ouverture d'un plan précis en plein écran dans le Coteur ──
@@ -859,15 +944,17 @@ function initCoteurFrame(){
   coteurReady = true;
   sendPlanToCoteur();
 }
-function sendPlanToCoteur(){
+async function sendPlanToCoteur(){
   const frame = document.getElementById('det-coteur-frame');
   const c = load().find(x=>x.id===currentDetailId);
   if(!frame || !coteurReady || !c || !activePlanId) return;
   const plan = getPlansOf(c).find(p=>p.id===activePlanId);
-  if(!plan || !plan.data) return;
+  if(!plan) return;
+  const url = await getFileUrl(plan);
+  if(!url){ showToast('❌ Fichier introuvable en local'); return; }
   frame.contentWindow.postMessage({
     type: 'coteur-init',
-    planData: plan.data,
+    planData: url,
     items: plan.measures || null,
     chantierNom: c.nom + ' — ' + plan.name
   }, '*');
@@ -890,23 +977,27 @@ window.addEventListener('message', (e)=>{
   }
 });
 
-// Remplace le fichier du plan actuellement ouvert en plein écran (garde le même id,
-// donc reste le même élément dans la liste ; mesures remises à zéro car les pixels changent).
-function handleReplacePlanFile(event){
+// Remplace le fichier du plan actuellement ouvert en plein écran (garde le même id
+// ET le même chemin Storage, donc écrase juste le fichier ; mesures remises à zéro
+// car les pixels changent).
+async function handleReplacePlanFile(event){
   const file = event.target.files[0];
   if(!file || !activePlanId) return;
-  if(file.size > 2 * 1024 * 1024){
-    showToast('⚠️ Fichier trop lourd (max 2 Mo)');
+  if(file.size > 50 * 1024 * 1024){
+    showToast('⚠️ Fichier trop lourd (max 50 Mo)');
     event.target.value='';
     return;
   }
-  const reader = new FileReader();
-  reader.onload = function(e){
+  try{
+    const pdfKey = `plan_${currentDetailId}_${activePlanId}`;
+    await savePdfBlob(pdfKey, file);
+    delete blobUrlCache[pdfKey]; // force la régénération de l'URL objet avec le nouveau contenu
+
     const data = [...load()];
     const idx = data.findIndex(x=>x.id===currentDetailId);
     if(idx===-1) return;
     const plans = getPlansOf(data[idx]).map(p => p.id===activePlanId
-      ? {...p, name:file.name, size:(file.size/1024).toFixed(0)+' Ko', data:e.target.result, measures:null}
+      ? {...p, name:file.name, size:(file.size/1024).toFixed(0)+' Ko', pdfKey, data:undefined, storagePath:undefined, measures:null}
       : p
     );
     data[idx] = {...data[idx], plans};
@@ -915,21 +1006,38 @@ function handleReplacePlanFile(event){
     coteurReady = false;
     openPlanCoteur(activePlanId); // recharge le frame avec le nouveau fichier
     showToast('✓ Plan remplacé');
-  };
-  reader.readAsDataURL(file);
+  } catch(e){
+    console.error('❌ Erreur enregistrement local du plan:', e);
+    showToast('❌ Enregistrement échoué : '+e.message, 8000);
+  }
   event.target.value='';
 }
 
-function handleDetFileUpload(event, field){
+async function handleDetFileUpload(event, field){
   const file = event.target.files[0];
   if(!file) return;
-  if(file.size > 2 * 1024 * 1024){
-    showToast('⚠️ Fichier trop lourd (max 2 Mo)');
+  if(file.size > 50 * 1024 * 1024){
+    showToast('⚠️ Fichier trop lourd (max 50 Mo)');
     event.target.value='';
     return;
   }
-  const reader = new FileReader();
-  reader.onload = function(e){
+  if(!currentDetailId){
+    showToast('❌ Aucun chantier sélectionné');
+    event.target.value='';
+    return;
+  }
+
+  try{
+    let pdfKey, planId;
+    if(field==='pdf'){
+      pdfKey = `devis_${currentDetailId}`;
+    } else {
+      planId = 'p_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+      pdfKey = `plan_${currentDetailId}_${planId}`;
+    }
+    await savePdfBlob(pdfKey, file);
+    delete blobUrlCache[pdfKey];
+
     const data = [...load()];
     const idx = data.findIndex(x=>x.id===currentDetailId);
     if(idx===-1){
@@ -939,34 +1047,36 @@ function handleDetFileUpload(event, field){
     }
 
     if(field==='pdf'){
-      // Devis : fichier unique, remplacé.
-      data[idx] = {...data[idx], pdf: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result }};
+      data[idx] = {...data[idx], pdf: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', pdfKey }};
     } else {
-      // Plan : ajouté à la liste des plans de ce chantier.
       const newPlan = {
-        id: 'p_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
-        name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result,
+        id: planId, name: file.name, size: (file.size/1024).toFixed(0)+' Ko', pdfKey,
         measures: null, addedAt: new Date().toISOString()
       };
-      const plans = [...getPlansOf(data[idx]), newPlan];
-      data[idx] = {...data[idx], plans};
+      data[idx] = {...data[idx], plans: [...getPlansOf(data[idx]), newPlan]};
     }
 
     const ok = save(data);
     if(!ok) return; // save() a déjà affiché l'erreur exacte
+
     // Vérification : on relit depuis le stockage pour confirmer que ça a vraiment pris
     const verify = load().find(x=>x.id===currentDetailId);
-    const verifyOk = field==='pdf' ? (verify && verify.pdf && verify.pdf.data) : (verify && getPlansOf(verify).some(p=>p.data));
+    const verifyOk = field==='pdf'
+      ? (verify && verify.pdf && verify.pdf.pdfKey===pdfKey)
+      : (verify && getPlansOf(verify).some(p=>p.id===planId && p.pdfKey===pdfKey));
     if(!verifyOk){
-      console.error('❌ Vérification post-sauvegarde échouée pour', field, verify);
-      showToast('❌ Le fichier ne semble pas avoir été enregistré — réessaie', 8000);
+      console.error('❌ Vérification post-sauvegarde échouée.', {field, planId, pdfKey, verify});
+      showToast('❌ Le plan ne s\'est pas enregistré correctement — réessaie', 8000);
       return;
     }
+
     if(field==='plan') renderPlanList(); else renderDetFileTab('devis');
     renderList();
     showToast(`✓ ${field==='plan'?'Plan importé':'Devis enregistré'}`);
-  };
-  reader.readAsDataURL(file);
+  } catch(e){
+    console.error('❌ Erreur enregistrement local:', e);
+    showToast('❌ Enregistrement échoué : '+e.message, 8000);
+  }
   event.target.value='';
 }
 
