@@ -160,6 +160,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .det-notes{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:12px;}
 .det-info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:4px 14px;box-shadow:var(--sh);}
 .det-file-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);margin-bottom:12px;flex-shrink:0;}
+.plan-list{display:flex;flex-direction:column;gap:10px;}
+.plan-list-row{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);cursor:pointer;}
+.plan-list-row:active{transform:scale(.98);}
+.plan-list-icon{font-size:24px;flex-shrink:0;}
+.plan-list-info{flex:1;min-width:0;}
+.plan-list-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.plan-list-meta{font-size:11px;color:var(--text3);margin-top:2px;}
+.plan-list-del{background:none;border:none;font-size:15px;opacity:.5;cursor:pointer;padding:6px;flex-shrink:0;}
+.plan-list-arrow{font-size:18px;color:var(--text3);flex-shrink:0;}
 .det-file-icon{font-size:30px;flex-shrink:0;}
 .det-file-info{flex:1;min-width:0;}
 .det-file-name{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -171,8 +180,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .det-pdf-frame{width:100%;flex:1;min-height:0;border:none;border-radius:var(--rs);background:var(--bg2);}
 #det-tab-plan.plan-fullscreen{position:fixed;inset:0;z-index:500;background:#111214;padding:0;}
 #det-tab-plan.plan-fullscreen .det-pdf-frame{border-radius:0;}
-.plan-exit-btn{position:fixed;z-index:600;top:calc(10px + env(safe-area-inset-top,0px));left:10px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;width:36px;height:36px;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;}
-.plan-replace-btn{position:fixed;z-index:600;top:calc(10px + env(safe-area-inset-top,0px));right:10px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:0 12px;height:36px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;}
+.plan-exit-btn{position:fixed;z-index:9999;top:calc(10px + env(safe-area-inset-top,0px));left:10px;background:rgba(0,0,0,.7);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;width:40px;height:40px;font-size:20px;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;}
+.plan-replace-btn{position:fixed;z-index:9999;top:calc(10px + env(safe-area-inset-top,0px));right:10px;background:rgba(0,0,0,.7);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:0 14px;height:40px;font-size:12px;font-weight:700;align-items:center;gap:6px;cursor:pointer;font-family:inherit;}
 .det-empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:20px;}
 .det-empty-icon{font-size:44px;opacity:.5;}
 .det-empty-text{font-size:13px;color:var(--text3);font-weight:600;}
@@ -299,6 +308,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
  
 <!-- ═══ CHANTIER DETAIL — page plein écran ═══ -->
 <div class="detail-ov" id="detail-ov">
+  <button class="plan-exit-btn" id="plan-exit-btn" onclick="exitPlanFullscreen()" style="display:none;">‹</button>
+  <button class="plan-replace-btn" id="plan-replace-btn" onclick="document.getElementById('det-plan-replace-input').click()" style="display:none;">🔄 Remplacer</button>
   <div class="det-header">
     <div class="det-header-inner">
       <button class="back-btn" onclick="closeDetail()">←</button>
@@ -328,6 +339,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   </div>
 
   <input type="file" id="det-plan-input" accept="application/pdf" style="display:none" onchange="handleDetFileUpload(event,'plan')">
+  <input type="file" id="det-plan-replace-input" accept="application/pdf" style="display:none" onchange="handleReplacePlanFile(event)">
   <input type="file" id="det-devis-input" accept="application/pdf" style="display:none" onchange="handleDetFileUpload(event,'pdf')">
 </div>
  
@@ -510,7 +522,8 @@ function renderList() {
     if (c.fin) pills.push({ label: '→ '+fmtDate(c.fin) });
     if (c.montant) pills.push({ label: 'CHF '+Number(c.montant).toLocaleString('fr-CH'), accent: true });
     if (c.marche) pills.push({ label: c.marche });
-    if (c.plan && c.plan.data) pills.push({ label: '📐 Plan' });
+    const planCount = getPlansOf(c).length;
+    if (planCount) pills.push({ label: '📐 '+(planCount>1?planCount+' plans':'Plan') });
     if (c.pdf && c.pdf.data) pills.push({ label: '📄 Devis' });
  
     return `
@@ -602,8 +615,7 @@ function saveChantier() {
     color:    selectedColor,
     notes:    g('add-notes'),
     pdf:      currentPdf,
-    plan:     null,
-    planMeasures: null,
+    plans:    [],
     createdAt: new Date().toISOString(),
     // Structure pour la suite
     documents: [],
@@ -678,14 +690,6 @@ function viewPdf(chId){
     w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0;"><embed src="${c.pdf.data}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
   }
 }
-function viewPlan(chId){
-  const c = load().find(x=>x.id===chId);
-  if(!c || !c.plan || !c.plan.data) return;
-  const w = window.open('');
-  if(w){
-    w.document.write(`<html><head><title>${esc(c.plan.name)}</title></head><body style="margin:0;"><embed src="${c.plan.data}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
-  }
-}
 
 // ════════════════════════════════════════════
 // DETAIL — page plein écran à onglets (Plan / Devis / Infos)
@@ -717,6 +721,7 @@ function openDetail(id) {
     : '';
 
   currentDetTab = 'plan';
+  activePlanId = null;
   renderDetTabButtons();
   renderDetFileTab('plan');
   renderDetFileTab('devis');
@@ -729,10 +734,12 @@ function openDetail(id) {
 
 function switchDetTab(tab){
   currentDetTab = tab;
+  if(tab==='plan') activePlanId = null; // on revient toujours à la liste, pas au dernier plan ouvert
   renderDetTabButtons();
   document.getElementById('det-tab-plan').style.display  = tab==='plan'  ? '' : 'none';
   document.getElementById('det-tab-devis').style.display = tab==='devis' ? '' : 'none';
   document.getElementById('det-tab-infos').style.display = tab==='infos' ? '' : 'none';
+  if(tab==='plan') renderDetFileTab('plan');
   updatePlanFullscreenState();
 }
 function renderDetTabButtons(){
@@ -741,32 +748,21 @@ function renderDetTabButtons(){
   });
 }
 
-// field = 'plan' ou 'pdf' (pdf = devis, nom historique du champ) ; tabKey = 'plan' ou 'devis'
+// tabKey = 'plan' ou 'devis'. Le Devis reste un fichier unique ; le Plan est
+// maintenant une liste de plans (voir renderPlanList / openPlanCoteur).
 function renderDetFileTab(tabKey){
-  const field = tabKey==='plan' ? 'plan' : 'pdf';
-  const label = tabKey==='plan' ? 'plan' : 'devis';
+  if(tabKey==='plan'){ renderPlanList(); return; }
+
   const c = load().find(x=>x.id===currentDetailId);
-  const file = c && c[field];
-  const el = document.getElementById('det-tab-'+tabKey);
+  const file = c && c.pdf;
+  const el = document.getElementById('det-tab-devis');
 
   if(!file || !file.data){
     el.innerHTML = `<div class="det-empty-state">
       <div class="det-empty-icon">📄</div>
-      <div class="det-empty-text">Aucun ${label} pour l'instant</div>
-      <button class="det-empty-btn" onclick="document.getElementById('det-${field==='plan'?'plan':'devis'}-input').click()">📂 Importer le ${label}</button>
+      <div class="det-empty-text">Aucun devis pour l'instant</div>
+      <button class="det-empty-btn" onclick="document.getElementById('det-devis-input').click()">📂 Importer le devis</button>
     </div>`;
-    updatePlanFullscreenState();
-    return;
-  }
-
-  if(tabKey==='plan'){
-    // Plein écran : plus de carte de fichier, juste le Coteur + 2 boutons flottants.
-    el.innerHTML = `
-      <button class="plan-exit-btn" onclick="exitPlanFullscreen()">‹</button>
-      <button class="plan-replace-btn" onclick="document.getElementById('det-plan-input').click()">🔄 Remplacer</button>
-      <iframe class="det-pdf-frame" id="det-coteur-frame" src="plan/index.html" onload="initCoteurFrame()"></iframe>
-    `;
-    updatePlanFullscreenState();
     return;
   }
 
@@ -786,18 +782,75 @@ function renderDetFileTab(tabKey){
   `;
 }
 
-// Le plan passe en plein écran automatiquement dès qu'on est sur son onglet
-// et qu'un plan existe ; le bouton ‹ en haut à gauche ramène aux onglets normaux.
-function updatePlanFullscreenState(){
+// ── Onglet Plan : liste des plans importés pour ce chantier ──
+function renderPlanList(){
   const c = load().find(x=>x.id===currentDetailId);
-  const hasPlan = c && c.plan && c.plan.data;
-  const planTab = document.getElementById('det-tab-plan');
-  const isFullscreen = currentDetTab==='plan' && hasPlan;
-  planTab.classList.toggle('plan-fullscreen', isFullscreen);
+  const plans = getPlansOf(c);
+  const el = document.getElementById('det-tab-plan');
+
+  if(!plans.length){
+    el.innerHTML = `<div class="det-empty-state">
+      <div class="det-empty-icon">📐</div>
+      <div class="det-empty-text">Aucun plan pour l'instant</div>
+      <button class="det-empty-btn" onclick="document.getElementById('det-plan-input').click()">📂 Importer un plan</button>
+    </div>`;
+    updatePlanFullscreenState();
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="plan-list">
+      ${plans.map(p => `
+        <div class="plan-list-row" onclick="openPlanCoteur('${p.id}')">
+          <span class="plan-list-icon">📐</span>
+          <div class="plan-list-info">
+            <div class="plan-list-name">${esc(p.name)}</div>
+            <div class="plan-list-meta">${esc(p.size||'')}${p.measures ? ' · coté' : ''}</div>
+          </div>
+          <button class="plan-list-del" onclick="event.stopPropagation();deletePlan('${p.id}')" title="Supprimer">🗑</button>
+          <span class="plan-list-arrow">›</span>
+        </div>
+      `).join('')}
+    </div>
+    <button class="btn btn-teal" style="width:100%;margin-top:14px" onclick="document.getElementById('det-plan-input').click()">+ Importer un plan</button>
+  `;
+  updatePlanFullscreenState();
+}
+
+function deletePlan(planId){
+  if(!confirm('Supprimer ce plan et ses cotes ?')) return;
+  const data = [...load()];
+  const idx = data.findIndex(x=>x.id===currentDetailId);
+  if(idx===-1) return;
+  const plans = getPlansOf(data[idx]).filter(p=>p.id!==planId);
+  data[idx] = {...data[idx], plans, plan: undefined, planMeasures: undefined}; // nettoie aussi l'ancien format legacy
+  save(data);
+  renderPlanList();
+  renderList();
+  showToast('🗑 Plan supprimé');
+}
+
+// ── Ouverture d'un plan précis en plein écran dans le Coteur ──
+let activePlanId = null;
+function openPlanCoteur(planId){
+  activePlanId = planId;
+  coteurReady = false;
+  document.getElementById('det-tab-plan').innerHTML = `<iframe class="det-pdf-frame" id="det-coteur-frame" src="plan/index.html" onload="initCoteurFrame()"></iframe>`;
+  updatePlanFullscreenState();
+}
+
+// Le Coteur passe en plein écran quand un plan précis est ouvert (activePlanId défini).
+// Le bouton ‹ ramène à la liste des plans (pas à l'onglet Infos).
+function updatePlanFullscreenState(){
+  const isFullscreen = currentDetTab==='plan' && !!activePlanId;
+  document.getElementById('det-tab-plan').classList.toggle('plan-fullscreen', isFullscreen);
   document.querySelector('.det-header').style.display = isFullscreen ? 'none' : '';
+  document.getElementById('plan-exit-btn').style.display = isFullscreen ? 'flex' : 'none';
+  document.getElementById('plan-replace-btn').style.display = isFullscreen ? 'flex' : 'none';
 }
 function exitPlanFullscreen(){
-  switchDetTab('infos');
+  activePlanId = null;
+  renderPlanList();
 }
 
 // ── Pont postMessage avec l'outil Coteur de plans (iframe) ──────────
@@ -809,12 +862,14 @@ function initCoteurFrame(){
 function sendPlanToCoteur(){
   const frame = document.getElementById('det-coteur-frame');
   const c = load().find(x=>x.id===currentDetailId);
-  if(!frame || !coteurReady || !c || !c.plan || !c.plan.data) return;
+  if(!frame || !coteurReady || !c || !activePlanId) return;
+  const plan = getPlansOf(c).find(p=>p.id===activePlanId);
+  if(!plan || !plan.data) return;
   frame.contentWindow.postMessage({
     type: 'coteur-init',
-    planData: c.plan.data,
-    items: c.planMeasures || null,
-    chantierNom: c.nom
+    planData: plan.data,
+    items: plan.measures || null,
+    chantierNom: c.nom + ' — ' + plan.name
   }, '*');
 }
 let coteurSaveTimer = null;
@@ -822,17 +877,48 @@ window.addEventListener('message', (e)=>{
   const msg = e.data;
   if(!msg) return;
   if(msg.type === 'coteur-ready'){ sendPlanToCoteur(); return; }
-  if(msg.type === 'coteur-items-update' && currentDetailId){
+  if(msg.type === 'coteur-items-update' && currentDetailId && activePlanId){
     clearTimeout(coteurSaveTimer);
     coteurSaveTimer = setTimeout(()=>{
       const data = [...load()];
       const idx = data.findIndex(x=>x.id===currentDetailId);
       if(idx===-1) return;
-      data[idx] = {...data[idx], planMeasures: msg.items};
+      const plans = getPlansOf(data[idx]).map(p => p.id===activePlanId ? {...p, measures: msg.items} : p);
+      data[idx] = {...data[idx], plans};
       save(data);
     }, 400);
   }
 });
+
+// Remplace le fichier du plan actuellement ouvert en plein écran (garde le même id,
+// donc reste le même élément dans la liste ; mesures remises à zéro car les pixels changent).
+function handleReplacePlanFile(event){
+  const file = event.target.files[0];
+  if(!file || !activePlanId) return;
+  if(file.size > 2 * 1024 * 1024){
+    showToast('⚠️ Fichier trop lourd (max 2 Mo)');
+    event.target.value='';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const data = [...load()];
+    const idx = data.findIndex(x=>x.id===currentDetailId);
+    if(idx===-1) return;
+    const plans = getPlansOf(data[idx]).map(p => p.id===activePlanId
+      ? {...p, name:file.name, size:(file.size/1024).toFixed(0)+' Ko', data:e.target.result, measures:null}
+      : p
+    );
+    data[idx] = {...data[idx], plans};
+    const ok = save(data);
+    if(!ok) return;
+    coteurReady = false;
+    openPlanCoteur(activePlanId); // recharge le frame avec le nouveau fichier
+    showToast('✓ Plan remplacé');
+  };
+  reader.readAsDataURL(file);
+  event.target.value='';
+}
 
 function handleDetFileUpload(event, field){
   const file = event.target.files[0];
@@ -851,22 +937,34 @@ function handleDetFileUpload(event, field){
       showToast('❌ Chantier introuvable (id: '+currentDetailId+') — impossible d\'enregistrer', 8000);
       return;
     }
-    const patch = { [field]: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result } };
-    if(field==='plan') patch.planMeasures = null; // nouveau plan = anciennes mesures obsolètes (pixels différents)
-    data[idx] = {...data[idx], ...patch};
+
+    if(field==='pdf'){
+      // Devis : fichier unique, remplacé.
+      data[idx] = {...data[idx], pdf: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result }};
+    } else {
+      // Plan : ajouté à la liste des plans de ce chantier.
+      const newPlan = {
+        id: 'p_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+        name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result,
+        measures: null, addedAt: new Date().toISOString()
+      };
+      const plans = [...getPlansOf(data[idx]), newPlan];
+      data[idx] = {...data[idx], plans};
+    }
+
     const ok = save(data);
     if(!ok) return; // save() a déjà affiché l'erreur exacte
     // Vérification : on relit depuis le stockage pour confirmer que ça a vraiment pris
     const verify = load().find(x=>x.id===currentDetailId);
-    if(!verify || !verify[field] || !verify[field].data){
+    const verifyOk = field==='pdf' ? (verify && verify.pdf && verify.pdf.data) : (verify && getPlansOf(verify).some(p=>p.data));
+    if(!verifyOk){
       console.error('❌ Vérification post-sauvegarde échouée pour', field, verify);
       showToast('❌ Le fichier ne semble pas avoir été enregistré — réessaie', 8000);
       return;
     }
-    coteurReady = false; // le prochain onload du frame Coteur renverra ce nouveau plan
-    renderDetFileTab(field==='plan' ? 'plan' : 'devis');
+    if(field==='plan') renderPlanList(); else renderDetFileTab('devis');
     renderList();
-    showToast(`✓ ${field==='plan'?'Plan':'Devis'} enregistré`);
+    showToast(`✓ ${field==='plan'?'Plan importé':'Devis enregistré'}`);
   };
   reader.readAsDataURL(file);
   event.target.value='';
@@ -894,6 +992,15 @@ function fmtDateLong(d) {
   if (!d) return '';
   return new Date(d+'T12:00:00').toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
+// Lit la liste des plans d'un chantier, avec compatibilité pour l'ancien format
+// (c.plan unique) — ne modifie rien, juste pour l'affichage/lecture.
+function getPlansOf(c){
+  if(!c) return [];
+  if(Array.isArray(c.plans)) return c.plans;
+  if(c.plan && c.plan.data) return [{ id:'legacy', name:c.plan.name, size:c.plan.size, data:c.plan.data, measures:c.planMeasures||null, addedAt:c.createdAt||new Date().toISOString() }];
+  return [];
+}
+
 function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
  
 let toastTimer;
@@ -1069,8 +1176,11 @@ window.openDetail            = openDetail;
 window.closeDetail           = closeDetail;
 window.deleteCurrentChantier = deleteCurrentChantier;
 window.switchDetTab          = switchDetTab;
+window.exitPlanFullscreen    = exitPlanFullscreen;
 window.handleDetFileUpload   = handleDetFileUpload;
-window.viewPlan              = viewPlan;
+window.handleReplacePlanFile = handleReplacePlanFile;
+window.openPlanCoteur        = openPlanCoteur;
+window.deletePlan            = deletePlan;
 window.initCoteurFrame       = initCoteurFrame;
 window.openCalculatrice      = openCalculatrice;
 window.closeCalculatrice     = closeCalculatrice;
