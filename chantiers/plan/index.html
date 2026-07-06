@@ -23,7 +23,7 @@
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden;}
+  html,body{margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden; touch-action:pan-x pan-y;}
   #app{display:flex; flex-direction:column; height:100vh;}
 
   header{
@@ -71,6 +71,7 @@
     flex:1; overflow:auto; position:relative; background:#111214;
     background-image: radial-gradient(circle, #23262a 1px, transparent 1px);
     background-size: 18px 18px;
+    touch-action: pan-x pan-y;
   }
   #empty-state{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -186,6 +187,11 @@
       <button class="seg-btn active" data-value="drag">Glisser</button>
       <button class="seg-btn" data-value="points">2 points</button>
     </div>
+    <span class="seg-label">Accroch.</span>
+    <div class="seg-group" data-setting="snap">
+      <button class="seg-btn active" data-value="off">Off</button>
+      <button class="seg-btn" data-value="on">🎯 Auto</button>
+    </div>
   </div>
 
   <div id="viewport">
@@ -201,19 +207,6 @@
       <button id="zoom-out">–</button>
     </div>
   </div>
-
-  <footer>
-    <div id="status">
-      <span id="status-text"><b>Mode Déplacer</b> — importe un plan pour commencer.</span>
-      <span id="active-page-badge" style="display:none; font-size:11px; color:var(--text-dim); font-family:var(--mono);"></span>
-    </div>
-    <div id="list"></div>
-    <div id="actions">
-      <button id="btn-undo">↶ Annuler</button>
-      <button id="btn-clear" class="danger">Effacer tout</button>
-      <button id="btn-export" class="primary">Exporter PNG</button>
-    </div>
-  </footer>
 
 </div>
 
@@ -235,6 +228,8 @@ let pageCalib = {};              // {pageNum: {ratio:number|null, pointsPerMeter
 const METERS_PER_PDF_POINT = 0.0254/72; // 1 point PDF = 1/72 pouce
 let dimAngleMode = '90';         // '90' (aimanté horizontal/vertical) | 'libre'
 let dimInputMode = 'drag';       // 'drag' (glisser) | 'points' (poser 2 points)
+let snapEnabled = false;         // accrochage intelligent sur intersections du plan
+const pageSegmentsCache = {};    // {pageNum: [{x1,y1,x2,y2}, ...]} en espace PDF (points)
 let liveHudPoint = null;
 let pagePanels = {};              // {pageNum: {panelEl, planCanvas, overlay, octx, renderScale, pointsPerMeter, calibrationLinePt, badgeEl}}
 let currentRenderMultiplier = 1;  // qualité de rendu actuellement appliquée (montée à la demande au zoom)
@@ -253,10 +248,6 @@ function currentItems(){
 }
 function setActivePage(pageNum){
   currentPageNum = pageNum;
-  const badge = document.getElementById('active-page-badge');
-  badge.style.display = 'inline';
-  badge.textContent = 'Page '+pageNum+' / '+(pdfDoc?pdfDoc.numPages:'?');
-  renderList();
 }
 
 // Les points des mesures/cotes/notes sont stockés en "espace PDF" (coordonnées à
@@ -354,6 +345,148 @@ function computeColumns(n){
   return 4;
 }
 
+// Cherche le texte du cartouche type "Ech. 1:50" / "Echelle 1:100" / "Ech 1/50"
+// dans le contenu texte réel de la page PDF, et renvoie le ratio (ex. 50) si trouvé.
+// ════════════════════════════════════════════
+// ACCROCHAGE INTELLIGENT — extrait les vrais segments de droite du PDF
+// (via l'opérateur list de pdf.js, pas le rendu bitmap) pour pouvoir accrocher
+// précisément sur une intersection entre 2 traits du plan.
+// ════════════════════════════════════════════
+function pdfMatMul(m, ctm){
+  // m appliqué après ctm (comme un cm PDF), format [a,b,c,d,e,f]
+  return [
+    m[0]*ctm[0]+m[1]*ctm[2],             m[0]*ctm[1]+m[1]*ctm[3],
+    m[2]*ctm[0]+m[3]*ctm[2],             m[2]*ctm[1]+m[3]*ctm[3],
+    m[4]*ctm[0]+m[5]*ctm[2]+ctm[4],      m[4]*ctm[1]+m[5]*ctm[3]+ctm[5]
+  ];
+}
+function pdfMatApply(m, x, y){
+  return { x: m[0]*x + m[2]*y + m[4], y: m[1]*x + m[3]*y + m[5] };
+}
+
+async function getPageSegments(pageNum){
+  if(pageSegmentsCache[pageNum]) return pageSegmentsCache[pageNum];
+  const segments = [];
+  try{
+    const page = await pdfDoc.getPage(pageNum);
+    const opList = await page.getOperatorList();
+    const OPS = pdfjsLib.OPS;
+    let ctmStack = [[1,0,0,1,0,0]];
+    const ctm = () => ctmStack[ctmStack.length-1];
+
+    for(let i=0; i<opList.fnArray.length; i++){
+      const fn = opList.fnArray[i];
+      const args = opList.argsArray[i];
+
+      if(fn === OPS.save){
+        ctmStack.push(ctm().slice());
+      } else if(fn === OPS.restore){
+        if(ctmStack.length > 1) ctmStack.pop();
+      } else if(fn === OPS.transform){
+        ctmStack[ctmStack.length-1] = pdfMatMul(args, ctm());
+      } else if(fn === OPS.constructPath){
+        const subOps = args[0];
+        const coords = args[1];
+        let ci = 0, startX = 0, startY = 0, prev = null;
+        const M = ctm();
+        for(let k=0; k<subOps.length; k++){
+          const op = subOps[k];
+          if(op === OPS.moveTo){
+            const x = coords[ci++], y = coords[ci++];
+            const tp = pdfMatApply(M, x, y);
+            startX = x; startY = y;
+            prev = tp;
+          } else if(op === OPS.lineTo){
+            const x = coords[ci++], y = coords[ci++];
+            const tp = pdfMatApply(M, x, y);
+            if(prev) segments.push({x1:prev.x, y1:prev.y, x2:tp.x, y2:tp.y});
+            prev = tp;
+          } else if(op === OPS.curveTo){
+            ci += 4; // ignore les 2 points de contrôle : les courbes ne sont pas accrochables
+            const x = coords[ci++], y = coords[ci++];
+            prev = pdfMatApply(M, x, y);
+          } else if(op === OPS.closePath){
+            const tp = pdfMatApply(M, startX, startY);
+            if(prev) segments.push({x1:prev.x, y1:prev.y, x2:tp.x, y2:tp.y});
+            prev = tp;
+          } else if(op === OPS.rectangle){
+            const rx=coords[ci++], ry=coords[ci++], rw=coords[ci++], rh=coords[ci++];
+            const p1=pdfMatApply(M,rx,ry), p2=pdfMatApply(M,rx+rw,ry), p3=pdfMatApply(M,rx+rw,ry+rh), p4=pdfMatApply(M,rx,ry+rh);
+            segments.push({x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y});
+            segments.push({x1:p2.x,y1:p2.y,x2:p3.x,y2:p3.y});
+            segments.push({x1:p3.x,y1:p3.y,x2:p4.x,y2:p4.y});
+            segments.push({x1:p4.x,y1:p4.y,x2:p1.x,y2:p1.y});
+            prev = p1;
+          }
+        }
+      }
+    }
+    console.log('[Coteur] Accrochage : '+segments.length+' segments extraits sur la page '+pageNum);
+  }catch(e){
+    console.warn('[Coteur] Extraction des segments (accrochage) échouée pour la page '+pageNum+':', e);
+  }
+  pageSegmentsCache[pageNum] = segments;
+  return segments;
+}
+
+function distPointToSegment(p, s){
+  const dx = s.x2-s.x1, dy = s.y2-s.y1;
+  const lenSq = dx*dx + dy*dy;
+  if(lenSq < 1e-9) return Math.hypot(p.x-s.x1, p.y-s.y1);
+  let t = ((p.x-s.x1)*dx + (p.y-s.y1)*dy) / lenSq;
+  t = Math.max(0, Math.min(1, t));
+  return Math.hypot(p.x-(s.x1+t*dx), p.y-(s.y1+t*dy));
+}
+function segmentIntersection(a, b){
+  const denom = (a.x1-a.x2)*(b.y1-b.y2) - (a.y1-a.y2)*(b.x1-b.x2);
+  if(Math.abs(denom) < 1e-9) return null; // parallèles ou confondus
+  const t = ((a.x1-b.x1)*(b.y1-b.y2) - (a.y1-b.y1)*(b.x1-b.x2)) / denom;
+  const u = -((a.x1-a.x2)*(a.y1-b.y1) - (a.y1-a.y2)*(a.x1-b.x1)) / denom;
+  const margin = 0.08; // tolère un petit dépassement (coins qui ne se touchent pas pixel-perfect)
+  if(t < -margin || t > 1+margin || u < -margin || u > 1+margin) return null;
+  return { x: a.x1 + t*(a.x2-a.x1), y: a.y1 + t*(a.y2-a.y1) };
+}
+
+// Tente d'accrocher un point (en pixels canvas) sur l'intersection de 2 traits du
+// plan proche du clic. Renvoie le point accroché (en pixels canvas) ou null si rien
+// trouvé de fiable à proximité — dans ce cas on garde le point brut du clic.
+async function trySnapToIntersection(pixelPos, pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return null;
+  const clickPt = pxToPoint(pixelPos, pageNum); // espace PDF (points)
+  const radiusPt = 16 / panel.renderScale; // ~16px écran de tolérance, quel que soit le zoom
+  const segments = await getPageSegments(pageNum);
+  if(!segments.length) return null;
+
+  const nearby = segments.filter(s => distPointToSegment(clickPt, s) <= radiusPt);
+  if(nearby.length < 2) return null;
+
+  let best = null, bestDist = Infinity;
+  for(let i=0; i<nearby.length; i++){
+    for(let j=i+1; j<nearby.length; j++){
+      const ipt = segmentIntersection(nearby[i], nearby[j]);
+      if(!ipt) continue;
+      const d = Math.hypot(ipt.x-clickPt.x, ipt.y-clickPt.y);
+      if(d < bestDist && d <= radiusPt*1.5){ bestDist = d; best = ipt; }
+    }
+  }
+  if(!best) return null;
+  console.log('[Coteur] Accrochage réussi à '+bestDist.toFixed(2)+'pt du clic (page '+pageNum+')');
+  return pointToPx(best, pageNum); // reconverti en pixels canvas pour rester cohérent avec le reste du code
+}
+
+async function detectScaleFromPage(page){
+  try{
+    const content = await page.getTextContent();
+    const text = content.items.map(it=>it.str).join(' ');
+    const m = text.match(/Ech(?:elle)?\.?\s*1\s*[:\/]\s*(\d+(?:[.,]\d+)?)/i);
+    if(m) return parseFloat(m[1].replace(',', '.'));
+  }catch(e){
+    console.warn('[Coteur] Détection auto de l\'échelle échouée pour cette page:', e);
+  }
+  return null;
+}
+
 async function renderAllPages(){
   board.innerHTML = '';
   pagePanels = {};
@@ -402,6 +535,13 @@ async function renderAllPages(){
 
     const ctx = planCv.getContext('2d');
     await page.render({canvasContext: ctx, viewport: pv}).promise;
+
+    // Détection automatique de l'échelle imprimée (cartouche "Ech. 1:XX"), seulement
+    // si cette page n'a pas déjà une échelle choisie manuellement au préalable.
+    if(!pageCalib[i]){
+      const detected = await detectScaleFromPage(page);
+      if(detected) pageCalib[i] = { ratio: detected, pointsPerMeter:null, calibrationLinePt:null };
+    }
 
     pagePanels[i] = {
       panelEl: panel, planCanvas: planCv, overlay: overlayCv, octx: overlayCv.getContext('2d'),
@@ -453,9 +593,9 @@ document.getElementById('zoom-out').onclick = ()=>applyZoom(-0.3);
 async function rerenderAllPagesQuality(multiplier){
   if(!pdfDoc || rerenderingQuality) return;
   rerenderingQuality = true;
-  const badge = document.getElementById('active-page-badge');
-  const prevText = badge.textContent;
-  badge.textContent = '🔄 Amélioration de la netteté…';
+  hud.style.display = 'block';
+  hudLabel.textContent = '';
+  hudVal.textContent = '🔄 Amélioration de la netteté…';
   for(let i=1; i<=pdfDoc.numPages; i++){
     const panel = pagePanels[i];
     if(!panel) continue;
@@ -470,7 +610,7 @@ async function rerenderAllPagesQuality(multiplier){
     await page.render({canvasContext: ctx, viewport: pv}).promise;
     redrawPage(i);
   }
-  badge.textContent = prevText;
+  hud.style.display = 'none';
   rerenderingQuality = false;
 }
 
@@ -487,14 +627,6 @@ document.querySelectorAll('.tool').forEach(btn=>{
     });
     redrawPage(currentPageNum);
     document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
-    const labels = {
-      pan: 'Mode Déplacer — balaie/zoome librement sur le tableau.',
-      calibrate: 'Mode Calibrer — clique 2 points d’une cote connue sur le plan.',
-      measure: 'Mode Mesurer — clique un point de départ puis déplace pour lire la distance.',
-      dimension: 'Mode Coter — pose une cote comme sur un plan (2 points + libellé).',
-      note: 'Mode Note — clique un point pour ajouter une remarque chantier.'
-    };
-    document.getElementById('status-text').innerHTML = '<b>'+btn.textContent.trim()+'</b> — '+labels[mode].split('— ')[1];
   });
 });
 
@@ -509,6 +641,7 @@ document.querySelectorAll('#dim-options .seg-btn').forEach(btn=>{
     redrawPage(currentPageNum);
     if(setting==='angle') dimAngleMode = btn.dataset.value;
     else if(setting==='input') dimInputMode = btn.dataset.value;
+    else if(setting==='snap') snapEnabled = (btn.dataset.value==='on');
   });
 });
 document.querySelector('.tool[data-mode="pan"]').classList.add('active');
@@ -601,22 +734,10 @@ function finalizeMeasure(pageNum, p1px,p2px){
   redrawPage(pageNum); renderList(); notifyParent();
 }
 function finalizeDimension(pageNum, p1px,p2px){
-  const panel = pagePanels[pageNum];
   const p1 = pxToPoint(p1px, pageNum), p2 = pxToPoint(p2px, pageNum);
   const valueDist = dist(p1,p2);
-  openModal({
-    title:'Libellé de la cote',
-    subtitle:'Distance mesurée : '+formatReal(valueDist, pageNum)+(panel.pointsPerMeter?'':' (calibre d’abord pour une valeur réelle)'),
-    fields:[{name:'label', type:'text', placeholder:'ex. Mur façade nord (optionnel)'}],
-    onSubmit:(v)=>{
-      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: valueDist, label:v.label||''});
-      redrawPage(pageNum); renderList(); notifyParent();
-    },
-    onCancel:()=>{
-      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: valueDist, label:''});
-      redrawPage(pageNum); renderList(); notifyParent();
-    }
-  });
+  (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: valueDist, label:''});
+  redrawPage(pageNum); renderList(); notifyParent();
 }
 
 function overlayFromEvent(e){
@@ -624,14 +745,14 @@ function overlayFromEvent(e){
   return (t && t.classList && t.classList.contains('overlay-canvas')) ? t : null;
 }
 
-board.addEventListener('pointerdown', (e)=>{
+board.addEventListener('pointerdown', async (e)=>{
   if(!pdfDoc || mode==='pan') return;
   const ov = overlayFromEvent(e);
   if(!ov) return;
   const pageNum = parseInt(ov.dataset.page, 10);
   if(pageNum !== currentPageNum) setActivePage(pageNum);
   activeOverlay = ov;
-  const p = getPos(e, ov);
+  const raw = getPos(e, ov);
 
   if(mode==='note'){
     openModal({
@@ -639,12 +760,20 @@ board.addEventListener('pointerdown', (e)=>{
       fields:[{name:'text', type:'textarea', placeholder:'Remarque chantier…'}],
       onSubmit:(v)=>{
         if(!v.text) return;
-        const p1 = pxToPoint(p, pageNum);
+        const p1 = pxToPoint(raw, pageNum);
         (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'note', p1, text:v.text});
         redrawPage(pageNum); renderList(); notifyParent();
       }
     });
     return;
+  }
+
+  // Accrochage intelligent : tente de coller ce point sur une intersection du plan.
+  let p = raw;
+  let snapped = false;
+  if(snapEnabled && (mode==='measure' || mode==='dimension')){
+    const s = await trySnapToIntersection(raw, pageNum);
+    if(s){ p = s; snapped = true; }
   }
 
   // Mode "2 points" : chaque tap pose un point, pas de glisser nécessaire.
@@ -654,7 +783,7 @@ board.addEventListener('pointerdown', (e)=>{
       redrawPage(pageNum);
     } else {
       const p1 = pending[0];
-      const p2 = applyAngleSnap(p1, p);
+      const p2 = snapped ? p : applyAngleSnap(p1, p);
       pending = [];
       hud.style.display = 'none';
       if(mode==='measure') finalizeMeasure(pageNum, p1,p2); else finalizeDimension(pageNum, p1,p2);
@@ -686,7 +815,7 @@ board.addEventListener('pointermove', (e)=>{
   }
 });
 
-board.addEventListener('pointerup', (e)=>{
+board.addEventListener('pointerup', async (e)=>{
   if(!pdfDoc || mode==='pan' || mode==='note') return;
   if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){ return; } // finalisé au pointerdown
   if(!dragging || pending.length===0 || !activeOverlay) return;
@@ -696,7 +825,13 @@ board.addEventListener('pointerup', (e)=>{
   const p1 = pending[0];
   hud.style.display = 'none';
   if(dist(p1,raw) < 4){ pending=[]; redrawPage(pageNum); return; } // ignore accidental taps
-  const p2 = (mode==='measure'||mode==='dimension') ? applyAngleSnap(p1, raw) : raw;
+
+  let p2 = raw, snapped = false;
+  if(snapEnabled && (mode==='measure' || mode==='dimension')){
+    const s = await trySnapToIntersection(raw, pageNum);
+    if(s){ p2 = s; snapped = true; }
+  }
+  if(!snapped && (mode==='measure' || mode==='dimension')) p2 = applyAngleSnap(p1, raw);
 
   if(mode==='calibrate'){
     const pxDist = dist(p1,p2);
@@ -819,61 +954,10 @@ function drawLabel(octx, x,y,text,color){
 }
 
 // ---------- List panel ----------
-function renderList(){
-  const list = document.getElementById('list');
-  const items = currentItems();
-  if(items.length===0){ list.innerHTML = '<div class="item" style="color:var(--text-dim);">Aucun élément sur cette page.</div>'; return; }
-  list.innerHTML = '';
-  items.forEach((it, idx)=>{
-    const row = document.createElement('div');
-    row.className = 'item';
-    let badge='', val='', lbl='';
-    if(it.type==='measure'){ badge='<div class="badge" style="background:#3a3e44;color:#fff;">M</div>'; val=formatReal(it.value, currentPageNum); lbl='mesure'; }
-    if(it.type==='dimension'){ badge='<div class="badge" style="background:#7dd66a;color:#122;">C</div>'; val=formatReal(it.value, currentPageNum); lbl=it.label||'cote'; }
-    if(it.type==='note'){ badge='<div class="badge" style="background:#e8c547;color:#122;">N</div>'; val=it.text; lbl='note '+(idx+1); }
-    row.innerHTML = badge+'<div class="val">'+val+'</div><div class="lbl">'+lbl+'</div><button data-id="'+it.id+'">✕</button>';
-    row.querySelector('button').onclick = ()=>{
-      itemsByPage[currentPageNum] = currentItems().filter(i=>i.id!==it.id);
-      redrawPage(currentPageNum); renderList(); notifyParent();
-    };
-    list.appendChild(row);
-  });
-}
-
-document.getElementById('btn-undo').onclick = ()=>{
-  const items = currentItems();
-  if(items.length) items.pop();
-  else {
-    const panel = pagePanels[currentPageNum];
-    if(panel){ panel.calibrationLinePt=null; panel.pointsPerMeter=null; }
-    delete pageCalib[currentPageNum];
-    updatePanelBadge(currentPageNum);
-  }
-  redrawPage(currentPageNum); renderList(); notifyParent();
-};
-document.getElementById('btn-clear').onclick = ()=>{
-  openModal({
-    title:'Tout effacer ?',
-    subtitle:'Cotes, mesures et notes de cette page seront supprimées.',
-    fields:[],
-    okText:'Effacer',
-    onSubmit:()=>{ itemsByPage[currentPageNum]=[]; redrawPage(currentPageNum); renderList(); notifyParent(); }
-  });
-};
-document.getElementById('btn-export').onclick = ()=>{
-  if(!pdfDoc){ return; }
-  const panel = pagePanels[currentPageNum];
-  if(!panel) return;
-  const merged = document.createElement('canvas');
-  merged.width = panel.planCanvas.width; merged.height = panel.planCanvas.height;
-  const mctx = merged.getContext('2d');
-  mctx.drawImage(panel.planCanvas,0,0);
-  mctx.drawImage(panel.overlay,0,0);
-  const link = document.createElement('a');
-  link.download = 'plan-annote-page'+currentPageNum+'.png';
-  link.href = merged.toDataURL('image/png');
-  link.click();
-};
+// La liste d'éléments et les boutons Annuler/Effacer/Exporter ont été retirés
+// (barre du bas supprimée). renderList() reste en stub vide pour ne pas casser
+// les appels existants ailleurs dans le code.
+function renderList(){}
 
 // ---------- Modal ----------
 function openModal({title, subtitle, fields, onSubmit, onCancel, okText}){
