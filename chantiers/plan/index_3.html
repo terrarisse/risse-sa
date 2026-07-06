@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Coteur de plans — Risse SA</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+  :root{
+    --bg:#1b1d21;
+    --panel:#232629;
+    --panel-2:#2c2f34;
+    --line:#3a3e44;
+    --text:#e9e7e2;
+    --text-dim:#9a9d a2;
+    --text-dim:#9ba0a6;
+    --orange:#ff6a1a;
+    --orange-dim:#7a3510;
+    --cyan:#3ecfd6;
+    --green:#7dd66a;
+    --yellow:#e8c547;
+    --mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden;}
+  #app{display:flex; flex-direction:column; height:100vh;}
+
+  header{
+    padding:10px 14px; background:var(--panel); border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between; gap:10px; flex-shrink:0;
+  }
+  header .brand{display:flex; flex-direction:column; line-height:1.1;}
+  header .brand b{font-size:15px; letter-spacing:.3px;}
+  header .brand span{font-size:11px; color:var(--text-dim);}
+  .upload-btn{
+    background:var(--orange); color:#1b1d21; font-weight:700; font-size:13px;
+    padding:8px 14px; border-radius:6px; border:none; white-space:nowrap; cursor:pointer;
+  }
+  input[type=file]{display:none;}
+
+  #toolbar{
+    display:flex; gap:6px; padding:8px 10px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); overflow-x:auto; flex-shrink:0;
+  }
+  .tool{
+    flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:3px;
+    background:transparent; border:1px solid var(--line); color:var(--text-dim);
+    padding:7px 12px; border-radius:8px; font-size:11px; cursor:pointer; min-width:64px;
+  }
+  .tool .dot{width:8px; height:8px; border-radius:50%; background:currentColor;}
+  .tool.active{border-color:var(--orange); color:var(--orange); background:rgba(255,106,26,.08);}
+  .tool[data-color="cyan"].active{border-color:var(--cyan); color:var(--cyan); background:rgba(62,207,214,.08);}
+  .tool[data-color="green"].active{border-color:var(--green); color:var(--green); background:rgba(125,214,106,.08);}
+  .tool[data-color="yellow"].active{border-color:var(--yellow); color:var(--yellow); background:rgba(232,197,71,.08);}
+
+  #dim-options{
+    display:none; gap:14px; padding:8px 10px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); flex-shrink:0; align-items:center; flex-wrap:wrap;
+  }
+  #dim-options .seg-label{font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.4px;}
+  #dim-options .seg-group{display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  #dim-options .seg-btn{
+    background:transparent; border:none; color:var(--text-dim); font-size:12px; font-family:var(--sans);
+    padding:6px 12px; cursor:pointer;
+  }
+  #dim-options .seg-btn + .seg-btn{border-left:1px solid var(--line);}
+  #dim-options .seg-btn.active{background:var(--orange); color:#1a1204;}
+
+  #viewport{
+    flex:1; overflow:auto; position:relative; background:#111214;
+    background-image: radial-gradient(circle, #23262a 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  #empty-state{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:10px; color:var(--text-dim); text-align:center; padding:30px;
+  }
+  #empty-state b{color:var(--text); font-size:16px;}
+  #board{
+    display:grid; gap:32px; padding:32px; align-items:start; justify-items:start;
+    width:max-content;
+  }
+  canvas{display:block;}
+  .page-panel{position:relative;}
+  .plan-canvas{position:relative; top:0; left:0;}
+  .overlay-canvas{position:absolute; top:0; left:0; touch-action:pan-x pan-y;}
+  .panel-page-label{
+    position:absolute; left:0; top:-20px; font-size:11px; color:var(--text-dim);
+    font-family:var(--mono); pointer-events:none;
+  }
+  .panel-scale-badge{
+    position:absolute; right:4px; bottom:4px; background:rgba(0,0,0,.6);
+    border:1px solid var(--line); border-radius:6px; padding:4px 8px; font-size:10px;
+    color:var(--text-dim); cursor:pointer;
+  }
+  .panel-scale-badge b{color:var(--cyan); font-family:var(--mono); font-weight:600;}
+
+  #hud{
+    position:absolute; left:10px; bottom:10px; background:rgba(0,0,0,.75);
+    border:1px solid var(--orange); border-radius:8px; padding:8px 14px; display:none;
+    font-family:var(--mono); color:var(--orange); font-size:22px; letter-spacing:1px;
+    box-shadow:0 0 14px rgba(255,106,26,.25); pointer-events:none;
+  }
+  #hud span{font-size:11px; display:block; color:var(--text-dim); font-family:var(--sans); letter-spacing:0;}
+
+  #zoom-ctrl{
+    position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:4px;
+  }
+  #zoom-ctrl button{
+    width:34px; height:34px; border-radius:6px; border:1px solid var(--line); background:var(--panel);
+    color:var(--text); font-size:16px; cursor:pointer;
+  }
+
+  footer{
+    background:var(--panel); border-top:1px solid var(--line); flex-shrink:0;
+    max-height:34vh; display:flex; flex-direction:column;
+  }
+  #status{
+    padding:8px 14px; font-size:12px; color:var(--text-dim); border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  #status b{color:var(--text);}
+  #list{overflow-y:auto; flex:1;}
+  .item{
+    display:flex; align-items:center; gap:10px; padding:9px 14px; border-bottom:1px solid var(--line);
+    font-size:13px;
+  }
+  .item .badge{
+    width:22px; height:22px; border-radius:5px; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; flex-shrink:0;
+  }
+  .item .val{font-family:var(--mono); color:var(--text); flex:1;}
+  .item .lbl{color:var(--text-dim); font-size:11px;}
+  .item button{background:none; border:none; color:#c9564a; font-size:16px; cursor:pointer; padding:4px 6px;}
+  #actions{display:flex; gap:8px; padding:8px 14px;}
+  #actions button{
+    flex:1; padding:9px; border-radius:6px; border:1px solid var(--line); background:var(--panel-2);
+    color:var(--text); font-size:12px; cursor:pointer;
+  }
+  #actions button.danger{color:#e07a6f; border-color:#5a2f2a;}
+  #actions button.primary{background:var(--orange); color:#1b1d21; font-weight:700; border:none;}
+
+  #modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:50;
+  }
+  #modal-box{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:20px; width:min(320px,88vw);
+  }
+  #modal-box h3{margin:0 0 4px; font-size:14px;}
+  #modal-box p{margin:0 0 14px; font-size:12px; color:var(--text-dim);}
+  #modal-box input, #modal-box textarea, #modal-box select{
+    width:100%; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; color:var(--text);
+    padding:10px; font-size:15px; font-family:var(--mono); margin-bottom:12px;
+  }
+  #modal-box textarea{font-family:var(--sans); resize:none; height:60px;}
+  #modal-box .row{display:flex; gap:8px;}
+  #modal-box button{flex:1; padding:10px; border-radius:6px; border:none; font-size:13px; cursor:pointer;}
+  #modal-cancel{background:var(--panel-2); color:var(--text-dim); border:1px solid var(--line) !important;}
+  #modal-ok{background:var(--orange); color:#1b1d21; font-weight:700;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <div class="brand"><b>Coteur de plans</b><span id="brand-sub">Risse SA</span></div>
+  </header>
+
+  <div id="toolbar">
+    <button class="tool" data-mode="pan" data-color="default"><span class="dot"></span>Déplacer</button>
+    <button class="tool" data-mode="calibrate" data-color="cyan"><span class="dot"></span>Calibrer</button>
+    <button class="tool" data-mode="measure" data-color="default"><span class="dot"></span>Mesurer</button>
+    <button class="tool" data-mode="dimension" data-color="green"><span class="dot"></span>Coter</button>
+    <button class="tool" data-mode="note" data-color="yellow"><span class="dot"></span>Note</button>
+  </div>
+
+  <div id="dim-options">
+    <span class="seg-label">Angle</span>
+    <div class="seg-group" data-setting="angle">
+      <button class="seg-btn active" data-value="90">90°</button>
+      <button class="seg-btn" data-value="libre">Libre</button>
+    </div>
+    <span class="seg-label">Pose</span>
+    <div class="seg-group" data-setting="input">
+      <button class="seg-btn active" data-value="drag">Glisser</button>
+      <button class="seg-btn" data-value="points">2 points</button>
+    </div>
+  </div>
+
+  <div id="viewport">
+    <div id="empty-state">
+      <b id="empty-title">Chargement du plan…</b>
+      <div id="empty-sub">Le plan de ce chantier va s'afficher automatiquement.</div>
+      <button id="empty-retry-btn" onclick="location.reload()" style="display:none;margin-top:14px;padding:10px 18px;border:none;border-radius:8px;background:#3ecfd6;color:#0d1116;font-weight:700;font-family:inherit;cursor:pointer;">🔄 Réessayer</button>
+    </div>
+    <div id="board" style="display:none;"></div>
+    <div id="hud"><span id="hud-label">DISTANCE</span><span id="hud-val" style="font-size:22px; color:var(--orange);">—</span></div>
+    <div id="zoom-ctrl">
+      <button id="zoom-in">+</button>
+      <button id="zoom-out">–</button>
+    </div>
+  </div>
+
+  <footer>
+    <div id="status">
+      <span id="status-text"><b>Mode Déplacer</b> — importe un plan pour commencer.</span>
+      <span id="active-page-badge" style="display:none; font-size:11px; color:var(--text-dim); font-family:var(--mono);"></span>
+    </div>
+    <div id="list"></div>
+    <div id="actions">
+      <button id="btn-undo">↶ Annuler</button>
+      <button id="btn-clear" class="danger">Effacer tout</button>
+      <button id="btn-export" class="primary">Exporter PNG</button>
+    </div>
+  </footer>
+
+</div>
+
+<div id="modal-overlay">
+  <div id="modal-box"></div>
+</div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ---------- State ----------
+let pdfDoc = null;
+let currentPageNum = 1;          // page actuellement ciblée par le pointeur (plus une "page affichée")
+let mode = 'pan';
+let pending = [];                // points collected for current action
+let itemsByPage = {};            // {pageNum: [ {type, p1,p2,label,value} ] }
+let nextId = 1;
+let pageCalib = {};              // {pageNum: {ratio:number|null, pxPerMeter:number|null, calibrationLine:{p1,p2}|null}}
+const METERS_PER_PDF_POINT = 0.0254/72; // 1 point PDF = 1/72 pouce
+let dimAngleMode = '90';         // '90' (aimanté horizontal/vertical) | 'libre'
+let dimInputMode = 'drag';       // 'drag' (glisser) | 'points' (poser 2 points)
+let liveHudPoint = null;
+let pagePanels = {};              // {pageNum: {panelEl, planCanvas, overlay, octx, renderScale, pxPerMeter, calibrationLine, badgeEl}}
+
+const board = document.getElementById('board');
+const viewport = document.getElementById('viewport');
+const hud = document.getElementById('hud');
+const hudVal = document.getElementById('hud-val');
+const hudLabel = document.getElementById('hud-label');
+
+function currentItems(){
+  if(!itemsByPage[currentPageNum]) itemsByPage[currentPageNum] = [];
+  return itemsByPage[currentPageNum];
+}
+function setActivePage(pageNum){
+  currentPageNum = pageNum;
+  const badge = document.getElementById('active-page-badge');
+  badge.style.display = 'inline';
+  badge.textContent = 'Page '+pageNum+' / '+(pdfDoc?pdfDoc.numPages:'?');
+  renderList();
+}
+
+// ---------- Chargement piloté par la page parente (module Chantiers) ----------
+// Le parent envoie : { type:'coteur-init', planData: <data URI base64>, items: <{itemsByPage, pageCalib} sauvegardé ou null>, chantierNom: <string> }
+// On renvoie au parent à chaque modification : { type:'coteur-items-update', items: {itemsByPage, pageCalib} }
+let initReceived = false;
+window.addEventListener('message', async (e)=>{
+  const msg = e.data;
+  if(!msg || msg.type !== 'coteur-init') return;
+  initReceived = true;
+  console.log('[Coteur] coteur-init reçu', {hasPlan: !!msg.planData, chantier: msg.chantierNom});
+  if(msg.chantierNom) document.getElementById('brand-sub').textContent = msg.chantierNom;
+  const saved = msg.items && typeof msg.items === 'object' ? msg.items : {};
+  // Compat : anciennes sauvegardes = itemsByPage directement (pas encore de pageCalib)
+  const looksLikeOldFormat = saved && !saved.itemsByPage && !saved.pageCalib;
+  itemsByPage = looksLikeOldFormat ? saved : (saved.itemsByPage || {});
+  pageCalib = looksLikeOldFormat ? {} : (saved.pageCalib || {});
+  // Recalcule nextId au-dessus de tout ce qui existe déjà, pour ne jamais réutiliser un id
+  let maxId = 0;
+  Object.values(itemsByPage).forEach(arr => (arr||[]).forEach(it => { if(it.id > maxId) maxId = it.id; }));
+  nextId = maxId + 1;
+
+  if(!msg.planData){
+    setEmptyState('Aucun plan pour ce chantier', 'Importe un plan depuis l\'onglet Plan pour commencer.');
+    return;
+  }
+  try{
+    console.log('[Coteur] fetch du plan…');
+    const res = await fetch(msg.planData);
+    const buf = await res.arrayBuffer();
+    console.log('[Coteur] plan récupéré,', buf.byteLength, 'octets — chargement pdf.js…');
+    pdfDoc = await pdfjsLib.getDocument({data: buf}).promise;
+    console.log('[Coteur] PDF chargé,', pdfDoc.numPages, 'page(s)');
+    document.getElementById('empty-state').style.display = 'none';
+    board.style.display = 'grid';
+    await renderAllPages();
+    setActivePage(1);
+  }catch(err){
+    console.error('[Coteur] Erreur chargement plan:', err);
+    setEmptyState('Erreur de chargement du plan', (err && err.message ? err.message+' — ' : '')+'Réessaie ci-dessous.', true);
+  }
+});
+
+function setEmptyState(title, sub, showRetry){
+  document.getElementById('empty-title').textContent = title;
+  document.getElementById('empty-sub').textContent = sub;
+  const btn = document.getElementById('empty-retry-btn');
+  if(btn) btn.style.display = showRetry ? 'inline-block' : 'none';
+}
+
+// Prévient le parent que le coteur est prêt à recevoir le plan
+if(window.parent !== window){
+  window.parent.postMessage({type:'coteur-ready'}, '*');
+  console.log('[Coteur] coteur-ready envoyé au parent, en attente du plan…');
+}
+
+// Filet de sécurité : si rien n'est arrivé après 6s, on affiche un message clair
+// au lieu de rester bloqué indéfiniment sur "Chargement du plan…", et on relance
+// la demande au parent au cas où le tout premier postMessage se serait perdu.
+setTimeout(()=>{
+  if(!initReceived && window.parent !== window){
+    console.warn('[Coteur] Aucune réponse du parent après 6s, nouvelle tentative…');
+    setEmptyState('Ça prend plus de temps que prévu…', 'Nouvel essai en cours. Si ça persiste, réouvre l\'onglet Plan.', true);
+    window.parent.postMessage({type:'coteur-ready'}, '*');
+  }
+}, 6000);
+
+// Renvoie les mesures/cotes/notes au parent (debounce léger pour éviter de spammer pendant le tracé)
+let notifyTimer = null;
+function notifyParent(){
+  if(window.parent === window) return; // ouvert seul, hors iframe : rien à notifier
+  clearTimeout(notifyTimer);
+  notifyTimer = setTimeout(()=>{
+    window.parent.postMessage({type:'coteur-items-update', items: {itemsByPage, pageCalib}}, '*');
+  }, 500);
+}
+
+// Détermine un nombre de colonnes raisonnable pour la grille selon le nombre de pages
+function computeColumns(n){
+  if(n<=2) return n;
+  if(n<=6) return Math.ceil(n/2);
+  return 4;
+}
+
+async function renderAllPages(){
+  board.innerHTML = '';
+  pagePanels = {};
+  const cols = computeColumns(pdfDoc.numPages);
+  board.style.gridTemplateColumns = 'repeat('+cols+', max-content)';
+  const targetWidth = 640;
+
+  for(let i=1; i<=pdfDoc.numPages; i++){
+    const page = await pdfDoc.getPage(i);
+    const nv = page.getViewport({scale:1});
+    const scale = targetWidth / nv.width;
+    const pv = page.getViewport({scale});
+
+    const panel = document.createElement('div');
+    panel.className = 'page-panel';
+    panel.style.width = pv.width+'px';
+    panel.style.height = pv.height+'px';
+
+    const planCv = document.createElement('canvas');
+    planCv.className = 'plan-canvas';
+    planCv.width = pv.width; planCv.height = pv.height;
+    planCv.style.width = pv.width+'px'; planCv.style.height = pv.height+'px';
+
+    const overlayCv = document.createElement('canvas');
+    overlayCv.className = 'overlay-canvas';
+    overlayCv.width = pv.width; overlayCv.height = pv.height;
+    overlayCv.style.width = pv.width+'px'; overlayCv.style.height = pv.height+'px';
+    overlayCv.dataset.page = i;
+    overlayCv.style.touchAction = (mode==='pan') ? 'pan-x pan-y' : 'none';
+
+    const label = document.createElement('div');
+    label.className = 'panel-page-label';
+    label.textContent = 'Page '+i;
+
+    const badge = document.createElement('div');
+    badge.className = 'panel-scale-badge';
+    badge.innerHTML = 'Échelle <b>—</b>';
+    badge.addEventListener('click', ()=>openScaleChooser(i));
+
+    panel.appendChild(planCv);
+    panel.appendChild(overlayCv);
+    panel.appendChild(label);
+    panel.appendChild(badge);
+    board.appendChild(panel);
+
+    const ctx = planCv.getContext('2d');
+    await page.render({canvasContext: ctx, viewport: pv}).promise;
+
+    pagePanels[i] = {
+      panelEl: panel, planCanvas: planCv, overlay: overlayCv, octx: overlayCv.getContext('2d'),
+      renderScale: scale, pxPerMeter: null, calibrationLine: null, badgeEl: badge
+    };
+    applyStoredCalibForPage(i);
+    redrawPage(i);
+  }
+}
+
+// Réapplique la calibration propre à une page (échelle auto ou calibration manuelle
+// précédemment faite sur CETTE page).
+function applyStoredCalibForPage(pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return;
+  const stored = pageCalib[pageNum];
+  if(stored && stored.ratio){
+    panel.pxPerMeter = panel.renderScale / (METERS_PER_PDF_POINT * stored.ratio);
+    panel.calibrationLine = null;
+  } else if(stored && stored.pxPerMeter){
+    panel.pxPerMeter = stored.pxPerMeter;
+    panel.calibrationLine = stored.calibrationLine || null;
+  } else {
+    panel.pxPerMeter = null;
+    panel.calibrationLine = null;
+  }
+  updatePanelBadge(pageNum);
+}
+
+// ---------- Zoom (CSS-based sur tout le tableau, coordonnées auto-corrigées via getBoundingClientRect) ----------
+let zoomLevel = 1;
+function applyZoom(delta){
+  zoomLevel = Math.max(0.5, Math.min(3, zoomLevel+delta));
+  board.style.zoom = zoomLevel;
+}
+document.getElementById('zoom-in').onclick = ()=>applyZoom(0.25);
+document.getElementById('zoom-out').onclick = ()=>applyZoom(-0.25);
+
+// ---------- Mode switching ----------
+document.querySelectorAll('.tool').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tool').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    mode = btn.dataset.mode;
+    pending = [];
+    hud.style.display = 'none';
+    Object.values(pagePanels).forEach(p=>{
+      p.overlay.style.touchAction = (mode==='pan') ? 'pan-x pan-y' : 'none';
+    });
+    redrawPage(currentPageNum);
+    document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
+    const labels = {
+      pan: 'Mode Déplacer — balaie/zoome librement sur le tableau.',
+      calibrate: 'Mode Calibrer — clique 2 points d’une cote connue sur le plan.',
+      measure: 'Mode Mesurer — clique un point de départ puis déplace pour lire la distance.',
+      dimension: 'Mode Coter — pose une cote comme sur un plan (2 points + libellé).',
+      note: 'Mode Note — clique un point pour ajouter une remarque chantier.'
+    };
+    document.getElementById('status-text').innerHTML = '<b>'+btn.textContent.trim()+'</b> — '+labels[mode].split('— ')[1];
+  });
+});
+
+document.querySelectorAll('#dim-options .seg-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.closest('.seg-group');
+    const setting = group.dataset.setting;
+    group.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    pending = [];
+    hud.style.display = 'none';
+    redrawPage(currentPageNum);
+    if(setting==='angle') dimAngleMode = btn.dataset.value;
+    else if(setting==='input') dimInputMode = btn.dataset.value;
+  });
+});
+document.querySelector('.tool[data-mode="pan"]').classList.add('active');
+
+// ---------- Coordinate helpers ----------
+function getPos(e, overlayEl){
+  const rect = overlayEl.getBoundingClientRect();
+  const cx = (e.touches ? e.touches[0].clientX : e.clientX);
+  const cy = (e.touches ? e.touches[0].clientY : e.clientY);
+  return {
+    x: (cx - rect.left) * (overlayEl.width / rect.width),
+    y: (cy - rect.top) * (overlayEl.height / rect.height)
+  };
+}
+function dist(a,b){ return Math.hypot(b.x-a.x, b.y-a.y); }
+function formatReal(pxDist, pageNum){
+  const panel = pagePanels[pageNum];
+  const ppm = panel ? panel.pxPerMeter : null;
+  if(!ppm) return pxDist.toFixed(0)+' px';
+  const meters = pxDist / ppm;
+  if(meters < 1) return (meters*100).toFixed(1)+' cm';
+  return meters.toFixed(2)+' m';
+}
+function updatePanelBadge(pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return;
+  const stored = pageCalib[pageNum];
+  if(stored && stored.ratio) panel.badgeEl.innerHTML = 'Échelle <b>1:'+stored.ratio+'</b>';
+  else if(panel.pxPerMeter) panel.badgeEl.innerHTML = 'Échelle <b>'+panel.pxPerMeter.toFixed(1)+' px/m</b>';
+  else panel.badgeEl.innerHTML = 'Échelle <b>—</b>';
+}
+
+const COMMON_SCALES = [20,50,100,200,500];
+function openScaleChooser(pageNum){
+  if(!pdfDoc) return;
+  openModal({
+    title:'Échelle de la page '+pageNum,
+    subtitle:'Indique l\'échelle imprimée sur le plan (cartouche "Ech. 1:XX") — la calibration se fait alors automatiquement, sans clic.',
+    fields:[{name:'ratio', type:'select', options:[
+      ...COMMON_SCALES.map(r=>({value:r, label:'1 : '+r})),
+      {value:'custom', label:'Autre valeur…'}
+    ]}],
+    okText:'Appliquer',
+    onSubmit:(v)=>{
+      if(v.ratio==='custom'){
+        openModal({
+          title:'Échelle personnalisée',
+          subtitle:'Le "X" du ratio 1:X imprimé sur le plan :',
+          fields:[{name:'ratio', type:'number', placeholder:'ex. 33.33', step:'any'}],
+          onSubmit:(v2)=>{
+            const r = parseFloat(v2.ratio);
+            if(!r || r<=0) return;
+            setPageScaleRatio(r, pageNum);
+          }
+        });
+      } else {
+        setPageScaleRatio(parseFloat(v.ratio), pageNum);
+      }
+    }
+  });
+}
+
+function setPageScaleRatio(ratio, pageNum){
+  pageCalib[pageNum] = { ratio, pxPerMeter:null, calibrationLine:null };
+  applyStoredCalibForPage(pageNum);
+  redrawPage(pageNum);
+  notifyParent();
+}
+
+// ---------- Pointer handling (délégué sur #board, une page à la fois) ----------
+let dragging = false;
+let activeOverlay = null;
+
+// Si le mode "90°" est actif, force le 2e point sur l'axe horizontal ou vertical
+// (celui le plus proche du geste), en gardant le 1er point fixe.
+function applyAngleSnap(p1, p2){
+  if(dimAngleMode !== '90') return p2;
+  const dx = Math.abs(p2.x-p1.x), dy = Math.abs(p2.y-p1.y);
+  return dx >= dy ? {x:p2.x, y:p1.y} : {x:p1.x, y:p2.y};
+}
+
+function finalizeMeasure(pageNum, p1,p2){
+  (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'measure', p1, p2, value: dist(p1,p2)});
+  redrawPage(pageNum); renderList(); notifyParent();
+}
+function finalizeDimension(pageNum, p1,p2){
+  const panel = pagePanels[pageNum];
+  openModal({
+    title:'Libellé de la cote',
+    subtitle:'Distance mesurée : '+formatReal(dist(p1,p2), pageNum)+(panel.pxPerMeter?'':' (calibre d’abord pour une valeur réelle)'),
+    fields:[{name:'label', type:'text', placeholder:'ex. Mur façade nord (optionnel)'}],
+    onSubmit:(v)=>{
+      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:v.label||''});
+      redrawPage(pageNum); renderList(); notifyParent();
+    },
+    onCancel:()=>{
+      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:''});
+      redrawPage(pageNum); renderList(); notifyParent();
+    }
+  });
+}
+
+function overlayFromEvent(e){
+  const t = e.target;
+  return (t && t.classList && t.classList.contains('overlay-canvas')) ? t : null;
+}
+
+board.addEventListener('pointerdown', (e)=>{
+  if(!pdfDoc || mode==='pan') return;
+  const ov = overlayFromEvent(e);
+  if(!ov) return;
+  const pageNum = parseInt(ov.dataset.page, 10);
+  if(pageNum !== currentPageNum) setActivePage(pageNum);
+  activeOverlay = ov;
+  const p = getPos(e, ov);
+
+  if(mode==='note'){
+    openModal({
+      title:'Nouvelle note',
+      fields:[{name:'text', type:'textarea', placeholder:'Remarque chantier…'}],
+      onSubmit:(v)=>{
+        if(!v.text) return;
+        (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'note', p1:p, text:v.text});
+        redrawPage(pageNum); renderList(); notifyParent();
+      }
+    });
+    return;
+  }
+
+  // Mode "2 points" : chaque tap pose un point, pas de glisser nécessaire.
+  if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){
+    if(pending.length===0){
+      pending = [p];
+      redrawPage(pageNum);
+    } else {
+      const p1 = pending[0];
+      const p2 = applyAngleSnap(p1, p);
+      pending = [];
+      hud.style.display = 'none';
+      if(mode==='measure') finalizeMeasure(pageNum, p1,p2); else finalizeDimension(pageNum, p1,p2);
+    }
+    return;
+  }
+
+  dragging = true;
+  pending = [p];
+});
+
+board.addEventListener('pointermove', (e)=>{
+  if(!pdfDoc || mode==='pan' || mode==='note') return;
+  if(pending.length===0 || !activeOverlay) return;
+  if(dimInputMode==='drag' && !dragging) return;
+  const pageNum = parseInt(activeOverlay.dataset.page, 10);
+  const raw = getPos(e, activeOverlay);
+  const p = (mode==='measure'||mode==='dimension') ? applyAngleSnap(pending[0], raw) : raw;
+  liveHudPoint = p;
+  redrawPage(pageNum, pending[0], p);
+  const d = dist(pending[0], p);
+  hud.style.display = 'block';
+  hudLabel.textContent = mode==='calibrate' ? 'LONGUEUR (px)' : 'DISTANCE';
+  hudVal.textContent = mode==='calibrate' ? d.toFixed(0)+' px' : formatReal(d, pageNum);
+});
+
+board.addEventListener('pointerup', (e)=>{
+  if(!pdfDoc || mode==='pan' || mode==='note') return;
+  if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){ return; } // finalisé au pointerdown
+  if(!dragging || pending.length===0 || !activeOverlay) return;
+  dragging = false;
+  const pageNum = parseInt(activeOverlay.dataset.page, 10);
+  const raw = getPos(e, activeOverlay);
+  const p1 = pending[0];
+  hud.style.display = 'none';
+  if(dist(p1,raw) < 4){ pending=[]; redrawPage(pageNum); return; } // ignore accidental taps
+  const p2 = (mode==='measure'||mode==='dimension') ? applyAngleSnap(p1, raw) : raw;
+
+  if(mode==='calibrate'){
+    const pxDist = dist(p1,p2);
+    openModal({
+      title:'Calibration',
+      subtitle:'Distance réelle entre ces 2 points (en mètres) :',
+      fields:[{name:'meters', type:'number', placeholder:'ex. 4.85', step:'0.01'}],
+      onSubmit:(v)=>{
+        const m = parseFloat(v.meters);
+        if(!m || m<=0) return;
+        const panel = pagePanels[pageNum];
+        panel.pxPerMeter = pxDist / m;
+        panel.calibrationLine = {p1,p2};
+        pageCalib[pageNum] = { ratio:null, pxPerMeter:panel.pxPerMeter, calibrationLine:panel.calibrationLine };
+        updatePanelBadge(pageNum);
+        pending=[]; redrawPage(pageNum);
+        notifyParent();
+      },
+      onCancel:()=>{ pending=[]; redrawPage(pageNum); }
+    });
+  } else if(mode==='measure'){
+    pending=[]; finalizeMeasure(pageNum, p1,p2);
+  } else if(mode==='dimension'){
+    pending=[]; finalizeDimension(pageNum, p1,p2);
+  }
+});
+
+// ---------- Drawing ----------
+function redrawPage(pageNum, livePA, livePB){
+  const panel = pagePanels[pageNum];
+  if(!panel) return;
+  const octx = panel.octx;
+  octx.clearRect(0,0,panel.overlay.width, panel.overlay.height);
+
+  if(panel.calibrationLine){
+    drawLine(octx, panel.calibrationLine.p1, panel.calibrationLine.p2, '#3ecfd6', true);
+  }
+
+  (itemsByPage[pageNum]||[]).forEach(it=>{
+    if(it.type==='measure'){
+      drawLine(octx, it.p1, it.p2, 'rgba(255,255,255,0.5)', true, formatReal(it.value, pageNum));
+    } else if(it.type==='dimension'){
+      drawDimension(octx, it.p1, it.p2, '#7dd66a', formatReal(it.value, pageNum), it.label);
+    } else if(it.type==='note'){
+      drawNote(octx, it.p1, '#e8c547', it.id, pageNum);
+    }
+  });
+
+  if(livePA && livePB){
+    const color = mode==='calibrate' ? '#3ecfd6' : (mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)');
+    drawLine(octx, livePA, livePB, color, mode!=='dimension');
+  } else if(pending.length===1 && dimInputMode==='points' && (mode==='measure'||mode==='dimension') && pageNum===currentPageNum){
+    const color = mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)';
+    octx.save();
+    octx.fillStyle = color;
+    octx.beginPath(); octx.arc(pending[0].x, pending[0].y, 5, 0, Math.PI*2); octx.fill();
+    octx.restore();
+  }
+}
+
+function drawLine(octx, p1,p2,color,dashed,label){
+  octx.save();
+  octx.strokeStyle = color; octx.lineWidth = 2;
+  if(dashed) octx.setLineDash([6,5]);
+  octx.beginPath(); octx.moveTo(p1.x,p1.y); octx.lineTo(p2.x,p2.y); octx.stroke();
+  octx.setLineDash([]);
+  [p1,p2].forEach(p=>{
+    octx.beginPath(); octx.arc(p.x,p.y,4,0,Math.PI*2); octx.fillStyle=color; octx.fill();
+  });
+  if(label){
+    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+    drawLabel(octx, mx,my,label,color);
+  }
+  octx.restore();
+}
+
+function drawDimension(octx, p1,p2,color,valLabel,textLabel){
+  octx.save();
+  octx.strokeStyle = color; octx.fillStyle = color; octx.lineWidth = 1.5;
+  const angle = Math.atan2(p2.y-p1.y, p2.x-p1.x);
+  const tick = 8;
+  [p1,p2].forEach(p=>{
+    octx.beginPath();
+    octx.moveTo(p.x - Math.sin(angle)*tick, p.y + Math.cos(angle)*tick);
+    octx.lineTo(p.x + Math.sin(angle)*tick, p.y - Math.cos(angle)*tick);
+    octx.stroke();
+  });
+  octx.beginPath(); octx.moveTo(p1.x,p1.y); octx.lineTo(p2.x,p2.y); octx.stroke();
+  [p1,p2].forEach(p=>{ octx.beginPath(); octx.arc(p.x,p.y,3,0,Math.PI*2); octx.fill(); });
+  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
+  drawLabel(octx, mx,my, textLabel ? (textLabel+' · '+valLabel) : valLabel, color);
+  octx.restore();
+}
+
+function drawNote(octx, p, color, id, pageNum){
+  octx.save();
+  octx.fillStyle = color;
+  octx.beginPath(); octx.arc(p.x,p.y,10,0,Math.PI*2); octx.fill();
+  octx.fillStyle = '#1b1d21'; octx.font = 'bold 11px sans-serif';
+  octx.textAlign='center'; octx.textBaseline='middle';
+  octx.fillText(String((itemsByPage[pageNum]||[]).filter(i=>i.type==='note').findIndex(i=>i.id===id)+1), p.x, p.y+1);
+  octx.restore();
+}
+
+function drawLabel(octx, x,y,text,color){
+  octx.font = '600 12px ui-monospace, monospace';
+  const w = octx.measureText(text).width + 12;
+  octx.fillStyle = 'rgba(20,20,22,0.85)';
+  octx.fillRect(x-w/2, y-10, w, 20);
+  octx.strokeStyle = color; octx.lineWidth=1;
+  octx.strokeRect(x-w/2, y-10, w, 20);
+  octx.fillStyle = color;
+  octx.textAlign='center'; octx.textBaseline='middle';
+  octx.fillText(text, x, y+1);
+}
+
+// ---------- List panel ----------
+function renderList(){
+  const list = document.getElementById('list');
+  const items = currentItems();
+  if(items.length===0){ list.innerHTML = '<div class="item" style="color:var(--text-dim);">Aucun élément sur cette page.</div>'; return; }
+  list.innerHTML = '';
+  items.forEach((it, idx)=>{
+    const row = document.createElement('div');
+    row.className = 'item';
+    let badge='', val='', lbl='';
+    if(it.type==='measure'){ badge='<div class="badge" style="background:#3a3e44;color:#fff;">M</div>'; val=formatReal(it.value, currentPageNum); lbl='mesure'; }
+    if(it.type==='dimension'){ badge='<div class="badge" style="background:#7dd66a;color:#122;">C</div>'; val=formatReal(it.value, currentPageNum); lbl=it.label||'cote'; }
+    if(it.type==='note'){ badge='<div class="badge" style="background:#e8c547;color:#122;">N</div>'; val=it.text; lbl='note '+(idx+1); }
+    row.innerHTML = badge+'<div class="val">'+val+'</div><div class="lbl">'+lbl+'</div><button data-id="'+it.id+'">✕</button>';
+    row.querySelector('button').onclick = ()=>{
+      itemsByPage[currentPageNum] = currentItems().filter(i=>i.id!==it.id);
+      redrawPage(currentPageNum); renderList(); notifyParent();
+    };
+    list.appendChild(row);
+  });
+}
+
+document.getElementById('btn-undo').onclick = ()=>{
+  const items = currentItems();
+  if(items.length) items.pop();
+  else {
+    const panel = pagePanels[currentPageNum];
+    if(panel){ panel.calibrationLine=null; panel.pxPerMeter=null; }
+    delete pageCalib[currentPageNum];
+    updatePanelBadge(currentPageNum);
+  }
+  redrawPage(currentPageNum); renderList(); notifyParent();
+};
+document.getElementById('btn-clear').onclick = ()=>{
+  openModal({
+    title:'Tout effacer ?',
+    subtitle:'Cotes, mesures et notes de cette page seront supprimées.',
+    fields:[],
+    okText:'Effacer',
+    onSubmit:()=>{ itemsByPage[currentPageNum]=[]; redrawPage(currentPageNum); renderList(); notifyParent(); }
+  });
+};
+document.getElementById('btn-export').onclick = ()=>{
+  if(!pdfDoc){ return; }
+  const panel = pagePanels[currentPageNum];
+  if(!panel) return;
+  const merged = document.createElement('canvas');
+  merged.width = panel.planCanvas.width; merged.height = panel.planCanvas.height;
+  const mctx = merged.getContext('2d');
+  mctx.drawImage(panel.planCanvas,0,0);
+  mctx.drawImage(panel.overlay,0,0);
+  const link = document.createElement('a');
+  link.download = 'plan-annote-page'+currentPageNum+'.png';
+  link.href = merged.toDataURL('image/png');
+  link.click();
+};
+
+// ---------- Modal ----------
+function openModal({title, subtitle, fields, onSubmit, onCancel, okText}){
+  const overlayEl = document.getElementById('modal-overlay');
+  const box = document.getElementById('modal-box');
+  let html = '<h3>'+title+'</h3>';
+  if(subtitle) html += '<p>'+subtitle+'</p>';
+  fields.forEach(f=>{
+    if(f.type==='textarea') html += '<textarea name="'+f.name+'" placeholder="'+(f.placeholder||'')+'" autofocus></textarea>';
+    else if(f.type==='select') html += '<select name="'+f.name+'" autofocus>'+f.options.map(o=>'<option value="'+o.value+'"'+(o.selected?' selected':'')+'>'+o.label+'</option>').join('')+'</select>';
+    else html += '<input name="'+f.name+'" type="'+f.type+'" step="'+(f.step||'any')+'" placeholder="'+(f.placeholder||'')+'" autofocus>';
+  });
+  html += '<div class="row"><button id="modal-cancel">Annuler</button><button id="modal-ok">'+(okText||'Valider')+'</button></div>';
+  box.innerHTML = html;
+  overlayEl.style.display = 'flex';
+  const firstInput = box.querySelector('input,textarea,select');
+  if(firstInput) setTimeout(()=>firstInput.focus(), 50);
+
+  function close(){ overlayEl.style.display='none'; }
+  box.querySelector('#modal-cancel').onclick = ()=>{ close(); if(onCancel) onCancel(); };
+  box.querySelector('#modal-ok').onclick = ()=>{
+    const values = {};
+    fields.forEach(f=>{ values[f.name] = box.querySelector('[name="'+f.name+'"]').value; });
+    close();
+    onSubmit(values);
+  };
+  if(firstInput){
+    firstInput.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter' && f_type_ok()) box.querySelector('#modal-ok').click();
+    });
+  }
+  function f_type_ok(){ return fields.length<=1 && fields[0] && fields[0].type!=='textarea'; }
+}
+
+window.addEventListener('resize', ()=>{ if(pdfDoc) renderAllPages().then(()=>redrawPage(currentPageNum)); });
+</script>
+</body>
+</html>
