@@ -231,12 +231,15 @@ let mode = 'pan';
 let pending = [];                // points collected for current action
 let itemsByPage = {};            // {pageNum: [ {type, p1,p2,label,value} ] }
 let nextId = 1;
-let pageCalib = {};              // {pageNum: {ratio:number|null, pxPerMeter:number|null, calibrationLine:{p1,p2}|null}}
+let pageCalib = {};              // {pageNum: {ratio:number|null, pointsPerMeter:number|null, calibrationLinePt:{p1,p2}|null}}
 const METERS_PER_PDF_POINT = 0.0254/72; // 1 point PDF = 1/72 pouce
 let dimAngleMode = '90';         // '90' (aimanté horizontal/vertical) | 'libre'
 let dimInputMode = 'drag';       // 'drag' (glisser) | 'points' (poser 2 points)
 let liveHudPoint = null;
-let pagePanels = {};              // {pageNum: {panelEl, planCanvas, overlay, octx, renderScale, pxPerMeter, calibrationLine, badgeEl}}
+let pagePanels = {};              // {pageNum: {panelEl, planCanvas, overlay, octx, renderScale, pointsPerMeter, calibrationLinePt, badgeEl}}
+let currentRenderMultiplier = 1;  // qualité de rendu actuellement appliquée (montée à la demande au zoom)
+const BASE_MULTIPLIER = 1.8;      // qualité de base à zoomLevel=1
+const DISPLAY_WIDTH = 480;        // taille affichée par défaut sur le tableau (compacte)
 
 const board = document.getElementById('board');
 const viewport = document.getElementById('viewport');
@@ -254,6 +257,19 @@ function setActivePage(pageNum){
   badge.style.display = 'inline';
   badge.textContent = 'Page '+pageNum+' / '+(pdfDoc?pdfDoc.numPages:'?');
   renderList();
+}
+
+// Les points des mesures/cotes/notes sont stockés en "espace PDF" (coordonnées à
+// scale=1, indépendantes de la résolution de rendu), pour rester justes même si on
+// re-rend une page à une meilleure qualité (zoom). On convertit vers/depuis les
+// pixels du canvas actuel au moment du dessin ou du clic.
+function pxToPoint(p, pageNum){
+  const panel = pagePanels[pageNum];
+  return { x: p.x/panel.renderScale, y: p.y/panel.renderScale };
+}
+function pointToPx(p, pageNum){
+  const panel = pagePanels[pageNum];
+  return { x: p.x*panel.renderScale, y: p.y*panel.renderScale };
 }
 
 // ---------- Chargement piloté par la page parente (module Chantiers) ----------
@@ -343,28 +359,29 @@ async function renderAllPages(){
   pagePanels = {};
   const cols = computeColumns(pdfDoc.numPages);
   board.style.gridTemplateColumns = 'repeat('+cols+', max-content)';
-  const targetWidth = 640;
+  currentRenderMultiplier = BASE_MULTIPLIER;
 
   for(let i=1; i<=pdfDoc.numPages; i++){
     const page = await pdfDoc.getPage(i);
     const nv = page.getViewport({scale:1});
-    const scale = targetWidth / nv.width;
+    const scale = (DISPLAY_WIDTH * currentRenderMultiplier) / nv.width; // résolution interne haute
     const pv = page.getViewport({scale});
+    const displayHeight = DISPLAY_WIDTH * (nv.height/nv.width);
 
     const panel = document.createElement('div');
     panel.className = 'page-panel';
-    panel.style.width = pv.width+'px';
-    panel.style.height = pv.height+'px';
+    panel.style.width = DISPLAY_WIDTH+'px';
+    panel.style.height = displayHeight+'px';
 
     const planCv = document.createElement('canvas');
     planCv.className = 'plan-canvas';
     planCv.width = pv.width; planCv.height = pv.height;
-    planCv.style.width = pv.width+'px'; planCv.style.height = pv.height+'px';
+    planCv.style.width = DISPLAY_WIDTH+'px'; planCv.style.height = displayHeight+'px';
 
     const overlayCv = document.createElement('canvas');
     overlayCv.className = 'overlay-canvas';
     overlayCv.width = pv.width; overlayCv.height = pv.height;
-    overlayCv.style.width = pv.width+'px'; overlayCv.style.height = pv.height+'px';
+    overlayCv.style.width = DISPLAY_WIDTH+'px'; overlayCv.style.height = displayHeight+'px';
     overlayCv.dataset.page = i;
     overlayCv.style.touchAction = (mode==='pan') ? 'pan-x pan-y' : 'none';
 
@@ -388,7 +405,7 @@ async function renderAllPages(){
 
     pagePanels[i] = {
       panelEl: panel, planCanvas: planCv, overlay: overlayCv, octx: overlayCv.getContext('2d'),
-      renderScale: scale, pxPerMeter: null, calibrationLine: null, badgeEl: badge
+      renderScale: scale, pointsPerMeter: null, calibrationLinePt: null, badgeEl: badge
     };
     applyStoredCalibForPage(i);
     redrawPage(i);
@@ -396,32 +413,66 @@ async function renderAllPages(){
 }
 
 // Réapplique la calibration propre à une page (échelle auto ou calibration manuelle
-// précédemment faite sur CETTE page).
+// précédemment faite sur CETTE page). Exprimée en "par point PDF", donc valable à
+// n'importe quelle résolution de rendu.
 function applyStoredCalibForPage(pageNum){
   const panel = pagePanels[pageNum];
   if(!panel) return;
   const stored = pageCalib[pageNum];
   if(stored && stored.ratio){
-    panel.pxPerMeter = panel.renderScale / (METERS_PER_PDF_POINT * stored.ratio);
-    panel.calibrationLine = null;
-  } else if(stored && stored.pxPerMeter){
-    panel.pxPerMeter = stored.pxPerMeter;
-    panel.calibrationLine = stored.calibrationLine || null;
+    panel.pointsPerMeter = 1/(METERS_PER_PDF_POINT * stored.ratio);
+    panel.calibrationLinePt = null;
+  } else if(stored && stored.pointsPerMeter){
+    panel.pointsPerMeter = stored.pointsPerMeter;
+    panel.calibrationLinePt = stored.calibrationLinePt || null;
   } else {
-    panel.pxPerMeter = null;
-    panel.calibrationLine = null;
+    panel.pointsPerMeter = null;
+    panel.calibrationLinePt = null;
   }
   updatePanelBadge(pageNum);
 }
 
-// ---------- Zoom (CSS-based sur tout le tableau, coordonnées auto-corrigées via getBoundingClientRect) ----------
+// ---------- Zoom (CSS) + rendu adaptatif : redessine à meilleure résolution quand
+// le zoom dépasse ce que la résolution actuelle peut afficher net. ----------
 let zoomLevel = 1;
-function applyZoom(delta){
-  zoomLevel = Math.max(0.5, Math.min(3, zoomLevel+delta));
+let rerenderingQuality = false;
+
+async function applyZoom(delta){
+  zoomLevel = Math.max(0.5, Math.min(5, zoomLevel+delta));
   board.style.zoom = zoomLevel;
+
+  const needed = zoomLevel * BASE_MULTIPLIER;
+  if(needed > currentRenderMultiplier * 1.15 && !rerenderingQuality){
+    currentRenderMultiplier = needed;
+    await rerenderAllPagesQuality(currentRenderMultiplier);
+  }
 }
-document.getElementById('zoom-in').onclick = ()=>applyZoom(0.25);
-document.getElementById('zoom-out').onclick = ()=>applyZoom(-0.25);
+document.getElementById('zoom-in').onclick = ()=>applyZoom(0.3);
+document.getElementById('zoom-out').onclick = ()=>applyZoom(-0.3);
+
+async function rerenderAllPagesQuality(multiplier){
+  if(!pdfDoc || rerenderingQuality) return;
+  rerenderingQuality = true;
+  const badge = document.getElementById('active-page-badge');
+  const prevText = badge.textContent;
+  badge.textContent = '🔄 Amélioration de la netteté…';
+  for(let i=1; i<=pdfDoc.numPages; i++){
+    const panel = pagePanels[i];
+    if(!panel) continue;
+    const page = await pdfDoc.getPage(i);
+    const nv = page.getViewport({scale:1});
+    const scale = (DISPLAY_WIDTH * multiplier) / nv.width;
+    const pv = page.getViewport({scale});
+    panel.planCanvas.width = pv.width; panel.planCanvas.height = pv.height;
+    panel.overlay.width = pv.width; panel.overlay.height = pv.height;
+    panel.renderScale = scale;
+    const ctx = panel.planCanvas.getContext('2d');
+    await page.render({canvasContext: ctx, viewport: pv}).promise;
+    redrawPage(i);
+  }
+  badge.textContent = prevText;
+  rerenderingQuality = false;
+}
 
 // ---------- Mode switching ----------
 document.querySelectorAll('.tool').forEach(btn=>{
@@ -473,11 +524,16 @@ function getPos(e, overlayEl){
   };
 }
 function dist(a,b){ return Math.hypot(b.x-a.x, b.y-a.y); }
-function formatReal(pxDist, pageNum){
+// pointDist : distance en "points PDF" (résolution-indépendante). Le fallback non-calibré
+// reconvertit en pixels à l'écran actuel, juste pour donner un ordre de grandeur.
+function formatReal(pointDist, pageNum){
   const panel = pagePanels[pageNum];
-  const ppm = panel ? panel.pxPerMeter : null;
-  if(!ppm) return pxDist.toFixed(0)+' px';
-  const meters = pxDist / ppm;
+  const ppm = panel ? panel.pointsPerMeter : null;
+  if(!ppm){
+    const px = panel ? pointDist*panel.renderScale : pointDist;
+    return px.toFixed(0)+' px';
+  }
+  const meters = pointDist / ppm;
   if(meters < 1) return (meters*100).toFixed(1)+' cm';
   return meters.toFixed(2)+' m';
 }
@@ -486,7 +542,7 @@ function updatePanelBadge(pageNum){
   if(!panel) return;
   const stored = pageCalib[pageNum];
   if(stored && stored.ratio) panel.badgeEl.innerHTML = 'Échelle <b>1:'+stored.ratio+'</b>';
-  else if(panel.pxPerMeter) panel.badgeEl.innerHTML = 'Échelle <b>'+panel.pxPerMeter.toFixed(1)+' px/m</b>';
+  else if(panel.pointsPerMeter) panel.badgeEl.innerHTML = 'Échelle <b>'+(panel.pointsPerMeter*panel.renderScale).toFixed(1)+' px/m</b>';
   else panel.badgeEl.innerHTML = 'Échelle <b>—</b>';
 }
 
@@ -521,7 +577,7 @@ function openScaleChooser(pageNum){
 }
 
 function setPageScaleRatio(ratio, pageNum){
-  pageCalib[pageNum] = { ratio, pxPerMeter:null, calibrationLine:null };
+  pageCalib[pageNum] = { ratio, pointsPerMeter:null, calibrationLinePt:null };
   applyStoredCalibForPage(pageNum);
   redrawPage(pageNum);
   notifyParent();
@@ -539,22 +595,25 @@ function applyAngleSnap(p1, p2){
   return dx >= dy ? {x:p2.x, y:p1.y} : {x:p1.x, y:p2.y};
 }
 
-function finalizeMeasure(pageNum, p1,p2){
+function finalizeMeasure(pageNum, p1px,p2px){
+  const p1 = pxToPoint(p1px, pageNum), p2 = pxToPoint(p2px, pageNum);
   (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'measure', p1, p2, value: dist(p1,p2)});
   redrawPage(pageNum); renderList(); notifyParent();
 }
-function finalizeDimension(pageNum, p1,p2){
+function finalizeDimension(pageNum, p1px,p2px){
   const panel = pagePanels[pageNum];
+  const p1 = pxToPoint(p1px, pageNum), p2 = pxToPoint(p2px, pageNum);
+  const valueDist = dist(p1,p2);
   openModal({
     title:'Libellé de la cote',
-    subtitle:'Distance mesurée : '+formatReal(dist(p1,p2), pageNum)+(panel.pxPerMeter?'':' (calibre d’abord pour une valeur réelle)'),
+    subtitle:'Distance mesurée : '+formatReal(valueDist, pageNum)+(panel.pointsPerMeter?'':' (calibre d’abord pour une valeur réelle)'),
     fields:[{name:'label', type:'text', placeholder:'ex. Mur façade nord (optionnel)'}],
     onSubmit:(v)=>{
-      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:v.label||''});
+      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: valueDist, label:v.label||''});
       redrawPage(pageNum); renderList(); notifyParent();
     },
     onCancel:()=>{
-      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: dist(p1,p2), label:''});
+      (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: valueDist, label:''});
       redrawPage(pageNum); renderList(); notifyParent();
     }
   });
@@ -580,7 +639,8 @@ board.addEventListener('pointerdown', (e)=>{
       fields:[{name:'text', type:'textarea', placeholder:'Remarque chantier…'}],
       onSubmit:(v)=>{
         if(!v.text) return;
-        (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'note', p1:p, text:v.text});
+        const p1 = pxToPoint(p, pageNum);
+        (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'note', p1, text:v.text});
         redrawPage(pageNum); renderList(); notifyParent();
       }
     });
@@ -615,10 +675,15 @@ board.addEventListener('pointermove', (e)=>{
   const p = (mode==='measure'||mode==='dimension') ? applyAngleSnap(pending[0], raw) : raw;
   liveHudPoint = p;
   redrawPage(pageNum, pending[0], p);
-  const d = dist(pending[0], p);
   hud.style.display = 'block';
-  hudLabel.textContent = mode==='calibrate' ? 'LONGUEUR (px)' : 'DISTANCE';
-  hudVal.textContent = mode==='calibrate' ? d.toFixed(0)+' px' : formatReal(d, pageNum);
+  if(mode==='calibrate'){
+    hudLabel.textContent = 'LONGUEUR (px)';
+    hudVal.textContent = dist(pending[0], p).toFixed(0)+' px';
+  } else {
+    hudLabel.textContent = 'DISTANCE';
+    const pt1 = pxToPoint(pending[0], pageNum), pt2 = pxToPoint(p, pageNum);
+    hudVal.textContent = formatReal(dist(pt1,pt2), pageNum);
+  }
 });
 
 board.addEventListener('pointerup', (e)=>{
@@ -635,6 +700,7 @@ board.addEventListener('pointerup', (e)=>{
 
   if(mode==='calibrate'){
     const pxDist = dist(p1,p2);
+    const pointDist = pxDist / pagePanels[pageNum].renderScale;
     openModal({
       title:'Calibration',
       subtitle:'Distance réelle entre ces 2 points (en mètres) :',
@@ -643,9 +709,9 @@ board.addEventListener('pointerup', (e)=>{
         const m = parseFloat(v.meters);
         if(!m || m<=0) return;
         const panel = pagePanels[pageNum];
-        panel.pxPerMeter = pxDist / m;
-        panel.calibrationLine = {p1,p2};
-        pageCalib[pageNum] = { ratio:null, pxPerMeter:panel.pxPerMeter, calibrationLine:panel.calibrationLine };
+        panel.pointsPerMeter = pointDist / m;
+        panel.calibrationLinePt = { p1: pxToPoint(p1,pageNum), p2: pxToPoint(p2,pageNum) };
+        pageCalib[pageNum] = { ratio:null, pointsPerMeter:panel.pointsPerMeter, calibrationLinePt:panel.calibrationLinePt };
         updatePanelBadge(pageNum);
         pending=[]; redrawPage(pageNum);
         notifyParent();
@@ -666,17 +732,21 @@ function redrawPage(pageNum, livePA, livePB){
   const octx = panel.octx;
   octx.clearRect(0,0,panel.overlay.width, panel.overlay.height);
 
-  if(panel.calibrationLine){
-    drawLine(octx, panel.calibrationLine.p1, panel.calibrationLine.p2, '#3ecfd6', true);
+  if(panel.calibrationLinePt){
+    const p1 = pointToPx(panel.calibrationLinePt.p1, pageNum), p2 = pointToPx(panel.calibrationLinePt.p2, pageNum);
+    drawLine(octx, p1, p2, '#3ecfd6', true);
   }
 
   (itemsByPage[pageNum]||[]).forEach(it=>{
     if(it.type==='measure'){
-      drawLine(octx, it.p1, it.p2, 'rgba(255,255,255,0.5)', true, formatReal(it.value, pageNum));
+      const p1 = pointToPx(it.p1, pageNum), p2 = pointToPx(it.p2, pageNum);
+      drawLine(octx, p1, p2, 'rgba(255,255,255,0.5)', true, formatReal(it.value, pageNum));
     } else if(it.type==='dimension'){
-      drawDimension(octx, it.p1, it.p2, '#7dd66a', formatReal(it.value, pageNum), it.label);
+      const p1 = pointToPx(it.p1, pageNum), p2 = pointToPx(it.p2, pageNum);
+      drawDimension(octx, p1, p2, '#7dd66a', formatReal(it.value, pageNum), it.label);
     } else if(it.type==='note'){
-      drawNote(octx, it.p1, '#e8c547', it.id, pageNum);
+      const p1 = pointToPx(it.p1, pageNum);
+      drawNote(octx, p1, '#e8c547', it.id, pageNum);
     }
   });
 
@@ -775,7 +845,7 @@ document.getElementById('btn-undo').onclick = ()=>{
   if(items.length) items.pop();
   else {
     const panel = pagePanels[currentPageNum];
-    if(panel){ panel.calibrationLine=null; panel.pxPerMeter=null; }
+    if(panel){ panel.calibrationLinePt=null; panel.pointsPerMeter=null; }
     delete pageCalib[currentPageNum];
     updatePanelBadge(currentPageNum);
   }
