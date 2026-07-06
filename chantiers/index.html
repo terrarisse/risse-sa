@@ -169,6 +169,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .det-file-btn.primary{background:var(--navy);color:#fff;}
 .det-file-btn.ghost{background:var(--bg2);color:var(--text2);}
 .det-pdf-frame{width:100%;flex:1;min-height:0;border:none;border-radius:var(--rs);background:var(--bg2);}
+#det-tab-plan.plan-fullscreen{position:fixed;inset:0;z-index:500;background:#111214;padding:0;}
+#det-tab-plan.plan-fullscreen .det-pdf-frame{border-radius:0;}
+.plan-exit-btn{position:fixed;z-index:600;top:calc(10px + env(safe-area-inset-top,0px));left:10px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;width:36px;height:36px;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;}
+.plan-replace-btn{position:fixed;z-index:600;top:calc(10px + env(safe-area-inset-top,0px));right:10px;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:0 12px;height:36px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;}
 .det-empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:20px;}
 .det-empty-icon{font-size:44px;opacity:.5;}
 .det-empty-text{font-size:13px;color:var(--text3);font-weight:600;}
@@ -409,10 +413,16 @@ let currentPdf = null; // {name, size, data}
 function load() { try { return JSON.parse(localStorage.getItem(KEY)||'[]'); } catch(e){ return []; } }
 function save(d) {
   // 1. localStorage
-  localStorage.setItem(KEY, JSON.stringify(d));
-  // Sync liste simple rv6_c pour les autres modules
-  const simple = d.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
-  localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
+  try {
+    localStorage.setItem(KEY, JSON.stringify(d));
+    // Sync liste simple rv6_c pour les autres modules
+    const simple = d.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
+    localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
+  } catch (e) {
+    console.error('❌ localStorage save error:', e);
+    showToast('❌ Sauvegarde locale échouée : '+e.name+' — '+e.message, 8000);
+    return false;
+  }
   // 2. Firestore (async, pas bloquant)
   if (auth.currentUser) {
     const issue = findNestedArrayIssue(d, 'items');
@@ -426,6 +436,7 @@ function save(d) {
         if (!issue) showToast('⚠️ Sync Firestore échouée : '+e.message, 6000);
       });
   }
+  return true;
 }
 
 // Repère un tableau qui contient directement un autre tableau (interdit par Firestore),
@@ -722,6 +733,7 @@ function switchDetTab(tab){
   document.getElementById('det-tab-plan').style.display  = tab==='plan'  ? '' : 'none';
   document.getElementById('det-tab-devis').style.display = tab==='devis' ? '' : 'none';
   document.getElementById('det-tab-infos').style.display = tab==='infos' ? '' : 'none';
+  updatePlanFullscreenState();
 }
 function renderDetTabButtons(){
   ['plan','devis','infos'].forEach(t=>{
@@ -743,6 +755,18 @@ function renderDetFileTab(tabKey){
       <div class="det-empty-text">Aucun ${label} pour l'instant</div>
       <button class="det-empty-btn" onclick="document.getElementById('det-${field==='plan'?'plan':'devis'}-input').click()">📂 Importer le ${label}</button>
     </div>`;
+    updatePlanFullscreenState();
+    return;
+  }
+
+  if(tabKey==='plan'){
+    // Plein écran : plus de carte de fichier, juste le Coteur + 2 boutons flottants.
+    el.innerHTML = `
+      <button class="plan-exit-btn" onclick="exitPlanFullscreen()">‹</button>
+      <button class="plan-replace-btn" onclick="document.getElementById('det-plan-input').click()">🔄 Remplacer</button>
+      <iframe class="det-pdf-frame" id="det-coteur-frame" src="plan/index.html" onload="initCoteurFrame()"></iframe>
+    `;
+    updatePlanFullscreenState();
     return;
   }
 
@@ -754,14 +778,26 @@ function renderDetFileTab(tabKey){
         <div class="det-file-size">${file.size}</div>
       </div>
       <div class="det-file-actions">
-        <button class="det-file-btn ghost" onclick="document.getElementById('det-${field==='plan'?'plan':'devis'}-input').click()">Remplacer</button>
-        <button class="det-file-btn primary" onclick="${field==='plan'?'viewPlan':'viewPdf'}('${currentDetailId}')">Agrandir</button>
+        <button class="det-file-btn ghost" onclick="document.getElementById('det-devis-input').click()">Remplacer</button>
+        <button class="det-file-btn primary" onclick="viewPdf('${currentDetailId}')">Agrandir</button>
       </div>
     </div>
-    ${tabKey==='plan'
-      ? `<iframe class="det-pdf-frame" id="det-coteur-frame" src="plan/index.html" onload="initCoteurFrame()"></iframe>`
-      : `<iframe class="det-pdf-frame" src="${file.data}"></iframe>`}
+    <iframe class="det-pdf-frame" src="${file.data}"></iframe>
   `;
+}
+
+// Le plan passe en plein écran automatiquement dès qu'on est sur son onglet
+// et qu'un plan existe ; le bouton ‹ en haut à gauche ramène aux onglets normaux.
+function updatePlanFullscreenState(){
+  const c = load().find(x=>x.id===currentDetailId);
+  const hasPlan = c && c.plan && c.plan.data;
+  const planTab = document.getElementById('det-tab-plan');
+  const isFullscreen = currentDetTab==='plan' && hasPlan;
+  planTab.classList.toggle('plan-fullscreen', isFullscreen);
+  document.querySelector('.det-header').style.display = isFullscreen ? 'none' : '';
+}
+function exitPlanFullscreen(){
+  switchDetTab('infos');
 }
 
 // ── Pont postMessage avec l'outil Coteur de plans (iframe) ──────────
@@ -810,11 +846,23 @@ function handleDetFileUpload(event, field){
   reader.onload = function(e){
     const data = [...load()];
     const idx = data.findIndex(x=>x.id===currentDetailId);
-    if(idx===-1) return;
+    if(idx===-1){
+      console.error('❌ Chantier introuvable dans load() pour currentDetailId=', currentDetailId, 'IDs disponibles:', data.map(x=>x.id));
+      showToast('❌ Chantier introuvable (id: '+currentDetailId+') — impossible d\'enregistrer', 8000);
+      return;
+    }
     const patch = { [field]: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', data: e.target.result } };
     if(field==='plan') patch.planMeasures = null; // nouveau plan = anciennes mesures obsolètes (pixels différents)
     data[idx] = {...data[idx], ...patch};
-    save(data);
+    const ok = save(data);
+    if(!ok) return; // save() a déjà affiché l'erreur exacte
+    // Vérification : on relit depuis le stockage pour confirmer que ça a vraiment pris
+    const verify = load().find(x=>x.id===currentDetailId);
+    if(!verify || !verify[field] || !verify[field].data){
+      console.error('❌ Vérification post-sauvegarde échouée pour', field, verify);
+      showToast('❌ Le fichier ne semble pas avoir été enregistré — réessaie', 8000);
+      return;
+    }
     coteurReady = false; // le prochain onload du frame Coteur renverra ce nouveau plan
     renderDetFileTab(field==='plan' ? 'plan' : 'devis');
     renderList();
