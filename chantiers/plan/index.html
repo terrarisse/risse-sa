@@ -245,6 +245,7 @@ function zoomStageAtPoint(newScale, point){
     y: point.y - mousePointTo.y*newScale,
   });
   stage.batchDraw();
+  refreshMarkerScales();
   maybeUpgradeQuality(newScale);
 }
 
@@ -545,23 +546,36 @@ function redrawPageItems(pageNum){
   mainLayer.batchDraw();
 }
 
+// Taille des pastilles/étiquettes à l'écran, indépendante du niveau de zoom
+// (comme sur un vrai logiciel de CAO — un point reste petit et précis, même
+// très zoomé, seule la position doit être exacte).
+function markerScale(){ return stage ? 1/stage.scaleX() : 1; }
+
+function drawPointMarker(groupParent, x, y, color, radius){
+  const c = new Konva.Circle({x, y, radius: radius||4, fill:color, listening:false});
+  c.scale({x:markerScale(), y:markerScale()});
+  groupParent.add(c);
+  return c;
+}
+
 function drawLabelShape(groupParent, x, y, text, color){
   const t = new Konva.Text({text, fontSize:12, fontFamily:'monospace', fontStyle:'600', fill:color, padding:5, listening:false});
-  t.offsetX(t.width()/2); t.offsetY(t.height()/2);
-  t.x(x); t.y(y);
+  const w = t.width(), h = t.height();
+  t.offsetX(w/2); t.offsetY(h/2);
   const bg = new Konva.Rect({
-    x: x - t.width()/2, y: y - t.height()/2, width:t.width(), height:t.height(),
+    x:-w/2, y:-h/2, width:w, height:h,
     fill:'rgba(20,20,22,0.85)', stroke:color, strokeWidth:1, cornerRadius:3, listening:false
   });
-  groupParent.add(bg); groupParent.add(t);
+  const lg = new Konva.Group({x, y, name:'ui-marker'});
+  lg.add(bg); lg.add(t);
+  lg.scale({x:markerScale(), y:markerScale()});
+  groupParent.add(lg);
 }
 
 function drawLineShape(groupParent, p1, p2, color, dashed, label){
   const line = new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:2, dash: dashed?[6,5]:undefined, listening:false });
   groupParent.add(line);
-  [p1,p2].forEach(p=>{
-    groupParent.add(new Konva.Circle({x:p.x, y:p.y, radius:4, fill:color, listening:false}));
-  });
+  [p1,p2].forEach(p=>drawPointMarker(groupParent, p.x, p.y, color, 4));
   if(label) drawLabelShape(groupParent, (p1.x+p2.x)/2, (p1.y+p2.y)/2, label, color);
 }
 
@@ -575,17 +589,20 @@ function drawDimensionShape(groupParent, p1, p2, color, valLabel){
     }));
   });
   groupParent.add(new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:1.5, listening:false }));
-  [p1,p2].forEach(p=>groupParent.add(new Konva.Circle({x:p.x,y:p.y,radius:3,fill:color,listening:false})));
+  [p1,p2].forEach(p=>drawPointMarker(groupParent, p.x, p.y, color, 3));
   drawLabelShape(groupParent, (p1.x+p2.x)/2, (p1.y+p2.y)/2, valLabel, color);
 }
 
 function drawNoteShape(groupParent, p, color, id, pageNum){
   const idx = (itemsByPage[pageNum]||[]).filter(i=>i.type==='note').findIndex(i=>i.id===id)+1;
-  groupParent.add(new Konva.Circle({x:p.x, y:p.y, radius:11, fill:color, listening:false}));
+  const ng = new Konva.Group({x:p.x, y:p.y, name:'ui-marker'});
+  ng.add(new Konva.Circle({x:0, y:0, radius:11, fill:color, listening:false}));
   const t = new Konva.Text({text:String(idx), fontSize:11, fontStyle:'bold', fill:'#1b1d21', fontFamily:'sans-serif', listening:false});
   t.offsetX(t.width()/2); t.offsetY(t.height()/2);
-  t.x(p.x); t.y(p.y+1);
-  groupParent.add(t);
+  t.x(0); t.y(1);
+  ng.add(t);
+  ng.scale({x:markerScale(), y:markerScale()});
+  groupParent.add(ng);
 }
 
 // Point/ligne "en cours de pose" (aperçu live pendant le glisser ou entre 2 taps)
@@ -599,7 +616,7 @@ function drawLivePreview(pageNum, p1, p2){
   const color = mode==='calibrate' ? '#3ecfd6' : (mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)');
   liveShape = new Konva.Group();
   liveShape.add(new Konva.Line({points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:2, dash: mode!=='dimension'?[6,5]:undefined, listening:false}));
-  liveShape.add(new Konva.Circle({x:p2.x,y:p2.y,radius:4,fill:color,listening:false}));
+  drawPointMarker(liveShape, p2.x, p2.y, color, 4);
   panel.itemsGroup.add(liveShape);
   mainLayer.batchDraw();
 }
@@ -607,8 +624,20 @@ function drawPendingDot(pageNum, p){
   clearLivePreview();
   const panel = pagePanels[pageNum];
   const color = mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)';
-  liveShape = new Konva.Circle({x:p.x, y:p.y, radius:5, fill:color, listening:false});
+  liveShape = new Konva.Group();
+  drawPointMarker(liveShape, p.x, p.y, color, 5);
   panel.itemsGroup.add(liveShape);
+  mainLayer.batchDraw();
+}
+
+// Recale la taille de toutes les pastilles/étiquettes déjà posées après un zoom,
+// pour qu'elles restent petites et précises à l'écran quel que soit le niveau de zoom.
+function refreshMarkerScales(){
+  const s = markerScale();
+  Object.values(pagePanels).forEach(panel=>{
+    panel.itemsGroup.find('Circle').forEach(c=>c.scale({x:s, y:s}));
+    panel.itemsGroup.find('.ui-marker').forEach(g=>g.scale({x:s, y:s}));
+  });
   mainLayer.batchDraw();
 }
 
