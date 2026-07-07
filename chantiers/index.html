@@ -456,8 +456,11 @@ async function getPdfBlob(key){
   return new Promise((resolve, reject)=>{
     const tx = dbase.transaction(PDF_STORE, 'readonly');
     const req = tx.objectStore(PDF_STORE).get(key);
-    req.onsuccess = ()=>resolve(req.result || null);
-    req.onerror = ()=>reject(req.error);
+    req.onsuccess = ()=>{
+      if(!req.result) console.warn('🔎 [IndexedDB] Clé introuvable :', key);
+      resolve(req.result || null);
+    };
+    req.onerror = ()=>{ console.error('🔎 [IndexedDB] Erreur de lecture pour', key, req.error); reject(req.error); };
   });
 }
 async function deletePdfBlob(key){
@@ -477,13 +480,15 @@ async function getPdfObjectUrl(key){
   if(!blob) return null;
   const url = URL.createObjectURL(blob);
   blobUrlCache[key] = url;
+  console.log('🔎 [IndexedDB] Blob trouvé pour', key, '—', (blob.size/1024).toFixed(0), 'Ko');
   return url;
 }
 // Résout une URL utilisable pour un fichier (plan ou devis), quel que soit son mode
 // de stockage : nouveau (IndexedDB, via pdfKey) ou ancien (base64 direct ou URL
 // Firebase Storage encore présente dans `data`, pour la rétrocompatibilité).
 async function getFileUrl(fileObj){
-  if(!fileObj) return null;
+  if(!fileObj){ console.warn('🔎 [getFileUrl] fileObj vide'); return null; }
+  console.log('🔎 [getFileUrl] recherche pour', {pdfKey:fileObj.pdfKey, hasData:!!fileObj.data});
   if(fileObj.pdfKey) return await getPdfObjectUrl(fileObj.pdfKey);
   if(fileObj.data) return fileObj.data;
   return null;
@@ -949,9 +954,18 @@ async function sendPlanToCoteur(){
   const c = load().find(x=>x.id===currentDetailId);
   if(!frame || !coteurReady || !c || !activePlanId) return;
   const plan = getPlansOf(c).find(p=>p.id===activePlanId);
-  if(!plan) return;
+  if(!plan){
+    console.error('🔎 [sendPlanToCoteur] Plan introuvable dans getPlansOf() pour activePlanId=', activePlanId, 'plans dispos:', getPlansOf(c).map(p=>p.id));
+    showToast('❌ Plan introuvable en local', 6000);
+    return;
+  }
+  console.log('🔎 [sendPlanToCoteur] plan trouvé:', {id:plan.id, name:plan.name, pdfKey:plan.pdfKey, hasData:!!plan.data});
   const url = await getFileUrl(plan);
-  if(!url){ showToast('❌ Fichier introuvable en local'); return; }
+  if(!url){
+    console.error('🔎 [sendPlanToCoteur] getFileUrl a renvoyé null pour', plan);
+    showToast('❌ Fichier introuvable en local', 6000);
+    return;
+  }
   frame.contentWindow.postMessage({
     type: 'coteur-init',
     planData: url,
@@ -1144,6 +1158,22 @@ async function initApp() {
   await syncFromFirestore();
   migrateLegacyChantiers();
   renderList();
+  requestPersistentStorage();
+}
+
+// Demande au navigateur de ne pas effacer IndexedDB automatiquement sous pression
+// de stockage (sans ça, les PDF de plans/devis peuvent disparaître avec le temps
+// sur certains navigateurs, même sans action de l'utilisateur).
+async function requestPersistentStorage(){
+  try{
+    if(navigator.storage && navigator.storage.persist){
+      const already = await navigator.storage.persisted();
+      if(!already){
+        const granted = await navigator.storage.persist();
+        console.log('🔎 [Storage] Persistance', granted ? 'accordée' : 'refusée par le navigateur');
+      }
+    }
+  }catch(e){ console.warn('🔎 [Storage] Impossible de demander la persistance:', e); }
 }
 
 // ── CALCULATRICE POPUP (historique partagé avec les autres modules) ──
