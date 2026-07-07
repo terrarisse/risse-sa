@@ -616,8 +616,152 @@ function findNearestDarkPixel(pageNum, cx, cy, maxRadius, threshold){
 function trySnapToDarkEdge(localPt, pageNum){
   return findNearestDarkPixel(pageNum, localPt.x, localPt.y, 22, 130);
 }
-function trySnap(localPt, pageNum){
-  return trySnapToExistingPoint(localPt, pageNum) || trySnapToDarkEdge(localPt, pageNum);
+
+// ── Extraction vectorielle réelle du PDF (liste d'opérations pdf.js) ──
+// C'est ce que pdf.js utilise en interne pour dessiner le PDF — on relit la
+// même liste pour reconstruire les vrais segments de droite, avec la même
+// pile de matrices de transformation (save/restore/transform).
+const pageSegmentsCache = {};
+function pdfMatMul(m, ctm){
+  return [
+    m[0]*ctm[0]+m[1]*ctm[2],             m[0]*ctm[1]+m[1]*ctm[3],
+    m[2]*ctm[0]+m[3]*ctm[2],             m[2]*ctm[1]+m[3]*ctm[3],
+    m[4]*ctm[0]+m[5]*ctm[2]+ctm[4],      m[4]*ctm[1]+m[5]*ctm[3]+ctm[5]
+  ];
+}
+function pdfMatApply(m, x, y){
+  return { x: m[0]*x + m[2]*y + m[4], y: m[1]*x + m[3]*y + m[5] };
+}
+async function getPageSegments(pageNum){
+  if(pageSegmentsCache[pageNum]) return pageSegmentsCache[pageNum];
+  const segments = [];
+  try{
+    const OPS = pdfjsLib.OPS;
+    if(!OPS){
+      console.error('[Coteur][Vecteur] pdfjsLib.OPS introuvable dans cette version de pdf.js — extraction impossible.');
+      pageSegmentsCache[pageNum] = [];
+      return [];
+    }
+    const page = await pdfDoc.getPage(pageNum);
+    const opList = await page.getOperatorList();
+    let ctmStack = [[1,0,0,1,0,0]];
+    const ctm = () => ctmStack[ctmStack.length-1];
+    let pathOpsCount = 0;
+
+    for(let i=0; i<opList.fnArray.length; i++){
+      const fn = opList.fnArray[i];
+      const args = opList.argsArray[i];
+
+      if(fn === OPS.save){
+        ctmStack.push(ctm().slice());
+      } else if(fn === OPS.restore){
+        if(ctmStack.length>1) ctmStack.pop();
+      } else if(fn === OPS.transform){
+        ctmStack[ctmStack.length-1] = pdfMatMul(args, ctm());
+      } else if(fn === OPS.constructPath){
+        pathOpsCount++;
+        const subOps = args[0], coords = args[1];
+        let ci=0, startX=0, startY=0, prev=null;
+        const M = ctm();
+        for(let k=0;k<subOps.length;k++){
+          const op = subOps[k];
+          if(op===OPS.moveTo){
+            const x=coords[ci++], y=coords[ci++];
+            const tp=pdfMatApply(M,x,y);
+            startX=x; startY=y; prev=tp;
+          } else if(op===OPS.lineTo){
+            const x=coords[ci++], y=coords[ci++];
+            const tp=pdfMatApply(M,x,y);
+            if(prev) segments.push({x1:prev.x, y1:prev.y, x2:tp.x, y2:tp.y});
+            prev=tp;
+          } else if(op===OPS.curveTo){
+            ci+=4; // ignore les 2 points de contrôle : les courbes ne sont pas accrochables
+            const x=coords[ci++], y=coords[ci++];
+            prev=pdfMatApply(M,x,y);
+          } else if(op===OPS.closePath){
+            const tp=pdfMatApply(M,startX,startY);
+            if(prev) segments.push({x1:prev.x, y1:prev.y, x2:tp.x, y2:tp.y});
+            prev=tp;
+          } else if(op===OPS.rectangle){
+            const rx=coords[ci++], ry=coords[ci++], rw=coords[ci++], rh=coords[ci++];
+            const p1=pdfMatApply(M,rx,ry), p2=pdfMatApply(M,rx+rw,ry), p3=pdfMatApply(M,rx+rw,ry+rh), p4=pdfMatApply(M,rx,ry+rh);
+            segments.push({x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y});
+            segments.push({x1:p2.x,y1:p2.y,x2:p3.x,y2:p3.y});
+            segments.push({x1:p3.x,y1:p3.y,x2:p4.x,y2:p4.y});
+            segments.push({x1:p4.x,y1:p4.y,x2:p1.x,y2:p1.y});
+            prev=p1;
+          }
+        }
+      }
+    }
+    console.log('[Coteur][Vecteur] page '+pageNum+' — '+opList.fnArray.length+' opérations, '+pathOpsCount+' tracés de chemin, '+segments.length+' segments extraits');
+    if(segments.length){
+      console.log('[Coteur][Vecteur] exemple (espace PDF, points) :', segments.slice(0,3));
+    } else {
+      console.warn('[Coteur][Vecteur] 0 segment — cette page est probablement une image raster (scan), pas du vectoriel exploitable.');
+    }
+  }catch(e){
+    console.error('[Coteur][Vecteur] Erreur d\'extraction:', e);
+  }
+  pageSegmentsCache[pageNum] = segments;
+  return segments;
+}
+
+function distPointToSegmentPt(p, s){
+  const dx=s.x2-s.x1, dy=s.y2-s.y1;
+  const lenSq=dx*dx+dy*dy;
+  if(lenSq<1e-9) return { d:Math.hypot(p.x-s.x1,p.y-s.y1), proj:{x:s.x1,y:s.y1} };
+  let t=((p.x-s.x1)*dx+(p.y-s.y1)*dy)/lenSq;
+  t=Math.max(0,Math.min(1,t));
+  const proj={x:s.x1+t*dx, y:s.y1+t*dy};
+  return { d:Math.hypot(p.x-proj.x, p.y-proj.y), proj };
+}
+function segmentIntersectionPt(a,b){
+  const denom=(a.x1-a.x2)*(b.y1-b.y2)-(a.y1-a.y2)*(b.x1-b.x2);
+  if(Math.abs(denom)<1e-9) return null;
+  const t=((a.x1-b.x1)*(b.y1-b.y2)-(a.y1-b.y1)*(b.x1-b.x2))/denom;
+  const u=-((a.x1-a.x2)*(a.y1-b.y1)-(a.y1-a.y2)*(a.x1-b.x1))/denom;
+  const margin=0.1;
+  if(t<-margin||t>1+margin||u<-margin||u>1+margin) return null;
+  return { x:a.x1+t*(a.x2-a.x1), y:a.y1+t*(a.y2-a.y1) };
+}
+
+// Accroche d'abord sur une intersection entre 2 traits proches (coin exact),
+// sinon sur le point le plus proche du trait le plus proche (perpendiculaire —
+// utile quand on clique à côté du mur, sur une cote décalée en parallèle).
+async function trySnapToVector(localPt, pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return null;
+  const segments = await getPageSegments(pageNum);
+  if(!segments.length) return null;
+  const clickPt = localToPoint(localPt, pageNum);
+  const radiusPt = 16 / panel.pageDisplayScale;
+
+  const nearby = segments.filter(s => distPointToSegmentPt(clickPt, s).d <= radiusPt);
+  if(nearby.length>=2){
+    let best=null, bestDist=Infinity;
+    for(let i=0;i<nearby.length;i++){
+      for(let j=i+1;j<nearby.length;j++){
+        const ipt = segmentIntersectionPt(nearby[i], nearby[j]);
+        if(!ipt) continue;
+        const d = Math.hypot(ipt.x-clickPt.x, ipt.y-clickPt.y);
+        if(d<bestDist && d<=radiusPt*2){ bestDist=d; best=ipt; }
+      }
+    }
+    if(best) return pointToLocal(best, pageNum);
+  }
+  let bestProj=null, bestD=Infinity;
+  segments.forEach(s=>{
+    const r = distPointToSegmentPt(clickPt, s);
+    if(r.d<radiusPt && r.d<bestD){ bestD=r.d; bestProj=r.proj; }
+  });
+  return bestProj ? pointToLocal(bestProj, pageNum) : null;
+}
+
+async function trySnap(localPt, pageNum){
+  return trySnapToExistingPoint(localPt, pageNum)
+    || await trySnapToVector(localPt, pageNum)
+    || trySnapToDarkEdge(localPt, pageNum);
 }
 
 // ════════════════════════════════════════════
@@ -977,7 +1121,7 @@ function attachPageInteraction(pageNum, group, hitRect){
   group.on('dragmove', ()=>{ if(mode==='organize') onPageDragMove(pageNum); });
   group.on('dragend', ()=>{ if(mode==='organize') onPageDragEnd(pageNum); });
 
-  group.on('mousedown touchstart', (e)=>{
+  group.on('mousedown touchstart', async (e)=>{
     if(mode==='pan') return;
     if(mode==='organize') return; // le glisser Konva natif s'en charge ; la sélection est gérée par 'click tap'
 
@@ -998,7 +1142,7 @@ function attachPageInteraction(pageNum, group, hitRect){
     let local = localRaw;
     let snapped = false;
     if(snapEnabled && (mode==='measure'||mode==='dimension')){
-      const s = trySnap(localRaw, pageNum);
+      const s = await trySnap(localRaw, pageNum);
       if(s){ local = s; snapped = true; }
     }
 
@@ -1056,7 +1200,7 @@ function attachPageInteraction(pageNum, group, hitRect){
     }
   });
 
-  group.on('mouseup touchend', (e)=>{
+  group.on('mouseup touchend', async (e)=>{
     if(mode==='pan' || mode==='note') return;
     if((mode==='measure'||mode==='dimension') && dimInputMode==='points') return;
     if(!dragging || pending.length===0) return;
@@ -1069,7 +1213,7 @@ function attachPageInteraction(pageNum, group, hitRect){
 
     let p2 = raw, snapped = false;
     if(snapEnabled && (mode==='measure'||mode==='dimension')){
-      const s = trySnap(raw, pageNum);
+      const s = await trySnap(raw, pageNum);
       if(s){ p2 = s; snapped = true; }
     }
     if(!snapped && (mode==='measure'||mode==='dimension')) p2 = applyAngleSnap(p1, raw);
