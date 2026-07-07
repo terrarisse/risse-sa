@@ -233,7 +233,7 @@ function setStageDraggable(on){
 
 // Zoom autour d'un point donné (coordonnées écran, relatives au stage), sans dérive.
 function zoomStageAtPoint(newScale, point){
-  newScale = Math.max(0.4, Math.min(6, newScale));
+  newScale = Math.max(0.08, Math.min(20, newScale));
   const oldScale = stage.scaleX();
   const mousePointTo = {
     x: (point.x - stage.x()) / oldScale,
@@ -249,12 +249,12 @@ function zoomStageAtPoint(newScale, point){
   maybeUpgradeQuality(newScale);
 }
 
-function zoomButton(delta){
+function zoomButton(factor){
   const center = { x: stage.width()/2, y: stage.height()/2 };
-  zoomStageAtPoint(stage.scaleX()+delta, center);
+  zoomStageAtPoint(stage.scaleX()*factor, center);
 }
-document.getElementById('zoom-in').onclick = ()=>zoomButton(0.3);
-document.getElementById('zoom-out').onclick = ()=>zoomButton(-0.3);
+document.getElementById('zoom-in').onclick = ()=>zoomButton(1.35);
+document.getElementById('zoom-out').onclick = ()=>zoomButton(1/1.35);
 
 // Pincement à 2 doigts — recette standard Konva.
 let pinchLastDist = 0;
@@ -281,8 +281,9 @@ function setupPinchZoom(){
 // Redessine à meilleure résolution interne quand le zoom dépasse ce que la
 // résolution actuelle affiche net (texte/traits toujours nets).
 let rerenderingQuality = false;
+const MAX_RENDER_MULTIPLIER = 9; // plafond de sécurité (taille de canvas/mémoire mobile)
 async function maybeUpgradeQuality(scale){
-  const needed = scale * BASE_MULTIPLIER;
+  const needed = Math.min(scale * BASE_MULTIPLIER, MAX_RENDER_MULTIPLIER);
   if(needed > currentRenderMultiplier*1.15 && !rerenderingQuality){
     currentRenderMultiplier = needed;
     rerenderingQuality = true;
@@ -573,23 +574,23 @@ function drawLabelShape(groupParent, x, y, text, color){
 }
 
 function drawLineShape(groupParent, p1, p2, color, dashed, label){
-  const line = new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:2, dash: dashed?[6,5]:undefined, listening:false });
+  const line = new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:1.5, strokeScaleEnabled:false, dash: dashed?[6,5]:undefined, listening:false });
   groupParent.add(line);
-  [p1,p2].forEach(p=>drawPointMarker(groupParent, p.x, p.y, color, 4));
+  [p1,p2].forEach(p=>drawPointMarker(groupParent, p.x, p.y, color, 3));
   if(label) drawLabelShape(groupParent, (p1.x+p2.x)/2, (p1.y+p2.y)/2, label, color);
 }
 
 function drawDimensionShape(groupParent, p1, p2, color, valLabel){
   const angle = Math.atan2(p2.y-p1.y, p2.x-p1.x);
-  const tick = 8;
+  const tick = 6 / markerScale(); // longueur de la moustache en pixels écran constants, quel que soit le zoom
   [p1,p2].forEach(p=>{
     groupParent.add(new Konva.Line({
       points:[ p.x-Math.sin(angle)*tick, p.y+Math.cos(angle)*tick, p.x+Math.sin(angle)*tick, p.y-Math.cos(angle)*tick ],
-      stroke:color, strokeWidth:1.5, listening:false
+      stroke:color, strokeWidth:1, strokeScaleEnabled:false, listening:false
     }));
   });
-  groupParent.add(new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:1.5, listening:false }));
-  [p1,p2].forEach(p=>drawPointMarker(groupParent, p.x, p.y, color, 3));
+  groupParent.add(new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:1, strokeScaleEnabled:false, listening:false }));
+  [p1,p2].forEach(p=>drawPointMarker(groupParent, p.x, p.y, color, 2.5));
   drawLabelShape(groupParent, (p1.x+p2.x)/2, (p1.y+p2.y)/2, valLabel, color);
 }
 
@@ -639,6 +640,19 @@ function refreshMarkerScales(){
     panel.itemsGroup.find('.ui-marker').forEach(g=>g.scale({x:s, y:s}));
   });
   mainLayer.batchDraw();
+  scheduleFullItemsRedraw();
+}
+
+// Les pastilles/étiquettes se réajustent instantanément (léger, fluide pendant le
+// geste), mais les moustaches des cotes sont "gravées" dans les points du trait à
+// la création — on les recalcule précisément une fois le zoom stabilisé, pour
+// qu'elles restent fines et correctes à n'importe quel niveau de zoom.
+let fullRedrawTimer = null;
+function scheduleFullItemsRedraw(){
+  clearTimeout(fullRedrawTimer);
+  fullRedrawTimer = setTimeout(()=>{
+    Object.keys(pagePanels).forEach(pn=>redrawPageItems(parseInt(pn,10)));
+  }, 150);
 }
 
 // ════════════════════════════════════════════
@@ -697,11 +711,13 @@ function attachPageInteraction(pageNum, group, hitRect){
     if((mode==='measure'||mode==='dimension') && dimInputMode==='points'){
       if(pending.length===0){
         pending=[local];
+        pendingToolMode = mode;
         drawPendingDot(pageNum, local);
       } else {
         const p1 = pending[0];
         const p2 = snapped ? local : applyAngleSnap(p1, local);
         pending=[];
+        pendingToolMode = null;
         hud.style.display='none';
         if(mode==='measure') finalizeMeasure(pageNum, p1, p2); else finalizeDimension(pageNum, p1, p2);
       }
@@ -781,14 +797,32 @@ function attachPageInteraction(pageNum, group, hitRect){
 // ════════════════════════════════════════════
 // BARRE D'OUTILS
 // ════════════════════════════════════════════
+let pendingToolMode = null; // outil auquel appartient le point en attente (mode "2 points")
+
 document.querySelectorAll('.tool').forEach(btn=>{
   btn.addEventListener('click', ()=>{
+    const newMode = btn.dataset.mode;
+
+    // On garde le point déjà posé (mode "2 points") si on passe juste par Déplacer
+    // pour naviguer, ou si on revient sur le même outil de cotation qu'avant —
+    // seul un changement vers un AUTRE outil de dessin annule le point en attente.
+    const keepPending = pending.length>0 && dimInputMode==='points'
+      && (newMode==='pan' || newMode===pendingToolMode);
+
     document.querySelectorAll('.tool').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    mode = btn.dataset.mode;
-    pending = []; pendingPageNum = null; dragging = false;
+    mode = newMode;
+    dragging = false;
     hud.style.display='none';
-    clearLivePreview();
+
+    if(!keepPending){
+      pending = []; pendingPageNum = null; pendingToolMode = null;
+      clearLivePreview();
+    } else if(mode!=='pan'){
+      // De retour sur l'outil : on réaffiche le point mémorisé.
+      drawPendingDot(pendingPageNum, pending[0]);
+    }
+
     if(stage) setStageDraggable(mode==='pan');
     document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
   });
