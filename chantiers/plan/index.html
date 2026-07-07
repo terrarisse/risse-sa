@@ -52,6 +52,21 @@
   .tool[data-color="green"].active .dot{background:var(--green);}
   .tool[data-color="yellow"].active{border-color:var(--yellow);}
   .tool[data-color="yellow"].active .dot{background:var(--yellow);}
+  .tool[data-color="red"].active{border-color:#e5484d;}
+  .tool[data-color="red"].active .dot{background:#e5484d;}
+  .tool[data-color="purple"].active{border-color:#9d7bea;}
+  .tool[data-color="purple"].active .dot{background:#9d7bea;}
+
+  #organize-bar{
+    display:none; gap:8px; padding:8px 10px; background:var(--panel-2);
+    border-bottom:1px solid var(--line); flex-shrink:0; align-items:center; flex-wrap:wrap;
+  }
+  #organize-hint{font-size:11px; color:var(--text-dim); flex:1;}
+  #organize-bar button{
+    background:#9d7bea; color:#1c1330; border:none; font-size:12px; font-weight:700;
+    font-family:var(--sans); padding:7px 12px; border-radius:8px; cursor:pointer; white-space:nowrap;
+  }
+  #organize-bar #organize-ungroup-btn{background:var(--panel); color:var(--text-dim); border:1px solid var(--line);}
 
   #dim-options{
     display:none; gap:14px; padding:8px 10px; background:var(--panel-2);
@@ -130,6 +145,15 @@
     <button class="tool" data-mode="measure" data-color="default"><span class="dot"></span>Mesurer</button>
     <button class="tool" data-mode="dimension" data-color="green"><span class="dot"></span>Coter</button>
     <button class="tool" data-mode="note" data-color="yellow"><span class="dot"></span>Note</button>
+    <button class="tool" data-mode="delete" data-color="red"><span class="dot"></span>Supprimer</button>
+    <button class="tool" data-mode="organize" data-color="purple"><span class="dot"></span>Organiser</button>
+  </div>
+
+  <div id="organize-bar">
+    <span id="organize-hint">Glisse les plans pour les placer, tape pour en sélectionner plusieurs</span>
+    <button id="organize-group-btn" style="display:none;">Grouper</button>
+    <button id="organize-ungroup-btn" style="display:none;">Dégrouper</button>
+    <button id="organize-label-btn" style="display:none;">🏷️ Annoter le groupe</button>
   </div>
 
   <div id="dim-options">
@@ -186,6 +210,13 @@ const METERS_PER_PDF_POINT = 0.0254/72;
 let dimAngleMode = '90';     // '90' | 'libre'
 let dimInputMode = 'drag';   // 'drag' | 'points'
 let snapEnabled = false;
+
+// ── Organiser : disposition libre des pages sur le tableau ──
+let pageLayout = {};        // {pageNum: {x, y, rotation}} — x,y = centre de la page
+let pageGroupId = {};       // {pageNum: groupId|null}
+let groupAnnotations = {};  // {groupId: {label}}
+let nextGroupId = 1;
+let organizeSelection = []; // pages sélectionnées en mode Organiser (pour grouper/dégrouper/annoter)
 let pending = [];            // points en cours de pose (en coordonnées "page-local" pixels d'affichage)
 let pendingPageNum = null;
 
@@ -281,7 +312,7 @@ function setupPinchZoom(){
 // Redessine à meilleure résolution interne quand le zoom dépasse ce que la
 // résolution actuelle affiche net (texte/traits toujours nets).
 let rerenderingQuality = false;
-const MAX_RENDER_MULTIPLIER = 9; // plafond de sécurité (taille de canvas/mémoire mobile)
+const MAX_RENDER_MULTIPLIER = 13; // plafond de sécurité (taille de canvas/mémoire mobile)
 async function maybeUpgradeQuality(scale){
   const needed = Math.min(scale * BASE_MULTIPLIER, MAX_RENDER_MULTIPLIER);
   if(needed > currentRenderMultiplier*1.15 && !rerenderingQuality){
@@ -352,18 +383,38 @@ async function renderAllPages(){
     off.width = pv.width; off.height = pv.height;
     await page.render({canvasContext: off.getContext('2d'), viewport: pv}).promise;
 
+    // Canevas d'échantillonnage à résolution fixe (indépendante du zoom/qualité),
+    // utilisé uniquement pour l'accrochage par analyse de pixels — coordonnées
+    // directement en espace "page-local" (0..DISPLAY_WIDTH), pas de conversion.
+    const samplePv = page.getViewport({scale: pageDisplayScale});
+    const sampleCanvas = document.createElement('canvas');
+    sampleCanvas.width = samplePv.width; sampleCanvas.height = samplePv.height;
+    await page.render({canvasContext: sampleCanvas.getContext('2d'), viewport: samplePv}).promise;
+
     if(!pageCalib[i]){
       const detected = await detectScaleFromPage(page);
       if(detected) pageCalib[i] = { ratio: detected, pointsPerMeter:null, calibrationLinePt:null };
     }
 
-    const group = new Konva.Group({x: gx, y: gy});
+    // Position par défaut = grille calculée ; si l'utilisateur a déjà déplacé/tourné
+    // cette page (mode Organiser), on respecte sa disposition.
+    const defaultCenter = { x: gx + DISPLAY_WIDTH/2, y: gy + displayHeight/2, rotation: 0 };
+    const layout = pageLayout[i] || defaultCenter;
+    if(!pageLayout[i]) pageLayout[i] = layout;
+
+    const group = new Konva.Group({
+      x: layout.x, y: layout.y, rotation: layout.rotation||0,
+      offsetX: DISPLAY_WIDTH/2, offsetY: displayHeight/2,
+    });
 
     const hitRect = new Konva.Rect({x:0, y:0, width:DISPLAY_WIDTH, height:displayHeight, fill:'#000'});
     group.add(hitRect);
 
     const konvaImage = new Konva.Image({image: off, x:0, y:0, width:DISPLAY_WIDTH, height:displayHeight, listening:false});
     group.add(konvaImage);
+
+    const selectionRect = new Konva.Rect({x:-4, y:-4, width:DISPLAY_WIDTH+8, height:displayHeight+8, stroke:'#9d7bea', strokeWidth:3, strokeScaleEnabled:false, listening:false, visible:false});
+    group.add(selectionRect);
 
     const label = new Konva.Text({x:0, y:-20, text:'Page '+i, fontSize:11, fill:'#9ba0a6', fontFamily:'monospace', listening:false});
     group.add(label);
@@ -373,8 +424,15 @@ async function renderAllPages(){
     const badgeBg = new Konva.Rect({width:badgeW, height:badgeH, fill:'rgba(0,0,0,.65)', stroke:'#3a3e44', strokeWidth:1, cornerRadius:5});
     const badgeText = new Konva.Text({text:'Échelle —', fontSize:10, fill:'#9ba0a6', width:badgeW, height:badgeH, align:'center', verticalAlign:'middle', fontFamily:'sans-serif'});
     badgeGroup.add(badgeBg); badgeGroup.add(badgeText);
-    badgeGroup.on('click tap', (e)=>{ e.cancelBubble = true; openScaleChooser(i); });
+    badgeGroup.on('click tap', (e)=>{ e.cancelBubble = true; if(mode!=='organize') openScaleChooser(i); });
     group.add(badgeGroup);
+
+    // Poignée de rotation — visible seulement en mode Organiser
+    const rotBtn = new Konva.Group({x:DISPLAY_WIDTH-20, y:20, visible:false, name:'rotate-handle'});
+    rotBtn.add(new Konva.Circle({radius:16, fill:'rgba(0,0,0,.7)', stroke:'#9d7bea', strokeWidth:1.5, strokeScaleEnabled:false}));
+    rotBtn.add(new Konva.Text({text:'⟳', fontSize:18, fill:'#fff', offsetX:6, offsetY:10}));
+    rotBtn.on('click tap', (e)=>{ e.cancelBubble = true; rotatePage(i); });
+    group.add(rotBtn);
 
     const itemsGroup = new Konva.Group();
     group.add(itemsGroup);
@@ -382,10 +440,11 @@ async function renderAllPages(){
     mainLayer.add(group);
 
     pagePanels[i] = {
-      group, itemsGroup, konvaImage, badgeText,
+      group, itemsGroup, konvaImage, badgeText, selectionRect, rotBtn,
       pageDisplayScale, displayWidth: DISPLAY_WIDTH, displayHeight,
       pointsPerMeter: null, calibrationLinePt: null,
       nativeWidth: nv.width, nativeHeight: nv.height,
+      sampleCtx: sampleCanvas.getContext('2d'),
     };
 
     applyStoredCalibForPage(i);
@@ -501,8 +560,9 @@ function formatReal(pointDist, pageNum){
 }
 
 // ════════════════════════════════════════════
-// ACCROCHAGE — sur les points déjà posés (extrémités des cotes/mesures existantes),
-// plus simple et fiable que d'analyser les traits internes du PDF.
+// ACCROCHAGE — d'abord sur les points déjà posés (extrémités des cotes/mesures
+// existantes), puis en secours par analyse des pixels du plan (recherche du
+// trait sombre le plus proche — mur, cloison...) autour du clic.
 // ════════════════════════════════════════════
 function trySnapToExistingPoint(localPt, pageNum){
   const items = itemsByPage[pageNum]||[];
@@ -518,6 +578,240 @@ function trySnapToExistingPoint(localPt, pageNum){
     });
   });
   return best;
+}
+
+// Cherche le pixel sombre le plus proche de (cx,cy) — coordonnées "page-local"
+// (0..DISPLAY_WIDTH), directement compatibles avec le canevas d'échantillonnage.
+// Renvoie {x,y} en pixels page-local, ou null si rien de sombre à proximité.
+function findNearestDarkPixel(pageNum, cx, cy, maxRadius, threshold){
+  const panel = pagePanels[pageNum];
+  if(!panel || !panel.sampleCtx) return null;
+  const startX = Math.max(0, Math.round(cx-maxRadius));
+  const startY = Math.max(0, Math.round(cy-maxRadius));
+  const size = maxRadius*2;
+  let imgData;
+  try{ imgData = panel.sampleCtx.getImageData(startX, startY, size, size); }
+  catch(e){ return null; }
+  const data = imgData.data, w = imgData.width, h = imgData.height;
+  for(let ring=2; ring<=maxRadius; ring++){
+    const samples = Math.max(10, Math.round(ring*2));
+    let best=null, bestDist=Infinity;
+    for(let i=0;i<samples;i++){
+      const angle=(i/samples)*Math.PI*2;
+      const lx = Math.round(maxRadius + Math.cos(angle)*ring);
+      const ly = Math.round(maxRadius + Math.sin(angle)*ring);
+      if(lx<0||ly<0||lx>=w||ly>=h) continue;
+      const idx = (ly*w+lx)*4;
+      const brightness = (data[idx]+data[idx+1]+data[idx+2])/3;
+      if(data[idx+3]>10 && brightness<threshold){
+        const gx = startX+lx, gy = startY+ly;
+        const d = Math.hypot(gx-cx, gy-cy);
+        if(d<bestDist){ bestDist=d; best={x:gx, y:gy}; }
+      }
+    }
+    if(best) return best;
+  }
+  return null;
+}
+function trySnapToDarkEdge(localPt, pageNum){
+  return findNearestDarkPixel(pageNum, localPt.x, localPt.y, 22, 130);
+}
+function trySnap(localPt, pageNum){
+  return trySnapToExistingPoint(localPt, pageNum) || trySnapToDarkEdge(localPt, pageNum);
+}
+
+// ════════════════════════════════════════════
+// SUPPRIMER — retire la mesure/cote/note la plus proche du clic
+// ════════════════════════════════════════════
+function distToSegmentXY(p, x1,y1,x2,y2){
+  const dx=x2-x1, dy=y2-y1;
+  const lenSq=dx*dx+dy*dy;
+  if(lenSq<1e-9) return Math.hypot(p.x-x1,p.y-y1);
+  let t=((p.x-x1)*dx+(p.y-y1)*dy)/lenSq;
+  t=Math.max(0,Math.min(1,t));
+  return Math.hypot(p.x-(x1+t*dx), p.y-(y1+t*dy));
+}
+function deleteNearestItem(pageNum, localPt){
+  const items = itemsByPage[pageNum]||[];
+  if(!items.length) return;
+  const threshold = 20; // pixels d'affichage
+  let bestIdx=-1, bestDist=Infinity;
+  items.forEach((it,idx)=>{
+    let d;
+    if(it.type==='note'){
+      d = dist(pointToLocal(it.p1,pageNum), localPt);
+    } else {
+      const p1=pointToLocal(it.p1,pageNum), p2=pointToLocal(it.p2,pageNum);
+      d = distToSegmentXY(localPt, p1.x,p1.y,p2.x,p2.y);
+    }
+    if(d<threshold && d<bestDist){ bestDist=d; bestIdx=idx; }
+  });
+  if(bestIdx>=0){
+    items.splice(bestIdx,1);
+    redrawPageItems(pageNum);
+    notifyParent();
+  }
+}
+
+// ════════════════════════════════════════════
+// ORGANISER — tourner / déplacer / grouper / annoter les pages sur le tableau
+// ════════════════════════════════════════════
+function rotatePage(pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return;
+  const newRot = ((panel.group.rotation()||0) + 90) % 360;
+  panel.group.rotation(newRot);
+  pageLayout[pageNum] = { x:panel.group.x(), y:panel.group.y(), rotation:newRot };
+  mainLayer.batchDraw();
+  renderGroupAnnotations();
+  notifyParent();
+}
+
+function toggleOrganizeSelection(pageNum){
+  const idx = organizeSelection.indexOf(pageNum);
+  if(idx>=0) organizeSelection.splice(idx,1);
+  else organizeSelection.push(pageNum);
+  pagePanels[pageNum].selectionRect.visible(organizeSelection.includes(pageNum));
+  mainLayer.batchDraw();
+  updateOrganizeBar();
+}
+function clearOrganizeSelection(){
+  organizeSelection.forEach(pn=>{ if(pagePanels[pn]) pagePanels[pn].selectionRect.visible(false); });
+  organizeSelection = [];
+  mainLayer.batchDraw();
+  updateOrganizeBar();
+}
+function updateOrganizeBar(){
+  const groupBtn = document.getElementById('organize-group-btn');
+  const ungroupBtn = document.getElementById('organize-ungroup-btn');
+  const labelBtn = document.getElementById('organize-label-btn');
+  const hint = document.getElementById('organize-hint');
+  if(organizeSelection.length===0){
+    groupBtn.style.display='none'; ungroupBtn.style.display='none'; labelBtn.style.display='none';
+    hint.style.display='';
+    return;
+  }
+  hint.style.display='none';
+  const firstGid = pageGroupId[organizeSelection[0]];
+  const allSameGroup = firstGid && organizeSelection.every(pn=>pageGroupId[pn]===firstGid);
+  const anyGrouped = organizeSelection.some(pn=>pageGroupId[pn]);
+  groupBtn.style.display = organizeSelection.length>=2 ? 'inline-block' : 'none';
+  ungroupBtn.style.display = anyGrouped ? 'inline-block' : 'none';
+  labelBtn.style.display = allSameGroup ? 'inline-block' : 'none';
+}
+document.getElementById('organize-group-btn').onclick = ()=>{
+  const gid = 'g'+(nextGroupId++);
+  organizeSelection.forEach(pn=>{ pageGroupId[pn]=gid; });
+  updateOrganizeBar();
+  notifyParent();
+};
+document.getElementById('organize-ungroup-btn').onclick = ()=>{
+  organizeSelection.forEach(pn=>{ pageGroupId[pn]=null; });
+  const gids = new Set(Object.values(pageGroupId));
+  Object.keys(groupAnnotations).forEach(gid=>{ if(!gids.has(gid)) delete groupAnnotations[gid]; });
+  renderGroupAnnotations();
+  updateOrganizeBar();
+  notifyParent();
+};
+document.getElementById('organize-label-btn').onclick = ()=>{
+  const gid = pageGroupId[organizeSelection[0]];
+  if(!gid) return;
+  openModal({
+    title:'Annoter le groupe',
+    subtitle:'Cette étiquette s\'affiche au-dessus des pages groupées.',
+    fields:[{name:'label', type:'text', placeholder:'ex. Étage 1 — sous-sol'}],
+    onSubmit:(v)=>{
+      groupAnnotations[gid] = { label: v.label||'' };
+      renderGroupAnnotations();
+      notifyParent();
+    }
+  });
+};
+
+function renderGroupAnnotations(){
+  mainLayer.find('.group-annotation').forEach(n=>n.destroy());
+  const groups = {};
+  Object.keys(pageGroupId).forEach(pnStr=>{
+    const pn = parseInt(pnStr,10);
+    const gid = pageGroupId[pn];
+    if(!gid) return;
+    (groups[gid] = groups[gid]||[]).push(pn);
+  });
+  Object.keys(groups).forEach(gid=>{
+    const ann = groupAnnotations[gid];
+    if(!ann || !ann.label) return;
+    let minX=Infinity, minY=Infinity, maxX=-Infinity;
+    groups[gid].forEach(pn=>{
+      const panel = pagePanels[pn];
+      if(!panel) return;
+      const box = panel.group.getClientRect({relativeTo: mainLayer});
+      minX = Math.min(minX, box.x); maxX = Math.max(maxX, box.x+box.width);
+      minY = Math.min(minY, box.y);
+    });
+    if(minX===Infinity) return;
+    const t = new Konva.Text({
+      x:(minX+maxX)/2, y:minY-30, text:ann.label, fontSize:14, fontStyle:'bold',
+      fill:'#9d7bea', fontFamily:'sans-serif', name:'group-annotation', listening:false
+    });
+    t.offsetX(t.width()/2);
+    mainLayer.add(t);
+  });
+  mainLayer.batchDraw();
+}
+
+// Active/désactive le mode Organiser sur toutes les pages (glisser, poignée de rotation)
+function setOrganizeMode(on){
+  Object.values(pagePanels).forEach(panel=>{
+    panel.group.draggable(on);
+    panel.rotBtn.visible(on);
+  });
+  if(!on) clearOrganizeSelection();
+  document.getElementById('organize-bar').style.display = on ? 'flex' : 'none';
+  mainLayer.batchDraw();
+}
+
+function onPageDragStart(pageNum){
+  const panel = pagePanels[pageNum];
+  panel.group.__dragMoved = false;
+  panel.group.__dragOrigin = {x:panel.group.x(), y:panel.group.y()};
+  const gid = pageGroupId[pageNum];
+  panel.group.__groupOrigins = null;
+  if(gid){
+    const origins = {};
+    Object.keys(pageGroupId).forEach(pnStr=>{
+      const pn = parseInt(pnStr,10);
+      if(pn!==pageNum && pageGroupId[pn]===gid && pagePanels[pn]) origins[pn] = {x:pagePanels[pn].group.x(), y:pagePanels[pn].group.y()};
+    });
+    panel.group.__groupOrigins = origins;
+  }
+}
+function onPageDragMove(pageNum){
+  const panel = pagePanels[pageNum];
+  panel.group.__dragMoved = true;
+  if(panel.group.__groupOrigins){
+    const dx = panel.group.x()-panel.group.__dragOrigin.x;
+    const dy = panel.group.y()-panel.group.__dragOrigin.y;
+    Object.keys(panel.group.__groupOrigins).forEach(pnStr=>{
+      const pn = parseInt(pnStr,10);
+      const origin = panel.group.__groupOrigins[pn];
+      pagePanels[pn].group.position({x:origin.x+dx, y:origin.y+dy});
+    });
+  }
+  mainLayer.batchDraw();
+}
+function onPageDragEnd(pageNum){
+  const panel = pagePanels[pageNum];
+  const gid = pageGroupId[pageNum];
+  Object.keys(pagePanels).forEach(pnStr=>{
+    const pn = parseInt(pnStr,10);
+    if(pn===pageNum || (gid && pageGroupId[pn]===gid)){
+      const p = pagePanels[pn].group;
+      pageLayout[pn] = { x:p.x(), y:p.y(), rotation:p.rotation()||0 };
+    }
+  });
+  renderGroupAnnotations();
+  notifyParent();
+  setTimeout(()=>{ panel.group.__dragMoved = false; }, 50);
 }
 
 // ════════════════════════════════════════════
@@ -679,8 +973,22 @@ let dragging = false;
 let dragStartLocal = null;
 
 function attachPageInteraction(pageNum, group, hitRect){
+  group.on('dragstart', ()=>{ if(mode==='organize') onPageDragStart(pageNum); });
+  group.on('dragmove', ()=>{ if(mode==='organize') onPageDragMove(pageNum); });
+  group.on('dragend', ()=>{ if(mode==='organize') onPageDragEnd(pageNum); });
+
   group.on('mousedown touchstart', (e)=>{
     if(mode==='pan') return;
+    if(mode==='organize') return; // le glisser Konva natif s'en charge ; la sélection est gérée par 'click tap'
+
+    if(mode==='delete'){
+      e.evt.preventDefault();
+      e.cancelBubble = true;
+      const localPt = group.getRelativePointerPosition();
+      deleteNearestItem(pageNum, localPt);
+      return;
+    }
+
     e.evt.preventDefault();
     e.cancelBubble = true;
     if(pendingPageNum !== pageNum){ pending=[]; clearLivePreview(); }
@@ -690,7 +998,7 @@ function attachPageInteraction(pageNum, group, hitRect){
     let local = localRaw;
     let snapped = false;
     if(snapEnabled && (mode==='measure'||mode==='dimension')){
-      const s = trySnapToExistingPoint(localRaw, pageNum);
+      const s = trySnap(localRaw, pageNum);
       if(s){ local = s; snapped = true; }
     }
 
@@ -761,7 +1069,7 @@ function attachPageInteraction(pageNum, group, hitRect){
 
     let p2 = raw, snapped = false;
     if(snapEnabled && (mode==='measure'||mode==='dimension')){
-      const s = trySnapToExistingPoint(raw, pageNum);
+      const s = trySnap(raw, pageNum);
       if(s){ p2 = s; snapped = true; }
     }
     if(!snapped && (mode==='measure'||mode==='dimension')) p2 = applyAngleSnap(p1, raw);
@@ -791,6 +1099,13 @@ function attachPageInteraction(pageNum, group, hitRect){
     } else if(mode==='dimension'){
       finalizeDimension(pageNum, p1, p2);
     }
+  });
+
+  group.on('click tap', (e)=>{
+    if(mode!=='organize') return;
+    if(group.__dragMoved) return; // c'était un glisser, pas un tap de sélection
+    e.cancelBubble = true;
+    toggleOrganizeSelection(pageNum);
   });
 }
 
@@ -823,7 +1138,8 @@ document.querySelectorAll('.tool').forEach(btn=>{
       drawPendingDot(pendingPageNum, pending[0]);
     }
 
-    if(stage) setStageDraggable(mode==='pan');
+    if(stage) setStageDraggable(mode==='pan' || mode==='organize');
+    setOrganizeMode(mode==='organize');
     document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
   });
 });
@@ -893,6 +1209,15 @@ window.addEventListener('message', async (e)=>{
   const looksOld = saved && !saved.itemsByPage && !saved.pageCalib;
   itemsByPage = looksOld ? saved : (saved.itemsByPage || {});
   pageCalib = looksOld ? {} : (saved.pageCalib || {});
+  pageLayout = looksOld ? {} : (saved.pageLayout || {});
+  pageGroupId = looksOld ? {} : (saved.pageGroupId || {});
+  groupAnnotations = looksOld ? {} : (saved.groupAnnotations || {});
+  let maxGid = 0;
+  Object.keys(pageGroupId).forEach(pn=>{
+    const g = pageGroupId[pn];
+    if(g){ const n=parseInt(String(g).replace('g',''),10); if(!isNaN(n) && n>maxGid) maxGid=n; }
+  });
+  nextGroupId = maxGid+1;
   let maxId = 0;
   Object.values(itemsByPage).forEach(arr => (arr||[]).forEach(it => { if(it.id>maxId) maxId=it.id; }));
   nextId = maxId+1;
@@ -911,6 +1236,7 @@ window.addEventListener('message', async (e)=>{
     document.getElementById('empty-state').style.display = 'none';
     if(!stage) initStage();
     await renderAllPages();
+    renderGroupAnnotations();
     setActivePage(1);
   }catch(err){
     console.error('[Coteur] Erreur chargement plan:', err);
@@ -943,7 +1269,7 @@ function notifyParent(){
   if(window.parent === window) return;
   clearTimeout(notifyTimer);
   notifyTimer = setTimeout(()=>{
-    window.parent.postMessage({type:'coteur-items-update', items:{itemsByPage, pageCalib}}, '*');
+    window.parent.postMessage({type:'coteur-items-update', items:{itemsByPage, pageCalib, pageLayout, pageGroupId, groupAnnotations}}, '*');
   }, 500);
 }
 </script>
