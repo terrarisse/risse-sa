@@ -415,6 +415,8 @@ async function renderAllPages(){
 
     const selectionRect = new Konva.Rect({x:-4, y:-4, width:DISPLAY_WIDTH+8, height:displayHeight+8, stroke:'#9d7bea', strokeWidth:3, strokeScaleEnabled:false, listening:false, visible:false});
     group.add(selectionRect);
+    const groupColorRect = new Konva.Rect({x:-9, y:-9, width:DISPLAY_WIDTH+18, height:displayHeight+18, stroke:'#9d7bea', strokeWidth:3, strokeScaleEnabled:false, listening:false, visible:false, dash:[10,6]});
+    group.add(groupColorRect);
 
     const label = new Konva.Text({x:0, y:-20, text:'Page '+i, fontSize:11, fill:'#9ba0a6', fontFamily:'monospace', listening:false});
     group.add(label);
@@ -440,7 +442,7 @@ async function renderAllPages(){
     mainLayer.add(group);
 
     pagePanels[i] = {
-      group, itemsGroup, konvaImage, badgeText, selectionRect, rotBtn,
+      group, itemsGroup, konvaImage, badgeText, selectionRect, rotBtn, groupColorRect,
       pageDisplayScale, displayWidth: DISPLAY_WIDTH, displayHeight,
       pointsPerMeter: null, calibrationLinePt: null,
       nativeWidth: nv.width, nativeHeight: nv.height,
@@ -450,6 +452,7 @@ async function renderAllPages(){
     applyStoredCalibForPage(i);
     redrawPageItems(i);
     attachPageInteraction(i, group, hitRect);
+    updatePageGroupVisual(i);
   }
 
   mainLayer.batchDraw();
@@ -843,10 +846,22 @@ function updateOrganizeBar(){
   ungroupBtn.style.display = anyGrouped ? 'inline-block' : 'none';
   labelBtn.style.display = allSameGroup ? 'inline-block' : 'none';
 }
+const GROUP_COLORS = [
+  {value:'#e5484d', label:'🔴 Rouge'},
+  {value:'#f5a623', label:'🟠 Orange'},
+  {value:'#f0c318', label:'🟡 Jaune'},
+  {value:'#4caf50', label:'🟢 Vert'},
+  {value:'#3ecfd6', label:'🔵 Cyan'},
+  {value:'#5b8def', label:'🔵 Bleu'},
+  {value:'#9d7bea', label:'🟣 Violet'},
+];
+
 document.getElementById('organize-group-btn').onclick = ()=>{
   const gid = 'g'+(nextGroupId++);
   organizeSelection.forEach(pn=>{ pageGroupId[pn]=gid; });
+  groupAnnotations[gid] = { label:'', color:'#9d7bea' };
   updateOrganizeBar();
+  updateAllPageGroupVisuals();
   notifyParent();
 };
 document.getElementById('organize-ungroup-btn').onclick = ()=>{
@@ -855,22 +870,47 @@ document.getElementById('organize-ungroup-btn').onclick = ()=>{
   Object.keys(groupAnnotations).forEach(gid=>{ if(!gids.has(gid)) delete groupAnnotations[gid]; });
   renderGroupAnnotations();
   updateOrganizeBar();
+  updateAllPageGroupVisuals();
   notifyParent();
 };
 document.getElementById('organize-label-btn').onclick = ()=>{
   const gid = pageGroupId[organizeSelection[0]];
   if(!gid) return;
+  const current = groupAnnotations[gid] || { label:'', color:'#9d7bea' };
   openModal({
-    title:'Annoter le groupe',
-    subtitle:'Cette étiquette s\'affiche au-dessus des pages groupées.',
-    fields:[{name:'label', type:'text', placeholder:'ex. Étage 1 — sous-sol'}],
+    title:'Personnaliser le groupe',
+    subtitle:'Nom et couleur affichés pour repérer ce groupe sur le tableau.',
+    fields:[
+      {name:'label', type:'text', placeholder:'ex. Étage 1 — sous-sol'},
+      {name:'color', type:'select', options: GROUP_COLORS.map(c=>({...c, selected:c.value===current.color}))}
+    ],
     onSubmit:(v)=>{
-      groupAnnotations[gid] = { label: v.label||'' };
+      groupAnnotations[gid] = { label: v.label||'', color: v.color||'#9d7bea' };
       renderGroupAnnotations();
+      updateAllPageGroupVisuals();
       notifyParent();
     }
   });
 };
+
+// Affiche le contour coloré (permanent tant qu'on est en mode Organiser) qui
+// identifie visuellement à quel groupe une page appartient.
+function updatePageGroupVisual(pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return;
+  const gid = pageGroupId[pageNum];
+  if(gid){
+    const color = (groupAnnotations[gid] && groupAnnotations[gid].color) || '#9d7bea';
+    panel.groupColorRect.stroke(color);
+    panel.groupColorRect.visible(mode==='organize');
+  } else {
+    panel.groupColorRect.visible(false);
+  }
+}
+function updateAllPageGroupVisuals(){
+  Object.keys(pagePanels).forEach(pn=>updatePageGroupVisual(parseInt(pn,10)));
+  mainLayer.batchDraw();
+}
 
 function renderGroupAnnotations(){
   mainLayer.find('.group-annotation').forEach(n=>n.destroy());
@@ -911,6 +951,7 @@ function setOrganizeMode(on){
   });
   if(!on) clearOrganizeSelection();
   document.getElementById('organize-bar').style.display = on ? 'flex' : 'none';
+  updateAllPageGroupVisuals();
   mainLayer.batchDraw();
 }
 
@@ -1117,9 +1158,19 @@ let dragging = false;
 let dragStartLocal = null;
 
 function attachPageInteraction(pageNum, group, hitRect){
-  group.on('dragstart', ()=>{ if(mode==='organize') onPageDragStart(pageNum); });
-  group.on('dragmove', ()=>{ if(mode==='organize') onPageDragMove(pageNum); });
-  group.on('dragend', ()=>{ if(mode==='organize') onPageDragEnd(pageNum); });
+  group.on('dragstart', (e)=>{
+    if(mode!=='organize') return;
+    e.cancelBubble = true;
+    stage.draggable(false); // évite que le tableau bouge en même temps que la page qu'on glisse
+    onPageDragStart(pageNum);
+  });
+  group.on('dragmove', (e)=>{ if(mode==='organize'){ e.cancelBubble=true; onPageDragMove(pageNum); } });
+  group.on('dragend', (e)=>{
+    if(mode!=='organize') return;
+    e.cancelBubble = true;
+    onPageDragEnd(pageNum);
+    stage.draggable(true); // réactive le pan du tableau une fois le glisser terminé
+  });
 
   group.on('mousedown touchstart', async (e)=>{
     if(mode==='pan') return;
@@ -1167,7 +1218,7 @@ function attachPageInteraction(pageNum, group, hitRect){
         drawPendingDot(pageNum, local);
       } else {
         const p1 = pending[0];
-        const p2 = snapped ? local : applyAngleSnap(p1, local);
+        const p2 = applyAngleSnap(p1, local);
         pending=[];
         pendingToolMode = null;
         hud.style.display='none';
@@ -1216,7 +1267,7 @@ function attachPageInteraction(pageNum, group, hitRect){
       const s = await trySnap(raw, pageNum);
       if(s){ p2 = s; snapped = true; }
     }
-    if(!snapped && (mode==='measure'||mode==='dimension')) p2 = applyAngleSnap(p1, raw);
+    if(mode==='measure'||mode==='dimension') p2 = applyAngleSnap(p1, p2);
 
     if(mode==='calibrate'){
       const pxDist = dist(p1,p2); // en pixels page-local (affichage)
