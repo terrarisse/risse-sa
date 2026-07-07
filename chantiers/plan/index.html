@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Coteur de plans — Risse SA</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/konva@9/konva.min.js"></script>
 <style>
   :root{
     --bg:#1b1d21;
@@ -12,10 +13,8 @@
     --panel-2:#2c2f34;
     --line:#3a3e44;
     --text:#e9e7e2;
-    --text-dim:#9a9d a2;
     --text-dim:#9ba0a6;
     --orange:#ff6a1a;
-    --orange-dim:#7a3510;
     --cyan:#3ecfd6;
     --green:#7dd66a;
     --yellow:#e8c547;
@@ -23,36 +22,36 @@
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-  html,body{margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden; touch-action:pan-x pan-y;}
+  html,body{margin:0; height:100%; background:var(--bg); color:var(--text); font-family:var(--sans); overflow:hidden; touch-action:none;}
   #app{display:flex; flex-direction:column; height:100vh;}
 
   header{
     padding:10px 14px; background:var(--panel); border-bottom:1px solid var(--line);
-    display:flex; align-items:center; justify-content:space-between; gap:10px; flex-shrink:0;
+    flex-shrink:0;
   }
-  header .brand{display:flex; flex-direction:column; line-height:1.1;}
-  header .brand b{font-size:15px; letter-spacing:.3px;}
+  header .brand{display:flex; flex-direction:column;}
+  header .brand b{font-size:14px;}
   header .brand span{font-size:11px; color:var(--text-dim);}
-  .upload-btn{
-    background:var(--orange); color:#1b1d21; font-weight:700; font-size:13px;
-    padding:8px 14px; border-radius:6px; border:none; white-space:nowrap; cursor:pointer;
-  }
-  input[type=file]{display:none;}
 
   #toolbar{
-    display:flex; gap:6px; padding:8px 10px; background:var(--panel-2);
+    display:flex; gap:8px; padding:8px 10px; background:var(--panel-2);
     border-bottom:1px solid var(--line); overflow-x:auto; flex-shrink:0;
   }
   .tool{
-    flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:3px;
-    background:transparent; border:1px solid var(--line); color:var(--text-dim);
-    padding:7px 12px; border-radius:8px; font-size:11px; cursor:pointer; min-width:64px;
+    background:var(--panel); border:1px solid var(--line); color:var(--text-dim);
+    font-family:var(--sans); font-size:12px; font-weight:600; padding:8px 12px;
+    border-radius:8px; cursor:pointer; display:flex; align-items:center; gap:6px;
+    white-space:nowrap; flex-shrink:0;
   }
-  .tool .dot{width:8px; height:8px; border-radius:50%; background:currentColor;}
-  .tool.active{border-color:var(--orange); color:var(--orange); background:rgba(255,106,26,.08);}
-  .tool[data-color="cyan"].active{border-color:var(--cyan); color:var(--cyan); background:rgba(62,207,214,.08);}
-  .tool[data-color="green"].active{border-color:var(--green); color:var(--green); background:rgba(125,214,106,.08);}
-  .tool[data-color="yellow"].active{border-color:var(--yellow); color:var(--yellow); background:rgba(232,197,71,.08);}
+  .tool .dot{width:7px; height:7px; border-radius:50%; background:var(--text-dim);}
+  .tool.active{color:var(--text); border-color:var(--orange);}
+  .tool.active .dot{background:var(--orange);}
+  .tool[data-color="cyan"].active{border-color:var(--cyan);}
+  .tool[data-color="cyan"].active .dot{background:var(--cyan);}
+  .tool[data-color="green"].active{border-color:var(--green);}
+  .tool[data-color="green"].active .dot{background:var(--green);}
+  .tool[data-color="yellow"].active{border-color:var(--yellow);}
+  .tool[data-color="yellow"].active .dot{background:var(--yellow);}
 
   #dim-options{
     display:none; gap:14px; padding:8px 10px; background:var(--panel-2);
@@ -68,97 +67,54 @@
   #dim-options .seg-btn.active{background:var(--orange); color:#1a1204;}
 
   #viewport{
-    flex:1; overflow:auto; position:relative; background:#111214;
+    flex:1; position:relative; background:#111214;
     background-image: radial-gradient(circle, #23262a 1px, transparent 1px);
     background-size: 18px 18px;
-    touch-action: pan-x pan-y;
+    overflow:hidden;
   }
   #empty-state{
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     flex-direction:column; gap:10px; color:var(--text-dim); text-align:center; padding:30px;
+    z-index:5;
   }
   #empty-state b{color:var(--text); font-size:16px;}
-  #board{
-    display:grid; gap:32px; padding:32px; align-items:start; justify-items:start;
-    width:max-content;
-  }
-  canvas{display:block;}
-  .page-panel{position:relative;}
-  .plan-canvas{position:relative; top:0; left:0;}
-  .overlay-canvas{position:absolute; top:0; left:0; touch-action:pan-x pan-y;}
-  .panel-page-label{
-    position:absolute; left:0; top:-20px; font-size:11px; color:var(--text-dim);
-    font-family:var(--mono); pointer-events:none;
-  }
-  .panel-scale-badge{
-    position:absolute; right:4px; bottom:4px; background:rgba(0,0,0,.6);
-    border:1px solid var(--line); border-radius:6px; padding:4px 8px; font-size:10px;
-    color:var(--text-dim); cursor:pointer;
-  }
-  .panel-scale-badge b{color:var(--cyan); font-family:var(--mono); font-weight:600;}
+  #stage-container{ position:absolute; inset:0; touch-action:none; }
 
   #hud{
     position:absolute; left:10px; bottom:10px; background:rgba(0,0,0,.75);
     border:1px solid var(--orange); border-radius:8px; padding:8px 14px; display:none;
     font-family:var(--mono); color:var(--orange); font-size:22px; letter-spacing:1px;
-    box-shadow:0 0 14px rgba(255,106,26,.25); pointer-events:none;
+    box-shadow:0 0 14px rgba(255,106,26,.25); pointer-events:none; z-index:20;
   }
   #hud span{font-size:11px; display:block; color:var(--text-dim); font-family:var(--sans); letter-spacing:0;}
 
   #zoom-ctrl{
-    position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:4px;
+    position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:4px; z-index:20;
   }
   #zoom-ctrl button{
-    width:34px; height:34px; border-radius:6px; border:1px solid var(--line); background:var(--panel);
-    color:var(--text); font-size:16px; cursor:pointer;
+    width:40px; height:40px; border-radius:8px; border:1px solid var(--line); background:var(--panel);
+    color:var(--text); font-size:18px; cursor:pointer;
   }
 
-  footer{
-    background:var(--panel); border-top:1px solid var(--line); flex-shrink:0;
-    max-height:34vh; display:flex; flex-direction:column;
-  }
-  #status{
-    padding:8px 14px; font-size:12px; color:var(--text-dim); border-bottom:1px solid var(--line);
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  #status b{color:var(--text);}
-  #list{overflow-y:auto; flex:1;}
-  .item{
-    display:flex; align-items:center; gap:10px; padding:9px 14px; border-bottom:1px solid var(--line);
-    font-size:13px;
-  }
-  .item .badge{
-    width:22px; height:22px; border-radius:5px; display:flex; align-items:center; justify-content:center;
-    font-size:11px; font-weight:700; flex-shrink:0;
-  }
-  .item .val{font-family:var(--mono); color:var(--text); flex:1;}
-  .item .lbl{color:var(--text-dim); font-size:11px;}
-  .item button{background:none; border:none; color:#c9564a; font-size:16px; cursor:pointer; padding:4px 6px;}
-  #actions{display:flex; gap:8px; padding:8px 14px;}
-  #actions button{
-    flex:1; padding:9px; border-radius:6px; border:1px solid var(--line); background:var(--panel-2);
-    color:var(--text); font-size:12px; cursor:pointer;
-  }
-  #actions button.danger{color:#e07a6f; border-color:#5a2f2a;}
-  #actions button.primary{background:var(--orange); color:#1b1d21; font-weight:700; border:none;}
-
+  /* ---------- Modal ---------- */
   #modal-overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:50;
+    position:fixed; inset:0; background:rgba(0,0,0,.6); display:none;
+    align-items:flex-end; z-index:100;
   }
+  #modal-overlay.open{display:flex;}
   #modal-box{
-    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:20px; width:min(320px,88vw);
+    background:var(--panel); width:100%; padding:18px 16px 26px; border-radius:16px 16px 0 0;
+    border-top:1px solid var(--line);
   }
   #modal-box h3{margin:0 0 4px; font-size:14px;}
   #modal-box p{margin:0 0 14px; font-size:12px; color:var(--text-dim);}
   #modal-box input, #modal-box textarea, #modal-box select{
-    width:100%; background:var(--panel-2); border:1px solid var(--line); border-radius:6px; color:var(--text);
-    padding:10px; font-size:15px; font-family:var(--mono); margin-bottom:12px;
+    width:100%; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    font-family:var(--sans); font-size:14px; padding:10px; border-radius:8px; margin-bottom:10px;
   }
   #modal-box textarea{font-family:var(--sans); resize:none; height:60px;}
   #modal-box .row{display:flex; gap:8px;}
   #modal-box button{flex:1; padding:10px; border-radius:6px; border:none; font-size:13px; cursor:pointer;}
-  #modal-cancel{background:var(--panel-2); color:var(--text-dim); border:1px solid var(--line) !important;}
-  #modal-ok{background:var(--orange); color:#1b1d21; font-weight:700;}
 </style>
 </head>
 <body>
@@ -200,7 +156,7 @@
       <div id="empty-sub">Le plan de ce chantier va s'afficher automatiquement.</div>
       <button id="empty-retry-btn" onclick="location.reload()" style="display:none;margin-top:14px;padding:10px 18px;border:none;border-radius:8px;background:#3ecfd6;color:#0d1116;font-weight:700;font-family:inherit;cursor:pointer;">🔄 Réessayer</button>
     </div>
-    <div id="board" style="display:none;"></div>
+    <div id="stage-container"></div>
     <div id="hud"><span id="hud-label">DISTANCE</span><span id="hud-val" style="font-size:22px; color:var(--orange);">—</span></div>
     <div id="zoom-ctrl">
       <button id="zoom-in">+</button>
@@ -210,351 +166,249 @@
 
 </div>
 
-<div id="modal-overlay">
+<div id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div id="modal-box"></div>
 </div>
 
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-// ---------- State ----------
+// ════════════════════════════════════════════
+// ÉTAT
+// ════════════════════════════════════════════
 let pdfDoc = null;
-let currentPageNum = 1;          // page actuellement ciblée par le pointeur (plus une "page affichée")
+let currentPageNum = 1;
 let mode = 'pan';
-let pending = [];                // points collected for current action
-let itemsByPage = {};            // {pageNum: [ {type, p1,p2,label,value} ] }
+let itemsByPage = {};        // {pageNum: [{id,type,p1,p2,value,label,text}]}  — p1/p2 en "espace PDF" (points, scale=1)
 let nextId = 1;
-let pageCalib = {};              // {pageNum: {ratio:number|null, pointsPerMeter:number|null, calibrationLinePt:{p1,p2}|null}}
-const METERS_PER_PDF_POINT = 0.0254/72; // 1 point PDF = 1/72 pouce
-let dimAngleMode = '90';         // '90' (aimanté horizontal/vertical) | 'libre'
-let dimInputMode = 'drag';       // 'drag' (glisser) | 'points' (poser 2 points)
-let snapEnabled = false;         // accrochage intelligent sur intersections du plan
-const pageSegmentsCache = {};    // {pageNum: [{x1,y1,x2,y2}, ...]} en espace PDF (points)
-let liveHudPoint = null;
-let pagePanels = {};              // {pageNum: {panelEl, planCanvas, overlay, octx, renderScale, pointsPerMeter, calibrationLinePt, badgeEl}}
-let currentRenderMultiplier = 1;  // qualité de rendu actuellement appliquée (montée à la demande au zoom)
-const BASE_MULTIPLIER = 1.8;      // qualité de base à zoomLevel=1
-const DISPLAY_WIDTH = 480;        // taille affichée par défaut sur le tableau (compacte)
+let pageCalib = {};          // {pageNum: {ratio, pointsPerMeter, calibrationLinePt}}
+const METERS_PER_PDF_POINT = 0.0254/72;
+let dimAngleMode = '90';     // '90' | 'libre'
+let dimInputMode = 'drag';   // 'drag' | 'points'
+let snapEnabled = false;
+let pending = [];            // points en cours de pose (en coordonnées "page-local" pixels d'affichage)
+let pendingPageNum = null;
 
-const board = document.getElementById('board');
-const viewport = document.getElementById('viewport');
+const DISPLAY_WIDTH = 480;
+const BASE_MULTIPLIER = 1.8;
+let currentRenderMultiplier = BASE_MULTIPLIER;
+let pagePanels = {};          // {pageNum: {group, itemsGroup, konvaImage, badgeText, pageDisplayScale, displayWidth, displayHeight, pointsPerMeter, calibrationLinePt, nativeWidth, nativeHeight}}
+
+let stage = null, mainLayer = null;
+
+const viewportEl = document.getElementById('viewport');
+const stageContainerEl = document.getElementById('stage-container');
 const hud = document.getElementById('hud');
-const hudVal = document.getElementById('hud-val');
 const hudLabel = document.getElementById('hud-label');
+const hudVal = document.getElementById('hud-val');
 
 function currentItems(){
   if(!itemsByPage[currentPageNum]) itemsByPage[currentPageNum] = [];
   return itemsByPage[currentPageNum];
 }
-function setActivePage(pageNum){
-  currentPageNum = pageNum;
+function setActivePage(pageNum){ currentPageNum = pageNum; }
+
+// ════════════════════════════════════════════
+// STAGE KONVA — pan/zoom natif, fiable sur tous navigateurs
+// ════════════════════════════════════════════
+function initStage(){
+  stage = new Konva.Stage({
+    container: 'stage-container',
+    width: stageContainerEl.clientWidth,
+    height: stageContainerEl.clientHeight,
+    draggable: true,
+  });
+  mainLayer = new Konva.Layer();
+  stage.add(mainLayer);
+  setupPinchZoom();
+  window.addEventListener('resize', ()=>{
+    stage.width(stageContainerEl.clientWidth);
+    stage.height(stageContainerEl.clientHeight);
+  });
 }
 
-// Les points des mesures/cotes/notes sont stockés en "espace PDF" (coordonnées à
-// scale=1, indépendantes de la résolution de rendu), pour rester justes même si on
-// re-rend une page à une meilleure qualité (zoom). On convertit vers/depuis les
-// pixels du canvas actuel au moment du dessin ou du clic.
-function pxToPoint(p, pageNum){
+function setStageDraggable(on){
+  stage.draggable(on);
+}
+
+// Zoom autour d'un point donné (coordonnées écran, relatives au stage), sans dérive.
+function zoomStageAtPoint(newScale, point){
+  newScale = Math.max(0.4, Math.min(6, newScale));
+  const oldScale = stage.scaleX();
+  const mousePointTo = {
+    x: (point.x - stage.x()) / oldScale,
+    y: (point.y - stage.y()) / oldScale,
+  };
+  stage.scale({x:newScale, y:newScale});
+  stage.position({
+    x: point.x - mousePointTo.x*newScale,
+    y: point.y - mousePointTo.y*newScale,
+  });
+  stage.batchDraw();
+  maybeUpgradeQuality(newScale);
+}
+
+function zoomButton(delta){
+  const center = { x: stage.width()/2, y: stage.height()/2 };
+  zoomStageAtPoint(stage.scaleX()+delta, center);
+}
+document.getElementById('zoom-in').onclick = ()=>zoomButton(0.3);
+document.getElementById('zoom-out').onclick = ()=>zoomButton(-0.3);
+
+// Pincement à 2 doigts — recette standard Konva.
+let pinchLastDist = 0;
+function setupPinchZoom(){
+  stage.on('touchmove', (e)=>{
+    e.evt.preventDefault();
+    const touch1 = e.evt.touches[0], touch2 = e.evt.touches[1];
+    if(touch1 && touch2){
+      setStageDraggable(false);
+      const p1 = {x:touch1.clientX, y:touch1.clientY};
+      const p2 = {x:touch2.clientX, y:touch2.clientY};
+      const dist = Math.hypot(p2.x-p1.x, p2.y-p1.y);
+      if(!pinchLastDist){ pinchLastDist = dist; return; }
+      const rect = stageContainerEl.getBoundingClientRect();
+      const mid = { x:(p1.x+p2.x)/2 - rect.left, y:(p1.y+p2.y)/2 - rect.top };
+      const scaleBy = dist / pinchLastDist;
+      zoomStageAtPoint(stage.scaleX()*scaleBy, mid);
+      pinchLastDist = dist;
+    }
+  });
+  stage.on('touchend', ()=>{ pinchLastDist = 0; if(mode==='pan') setStageDraggable(true); });
+}
+
+// Redessine à meilleure résolution interne quand le zoom dépasse ce que la
+// résolution actuelle affiche net (texte/traits toujours nets).
+let rerenderingQuality = false;
+async function maybeUpgradeQuality(scale){
+  const needed = scale * BASE_MULTIPLIER;
+  if(needed > currentRenderMultiplier*1.15 && !rerenderingQuality){
+    currentRenderMultiplier = needed;
+    rerenderingQuality = true;
+    hud.style.display = 'block'; hudLabel.textContent=''; hudVal.textContent='🔄 Amélioration de la netteté…';
+    for(const pn of Object.keys(pagePanels)){
+      await upgradePageQuality(parseInt(pn,10));
+    }
+    hud.style.display = 'none';
+    rerenderingQuality = false;
+  }
+}
+async function upgradePageQuality(pageNum){
   const panel = pagePanels[pageNum];
-  return { x: p.x/panel.renderScale, y: p.y/panel.renderScale };
-}
-function pointToPx(p, pageNum){
-  const panel = pagePanels[pageNum];
-  return { x: p.x*panel.renderScale, y: p.y*panel.renderScale };
-}
-
-// ---------- Chargement piloté par la page parente (module Chantiers) ----------
-// Le parent envoie : { type:'coteur-init', planData: <data URI base64>, items: <{itemsByPage, pageCalib} sauvegardé ou null>, chantierNom: <string> }
-// On renvoie au parent à chaque modification : { type:'coteur-items-update', items: {itemsByPage, pageCalib} }
-let initReceived = false;
-window.addEventListener('message', async (e)=>{
-  const msg = e.data;
-  if(!msg || msg.type !== 'coteur-init') return;
-  initReceived = true;
-  console.log('[Coteur] coteur-init reçu', {hasPlan: !!msg.planData, chantier: msg.chantierNom});
-  if(msg.chantierNom) document.getElementById('brand-sub').textContent = msg.chantierNom;
-  const saved = msg.items && typeof msg.items === 'object' ? msg.items : {};
-  // Compat : anciennes sauvegardes = itemsByPage directement (pas encore de pageCalib)
-  const looksLikeOldFormat = saved && !saved.itemsByPage && !saved.pageCalib;
-  itemsByPage = looksLikeOldFormat ? saved : (saved.itemsByPage || {});
-  pageCalib = looksLikeOldFormat ? {} : (saved.pageCalib || {});
-  // Recalcule nextId au-dessus de tout ce qui existe déjà, pour ne jamais réutiliser un id
-  let maxId = 0;
-  Object.values(itemsByPage).forEach(arr => (arr||[]).forEach(it => { if(it.id > maxId) maxId = it.id; }));
-  nextId = maxId + 1;
-
-  if(!msg.planData){
-    setEmptyState('Aucun plan pour ce chantier', 'Importe un plan depuis l\'onglet Plan pour commencer.');
-    return;
-  }
-  try{
-    console.log('[Coteur] fetch du plan…');
-    const res = await fetch(msg.planData);
-    const buf = await res.arrayBuffer();
-    console.log('[Coteur] plan récupéré,', buf.byteLength, 'octets — chargement pdf.js…');
-    pdfDoc = await pdfjsLib.getDocument({data: buf}).promise;
-    console.log('[Coteur] PDF chargé,', pdfDoc.numPages, 'page(s)');
-    document.getElementById('empty-state').style.display = 'none';
-    board.style.display = 'grid';
-    await renderAllPages();
-    setActivePage(1);
-  }catch(err){
-    console.error('[Coteur] Erreur chargement plan:', err);
-    setEmptyState('Erreur de chargement du plan', (err && err.message ? err.message+' — ' : '')+'Réessaie ci-dessous.', true);
-  }
-});
-
-function setEmptyState(title, sub, showRetry){
-  document.getElementById('empty-title').textContent = title;
-  document.getElementById('empty-sub').textContent = sub;
-  const btn = document.getElementById('empty-retry-btn');
-  if(btn) btn.style.display = showRetry ? 'inline-block' : 'none';
+  if(!panel) return;
+  const page = await pdfDoc.getPage(pageNum);
+  const scale = (DISPLAY_WIDTH * currentRenderMultiplier) / panel.nativeWidth;
+  const pv = page.getViewport({scale});
+  const off = document.createElement('canvas');
+  off.width = pv.width; off.height = pv.height;
+  await page.render({canvasContext: off.getContext('2d'), viewport: pv}).promise;
+  panel.konvaImage.image(off);
+  mainLayer.batchDraw();
 }
 
-// Prévient le parent que le coteur est prêt à recevoir le plan
-if(window.parent !== window){
-  window.parent.postMessage({type:'coteur-ready'}, '*');
-  console.log('[Coteur] coteur-ready envoyé au parent, en attente du plan…');
-}
-
-// Filet de sécurité : si rien n'est arrivé après 6s, on affiche un message clair
-// au lieu de rester bloqué indéfiniment sur "Chargement du plan…", et on relance
-// la demande au parent au cas où le tout premier postMessage se serait perdu.
-setTimeout(()=>{
-  if(!initReceived && window.parent !== window){
-    console.warn('[Coteur] Aucune réponse du parent après 6s, nouvelle tentative…');
-    setEmptyState('Ça prend plus de temps que prévu…', 'Nouvel essai en cours. Si ça persiste, réouvre l\'onglet Plan.', true);
-    window.parent.postMessage({type:'coteur-ready'}, '*');
-  }
-}, 6000);
-
-// Renvoie les mesures/cotes/notes au parent (debounce léger pour éviter de spammer pendant le tracé)
-let notifyTimer = null;
-function notifyParent(){
-  if(window.parent === window) return; // ouvert seul, hors iframe : rien à notifier
-  clearTimeout(notifyTimer);
-  notifyTimer = setTimeout(()=>{
-    window.parent.postMessage({type:'coteur-items-update', items: {itemsByPage, pageCalib}}, '*');
-  }, 500);
-}
-
-// Détermine un nombre de colonnes raisonnable pour la grille selon le nombre de pages
+// ════════════════════════════════════════════
+// CHARGEMENT DES PAGES (grille de groupes Konva)
+// ════════════════════════════════════════════
 function computeColumns(n){
   if(n<=2) return n;
   if(n<=6) return Math.ceil(n/2);
   return 4;
 }
 
-// Cherche le texte du cartouche type "Ech. 1:50" / "Echelle 1:100" / "Ech 1/50"
-// dans le contenu texte réel de la page PDF, et renvoie le ratio (ex. 50) si trouvé.
-// ════════════════════════════════════════════
-// ACCROCHAGE INTELLIGENT — extrait les vrais segments de droite du PDF
-// (via l'opérateur list de pdf.js, pas le rendu bitmap) pour pouvoir accrocher
-// précisément sur une intersection entre 2 traits du plan.
-// ════════════════════════════════════════════
-function pdfMatMul(m, ctm){
-  // m appliqué après ctm (comme un cm PDF), format [a,b,c,d,e,f]
-  return [
-    m[0]*ctm[0]+m[1]*ctm[2],             m[0]*ctm[1]+m[1]*ctm[3],
-    m[2]*ctm[0]+m[3]*ctm[2],             m[2]*ctm[1]+m[3]*ctm[3],
-    m[4]*ctm[0]+m[5]*ctm[2]+ctm[4],      m[4]*ctm[1]+m[5]*ctm[3]+ctm[5]
-  ];
-}
-function pdfMatApply(m, x, y){
-  return { x: m[0]*x + m[2]*y + m[4], y: m[1]*x + m[3]*y + m[5] };
-}
+async function renderAllPages(){
+  mainLayer.destroyChildren();
+  pagePanels = {};
+  const cols = computeColumns(pdfDoc.numPages);
+  const gap = 40;
 
-async function getPageSegments(pageNum){
-  if(pageSegmentsCache[pageNum]) return pageSegmentsCache[pageNum];
-  const segments = [];
-  try{
-    const page = await pdfDoc.getPage(pageNum);
-    const opList = await page.getOperatorList();
-    const OPS = pdfjsLib.OPS;
-    let ctmStack = [[1,0,0,1,0,0]];
-    const ctm = () => ctmStack[ctmStack.length-1];
-
-    for(let i=0; i<opList.fnArray.length; i++){
-      const fn = opList.fnArray[i];
-      const args = opList.argsArray[i];
-
-      if(fn === OPS.save){
-        ctmStack.push(ctm().slice());
-      } else if(fn === OPS.restore){
-        if(ctmStack.length > 1) ctmStack.pop();
-      } else if(fn === OPS.transform){
-        ctmStack[ctmStack.length-1] = pdfMatMul(args, ctm());
-      } else if(fn === OPS.constructPath){
-        const subOps = args[0];
-        const coords = args[1];
-        let ci = 0, startX = 0, startY = 0, prev = null;
-        const M = ctm();
-        for(let k=0; k<subOps.length; k++){
-          const op = subOps[k];
-          if(op === OPS.moveTo){
-            const x = coords[ci++], y = coords[ci++];
-            const tp = pdfMatApply(M, x, y);
-            startX = x; startY = y;
-            prev = tp;
-          } else if(op === OPS.lineTo){
-            const x = coords[ci++], y = coords[ci++];
-            const tp = pdfMatApply(M, x, y);
-            if(prev) segments.push({x1:prev.x, y1:prev.y, x2:tp.x, y2:tp.y});
-            prev = tp;
-          } else if(op === OPS.curveTo){
-            ci += 4; // ignore les 2 points de contrôle : les courbes ne sont pas accrochables
-            const x = coords[ci++], y = coords[ci++];
-            prev = pdfMatApply(M, x, y);
-          } else if(op === OPS.closePath){
-            const tp = pdfMatApply(M, startX, startY);
-            if(prev) segments.push({x1:prev.x, y1:prev.y, x2:tp.x, y2:tp.y});
-            prev = tp;
-          } else if(op === OPS.rectangle){
-            const rx=coords[ci++], ry=coords[ci++], rw=coords[ci++], rh=coords[ci++];
-            const p1=pdfMatApply(M,rx,ry), p2=pdfMatApply(M,rx+rw,ry), p3=pdfMatApply(M,rx+rw,ry+rh), p4=pdfMatApply(M,rx,ry+rh);
-            segments.push({x1:p1.x,y1:p1.y,x2:p2.x,y2:p2.y});
-            segments.push({x1:p2.x,y1:p2.y,x2:p3.x,y2:p3.y});
-            segments.push({x1:p3.x,y1:p3.y,x2:p4.x,y2:p4.y});
-            segments.push({x1:p4.x,y1:p4.y,x2:p1.x,y2:p1.y});
-            prev = p1;
-          }
-        }
-      }
-    }
-    console.log('[Coteur] Accrochage : '+segments.length+' segments extraits sur la page '+pageNum);
-  }catch(e){
-    console.warn('[Coteur] Extraction des segments (accrochage) échouée pour la page '+pageNum+':', e);
+  // 1er passage : tailles naturelles de chaque page
+  const infos = [];
+  for(let i=1;i<=pdfDoc.numPages;i++){
+    const page = await pdfDoc.getPage(i);
+    const nv = page.getViewport({scale:1});
+    const pageDisplayScale = DISPLAY_WIDTH / nv.width;
+    infos.push({ i, page, nv, pageDisplayScale, displayHeight: nv.height*pageDisplayScale });
   }
-  pageSegmentsCache[pageNum] = segments;
-  return segments;
-}
+  const rowMaxH = [];
+  infos.forEach((info, idx)=>{
+    const row = Math.floor(idx/cols);
+    rowMaxH[row] = Math.max(rowMaxH[row]||0, info.displayHeight);
+  });
+  const rowStartY = [];
+  let y = gap;
+  for(let r=0;r<rowMaxH.length;r++){ rowStartY[r]=y; y += rowMaxH[r]+gap+24; } // +24 : marge pour le libellé "Page N"
 
-function distPointToSegment(p, s){
-  const dx = s.x2-s.x1, dy = s.y2-s.y1;
-  const lenSq = dx*dx + dy*dy;
-  if(lenSq < 1e-9) return Math.hypot(p.x-s.x1, p.y-s.y1);
-  let t = ((p.x-s.x1)*dx + (p.y-s.y1)*dy) / lenSq;
-  t = Math.max(0, Math.min(1, t));
-  return Math.hypot(p.x-(s.x1+t*dx), p.y-(s.y1+t*dy));
-}
-function segmentIntersection(a, b){
-  const denom = (a.x1-a.x2)*(b.y1-b.y2) - (a.y1-a.y2)*(b.x1-b.x2);
-  if(Math.abs(denom) < 1e-9) return null; // parallèles ou confondus
-  const t = ((a.x1-b.x1)*(b.y1-b.y2) - (a.y1-b.y1)*(b.x1-b.x2)) / denom;
-  const u = -((a.x1-a.x2)*(a.y1-b.y1) - (a.y1-a.y2)*(a.x1-b.x1)) / denom;
-  const margin = 0.08; // tolère un petit dépassement (coins qui ne se touchent pas pixel-perfect)
-  if(t < -margin || t > 1+margin || u < -margin || u > 1+margin) return null;
-  return { x: a.x1 + t*(a.x2-a.x1), y: a.y1 + t*(a.y2-a.y1) };
-}
+  for(let idx=0; idx<infos.length; idx++){
+    const {i, page, nv, pageDisplayScale, displayHeight} = infos[idx];
+    const col = idx % cols, row = Math.floor(idx/cols);
+    const gx = gap + col*(DISPLAY_WIDTH+gap);
+    const gy = rowStartY[row] + 24;
 
-// Tente d'accrocher un point (en pixels canvas) sur l'intersection de 2 traits du
-// plan proche du clic. Renvoie le point accroché (en pixels canvas) ou null si rien
-// trouvé de fiable à proximité — dans ce cas on garde le point brut du clic.
-async function trySnapToIntersection(pixelPos, pageNum){
-  const panel = pagePanels[pageNum];
-  if(!panel) return null;
-  const clickPt = pxToPoint(pixelPos, pageNum); // espace PDF (points)
-  const radiusPt = 16 / panel.renderScale; // ~16px écran de tolérance, quel que soit le zoom
-  const segments = await getPageSegments(pageNum);
-  if(!segments.length) return null;
+    const scale = (DISPLAY_WIDTH * currentRenderMultiplier) / nv.width;
+    const pv = page.getViewport({scale});
+    const off = document.createElement('canvas');
+    off.width = pv.width; off.height = pv.height;
+    await page.render({canvasContext: off.getContext('2d'), viewport: pv}).promise;
 
-  const nearby = segments.filter(s => distPointToSegment(clickPt, s) <= radiusPt);
-  if(nearby.length < 2) return null;
-
-  let best = null, bestDist = Infinity;
-  for(let i=0; i<nearby.length; i++){
-    for(let j=i+1; j<nearby.length; j++){
-      const ipt = segmentIntersection(nearby[i], nearby[j]);
-      if(!ipt) continue;
-      const d = Math.hypot(ipt.x-clickPt.x, ipt.y-clickPt.y);
-      if(d < bestDist && d <= radiusPt*1.5){ bestDist = d; best = ipt; }
+    if(!pageCalib[i]){
+      const detected = await detectScaleFromPage(page);
+      if(detected) pageCalib[i] = { ratio: detected, pointsPerMeter:null, calibrationLinePt:null };
     }
+
+    const group = new Konva.Group({x: gx, y: gy});
+
+    const hitRect = new Konva.Rect({x:0, y:0, width:DISPLAY_WIDTH, height:displayHeight, fill:'#000'});
+    group.add(hitRect);
+
+    const konvaImage = new Konva.Image({image: off, x:0, y:0, width:DISPLAY_WIDTH, height:displayHeight, listening:false});
+    group.add(konvaImage);
+
+    const label = new Konva.Text({x:0, y:-20, text:'Page '+i, fontSize:11, fill:'#9ba0a6', fontFamily:'monospace', listening:false});
+    group.add(label);
+
+    const badgeW = 96, badgeH = 24;
+    const badgeGroup = new Konva.Group({x: DISPLAY_WIDTH-badgeW-4, y: displayHeight-badgeH-4});
+    const badgeBg = new Konva.Rect({width:badgeW, height:badgeH, fill:'rgba(0,0,0,.65)', stroke:'#3a3e44', strokeWidth:1, cornerRadius:5});
+    const badgeText = new Konva.Text({text:'Échelle —', fontSize:10, fill:'#9ba0a6', width:badgeW, height:badgeH, align:'center', verticalAlign:'middle', fontFamily:'sans-serif'});
+    badgeGroup.add(badgeBg); badgeGroup.add(badgeText);
+    badgeGroup.on('click tap', (e)=>{ e.cancelBubble = true; openScaleChooser(i); });
+    group.add(badgeGroup);
+
+    const itemsGroup = new Konva.Group();
+    group.add(itemsGroup);
+
+    mainLayer.add(group);
+
+    pagePanels[i] = {
+      group, itemsGroup, konvaImage, badgeText,
+      pageDisplayScale, displayWidth: DISPLAY_WIDTH, displayHeight,
+      pointsPerMeter: null, calibrationLinePt: null,
+      nativeWidth: nv.width, nativeHeight: nv.height,
+    };
+
+    applyStoredCalibForPage(i);
+    redrawPageItems(i);
+    attachPageInteraction(i, group, hitRect);
   }
-  if(!best) return null;
-  console.log('[Coteur] Accrochage réussi à '+bestDist.toFixed(2)+'pt du clic (page '+pageNum+')');
-  return pointToPx(best, pageNum); // reconverti en pixels canvas pour rester cohérent avec le reste du code
+
+  mainLayer.batchDraw();
 }
 
+// Cherche le texte du cartouche type "Ech. 1:50" / "Echelle 1:100" dans le
+// contenu texte réel de la page PDF, et renvoie le ratio (ex. 50) si trouvé.
 async function detectScaleFromPage(page){
   try{
     const content = await page.getTextContent();
     const text = content.items.map(it=>it.str).join(' ');
     const m = text.match(/Ech(?:elle)?\.?\s*1\s*[:\/]\s*(\d+(?:[.,]\d+)?)/i);
     if(m) return parseFloat(m[1].replace(',', '.'));
-  }catch(e){
-    console.warn('[Coteur] Détection auto de l\'échelle échouée pour cette page:', e);
-  }
+  }catch(e){ console.warn('[Coteur] Détection échelle échouée:', e); }
   return null;
 }
 
-async function renderAllPages(){
-  board.innerHTML = '';
-  pagePanels = {};
-  const cols = computeColumns(pdfDoc.numPages);
-  board.style.gridTemplateColumns = 'repeat('+cols+', max-content)';
-  currentRenderMultiplier = BASE_MULTIPLIER;
-
-  for(let i=1; i<=pdfDoc.numPages; i++){
-    const page = await pdfDoc.getPage(i);
-    const nv = page.getViewport({scale:1});
-    const scale = (DISPLAY_WIDTH * currentRenderMultiplier) / nv.width; // résolution interne haute
-    const pv = page.getViewport({scale});
-    const displayHeight = DISPLAY_WIDTH * (nv.height/nv.width);
-
-    const panel = document.createElement('div');
-    panel.className = 'page-panel';
-    panel.style.width = DISPLAY_WIDTH+'px';
-    panel.style.height = displayHeight+'px';
-
-    const planCv = document.createElement('canvas');
-    planCv.className = 'plan-canvas';
-    planCv.width = pv.width; planCv.height = pv.height;
-    planCv.style.width = DISPLAY_WIDTH+'px'; planCv.style.height = displayHeight+'px';
-
-    const overlayCv = document.createElement('canvas');
-    overlayCv.className = 'overlay-canvas';
-    overlayCv.width = pv.width; overlayCv.height = pv.height;
-    overlayCv.style.width = DISPLAY_WIDTH+'px'; overlayCv.style.height = displayHeight+'px';
-    overlayCv.dataset.page = i;
-    overlayCv.style.touchAction = (mode==='pan') ? 'pan-x pan-y' : 'none';
-
-    const label = document.createElement('div');
-    label.className = 'panel-page-label';
-    label.textContent = 'Page '+i;
-
-    const badge = document.createElement('div');
-    badge.className = 'panel-scale-badge';
-    badge.innerHTML = 'Échelle <b>—</b>';
-    badge.addEventListener('click', ()=>openScaleChooser(i));
-
-    panel.appendChild(planCv);
-    panel.appendChild(overlayCv);
-    panel.appendChild(label);
-    panel.appendChild(badge);
-    board.appendChild(panel);
-
-    const ctx = planCv.getContext('2d');
-    await page.render({canvasContext: ctx, viewport: pv}).promise;
-
-    // Détection automatique de l'échelle imprimée (cartouche "Ech. 1:XX"), seulement
-    // si cette page n'a pas déjà une échelle choisie manuellement au préalable.
-    if(!pageCalib[i]){
-      const detected = await detectScaleFromPage(page);
-      if(detected) pageCalib[i] = { ratio: detected, pointsPerMeter:null, calibrationLinePt:null };
-    }
-
-    pagePanels[i] = {
-      panelEl: panel, planCanvas: planCv, overlay: overlayCv, octx: overlayCv.getContext('2d'),
-      renderScale: scale, pointsPerMeter: null, calibrationLinePt: null, badgeEl: badge
-    };
-    applyStoredCalibForPage(i);
-    redrawPage(i);
-  }
-}
-
-// Réapplique la calibration propre à une page (échelle auto ou calibration manuelle
-// précédemment faite sur CETTE page). Exprimée en "par point PDF", donc valable à
-// n'importe quelle résolution de rendu.
+// ════════════════════════════════════════════
+// CALIBRATION (par page, en "par point PDF" — indépendant du zoom/résolution)
+// ════════════════════════════════════════════
 function applyStoredCalibForPage(pageNum){
   const panel = pagePanels[pageNum];
   if(!panel) return;
@@ -571,117 +425,20 @@ function applyStoredCalibForPage(pageNum){
   }
   updatePanelBadge(pageNum);
 }
-
-// ---------- Zoom (CSS) + rendu adaptatif : redessine à meilleure résolution quand
-// le zoom dépasse ce que la résolution actuelle peut afficher net. ----------
-let zoomLevel = 1;
-let rerenderingQuality = false;
-
-async function applyZoom(delta){
-  zoomLevel = Math.max(0.5, Math.min(5, zoomLevel+delta));
-  board.style.zoom = zoomLevel;
-
-  const needed = zoomLevel * BASE_MULTIPLIER;
-  if(needed > currentRenderMultiplier * 1.15 && !rerenderingQuality){
-    currentRenderMultiplier = needed;
-    await rerenderAllPagesQuality(currentRenderMultiplier);
-  }
-}
-document.getElementById('zoom-in').onclick = ()=>applyZoom(0.3);
-document.getElementById('zoom-out').onclick = ()=>applyZoom(-0.3);
-
-async function rerenderAllPagesQuality(multiplier){
-  if(!pdfDoc || rerenderingQuality) return;
-  rerenderingQuality = true;
-  hud.style.display = 'block';
-  hudLabel.textContent = '';
-  hudVal.textContent = '🔄 Amélioration de la netteté…';
-  for(let i=1; i<=pdfDoc.numPages; i++){
-    const panel = pagePanels[i];
-    if(!panel) continue;
-    const page = await pdfDoc.getPage(i);
-    const nv = page.getViewport({scale:1});
-    const scale = (DISPLAY_WIDTH * multiplier) / nv.width;
-    const pv = page.getViewport({scale});
-    panel.planCanvas.width = pv.width; panel.planCanvas.height = pv.height;
-    panel.overlay.width = pv.width; panel.overlay.height = pv.height;
-    panel.renderScale = scale;
-    const ctx = panel.planCanvas.getContext('2d');
-    await page.render({canvasContext: ctx, viewport: pv}).promise;
-    redrawPage(i);
-  }
-  hud.style.display = 'none';
-  rerenderingQuality = false;
-}
-
-// ---------- Mode switching ----------
-document.querySelectorAll('.tool').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.tool').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    mode = btn.dataset.mode;
-    pending = [];
-    hud.style.display = 'none';
-    Object.values(pagePanels).forEach(p=>{
-      p.overlay.style.touchAction = (mode==='pan') ? 'pan-x pan-y' : 'none';
-    });
-    redrawPage(currentPageNum);
-    document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
-  });
-});
-
-document.querySelectorAll('#dim-options .seg-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const group = btn.closest('.seg-group');
-    const setting = group.dataset.setting;
-    group.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    pending = [];
-    hud.style.display = 'none';
-    redrawPage(currentPageNum);
-    if(setting==='angle') dimAngleMode = btn.dataset.value;
-    else if(setting==='input') dimInputMode = btn.dataset.value;
-    else if(setting==='snap') snapEnabled = (btn.dataset.value==='on');
-  });
-});
-document.querySelector('.tool[data-mode="pan"]').classList.add('active');
-
-// ---------- Coordinate helpers ----------
-function getPos(e, overlayEl){
-  const rect = overlayEl.getBoundingClientRect();
-  const cx = (e.touches ? e.touches[0].clientX : e.clientX);
-  const cy = (e.touches ? e.touches[0].clientY : e.clientY);
-  return {
-    x: (cx - rect.left) * (overlayEl.width / rect.width),
-    y: (cy - rect.top) * (overlayEl.height / rect.height)
-  };
-}
-function dist(a,b){ return Math.hypot(b.x-a.x, b.y-a.y); }
-// pointDist : distance en "points PDF" (résolution-indépendante). Le fallback non-calibré
-// reconvertit en pixels à l'écran actuel, juste pour donner un ordre de grandeur.
-function formatReal(pointDist, pageNum){
-  const panel = pagePanels[pageNum];
-  const ppm = panel ? panel.pointsPerMeter : null;
-  if(!ppm){
-    const px = panel ? pointDist*panel.renderScale : pointDist;
-    return px.toFixed(0)+' px';
-  }
-  const meters = pointDist / ppm;
-  if(meters < 1) return (meters*100).toFixed(1)+' cm';
-  return meters.toFixed(2)+' m';
-}
 function updatePanelBadge(pageNum){
   const panel = pagePanels[pageNum];
   if(!panel) return;
   const stored = pageCalib[pageNum];
-  if(stored && stored.ratio) panel.badgeEl.innerHTML = 'Échelle <b>1:'+stored.ratio+'</b>';
-  else if(panel.pointsPerMeter) panel.badgeEl.innerHTML = 'Échelle <b>'+(panel.pointsPerMeter*panel.renderScale).toFixed(1)+' px/m</b>';
-  else panel.badgeEl.innerHTML = 'Échelle <b>—</b>';
+  let txt;
+  if(stored && stored.ratio) txt = 'Échelle 1:'+stored.ratio;
+  else if(panel.pointsPerMeter) txt = 'Échelle calibrée';
+  else txt = 'Échelle —';
+  panel.badgeText.text(txt);
+  mainLayer.batchDraw();
 }
 
 const COMMON_SCALES = [20,50,100,200,500];
 function openScaleChooser(pageNum){
-  if(!pdfDoc) return;
   openModal({
     title:'Échelle de la page '+pageNum,
     subtitle:'Indique l\'échelle imprimée sur le plan (cartouche "Ech. 1:XX") — la calibration se fait alors automatiquement, sans clic.',
@@ -708,258 +465,323 @@ function openScaleChooser(pageNum){
     }
   });
 }
-
 function setPageScaleRatio(ratio, pageNum){
   pageCalib[pageNum] = { ratio, pointsPerMeter:null, calibrationLinePt:null };
   applyStoredCalibForPage(pageNum);
-  redrawPage(pageNum);
+  redrawPageItems(pageNum);
   notifyParent();
 }
 
-// ---------- Pointer handling (délégué sur #board, une page à la fois) ----------
-let dragging = false;
-let activeOverlay = null;
+// ════════════════════════════════════════════
+// CONVERSIONS DE COORDONNÉES
+// page-local = pixels d'affichage dans le groupe Konva de la page (0..DISPLAY_WIDTH)
+// espace PDF = points natifs du PDF (scale=1), stocké et indépendant du zoom/résolution
+// ════════════════════════════════════════════
+function localToPoint(p, pageNum){
+  const panel = pagePanels[pageNum];
+  return { x: p.x/panel.pageDisplayScale, y: p.y/panel.pageDisplayScale };
+}
+function pointToLocal(p, pageNum){
+  const panel = pagePanels[pageNum];
+  return { x: p.x*panel.pageDisplayScale, y: p.y*panel.pageDisplayScale };
+}
+function dist(a,b){ return Math.hypot(b.x-a.x, b.y-a.y); }
+function formatReal(pointDist, pageNum){
+  const panel = pagePanels[pageNum];
+  const ppm = panel ? panel.pointsPerMeter : null;
+  if(!ppm){
+    const px = panel ? pointDist*panel.pageDisplayScale : pointDist;
+    return px.toFixed(0)+' px';
+  }
+  const meters = pointDist/ppm;
+  if(meters<1) return (meters*100).toFixed(1)+' cm';
+  return meters.toFixed(2)+' m';
+}
 
-// Si le mode "90°" est actif, force le 2e point sur l'axe horizontal ou vertical
-// (celui le plus proche du geste), en gardant le 1er point fixe.
+// ════════════════════════════════════════════
+// ACCROCHAGE — sur les points déjà posés (extrémités des cotes/mesures existantes),
+// plus simple et fiable que d'analyser les traits internes du PDF.
+// ════════════════════════════════════════════
+function trySnapToExistingPoint(localPt, pageNum){
+  const items = itemsByPage[pageNum]||[];
+  if(!items.length) return null;
+  const radius = 18; // pixels d'affichage, tolérance constante quel que soit le zoom
+  let best=null, bestDist=Infinity;
+  items.forEach(it=>{
+    [it.p1, it.p2].forEach(p=>{
+      if(!p) return;
+      const local = pointToLocal(p, pageNum);
+      const d = dist(local, localPt);
+      if(d<radius && d<bestDist){ bestDist=d; best=local; }
+    });
+  });
+  return best;
+}
+
+// ════════════════════════════════════════════
+// DESSIN DES ÉLÉMENTS (mesures / cotes / notes) — vraies formes Konva, pas de
+// canvas brut à redessiner à la main.
+// ════════════════════════════════════════════
+function redrawPageItems(pageNum){
+  const panel = pagePanels[pageNum];
+  if(!panel) return;
+  panel.itemsGroup.destroyChildren();
+
+  if(panel.calibrationLinePt){
+    drawLineShape(panel.itemsGroup, pointToLocal(panel.calibrationLinePt.p1,pageNum), pointToLocal(panel.calibrationLinePt.p2,pageNum), '#3ecfd6', true);
+  }
+  (itemsByPage[pageNum]||[]).forEach(it=>{
+    if(it.type==='measure'){
+      const p1=pointToLocal(it.p1,pageNum), p2=pointToLocal(it.p2,pageNum);
+      drawLineShape(panel.itemsGroup, p1, p2, 'rgba(255,255,255,0.6)', true, formatReal(it.value,pageNum));
+    } else if(it.type==='dimension'){
+      const p1=pointToLocal(it.p1,pageNum), p2=pointToLocal(it.p2,pageNum);
+      drawDimensionShape(panel.itemsGroup, p1, p2, '#7dd66a', formatReal(it.value,pageNum));
+    } else if(it.type==='note'){
+      const p1=pointToLocal(it.p1,pageNum);
+      drawNoteShape(panel.itemsGroup, p1, '#e8c547', it.id, pageNum);
+    }
+  });
+  mainLayer.batchDraw();
+}
+
+function drawLabelShape(groupParent, x, y, text, color){
+  const t = new Konva.Text({text, fontSize:12, fontFamily:'monospace', fontStyle:'600', fill:color, padding:5, listening:false});
+  t.offsetX(t.width()/2); t.offsetY(t.height()/2);
+  t.x(x); t.y(y);
+  const bg = new Konva.Rect({
+    x: x - t.width()/2, y: y - t.height()/2, width:t.width(), height:t.height(),
+    fill:'rgba(20,20,22,0.85)', stroke:color, strokeWidth:1, cornerRadius:3, listening:false
+  });
+  groupParent.add(bg); groupParent.add(t);
+}
+
+function drawLineShape(groupParent, p1, p2, color, dashed, label){
+  const line = new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:2, dash: dashed?[6,5]:undefined, listening:false });
+  groupParent.add(line);
+  [p1,p2].forEach(p=>{
+    groupParent.add(new Konva.Circle({x:p.x, y:p.y, radius:4, fill:color, listening:false}));
+  });
+  if(label) drawLabelShape(groupParent, (p1.x+p2.x)/2, (p1.y+p2.y)/2, label, color);
+}
+
+function drawDimensionShape(groupParent, p1, p2, color, valLabel){
+  const angle = Math.atan2(p2.y-p1.y, p2.x-p1.x);
+  const tick = 8;
+  [p1,p2].forEach(p=>{
+    groupParent.add(new Konva.Line({
+      points:[ p.x-Math.sin(angle)*tick, p.y+Math.cos(angle)*tick, p.x+Math.sin(angle)*tick, p.y-Math.cos(angle)*tick ],
+      stroke:color, strokeWidth:1.5, listening:false
+    }));
+  });
+  groupParent.add(new Konva.Line({ points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:1.5, listening:false }));
+  [p1,p2].forEach(p=>groupParent.add(new Konva.Circle({x:p.x,y:p.y,radius:3,fill:color,listening:false})));
+  drawLabelShape(groupParent, (p1.x+p2.x)/2, (p1.y+p2.y)/2, valLabel, color);
+}
+
+function drawNoteShape(groupParent, p, color, id, pageNum){
+  const idx = (itemsByPage[pageNum]||[]).filter(i=>i.type==='note').findIndex(i=>i.id===id)+1;
+  groupParent.add(new Konva.Circle({x:p.x, y:p.y, radius:11, fill:color, listening:false}));
+  const t = new Konva.Text({text:String(idx), fontSize:11, fontStyle:'bold', fill:'#1b1d21', fontFamily:'sans-serif', listening:false});
+  t.offsetX(t.width()/2); t.offsetY(t.height()/2);
+  t.x(p.x); t.y(p.y+1);
+  groupParent.add(t);
+}
+
+// Point/ligne "en cours de pose" (aperçu live pendant le glisser ou entre 2 taps)
+let liveShape = null;
+function clearLivePreview(){
+  if(liveShape){ liveShape.destroy(); liveShape=null; mainLayer.batchDraw(); }
+}
+function drawLivePreview(pageNum, p1, p2){
+  clearLivePreview();
+  const panel = pagePanels[pageNum];
+  const color = mode==='calibrate' ? '#3ecfd6' : (mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)');
+  liveShape = new Konva.Group();
+  liveShape.add(new Konva.Line({points:[p1.x,p1.y,p2.x,p2.y], stroke:color, strokeWidth:2, dash: mode!=='dimension'?[6,5]:undefined, listening:false}));
+  liveShape.add(new Konva.Circle({x:p2.x,y:p2.y,radius:4,fill:color,listening:false}));
+  panel.itemsGroup.add(liveShape);
+  mainLayer.batchDraw();
+}
+function drawPendingDot(pageNum, p){
+  clearLivePreview();
+  const panel = pagePanels[pageNum];
+  const color = mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)';
+  liveShape = new Konva.Circle({x:p.x, y:p.y, radius:5, fill:color, listening:false});
+  panel.itemsGroup.add(liveShape);
+  mainLayer.batchDraw();
+}
+
+// ════════════════════════════════════════════
+// INTERACTION PAR PAGE
+// ════════════════════════════════════════════
 function applyAngleSnap(p1, p2){
   if(dimAngleMode !== '90') return p2;
   const dx = Math.abs(p2.x-p1.x), dy = Math.abs(p2.y-p1.y);
   return dx >= dy ? {x:p2.x, y:p1.y} : {x:p1.x, y:p2.y};
 }
 
-function finalizeMeasure(pageNum, p1px,p2px){
-  const p1 = pxToPoint(p1px, pageNum), p2 = pxToPoint(p2px, pageNum);
-  (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'measure', p1, p2, value: dist(p1,p2)});
-  redrawPage(pageNum); renderList(); notifyParent();
+function finalizeMeasure(pageNum, p1local, p2local){
+  const p1 = localToPoint(p1local,pageNum), p2 = localToPoint(p2local,pageNum);
+  (itemsByPage[pageNum]=itemsByPage[pageNum]||[]).push({id:nextId++, type:'measure', p1, p2, value:dist(p1,p2)});
+  clearLivePreview(); redrawPageItems(pageNum); notifyParent();
 }
-function finalizeDimension(pageNum, p1px,p2px){
-  const p1 = pxToPoint(p1px, pageNum), p2 = pxToPoint(p2px, pageNum);
-  const valueDist = dist(p1,p2);
-  (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value: valueDist, label:''});
-  redrawPage(pageNum); renderList(); notifyParent();
-}
-
-function overlayFromEvent(e){
-  const t = e.target;
-  return (t && t.classList && t.classList.contains('overlay-canvas')) ? t : null;
+function finalizeDimension(pageNum, p1local, p2local){
+  const p1 = localToPoint(p1local,pageNum), p2 = localToPoint(p2local,pageNum);
+  (itemsByPage[pageNum]=itemsByPage[pageNum]||[]).push({id:nextId++, type:'dimension', p1, p2, value:dist(p1,p2), label:''});
+  clearLivePreview(); redrawPageItems(pageNum); notifyParent();
 }
 
-board.addEventListener('pointerdown', async (e)=>{
-  if(!pdfDoc || mode==='pan') return;
-  const ov = overlayFromEvent(e);
-  if(!ov) return;
-  const pageNum = parseInt(ov.dataset.page, 10);
-  if(pageNum !== currentPageNum) setActivePage(pageNum);
-  activeOverlay = ov;
-  const raw = getPos(e, ov);
+let dragging = false;
+let dragStartLocal = null;
 
-  if(mode==='note'){
-    openModal({
-      title:'Nouvelle note',
-      fields:[{name:'text', type:'textarea', placeholder:'Remarque chantier…'}],
-      onSubmit:(v)=>{
-        if(!v.text) return;
-        const p1 = pxToPoint(raw, pageNum);
-        (itemsByPage[pageNum] = itemsByPage[pageNum]||[]).push({id:nextId++, type:'note', p1, text:v.text});
-        redrawPage(pageNum); renderList(); notifyParent();
+function attachPageInteraction(pageNum, group, hitRect){
+  group.on('mousedown touchstart', (e)=>{
+    if(mode==='pan') return;
+    e.evt.preventDefault();
+    e.cancelBubble = true;
+    if(pendingPageNum !== pageNum){ pending=[]; clearLivePreview(); }
+    pendingPageNum = pageNum;
+    setActivePage(pageNum);
+    let localRaw = group.getRelativePointerPosition();
+    let local = localRaw;
+    let snapped = false;
+    if(snapEnabled && (mode==='measure'||mode==='dimension')){
+      const s = trySnapToExistingPoint(localRaw, pageNum);
+      if(s){ local = s; snapped = true; }
+    }
+
+    if(mode==='note'){
+      openModal({
+        title:'Nouvelle note',
+        fields:[{name:'text', type:'textarea', placeholder:'Remarque chantier…'}],
+        onSubmit:(v)=>{
+          if(!v.text) return;
+          const p1 = localToPoint(local, pageNum);
+          (itemsByPage[pageNum]=itemsByPage[pageNum]||[]).push({id:nextId++, type:'note', p1, text:v.text});
+          redrawPageItems(pageNum); notifyParent();
+        }
+      });
+      return;
+    }
+
+    if((mode==='measure'||mode==='dimension') && dimInputMode==='points'){
+      if(pending.length===0){
+        pending=[local];
+        drawPendingDot(pageNum, local);
+      } else {
+        const p1 = pending[0];
+        const p2 = snapped ? local : applyAngleSnap(p1, local);
+        pending=[];
+        hud.style.display='none';
+        if(mode==='measure') finalizeMeasure(pageNum, p1, p2); else finalizeDimension(pageNum, p1, p2);
       }
-    });
-    return;
-  }
+      return;
+    }
 
-  // Accrochage intelligent : tente de coller ce point sur une intersection du plan.
-  let p = raw;
-  let snapped = false;
-  if(snapEnabled && (mode==='measure' || mode==='dimension')){
-    const s = await trySnapToIntersection(raw, pageNum);
-    if(s){ p = s; snapped = true; }
-  }
+    dragging = true;
+    dragStartLocal = local;
+    pending = [local];
+  });
 
-  // Mode "2 points" : chaque tap pose un point, pas de glisser nécessaire.
-  if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){
-    if(pending.length===0){
-      pending = [p];
-      redrawPage(pageNum);
+  group.on('mousemove touchmove', (e)=>{
+    if(mode==='pan' || mode==='note') return;
+    if(pendingPageNum !== pageNum) return;
+    if(dimInputMode==='drag' && !dragging) return;
+    if(pending.length===0) return;
+    e.evt.preventDefault();
+    const raw = group.getRelativePointerPosition();
+    const p = (mode==='measure'||mode==='dimension') ? applyAngleSnap(pending[0], raw) : raw;
+    drawLivePreview(pageNum, pending[0], p);
+    hud.style.display='block';
+    if(mode==='calibrate'){
+      hudLabel.textContent='LONGUEUR (px)';
+      hudVal.textContent = dist(pending[0],p).toFixed(0)+' px';
     } else {
-      const p1 = pending[0];
-      const p2 = snapped ? p : applyAngleSnap(p1, p);
-      pending = [];
-      hud.style.display = 'none';
-      if(mode==='measure') finalizeMeasure(pageNum, p1,p2); else finalizeDimension(pageNum, p1,p2);
-    }
-    return;
-  }
-
-  dragging = true;
-  pending = [p];
-});
-
-board.addEventListener('pointermove', (e)=>{
-  if(!pdfDoc || mode==='pan' || mode==='note') return;
-  if(pending.length===0 || !activeOverlay) return;
-  if(dimInputMode==='drag' && !dragging) return;
-  const pageNum = parseInt(activeOverlay.dataset.page, 10);
-  const raw = getPos(e, activeOverlay);
-  const p = (mode==='measure'||mode==='dimension') ? applyAngleSnap(pending[0], raw) : raw;
-  liveHudPoint = p;
-  redrawPage(pageNum, pending[0], p);
-  hud.style.display = 'block';
-  if(mode==='calibrate'){
-    hudLabel.textContent = 'LONGUEUR (px)';
-    hudVal.textContent = dist(pending[0], p).toFixed(0)+' px';
-  } else {
-    hudLabel.textContent = 'DISTANCE';
-    const pt1 = pxToPoint(pending[0], pageNum), pt2 = pxToPoint(p, pageNum);
-    hudVal.textContent = formatReal(dist(pt1,pt2), pageNum);
-  }
-});
-
-board.addEventListener('pointerup', async (e)=>{
-  if(!pdfDoc || mode==='pan' || mode==='note') return;
-  if((mode==='measure' || mode==='dimension') && dimInputMode==='points'){ return; } // finalisé au pointerdown
-  if(!dragging || pending.length===0 || !activeOverlay) return;
-  dragging = false;
-  const pageNum = parseInt(activeOverlay.dataset.page, 10);
-  const raw = getPos(e, activeOverlay);
-  const p1 = pending[0];
-  hud.style.display = 'none';
-  if(dist(p1,raw) < 4){ pending=[]; redrawPage(pageNum); return; } // ignore accidental taps
-
-  let p2 = raw, snapped = false;
-  if(snapEnabled && (mode==='measure' || mode==='dimension')){
-    const s = await trySnapToIntersection(raw, pageNum);
-    if(s){ p2 = s; snapped = true; }
-  }
-  if(!snapped && (mode==='measure' || mode==='dimension')) p2 = applyAngleSnap(p1, raw);
-
-  if(mode==='calibrate'){
-    const pxDist = dist(p1,p2);
-    const pointDist = pxDist / pagePanels[pageNum].renderScale;
-    openModal({
-      title:'Calibration',
-      subtitle:'Distance réelle entre ces 2 points (en mètres) :',
-      fields:[{name:'meters', type:'number', placeholder:'ex. 4.85', step:'0.01'}],
-      onSubmit:(v)=>{
-        const m = parseFloat(v.meters);
-        if(!m || m<=0) return;
-        const panel = pagePanels[pageNum];
-        panel.pointsPerMeter = pointDist / m;
-        panel.calibrationLinePt = { p1: pxToPoint(p1,pageNum), p2: pxToPoint(p2,pageNum) };
-        pageCalib[pageNum] = { ratio:null, pointsPerMeter:panel.pointsPerMeter, calibrationLinePt:panel.calibrationLinePt };
-        updatePanelBadge(pageNum);
-        pending=[]; redrawPage(pageNum);
-        notifyParent();
-      },
-      onCancel:()=>{ pending=[]; redrawPage(pageNum); }
-    });
-  } else if(mode==='measure'){
-    pending=[]; finalizeMeasure(pageNum, p1,p2);
-  } else if(mode==='dimension'){
-    pending=[]; finalizeDimension(pageNum, p1,p2);
-  }
-});
-
-// ---------- Drawing ----------
-function redrawPage(pageNum, livePA, livePB){
-  const panel = pagePanels[pageNum];
-  if(!panel) return;
-  const octx = panel.octx;
-  octx.clearRect(0,0,panel.overlay.width, panel.overlay.height);
-
-  if(panel.calibrationLinePt){
-    const p1 = pointToPx(panel.calibrationLinePt.p1, pageNum), p2 = pointToPx(panel.calibrationLinePt.p2, pageNum);
-    drawLine(octx, p1, p2, '#3ecfd6', true);
-  }
-
-  (itemsByPage[pageNum]||[]).forEach(it=>{
-    if(it.type==='measure'){
-      const p1 = pointToPx(it.p1, pageNum), p2 = pointToPx(it.p2, pageNum);
-      drawLine(octx, p1, p2, 'rgba(255,255,255,0.5)', true, formatReal(it.value, pageNum));
-    } else if(it.type==='dimension'){
-      const p1 = pointToPx(it.p1, pageNum), p2 = pointToPx(it.p2, pageNum);
-      drawDimension(octx, p1, p2, '#7dd66a', formatReal(it.value, pageNum), it.label);
-    } else if(it.type==='note'){
-      const p1 = pointToPx(it.p1, pageNum);
-      drawNote(octx, p1, '#e8c547', it.id, pageNum);
+      hudLabel.textContent='DISTANCE';
+      hudVal.textContent = formatReal(dist(localToPoint(pending[0],pageNum), localToPoint(p,pageNum)), pageNum);
     }
   });
 
-  if(livePA && livePB){
-    const color = mode==='calibrate' ? '#3ecfd6' : (mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)');
-    drawLine(octx, livePA, livePB, color, mode!=='dimension');
-  } else if(pending.length===1 && dimInputMode==='points' && (mode==='measure'||mode==='dimension') && pageNum===currentPageNum){
-    const color = mode==='dimension' ? '#7dd66a' : 'rgba(255,106,26,0.9)';
-    octx.save();
-    octx.fillStyle = color;
-    octx.beginPath(); octx.arc(pending[0].x, pending[0].y, 5, 0, Math.PI*2); octx.fill();
-    octx.restore();
-  }
-}
+  group.on('mouseup touchend', (e)=>{
+    if(mode==='pan' || mode==='note') return;
+    if((mode==='measure'||mode==='dimension') && dimInputMode==='points') return;
+    if(!dragging || pending.length===0) return;
+    dragging = false;
+    hud.style.display='none';
+    const raw = group.getRelativePointerPosition();
+    const p1 = pending[0];
+    pending = [];
+    if(dist(p1,raw) < 4){ clearLivePreview(); return; }
 
-function drawLine(octx, p1,p2,color,dashed,label){
-  octx.save();
-  octx.strokeStyle = color; octx.lineWidth = 2;
-  if(dashed) octx.setLineDash([6,5]);
-  octx.beginPath(); octx.moveTo(p1.x,p1.y); octx.lineTo(p2.x,p2.y); octx.stroke();
-  octx.setLineDash([]);
-  [p1,p2].forEach(p=>{
-    octx.beginPath(); octx.arc(p.x,p.y,4,0,Math.PI*2); octx.fillStyle=color; octx.fill();
+    let p2 = raw, snapped = false;
+    if(snapEnabled && (mode==='measure'||mode==='dimension')){
+      const s = trySnapToExistingPoint(raw, pageNum);
+      if(s){ p2 = s; snapped = true; }
+    }
+    if(!snapped && (mode==='measure'||mode==='dimension')) p2 = applyAngleSnap(p1, raw);
+
+    if(mode==='calibrate'){
+      const pxDist = dist(p1,p2); // en pixels page-local (affichage)
+      const pointDist = pxDist / pagePanels[pageNum].pageDisplayScale;
+      openModal({
+        title:'Calibration',
+        subtitle:'Distance réelle entre ces 2 points (en mètres) :',
+        fields:[{name:'meters', type:'number', placeholder:'ex. 4.85', step:'0.01'}],
+        onSubmit:(v)=>{
+          const m = parseFloat(v.meters);
+          if(!m || m<=0) return;
+          const panel = pagePanels[pageNum];
+          panel.pointsPerMeter = pointDist/m;
+          panel.calibrationLinePt = { p1: localToPoint(p1,pageNum), p2: localToPoint(p2,pageNum) };
+          pageCalib[pageNum] = { ratio:null, pointsPerMeter:panel.pointsPerMeter, calibrationLinePt:panel.calibrationLinePt };
+          updatePanelBadge(pageNum);
+          clearLivePreview(); redrawPageItems(pageNum);
+          notifyParent();
+        },
+        onCancel:()=>{ clearLivePreview(); }
+      });
+    } else if(mode==='measure'){
+      finalizeMeasure(pageNum, p1, p2);
+    } else if(mode==='dimension'){
+      finalizeDimension(pageNum, p1, p2);
+    }
   });
-  if(label){
-    const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
-    drawLabel(octx, mx,my,label,color);
-  }
-  octx.restore();
 }
 
-function drawDimension(octx, p1,p2,color,valLabel,textLabel){
-  octx.save();
-  octx.strokeStyle = color; octx.fillStyle = color; octx.lineWidth = 1.5;
-  const angle = Math.atan2(p2.y-p1.y, p2.x-p1.x);
-  const tick = 8;
-  [p1,p2].forEach(p=>{
-    octx.beginPath();
-    octx.moveTo(p.x - Math.sin(angle)*tick, p.y + Math.cos(angle)*tick);
-    octx.lineTo(p.x + Math.sin(angle)*tick, p.y - Math.cos(angle)*tick);
-    octx.stroke();
+// ════════════════════════════════════════════
+// BARRE D'OUTILS
+// ════════════════════════════════════════════
+document.querySelectorAll('.tool').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tool').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    mode = btn.dataset.mode;
+    pending = []; pendingPageNum = null; dragging = false;
+    hud.style.display='none';
+    clearLivePreview();
+    if(stage) setStageDraggable(mode==='pan');
+    document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
   });
-  octx.beginPath(); octx.moveTo(p1.x,p1.y); octx.lineTo(p2.x,p2.y); octx.stroke();
-  [p1,p2].forEach(p=>{ octx.beginPath(); octx.arc(p.x,p.y,3,0,Math.PI*2); octx.fill(); });
-  const mx=(p1.x+p2.x)/2, my=(p1.y+p2.y)/2;
-  drawLabel(octx, mx,my, textLabel ? (textLabel+' · '+valLabel) : valLabel, color);
-  octx.restore();
-}
+});
+document.querySelector('.tool[data-mode="pan"]').classList.add('active');
 
-function drawNote(octx, p, color, id, pageNum){
-  octx.save();
-  octx.fillStyle = color;
-  octx.beginPath(); octx.arc(p.x,p.y,10,0,Math.PI*2); octx.fill();
-  octx.fillStyle = '#1b1d21'; octx.font = 'bold 11px sans-serif';
-  octx.textAlign='center'; octx.textBaseline='middle';
-  octx.fillText(String((itemsByPage[pageNum]||[]).filter(i=>i.type==='note').findIndex(i=>i.id===id)+1), p.x, p.y+1);
-  octx.restore();
-}
+document.querySelectorAll('#dim-options .seg-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.closest('.seg-group');
+    const setting = group.dataset.setting;
+    group.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    pending=[]; pendingPageNum=null; hud.style.display='none'; clearLivePreview();
+    if(setting==='angle') dimAngleMode = btn.dataset.value;
+    else if(setting==='input') dimInputMode = btn.dataset.value;
+    else if(setting==='snap') snapEnabled = (btn.dataset.value==='on');
+  });
+});
 
-function drawLabel(octx, x,y,text,color){
-  octx.font = '600 12px ui-monospace, monospace';
-  const w = octx.measureText(text).width + 12;
-  octx.fillStyle = 'rgba(20,20,22,0.85)';
-  octx.fillRect(x-w/2, y-10, w, 20);
-  octx.strokeStyle = color; octx.lineWidth=1;
-  octx.strokeRect(x-w/2, y-10, w, 20);
-  octx.fillStyle = color;
-  octx.textAlign='center'; octx.textBaseline='middle';
-  octx.fillText(text, x, y+1);
-}
-
-// ---------- List panel ----------
-// La liste d'éléments et les boutons Annuler/Effacer/Exporter ont été retirés
-// (barre du bas supprimée). renderList() reste en stub vide pour ne pas casser
-// les appels existants ailleurs dans le code.
-function renderList(){}
-
-// ---------- Modal ----------
+// ════════════════════════════════════════════
+// MODAL GÉNÉRIQUE
+// ════════════════════════════════════════════
 function openModal({title, subtitle, fields, onSubmit, onCancel, okText}){
   const overlayEl = document.getElementById('modal-overlay');
   const box = document.getElementById('modal-box');
@@ -970,29 +792,97 @@ function openModal({title, subtitle, fields, onSubmit, onCancel, okText}){
     else if(f.type==='select') html += '<select name="'+f.name+'" autofocus>'+f.options.map(o=>'<option value="'+o.value+'"'+(o.selected?' selected':'')+'>'+o.label+'</option>').join('')+'</select>';
     else html += '<input name="'+f.name+'" type="'+f.type+'" step="'+(f.step||'any')+'" placeholder="'+(f.placeholder||'')+'" autofocus>';
   });
-  html += '<div class="row"><button id="modal-cancel">Annuler</button><button id="modal-ok">'+(okText||'Valider')+'</button></div>';
+  html += '<div class="row"><button id="modal-cancel" style="background:var(--panel-2);color:var(--text-dim);">Annuler</button><button id="modal-ok" style="background:var(--orange);color:#1a1204;font-weight:700;">'+(okText||'Valider')+'</button></div>';
   box.innerHTML = html;
-  overlayEl.style.display = 'flex';
-  const firstInput = box.querySelector('input,textarea,select');
-  if(firstInput) setTimeout(()=>firstInput.focus(), 50);
+  overlayEl.classList.add('open');
 
-  function close(){ overlayEl.style.display='none'; }
-  box.querySelector('#modal-cancel').onclick = ()=>{ close(); if(onCancel) onCancel(); };
-  box.querySelector('#modal-ok').onclick = ()=>{
-    const values = {};
-    fields.forEach(f=>{ values[f.name] = box.querySelector('[name="'+f.name+'"]').value; });
-    close();
-    onSubmit(values);
-  };
-  if(firstInput){
-    firstInput.addEventListener('keydown', (e)=>{
-      if(e.key==='Enter' && f_type_ok()) box.querySelector('#modal-ok').click();
-    });
+  const firstInput = box.querySelector('input,textarea,select');
+  if(firstInput){ setTimeout(()=>firstInput.focus(), 50); }
+
+  function collect(){
+    const v = {};
+    fields.forEach(f=>{ v[f.name] = box.querySelector('[name="'+f.name+'"]').value; });
+    return v;
   }
-  function f_type_ok(){ return fields.length<=1 && fields[0] && fields[0].type!=='textarea'; }
+  function submit(){
+    closeModal();
+    if(onSubmit) onSubmit(collect());
+  }
+  box.querySelector('#modal-ok').onclick = submit;
+  box.querySelector('#modal-cancel').onclick = ()=>{ closeModal(); if(onCancel) onCancel(); };
+  if(firstInput && fields.length===1 && fields[0].type!=='textarea'){
+    firstInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') submit(); });
+  }
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('open'); }
+
+// ════════════════════════════════════════════
+// PONT AVEC LA PAGE PARENTE (module Chantiers)
+// ════════════════════════════════════════════
+let initReceived = false;
+window.addEventListener('message', async (e)=>{
+  const msg = e.data;
+  if(!msg || msg.type !== 'coteur-init') return;
+  initReceived = true;
+  console.log('[Coteur] coteur-init reçu', {hasPlan: !!msg.planData, chantier: msg.chantierNom});
+  if(msg.chantierNom) document.getElementById('brand-sub').textContent = msg.chantierNom;
+  const saved = msg.items && typeof msg.items === 'object' ? msg.items : {};
+  const looksOld = saved && !saved.itemsByPage && !saved.pageCalib;
+  itemsByPage = looksOld ? saved : (saved.itemsByPage || {});
+  pageCalib = looksOld ? {} : (saved.pageCalib || {});
+  let maxId = 0;
+  Object.values(itemsByPage).forEach(arr => (arr||[]).forEach(it => { if(it.id>maxId) maxId=it.id; }));
+  nextId = maxId+1;
+
+  if(!msg.planData){
+    setEmptyState('Aucun plan pour ce chantier', 'Importe un plan depuis l\'onglet Plan pour commencer.');
+    return;
+  }
+  try{
+    console.log('[Coteur] fetch du plan…');
+    const res = await fetch(msg.planData);
+    const buf = await res.arrayBuffer();
+    console.log('[Coteur] plan récupéré,', buf.byteLength, 'octets — chargement pdf.js…');
+    pdfDoc = await pdfjsLib.getDocument({data:buf}).promise;
+    console.log('[Coteur] PDF chargé,', pdfDoc.numPages, 'page(s)');
+    document.getElementById('empty-state').style.display = 'none';
+    if(!stage) initStage();
+    await renderAllPages();
+    setActivePage(1);
+  }catch(err){
+    console.error('[Coteur] Erreur chargement plan:', err);
+    setEmptyState('Erreur de chargement du plan', (err && err.message?err.message+' — ':'')+'Réessaie ci-dessous.', true);
+  }
+});
+
+function setEmptyState(title, sub, showRetry){
+  document.getElementById('empty-state').style.display = 'flex';
+  document.getElementById('empty-title').textContent = title;
+  document.getElementById('empty-sub').textContent = sub;
+  const btn = document.getElementById('empty-retry-btn');
+  if(btn) btn.style.display = showRetry ? 'inline-block' : 'none';
 }
 
-window.addEventListener('resize', ()=>{ if(pdfDoc) renderAllPages().then(()=>redrawPage(currentPageNum)); });
+if(window.parent !== window){
+  window.parent.postMessage({type:'coteur-ready'}, '*');
+  console.log('[Coteur] coteur-ready envoyé au parent, en attente du plan…');
+}
+setTimeout(()=>{
+  if(!initReceived && window.parent !== window){
+    console.warn('[Coteur] Aucune réponse du parent après 6s, nouvelle tentative…');
+    setEmptyState('Ça prend plus de temps que prévu…', 'Nouvel essai en cours. Si ça persiste, réouvre l\'onglet Plan.', true);
+    window.parent.postMessage({type:'coteur-ready'}, '*');
+  }
+}, 6000);
+
+let notifyTimer = null;
+function notifyParent(){
+  if(window.parent === window) return;
+  clearTimeout(notifyTimer);
+  notifyTimer = setTimeout(()=>{
+    window.parent.postMessage({type:'coteur-items-update', items:{itemsByPage, pageCalib}}, '*');
+  }, 500);
+}
 </script>
 </body>
 </html>
