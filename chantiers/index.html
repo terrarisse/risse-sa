@@ -891,7 +891,7 @@ function renderPlanList(){
             <div class="plan-list-name">${esc(p.name)}</div>
             <div class="plan-list-meta">${esc(p.size||'')}${p.measures ? ' · coté' : ''}</div>
           </div>
-          <button class="plan-list-del" onclick="event.stopPropagation();deletePlan('${p.id}')" title="Supprimer">🗑</button>
+          <button class="plan-list-del" onclick="deletePlanClick(event,'${p.id}')" title="Supprimer">🗑</button>
           <span class="plan-list-arrow">›</span>
         </div>
       `).join('')}
@@ -901,22 +901,38 @@ function renderPlanList(){
   updatePlanFullscreenState();
 }
 
+function deletePlanClick(e, planId){
+  if(e) e.stopPropagation();
+  deletePlan(planId);
+}
 function deletePlan(planId){
-  if(!confirm('Supprimer ce plan et ses cotes ?')) return;
-  const data = [...load()];
-  const idx = data.findIndex(x=>x.id===currentDetailId);
-  if(idx===-1) return;
-  const target = getPlansOf(data[idx]).find(p=>p.id===planId);
-  const plans = getPlansOf(data[idx]).filter(p=>p.id!==planId);
-  data[idx] = {...data[idx], plans, plan: undefined, planMeasures: undefined}; // nettoie aussi l'ancien format legacy
-  save(data);
-  renderPlanList();
-  renderList();
-  showToast('🗑 Plan supprimé');
-  // Nettoyage du fichier dans IndexedDB (best-effort, n'empêche pas la suppression si ça échoue)
-  if(target && target.pdfKey){
-    delete blobUrlCache[target.pdfKey];
-    deletePdfBlob(target.pdfKey).catch(e=>console.warn('[Chantiers] Suppression IndexedDB échouée:', e));
+  console.log('🔎 [deletePlan] appelé avec planId=', planId, 'currentDetailId=', currentDetailId);
+  if(!confirm('Supprimer ce plan et ses cotes ?')) { console.log('🔎 [deletePlan] annulé par l\'utilisateur'); return; }
+  try{
+    const data = [...load()];
+    const idx = data.findIndex(x=>x.id===currentDetailId);
+    if(idx===-1){
+      console.error('🔎 [deletePlan] chantier introuvable pour currentDetailId=', currentDetailId);
+      showToast('❌ Chantier introuvable — suppression annulée', 6000);
+      return;
+    }
+    const target = getPlansOf(data[idx]).find(p=>p.id===planId);
+    if(!target) console.warn('🔎 [deletePlan] plan introuvable dans la liste pour planId=', planId, 'plans dispos:', getPlansOf(data[idx]).map(p=>p.id));
+    const plans = getPlansOf(data[idx]).filter(p=>p.id!==planId);
+    data[idx] = {...data[idx], plans, plan: undefined, planMeasures: undefined}; // nettoie aussi l'ancien format legacy
+    const ok = save(data);
+    if(!ok){ console.error('🔎 [deletePlan] save() a échoué'); return; }
+    console.log('🔎 [deletePlan] plan retiré, il en reste', plans.length);
+    renderPlanList();
+    renderList();
+    showToast('🗑 Plan supprimé');
+    if(target && target.pdfKey){
+      delete blobUrlCache[target.pdfKey];
+      deletePdfBlob(target.pdfKey).catch(e=>console.warn('[Chantiers] Suppression IndexedDB échouée:', e));
+    }
+  }catch(e){
+    console.error('🔎 [deletePlan] Erreur inattendue:', e);
+    showToast('❌ Erreur : '+e.message, 6000);
   }
 }
 
@@ -1321,6 +1337,7 @@ window.handleDetFileUpload   = handleDetFileUpload;
 window.handleReplacePlanFile = handleReplacePlanFile;
 window.openPlanCoteur        = openPlanCoteur;
 window.deletePlan            = deletePlan;
+window.deletePlanClick        = deletePlanClick;
 window.initCoteurFrame       = initCoteurFrame;
 window.openCalculatrice      = openCalculatrice;
 window.closeCalculatrice     = closeCalculatrice;
