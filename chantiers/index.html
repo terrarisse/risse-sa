@@ -507,20 +507,44 @@ function save(d) {
     showToast('❌ Sauvegarde locale échouée : '+e.name+' — '+e.message, 8000);
     return false;
   }
-  // 2. Firestore (async, pas bloquant)
+  // 2. Firestore (async, pas bloquant) — jamais laissé planter l'appelant :
+  // Firestore refuse les valeurs `undefined` (contrairement à localStorage), donc
+  // on nettoie profondément avant d'envoyer, et on encapsule setDoc() lui-même
+  // dans un try/catch (il peut lever une exception SYNCHRONE avant même de
+  // renvoyer une promesse, ce que .catch() seul ne rattrape pas).
   if (auth.currentUser) {
-    const issue = findNestedArrayIssue(d, 'items');
-    if (issue) {
-      console.warn('🔎 [Diagnostic] Structure suspecte pour Firestore, trouvée à :', issue);
-      showToast('🔎 Diagnostic : '+issue, 6000);
+    try{
+      const issue = findNestedArrayIssue(d, 'items');
+      if (issue) {
+        console.warn('🔎 [Diagnostic] Structure suspecte pour Firestore, trouvée à :', issue);
+        showToast('🔎 Diagnostic : '+issue, 6000);
+      }
+      const cleanD = stripUndefinedDeep(d);
+      setDoc(doc(db, 'chantiers', 'data'), { items: cleanD, updatedAt: Date.now() })
+        .catch(e => {
+          console.warn('Firestore save error:', e);
+          if (!issue) showToast('⚠️ Sync Firestore échouée : '+e.message, 6000);
+        });
+    }catch(e){
+      console.error('❌ setDoc() a levé une exception synchrone:', e);
+      showToast('⚠️ Sync Firestore échouée : '+e.message, 6000);
     }
-    setDoc(doc(db, 'chantiers', 'data'), { items: d, updatedAt: Date.now() })
-      .catch(e => {
-        console.warn('Firestore save error:', e);
-        if (!issue) showToast('⚠️ Sync Firestore échouée : '+e.message, 6000);
-      });
   }
   return true;
+}
+
+// Retire récursivement toutes les valeurs `undefined` d'un objet/tableau —
+// Firestore les refuse catégoriquement (contrairement à localStorage/JSON).
+function stripUndefinedDeep(value){
+  if (Array.isArray(value)) return value.map(stripUndefinedDeep);
+  if (value && typeof value === 'object' && !(value instanceof Date)) {
+    const out = {};
+    Object.keys(value).forEach(k=>{
+      if (value[k] !== undefined) out[k] = stripUndefinedDeep(value[k]);
+    });
+    return out;
+  }
+  return value;
 }
 
 // Repère un tableau qui contient directement un autre tableau (interdit par Firestore),
@@ -919,7 +943,9 @@ function deletePlan(planId){
     const target = getPlansOf(data[idx]).find(p=>p.id===planId);
     if(!target) console.warn('🔎 [deletePlan] plan introuvable dans la liste pour planId=', planId, 'plans dispos:', getPlansOf(data[idx]).map(p=>p.id));
     const plans = getPlansOf(data[idx]).filter(p=>p.id!==planId);
-    data[idx] = {...data[idx], plans, plan: undefined, planMeasures: undefined}; // nettoie aussi l'ancien format legacy
+    data[idx] = {...data[idx], plans};
+    delete data[idx].plan;           // nettoie aussi l'ancien format legacy
+    delete data[idx].planMeasures;
     const ok = save(data);
     if(!ok){ console.error('🔎 [deletePlan] save() a échoué'); return; }
     console.log('🔎 [deletePlan] plan retiré, il en reste', plans.length);
