@@ -514,12 +514,22 @@ function save(d) {
   // renvoyer une promesse, ce que .catch() seul ne rattrape pas).
   if (auth.currentUser) {
     try{
-      const issue = findNestedArrayIssue(d, 'items');
+      // Plans et devis restent 100% locaux (fichiers dans IndexedDB, propres à
+      // cet appareil) — inutile et risqué de les envoyer sur Firestore (trop
+      // volumineux, et un autre appareil ne pourrait de toute façon pas ouvrir
+      // les fichiers qu'il n'a pas). On ne synchronise que les infos du chantier.
+      const forFirestore = d.map(c=>{
+        const copy = {...c};
+        delete copy.plans; delete copy.pdf;
+        delete copy.plan; delete copy.planMeasures; // ancien format legacy
+        return copy;
+      });
+      const issue = findNestedArrayIssue(forFirestore, 'items');
       if (issue) {
         console.warn('🔎 [Diagnostic] Structure suspecte pour Firestore, trouvée à :', issue);
         showToast('🔎 Diagnostic : '+issue, 6000);
       }
-      const cleanD = stripUndefinedDeep(d);
+      const cleanD = stripUndefinedDeep(forFirestore);
       setDoc(doc(db, 'chantiers', 'data'), { items: cleanD, updatedAt: Date.now() })
         .catch(e => {
           console.warn('Firestore save error:', e);
@@ -569,10 +579,27 @@ async function syncFromFirestore() {
   try {
     const snap = await getDoc(doc(db, 'chantiers', 'data'));
     if (snap.exists()) {
-      const items = snap.data().items || [];
-      localStorage.setItem(KEY, JSON.stringify(items));
+      const remoteItems = snap.data().items || [];
+      const localItems = load(); // ce qu'on a déjà sur CET appareil (plans/devis inclus)
+      const localById = {};
+      localItems.forEach(c => { localById[c.id] = c; });
+
+      // Fusion : les infos du chantier viennent du cloud, mais plans/devis restent
+      // ceux déjà présents localement — ils ne sont jamais synchronisés (fichiers
+      // trop volumineux pour Firestore, stockés uniquement dans IndexedDB de
+      // cet appareil), donc le cloud n'en a de toute façon jamais connaissance.
+      const merged = remoteItems.map(remote => {
+        const localMatch = localById[remote.id];
+        return {
+          ...remote,
+          plans: (localMatch && localMatch.plans) || [],
+          pdf: (localMatch && localMatch.pdf) || null,
+        };
+      });
+
+      localStorage.setItem(KEY, JSON.stringify(merged));
       // Sync liste simple aussi
-      const simple = items.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
+      const simple = merged.filter(c=>c.statut==='actif'||!c.statut).map(c=>c.nom);
       localStorage.setItem(KEY_SIMPLE, JSON.stringify(simple));
     }
   } catch(e) {
