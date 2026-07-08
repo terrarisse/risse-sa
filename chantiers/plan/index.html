@@ -141,12 +141,12 @@
 
   <div id="toolbar">
     <button class="tool" data-mode="pan" data-color="default"><span class="dot"></span>Déplacer</button>
-    <button class="tool" data-mode="calibrate" data-color="cyan"><span class="dot"></span>Calibrer</button>
-    <button class="tool" data-mode="measure" data-color="default"><span class="dot"></span>Mesurer</button>
     <button class="tool" data-mode="dimension" data-color="green"><span class="dot"></span>Coter</button>
     <button class="tool" data-mode="note" data-color="yellow"><span class="dot"></span>Note</button>
     <button class="tool" data-mode="delete" data-color="red"><span class="dot"></span>Supprimer</button>
+    <button class="tool" data-mode="measure" data-color="default"><span class="dot"></span>Mesurer</button>
     <button class="tool" data-mode="organize" data-color="purple"><span class="dot"></span>Organiser</button>
+    <button class="tool" data-mode="calibrate" data-color="cyan"><span class="dot"></span>Calibrer</button>
   </div>
 
   <div id="organize-bar">
@@ -252,6 +252,7 @@ function initStage(){
   mainLayer = new Konva.Layer();
   stage.add(mainLayer);
   setupPinchZoom();
+  setupOrganizeBackgroundPan();
   window.addEventListener('resize', ()=>{
     stage.width(stageContainerEl.clientWidth);
     stage.height(stageContainerEl.clientHeight);
@@ -260,6 +261,29 @@ function initStage(){
 
 function setStageDraggable(on){
   stage.draggable(on);
+}
+
+// En mode Organiser, le tableau (stage) n'est JAMAIS draggable — pour éviter
+// tout conflit avec le glisser individuel des pages (c'était la cause de la
+// "duplication" visuelle). Le pan du fond vide est donc géré ici, à la main,
+// et seulement si le tap démarre bien sur le fond (pas sur une page).
+let bgPanFrom = null;
+function setupOrganizeBackgroundPan(){
+  stage.on('mousedown touchstart', (e)=>{
+    if(mode!=='organize') return;
+    if(e.target !== stage) return; // le tap est sur une page → sa propre logique de drag prend le relais
+    const pos = stage.getPointerPosition();
+    if(!pos) return;
+    bgPanFrom = { x: pos.x - stage.x(), y: pos.y - stage.y() };
+  });
+  stage.on('mousemove touchmove', (e)=>{
+    if(mode!=='organize' || !bgPanFrom) return;
+    const pos = stage.getPointerPosition();
+    if(!pos) return;
+    stage.position({ x: pos.x - bgPanFrom.x, y: pos.y - bgPanFrom.y });
+    stage.batchDraw();
+  });
+  stage.on('mouseup touchend', ()=>{ bgPanFrom = null; });
 }
 
 // Zoom autour d'un point donné (coordonnées écran, relatives au stage), sans dérive.
@@ -1161,7 +1185,6 @@ function attachPageInteraction(pageNum, group, hitRect){
   group.on('dragstart', (e)=>{
     if(mode!=='organize') return;
     e.cancelBubble = true;
-    stage.draggable(false); // évite que le tableau bouge en même temps que la page qu'on glisse
     onPageDragStart(pageNum);
   });
   group.on('dragmove', (e)=>{ if(mode==='organize'){ e.cancelBubble=true; onPageDragMove(pageNum); } });
@@ -1169,7 +1192,6 @@ function attachPageInteraction(pageNum, group, hitRect){
     if(mode!=='organize') return;
     e.cancelBubble = true;
     onPageDragEnd(pageNum);
-    stage.draggable(true); // réactive le pan du tableau une fois le glisser terminé
   });
 
   group.on('mousedown touchstart', async (e)=>{
@@ -1333,7 +1355,7 @@ document.querySelectorAll('.tool').forEach(btn=>{
       drawPendingDot(pendingPageNum, pending[0]);
     }
 
-    if(stage) setStageDraggable(mode==='pan' || mode==='organize');
+    if(stage) setStageDraggable(mode==='pan');
     setOrganizeMode(mode==='organize');
     document.getElementById('dim-options').style.display = (mode==='measure'||mode==='dimension') ? 'flex' : 'none';
   });
