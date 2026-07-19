@@ -4233,7 +4233,7 @@ function renderHistoriqueInline() {
 
     const fournitCat = (r.fournitures_catalogue||[]).filter(f=>f.qty&&parseFloat(f.qty)>0);
     const fournitRows = fournitCat.length > 0
-      ? fournitCat.map(f => infoRow(f.subCat ? f.subCat + ' ' + f.nom : f.nom, `${f.qty} ${f.unit}`)).join('')
+      ? fournitCat.map(f => infoRow(f.nom || f.cat, `${f.qty} ${f.unit}`)).join('')
       : null;
 
     const evacItems = (r.evacuations||[]);
@@ -4259,11 +4259,11 @@ function renderHistoriqueInline() {
         <span class="rapport-chevron">›</span>
       </div>
       <div class="rapport-card-chips collapsed" id="rchips-${r.id}">
-        ${nEmp>0 ? `<span class="rc-chip blue">👷 ${nEmp} emp.</span>` : ''}
-        ${nLoc>0 ? `<span class="rc-chip blue">🔧 ${nLoc} engin(s)</span>` : ''}
-        ${(r.metres||[]).length>0 ? `<span class="rc-chip green">📐 ${r.metres.length} métré(s)</span>` : ''}
-        ${nFournit>0 ? `<span class="rc-chip green">📦 ${nFournit} fournit.</span>` : ''}
-        ${nEvac>0 ? `<span class="rc-chip green">🚮 ${nEvac} évac.</span>` : ''}
+        <span class="rc-chip${nEmp>0?' blue':''}">👷 ${nEmp} emp.</span>
+        <span class="rc-chip${nLoc>0?' blue':''}">🔧 ${nLoc} engin(s)</span>
+        <span class="rc-chip${(r.metres||[]).length>0?' green':''}">📐 ${(r.metres||[]).length} métré(s)</span>
+        <span class="rc-chip${nFournit>0?' green':''}">📦 ${nFournit} fournit.</span>
+        <span class="rc-chip${nEvac>0?' green':''}">🚮 ${nEvac} évac.</span>
         ${r.meteo ? `<span class="rc-chip">${r.meteo}</span>` : ''}
         <div style="width:100%;margin-top:6px;">
           ${section('👷','Main d\'œuvre', moRows)}
@@ -4396,7 +4396,7 @@ function rapportToTexte(r) {
 
   if (fournitCat.length > 0) {
     txt += `FOURNITURES ET FORFAITS\n`;
-    fournitCat.forEach(f => txt += `  ${f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat)} : ${f.qty} ${f.unit}\n`);
+    fournitCat.forEach(f => txt += `  ${f.nom || f.cat} : ${f.qty} ${f.unit}\n`);
     txt += '\n';
   }
 
@@ -4503,7 +4503,7 @@ function bonToHTML(r, isPreview) {
     `<tr><td style="padding:8px;white-space:pre-wrap;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
     + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} metre(s)</td></tr>`:'')
   )}
-  ${fournitCat.length>0?section('Fournitures et Forfaits',rowsHTML(fournitCat.map(f=>[f.subCat ? f.subCat + ' ' + f.nom : (f.nom||f.cat),`${f.qty} ${f.unit}`]))):''}
+  ${fournitCat.length>0?section('Fournitures et Forfaits',rowsHTML(fournitCat.map(f=>[f.nom || f.cat,`${f.qty} ${f.unit}`]))):''}
   ${evac.length>0?section('Evacuations',rowsHTML(evac.map(e=>[e.mat||'—',`${e.qte} ${e.unite}`]))):''}
   ${r.notes?section('Notes',`<tr><td style="padding:8px;">${r.notes}</td></tr>`):''}
   ${(r.signatureInterne||r.signatureClient||isPreview)?`
@@ -4825,11 +4825,11 @@ function renderHistorique() {
         <span class="rapport-chevron">›</span>
       </div>
       <div class="rapport-card-chips collapsed" id="rchips-${r.id}">
-        ${nEmp>0 ? `<span class="rc-chip blue">👷 ${nEmp} emp.</span>` : ''}
-        ${nLoc>0 ? `<span class="rc-chip blue">🔧 ${nLoc} engin(s)</span>` : ''}
-        ${(r.metres||[]).length>0 ? `<span class="rc-chip green">📐 ${r.metres.length} métré(s)</span>` : ''}
-        ${nFournit>0 ? `<span class="rc-chip green">📦 ${nFournit} fournit.</span>` : ''}
-        ${nEvac>0 ? `<span class="rc-chip green">🚮 ${nEvac} évac.</span>` : ''}
+        <span class="rc-chip${nEmp>0?' blue':''}">👷 ${nEmp} emp.</span>
+        <span class="rc-chip${nLoc>0?' blue':''}">🔧 ${nLoc} engin(s)</span>
+        <span class="rc-chip${(r.metres||[]).length>0?' green':''}">📐 ${(r.metres||[]).length} métré(s)</span>
+        <span class="rc-chip${nFournit>0?' green':''}">📦 ${nFournit} fournit.</span>
+        <span class="rc-chip${nEvac>0?' green':''}">🚮 ${nEvac} évac.</span>
         ${r.meteo ? `<span class="rc-chip">${r.meteo}</span>` : ''}
         <button onclick="openEditPage('${r.id}')" style="margin-left:auto;background:var(--teal);color:white;border:none;font-family:inherit;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;">✏️ Ouvrir</button>
       </div>
