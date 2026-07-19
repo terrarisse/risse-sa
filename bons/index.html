@@ -4498,7 +4498,7 @@ function bonToHTML(r, isPreview) {
     ${r.numero ? `<span class="numero-badge">${r.numero}</span>` : (isPreview ? `<span class="numero-badge">${peekNextBonNumero()}</span>` : '')}
   </div>
   ${section('Main d\'oeuvre', moRows)}
-  ${section('Location', locRows)}
+  ${locFilled.length>0?section('Location', locRows):''}
   ${section('Travaux realises',
     `<tr><td style="padding:8px;white-space:pre-wrap;">${r.travaux||'<span style="color:#aaa;font-style:italic;">Aucune description</span>'}</td></tr>`
     + ((r.metres||[]).length>0?`<tr><td style="padding:4px 8px;color:#888;font-size:12px;">+ ${r.metres.length} metre(s)</td></tr>`:'')
