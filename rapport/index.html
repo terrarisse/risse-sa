@@ -4228,6 +4228,7 @@ function confirmDeleteDraft() {
   `;
   document.body.appendChild(overlay);
   document.getElementById('btn-confirm-del-draft').onclick = () => {
+      localStorage.removeItem('rj_edit_from');
     localStorage.removeItem(STORAGE_KEY);
     resetRapport();
     document.body.removeChild(overlay);
@@ -4290,6 +4291,29 @@ function resetRapport() {
   updateHeader();
 }
 
+function archiveToChantier(data) {
+  let ef = null; try { ef = JSON.parse(localStorage.getItem('rj_edit_from') || 'null'); } catch(e) {}
+  localStorage.removeItem('rj_edit_from');
+  const list = JSON.parse(localStorage.getItem('rv6_chantiers_v1') || '[]');
+  const nm = (data.chantier || '').trim().toLowerCase();
+  const c = list.find(x => (x.nom || '').trim().toLowerCase() === nm);
+  if (!c) return;
+  const PK = 'rv6_ch_rap_pending';
+  const q = JSON.parse(localStorage.getItem(PK) || '[]');
+  q.push({ cid: c.id, report: data });
+  localStorage.setItem(PK, JSON.stringify(q));
+  if (!_auth.currentUser) return;
+  const col = _db.collection('chantiers');
+  if (ef && ef.id && ef.cid) col.doc('rap_' + ef.cid + '_' + ef.id).delete().catch(() => {});
+  col.doc('rap_' + c.id + '_' + data.id)
+    .set({ type: 'rapport', chantierId: c.id, report: JSON.parse(JSON.stringify(data)), updatedAt: Date.now() })
+    .then(() => {
+      const k = JSON.parse(localStorage.getItem(PK) || '[]').filter(x => String(x.report.id) !== String(data.id));
+      localStorage.setItem(PK, JSON.stringify(k));
+    })
+    .catch(e => console.warn('Archive chantier:', e));
+}
+
 function finaliserRapport() {
   const data = collectData();
 
@@ -4317,6 +4341,8 @@ function finaliserRapport() {
     _db.collection('rapports').doc('data').set({ items: purged, updatedAt: now })
       .catch(e => console.warn('Firestore finaliserRapport:', e));
   }
+
+  try { archiveToChantier(data); } catch(e) { console.warn('Archive chantier:', e); }
 
   // Reset immédiat
   resetRapport();
@@ -5157,10 +5183,10 @@ function partagerPDF(r) {
   }
 }
 
-function modifierRapport(e, id) {
+function modifierRapport(e, id, obj) {
   e.stopPropagation();
   const reports = getReports();
-  const r = reports.find(rep => String(rep.id) === String(id));
+  const r = obj || reports.find(rep => String(rep.id) === String(id));
   if (!r) return;
 
   // Confirmation si brouillon en cours
@@ -5169,6 +5195,11 @@ function modifierRapport(e, id) {
     if (!confirm('Un brouillon est en cours. Le remplacer par ce rapport ?')) return;
   }
 
+  try {
+    const _cl = JSON.parse(localStorage.getItem('rv6_chantiers_v1') || '[]');
+    const _cc = _cl.find(x => (x.nom || '').trim().toLowerCase() === (r.chantier || '').trim().toLowerCase());
+    localStorage.setItem('rj_edit_from', JSON.stringify({ id: r.id, cid: _cc ? _cc.id : null }));
+  } catch(e) {}
   // Supprimer de la liste des validés
   const updated = reports.filter(rep => String(rep.id) !== String(id));
   localStorage.setItem(REPORTS_KEY, JSON.stringify(updated));
@@ -5751,6 +5782,7 @@ function initRapport() {
   buildLocationItems();
   buildMatChips();
   loadDraft();
+  try { const _er = localStorage.getItem('rj_edit_request'); if (_er) { localStorage.removeItem('rj_edit_request'); setTimeout(() => modifierRapport({ stopPropagation(){} }, null, JSON.parse(_er)), 400); } } catch(e) {}
   if (!document.getElementById('rj-date').value) setDefaultDate();
   renderEmployes();
   updateHeader();
