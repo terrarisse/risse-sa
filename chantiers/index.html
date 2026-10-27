@@ -214,6 +214,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .rap-act button{background:var(--bg);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;font-size:15px;margin-left:6px}
 .rap-det{display:none;border-top:1px solid var(--bg2);margin-top:10px;padding-top:8px;font-size:12px;color:var(--text);line-height:1.6}
 .rap-det.open{display:block}
+.rap-row.opened .rap-tx{display:none}
 .rap-det b{color:var(--text2)}
 .rap-lst{margin-top:4px}
 .rap-li{padding-left:10px;border-left:2px solid var(--bg2);margin:2px 0}
@@ -971,7 +972,7 @@ function rapRow(r,ed){
   const ev = (r.evacuations||[]).filter(e=>e.mat).map(e=>`${esc(e.mat)} ${esc(e.qte)} ${esc(e.unite)}`);
   const me = (r.metres||[]).map(m=>`${esc(m.desc)} ${esc(m.total)} ${esc(m.unit)}`);
   const tv = r.travaux||'';
-  return `<div class="rap-row"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}</div></div><div class="rap-act"><button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${LL('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`))}${LL('Location',loc)}${LL('Fournitures',fo)}${LL('Évacuations',ev)}${LL('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
+  return `<div class="rap-row"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open');this.parentNode.classList.toggle('opened')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}</div></div><div class="rap-act"><button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${LL('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`))}${LL('Location',loc)}${LL('Fournitures',fo)}${LL('Évacuations',ev)}${LL('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
 }
 async function renderRapports(){
   const cid = currentDetailId, el = document.getElementById('det-tab-rapports');
