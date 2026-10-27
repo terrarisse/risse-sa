@@ -78,7 +78,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .res-hub-sub{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;}
 .res-hub-arrow{color:rgba(255,255,255,.7);font-size:20px;}
 .res-hub-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(6,1fr);
   border-top:1px solid var(--border);
 }
 .res-hub-item{
@@ -164,7 +164,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="res-hub-header">
       <div>
         <div class="res-hub-title">📚 Ressources entreprise</div>
-        <div class="res-hub-sub">Équipe · Machines · Véhicules · Matériel · Matériaux</div>
+        <div class="res-hub-sub">Équipe · Machines · Véhicules · Matériel · Matériaux · Évacuations</div>
       </div>
       <div class="res-hub-arrow">›</div>
     </div>
@@ -193,6 +193,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         <div class="res-hub-item-icon">🪨</div>
         <div class="res-hub-item-count" id="cnt-materiaux">0</div>
         <div class="res-hub-item-label">Matériaux</div>
+      </div>
+      <div class="res-hub-item">
+        <div class="res-hub-item-icon">🚮</div>
+        <div class="res-hub-item-count" id="cnt-evacuations">0</div>
+        <div class="res-hub-item-label">Évac.</div>
       </div>
     </div>
   </a>
@@ -255,10 +260,18 @@ async function syncAllFromFirestore() {
       { fire: 'vehicules', local: 'rv6_vehicles'   },
       { fire: 'materiel',  local: 'rv6_equipment'  },
       { fire: 'materiaux', local: 'rv6_materials'  },
+      { fire: 'evacuations', local: 'rv6_evacuations' },
     ];
     const sectionPromises = sections.map(async s => {
       const snap = await db.collection('ressources').doc(s.fire).get();
       if (snap.exists) localStorage.setItem(s.local, JSON.stringify(snap.data().items || []));
+      else if (s.fire === 'evacuations') {
+        // Première fois : liste de départ (ids fixes → pas de doublon entre appareils)
+        let cur = []; try { cur = JSON.parse(localStorage.getItem(s.local) || '[]'); } catch(e) {}
+        const items = cur.length ? cur : [['evac_gravats','Gravats','m³'],['evac_deblais','Déblais terre','m³'],['evac_enrobe','Enrobé','T'],['evac_beton','Béton concassé','m³'],['evac_ferraille','Ferraille','T'],['evac_dechets','Déchets chantier','benne'],['evac_boue','Boue/sédiments','m³'],['evac_bois','Bois','m³']].map(a=>({id:a[0],nom:a[1],unite:a[2],catId:'',subCatId:'',photo:'',icon:''}));
+        localStorage.setItem(s.local, JSON.stringify(items));
+        db.collection('ressources').doc('evacuations').set({ items, updatedAt: Date.now() }).catch(e => console.warn('Seed évacuations:', e));
+      }
     });
 
     const cPromise = db.collection('chantiers').doc('data').get().then(cSnap => {
@@ -296,7 +309,7 @@ async function syncAllFromFirestore() {
 }
 
 function updateResourceCounts() {
-  const KEYS = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
+  const KEYS = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
   Object.entries(KEYS).forEach(([s,k]) => {
     try { const el = document.getElementById('cnt-'+s); if(el) el.textContent = JSON.parse(localStorage.getItem(k)||'[]').length; } catch(e) {}
   });
