@@ -1485,6 +1485,8 @@ textarea { resize: none; }
 .preview-section p { font-size: 13px; color: var(--text); line-height: 1.5; }
 .preview-empty { color: var(--text-light); font-style: italic; }
 
+.mo-gear{background:rgba(255,255,255,.15);border:none;border-radius:50%;width:38px;height:38px;font-size:18px;color:#fff;cursor:pointer;flex-shrink:0}
+.tab-item{min-width:0}
 </style>
 </head>
 <body>
@@ -1514,6 +1516,7 @@ textarea { resize: none; }
     <div class="step-dot" id="dot-2"></div>
     <div class="step-dot" id="dot-3"></div>
     <div class="step-dot" id="dot-4"></div>
+    <div class="step-dot" id="dot-6"></div>
     <div class="step-dot" id="dot-5"></div>
   </div>
 
@@ -1560,10 +1563,10 @@ textarea { resize: none; }
           <span style="color:var(--yellow);font-size:15px;font-weight:600;">h</span>
         </div>
       </div>
-      <div style="text-align:right;">
+      <div style="display:flex;align-items:center;gap:14px;"><button class="mo-gear" onclick="openMoPresets()" aria-label="Heures préréglées">⚙️</button><div style="text-align:right;">
         <div style="color:rgba(255,255,255,0.65);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Employés</div>
         <div style="color:white;font-size:28px;font-weight:700;line-height:1;" id="mo-count-global">0</div>
-      </div>
+      </div></div>
     </div>
 
     <!-- LISTE EMPLOYÉS -->
@@ -1777,7 +1780,7 @@ textarea { resize: none; }
     <div id="fournit-selection-zone" style="display:none;">
       <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
         <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1);">
-          <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Fournitures / Évacuations</span>
+          <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Fournitures</span>
         </div>
         <div id="fournit-sel-list"></div>
       </div>
@@ -1800,6 +1803,29 @@ textarea { resize: none; }
 
     <div class="nav-btns">
       <button class="btn-prev" onclick="goSection(3)">←</button>
+      <button class="btn-next" onclick="goSection(6)" style="background:var(--navy);">Suivant → Évacuations</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SECTION 6 : ÉVACUATIONS
+  ════════════════════════════════════ -->
+  <div class="section" id="sec-6">
+    <div id="evac-selection-zone" style="display:none;">
+      <div style="background:var(--navy);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow);">
+        <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.15);">
+          <span style="color:white;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Évacuations</span>
+        </div>
+        <div id="evac-sel-list"></div>
+      </div>
+    </div>
+    <div style="background:white;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;display:flex;gap:8px;align-items:center;padding:8px 10px;">
+      <input style="flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;font-family:inherit;font-size:14px;" type="text" placeholder="Rechercher une évacuation…" id="evac-search" oninput="evacSearch(this.value)">
+      <button onclick="evacClearSearch()" style="background:none;border:none;color:var(--text-muted);font-size:18px;cursor:pointer;display:none;padding:4px;" id="evac-clear">✕</button>
+    </div>
+    <div id="evac-catalogue"></div>
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goSection(4)">←</button>
       <button class="btn-next" onclick="goSection(5)" style="background:var(--navy);">Suivant → Rapport</button>
     </div>
   </div>
@@ -1876,6 +1902,10 @@ textarea { resize: none; }
     <span class="tab-icon">📦</span>
     Fournit.
   </button>
+  <button class="tab-item" onclick="goSection(6)" id="tab-6">
+    <span class="tab-icon">🚛</span>
+    Évac.
+  </button>
   <button class="tab-item" onclick="goSection(5)" id="tab-5">
     <span class="tab-icon">📂</span>
     Rapports
@@ -1893,6 +1923,25 @@ textarea { resize: none; }
       <div class="chips" style="margin-top:8px;" id="employe-presets"></div>
     </div>
     <button class="btn-sheet-confirm" onclick="confirmAddEmploye()">Ajouter ✓</button>
+  </div>
+</div>
+
+<!-- OVERLAY: HEURES PRÉRÉGLÉES -->
+<div class="overlay" id="overlay-mo-presets" onclick="closeOverlay(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Heures préréglées</div>
+    <div class="form-row">
+      <label class="lbl">Bouton 1 (en heures, ex. 4.5 = 4h30)</label>
+      <input type="number" id="mo-p1" min="0.25" max="24" step="0.25" inputmode="decimal" oninput="moPresetLabels()">
+      <div id="mo-p1-l" style="font-size:12px;color:var(--text-muted);margin-top:4px;"></div>
+    </div>
+    <div class="form-row">
+      <label class="lbl">Bouton 2 (en heures, ex. 9 = 9h00)</label>
+      <input type="number" id="mo-p2" min="0.25" max="24" step="0.25" inputmode="decimal" oninput="moPresetLabels()">
+      <div id="mo-p2-l" style="font-size:12px;color:var(--text-muted);margin-top:4px;"></div>
+    </div>
+    <button class="btn-sheet-confirm" onclick="saveMoPresets()">Enregistrer ✓</button>
   </div>
 </div>
 
@@ -2444,6 +2493,8 @@ function wireLocInlineControls(id) {
 
 function buildLocGroup(containerId, items, groupKey) {
   const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
   if (!window._locMeta) window._locMeta = {};
   items.forEach(item => {
     const row = document.createElement('div');
@@ -2693,13 +2744,17 @@ function goSection(n) {
   updateStepBar(n);
   if (n === 3) { autoGrowTravaux(); }
   if (n === 4) { buildFournitCatalogue(); }
+  if (n === 6) { buildEvacCatalogue(); }
   if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
 }
 
 function updateStepBar(n) {
-  for(let i = 0; i < 6; i++) {
+  const ORD = [0,1,2,3,4,6,5];
+  const pn = ORD.indexOf(n);
+  for(let i = 0; i < 7; i++) {
     const d = document.getElementById(`dot-${i}`);
-    if (d) d.className = 'step-dot' + (i < n ? ' done' : i === n ? ' active' : '');
+    const pi = ORD.indexOf(i);
+    if (d) d.className = 'step-dot' + (pi < pn ? ' done' : i === n ? ' active' : '');
   }
 }
 
@@ -2738,13 +2793,13 @@ function renderEmployes() {
 
     const btnDemi = document.createElement('button');
     btnDemi.className = 'mo-quick-btn';
-    btnDemi.textContent = '+4h30';
-    btnDemi.addEventListener('click', () => moAddHeures(nom, 4.5));
+    btnDemi.textContent = '+' + fmtHeures(moPresets()[0]);
+    btnDemi.addEventListener('click', () => moAddHeures(nom, moPresets()[0]));
 
     const btnJour = document.createElement('button');
     btnJour.className = 'mo-quick-btn jour';
-    btnJour.textContent = '+9h00';
-    btnJour.addEventListener('click', () => moAddHeures(nom, 9));
+    btnJour.textContent = '+' + fmtHeures(moPresets()[1]);
+    btnJour.addEventListener('click', () => moAddHeures(nom, moPresets()[1]));
 
     const input = document.createElement('input');
     input.type = 'number';
@@ -3990,7 +4045,8 @@ function buildRecapPreview() {
 
   const travaux = document.getElementById('tx-travaux').value || '';
   const nMetres = document.getElementById('metres-list')?.children.length || 0;
-  const nEvac = document.getElementById('evac-list')?.children.length || 0;
+  const evacItems = Object.values(evacSelection).filter(v => v.qty && parseFloat(v.qty) > 0);
+  const nEvac = evacItems.length;
 
   // Location summary
   const locFilled = Object.entries(locSelection).filter(([,sel]) => sel.qty > 0);
@@ -4059,7 +4115,7 @@ function buildRecapPreview() {
     ${nEvac > 0 ? `
     <div class="preview-section">
       <h4>🚮 Évacuations</h4>
-      <div class="info-row"><span class="k">Évacuations</span><span class="v">${nEvac} article(s)</span></div>
+      ${evacItems.map(v => `<div class="info-row"><span class="k">${v.subCat ? v.subCat + ' ' : ''}${v.nom}</span><span class="v">${v.qty} ${v.unit}</span></div>`).join('')}
     </div>` : ''}
   `;
 }
@@ -4108,11 +4164,7 @@ function collectData() {
     fournitData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
   });
 
-  const evacData = [];
-  document.querySelectorAll('#evac-list .fournit-item').forEach(row => {
-    const inputs = row.querySelectorAll('input, select');
-    evacData.push({ mat: inputs[0].value, qte: inputs[1].value, unite: inputs[2].value });
-  });
+  const evacData = Object.values(evacSelection).filter(v => v.qty && parseFloat(v.qty) > 0).map(v => ({ mat: (v.subCat ? v.subCat + ' ' : '') + v.nom, qte: v.qty, unite: v.unit }));
 
   return {
     date: document.getElementById('rj-date').value,
@@ -4127,6 +4179,7 @@ function collectData() {
     fournitures: fournitData,
     fournitSelection: fournitSelection,
     evacuations: evacData,
+    evacSelection: evacSelection,
     fournitures_catalogue: Object.entries(fournitSelection).map(([k,v]) => ({
       nom: v.nom, qty: v.qty, unit: v.unit, cat: v.cat || '', subCat: v.subCat || ''
     })),
@@ -4195,16 +4248,7 @@ function loadDraft() {
     }
 
     // Évacuations
-    if (d.evacuations) d.evacuations.forEach(e => {
-      addFournitRowWithMat('evac-list', 'sum-evac', e.mat);
-      const rows = document.querySelectorAll('#evac-list .fournit-item');
-      const last = rows[rows.length-1];
-      if (last) {
-        const inputs = last.querySelectorAll('input, select');
-        if (inputs[1]) inputs[1].value = e.qte;
-        if (inputs[2]) inputs[2].value = e.unite;
-      }
-    });
+    restoreEvac(d);
 
     updateHeader();
   } catch(e) { console.warn('Draft load error', e); }
@@ -4282,11 +4326,11 @@ function resetRapport() {
   if (cat) cat.innerHTML = '';
   renderFournitSelectionZone();
 
-  // Évacuations (supprimées mais garde la compat)
-  const evacList = document.getElementById('evac-list');
-  if (evacList) evacList.innerHTML = '';
-  const sumEvacEl = document.getElementById('sum-evac');
-  if (sumEvacEl) sumEvacEl.textContent = '—';
+  // Évacuations
+  evacSelection = {};
+  const evCat = document.getElementById('evac-catalogue');
+  if (evCat) evCat.innerHTML = '';
+  renderEvacSelectionZone();
 
   updateHeader();
 }
@@ -4797,6 +4841,416 @@ function confirmFournitAdd() {
 function closeFournitOverlay(e) { if (e.target.classList.contains('overlay')) e.target.classList.remove('open'); }
 function fslug(s) { return s.replace(/[^a-zA-Z0-9]/g,'_').substring(0,40); }
 
+let evacSelection = {};
+const EVAC_UNITS = ['m³','T','kg','benne','pc','m','ml','m²','L','h','p/j','sac','forfait'];
+function evacUnits(u){ return (u && !EVAC_UNITS.includes(u)) ? [u, ...EVAC_UNITS] : EVAC_UNITS; }
+function restoreEvac(d) {
+  evacSelection = {};
+  if (d && d.evacSelection && Object.keys(d.evacSelection).length > 0) {
+    evacSelection = d.evacSelection;
+  } else if (d && Array.isArray(d.evacuations)) {
+    d.evacuations.forEach((e, i) => {
+      if (!e || !e.mat) return;
+      evacSelection['legacy_' + i] = { qty: e.qte, unit: e.unite || 'm³', nom: e.mat, cat: '', subCat: '' };
+    });
+  }
+  renderEvacSelectionZone();
+}
+
+// ─── ÉVACUATIONS (même fonctionnement que Fournitures, liste issue de Ressources) ───
+function buildEvacCatalogue() {
+  const container = document.getElementById('evac-catalogue');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const items = JSON.parse(localStorage.getItem('rv6_evacuations') || '[]');
+  const catsData = (() => { try { return JSON.parse(localStorage.getItem('rv6_res_categories') || '{}'); } catch(e) { return {}; } })();
+  const cats = catsData.evacuations || [];
+
+  if (!items.length) {
+    container.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
+      <div style="font-size:36px;margin-bottom:12px;">🚮</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Aucune évacuation enregistrée</div>
+      <div style="font-size:12px;margin-bottom:16px;">Ajoutez des évacuations dans le module Ressources.</div>
+      <a href="../ressources/index.html" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 18px;border-radius:10px;text-decoration:none;">Ouvrir Ressources →</a>
+    </div>`;
+    return;
+  }
+
+  // Group items by category
+  const grouped = {};
+  items.forEach(item => {
+    const cid = item.catId || '__none__';
+    if (!grouped[cid]) grouped[cid] = { items: [], subGroups: {} };
+    const sid = item.subCatId || '__none__';
+    if (!grouped[cid].subGroups[sid]) grouped[cid].subGroups[sid] = [];
+    grouped[cid].subGroups[sid].push(item);
+    grouped[cid].items.push(item);
+  });
+
+  // Render categories
+  cats.forEach(cat => {
+    const group = grouped[cat.id];
+    if (!group || !group.items.length) return;
+    const subs = cat.children || [];
+    const div = document.createElement('div');
+    div.className = 'r-accordion';
+    div.id = 'ecat-' + cat.id;
+
+    const selCount = group.items.filter(i => evacSelection[i.id]).length;
+    const dotColor = cat.color || '#9AA3BC';
+    const catIndicator = cat.image
+      ? `<div style="width:28px;height:28px;border-radius:6px;overflow:hidden;flex-shrink:0;"><img src="${cat.image}" style="width:100%;height:100%;object-fit:cover;"></div>`
+      : cat.emoji
+        ? `<div style="width:28px;height:28px;border-radius:6px;background:${dotColor}22;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">${cat.emoji}</div>`
+        : `<div class="r-acc-dot" style="background:${dotColor};"></div>`;
+
+    const h = document.createElement('div');
+    h.className = 'r-acc-header';
+    h.innerHTML = `${catIndicator}<span class="r-acc-name">${cat.name||cat.nom||'—'}</span><span class="r-acc-count${selCount>0?' sel':''}" id="ecnt-${cat.id}">${selCount>0?selCount+' sél.':group.items.length}</span><span class="r-acc-chevron">›</span>`;
+    const b = document.createElement('div');
+    b.className = 'r-acc-body';
+    h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
+    div.appendChild(h);
+
+    const inner = document.createElement('div');
+    inner.className = 'r-acc-inner';
+
+    if (subs.length > 0) {
+      // Sous-accordéons
+      subs.forEach(sub => {
+        const subItems = (group.subGroups[sub.id] || []);
+        if (!subItems.length) return;
+        const sh = document.createElement('div');
+        sh.className = 'r-sub-header';
+        const subSelCount = subItems.filter(i => evacSelection[i.id]).length;
+        sh.innerHTML = `<div class="r-sub-dot" style="background:${dotColor};"></div><span class="r-sub-name">${sub.name}</span><span class="r-sub-count">${subItems.length}</span><span class="r-acc-chevron" style="font-size:12px;">›</span>`;
+        const sb = document.createElement('div');
+        sb.className = 'r-sub-body';
+        sh.onclick = () => { sh.classList.toggle('open'); sb.classList.toggle('open'); };
+        const si = document.createElement('div');
+        si.className = 'r-sub-inner';
+        subItems.forEach(item => si.appendChild(buildRItem(item, sub.name, cat.name||cat.nom)));
+        sb.appendChild(si);
+        inner.appendChild(sh);
+        inner.appendChild(sb);
+      });
+      // Items sans sous-cat
+      (group.subGroups['__none__'] || []).forEach(item => inner.appendChild(buildRItem(item, null, cat.name||cat.nom)));
+    } else {
+      group.items.forEach(item => inner.appendChild(buildRItem(item, null, cat.name||cat.nom)));
+    }
+
+    b.appendChild(inner);
+    div.appendChild(b);
+    container.appendChild(div);
+  });
+
+  // Sans catégorie
+  const noCat = grouped['__none__'];
+  if (noCat && noCat.items.length) {
+    const div = document.createElement('div');
+    div.className = 'r-accordion';
+    div.id = 'ecat-__none__';
+    const selCount = noCat.items.filter(i => evacSelection[i.id]).length;
+    const h = document.createElement('div');
+    h.className = 'r-acc-header';
+    h.innerHTML = `<div class="r-acc-dot" style="background:#9AA3BC;"></div><span class="r-acc-name">Sans catégorie</span><span class="r-acc-count${selCount>0?' sel':''}" id="ecnt-__none__">${selCount>0?selCount+' sél.':noCat.items.length}</span><span class="r-acc-chevron">›</span>`;
+    const b = document.createElement('div');
+    b.className = 'r-acc-body';
+    h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
+    const inner = document.createElement('div');
+    inner.className = 'r-acc-inner';
+    noCat.items.forEach(item => inner.appendChild(buildRItem(item)));
+    b.appendChild(inner);
+    div.appendChild(h);
+    div.appendChild(b);
+    container.appendChild(div);
+  }
+}
+
+
+function buildRItem(item, subName, catName) {
+  const key = item.id;
+  const isSelected = !!evacSelection[key];
+  const uid = ++_frowId;
+  if (!window._evacUids) window._evacUids = {};
+  window._evacUids[key] = uid;
+
+  const sub = [item.famille, item.unite].filter(Boolean).join(' · ');
+  const div = document.createElement('div');
+  div.className = 'r-item';
+  // Inclut catégorie + sous-catégorie dans la chaîne recherchable, pour
+  // pouvoir retrouver un item par "PVC 125 manchon" même si "PVC" et "125"
+  // viennent du nom de la catégorie/sous-catégorie et non de item.nom.
+  div.dataset.nom = [catName, subName, item.nom].filter(Boolean).join(' ');
+  div.dataset.key = key;
+  div.dataset.uid = uid;
+
+  let iconHtml = '';
+  if (item.photo) {
+    iconHtml = `<div class="r-item-icon"><img src="${item.photo}"></div>`;
+  } else if (item.icon) {
+    iconHtml = `<div class="r-item-icon" style="font-size:20px;">${item.icon}</div>`;
+  } else {
+    iconHtml = `<div class="r-item-icon" style="font-size:20px;">🚛</div>`;
+  }
+
+  const defaultUnit = item.unite || 'm³';
+  // Registre persistant des métadonnées de l'item, indexé par key. Permet à
+  // toggleEvacSelect de retrouver nom/catégorie/unité même quand elle est
+  // appelée seulement avec key (bouton ✕ inline ou ✕ zone navy du bas), et
+  // donc de pouvoir re-sélectionner correctement après une désélection.
+  if (!window._evacMeta) window._evacMeta = {};
+  window._evacMeta[key] = { catName: item.famille||'Évacuations', nom: item.nom, defaultUnit, subCat: subName||'' };
+
+  div.innerHTML = `
+    ${iconHtml}
+    <div class="r-item-body">
+      <div class="r-item-name${isSelected?' sel':''}" id="en-${uid}">${item.nom||'—'}</div>
+      ${sub ? `<div class="r-item-sub">${sub}</div>` : ''}
+    </div>
+    <span id="ewrap-${uid}">${isSelected ? evacControlsHTML(key, uid) : `<span id="echk-${uid}" class="r-item-check">⬜</span>`}</span>
+  `;
+  const chkEl = div.querySelector('.r-item-check');
+  if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleEvacSelect(key); };
+  if (isSelected) wireEvacInlineControls(key, uid);
+  return div;
+}
+
+// Génère le HTML des contrôles inline (select unité + .5 + 1 + qté + ✕) qui
+// remplacent la case ⬜/✅ une fois l'item sélectionné dans la liste catalogue.
+function evacControlsHTML(key, uid) {
+  const sel = evacSelection[key];
+  if (!sel) return `<span id="echk-${uid}" class="r-item-check">⬜</span>`;
+  return `
+    <span class="r-item-controls" id="ectrl-${uid}">
+      <select id="ectrl-unit-${uid}">
+        ${evacUnits(sel.unit).map(u=>`<option value="${u}" ${sel.unit===u?'selected':''}>${u}</option>`).join('')}
+      </select>
+      <button type="button" class="ric-btn" id="ectrl-half-${uid}">+0.5</button>
+      <button type="button" class="ric-btn plus-one" id="ectrl-one-${uid}">+1</button>
+      <input type="number" min="0" step="0.5" class="ric-qty" id="ectrl-qty-${uid}" value="${sel.qty||''}" placeholder="0">
+      <button type="button" class="ric-del" id="ectrl-del-${uid}">✕</button>
+    </span>
+  `;
+}
+
+// Branche les écouteurs des contrôles inline pour un item donné. Appelé après
+// insertion du HTML (au build initial si déjà sélectionné, ou lors du passage
+// case → contrôles via toggleEvacSelect).
+function wireEvacInlineControls(key, uid) {
+  const unitSel = document.getElementById(`ectrl-unit-${uid}`);
+  const btnHalf = document.getElementById(`ectrl-half-${uid}`);
+  const btnOne  = document.getElementById(`ectrl-one-${uid}`);
+  const qtyInp  = document.getElementById(`ectrl-qty-${uid}`);
+  const btnDel  = document.getElementById(`ectrl-del-${uid}`);
+  if (!unitSel) return;
+
+  const stop = (e) => e.stopPropagation();
+  [unitSel, btnHalf, btnOne, qtyInp, btnDel].forEach(el => el.addEventListener('click', stop));
+
+  unitSel.onchange = () => { evacSelection[key].unit = unitSel.value; renderEvacSelectionZone(); autoSaveDraft(); };
+
+  const updateQty = (val) => {
+    const q = Math.round(val * 4) / 4;
+    evacSelection[key].qty = q;
+    qtyInp.value = q > 0 ? q : '';
+    renderEvacSelectionZone();
+    autoSaveDraft();
+  };
+  btnHalf.onclick = () => updateQty((parseFloat(qtyInp.value)||0) + 0.5);
+  btnOne.onclick  = () => updateQty((parseFloat(qtyInp.value)||0) + 1);
+  qtyInp.oninput  = () => { evacSelection[key].qty = parseFloat(qtyInp.value)||0; renderEvacSelectionZone(); autoSaveDraft(); };
+  btnDel.onclick  = () => toggleEvacSelect(key);
+}
+
+function buildEvacRow(catName, nom, defaultUnit) { /* compat */ }
+
+// Construit l'ordre de référence des ids de matériaux (catégories dans leur
+// ordre, sous-catégories dans leur ordre, puis items dans l'ordre de
+// rv6_materials) — pour que la zone de sélection suive l'ordre du catalogue
+// plutôt que l'ordre où les items ont été cochés.
+function buildEvacOrderIndex() {
+  const items = JSON.parse(localStorage.getItem('rv6_evacuations') || '[]');
+  const catsData = (() => { try { return JSON.parse(localStorage.getItem('rv6_res_categories') || '{}'); } catch(e) { return {}; } })();
+  const cats = catsData.evacuations || [];
+  const order = [];
+  const used = new Set();
+  cats.forEach(cat => {
+    const subs = cat.children || [];
+    subs.forEach(sub => {
+      items.filter(i => i.catId===cat.id && i.subCatId===sub.id).forEach(i => { order.push(i.id); used.add(i.id); });
+    });
+    items.filter(i => i.catId===cat.id && (!i.subCatId || !subs.find(s=>s.id===i.subCatId))).forEach(i => { order.push(i.id); used.add(i.id); });
+  });
+  items.forEach(i => { if (!used.has(i.id)) order.push(i.id); });
+  return order;
+}
+
+function renderEvacSelectionZone() {
+  const zone = document.getElementById('evac-selection-zone');
+  const list = document.getElementById('evac-sel-list');
+  const orderIndex = buildEvacOrderIndex();
+  const keys = Object.keys(evacSelection).sort((a, b) => {
+    const iA = orderIndex.indexOf(a), iB = orderIndex.indexOf(b);
+    if (iA === -1 && iB === -1) return 0;
+    if (iA === -1) return 1;
+    if (iB === -1) return -1;
+    return iA - iB;
+  });
+  if (!keys.length) { zone.style.display = 'none'; return; }
+  zone.style.display = 'block';
+  list.innerHTML = '';
+  keys.forEach(key => {
+    const item = evacSelection[key];
+    const fullName = item.subCat ? item.subCat + ' ' + item.nom : item.nom;
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:5px;padding:6px 10px;border-top:1px solid rgba(255,255,255,0.08);';
+    row.innerHTML = `
+      <span class="evac-sel-name" style="flex:1;color:white;font-weight:500;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.2;font-size:13px;max-height:31.2px;">${fullName}</span>
+      <button onclick="var q=Math.round((parseFloat(evacSelection['${key}'].qty||0)+0.5)*4)/4;evacSelection['${key}'].qty=q;document.getElementById('eqty-${key.replace(/'/g,'')}').value=q;syncEvacInlineQty('${key}');autoSaveDraft();"
+        style="background:var(--bg-light,rgba(255,255,255,0.15));border:1px solid rgba(255,255,255,0.3);color:white;border-radius:5px;width:26px;height:24px;cursor:pointer;font-size:10px;font-weight:700;flex-shrink:0;padding:0;">+0.5</button>
+      <button onclick="var q=parseFloat(evacSelection['${key}'].qty||0)+1;evacSelection['${key}'].qty=q;document.getElementById('eqty-${key.replace(/'/g,'')}').value=q;syncEvacInlineQty('${key}');autoSaveDraft();"
+        style="background:var(--yellow);border:none;color:var(--navy);border-radius:5px;width:24px;height:24px;cursor:pointer;font-size:11px;font-weight:700;flex-shrink:0;padding:0;">+1</button>
+      <input type="number" min="0" step="0.5" placeholder="Qté"
+        id="eqty-${key.replace(/'/g,'')}"
+        style="width:42px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:5px;color:white;padding:3px 2px;font-size:12px;text-align:center;outline:none;flex-shrink:0;"
+        value="${item.qty||''}"
+        oninput="evacSelection['${key}'].qty=this.value;syncEvacInlineQty('${key}');autoSaveDraft();">
+      <select style="width:48px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:5px;color:white;padding:3px 1px;font-size:10px;outline:none;flex-shrink:0;"
+        onchange="evacSelection['${key}'].unit=this.value;syncEvacInlineUnit('${key}');autoSaveDraft();">
+        ${evacUnits(item.unit).map(u=>`<option value="${u}" ${item.unit===u?'selected':''} style="color:#333;">${u}</option>`).join('')}
+      </select>
+      <button onclick="toggleEvacSelect('${key}')"
+        style="background:rgba(255,255,255,0.15);border:none;color:white;border-radius:5px;width:24px;height:24px;cursor:pointer;font-size:12px;flex-shrink:0;padding:0;">✕</button>
+    `;
+    list.appendChild(row);
+
+    // Réduit progressivement la police du nom si le texte (sur 2 lignes) dépasse
+    // la largeur disponible, jusqu'à un plancher de 8.5px. Mesure faite sur un clone
+    // temporaire en une seule ligne (white-space:nowrap) pour ne pas dépendre du
+    // comportement de -webkit-line-clamp, variable selon les navigateurs.
+    const nameEl = row.querySelector('.evac-sel-name');
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;left:-9999px;font-weight:500;';
+    probe.textContent = fullName;
+    document.body.appendChild(probe);
+    let fontSize = 13;
+    const availableWidth = () => nameEl.getBoundingClientRect().width;
+    // Largeur dispo pour 2 lignes ≈ 2x la largeur de la ligne (approximation suffisante
+    // pour un nom de produit sans retour à la ligne naturel).
+    while (fontSize > 8.5) {
+      probe.style.fontSize = fontSize + 'px';
+      const w = availableWidth();
+      if (probe.scrollWidth <= w * 2 || w === 0) break;
+      fontSize -= 0.5;
+    }
+    document.body.removeChild(probe);
+    nameEl.style.fontSize = fontSize + 'px';
+    nameEl.style.maxHeight = (fontSize * 1.2 * 2) + 'px';
+  });
+}
+
+// Synchronise l'input qté affiché dans la liste catalogue (contrôles inline)
+// quand la quantité est modifiée depuis la zone de sélection navy du bas.
+function syncEvacInlineQty(key) {
+  const uid = window._evacUids?.[key];
+  if (!uid) return;
+  const inp = document.getElementById('ectrl-qty-' + uid);
+  if (inp) inp.value = evacSelection[key]?.qty || '';
+}
+function syncEvacInlineUnit(key) {
+  const uid = window._evacUids?.[key];
+  if (!uid) return;
+  const sel = document.getElementById('ectrl-unit-' + uid);
+  if (sel) sel.value = evacSelection[key]?.unit || 'pc';
+}
+
+function toggleEvacSelect(key, catName, nom, defaultUnit, subCat) {
+  // Le registre _evacMeta (rempli au rendu de chaque ligne) est la source
+  // fiable : les arguments catName/nom/defaultUnit/subCat ne sont fournis que
+  // lors du premier rendu, pas lors des appels ✕ (key seul). Sans ce filet,
+  // une re-sélection après désélection perdait nom/catégorie/unité.
+  const meta = window._evacMeta?.[key];
+  if (meta) {
+    catName = meta.catName; nom = meta.nom; defaultUnit = meta.defaultUnit; subCat = meta.subCat;
+  }
+  if (evacSelection[key]) {
+    delete evacSelection[key];
+  } else {
+    evacSelection[key] = { qty: '', unit: defaultUnit || 'm³', nom, cat: catName, subCat: subCat||'' };
+  }
+  const isNow = !!evacSelection[key];
+  const uid = window._evacUids?.[key];
+  if (uid) {
+    document.getElementById('en-' + uid)?.classList.toggle('sel', isNow);
+    const wrap = document.getElementById('ewrap-' + uid);
+    if (wrap) {
+      wrap.innerHTML = isNow ? evacControlsHTML(key, uid) : `<span id="echk-${uid}" class="r-item-check">⬜</span>`;
+      if (isNow) {
+        wireEvacInlineControls(key, uid);
+      } else {
+        const chkEl = wrap.querySelector('.r-item-check');
+        if (chkEl) chkEl.onclick = (e) => { e.stopPropagation(); toggleEvacSelect(key); };
+      }
+    }
+  }
+  updateEvacCatCount();
+  renderEvacSelectionZone();
+  autoSaveDraft();
+}
+
+function updateEvacCatCount() {
+  // Update all category counters
+  document.querySelectorAll('#evac-catalogue .r-accordion').forEach(acc => {
+    const catId = acc.id.replace('ecat-', '');
+    const items = acc.querySelectorAll('.r-item');
+    const selCount = [...items].filter(el => evacSelection[el.dataset.key]).length;
+    const countEl = document.getElementById('ecnt-' + catId);
+    if (countEl) {
+      countEl.textContent = selCount > 0 ? selCount + ' sél.' : items.length;
+      countEl.classList.toggle('sel', selCount > 0);
+    }
+  });
+}
+
+function evacSearch(q) {
+  document.getElementById('evac-clear').style.display = q ? 'block' : 'none';
+  q = q.toLowerCase().trim();
+  if (!q) {
+    document.querySelectorAll('#evac-catalogue .r-item').forEach(r => r.style.display = '');
+    document.querySelectorAll('#evac-catalogue .r-accordion').forEach(g => g.style.display = '');
+    document.querySelectorAll('#evac-catalogue .r-acc-header').forEach(h => { h.classList.remove('open'); h.nextElementSibling?.classList.remove('open'); });
+    return;
+  }
+  // Recherche multi-mots : chaque mot tapé doit être présent (peu importe
+  // l'ordre) dans le nom complet de l'item (catégorie + sous-catégorie + nom).
+  const words = q.split(/\s+/).filter(Boolean);
+  document.querySelectorAll('#evac-catalogue .r-accordion').forEach(group => {
+    const items = group.querySelectorAll('.r-item');
+    let hasMatch = false;
+    items.forEach(item => {
+      const nom = item.dataset.nom?.toLowerCase() || '';
+      const match = words.every(w => nom.includes(w));
+      item.style.display = match ? '' : 'none';
+      if (match) hasMatch = true;
+    });
+    group.style.display = hasMatch ? '' : 'none';
+    if (hasMatch) { group.querySelector('.r-acc-header')?.classList.add('open'); group.querySelector('.r-acc-body')?.classList.add('open'); }
+    // Ouvre aussi chaque sous-accordéon qui contient un item filtré, sinon
+    // l'item reste caché derrière une sous-catégorie repliée.
+    group.querySelectorAll('.r-sub-header').forEach(sh => {
+      const sb = sh.nextElementSibling;
+      const subHasMatch = sb && [...sb.querySelectorAll('.r-item')].some(i => i.style.display !== 'none');
+      sh.classList.toggle('open', !!subHasMatch);
+      if (sb) sb.classList.toggle('open', !!subHasMatch);
+    });
+  });
+}
+function evacClearSearch() { document.getElementById('evac-search').value = ''; evacSearch(''); }
+
+
 // Auto-save every 60s
 setInterval(saveDraft, 60000);
 
@@ -5238,16 +5692,7 @@ function modifierRapport(e, id, obj) {
     renderFournitSelectionZone();
   }
 
-  if (d.evacuations) d.evacuations.forEach(ev => {
-    addFournitRowWithMat('evac-list', 'sum-evac', ev.mat);
-    const rows = document.querySelectorAll('#evac-list .fournit-item');
-    const last = rows[rows.length-1];
-    if (last) {
-      const inputs = last.querySelectorAll('input, select');
-      if (inputs[1]) inputs[1].value = ev.qte;
-      if (inputs[2]) inputs[2].value = ev.unite;
-    }
-  });
+  restoreEvac(d);
 
   // Sauvegarder comme brouillon
   autoSaveDraft();
@@ -5775,7 +6220,62 @@ function calcEquals() {
 
 
 // ─── INIT ──────────────────────────────────────────────────────
+// ─── PRÉRÉGLAGES HEURES M.O. (partagés entre appareils via Firestore) ───
+const MO_PRESETS_KEY = 'rv6_mo_presets';
+function moPresets() {
+  try {
+    const p = JSON.parse(localStorage.getItem(MO_PRESETS_KEY) || 'null');
+    if (Array.isArray(p) && p.length === 2 && p.every(v => parseFloat(v) > 0 && parseFloat(v) <= 24)) return p.map(parseFloat);
+  } catch(e) {}
+  return [4.5, 9];
+}
+function fmtHeures(v) {
+  const h = Math.floor(v + 1e-9);
+  const m = Math.round((v - h) * 60);
+  return h + 'h' + String(m).padStart(2, '0');
+}
+function moPresetLabels() {
+  [1, 2].forEach(i => {
+    const v = parseFloat(document.getElementById('mo-p' + i).value);
+    document.getElementById('mo-p' + i + '-l').textContent = v > 0 ? '→ bouton « +' + fmtHeures(v) + ' »' : '';
+  });
+}
+function openMoPresets() {
+  const p = moPresets();
+  document.getElementById('mo-p1').value = p[0];
+  document.getElementById('mo-p2').value = p[1];
+  moPresetLabels();
+  document.getElementById('overlay-mo-presets').classList.add('open');
+}
+function saveMoPresets() {
+  const a = parseFloat(document.getElementById('mo-p1').value);
+  const b = parseFloat(document.getElementById('mo-p2').value);
+  if (!(a > 0 && a <= 24 && b > 0 && b <= 24)) { showToast('⚠ Heures entre 0.25 et 24', '#E53935'); return; }
+  localStorage.setItem(MO_PRESETS_KEY, JSON.stringify([a, b]));
+  if (_auth.currentUser) {
+    _db.collection('ressources').doc('mo_presets').set({ items: [a, b], updatedAt: Date.now() })
+      .catch(e => console.warn('Firestore presets:', e));
+  }
+  document.getElementById('overlay-mo-presets').classList.remove('open');
+  renderEmployes();
+  showToast('✓ Heures préréglées enregistrées', 'var(--teal)');
+}
+function syncMoPresets() {
+  if (!_auth.currentUser) return;
+  _db.collection('ressources').doc('mo_presets').get().then(s => {
+    if (!s.exists) return;
+    const it = s.data().items;
+    if (Array.isArray(it) && it.length === 2) {
+      localStorage.setItem(MO_PRESETS_KEY, JSON.stringify(it));
+      renderEmployes();
+    }
+  }).catch(e => console.warn('Sync presets:', e));
+}
+
+let _rapportInited = false;
 function initRapport() {
+  if (_rapportInited) return;
+  _rapportInited = true;
   purgeOld();
   buildChantierChips();
   buildNomChips();
@@ -5785,6 +6285,7 @@ function initRapport() {
   try { const _er = localStorage.getItem('rj_edit_request'); if (_er) { localStorage.removeItem('rj_edit_request'); setTimeout(() => modifierRapport({ stopPropagation(){} }, null, JSON.parse(_er)), 400); } } catch(e) {}
   if (!document.getElementById('rj-date').value) setDefaultDate();
   renderEmployes();
+  syncMoPresets();
   updateHeader();
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
   document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); });
