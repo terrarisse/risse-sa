@@ -215,6 +215,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .rap-det{display:none;border-top:1px solid var(--bg2);margin-top:10px;padding-top:8px;font-size:12px;color:var(--text);line-height:1.6}
 .rap-det.open{display:block}
 .rap-det b{color:var(--text2)}
+.rap-lst{margin-top:4px}
+.rap-li{padding-left:10px;border-left:2px solid var(--bg2);margin:2px 0}
 </style>
 </head>
 <body>
@@ -346,8 +348,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     </div>
     <div class="det-tabs">
       <button class="det-tab active" id="det-tab-btn-infos" onclick="switchDetTab('infos')">ℹ️ Info</button>
-      <button class="det-tab" id="det-tab-btn-plan" onclick="switchDetTab('plan')">📐 Plan</button>
       <button class="det-tab" id="det-tab-btn-rapports" onclick="switchDetTab('rapports')">📋 Rapports</button>
+      <button class="det-tab" id="det-tab-btn-plan" onclick="switchDetTab('plan')">📐 Plan</button>
     </div>
   </div>
 
@@ -963,12 +965,13 @@ function rapRow(r,ed){
   const h = emp.reduce((t,e)=>t+parseFloat(e.heures),0);
   const editing = ed && String(ed.id)===String(r.id);
   const L = (t,v)=> v?`<div><b>${t} :</b> ${v}</div>`:'';
-  const loc = Object.values(r.locSelection||{}).filter(x=>x.qty>0).map(x=>`${esc(x.label)} ${x.qty} ${esc(x.unit)}`).join(', ');
-  const fo = (r.fournitures_catalogue||[]).map(f=>`${esc(f.nom)} ${esc(f.qty)} ${esc(f.unit)}`).join(', ');
-  const ev = (r.evacuations||[]).filter(e=>e.mat).map(e=>`${esc(e.mat)} ${esc(e.qte)} ${esc(e.unite)}`).join(', ');
-  const me = (r.metres||[]).map(m=>`${esc(m.desc)} ${esc(m.total)} ${esc(m.unit)}`).join(', ');
+  const LL = (t,a)=> a.length?`<div class="rap-lst"><b>${t} :</b>${a.map(x=>`<div class="rap-li">${x}</div>`).join('')}</div>`:'';
+  const loc = Object.values(r.locSelection||{}).filter(x=>x.qty>0).map(x=>`${esc(x.label)} ${x.qty} ${esc(x.unit)}`);
+  const fo = (r.fournitures_catalogue||[]).map(f=>`${esc(f.nom)} ${esc(f.qty)} ${esc(f.unit)}`);
+  const ev = (r.evacuations||[]).filter(e=>e.mat).map(e=>`${esc(e.mat)} ${esc(e.qte)} ${esc(e.unite)}`);
+  const me = (r.metres||[]).map(m=>`${esc(m.desc)} ${esc(m.total)} ${esc(m.unit)}`);
   const tv = r.travaux||'';
-  return `<div class="rap-row"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}</div></div><div class="rap-act"><button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${L('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`).join(', '))}${L('Location',loc)}${L('Fournitures',fo)}${L('Évacuations',ev)}${L('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
+  return `<div class="rap-row"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}</div></div><div class="rap-act"><button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${LL('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`))}${LL('Location',loc)}${LL('Fournitures',fo)}${LL('Évacuations',ev)}${LL('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
 }
 async function renderRapports(){
   const cid = currentDetailId, el = document.getElementById('det-tab-rapports');
