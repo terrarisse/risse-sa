@@ -1303,7 +1303,7 @@ function saveItem(section){
     if(!g('mt-nom')){ highlight('mt-nom'); return; }
     const catVal = g('mt-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
     item={...item, catId:cId, subCatId:sId, nom:g('mt-nom'), type:g('mt-type'), marque:g('mt-marque'), ref:g('mt-ref'), poids:g('mt-poids'), puissance:g('mt-puissance'), prix:g('mt-prix'), location:g('mt-location'), notes:g('mt-notes') };
-  } else if((section==='materiaux'||section==='evacuations')){
+  } else if(section==='materiaux'){
     if(!g('mx-nom')){ highlight('mx-nom'); return; }
     const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
     item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), unite:g('mx-unite'), densite:g('mx-densite')?parseFloat(g('mx-densite')):null, masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), notes:g('mx-notes') };
