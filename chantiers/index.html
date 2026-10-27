@@ -193,6 +193,28 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 /* ── TOAST ── */
 .toast{position:fixed;bottom:calc(var(--safe-b)+12px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.chantier-card{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.st-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.st-btn{border:1.5px solid var(--border);background:#fff;color:var(--text2);border-radius:10px;padding:9px 2px;font:700 11px 'Inter',sans-serif;cursor:pointer}
+.st-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.menu-body{display:flex;flex-direction:column;gap:8px;padding-bottom:24px}
+.menu-btn{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px;font:600 14px 'Inter',sans-serif;text-align:left;color:var(--text);cursor:pointer}
+.menu-btn.danger{color:var(--red)}
+.chantier-card.dragging{opacity:.55;box-shadow:var(--shm)}
+.drag-h{touch-action:none;padding:0 14px;display:flex;align-items:center;font-size:22px;color:var(--text3)}
+.reorder-bar{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:12px;font-weight:600}
+.reorder-bar button{background:var(--yellow);color:var(--navy);border:none;border-radius:8px;padding:7px 16px;font:700 13px 'Inter',sans-serif}
+.rap-row{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:10px}
+.rap-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.rap-date{font-weight:700;font-size:14px;color:var(--text)}
+.rap-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.rap-tx{font-size:12px;color:var(--text2);margin-top:6px}
+.rap-act{display:flex}
+.rap-act button{background:var(--bg);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;font-size:15px;margin-left:6px}
+.rap-det{display:none;border-top:1px solid var(--bg2);margin-top:10px;padding-top:8px;font-size:12px;color:var(--text);line-height:1.6}
+.rap-det.open{display:block}
+.rap-det b{color:var(--text2)}
 </style>
 </head>
 <body>
@@ -237,7 +259,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr">
-      <div class="modal-title">📁 Nouveau chantier</div>
+      <div class="modal-title" id="add-title">📁 Nouveau chantier</div>
       <button class="modal-close" onclick="closeAdd()">✕</button>
     </div>
     <div class="modal-body">
@@ -277,7 +299,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
         </div>
       </div>
  
-      <div class="fsec">Devis (PDF)</div>
+      <div class="fsec" id="pdf-fsec">Devis (PDF)</div>
       <div id="pdf-zone">
         <div id="pdf-preview" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:8px;">
           <span style="font-size:24px;">📄</span>
@@ -297,8 +319,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
       <div class="fsec">Couleur d'identification</div>
       <div class="color-row" id="colorPicker"></div>
  
-      <div class="fsec">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="add-notes" placeholder="Accès, contraintes particulières, contacts..."></textarea></div>
+      <div class="fsec">Description</div>
+      <div class="field"><label>Description</label><textarea id="add-notes" placeholder="Accès, contraintes particulières, contacts..."></textarea></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-navy" onclick="saveChantier()">Enregistrer</button>
@@ -320,18 +342,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
           <span id="det-meta"></span>
         </div>
       </div>
+      <button class="back-btn" onclick="editCurrent()">✏️</button>
     </div>
     <div class="det-tabs">
-      <button class="det-tab active" id="det-tab-btn-plan" onclick="switchDetTab('plan')">📐 Plan</button>
-      <button class="det-tab" id="det-tab-btn-devis" onclick="switchDetTab('devis')">📄 Devis</button>
-      <button class="det-tab" id="det-tab-btn-infos" onclick="switchDetTab('infos')">ℹ️ Infos</button>
+      <button class="det-tab active" id="det-tab-btn-infos" onclick="switchDetTab('infos')">ℹ️ Info</button>
+      <button class="det-tab" id="det-tab-btn-plan" onclick="switchDetTab('plan')">📐 Plan</button>
+      <button class="det-tab" id="det-tab-btn-rapports" onclick="switchDetTab('rapports')">📋 Rapports</button>
     </div>
   </div>
 
-  <div class="det-tab-content" id="det-tab-plan"></div>
-  <div class="det-tab-content" id="det-tab-devis" style="display:none"></div>
-  <div class="det-tab-content" id="det-tab-infos" style="display:none">
+  <div class="det-tab-content" id="det-tab-plan" style="display:none"></div>
+  <div class="det-tab-content" id="det-tab-rapports" style="display:none"></div>
+  <div class="det-tab-content" id="det-tab-infos">
+    <div class="st-row" id="det-st-row"></div>
     <div class="det-info-card"><div id="det-rows"></div></div>
+    <div id="det-devis-wrap"></div>
     <div id="det-notes-wrap"></div>
     <div class="det-footer">
       <button class="btn btn-danger btn-sm" style="width:100%" onclick="deleteCurrentChantier()">🗑 Supprimer ce chantier</button>
@@ -381,7 +406,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 // ── FIREBASE ────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, deleteDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 // Firebase Storage mis de côté pour l'instant (nécessite le plan payant Blaze) —
 // les PDF (plans/devis) sont stockés en local via IndexedDB, voir plus bas.
 
@@ -520,7 +545,7 @@ function save(d) {
       // les fichiers qu'il n'a pas). On ne synchronise que les infos du chantier.
       const forFirestore = d.map(c=>{
         const copy = {...c};
-        delete copy.plans; delete copy.pdf;
+        delete copy.plans; copy.pdf = (c.pdf && c.pdf.parts) ? {name:c.pdf.name,size:c.pdf.size,pdfKey:c.pdf.pdfKey,parts:c.pdf.parts} : undefined;
         delete copy.plan; delete copy.planMeasures; // ancien format legacy
         return copy;
       });
@@ -593,7 +618,7 @@ async function syncFromFirestore() {
         return {
           ...remote,
           plans: (localMatch && localMatch.plans) || [],
-          pdf: (localMatch && localMatch.pdf) || null,
+          pdf: (localMatch && localMatch.pdf) || remote.pdf || null,
         };
       });
 
@@ -619,15 +644,6 @@ function renderList() {
   // Filtre recherche
   if (q) data = data.filter(c => Object.values(c).some(v=>String(v).toLowerCase().includes(q)));
  
-  // Tri : actif d'abord, puis par date début desc, puis alphabétique
-  const order = { actif:0, prospect:1, pause:2, termine:3 };
-  data.sort((a,b) => {
-    const so = (order[a.statut]||0) - (order[b.statut]||0);
-    if (so !== 0) return so;
-    if (a.debut && b.debut) return b.debut.localeCompare(a.debut);
-    return a.nom.localeCompare(b.nom);
-  });
- 
   const el = document.getElementById('listContainer');
   const total = load().length;
   document.getElementById('hdrCount').textContent = total;
@@ -637,7 +653,7 @@ function renderList() {
     return;
   }
  
-  el.innerHTML = data.map(c => {
+  el.innerHTML = (reorderMode?'<div class="reorder-bar"><span>Glisse ☰ pour changer l\'ordre</span><button onclick="endReorder()">OK</button></div>':'') + data.map(c => {
     const color = c.color || COLORS[0];
     const pills = [];
     if (c.commune) pills.push({ label: '📍 '+c.commune });
@@ -647,11 +663,11 @@ function renderList() {
     if (c.marche) pills.push({ label: c.marche });
     const planCount = getPlansOf(c).length;
     if (planCount) pills.push({ label: '📐 '+(planCount>1?planCount+' plans':'Plan') });
-    if (c.pdf && c.pdf.data) pills.push({ label: '📄 Devis' });
+    if (c.pdf && (c.pdf.data||c.pdf.pdfKey)) pills.push({ label: '📄 Devis' });
  
     return `
-    <div class="chantier-card" onclick="openDetail('${c.id}')">
-      <div class="card-top">
+    <div class="chantier-card" data-id="${c.id}" ${reorderMode?'':`onclick="cardTap('${c.id}')"`}>
+      <div class="card-top">${reorderMode?'<div class="drag-h">☰</div>':''}
         <div class="card-accent" style="background:${color}"></div>
         <div class="card-body-wrap">
           <div class="card-title-row">
@@ -673,12 +689,13 @@ function renderList() {
 // FILTRES & RECHERCHE
 // ════════════════════════════════════════════
 function setFilter(f, el) {
+  if (reorderMode) return;
   currentFilter = f;
   document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('on'));
   el.classList.add('on');
   renderList();
 }
-function onSearch(v) { currentSearch = v; renderList(); }
+function onSearch(v) { if (reorderMode) return; currentSearch = v; renderList(); }
  
 // ════════════════════════════════════════════
 // COULEUR PICKER
@@ -696,9 +713,23 @@ function selectColor(c) {
 // ════════════════════════════════════════════
 // MODAL AJOUT
 // ════════════════════════════════════════════
-function openAdd() {
-  selectedColor = COLORS[0];
+let editingId = null;
+function setAddMode(edit){
+  document.getElementById('add-title').textContent = edit?'✏️ Modifier le chantier':'📁 Nouveau chantier';
+  ['pdf-fsec','pdf-zone'].forEach(i=>{ document.getElementById(i).style.display = edit?'none':''; });
+}
+function openAdd(editId) {
+  const ec = typeof editId==='string' ? load().find(x=>x.id===editId) : null;
+  editingId = ec ? ec.id : null;
+  selectedColor = ec ? (ec.color||COLORS[0]) : COLORS[0];
   buildColorPicker();
+  setAddMode(!!ec);
+  if (ec) {
+    const v=(id,x)=>{ document.getElementById(id).value = x||''; };
+    v('add-nom',ec.nom); v('add-client',ec.client); v('add-adresse',ec.adresse); v('add-commune',ec.commune);
+    v('add-statut',ec.statut||'actif'); v('add-debut',ec.debut); v('add-fin',ec.fin);
+    v('add-montant',ec.montant); v('add-marche',ec.marche); v('add-notes',ec.notes);
+  }
   document.getElementById('modal-add').classList.add('open');
   setTimeout(()=>document.getElementById('add-nom').focus(), 150);
 }
@@ -713,6 +744,7 @@ function closeAdd() {
   document.getElementById('add-fin').value='';
   selectedColor = COLORS[0];
   clearPdf();
+  editingId = null; setAddMode(false);
 }
  
 document.getElementById('modal-add').addEventListener('click',e=>{ if(e.target===document.getElementById('modal-add')) closeAdd(); });
@@ -723,6 +755,18 @@ function g(id){ const el=document.getElementById(id); return el?(el.value||'').t
 function saveChantier() {
   const nom = g('add-nom');
   if (!nom) { highlight('add-nom'); return; }
+  if (editingId) {
+    const d = load(); const i = d.findIndex(x=>x.id===editingId); const id = editingId;
+    if (i>-1) {
+      d[i] = {...d[i], nom, client:g('add-client'), adresse:g('add-adresse'), commune:g('add-commune'), statut:g('add-statut')||'actif',
+        debut:g('add-debut'), fin:g('add-fin'), montant:g('add-montant'), marche:g('add-marche'), color:selectedColor, notes:g('add-notes')};
+      save(d);
+    }
+    closeAdd(); renderList();
+    if (currentDetailId===id) refreshDetail();
+    showToast('✓ Modifications enregistrées');
+    return;
+  }
  
   const item = {
     id: Date.now().toString(36)+Math.random().toString(36).slice(2,4),
@@ -740,6 +784,7 @@ function saveChantier() {
     pdf:      currentPdf,
     plans:    [],
     createdAt: new Date().toISOString(),
+    o: 1,
     // Structure pour la suite
     documents: [],
     photos:    [],
@@ -747,7 +792,7 @@ function saveChantier() {
     travaux:   [],
   };
  
-  const data = [...load(), item];
+  const data = [item, ...load()];
   save(data);
   closeAdd();
   renderList();
@@ -819,58 +864,217 @@ async function viewPdf(chId){
 // ════════════════════════════════════════════
 // DETAIL — page plein écran à onglets (Plan / Devis / Infos)
 // ════════════════════════════════════════════
-let currentDetTab = 'plan';
+let currentDetTab = 'infos';
 
 function openDetail(id) {
   const c = load().find(x=>x.id===id);
   if (!c) return;
   currentDetailId = id;
-
+  activePlanId = null;
+  refreshDetail();
+  switchDetTab('infos');
+  document.getElementById('detail-ov').classList.add('open');
+}
+function editCurrent(){ openAdd(currentDetailId); }
+function refreshDetail(){
+  const c = load().find(x=>x.id===currentDetailId);
+  if (!c) return;
   document.getElementById('det-nom').textContent = c.nom;
-  document.getElementById('det-status-badge').textContent = STATUS_LABEL[c.statut]||'Actif';
-  document.getElementById('det-status-badge').className = 'card-status-badge '+(STATUS_CLASS[c.statut]||'status-actif');
+  const b = document.getElementById('det-status-badge');
+  b.textContent = STATUS_LABEL[c.statut]||'Actif';
+  b.className = 'card-status-badge '+(STATUS_CLASS[c.statut]||'status-actif');
   document.getElementById('det-meta').textContent = c.commune||'';
-
+  document.getElementById('det-st-row').innerHTML = ['actif','prospect','pause','termine'].map(k=>`<button class="st-btn${(c.statut||'actif')===k?' on':''}" onclick="setStatut('${k}')">${STATUS_LABEL[k]}</button>`).join('');
   const rows = [];
-  const add = (l,v) => { if(v) rows.push(`<div class="det-row"><span class="det-label">${l}</span><span class="det-val">${esc(v)}</span></div>`); };
+  const add = (l,v,raw) => { if(v) rows.push(`<div class="det-row"><span class="det-label">${l}</span><span class="det-val">${raw||esc(v)}</span></div>`); };
   add('Client',c.client);
-  add('Adresse',c.adresse);
+  const adr = [c.adresse,c.commune].filter(Boolean).join(', ');
+  add('Adresse',c.adresse, c.adresse?`<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(adr)}" target="_blank" rel="noopener" style="color:var(--navy)">${esc(c.adresse)} 📍</a>`:'');
   add('Commune',c.commune);
   add('Date début',c.debut?fmtDateLong(c.debut):'');
   add('Date fin prévue',c.fin?fmtDateLong(c.fin):'');
   add('Montant devis',c.montant?'CHF '+Number(c.montant).toLocaleString('fr-CH'):'');
   add('Type de marché',c.marche);
-  document.getElementById('det-rows').innerHTML = rows.join('');
+  document.getElementById('det-rows').innerHTML = rows.join('') || '<div class="det-row"><span class="det-label">Aucune information — utilise ✏️</span></div>';
   document.getElementById('det-notes-wrap').innerHTML = c.notes
-    ? `<div class="det-label" style="margin-top:12px;margin-bottom:6px">Notes</div><div class="det-notes">${esc(c.notes)}</div>`
-    : '';
-
-  currentDetTab = 'plan';
-  activePlanId = null;
-  renderDetTabButtons();
-  renderDetFileTab('plan');
-  renderDetFileTab('devis');
-  document.getElementById('det-tab-plan').style.display = '';
-  document.getElementById('det-tab-devis').style.display = 'none';
-  document.getElementById('det-tab-infos').style.display = 'none';
-
-  document.getElementById('detail-ov').classList.add('open');
+    ? `<div class="det-label" style="margin-top:12px;margin-bottom:6px">Description</div><div class="det-notes">${esc(c.notes)}</div>` : '';
+  const f = c.pdf;
+  const bt = (t,fn,cls)=>`<button class="det-file-btn ${cls}" onclick="${fn}">${t}</button>`;
+  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px"><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size:'Aucun fichier'}</div></div><div class="det-file-actions">${f?bt('Voir devis','viewDevis()','primary'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div>`;
 }
-
+function setStatut(k){
+  const d = load(); const i = d.findIndex(x=>x.id===currentDetailId); if (i<0) return;
+  d[i] = {...d[i], statut:k}; save(d); refreshDetail(); renderList();
+  showToast('✓ Statut : '+STATUS_LABEL[k]);
+}
 function switchDetTab(tab){
   currentDetTab = tab;
-  if(tab==='plan') activePlanId = null; // on revient toujours à la liste, pas au dernier plan ouvert
+  if(tab==='plan') activePlanId = null;
   renderDetTabButtons();
-  document.getElementById('det-tab-plan').style.display  = tab==='plan'  ? '' : 'none';
-  document.getElementById('det-tab-devis').style.display = tab==='devis' ? '' : 'none';
-  document.getElementById('det-tab-infos').style.display = tab==='infos' ? '' : 'none';
+  ['infos','plan','rapports'].forEach(t=>{ document.getElementById('det-tab-'+t).style.display = t===tab ? '' : 'none'; });
   if(tab==='plan') renderDetFileTab('plan');
+  if(tab==='rapports') renderRapports();
   updatePlanFullscreenState();
 }
 function renderDetTabButtons(){
-  ['plan','devis','infos'].forEach(t=>{
-    document.getElementById('det-tab-btn-'+t).classList.toggle('active', t===currentDetTab);
-  });
+  ['infos','plan','rapports'].forEach(t=>document.getElementById('det-tab-btn-'+t).classList.toggle('active', t===currentDetTab));
+}
+
+// ── Devis synchronisé (Firestore, par morceaux ; max 2 Mo) ──
+async function uploadDevis(cid, file){
+  if (file.size > 2*1024*1024) { showToast('⚠️ Devis > 2 Mo : gardé sur cet appareil seulement', 6000); return 0; }
+  try{
+    const s = await new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); });
+    const n = Math.ceil(s.length/600000);
+    for (let i=0;i<n;i++) await setDoc(doc(db,'chantiers',`devis_${cid}_${i}`),{type:'devis',chantierId:cid,n:i,data:s.slice(i*600000,(i+1)*600000)});
+    return n;
+  }catch(e){ console.warn('Sync devis',e); showToast('⚠️ Devis enregistré ici mais pas synchronisé : '+e.message, 6000); return 0; }
+}
+async function ensureDevis(c){
+  const f = c.pdf; if(!f||!f.pdfKey||!f.parts) return;
+  if (await getPdfBlob(f.pdfKey)) return;
+  try{
+    let s=''; for (let i=0;i<f.parts;i++){ const d=await getDoc(doc(db,'chantiers',`devis_${c.id}_${i}`)); if(!d.exists()) return; s+=d.data().data; }
+    const b = await (await fetch(s)).blob(); await savePdfBlob(f.pdfKey,b); delete blobUrlCache[f.pdfKey];
+  }catch(e){ console.warn('Téléchargement devis',e); }
+}
+async function viewDevis(){
+  const c = load().find(x=>x.id===currentDetailId); if(!c||!c.pdf) return;
+  const w = window.open('');
+  await ensureDevis(c);
+  const url = await getFileUrl(c.pdf);
+  if(!url){ if(w) w.close(); showToast('❌ Devis introuvable'); return; }
+  if(w) w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0"><embed src="${url}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0"></body></html>`);
+}
+
+// ── Rapports archivés du chantier (conservés jusqu'à suppression) ──
+const RAPK = 'rv6_ch_rapports';
+function rapLocal(){ try{ return JSON.parse(localStorage.getItem(RAPK)||'{}'); }catch(e){ return {}; } }
+async function loadRapports(cid){
+  try{
+    const s = await getDocs(query(collection(db,'chantiers'),where('chantierId','==',cid)));
+    const list = s.docs.map(d=>d.data()).filter(x=>x.type==='rapport').map(x=>x.report);
+    const a = rapLocal(); a[cid] = list; localStorage.setItem(RAPK,JSON.stringify(a));
+    return list;
+  }catch(e){ console.warn('Rapports',e); return rapLocal()[cid]||[]; }
+}
+function rapRow(r,ed){
+  const emp = (r.employes||[]).filter(e=>parseFloat(e.heures||0)>0);
+  const h = emp.reduce((t,e)=>t+parseFloat(e.heures),0);
+  const editing = ed && String(ed.id)===String(r.id);
+  const L = (t,v)=> v?`<div><b>${t} :</b> ${v}</div>`:'';
+  const loc = Object.values(r.locSelection||{}).filter(x=>x.qty>0).map(x=>`${esc(x.label)} ${x.qty} ${esc(x.unit)}`).join(', ');
+  const fo = (r.fournitures_catalogue||[]).map(f=>`${esc(f.nom)} ${esc(f.qty)} ${esc(f.unit)}`).join(', ');
+  const ev = (r.evacuations||[]).filter(e=>e.mat).map(e=>`${esc(e.mat)} ${esc(e.qte)} ${esc(e.unite)}`).join(', ');
+  const me = (r.metres||[]).map(m=>`${esc(m.desc)} ${esc(m.total)} ${esc(m.unit)}`).join(', ');
+  const tv = r.travaux||'';
+  return `<div class="rap-row"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}</div></div><div class="rap-act"><button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${L('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`).join(', '))}${L('Location',loc)}${L('Fournitures',fo)}${L('Évacuations',ev)}${L('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
+}
+async function renderRapports(){
+  const cid = currentDetailId, el = document.getElementById('det-tab-rapports');
+  const draw = list => {
+    if (cid!==currentDetailId || currentDetTab!=='rapports') return;
+    list = [...list].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||(b.id-a.id));
+    document.getElementById('det-tab-btn-rapports').textContent = '📋 Rapports'+(list.length?' ('+list.length+')':'');
+    let ed = null; try{ ed = JSON.parse(localStorage.getItem('rj_edit_from')||'null'); }catch(e){}
+    el.innerHTML = list.length ? list.map(r=>rapRow(r,ed)).join('') : '<div class="det-empty-state"><div class="det-empty-icon">📋</div><div class="det-empty-text">Aucun rapport validé pour ce chantier</div></div>';
+  };
+  draw(rapLocal()[cid]||[]);
+  draw(await loadRapports(cid));
+}
+function rapEdit(id){
+  const r = (rapLocal()[currentDetailId]||[]).find(x=>String(x.id)===String(id)); if(!r) return;
+  localStorage.setItem('rj_edit_request', JSON.stringify(r));
+  window.location.href = '../rapport/index.html';
+}
+async function rapDel(id){
+  if (!confirm('Supprimer ce rapport du chantier ?')) return;
+  const a = rapLocal(); a[currentDetailId] = (a[currentDetailId]||[]).filter(x=>String(x.id)!==String(id));
+  localStorage.setItem(RAPK,JSON.stringify(a));
+  try{ await deleteDoc(doc(db,'chantiers',`rap_${currentDetailId}_${id}`)); }catch(e){ console.warn(e); }
+  renderRapports(); showToast('🗑 Rapport supprimé');
+}
+async function flushPending(){
+  try{
+    const q = JSON.parse(localStorage.getItem('rv6_ch_rap_pending')||'[]'); if(!q.length) return;
+    const rest = [];
+    for (const x of q){ try{ await setDoc(doc(db,'chantiers',`rap_${x.cid}_${x.report.id}`),{type:'rapport',chantierId:x.cid,report:stripUndefinedDeep(x.report),updatedAt:Date.now()}); }catch(e){ rest.push(x); } }
+    localStorage.setItem('rv6_ch_rap_pending',JSON.stringify(rest));
+  }catch(e){}
+}
+async function migrateRapports(){
+  if (localStorage.getItem('rv6_ch_rap_migr')) return;
+  try{
+    const reps = JSON.parse(localStorage.getItem('rj_reports_v1')||'[]'); const ch = load();
+    for (const r of reps){
+      const c = ch.find(x=>(x.nom||'').trim().toLowerCase()===(r.chantier||'').trim().toLowerCase());
+      if (c) await setDoc(doc(db,'chantiers',`rap_${c.id}_${r.id}`),{type:'rapport',chantierId:c.id,report:stripUndefinedDeep(r),updatedAt:Date.now()});
+    }
+    localStorage.setItem('rv6_ch_rap_migr','1');
+  }catch(e){ console.warn('Migration rapports',e); }
+}
+
+// ── Ordre manuel (l'ordre du tableau = ordre affiché, synchronisé via Firestore) ──
+function migrateOrder(){
+  const d = load();
+  if (!d.length || d.some(c=>c.o)) return;
+  const o = {actif:0,prospect:1,pause:2,termine:3};
+  d.sort((a,b)=>{ const x=(o[a.statut]||0)-(o[b.statut]||0); if(x) return x; if(a.debut&&b.debut) return b.debut.localeCompare(a.debut); return (a.nom||'').localeCompare(b.nom||''); });
+  save(d.map(c=>({...c,o:1})));
+}
+let reorderMode = false, dragEl = null;
+function startReorder(){
+  currentFilter = 'tous'; currentSearch = '';
+  document.querySelector('.search-input').value = '';
+  document.querySelectorAll('.filter-chip').forEach(x=>x.classList.toggle('on', x.dataset.filter==='tous'));
+  reorderMode = true; renderList();
+}
+function endReorder(){
+  const ids = [...document.querySelectorAll('#listContainer .chantier-card')].map(e=>e.dataset.id);
+  const by = Object.fromEntries(load().map(c=>[c.id,c]));
+  save(ids.map(i=>by[i]).filter(Boolean));
+  reorderMode = false; renderList(); showToast('✓ Ordre enregistré');
+}
+const LC = document.getElementById('listContainer');
+LC.addEventListener('pointerdown',e=>{
+  const h = e.target.closest('.drag-h');
+  if (h) { dragEl = h.closest('.chantier-card'); dragEl.classList.add('dragging'); h.setPointerCapture(e.pointerId); return; }
+  lpFired = false;
+  const card = e.target.closest('.chantier-card'); if (!card || reorderMode) return;
+  lpX = e.clientX; lpY = e.clientY; clearTimeout(lpTimer);
+  lpTimer = setTimeout(()=>{ lpFired = true; if (navigator.vibrate) navigator.vibrate(20); openMenu(card.dataset.id); }, 500);
+});
+LC.addEventListener('pointermove',e=>{
+  if (lpTimer && (Math.abs(e.clientX-lpX)>10 || Math.abs(e.clientY-lpY)>10)) { clearTimeout(lpTimer); lpTimer = null; }
+  if (!dragEl) return;
+  const t = document.elementFromPoint(e.clientX,e.clientY), o = t && t.closest('.chantier-card');
+  if (o && o!==dragEl && o.parentNode===LC) { const r=o.getBoundingClientRect(); LC.insertBefore(dragEl, e.clientY<r.top+r.height/2 ? o : o.nextSibling); }
+  const sc = document.querySelector('.scroll');
+  if (e.clientY<140) sc.scrollTop -= 12; else if (e.clientY>innerHeight-100) sc.scrollTop += 12;
+});
+['pointerup','pointercancel','pointerleave'].forEach(t=>LC.addEventListener(t,()=>{
+  clearTimeout(lpTimer); lpTimer = null;
+  if (dragEl) { dragEl.classList.remove('dragging'); dragEl = null; }
+}));
+LC.addEventListener('contextmenu',e=>{ if (e.target.closest('.chantier-card')) e.preventDefault(); });
+
+// ── Menu appui long ──
+let lpTimer = null, lpFired = false, lpX = 0, lpY = 0;
+function cardTap(id){ if (lpFired) { lpFired = false; return; } openDetail(id); }
+function openMenu(id){
+  const c = load().find(x=>x.id===id); if(!c) return;
+  const ov = document.createElement('div'); ov.className = 'modal-ov open'; ov.id = 'menu-ov';
+  ov.onclick = e=>{ if (e.target===ov) ov.remove(); };
+  ov.innerHTML = `<div class="modal-sh"><div class="modal-drag"><div class="modal-handle"></div></div><div class="modal-hdr"><div class="modal-title">${esc(c.nom)}</div><button class="modal-close" onclick="menuClose()">✕</button></div><div class="modal-body menu-body"><button class="menu-btn" onclick="menuDo('order','${id}')">↕️ Réorganiser la liste</button><button class="menu-btn" onclick="menuDo('edit','${id}')">✏️ Modifier</button><div class="st-row">${['actif','prospect','pause','termine'].map(k=>`<button class="st-btn${(c.statut||'actif')===k?' on':''}" onclick="menuDo('st','${id}','${k}')">${STATUS_LABEL[k]}</button>`).join('')}</div><button class="menu-btn danger" onclick="menuDo('del','${id}')">🗑 Supprimer</button></div></div>`;
+  document.body.appendChild(ov);
+}
+function menuClose(){ const o = document.getElementById('menu-ov'); if (o) o.remove(); }
+function menuDo(a,id,k){
+  menuClose();
+  if (a==='order') startReorder();
+  else if (a==='edit') openAdd(id);
+  else if (a==='st') { const d=load(); const i=d.findIndex(x=>x.id===id); if(i>-1){ d[i]={...d[i],statut:k}; save(d); renderList(); showToast('✓ Statut : '+STATUS_LABEL[k]); } }
+  else if (a==='del' && confirm('Supprimer ce chantier et ses rapports archivés ?')) { removeChantier(id); renderList(); showToast('🗑 Chantier supprimé'); }
 }
 
 // tabKey = 'plan' ou 'devis'. Le Devis reste un fichier unique ; le Plan est
@@ -1130,7 +1334,8 @@ async function handleDetFileUpload(event, field){
     }
 
     if(field==='pdf'){
-      data[idx] = {...data[idx], pdf: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', pdfKey }};
+      const parts = await uploadDevis(currentDetailId, file);
+      data[idx] = {...data[idx], pdf: { name: file.name, size: (file.size/1024).toFixed(0)+' Ko', pdfKey, parts }};
     } else {
       const newPlan = {
         id: planId, name: file.name, size: (file.size/1024).toFixed(0)+' Ko', pdfKey,
@@ -1153,7 +1358,7 @@ async function handleDetFileUpload(event, field){
       return;
     }
 
-    if(field==='plan') renderPlanList(); else renderDetFileTab('devis');
+    if(field==='plan') renderPlanList(); else refreshDetail();
     renderList();
     showToast(`✓ ${field==='plan'?'Plan importé':'Devis enregistré'}`);
   } catch(e){
@@ -1165,12 +1370,16 @@ async function handleDetFileUpload(event, field){
 
 function closeDetail() { document.getElementById('detail-ov').classList.remove('open'); }
 
+async function removeChantier(id){
+  save(load().filter(c=>c.id!==id));
+  try{ const s = await getDocs(query(collection(db,'chantiers'),where('chantierId','==',id))); s.docs.forEach(x=>deleteDoc(x.ref)); }catch(e){ console.warn(e); }
+  const a = rapLocal(); delete a[id]; localStorage.setItem(RAPK,JSON.stringify(a));
+}
 function deleteCurrentChantier() {
   if (!currentDetailId) return;
-  const data = load().filter(c=>c.id!==currentDetailId);
-  save(data);
-  closeDetail();
-  renderList();
+  if (!confirm('Supprimer ce chantier et ses rapports archivés ?')) return;
+  removeChantier(currentDetailId);
+  closeDetail(); renderList();
   showToast('🗑 Chantier supprimé');
 }
  
@@ -1226,7 +1435,9 @@ function migrateLegacyChantiers() {
 async function initApp() {
   await syncFromFirestore();
   migrateLegacyChantiers();
+  migrateOrder();
   renderList();
+  flushPending().then(migrateRapports);
   requestPersistentStorage();
 }
 
@@ -1401,6 +1612,7 @@ window.calcOp                = calcOp;
 window.calcClear             = calcClear;
 window.calcBackspace         = calcBackspace;
 window.calcEquals            = calcEquals;
+Object.assign(window,{cardTap,menuClose,menuDo,endReorder,editCurrent,setStatut,viewDevis,rapEdit,rapDel});
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
