@@ -273,6 +273,7 @@ body.mat-dragging *{cursor:grabbing!important;}
   <div class="page" id="page-vehicules"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('vehicules',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('vehicules')">＋</button></div><div id="content-vehicules"></div></div>
   <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
   <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
+  <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
 </div>
  
 <!-- BOTTOM NAV -->
@@ -282,6 +283,7 @@ body.mat-dragging *{cursor:grabbing!important;}
   <button class="nav-item" data-tab="vehicules" onclick="switchTab('vehicules')"><span class="nav-icon">🚛</span><span class="nav-label">Véhicules</span><span class="nav-badge" id="badge-vehicules">0</span></button>
   <button class="nav-item" data-tab="materiel" onclick="switchTab('materiel')"><span class="nav-icon">🔧</span><span class="nav-label">Matériel</span><span class="nav-badge" id="badge-materiel">0</span></button>
   <button class="nav-item" data-tab="materiaux" onclick="switchTab('materiaux')"><span class="nav-icon">🪨</span><span class="nav-label">Matériaux</span><span class="nav-badge" id="badge-materiaux">0</span></button>
+  <button class="nav-item" data-tab="evacuations" onclick="switchTab('evacuations')"><span class="nav-icon">🚮</span><span class="nav-label">Évac.</span><span class="nav-badge" id="badge-evacuations">0</span></button>
 </nav>
  
 <div class="toast" id="toast"></div>
@@ -524,6 +526,28 @@ body.mat-dragging *{cursor:grabbing!important;}
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiaux')">Enregistrer</button></div>
   </div>
 </div>
+
+<!-- ÉVACUATIONS -->
+<div class="modal-ov" id="modal-add-evacuations">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title">🚮 Nouvelle évacuation</div><button class="modal-close" onclick="closeAdd('evacuations')">✕</button></div>
+    <div class="modal-body">
+      <div class="media-zone">
+        <div class="media-preview" id="media-prev-evacuations" onclick="triggerPhoto('evacuations')">📷</div>
+        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('evacuations')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('evacuations')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('evacuations')" style="display:none" id="media-del-evacuations">✕ Supprimer</button></div>
+      </div>
+      <div class="form-sec-label">Catégorie</div>
+      <div class="field"><label>Sous-catégorie</label><select id="ev-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="form-sec-label">Identification</div>
+      <div class="field"><label>Nom / Désignation *</label><input type="text" id="ev-nom" placeholder="Gravats, Déblais terre…" autocomplete="off"></div>
+      <div class="field"><label>Unité par défaut</label><select id="ev-unite"><option value="">—</option><option>m³</option><option>T</option><option>kg</option><option>benne</option><option>pc</option><option>m</option><option>ml</option><option>m²</option><option>L</option><option>h</option><option>sac</option><option>forfait</option></select></div>
+      <div class="form-sec-label">Notes</div>
+      <div class="field"><label>Notes libres</label><textarea id="ev-notes" placeholder="Décharge, filière, prix à la tonne…"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('evacuations')">Enregistrer</button></div>
+  </div>
+</div>
  
 <!-- ════════════════════════════════════
      DETAIL SHEET
@@ -591,15 +615,15 @@ onAuthStateChanged(auth, user => {
 });
 
 // ── CONFIG ──────────────────────────────────────────────
-const TABS    = ['equipe','machines','vehicules','materiel','materiaux'];
-const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux'};
-const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨'};
-const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB'};
-const KEYS    = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials'};
+const TABS    = ['equipe','machines','vehicules','materiel','materiaux','evacuations'];
+const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
+const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
+const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB',evacuations:'#F3F4F6'};
+const KEYS    = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
 const CAT_KEY = 'rv6_res_categories';
  
 // Sections avec sous-catégories actives
-const HAS_CATS = ['materiel','materiaux'];
+const HAS_CATS = ['materiel','materiaux','evacuations'];
  
 const PALETTE = ['#E53935','#E67E22','#F0A500','#2E7D32','#1A7F72','#1B3A6B','#6C3483','#1565C0','#00838F','#4E342E'];
  
@@ -648,8 +672,8 @@ let openAccordions     = {};
 let searchFilters      = {};
  
 // Photos et icônes éléments en cours d'édition
-let itemPhotos = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:''};
-let itemIcons  = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:''};
+let itemPhotos = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
+let itemIcons  = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
 let photoTargetSection = '';
 let emojiPickerCallback = null;
  
@@ -674,7 +698,7 @@ function save(s,d){
   }
 }
 
-function loadCats(){ try{ const r=localStorage.getItem(CAT_KEY); return r?JSON.parse(r):{equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; }catch(e){ return {equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[]}; } }
+function loadCats(){ try{ const r=localStorage.getItem(CAT_KEY); return r?JSON.parse(r):{equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[],evacuations:[]}; }catch(e){ return {equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[],evacuations:[]}; } }
 
 function saveCats(d){
   // 1. localStorage
@@ -696,6 +720,10 @@ async function syncFromFirestore(){
       if(snap.exists()){
         const items = snap.data().items || [];
         localStorage.setItem(KEYS[s], JSON.stringify(items));
+      } else if(s==='evacuations'){
+        // Première fois : liste de départ (ids fixes, donc sans doublon si plusieurs appareils)
+        let cur = []; try{ cur = JSON.parse(localStorage.getItem(KEYS[s])||'[]'); }catch(e){}
+        save(s, cur.length ? cur : [['evac_gravats','Gravats','m³'],['evac_deblais','Déblais terre','m³'],['evac_enrobe','Enrobé','T'],['evac_beton','Béton concassé','m³'],['evac_ferraille','Ferraille','T'],['evac_dechets','Déchets chantier','benne'],['evac_boue','Boue/sédiments','m³'],['evac_bois','Bois','m³']].map(a=>({id:a[0],nom:a[1],unite:a[2],catId:'',subCatId:'',photo:'',icon:''})));
       }
     }
     // Sync catégories
@@ -766,7 +794,7 @@ function renderContent(section, filter){
           const subItems = allCatItems.filter(i=>i.subCatId===sub.id);
           const subKey = section+'__'+cat.id+'__'+sub.id;
           const subOpen = openAccordions[subKey]||false;
-          const subAddBtn = section==='materiaux'
+          const subAddBtn = (section==='materiaux'||section==='evacuations')
             ? `<button class="acc-quick-add" onclick="event.stopPropagation();openAdd('${section}','${cat.id}|${sub.id}')" title="Ajouter dans ${esc(sub.name)}">＋</button>`
             : '';
           innerHtml += `
@@ -829,7 +857,7 @@ function catIndicatorHTML(image, emoji, color, size){
  
 // Accordéon avec contenu HTML libre (pour les sous-accordéons)
 function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen){
-  const showAddBtn = section==='materiaux' && cat.id;
+  const showAddBtn = (section==='materiaux'||section==='evacuations') && cat.id;
   return `
   <div class="accordion" data-cat-id="${cat.id||''}">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
@@ -848,7 +876,7 @@ function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen
 }
  
 function renderAccordion(accKey, name, cat, items, icon, bgColor, section, isOpen){
-  const showAddBtn = section==='materiaux' && cat.id;
+  const showAddBtn = (section==='materiaux'||section==='evacuations') && cat.id;
   return `
   <div class="accordion" data-cat-id="${cat.id||''}">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
@@ -1201,7 +1229,7 @@ function deleteSubCategory(catId, subId){
 }
  
 // ── SELECT CATÉGORIES (seulement materiel et materiaux) ─
-const CAT_SELECT_IDS = {materiel:'mt-cat', materiaux:'mx-cat'};
+const CAT_SELECT_IDS = {materiel:'mt-cat', materiaux:'mx-cat', evacuations:'ev-cat'};
  
 function populateCatSelects(section){
   if(!HAS_CATS.includes(section)) return;
@@ -1275,10 +1303,14 @@ function saveItem(section){
     if(!g('mt-nom')){ highlight('mt-nom'); return; }
     const catVal = g('mt-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
     item={...item, catId:cId, subCatId:sId, nom:g('mt-nom'), type:g('mt-type'), marque:g('mt-marque'), ref:g('mt-ref'), poids:g('mt-poids'), puissance:g('mt-puissance'), prix:g('mt-prix'), location:g('mt-location'), notes:g('mt-notes') };
-  } else if(section==='materiaux'){
+  } else if((section==='materiaux'||section==='evacuations')){
     if(!g('mx-nom')){ highlight('mx-nom'); return; }
     const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
     item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), unite:g('mx-unite'), densite:g('mx-densite')?parseFloat(g('mx-densite')):null, masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), notes:g('mx-notes') };
+  } else if(section==='evacuations'){
+    if(!g('ev-nom')){ highlight('ev-nom'); return; }
+    const catVal = g('ev-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
+    item={...item, catId:cId, subCatId:sId, nom:g('ev-nom'), unite:g('ev-unite'), notes:g('ev-notes') };
   }
  
   // Ajouter la photo et l'icône
@@ -1329,7 +1361,7 @@ function editCurrentItem(){
   // Changer le titre du modal
   const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
   if(titleEl){
-    const icons = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨'};
+    const icons = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
     titleEl.textContent = icons[section]+' Modifier';
   }
  
@@ -1376,12 +1408,16 @@ function fillForm(s, item){
     f('mx-granulo',item.granulo); f('mx-fournisseur',item.fournisseur);
     f('mx-prix',item.prix); f('mx-notes',item.notes);
   }
+  if(s==='evacuations'){
+    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
+    f('ev-cat',catVal); f('ev-nom',item.nom); f('ev-unite',item.unite); f('ev-notes',item.notes);
+  }
 }
  
 function resetModalTitle(section){
   const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
   if(!titleEl) return;
-  const titles = {equipe:'👷 Nouvel employé',machines:'🚜 Nouvelle machine',vehicules:'🚛 Nouveau véhicule',materiel:'🔧 Nouveau matériel',materiaux:'🪨 Nouveau matériau'};
+  const titles = {equipe:'👷 Nouvel employé',machines:'🚜 Nouvelle machine',vehicules:'🚛 Nouveau véhicule',materiel:'🔧 Nouveau matériel',materiaux:'🪨 Nouveau matériau',evacuations:'🚮 Nouvelle évacuation'};
   titleEl.textContent = titles[section]||'';
 }
  
@@ -1447,7 +1483,7 @@ function getSubtitle(s,item){
   if(s==='machines') return [item.type,item.annee].filter(Boolean).join(' · ');
   if(s==='vehicules') return [item.type,item.immat].filter(Boolean).join(' · ');
   if(s==='materiel') return [item.type,item.marque].filter(Boolean).join(' · ');
-  if(s==='materiaux') return [item.unite].filter(Boolean).join(' · ');
+  if(s==='materiaux'||s==='evacuations') return [item.unite].filter(Boolean).join(' · ');
   return '';
 }
 function getPrice(s,item){
@@ -1529,6 +1565,7 @@ function getDetailRows(s,item){
   if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.poids)add('Poids véhicule',item.poids+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.pma)add('Poids maximum',item.pma+' t'); if(item.volume)add('Volume pont',item.volume+' m³'); add('Dimensions',item.dimensions); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='materiel'){ add('Catégorie',item.type); add('Marque',item.marque); add('Référence',item.ref); if(item.poids)add('Poids',item.poids+' kg'); if(item.puissance)add('Puissance',item.puissance+' W'); if(item.prix)add("Prix d'achat",'CHF '+item.prix); if(item.location)add('Location/jour','CHF '+item.location); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
+  if(s==='evacuations'){ add('Unité',item.unite); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   if(s==='materiaux'){ add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.masse_volumique||item.densite){ const mv=item.masse_volumique||item.densite; add('Masse volumique',mv+' kg/m³'); } if(item.prix)add('Prix','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
   return r;
 }
@@ -1840,7 +1877,7 @@ function initItemDrag(el, section, itemId){
 // Système indépendant du drag tactile ci-dessus (qui reste pour le réordre mobile).
 const MOUSE_DRAG_THRESHOLD = 5;
 
-function initMaterialMouseDrag(el, itemId){
+function initMaterialMouseDrag(el, itemId, section){
   let startX, startY, dragging = false, moved = false;
 
   el.addEventListener('mousedown', e=>{
@@ -1891,14 +1928,14 @@ function initMaterialMouseDrag(el, itemId){
         if(accordion) newCatId = accordion.dataset.catId || ''; // '' = "Sans catégorie"
       }
       if(newCatId===null) return; // pas déposé sur une cible valide
-      const data = load('materiaux');
+      const data = load(section);
       const item = data.find(i=>i.id===itemId);
       if(!item) return;
       if(item.catId===newCatId && (item.subCatId||'')===newSubId) return; // déjà là
       item.catId = newCatId;
       item.subCatId = newSubId;
-      save('materiaux', data);
-      renderContent('materiaux', searchFilters['materiaux']||'');
+      save(section, data);
+      renderContent(section, searchFilters[section]||'');
       showToast(newCatId ? '✓ Déplacé' : '✓ Retiré de la catégorie');
     };
 
@@ -2060,9 +2097,9 @@ function attachDragListeners(section){
     initSubCatDrag(el, section, el.closest('.accordion[data-cat-id]').dataset.catId, el.closest('.sub-acc').dataset.subId);
   });
   // Drag souris desktop (changement de catégorie) — Matériaux uniquement
-  if(section==='materiaux'){
+  if((section==='materiaux'||section==='evacuations')){
     document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
-      initMaterialMouseDrag(el, el.dataset.id);
+      initMaterialMouseDrag(el, el.dataset.id, section);
     });
   }
 }
