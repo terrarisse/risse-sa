@@ -4932,15 +4932,15 @@ function buildEvacCatalogue() {
         sh.onclick = () => { sh.classList.toggle('open'); sb.classList.toggle('open'); };
         const si = document.createElement('div');
         si.className = 'r-sub-inner';
-        subItems.forEach(item => si.appendChild(buildRItem(item, sub.name, cat.name||cat.nom)));
+        subItems.forEach(item => si.appendChild(buildEvacItem(item, sub.name, cat.name||cat.nom)));
         sb.appendChild(si);
         inner.appendChild(sh);
         inner.appendChild(sb);
       });
       // Items sans sous-cat
-      (group.subGroups['__none__'] || []).forEach(item => inner.appendChild(buildRItem(item, null, cat.name||cat.nom)));
+      (group.subGroups['__none__'] || []).forEach(item => inner.appendChild(buildEvacItem(item, null, cat.name||cat.nom)));
     } else {
-      group.items.forEach(item => inner.appendChild(buildRItem(item, null, cat.name||cat.nom)));
+      group.items.forEach(item => inner.appendChild(buildEvacItem(item, null, cat.name||cat.nom)));
     }
 
     b.appendChild(inner);
@@ -4963,7 +4963,7 @@ function buildEvacCatalogue() {
     h.onclick = () => { h.classList.toggle('open'); b.classList.toggle('open'); };
     const inner = document.createElement('div');
     inner.className = 'r-acc-inner';
-    noCat.items.forEach(item => inner.appendChild(buildRItem(item)));
+    noCat.items.forEach(item => inner.appendChild(buildEvacItem(item)));
     b.appendChild(inner);
     div.appendChild(h);
     div.appendChild(b);
@@ -4972,7 +4972,7 @@ function buildEvacCatalogue() {
 }
 
 
-function buildRItem(item, subName, catName) {
+function buildEvacItem(item, subName, catName) {
   const key = item.id;
   const isSelected = !!evacSelection[key];
   const uid = ++_frowId;
