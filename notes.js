@@ -119,7 +119,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
     const listen = (kind) => onSnapshot(ref(kind), snap => {
       const remote = snap.exists() ? (snap.data().items || []) : [];
       if (kind === 'perso') perso = mergeLists(remote, perso); else equipe = mergeLists(remote, equipe);
-      saveCache(); render(); updateBadge();
+      saveCache(); render(); refreshEditor(); updateBadge();
     }, err => console.warn('[notes] listen', kind, err.code));
     unsubs.push(listen('perso'), listen('equipe'));
   }
@@ -169,9 +169,28 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
   }
 
   let draft = null; // note en cours d'édition
+  // Met à jour la note ouverte quand quelqu'un d'autre la modifie (sans écraser ce qu'on tape)
+  function refreshEditor() {
+    if (view !== 'edit' || !draft || draft._new || saveTimer) return;
+    const r = findNote(draft.id);
+    if (!r || (r.updatedAt || 0) <= (draft._ua || 0)) return;
+    const ae = document.activeElement, typing = ae && ov.contains(ae) && /^(INPUT|TEXTAREA)$/.test(ae.tagName) && ae.type !== 'checkbox';
+    draft._ua = r.updatedAt;
+    if (typing) { // on ne touche pas au texte en cours de frappe : seulement les coches
+      if (draft.type === 'liste' && r.type === 'liste' && (r.items || []).length === draft.items.length) {
+        r.items.forEach((it, i) => { draft.items[i].done = !!it.done; });
+        ov.querySelectorAll('input[type=checkbox]').forEach(c => { const v = draft.items[c.dataset.i]; if (v) { c.checked = v.done; const t = ov.querySelector(`[data-t="${c.dataset.i}"]`); if (t) t.classList.toggle('done', v.done); } });
+      }
+      return;
+    }
+    const keep = { _orig: r.partage, _ua: r.updatedAt };
+    draft = Object.assign(JSON.parse(JSON.stringify(r)), keep);
+    renderEditor();
+    setStatus('↻ Mis à jour par un collègue');
+  }
   function openEditor(id) {
     view = 'edit';
-    if (id) { draft = JSON.parse(JSON.stringify(findNote(id))); draft._orig = draft.partage; }
+    if (id) { draft = JSON.parse(JSON.stringify(findNote(id))); draft._orig = draft.partage; draft._ua = draft.updatedAt || 0; }
     else draft = { id: uid8(), titre: '', type: 'liste', texte: '', items: [{ t: '', done: false }], chantierId: '', partage: false, createdAt: now(), _new: true, _orig: false };
     renderEditor();
   }
@@ -227,7 +246,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
 
   async function commit() {
     if (!draft) return;
-    clearTimeout(saveTimer);
+    clearTimeout(saveTimer); saveTimer = null;
     const d = draft;
     const empty = !d.titre.trim() && !(d.type === 'texte' ? d.texte.trim() : d.items.some(x => x.t.trim()));
     if (empty) { setStatus(''); return; }
@@ -247,14 +266,14 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
       if (fromKind === 'equipe') put(equipe, tomb); else put(perso, tomb);
       pushes.push(push(fromKind, [tomb]));
     }
-    d._new = false; d._orig = d.partage;
+    d._new = false; d._orig = d.partage; d._ua = note.updatedAt;
     saveCache(); updateBadge();
     await Promise.all(pushes);
     setStatus('✓ Enregistré');
   }
 
   async function removeNote() {
-    const d = draft; clearTimeout(saveTimer);
+    const d = draft; clearTimeout(saveTimer); saveTimer = null;
     const kind = d._orig ? 'equipe' : 'perso';
     const tomb = { id: d.id, deleted: true, updatedAt: now() };
     const list = kind === 'equipe' ? equipe : perso;
@@ -270,7 +289,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
 
   /* ───────── Ouverture / bouton ───────── */
   function openNotes() { view = 'list'; ov.classList.add('open'); render(); }
-  function closeNotes() { if (view === 'edit') { commit(); } clearTimeout(saveTimer); draft = null; view = 'list'; ov.classList.remove('open'); }
+  function closeNotes() { if (view === 'edit') { commit(); } clearTimeout(saveTimer); saveTimer = null; draft = null; view = 'list'; ov.classList.remove('open'); }
   window.openNotes = openNotes;
 
   let btns = [];
