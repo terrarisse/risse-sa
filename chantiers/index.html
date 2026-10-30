@@ -304,7 +304,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
  
       <div class="fsec" id="pdf-fsec">Devis (PDF)</div>
       <div id="pdf-zone">
-        <div id="pdf-preview" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div id="pdf-preview" style="display:none;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;align-items:center;gap:10px;margin-bottom:8px;">
           <span style="font-size:24px;">📄</span>
           <div style="flex:1;min-width:0;">
             <div id="pdf-name" style="font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
@@ -312,7 +312,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
           </div>
           <button onclick="clearPdf()" style="background:none;border:none;color:var(--red);font-size:16px;cursor:pointer;padding:4px;">✕</button>
         </div>
-        <button onclick="document.getElementById('pdf-input').click()" style="width:100%;padding:14px;border:1.5px dashed var(--border);border-radius:var(--rs);background:var(--bg);cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;justify-content:center;gap:8px;" id="pdf-upload-btn">
+        <button id="pdf-upload-btn" onclick="document.getElementById('pdf-input').click()" style="width:100%;padding:14px;border:1.5px dashed var(--border);border-radius:var(--rs);background:var(--bg);cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--text2);display:flex;align-items:center;justify-content:center;gap:8px;" id="pdf-upload-btn">
           📎 Ajouter le devis (PDF)
         </button>
         <input type="file" id="pdf-input" accept="application/pdf" style="display:none" onchange="handlePdfUpload(event)">
@@ -361,6 +361,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
     <div class="det-info-card"><div id="det-rows"></div></div>
     <div id="det-devis-wrap"></div>
     <div id="det-notes-wrap"></div>
+    <div id="det-lnotes-wrap"></div>
     <div class="det-footer">
       <button class="btn btn-danger btn-sm" style="width:100%" onclick="deleteCurrentChantier()">🗑 Supprimer ce chantier</button>
     </div>
@@ -447,7 +448,8 @@ let currentFilter = 'tous';
 let currentSearch = '';
 let currentDetailId = null;
 let selectedColor = COLORS[0];
-let currentPdf = null; // {name, size, data}
+let currentPdf = null; // {name, size}
+let currentPdfFile = null; // fichier choisi dans le formulaire
  
 // ════════════════════════════════════════════
 // STORAGE
@@ -755,7 +757,7 @@ document.getElementById('add-nom').addEventListener('keydown',e=>{ if(e.key==='E
  
 function g(id){ const el=document.getElementById(id); return el?(el.value||'').trim():''; }
  
-function saveChantier() {
+async function saveChantier() {
   const nom = g('add-nom');
   if (!nom) { highlight('add-nom'); return; }
   if (editingId) {
@@ -784,7 +786,7 @@ function saveChantier() {
     marche:   g('add-marche'),
     color:    selectedColor,
     notes:    g('add-notes'),
-    pdf:      currentPdf,
+    pdf:      null,
     plans:    [],
     createdAt: new Date().toISOString(),
     o: 1,
@@ -795,6 +797,14 @@ function saveChantier() {
     travaux:   [],
   };
  
+  if (currentPdfFile) {
+    try {
+      const key = `devis_${item.id}`;
+      await savePdfBlob(key, currentPdfFile);
+      const parts = await uploadDevis(item.id, currentPdfFile);
+      item.pdf = { name: currentPdfFile.name, size: (currentPdfFile.size/1024).toFixed(0)+' Ko', pdfKey: key, parts };
+    } catch(e) { console.error('Devis (création)', e); showToast('⚠️ Devis non enregistré : '+e.message, 6000); }
+  }
   const data = [item, ...load()];
   save(data);
   closeAdd();
@@ -821,27 +831,21 @@ function handlePdfUpload(event){
     event.target.value='';
     return;
   }
-  const reader = new FileReader();
-  reader.onload = function(e){
-    currentPdf = {
-      name: file.name,
-      size: (file.size/1024).toFixed(0)+' Ko',
-      data: e.target.result
-    };
-    updatePdfPreview();
-  };
-  reader.readAsDataURL(file);
+  currentPdfFile = file;
+  currentPdf = { name: file.name, size: (file.size/1024).toFixed(0)+' Ko' };
+  updatePdfPreview();
   event.target.value='';
 }
  
 function clearPdf(){
-  currentPdf = null;
+  currentPdf = null; currentPdfFile = null;
   updatePdfPreview();
 }
  
 function updatePdfPreview(){
   const prev = document.getElementById('pdf-preview');
   const btn  = document.getElementById('pdf-upload-btn');
+  if(!prev||!btn) return;
   if(currentPdf){
     document.getElementById('pdf-name').textContent = currentPdf.name;
     document.getElementById('pdf-size').textContent = currentPdf.size;
@@ -858,10 +862,7 @@ async function viewPdf(chId){
   if(!c || !c.pdf) return;
   const url = await getFileUrl(c.pdf);
   if(!url) { showToast('❌ Fichier introuvable en local'); return; }
-  const w = window.open('');
-  if(w){
-    w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0;"><embed src="${url}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0;"></body></html>`);
-  }
+  openPdfViewer(c.pdf.name, url);
 }
 
 // ════════════════════════════════════════════
@@ -901,10 +902,24 @@ function refreshDetail(){
   document.getElementById('det-rows').innerHTML = rows.join('') || '<div class="det-row"><span class="det-label">Aucune information — utilise ✏️</span></div>';
   document.getElementById('det-notes-wrap').innerHTML = c.notes
     ? `<div class="det-label" style="margin-top:12px;margin-bottom:6px">Description</div><div class="det-notes">${esc(c.notes)}</div>` : '';
+  renderLinkedNotes();
   const f = c.pdf;
   const bt = (t,fn,cls)=>`<button class="det-file-btn ${cls}" onclick="${fn}">${t}</button>`;
   document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px"><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size:'Aucun fichier'}</div></div><div class="det-file-actions">${f?bt('Voir devis','viewDevis()','primary'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div>`;
 }
+function renderLinkedNotes(){
+  const el = document.getElementById('det-lnotes-wrap'); if(!el) return;
+  const list = (window.risseNotes && currentDetailId) ? window.risseNotes.forChantier(currentDetailId) : [];
+  const can = !!window.openNotes;
+  el.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 6px"><div class="det-label" style="margin:0">📝 Notes & listes</div>${can?`<button class="det-file-btn ghost" onclick="openNotes({nouveau:true,chantierId:currentDetailId})">＋ Note</button>`:''}</div>`
+   + (list.length ? list.map(n=>{
+      const it = n.items||[]; const prog = n.type==='liste' && it.length ? `${it.filter(x=>x.done).length}/${it.length}` : '';
+      const prev = n.type==='liste' ? it.slice(0,3).map(x=>(x.done?'✓ ':'• ')+x.t).join('\n') : (n.texte||'');
+      return `<div class="det-info-card" style="padding:10px 12px;margin-bottom:8px;cursor:pointer" onclick="openNotes({id:'${n.id}'})"><div style="font-size:14px;font-weight:700">${n.type==='liste'?'☑️':'📝'} ${esc(n.titre||'Sans titre')} ${prog?`<span style="font-size:11px;color:var(--text3);font-weight:600">${prog}</span>`:''} ${n.partage?'<span style="font-size:10px;color:var(--teal)">👥 Équipe</span>':''}</div>${prev?`<div style="font-size:12px;color:var(--text3);margin-top:3px;white-space:pre-line;max-height:3.6em;overflow:hidden">${esc(prev)}</div>`:''}</div>`;
+    }).join('') : `<div style="font-size:12px;color:var(--text3);padding:4px 0">Aucune note liée à ce chantier</div>`);
+}
+window.addEventListener('risse-notes-update', ()=>{ if(currentDetailId && document.getElementById('detail-ov').classList.contains('open')) renderLinkedNotes(); });
+
 function setStatut(k){
   const d = load(); const i = d.findIndex(x=>x.id===currentDetailId); if (i<0) return;
   d[i] = {...d[i], statut:k}; save(d); refreshDetail(); renderList();
@@ -943,11 +958,24 @@ async function ensureDevis(c){
 }
 async function viewDevis(){
   const c = load().find(x=>x.id===currentDetailId); if(!c||!c.pdf) return;
-  const w = window.open('');
   await ensureDevis(c);
   const url = await getFileUrl(c.pdf);
-  if(!url){ if(w) w.close(); showToast('❌ Devis introuvable'); return; }
-  if(w) w.document.write(`<html><head><title>${esc(c.pdf.name)}</title></head><body style="margin:0"><embed src="${url}" type="application/pdf" width="100%" height="100%" style="position:fixed;inset:0"></body></html>`);
+  if(!url){ showToast('❌ Devis introuvable sur cet appareil'); return; }
+  openPdfViewer(c.pdf.name, url);
+}
+function openPdfViewer(name, url){
+  let v = document.getElementById('pdf-viewer');
+  if(!v){
+    v = document.createElement('div'); v.id='pdf-viewer';
+    v.style.cssText='position:fixed;inset:0;z-index:600;background:#111214;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)';
+    v.innerHTML='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--navy);color:#fff"><button id="pdf-v-close" style="border:none;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;height:36px;padding:0 14px;font-size:14px;font-weight:700">✕ Fermer</button><div id="pdf-v-name" style="flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div><a id="pdf-v-open" target="_blank" rel="noopener" style="color:#fff;font-size:13px;font-weight:600;text-decoration:none;background:rgba(255,255,255,.15);border-radius:10px;padding:9px 12px">↗ Ouvrir</a></div><iframe id="pdf-v-frame" style="flex:1;border:none;background:#fff"></iframe>';
+    document.body.appendChild(v);
+    v.querySelector('#pdf-v-close').onclick=()=>{ v.style.display='none'; v.querySelector('#pdf-v-frame').src='about:blank'; };
+  }
+  v.querySelector('#pdf-v-name').textContent = name||'Devis';
+  v.querySelector('#pdf-v-open').href = url;
+  v.querySelector('#pdf-v-frame').src = url;
+  v.style.display='flex';
 }
 
 // ── Rapports archivés du chantier (conservés jusqu'à suppression) ──
