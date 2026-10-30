@@ -16,6 +16,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
   window.__risseNotes = true;
   if (/login\.html/.test(location.pathname)) return;
   if (window.self !== window.top) return; // pas dans les iframes (ex. plan)
+  if (window.firebase) return; // page à SDK « compat » (accueil) : on n'y mélange pas un 2e SDK
 
   const CONFIG = {
     apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
