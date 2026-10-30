@@ -188,10 +188,10 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
     renderEditor();
     setStatus('↻ Mis à jour par un collègue');
   }
-  function openEditor(id) {
+  function openEditor(id, preset) {
     view = 'edit';
     if (id) { draft = JSON.parse(JSON.stringify(findNote(id))); draft._orig = draft.partage; draft._ua = draft.updatedAt || 0; }
-    else draft = { id: uid8(), titre: '', type: 'liste', texte: '', items: [{ t: '', done: false }], chantierId: '', partage: false, createdAt: now(), _new: true, _orig: false };
+    else draft = { id: uid8(), titre: '', type: 'liste', texte: '', items: [{ t: '', done: false }], chantierId: (preset && preset.chantierId) || '', partage: false, createdAt: now(), _new: true, _orig: false };
     renderEditor();
   }
 
@@ -290,11 +290,17 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
   /* ───────── Ouverture / bouton ───────── */
   function openNotes() { view = 'list'; ov.classList.add('open'); render(); }
   function closeNotes() { if (view === 'edit') { commit(); } clearTimeout(saveTimer); saveTimer = null; draft = null; view = 'list'; ov.classList.remove('open'); }
-  window.openNotes = openNotes;
+  window.openNotes = function (o) {
+    if (o && o.id && findNote(o.id)) { ov.classList.add('open'); openEditor(o.id); }
+    else if (o && o.nouveau) { ov.classList.add('open'); openEditor(null, { chantierId: o.chantierId }); }
+    else openNotes();
+  };
+  window.risseNotes = { forChantier: id => all().filter(n => id && String(n.chantierId) === String(id)) };
 
   let btns = [];
   function updateBadge() {
     const n = all().length;
+    try { window.dispatchEvent(new Event('risse-notes-update')); } catch (e) {}
     btns.forEach(b => { let d = b.querySelector('.rn-dot'); if (!n) { if (d) d.remove(); return; } if (!d) { d = document.createElement('span'); d.className = 'rn-dot'; b.appendChild(d); } d.textContent = n > 9 ? '9+' : n; });
   }
   function mountButton() {
