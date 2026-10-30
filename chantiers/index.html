@@ -359,9 +359,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <div class="det-tab-content" id="det-tab-infos">
     <div class="st-row" id="det-st-row"></div>
     <div class="det-info-card"><div id="det-rows"></div></div>
+    <div id="det-lnotes-wrap"></div>
     <div id="det-devis-wrap"></div>
     <div id="det-notes-wrap"></div>
-    <div id="det-lnotes-wrap"></div>
     <div class="det-footer">
       <button class="btn btn-danger btn-sm" style="width:100%" onclick="deleteCurrentChantier()">🗑 Supprimer ce chantier</button>
     </div>
@@ -903,15 +903,18 @@ function refreshDetail(){
   document.getElementById('det-notes-wrap').innerHTML = c.notes
     ? `<div class="det-label" style="margin-top:12px;margin-bottom:6px">Description</div><div class="det-notes">${esc(c.notes)}</div>` : '';
   renderLinkedNotes();
+  _devisInlineOpen = false;
   const f = c.pdf;
   const bt = (t,fn,cls)=>`<button class="det-file-btn ${cls}" onclick="${fn}">${t}</button>`;
-  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px"><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size:'Aucun fichier'}</div></div><div class="det-file-actions">${f?bt('Voir devis','viewDevis()','primary'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div>`;
+  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px"><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size:'Aucun fichier'}</div></div><div class="det-file-actions">${f?`<button id="det-devis-toggle" class="det-file-btn primary" onclick="toggleDevisInline()">Afficher</button>`+bt('⛶ Plein écran','viewDevis()','ghost'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div><div id="det-devis-inline" style="display:none;margin-top:8px"></div>`;
 }
+function newLinkedNote(){ if(window.openNotes) window.openNotes({nouveau:true,chantierId:currentDetailId}); }
+window.newLinkedNote = newLinkedNote;
 function renderLinkedNotes(){
   const el = document.getElementById('det-lnotes-wrap'); if(!el) return;
   const list = (window.risseNotes && currentDetailId) ? window.risseNotes.forChantier(currentDetailId) : [];
   const can = !!window.openNotes;
-  el.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 6px"><div class="det-label" style="margin:0">📝 Notes & listes</div>${can?`<button class="det-file-btn ghost" onclick="openNotes({nouveau:true,chantierId:currentDetailId})">＋ Note</button>`:''}</div>`
+  el.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 6px"><div class="det-label" style="margin:0">📝 Notes & listes</div>${can?`<button class="det-file-btn ghost" onclick="newLinkedNote()">＋ Note</button>`:''}</div>`
    + (list.length ? list.map(n=>{
       const it = n.items||[]; const prog = n.type==='liste' && it.length ? `${it.filter(x=>x.done).length}/${it.length}` : '';
       const prev = n.type==='liste' ? it.slice(0,3).map(x=>(x.done?'✓ ':'• ')+x.t).join('\n') : (n.texte||'');
@@ -963,19 +966,64 @@ async function viewDevis(){
   if(!url){ showToast('❌ Devis introuvable sur cet appareil'); return; }
   openPdfViewer(c.pdf.name, url);
 }
+let _pdfjsP=null;
+function loadPdfJs(){
+  if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+  if(_pdfjsP) return _pdfjsP;
+  _pdfjsP = new Promise((res,rej)=>{
+    const sc=document.createElement('script');
+    sc.src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    sc.onload=()=>{ window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; res(window.pdfjsLib); };
+    sc.onerror=()=>{ _pdfjsP=null; rej(new Error('pdf.js indisponible')); };
+    document.head.appendChild(sc);
+  });
+  return _pdfjsP;
+}
+// Dessine toutes les pages du PDF dans `box` (marche aussi sur Android, contrairement à <iframe>/<embed>)
+async function renderPdfPages(box, url){
+  box.innerHTML='<div style="padding:24px;text-align:center;color:#8A93A6;font-size:12px">Chargement du PDF…</div>';
+  const lib = await loadPdfJs();
+  const pdf = await lib.getDocument(url).promise;
+  box.innerHTML='';
+  const w = box.clientWidth || 320, dpr = Math.min(window.devicePixelRatio||1, 2);
+  for(let i=1;i<=pdf.numPages;i++){
+    const pg = await pdf.getPage(i);
+    const base = pg.getViewport({scale:1});
+    const vp = pg.getViewport({scale:(w/base.width)*dpr});
+    const cv = document.createElement('canvas'); cv.width=vp.width; cv.height=vp.height;
+    cv.style.cssText='width:100%;display:block;margin:0 0 8px;background:#fff;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.25)';
+    box.appendChild(cv);
+    await pg.render({canvasContext:cv.getContext('2d'),viewport:vp}).promise;
+  }
+}
+let _devisInlineOpen=false;
+async function toggleDevisInline(){
+  const box=document.getElementById('det-devis-inline'); if(!box) return;
+  if(_devisInlineOpen){ box.style.display='none'; _devisInlineOpen=false; document.getElementById('det-devis-toggle').textContent='Afficher'; return; }
+  const c=load().find(x=>x.id===currentDetailId); if(!c||!c.pdf) return;
+  box.style.display='block'; _devisInlineOpen=true; document.getElementById('det-devis-toggle').textContent='Masquer';
+  try{
+    await ensureDevis(c);
+    const url=await getFileUrl(c.pdf);
+    if(!url) throw new Error('Devis introuvable sur cet appareil');
+    await renderPdfPages(box,url);
+  }catch(e){ box.innerHTML='<div style="padding:14px;color:#C0392B;font-size:12px">❌ '+esc(e.message)+'</div>'; }
+}
+window.toggleDevisInline = toggleDevisInline;
 function openPdfViewer(name, url){
   let v = document.getElementById('pdf-viewer');
   if(!v){
     v = document.createElement('div'); v.id='pdf-viewer';
     v.style.cssText='position:fixed;inset:0;z-index:600;background:#111214;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)';
-    v.innerHTML='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--navy);color:#fff"><button id="pdf-v-close" style="border:none;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;height:36px;padding:0 14px;font-size:14px;font-weight:700">✕ Fermer</button><div id="pdf-v-name" style="flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div><a id="pdf-v-open" target="_blank" rel="noopener" style="color:#fff;font-size:13px;font-weight:600;text-decoration:none;background:rgba(255,255,255,.15);border-radius:10px;padding:9px 12px">↗ Ouvrir</a></div><iframe id="pdf-v-frame" style="flex:1;border:none;background:#fff"></iframe>';
+    v.innerHTML='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--navy);color:#fff"><button id="pdf-v-close" style="border:none;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;height:36px;padding:0 14px;font-size:14px;font-weight:700">✕ Fermer</button><div id="pdf-v-name" style="flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div><a id="pdf-v-open" target="_blank" rel="noopener" style="color:#fff;font-size:13px;font-weight:600;text-decoration:none;background:rgba(255,255,255,.15);border-radius:10px;padding:9px 12px">↗ Ouvrir</a></div><div id="pdf-v-pages" style="flex:1;overflow-y:auto;padding:8px;-webkit-overflow-scrolling:touch"></div>';
     document.body.appendChild(v);
-    v.querySelector('#pdf-v-close').onclick=()=>{ v.style.display='none'; v.querySelector('#pdf-v-frame').src='about:blank'; };
+    v.querySelector('#pdf-v-close').onclick=()=>{ v.style.display='none'; v.querySelector('#pdf-v-pages').innerHTML=''; };
   }
   v.querySelector('#pdf-v-name').textContent = name||'Devis';
   v.querySelector('#pdf-v-open').href = url;
-  v.querySelector('#pdf-v-frame').src = url;
   v.style.display='flex';
+  const pg = v.querySelector('#pdf-v-pages');
+  renderPdfPages(pg, url).catch(()=>{ pg.innerHTML='<iframe src="'+url+'" style="width:100%;height:100%;border:none;background:#fff"></iframe>'; });
 }
 
 // ── Rapports archivés du chantier (conservés jusqu'à suppression) ──
