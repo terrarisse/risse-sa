@@ -302,7 +302,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
   function updateBadge() {
     const n = all().length;
     try { window.dispatchEvent(new Event('risse-notes-update')); } catch (e) {}
-    btns.forEach(b => { let d = b.querySelector('.rn-dot'); if (!n) { if (d) d.remove(); return; } if (!d) { d = document.createElement('span'); d.className = 'rn-dot'; b.appendChild(d); } d.textContent = n > 9 ? '9+' : n; });
+    btns.forEach(b => { const d = b.querySelector('.rn-dot'); if (d) d.remove(); }); // pas de pastille de compteur
   }
   function mountButton() {
     const calc = document.querySelector('[onclick*="openCalculatrice"]');
