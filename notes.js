@@ -7,16 +7,23 @@
    - Option « Partager avec l'équipe » par note (Firestore notes_equipe/data)
    - Lien optionnel vers un chantier
 */
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+/* Compatible avec les deux « versions » de Firebase utilisées par l'app :
+   - pages à SDK compat (accueil, rapport, carnet, bons) : on utilise window.firebase
+   - pages à SDK modulaire (chantiers, ressources, machine…) : import dynamique */
+const COMPAT = !!(window.firebase && window.firebase.apps);
+let M = null;
+if (!COMPAT) {
+  const a = await import("https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js");
+  const b = await import("https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js");
+  const c = await import("https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js");
+  M = { ...a, ...b, ...c };
+}
 
 (function () {
   if (window.__risseNotes) return;
   window.__risseNotes = true;
   if (/login\.html/.test(location.pathname)) return;
   if (window.self !== window.top) return; // pas dans les iframes (ex. plan)
-  if (window.firebase) return; // page à SDK « compat » (accueil) : on n'y mélange pas un 2e SDK
 
   const CONFIG = {
     apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
@@ -101,23 +108,31 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
     [...a, ...b].forEach(n => { if (!m[n.id] || (n.updatedAt || 0) >= (m[n.id].updatedAt || 0)) m[n.id] = n; });
     return prune(Object.values(m));
   }
-  const ref = k => k === 'perso' ? doc(db, 'notes_perso', user.uid) : doc(db, 'notes_equipe', 'data');
+  const ref = k => k === 'perso' ? ['notes_perso', user.uid] : ['notes_equipe', 'data'];
+  const dGet = async (r) => {
+    if (COMPAT) { const sn = await db.collection(r[0]).doc(r[1]).get(); return { exists: () => sn.exists, data: () => sn.data() }; }
+    return M.getDoc(M.doc(db, r[0], r[1]));
+  };
+  const dSet = (r, data) => COMPAT ? db.collection(r[0]).doc(r[1]).set(data) : M.setDoc(M.doc(db, r[0], r[1]), data);
+  const dListen = (r, cb, err) => COMPAT
+    ? db.collection(r[0]).doc(r[1]).onSnapshot(sn => cb({ exists: () => sn.exists, data: () => sn.data() }), err)
+    : M.onSnapshot(M.doc(db, r[0], r[1]), cb, err);
 
   // écriture avec fusion (relit le document puis fusionne par id, le plus récent gagne)
   async function push(kind, changed) {
     if (!db || !user) return;
     try {
       const r = ref(kind);
-      const snap = await getDoc(r);
+      const snap = await dGet(r);
       const remote = snap.exists() ? (snap.data().items || []) : [];
       const merged = mergeLists(remote, changed);
-      await setDoc(r, { items: merged, updatedAt: now() });
+      await dSet(r, { items: merged, updatedAt: now() });
     } catch (e) { console.warn('[notes] sync', e); setStatus('⚠️ Hors ligne — sera synchronisé plus tard'); }
   }
 
   function startSync() {
     unsubs.forEach(u => u()); unsubs = [];
-    const listen = (kind) => onSnapshot(ref(kind), snap => {
+    const listen = (kind) => dListen(ref(kind), snap => {
       const remote = snap.exists() ? (snap.data().items || []) : [];
       if (kind === 'perso') perso = mergeLists(remote, perso); else equipe = mergeLists(remote, equipe);
       saveCache(); render(); refreshEditor(); updateBadge();
@@ -311,7 +326,7 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
     b.onclick = openNotes;
     if (calc && calc.parentNode) {
       b.className = (calc.className || '') + ' rn-btn';
-      calc.parentNode.insertBefore(b, calc);
+      calc.parentNode.insertBefore(b, calc.nextSibling);
     } else {
       b.className = 'rn-fab'; b.style.display = 'flex';
       document.body.appendChild(b);
@@ -323,9 +338,17 @@ import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstat
   function boot() {
     loadCache();
     mountButton();
-    const app = getApps()[0] || initializeApp(CONFIG);
-    db = getFirestore(app);
-    onAuthStateChanged(getAuth(app), u => {
+    let onAuth;
+    if (COMPAT) {
+      const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(CONFIG);
+      db = firebase.firestore(app);
+      onAuth = cb => firebase.auth(app).onAuthStateChanged(cb);
+    } else {
+      const app = M.getApps()[0] || M.initializeApp(CONFIG);
+      db = M.getFirestore(app);
+      onAuth = cb => M.onAuthStateChanged(M.getAuth(app), cb);
+    }
+    onAuth(u => {
       user = u;
       if (!u) { unsubs.forEach(f => f()); unsubs = []; btns.forEach(b => b.style.display = 'none'); return; }
       btns.forEach(b => b.style.display = b.classList.contains('rn-fab') ? 'flex' : '');
