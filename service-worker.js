@@ -1,9 +1,10 @@
-const CACHE_NAME = 'risse-app-v9';
+const CACHE_NAME = 'risse-app-v10';
 const URLS = [
   './',
   './index.html',
   './login.html',
   './manifest.json',
+  './notes.js',
   './icon-192.png',
   './icon-512.png',
   './machine/index.html',
