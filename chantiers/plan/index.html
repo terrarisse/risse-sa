@@ -311,6 +311,22 @@ function zoomButton(factor){
 document.getElementById('zoom-in').onclick = ()=>zoomButton(1.35);
 document.getElementById('zoom-out').onclick = ()=>zoomButton(1/1.35);
 
+// PC : molette = zoom autour du curseur (sans effet sur téléphone)
+stageContainerEl.addEventListener('wheel', (e)=>{
+  if(!stage) return;
+  e.preventDefault();
+  const rect = stageContainerEl.getBoundingClientRect();
+  const point = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  const k = e.ctrlKey ? 0.01 : 0.0018; // pincement pavé tactile = plus sensible
+  zoomStageAtPoint(stage.scaleX() * Math.exp(-e.deltaY * k), point);
+}, {passive:false});
+// PC : touches + et − pour zoomer
+document.addEventListener('keydown', (e)=>{
+  if(!stage || /INPUT|TEXTAREA|SELECT/.test((e.target||{}).tagName||'')) return;
+  if(e.key==='+' || e.key==='=') { zoomButton(1.35); e.preventDefault(); }
+  else if(e.key==='-' || e.key==='_') { zoomButton(1/1.35); e.preventDefault(); }
+});
+
 // Pincement à 2 doigts — recette standard Konva.
 let pinchLastDist = 0;
 function setupPinchZoom(){
