@@ -260,7 +260,6 @@ body.mat-dragging *{cursor:grabbing!important;}
       <div class="header-sub" id="hdrSub">Risse S.A.</div>
     </div>
     <div class="header-actions">
-      <button class="cat-mgr-btn" onclick="openExport()">⬇ Exporter</button>
       <button class="cat-mgr-btn" onclick="openCatMgr()">⊞ Catégories</button>
       <div class="header-count" id="hdrCount">0</div>
     </div>
@@ -2118,45 +2117,6 @@ window.openAdd           = openAdd;
 window.closeAdd          = closeAdd;
 window.saveItem          = saveItem;
 window.openCatMgr        = openCatMgr;
-
-// ── EXPORT des listes (fichier à importer dans une autre installation) ──
-const EXPORT_LABELS = {equipe:'👷 Équipe',machines:'🚜 Machines',vehicules:'🚛 Véhicules',materiel:'🔧 Matériel',materiaux:'🪨 Matériaux',evacuations:'🚮 Évacuations'};
-function openExport(){
-  let ov = document.getElementById('export-ov');
-  if(!ov){
-    ov = document.createElement('div'); ov.id='export-ov';
-    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;display:flex;align-items:flex-end;justify-content:center';
-    ov.onclick = e => { if(e.target===ov) ov.remove(); };
-    document.body.appendChild(ov);
-  }
-  const rows = Object.keys(EXPORT_LABELS).map(k=>{
-    const n = load(k).length;
-    return `<label style="display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid #EEF0F5;font-size:14px;font-weight:600"><input type="checkbox" class="exp-chk" value="${k}" ${k==='equipe'?'':'checked'} ${n?'':'disabled'} style="width:20px;height:20px"><span style="flex:1">${EXPORT_LABELS[k]}</span><span style="font-size:12px;color:#8A93A6;font-weight:500">${n} élément${n>1?'s':''}</span></label>`;
-  }).join('');
-  ov.innerHTML = `<div style="background:#fff;width:100%;max-width:520px;border-radius:20px 20px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));font-family:inherit">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><div style="font-size:17px;font-weight:700">⬇ Exporter les listes</div><button onclick="document.getElementById('export-ov').remove()" style="border:none;background:#F1F3F7;border-radius:10px;width:34px;height:34px;font-size:15px">✕</button></div>
-    <div style="font-size:12px;color:#8A93A6;margin-bottom:8px">Crée un fichier avec les listes cochées (catégories et photos comprises), à importer dans une autre installation. L'équipe n'est pas cochée par défaut (noms de personnes).</div>
-    ${rows}
-    <button onclick="doExport()" style="width:100%;margin-top:14px;padding:14px;border:none;border-radius:12px;background:var(--navy);color:#fff;font-size:15px;font-weight:700;font-family:inherit">Télécharger le fichier</button></div>`;
-}
-function doExport(){
-  const sel = [...document.querySelectorAll('.exp-chk:checked:not(:disabled)')].map(c=>c.value);
-  if(!sel.length){ showToast('Coche au moins une liste'); return; }
-  const data = {};
-  sel.forEach(k=>{ data[k] = load(k); });
-  let cats = {}; try{ cats = JSON.parse(localStorage.getItem(CAT_KEY)||'{}'); }catch(e){}
-  const catsSel = {}; sel.forEach(k=>{ if(cats[k]) catsSel[k] = cats[k]; });
-  const out = { format:'ressources-export', version:1, exportedAt:new Date().toISOString(), data, categories:catsSel };
-  const blob = new Blob([JSON.stringify(out)],{type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'ressources-export-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-  const el = document.getElementById('export-ov'); if(el) el.remove();
-  showToast('✓ Fichier exporté ('+sel.length+' liste'+(sel.length>1?'s':'')+')');
-}
-window.openExport = openExport; window.doExport = doExport;
 window.closeCatMgr       = closeCatMgr;
 window.addCategory       = addCategory;
 window.deleteCategory    = deleteCategory;
