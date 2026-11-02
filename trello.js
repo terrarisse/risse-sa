@@ -184,14 +184,23 @@
 
   function openAttachment(att, cardId, cardUrl) {
     if (!att.isUpload) { window.open(att.url, '_blank'); return; }
-    var kind = kindOf(att);
+    viewFile(att.name, downloadBlob(att, cardId), { kind: kindOf(att), link: cardUrl, trello: true });
+  }
+
+  // Visionneuse plein écran : PDF (pages), photo, ou proposition de téléchargement.
+  // name : nom du fichier · blobP : Blob ou promesse de Blob · opts : { kind, link, trello }
+  function viewFile(name, blobP, opts) {
+    opts = opts || {};
+    injectCss();
+    var kind = opts.kind || kindOf({ name: name, mimeType: '' });
+    var link = opts.link || '';
     var ov = document.createElement('div'); ov.className = 'tv-ov';
     ov.innerHTML = '<div class="tv-hd">' +
       '<button class="tv-b tv-x" aria-label="Fermer">✕</button>' +
-      '<div class="tv-n">' + esc(att.name) + '</div>' +
+      '<div class="tv-n">' + esc(name) + '</div>' +
       (kind !== 'other' ? '<button class="tv-b" data-z="-1" aria-label="Dézoomer">−</button><button class="tv-b" data-z="1" aria-label="Zoomer">+</button>' : '') +
       '<a class="tv-b" data-dl aria-label="Télécharger" title="Télécharger" style="display:none">⬇</a>' +
-      '<a class="tv-b" href="' + esc(cardUrl) + '" target="_blank" rel="noopener" title="Ouvrir dans Trello">↗</a></div>' +
+      (link ? '<a class="tv-b" href="' + esc(link) + '" target="_blank" rel="noopener" title="Ouvrir dans Trello">↗</a>' : '') + '</div>' +
       '<div class="tv-body"><div class="tv-msg">Chargement…</div></div>';
     document.body.appendChild(ov);
     var body = ov.querySelector('.tv-body'), z = 1, blobUrl = null;
@@ -215,12 +224,13 @@
     function fail() {
       ov.querySelector('[data-dl]').style.display = 'none';
       body.innerHTML = '<div class="tv-msg">Impossible d\'afficher ce fichier dans l\'app.' +
-        (proxy() ? '' : '<br><small>Le relais Trello n\'est pas encore configuré.</small>') +
-        '<a class="tv-cta" href="' + esc(cardUrl) + '" target="_blank" rel="noopener">Ouvrir la carte dans Trello ↗</a></div>';
+        (opts.trello && !proxy() ? '<br><small>Le relais Trello n\'est pas encore configuré.</small>' : '') +
+        (link ? '<a class="tv-cta" href="' + esc(link) + '" target="_blank" rel="noopener">Ouvrir la carte dans Trello ↗</a>' : '') + '</div>';
     }
-    downloadBlob(att, cardId).then(function (blob) {
+    Promise.resolve(blobP).then(function (blob) {
+      if (!blob) throw new Error('vide');
       blobUrl = URL.createObjectURL(blob);
-      var dl = ov.querySelector('[data-dl]'); dl.href = blobUrl; dl.download = att.name || 'fichier'; dl.style.display = '';
+      var dl = ov.querySelector('[data-dl]'); dl.href = blobUrl; dl.download = name || 'fichier'; dl.style.display = '';
       if (kind === 'img') {
         body.innerHTML = '<img src="' + blobUrl + '" alt="">';
       } else if (kind === 'pdf') {
@@ -242,7 +252,7 @@
             return chain;
           });
       } else {
-        body.innerHTML = '<div class="tv-msg">Ce type de fichier ne peut pas être affiché dans l\'app.<a class="tv-cta" href="' + blobUrl + '" download="' + esc(att.name || 'fichier') + '">⬇ Télécharger « ' + esc(att.name) + ' »</a></div>';
+        body.innerHTML = '<div class="tv-msg">Ce type de fichier ne peut pas être affiché dans l\'app.<a class="tv-cta" href="' + blobUrl + '" download="' + esc(name || 'fichier') + '">⬇ Télécharger « ' + esc(name) + ' »</a></div>';
       }
     }).catch(fail);
   }
@@ -479,7 +489,7 @@
     connected: function () { return !!(key() && token()); },
     hasBoard: function () { return !!lsGet(LS.board); },
     cached: cached, organize: organize, parseWeek: parseWeek, parseTitle: parseTitle, norm: norm, gkey: gkey,
-    getData: getData, attachmentsOf: attachmentsOf, openAttachment: openAttachment, downloadBlob: downloadBlob,
+    getData: getData, attachmentsOf: attachmentsOf, openAttachment: openAttachment, downloadBlob: downloadBlob, viewFile: viewFile,
     kindOf: kindOf, fileIcon: fileIcon, fmtBytes: fmtBytes, fmtD: fmtD, suggestStatus: suggestStatus, cardOf: cardOf,
     mountWeek: mountWeek, connect: connect, disconnect: disconnect
   };

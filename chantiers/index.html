@@ -940,7 +940,7 @@ function refreshDetail(){
   _devisInlineOpen = false;
   const f = c.pdf;
   const bt = (t,fn,cls)=>`<button class="det-file-btn ${cls}" onclick="${fn}">${t}</button>`;
-  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px"><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size:'Aucun fichier'}</div></div><div class="det-file-actions">${f?`<button id="det-devis-toggle" class="det-file-btn primary" onclick="toggleDevisInline()">Afficher</button>`+bt('⛶ Plein écran','viewDevis()','ghost'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div><div id="det-devis-inline" style="display:none;margin-top:8px"></div>`;
+  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px${f?';cursor:pointer':''}" ${f?'onclick="viewDevis()"':''}><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size+' · toucher pour ouvrir':'Aucun fichier'}</div></div><div class="det-file-actions" onclick="event.stopPropagation()">${f?bt('Ouvrir','viewDevis()','primary'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div><div id="det-devis-inline" style="display:none;margin-top:8px"></div>`;
 }
 function newLinkedNote(){ if(window.openNotes) window.openNotes({nouveau:true,chantierId:currentDetailId}); }
 window.newLinkedNote = newLinkedNote;
@@ -1045,6 +1045,8 @@ async function toggleDevisInline(){
 }
 window.toggleDevisInline = toggleDevisInline;
 function openPdfViewer(name, url){
+  // Même visionneuse que le Programme (zoom, téléchargement) quand elle est disponible
+  if(window.RTrello && RTrello.viewFile){ RTrello.viewFile(name||'Devis.pdf', fetch(url).then(r=>r.blob()), {kind:'pdf'}); return; }
   let v = document.getElementById('pdf-viewer');
   if(!v){
     v = document.createElement('div'); v.id='pdf-viewer';
@@ -1291,7 +1293,7 @@ async function renderTrelloSection(fresh){
     el.innerHTML = c.trello ? `<div class="tr-box"><div class="tr-hd"><span>📌 ${esc(c.trello.name)}</span></div><div class="tr-body"><div class="tr-empty">Trello n'est pas connecté sur cet appareil — <a href="../index.html" style="color:var(--navy)">connecter depuis l'accueil</a>.</div></div></div>` : '';
     return;
   }
-  const org = await TR.getData(fresh);
+  const org = await TR.getData(fresh || !TR.cached());
   if(currentDetailId!==c.id) return;
   const g = trGroupOf(c, org);
   if(!c.trello){
@@ -1361,7 +1363,7 @@ async function trImportPlan(i, where){
 async function renderTrelloPlans(){
   const el = document.getElementById('det-trello-plans'); if(!el || !TR || !TR.connected()) return;
   const c = load().find(x=>x.id===currentDetailId); if(!c || !c.trello) return;
-  const org = await TR.getData(false); const g = trGroupOf(c, org); if(!g) return;
+  const org = await TR.getData(!TR.cached()); const g = trGroupOf(c, org); if(!g) return;
   const atts = TR.attachmentsOf(g).filter(x=>TR.kindOf(x.a)==='pdf' && x.a.isUpload);
   if(!atts.length) return;
   el._atts = atts;
