@@ -7,6 +7,8 @@
    ═══════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
+  // Dans une iframe (ex. Coteur affiché dans la fiche chantier) : on ne touche à rien
+  try { if (window.top !== window.self) return; } catch (e) { return; }
   var MQ = window.matchMedia('(min-width:1100px) and (pointer:fine)');
   var OFF_KEY = 'rv6_dk_off';
   var root = document.documentElement;
@@ -25,7 +27,7 @@
     var on = eligible() && !userOff();
     root.classList.toggle('dk', on);
     root.classList.toggle('dk-eligible', eligible());
-    if (document.body) { buildSidebar(); }
+    if (document.body && eligible()) { buildSidebar(); classify(); }
   }
   apply();
   if (MQ.addEventListener) MQ.addEventListener('change', apply); else MQ.addListener(apply);
@@ -55,7 +57,7 @@
     nav.className = 'dk-side';
     nav.setAttribute('aria-label', 'Modules');
     var html = '<a class="dk-brand" href="' + new URL('index.html', BASE).href + '">' +
-      '<img src="' + new URL('icon-192.png', BASE).href + '" alt="">' +
+      '<img src="' + new URL('logo-pc.png', BASE).href + '" alt="">' +
       '<span><b>Risse S.A.</b><small>Gestion de chantier</small></span></a>' +
       '<div class="dk-nav">';
     MODULES.forEach(function (m, i) {
@@ -101,7 +103,7 @@
   }
 
   /* ── Fermer la fenêtre du dessus avec Échap ─────────────── */
-  var OV_SEL = '.open[class*="-ov"], .open[class*="overlay"], .open[class*="modal"], .open[class*="sheet"], #menu-ov, #pdf-viewer, .dk-help-ov';
+  var OV_SEL = '.open[class*="-ov"], .open[class*="overlay"], .open[class*="modal"], .open[class*="sheet"], #menu-ov, #pdf-viewer, .dk-help-ov, .dk-center, .dk-page';
 
   function visible(el) {
     if (!el || !el.isConnected) return false;
@@ -110,7 +112,7 @@
   }
   function topOverlay() {
     var list = Array.prototype.slice.call(document.querySelectorAll(OV_SEL)).filter(function (el) {
-      if (!visible(el)) return false;
+      if (!visible(el) || !inView(el) || el.id === 'authGuard') return false;
       var p = getComputedStyle(el).position;
       return p === 'fixed' || p === 'absolute';
     });
@@ -122,7 +124,11 @@
     });
     return best;
   }
-  function stillOpen(el) { return el.isConnected && visible(el) && (el.classList.contains('open') || el.id === 'menu-ov' || el.id === 'pdf-viewer' || el.id === 'dk-help'); }
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0 && r.right > 1 && r.left < innerWidth - 1 && r.bottom > 1 && r.top < innerHeight - 1;
+  }
+  function stillOpen(el) { return el.isConnected && visible(el) && inView(el); }
 
   function closeTop() {
     // Plan en plein écran (Chantiers)
@@ -136,7 +142,7 @@
     ov.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
     if (!stillOpen(ov)) return true;
     // 2. Bouton de fermeture
-    var btns = ov.querySelectorAll('.modal-close, .ov-close, .close-btn, .sheet-close, .back-btn, [onclick*="close" i], [onclick*="fermer" i], [aria-label*="ermer"]');
+    var btns = ov.querySelectorAll('.modal-close, .ov-close, .close-btn, .sheet-close, .back-btn, .btn-back, [onclick*="close" i], [onclick*="fermer" i], [aria-label*="ermer"]');
     for (var i = 0; i < btns.length; i++) {
       if (visible(btns[i])) { btns[i].click(); if (!stillOpen(ov)) return true; break; }
     }
@@ -223,5 +229,94 @@
     }
   }, true);
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
+
+  /* ── Classement automatique des fenêtres ────────────────────
+     • fond semi-transparent + contenu collé en bas (bottom sheet) → boîte centrée
+     • page plein écran opaque → décalée à droite de la barre latérale
+     • bouton 🏠 de retour accueil → masqué (la barre latérale le remplace) */
+  function alphaOf(c) {
+    if (!c || c === 'transparent') return 0;
+    var m = c.match(/rgba?\(([^)]+)\)/); if (!m) return 1;
+    var p = m[1].split(/[ ,\/]+/).filter(Boolean);
+    return p.length > 3 ? parseFloat(p[3]) : 1;
+  }
+  var classifyQueued = false;
+  function classify() {
+    if (!active() || !document.body) return;
+    var kids = document.body.children;
+    for (var i = 0; i < kids.length; i++) {
+      var el = kids[i];
+      if (el.classList.contains('dk-side') || el.id === 'dk-help' || el.tagName === 'SCRIPT') continue;
+      var cs = getComputedStyle(el);
+      if (cs.position !== 'fixed' || cs.top !== '0px' || cs.left !== '0px' || cs.right !== '0px' || cs.bottom !== '0px') continue;
+      var a = alphaOf(cs.backgroundColor);
+      if (a > 0 && a < 1) {
+        if (cs.alignItems === 'flex-end' || cs.alignItems === 'end') {
+          el.classList.add('dk-center');
+          var sh = el.firstElementChild;
+          if (sh && !sh.classList.contains('dk-sheet')) sh.classList.add('dk-sheet');
+        }
+      } else if (a === 1 && el.id !== 'authGuard') {
+        el.classList.add('dk-page');
+      }
+    }
+    var homes = document.querySelectorAll('.back-btn, .topbar-back, #backBtn, button[onclick*="index.html"]');
+    for (var j = 0; j < homes.length; j++) {
+      var b = homes[j], oc = b.getAttribute('onclick') || '';
+      var isHome = b.textContent.trim() === '🏠' || /location\.href\s*=\s*'(\.\.\/)+index\.html'/.test(oc);
+      b.classList.toggle('dk-hide', isHome);
+    }
+  }
+  function queueClassify() {
+    if (classifyQueued) return; classifyQueued = true;
+    requestAnimationFrame(function () { classifyQueued = false; classify(); });
+  }
+  function startObserver() {
+    classify();
+    new MutationObserver(queueClassify).observe(document.body, { childList: true });
+    // le texte des boutons 🏠/← change selon la vue (Carnet, Machines)
+    var hb = document.querySelectorAll('#backBtn, #topbar-back');
+    for (var i = 0; i < hb.length; i++) new MutationObserver(queueClassify).observe(hb[i], { childList: true, characterData: true, subtree: true });
+  }
+
+  /* ── Glisser-déposer à la souris ──────────────────────────
+     Certaines listes ne se réordonnent qu'au doigt (appui long + glisser).
+     Sur PC, on traduit la souris en « doigt » pour ces éléments :
+     maintenir le clic ~½ s, puis glisser. */
+  var EMU_SEL = '.res-item[data-id], .machine-card[data-id], .acc-header, .sub-acc-header, .maint-card[data-id]';
+  // Matériaux / Évacuations : les éléments ont déjà leur propre glisser à la souris (changement de catégorie)
+  var EMU_EXCL = '#content-materiaux .res-item, #content-materiaux .machine-card, #content-evacuations .res-item, #content-evacuations .machine-card, input, textarea, select';
+  var emu = null, swallowClick = false;
+  function touchSupported() { try { new Touch({ identifier: 1, target: document.body, clientX: 0, clientY: 0 }); return true; } catch (e) { return false; } }
+  function fireTouch(type, t, x, y) {
+    var tt = new Touch({ identifier: 1, target: t, clientX: x, clientY: y, pageX: x, pageY: y, screenX: x, screenY: y, radiusX: 1, radiusY: 1, force: 1 });
+    var list = type === 'touchend' ? [] : [tt];
+    t.dispatchEvent(new TouchEvent(type, { bubbles: true, cancelable: true, composed: true, touches: list, targetTouches: list, changedTouches: [tt] }));
+  }
+  document.addEventListener('mousedown', function (e) {
+    if (!active() || e.button !== 0 || !e.target.closest) return;
+    if (!e.target.closest(EMU_SEL) || e.target.closest(EMU_EXCL) || !touchSupported()) return;
+    emu = { t: e.target, x: e.clientX, y: e.clientY, at: Date.now(), moved: false };
+    fireTouch('touchstart', emu.t, e.clientX, e.clientY);
+  }, true);
+  document.addEventListener('mousemove', function (e) {
+    if (!emu) return;
+    if (!emu.moved && Math.hypot(e.clientX - emu.x, e.clientY - emu.y) < 6) return; // ignorer les micro-tremblements
+    emu.moved = true;
+    e.preventDefault();
+    fireTouch('touchmove', emu.t, e.clientX, e.clientY);
+  }, true);
+  document.addEventListener('mouseup', function (e) {
+    if (!emu) return;
+    var m = emu.moved && Date.now() - emu.at > 300;
+    fireTouch('touchend', emu.t, e.clientX, e.clientY);
+    emu = null;
+    if (m) { swallowClick = true; setTimeout(function () { swallowClick = false; }, 60); }
+  }, true);
+  document.addEventListener('click', function (e) {
+    if (swallowClick) { swallowClick = false; e.preventDefault(); e.stopPropagation(); }
+  }, true);
+
+  function boot() { apply(); startObserver(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();

@@ -26,7 +26,7 @@ html.dk .dk-brand {
   display: flex; align-items: center; gap: 11px; padding: 18px 16px 16px;
   text-decoration: none; color: #fff; border-bottom: 1px solid rgba(255,255,255,.08);
 }
-html.dk .dk-brand img { width: 40px; height: 40px; border-radius: 50%; background: #fff; padding: 2px; object-fit: contain; }
+html.dk .dk-brand img { width: 46px; height: 46px; border-radius: 11px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,.3); flex-shrink: 0; }
 html.dk .dk-brand b { display: block; font-size: 15px; letter-spacing: -.2px; }
 html.dk .dk-brand small { display: block; font-size: 9.5px; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 html.dk .dk-nav { flex: 1; overflow-y: auto; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
@@ -140,7 +140,7 @@ html.dk .toolbar .search-input { max-width: 520px; }
 html.dk .toolbar { align-items: center; }
 
 /* Fiche chantier : panneau à droite de la barre latérale, contenu centré */
-html.dk .detail-ov { left: var(--dk-side); }
+html.dk .detail-ov:has(> .det-header) { left: var(--dk-side); }
 html.dk .det-header-inner { padding-left: 28px; padding-right: 28px; }
 html.dk .det-tabs { padding-left: 28px; padding-right: 28px; max-width: 640px; }
 html.dk #det-tab-infos,
@@ -154,3 +154,111 @@ html.dk #menu-ov .modal-sh { width: 380px; }
 
 /* Toast recentré sur la zone de contenu */
 html.dk .toast { left: calc(50% + var(--dk-side) / 2); }
+
+/* ══════════════════════════════════════════════════════════════
+   RÈGLES COMMUNES À TOUS LES MODULES
+   (les classes dk-* sont posées automatiquement par desktop.js)
+   ══════════════════════════════════════════════════════════════ */
+html.dk .dk-hide { display: none !important; }
+
+/* Bottom sheets → boîtes de dialogue centrées */
+html.dk .dk-center { align-items: center !important; justify-content: center !important; }
+html.dk .dk-center > .dk-sheet {
+  width: min(640px, 92vw) !important; max-width: 92vw !important;
+  border-radius: 18px !important; box-shadow: 0 24px 64px rgba(0,0,0,.35);
+  animation: dkPop .16s ease-out;
+}
+html.dk .dk-center > .dk-sheet [class*="handle"],
+html.dk .sheet-handle { display: none; }
+html.dk #overlay-calc > .dk-sheet, html.dk .overlay-calc > .dk-sheet { width: 400px !important; }
+
+/* Pages plein écran → à droite de la barre latérale */
+html.dk .dk-page { left: var(--dk-side) !important; }
+
+/* Toasts recentrés sur la zone de contenu */
+html.dk .saved-toast { left: calc(50% + var(--dk-side) / 2); }
+html.dk .quickadd-bar, html.dk .metre-kbd-bar { left: var(--dk-side) !important; }
+
+/* En-tête en premier, puis barre d'onglets EN HAUT (au lieu d'en bas) */
+html.dk body > .app-header, html.dk body > .topbar, html.dk body > .header, html.dk body > .hdr { order: -2; }
+html.dk body > .tab-bar, html.dk body > .bottom-nav { order: -1; }
+html.dk .app-header, html.dk .topbar, html.dk .header-top, html.dk .hdr, html.dk .edit-header, html.dk .histo-header { padding-left: 28px !important; padding-right: 28px !important; }
+
+html.dk body > .tab-bar,
+html.dk body > .bottom-nav {
+  height: auto !important; padding: 0 max(20px, calc((100% - var(--dk-max)) / 2)) !important;
+  border-top: none !important; border-bottom: 1px solid #E0E4EF; box-shadow: 0 1px 6px rgba(27,58,107,.06) !important;
+  justify-content: flex-start; gap: 2px; background: #fff; flex-shrink: 0;
+}
+html.dk body > .tab-bar > button,
+html.dk body > .bottom-nav > button {
+  flex: 0 0 auto !important; flex-direction: row !important; gap: 8px !important;
+  padding: 13px 18px !important; font-size: 13px !important; font-weight: 600;
+  border-radius: 0; position: relative; color: #4A5878;
+}
+html.dk body > .tab-bar > button:hover,
+html.dk body > .bottom-nav > button:hover { background: #F4F6FB; color: #1B3A6B; }
+html.dk body > .tab-bar .tab-icon, html.dk body > .bottom-nav .nav-icon { font-size: 16px !important; }
+html.dk body > .bottom-nav .nav-label { font-size: 13px !important; text-transform: none !important; letter-spacing: 0 !important; color: inherit; }
+html.dk body > .bottom-nav .nav-dot { display: none; }
+html.dk body > .tab-bar > button.active,
+html.dk body > .bottom-nav > button.active { color: #1B3A6B !important; }
+html.dk body > .tab-bar > button.active .nav-label,
+html.dk body > .bottom-nav > button.active .nav-label { color: #1B3A6B !important; }
+html.dk body > .tab-bar > button.active::before,
+html.dk body > .bottom-nav > button.active::after {
+  content: ''; position: absolute; top: auto !important; bottom: 0; left: 12px !important; right: 12px !important;
+  height: 3px; background: #F0A500; border-radius: 3px 3px 0 0;
+}
+html.dk body > .tab-bar .tab-item.done .tab-icon::after { top: 4px; right: 2px; }
+
+/* Glisser à la souris (listes réordonnables) */
+html.dk .res-item[data-id], html.dk .machine-card[data-id], html.dk .acc-header, html.dk .sub-acc-header, html.dk .maint-card[data-id] { user-select: none; -webkit-user-select: none; }
+
+/* ══════════════════════════════════════════════════════════════
+   RAPPORT & BONS DE RÉGIE
+   ══════════════════════════════════════════════════════════════ */
+html.dk #main-scroll,
+html.dk .edit-page .scroll-area,
+html.dk .histo-scroll { padding: 24px max(28px, calc((100% - 1000px) / 2)) 48px !important; }
+html.dk .step-bar { display: none; }  /* redondant avec les onglets visibles en haut */
+
+/* ══════════════════════════════════════════════════════════════
+   MACHINES
+   ══════════════════════════════════════════════════════════════ */
+html.dk #scroll-area { padding: 24px max(28px, calc((100% - 1100px) / 2)) 48px !important; }
+
+/* ══════════════════════════════════════════════════════════════
+   RESSOURCES
+   ══════════════════════════════════════════════════════════════ */
+html.dk .pages > .page { padding: 22px max(28px, calc((100% - 1100px) / 2)) 48px !important; }
+html.dk .header-actions .cat-mgr-btn { font-size: 12px; padding: 7px 14px; }
+html.dk .header-actions .cat-mgr-btn:hover { background: rgba(255,255,255,.25); }
+
+/* ══════════════════════════════════════════════════════════════
+   CALCULATRICE
+   ══════════════════════════════════════════════════════════════ */
+html.dk .content { max-width: 1000px; margin: 0 auto; padding: 24px 28px 60px; }
+html.dk .tabs-bar { max-width: 1000px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+html.dk .tab-btn:not(.active):hover { background: rgba(255,255,255,.2); color: #fff; }
+
+/* ══════════════════════════════════════════════════════════════
+   CARNET D'HEURE
+   ══════════════════════════════════════════════════════════════ */
+html.dk .month-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 24px 28px; max-width: 1200px; margin: 0 auto; }
+html.dk .params-body { max-width: 820px; margin: 0 auto; padding: 24px 28px; }
+html.dk .pdf-toolbar { padding-left: 28px; padding-right: 28px; }
+html.dk .pdf-scroll { cursor: grab; }
+
+/* Ressources : listes simples (Équipe, Véhicules…) en grille ; badges à côté du libellé */
+html.dk .pages [id^="content-"]:not(:has(.accordion)):has(> .res-item, > .machine-card) {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; align-items: start;
+}
+html.dk .pages [id^="content-"]:not(:has(.accordion)) > .res-item,
+html.dk .pages [id^="content-"]:not(:has(.accordion)) > .machine-card { margin: 0 !important; }
+html.dk .pages [id^="content-"]:not(:has(.accordion)) > :not(.res-item):not(.machine-card) { grid-column: 1 / -1; }
+html.dk body > .bottom-nav .nav-badge { position: static !important; margin-left: 2px; font-size: 10px; height: 18px; min-width: 18px; border-radius: 9px; }
+html.dk body > .bottom-nav > .nav-item.active::after { transform: none !important; width: auto !important; }
+html.dk .res-item:hover, html.dk .machine-card:hover, html.dk .maint-card:hover { box-shadow: 0 8px 22px rgba(27,58,107,.14); }
+html.dk .month-card { transition: transform .14s, box-shadow .14s; }
+html.dk .month-card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(27,58,107,.16); }
