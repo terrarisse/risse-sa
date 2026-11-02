@@ -263,7 +263,9 @@
     var homes = document.querySelectorAll('.back-btn, .topbar-back, #backBtn, button[onclick*="index.html"]');
     for (var j = 0; j < homes.length; j++) {
       var b = homes[j], oc = b.getAttribute('onclick') || '';
-      var isHome = b.textContent.trim() === '🏠' || /location\.href\s*=\s*'(\.\.\/)+index\.html'/.test(oc);
+      // On ne masque QUE les boutons qui renvoient directement à l'accueil.
+      // Les boutons à double usage (Carnet, Machines : 🏠 = retour dans le module) restent visibles.
+      var isHome = /location\.href\s*=\s*'(\.\.\/)+index\.html'/.test(oc);
       b.classList.toggle('dk-hide', isHome);
     }
   }
