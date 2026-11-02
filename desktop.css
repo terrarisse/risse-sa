@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════════════════════════
+   Risse S.A. — Couche PC (desktop.css)
+   Toutes les règles sont préfixées par html.dk : la classe n'est posée
+   par desktop.js que sur grand écran + souris. Le téléphone n'est pas touché.
+   ═══════════════════════════════════════════════════════════════ */
+
+html.dk { --dk-side: 232px; --dk-max: 1320px; }
+
+/* ── Bouton « Vue PC » (visible seulement si l'utilisateur a choisi la vue mobile sur PC) ── */
+.dk-back-pc, .dk-side { display: none; }
+html.dk-eligible:not(.dk) .dk-back-pc {
+  display: block; position: fixed; left: 14px; bottom: 14px; z-index: 9000;
+  background: #1B3A6B; color: #fff; border: none; border-radius: 20px; padding: 8px 14px;
+  font: 600 12px 'Inter', sans-serif; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+}
+
+/* ══ STRUCTURE ════════════════════════════════════════════════ */
+html.dk body { padding-left: var(--dk-side); }
+
+html.dk .dk-side {
+  display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--dk-side); z-index: 200; background: #122952; color: #fff;
+  box-shadow: 2px 0 16px rgba(0,0,0,.18); font-family: 'Inter', sans-serif;
+}
+html.dk .dk-brand {
+  display: flex; align-items: center; gap: 11px; padding: 18px 16px 16px;
+  text-decoration: none; color: #fff; border-bottom: 1px solid rgba(255,255,255,.08);
+}
+html.dk .dk-brand img { width: 40px; height: 40px; border-radius: 50%; background: #fff; padding: 2px; object-fit: contain; }
+html.dk .dk-brand b { display: block; font-size: 15px; letter-spacing: -.2px; }
+html.dk .dk-brand small { display: block; font-size: 9.5px; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+html.dk .dk-nav { flex: 1; overflow-y: auto; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+html.dk .dk-item {
+  display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 9px;
+  color: rgba(255,255,255,.72); text-decoration: none; font-size: 13.5px; font-weight: 500;
+  transition: background .12s, color .12s;
+}
+html.dk .dk-item:hover { background: rgba(255,255,255,.08); color: #fff; }
+html.dk .dk-item.on { background: #F0A500; color: #1B3A6B; font-weight: 700; }
+html.dk .dk-ic { width: 22px; text-align: center; font-size: 17px; }
+html.dk .dk-lb { flex: 1; }
+html.dk .dk-item kbd {
+  font: 600 10px 'Inter', sans-serif; opacity: 0; transition: opacity .12s;
+  background: rgba(255,255,255,.12); border-radius: 4px; padding: 1px 5px;
+}
+html.dk .dk-item:hover kbd { opacity: .7; }
+html.dk .dk-foot { padding: 10px; border-top: 1px solid rgba(255,255,255,.08); display: flex; flex-direction: column; gap: 4px; }
+html.dk .dk-foot button {
+  background: none; border: none; color: rgba(255,255,255,.5); text-align: left; padding: 8px 12px;
+  border-radius: 8px; font: 500 12px 'Inter', sans-serif; cursor: pointer;
+}
+html.dk .dk-foot button:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+/* Le bouton 🏠 retour accueil devient inutile (la barre latérale le remplace) */
+html.dk .back-btn[onclick*="../index.html"],
+html.dk .back-btn[onclick*="../../index.html"],
+html.dk a.back-btn[href$="../index.html"] { display: none !important; }
+
+/* Zones de contenu : centrées et aérées */
+html.dk .hub-scroll,
+html.dk .scroll {
+  padding: 26px max(32px, calc((100% - var(--dk-max)) / 2)) 48px !important;
+}
+html.dk .header-inner, html.dk .hub-top { padding-left: 28px; padding-right: 28px; }
+html.dk .hub-date-bar { padding-left: 28px; padding-right: 28px; }
+
+/* ══ FENÊTRES : bottom sheets → boîtes de dialogue centrées ═══ */
+html.dk .modal-ov,
+html.dk .overlay-calc { align-items: center; justify-content: center; }
+html.dk .modal-sh {
+  width: min(620px, 92vw); max-height: 86vh; border-radius: 18px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.35); animation: dkPop .16s ease-out;
+}
+html.dk .modal-drag, html.dk .calc-sheet-handle { display: none; }
+html.dk .modal-hdr { padding-top: 18px; }
+html.dk .calc-sheet {
+  width: 400px; max-width: 92vw; border-radius: 18px; padding: 22px 20px 22px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.35); animation: dkPop .16s ease-out;
+}
+@keyframes dkPop { from { opacity: 0; transform: scale(.96) translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* Retour visuel des touches de la calculatrice tapées au clavier */
+html.dk .calc-btn.dk-press { filter: brightness(.85); transform: scale(.96); }
+
+/* ══ SOURIS : survol, curseurs ═════════════════════════════════ */
+html.dk button:not(:disabled), html.dk [onclick], html.dk label[for], html.dk select { cursor: pointer; }
+html.dk .calc-btn:hover, html.dk .filter-chip:hover, html.dk .det-tab:not(.active):hover { filter: brightness(.94); }
+html.dk .det-tab:not(.active):hover { background: rgba(255,255,255,.18); color: #fff; filter: none; }
+html.dk .back-btn:hover, html.dk .calc-btn-header:hover { background: rgba(255,255,255,.25); }
+html.dk .modal-close:hover { filter: brightness(.9); }
+
+/* Barres de défilement fines */
+html.dk ::-webkit-scrollbar { width: 10px; height: 10px; }
+html.dk ::-webkit-scrollbar-thumb { background: rgba(27,58,107,.22); border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+html.dk ::-webkit-scrollbar-thumb:hover { background-color: rgba(27,58,107,.4); }
+html.dk ::-webkit-scrollbar-track { background: transparent; }
+html.dk { scrollbar-width: thin; scrollbar-color: rgba(27,58,107,.25) transparent; }
+
+/* Aide raccourcis */
+.dk-help-ov { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; }
+.dk-help-box { background: #fff; border-radius: 16px; padding: 18px 22px 20px; width: 460px; max-width: 92vw; box-shadow: 0 24px 64px rgba(0,0,0,.35); color: #1A2340; }
+.dk-help-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 15px; }
+.dk-help-x { border: none; background: #EAECF4; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; }
+.dk-help-box table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dk-help-box td { padding: 8px 4px; border-top: 1px solid #EAECF4; }
+.dk-help-box td:last-child { color: #4A5878; }
+.dk-help-box kbd { display: inline-block; background: #F4F6FB; border: 1px solid #E0E4EF; border-bottom-width: 2px; border-radius: 5px; padding: 1px 6px; font: 600 11px 'Inter', sans-serif; }
+
+/* ══════════════════════════════════════════════════════════════
+   ACCUEIL
+   ══════════════════════════════════════════════════════════════ */
+html.dk .modules-grid { grid-template-columns: repeat(6, 1fr); gap: 16px; }
+@media (max-width: 1360px) { html.dk .modules-grid { grid-template-columns: repeat(3, 1fr); } }
+html.dk .mod-card { padding: 26px 14px 22px; gap: 12px; transition: transform .14s, box-shadow .14s, border-color .14s; }
+html.dk .mod-card.is-active:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(27,58,107,.16); border-color: #1B3A6B; }
+html.dk .mod-icon { width: 64px; height: 64px; font-size: 32px; border-radius: 16px; }
+html.dk .mod-name { font-size: 14px; }
+html.dk .mod-desc { font-size: 11.5px; }
+html.dk .res-hub-card { transition: transform .14s, box-shadow .14s; }
+html.dk .res-hub-card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(27,58,107,.18); }
+html.dk .res-hub-item { padding-top: 16px; padding-bottom: 16px; }
+html.dk .res-hub-item-icon { font-size: 22px; }
+html.dk .res-hub-item-count { font-size: 18px; }
+html.dk .res-hub-item-label { font-size: 11px; }
+html.dk .sec-label { font-size: 11px; }
+
+/* ══════════════════════════════════════════════════════════════
+   CHANTIERS
+   ══════════════════════════════════════════════════════════════ */
+/* Liste en grille multi-colonnes (une seule colonne en mode « réordonner ») */
+html.dk #listContainer:not(:has(.reorder-bar)) {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; align-items: start;
+}
+html.dk #listContainer:not(:has(.reorder-bar)) > :not(.chantier-card) { grid-column: 1 / -1; }
+html.dk #listContainer:not(:has(.reorder-bar)) .chantier-card { margin-bottom: 0; }
+html.dk #listContainer:has(.reorder-bar) { max-width: 720px; }
+html.dk .chantier-card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(27,58,107,.16); }
+html.dk .chantier-card:hover .card-arrow { color: #1B3A6B; }
+html.dk .toolbar .search-input { max-width: 520px; }
+html.dk .toolbar { align-items: center; }
+
+/* Fiche chantier : panneau à droite de la barre latérale, contenu centré */
+html.dk .detail-ov { left: var(--dk-side); }
+html.dk .det-header-inner { padding-left: 28px; padding-right: 28px; }
+html.dk .det-tabs { padding-left: 28px; padding-right: 28px; max-width: 640px; }
+html.dk #det-tab-infos,
+html.dk #det-tab-rapports { padding: 24px max(28px, calc((100% - 960px) / 2)) 40px; }
+html.dk .det-tab-content:not(.plan-fullscreen)#det-tab-plan { padding: 20px 28px; }
+html.dk .plan-list-row:hover, html.dk .det-file-card:hover { box-shadow: 0 8px 22px rgba(27,58,107,.14); }
+html.dk .plan-list-row:hover .plan-list-arrow { color: #1B3A6B; }
+
+/* Menu clic droit / appui long */
+html.dk #menu-ov .modal-sh { width: 380px; }
+
+/* Toast recentré sur la zone de contenu */
+html.dk .toast { left: calc(50% + var(--dk-side) / 2); }
