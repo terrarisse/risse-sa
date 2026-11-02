@@ -7,6 +7,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#1B3A6B">
 <title>Chantiers — Risse S.A.</title>
+<link rel="stylesheet" href="../desktop.css">
+<script src="../desktop.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -1692,7 +1694,7 @@ window.calcOp                = calcOp;
 window.calcClear             = calcClear;
 window.calcBackspace         = calcBackspace;
 window.calcEquals            = calcEquals;
-Object.assign(window,{cardTap,menuClose,menuDo,endReorder,editCurrent,setStatut,viewDevis,rapEdit,rapDel});
+Object.assign(window,{cardTap,openMenu,menuClose,menuDo,endReorder,editCurrent,setStatut,viewDevis,rapEdit,rapDel});
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').catch(()=>{});
