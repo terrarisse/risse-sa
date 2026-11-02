@@ -226,7 +226,7 @@ if (!COMPAT) {
     renderContent();
     const $ = s => ov.querySelector(s);
     $('#rn-back').onclick = backToList;
-    $('#rn-del').onclick = () => { if (confirm('Supprimer cette note ?')) removeNote(); };
+    $('#rn-del').onclick = async () => { if (await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer cette note ?')) removeNote(); };
     $('#rn-titre').oninput = e => { d.titre = e.target.value; queueSave(); };
     ov.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { d.type = b.dataset.t; if (d.type === 'liste' && !d.items.length) d.items = [{ t: '', done: false }]; renderEditor(); queueSave(); });
     $('#rn-share').onclick = () => { d.partage = !d.partage; $('#rn-share').classList.toggle('on', d.partage); queueSave(); };

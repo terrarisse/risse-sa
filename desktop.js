@@ -281,44 +281,6 @@
     for (var i = 0; i < hb.length; i++) new MutationObserver(queueClassify).observe(hb[i], { childList: true, characterData: true, subtree: true });
   }
 
-  /* ── Glisser-déposer à la souris ──────────────────────────
-     Certaines listes ne se réordonnent qu'au doigt (appui long + glisser).
-     Sur PC, on traduit la souris en « doigt » pour ces éléments :
-     maintenir le clic ~½ s, puis glisser. */
-  var EMU_SEL = '.res-item[data-id], .machine-card[data-id], .acc-header, .sub-acc-header, .maint-card[data-id]';
-  // Matériaux / Évacuations : les éléments ont déjà leur propre glisser à la souris (changement de catégorie)
-  var EMU_EXCL = '#content-materiaux .res-item, #content-materiaux .machine-card, #content-evacuations .res-item, #content-evacuations .machine-card, input, textarea, select';
-  var emu = null, swallowClick = false;
-  function touchSupported() { try { new Touch({ identifier: 1, target: document.body, clientX: 0, clientY: 0 }); return true; } catch (e) { return false; } }
-  function fireTouch(type, t, x, y) {
-    var tt = new Touch({ identifier: 1, target: t, clientX: x, clientY: y, pageX: x, pageY: y, screenX: x, screenY: y, radiusX: 1, radiusY: 1, force: 1 });
-    var list = type === 'touchend' ? [] : [tt];
-    t.dispatchEvent(new TouchEvent(type, { bubbles: true, cancelable: true, composed: true, touches: list, targetTouches: list, changedTouches: [tt] }));
-  }
-  document.addEventListener('mousedown', function (e) {
-    if (!active() || e.button !== 0 || !e.target.closest) return;
-    if (!e.target.closest(EMU_SEL) || e.target.closest(EMU_EXCL) || !touchSupported()) return;
-    emu = { t: e.target, x: e.clientX, y: e.clientY, at: Date.now(), moved: false };
-    fireTouch('touchstart', emu.t, e.clientX, e.clientY);
-  }, true);
-  document.addEventListener('mousemove', function (e) {
-    if (!emu) return;
-    if (!emu.moved && Math.hypot(e.clientX - emu.x, e.clientY - emu.y) < 6) return; // ignorer les micro-tremblements
-    emu.moved = true;
-    e.preventDefault();
-    fireTouch('touchmove', emu.t, e.clientX, e.clientY);
-  }, true);
-  document.addEventListener('mouseup', function (e) {
-    if (!emu) return;
-    var m = emu.moved && Date.now() - emu.at > 300;
-    fireTouch('touchend', emu.t, e.clientX, e.clientY);
-    emu = null;
-    if (m) { swallowClick = true; setTimeout(function () { swallowClick = false; }, 60); }
-  }, true);
-  document.addEventListener('click', function (e) {
-    if (swallowClick) { swallowClick = false; e.preventDefault(); e.stopPropagation(); }
-  }, true);
-
   function boot() { apply(); startObserver(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();

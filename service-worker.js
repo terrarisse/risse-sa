@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v16';
+const CACHE_NAME = 'risse-app-v17';
 const URLS = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const URLS = [
   './notes.js',
   './desktop.css',
   './desktop.js',
+  './commun.js',
+  './trello.js',
   './logo-pc.png',
   './icon-192.png',
   './icon-512.png',
@@ -61,6 +63,8 @@ self.addEventListener('activate', e => {
 // l'API Cache ne supporte pas les autres méthodes, ex. les écritures Firestore en POST)
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return; // laisse passer normalement, pas d'interception
+  // Trello : données privées et toujours fraîches → jamais mises en cache
+  if (/(^|\.)trello\.com$/.test(new URL(e.request.url).hostname)) return;
 
   e.respondWith(
     fetch(e.request)

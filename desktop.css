@@ -262,3 +262,4 @@ html.dk body > .bottom-nav > .nav-item.active::after { transform: none !importan
 html.dk .res-item:hover, html.dk .machine-card:hover, html.dk .maint-card:hover { box-shadow: 0 8px 22px rgba(27,58,107,.14); }
 html.dk .month-card { transition: transform .14s, box-shadow .14s; }
 html.dk .month-card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(27,58,107,.16); }
+html.dk .res-item[data-id], html.dk .machine-card[data-id], html.dk .maint-card[data-id] { cursor: grab; }
