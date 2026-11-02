@@ -9,6 +9,7 @@
 <title>Ressources — Risse S.A.</title>
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
+<script src="../commun.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -2084,6 +2085,108 @@ function initSubCatDrag(el, section, catId, subId){
   });
 }
 
+// ── Glisser à la SOURIS (PC) : réordonner éléments, catégories, sous-catégories ──
+// Cliquer-glisser directement (pas besoin d'appui long). Un simple clic ouvre toujours la fiche.
+// Matériaux / Évacuations : déposer sur un en-tête de catégorie = changer de catégorie.
+function mouseDrag(el, h){
+  el.addEventListener('mousedown', e=>{
+    if(e.button!==0 || e.target.closest('input,textarea,select')) return;
+    e.stopPropagation();
+    const sx=e.clientX, sy=e.clientY; let dragging=false;
+    const under=ev=>{ el.style.visibility='hidden'; const t=document.elementFromPoint(ev.clientX,ev.clientY); el.style.visibility=''; return t; };
+    const scroller=el.closest('.page');
+    const onMove=ev=>{
+      if(!dragging){
+        if(Math.hypot(ev.clientX-sx, ev.clientY-sy)<6) return;
+        dragging=true; el.classList.add('drag-ghost'); document.body.classList.add('mat-dragging');
+      }
+      ev.preventDefault();
+      h.clear(); const t=under(ev); if(t) h.over(t);
+      if(scroller){ const r=scroller.getBoundingClientRect();
+        if(ev.clientY<r.top+50) scroller.scrollTop-=14; else if(ev.clientY>r.bottom-50) scroller.scrollTop+=14; }
+    };
+    const onUp=ev=>{
+      window.removeEventListener('mousemove',onMove); window.removeEventListener('mouseup',onUp);
+      if(!dragging) return;
+      el.classList.remove('drag-ghost'); document.body.classList.remove('mat-dragging'); h.clear();
+      // le clic qui suit le relâchement ne doit pas ouvrir la fiche
+      const stop=c=>{ c.stopPropagation(); c.preventDefault(); };
+      window.addEventListener('click',stop,{capture:true,once:true}); setTimeout(()=>window.removeEventListener('click',stop,true),80);
+      const t=under(ev); if(t) h.drop(t);
+    };
+    window.addEventListener('mousemove',onMove); window.addEventListener('mouseup',onUp);
+  });
+}
+function clearDragMarks(){
+  document.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));
+  document.querySelectorAll('.drop-target').forEach(x=>x.classList.remove('drop-target'));
+}
+function initItemMouseDrag(el, section, itemId){
+  const itemSel = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
+  const canMoveCat = section==='materiaux' || section==='evacuations';
+  mouseDrag(el, {
+    clear: clearDragMarks,
+    over(t){
+      const hdr = canMoveCat && t.closest('.acc-header, .sub-acc-header');
+      if(hdr){ hdr.classList.add('drop-target'); return; }
+      const it = t.closest(itemSel); if(it && it!==el) it.classList.add('drag-over');
+    },
+    drop(t){
+      const data = load(section);
+      const item = data.find(i=>i.id===itemId); if(!item) return;
+      const subHdr = canMoveCat && t.closest('.sub-acc-header');
+      const catHdr = canMoveCat && !subHdr && t.closest('.acc-header');
+      if(subHdr || catHdr){
+        let newCatId=null, newSubId='';
+        if(subHdr){ const sa=subHdr.closest('.sub-acc[data-sub-id]'), acc=subHdr.closest('.accordion[data-cat-id]'); if(sa&&acc){ newCatId=acc.dataset.catId; newSubId=sa.dataset.subId; } }
+        else { const acc=catHdr.closest('.accordion[data-cat-id]'); if(acc) newCatId=acc.dataset.catId||''; }
+        if(newCatId===null || (item.catId===newCatId && (item.subCatId||'')===newSubId)) return;
+        item.catId=newCatId; item.subCatId=newSubId;
+        save(section, data); renderContent(section, searchFilters[section]||'');
+        showToast(newCatId ? '✓ Déplacé' : '✓ Retiré de la catégorie'); return;
+      }
+      const target = t.closest(itemSel);
+      if(!target || target.dataset.id===itemId) return;
+      const fromIdx = data.findIndex(i=>i.id===itemId), toIdx = data.findIndex(i=>i.id===target.dataset.id);
+      if(fromIdx===-1 || toIdx===-1) return;
+      // déposé sur un élément d'une autre catégorie : il rejoint cette catégorie
+      const tItem = data[toIdx];
+      if(canMoveCat && ((tItem.catId||'')!==(item.catId||'') || (tItem.subCatId||'')!==(item.subCatId||''))){ item.catId=tItem.catId||''; item.subCatId=tItem.subCatId||''; }
+      save(section, reorder(data, fromIdx, toIdx));
+      renderContent(section, searchFilters[section]||'');
+      showToast('✓ Ordre mis à jour');
+    }
+  });
+}
+function initCatMouseDrag(el, section, catId){
+  mouseDrag(el, {
+    clear: clearDragMarks,
+    over(t){ const acc=t.closest('.accordion[data-cat-id]'); if(acc && acc.dataset.catId!==catId) acc.classList.add('drag-over'); },
+    drop(t){
+      const acc=t.closest('.accordion[data-cat-id]'); if(!acc || acc.dataset.catId===catId) return;
+      const allCats=loadCats(), cats=allCats[section]||[];
+      const fromIdx=cats.findIndex(c=>c.id===catId), toIdx=cats.findIndex(c=>c.id===acc.dataset.catId);
+      if(fromIdx===-1 || toIdx===-1) return;
+      allCats[section]=reorder(cats, fromIdx, toIdx); saveCats(allCats);
+      renderContent(section, searchFilters[section]||''); showToast('✓ Ordre catégories mis à jour');
+    }
+  });
+}
+function initSubCatMouseDrag(el, section, catId, subId){
+  mouseDrag(el, {
+    clear: clearDragMarks,
+    over(t){ const sa=t.closest('.sub-acc[data-sub-id]'); if(sa && sa.dataset.subId!==subId) sa.classList.add('drag-over'); },
+    drop(t){
+      const sa=t.closest('.sub-acc[data-sub-id]'); if(!sa || sa.dataset.subId===subId) return;
+      const allCats=loadCats(), cat=(allCats[section]||[]).find(c=>c.id===catId); if(!cat||!cat.children) return;
+      const fromIdx=cat.children.findIndex(x=>x.id===subId), toIdx=cat.children.findIndex(x=>x.id===sa.dataset.subId);
+      if(fromIdx===-1 || toIdx===-1) return;
+      cat.children=reorder(cat.children, fromIdx, toIdx); saveCats(allCats);
+      renderContent(section, searchFilters[section]||''); showToast('✓ Ordre sous-catégories mis à jour');
+    }
+  });
+}
+
 // Attache les listeners drag après chaque renderContent
 function attachDragListeners(section){
   // Items (les machines utilisent .machine-card comme conteneur draggable)
@@ -2099,12 +2202,16 @@ function attachDragListeners(section){
   document.querySelectorAll(`#content-${section} .sub-acc[data-sub-id] .sub-acc-header`).forEach(el=>{
     initSubCatDrag(el, section, el.closest('.accordion[data-cat-id]').dataset.catId, el.closest('.sub-acc').dataset.subId);
   });
-  // Drag souris desktop (changement de catégorie) — Matériaux uniquement
-  if((section==='materiaux'||section==='evacuations')){
-    document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
-      initMaterialMouseDrag(el, el.dataset.id, section);
-    });
-  }
+  // Glisser à la souris (PC) : réordonner + changer de catégorie (Matériaux/Évac.)
+  document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
+    initItemMouseDrag(el, section, el.dataset.id);
+  });
+  document.querySelectorAll(`#content-${section} .accordion[data-cat-id] .acc-header`).forEach(el=>{
+    initCatMouseDrag(el, section, el.closest('.accordion').dataset.catId);
+  });
+  document.querySelectorAll(`#content-${section} .sub-acc[data-sub-id] .sub-acc-header`).forEach(el=>{
+    initSubCatMouseDrag(el, section, el.closest('.accordion[data-cat-id]').dataset.catId, el.closest('.sub-acc').dataset.subId);
+  });
 }
 
 async function initApp(){
