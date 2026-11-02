@@ -1255,12 +1255,12 @@ async function renderDetFileTab(tabKey){
 const TR = window.RTrello;
 function trGroupOf(c, org){
   if(!c || !c.trello || !org) return null;
-  return org.groups[c.trello.key] || Object.values(org.groups).find(g=>g.cards.some(x=>x.name===c.trello.name)) || null;
+  return org.groups[c.trello.key] || org.groups[TR.gkey(c.trello.name)] || Object.values(org.groups).find(g=>g.cards.some(x=>x.name===c.trello.name)) || null;
 }
 // Recherche une carte qui correspond au chantier (nom ou client identiques)
 function trSuggest(c, org){
   if(!org) return null;
-  const linked = new Set(load().filter(x=>x.trello).map(x=>x.trello.key));
+  const linked = trLinkedKeys(org);
   const cands = [TR.norm(c.nom||''), TR.norm(c.client||'')].filter(x=>x.length>3);
   return Object.values(org.groups).find(g=>!linked.has(g.key) && cands.some(k=>{
     const gk = g.key, gc = TR.norm(TR.parseTitle(g.cards[0].name).client);
@@ -1272,6 +1272,12 @@ function trExistingFor(g, list){
   const t = TR.parseTitle(TR.cardOf(g).name);
   const gk = g.key, gc = TR.norm(t.client);
   return list.find(c=>!c.trello && [TR.norm(c.nom||''), TR.norm(c.client||'')].some(k=>k.length>3 && (k===gk || k===gc || gk.startsWith(k))));
+}
+// Clés des groupes Trello déjà liés à un chantier de l'app
+function trLinkedKeys(org, exceptId){
+  const set = new Set();
+  load().forEach(c=>{ if(c.trello && c.id!==exceptId){ set.add(c.trello.key); const g = trGroupOf(c, org); if(g) set.add(g.key); } });
+  return set;
 }
 function trWeeksHTML(g){
   const now = new Date();
@@ -1394,7 +1400,7 @@ function trGroupRows(groups, mode){
     return mode==='link'
       ? `<div class="tr-pick" onclick="trLink('${k}')"><div class="tr-pick-b"><div class="tr-pick-n">${esc(card.name)}</div><div class="tr-pick-m">${esc(meta)}</div></div><span class="tr-st" style="background:${sl[1]};color:${sl[2]}">${sl[0]}</span></div>`
       : (()=>{ const ex = trExistingFor(g, load());
-          return `<label class="tr-pick"><input type="checkbox" value="${k}" ${st!=='termine'?'checked':''}><div class="tr-pick-b"><div class="tr-pick-n">${esc(t.client)}</div><div class="tr-pick-m">${esc(meta)}${t.note?' · '+esc(t.note):''}</div>${ex?`<div class="tr-pick-m" style="color:var(--teal);font-weight:700">🔗 Déjà dans l'app : sera lié à « ${esc(ex.nom)} »</div>`:''}</div><span class="tr-st" style="background:${sl[1]};color:${sl[2]}">${sl[0]}</span></label>`; })();
+          return `<label class="tr-pick"><input type="checkbox" value="${k}"><div class="tr-pick-b"><div class="tr-pick-n">${esc(t.client)}</div><div class="tr-pick-m">${esc(meta)}${t.note?' · '+esc(t.note):''}</div>${ex?`<div class="tr-pick-m" style="color:var(--teal);font-weight:700">🔗 Déjà dans l'app : sera lié à « ${esc(ex.nom)} »</div>`:''}</div><span class="tr-st" style="background:${sl[1]};color:${sl[2]}">${sl[0]}</span></label>`; })();
   }).join('');
 }
 async function trReady(){
@@ -1414,18 +1420,21 @@ function trSortedGroups(org){
 }
 async function trPickLink(){
   const org = await trReady(); if(!org) return;
-  const linked = new Set(load().filter(x=>x.trello && x.id!==currentDetailId).map(x=>x.trello.key));
+  const linked = trLinkedKeys(org, currentDetailId);
   const groups = trSortedGroups(org).filter(g=>!linked.has(g.key));
   trSheet('🔗 Lier à une carte Trello', groups.length ? trGroupRows(groups,'link') : '<div class="tr-empty">Toutes les cartes sont déjà liées.</div>');
 }
 async function openTrelloImport(){
   const org = await trReady(); if(!org) return;
-  const linked = new Set(load().filter(x=>x.trello).map(x=>x.trello.key));
+  const linked = trLinkedKeys(org);
   const groups = trSortedGroups(org).filter(g=>!linked.has(g.key));
   if(!groups.length){ showToast('✓ Tous les chantiers Trello sont déjà dans l\'app'); return; }
   const ov = trSheet('📌 Importer depuis Trello',
-    `<div class="tr-empty" style="margin-bottom:10px">Chantiers du programme pas encore dans l'app. Les fiches seront créées et liées à leur carte (client, lieu, remarque, statut).</div>${trGroupRows(groups,'import')}`,
+    `<div class="tr-empty" style="margin-bottom:10px">Tableau <b style="color:var(--text)">${esc((org.board&&org.board.name)||'Trello')}</b> · ${groups.length} chantier${groups.length>1?'s':''} pas encore dans l'app. Coche ceux à importer : la fiche est créée et liée à sa carte.</div>${trGroupRows(groups,'import')}`,
     `<div style="padding:12px 16px calc(14px + var(--safe-b));border-top:1px solid var(--border)"><button class="tr-cta" id="tr-do-import">Importer la sélection</button></div>`);
+  const btn = ov.querySelector('#tr-do-import');
+  const upd = ()=>{ const n = ov.querySelectorAll('input[type=checkbox]:checked').length; btn.textContent = n ? `Importer ${n} chantier${n>1?'s':''}` : 'Coche les chantiers à importer'; btn.disabled = !n; btn.style.opacity = n?1:.5; };
+  ov.addEventListener('change', upd); upd();
   ov.querySelector('#tr-do-import').onclick = ()=>{
     const keys = [...ov.querySelectorAll('input[type=checkbox]:checked')].map(i=>decodeURIComponent(i.value));
     if(!keys.length){ showToast('Rien de sélectionné'); return; }

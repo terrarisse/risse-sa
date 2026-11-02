@@ -64,7 +64,7 @@
       api('/boards/' + boardId, { fields: 'name,url' }),
       api('/boards/' + boardId + '/lists', { filter: 'open', fields: 'name,pos' }),
       api('/boards/' + boardId + '/cards', {
-        filter: 'open', fields: 'name,desc,idList,labels,shortUrl,pos,badges',
+        filter: 'open', fields: 'name,desc,idList,labels,shortUrl,pos,badges,closed',
         attachments: 'true', attachment_fields: 'name,url,mimeType,bytes,date,isUpload'
       })
     ]).then(function (r) {
@@ -108,11 +108,19 @@
     return { client: (parts[0] || s).trim(), lieu: (parts.slice(1).join(' / ') || '').trim(), note: notes.join(' · ') };
   }
 
+  // Clé de regroupement d'un chantier : le client (partie avant « / », sans remarques)
+  // → « Fluckiger Isabelle & Philippe / Cugy » et « Fluckiger Isabelle & Philippe » = même chantier
+  function gkey(name) { return norm(parseTitle(name).client) || norm(name); }
+
   // Organise les données : semaines datées, colonne « à réaliser », groupes de chantiers
   function organize(data) {
     var lists = data.lists.slice().sort(function (a, b) { return a.pos - b.pos; });
+    // Uniquement les cartes des colonnes visibles du tableau (les colonnes archivées sont ignorées,
+    // même si leurs cartes ne sont pas archivées une à une)
+    var openIds = {}; lists.forEach(function (l) { openIds[l.id] = 1; });
+    var cards = data.cards.filter(function (c) { return openIds[c.idList] && !c.closed; });
     var byList = {};
-    data.cards.forEach(function (c) { (byList[c.idList] = byList[c.idList] || []).push(c); });
+    cards.forEach(function (c) { (byList[c.idList] = byList[c.idList] || []).push(c); });
     Object.keys(byList).forEach(function (k) { byList[k].sort(function (a, b) { return a.pos - b.pos; }); });
     var weeks = [], others = [];
     lists.forEach(function (l) {
@@ -122,12 +130,12 @@
     });
     weeks.sort(function (a, b) { return a.week.start - b.week.start; });
     var groups = {};
-    data.cards.forEach(function (c) {
-      var k = norm(c.name);
+    cards.forEach(function (c) {
+      var k = gkey(c.name);
       var g = groups[k] = groups[k] || { key: k, cards: [], weeks: [] };
       g.cards.push(c);
     });
-    weeks.forEach(function (w) { w.cards.forEach(function (c) { var g = groups[norm(c.name)]; if (g && g.weeks.indexOf(w) < 0) g.weeks.push(w); }); });
+    weeks.forEach(function (w) { w.cards.forEach(function (c) { var g = groups[gkey(c.name)]; if (g && g.weeks.indexOf(w) < 0) g.weeks.push(w); }); });
     return { weeks: weeks, others: others, groups: groups };
   }
   function currentWeekIndex(weeks) {
@@ -350,7 +358,7 @@
       }).join('') + '</div>';
       if (!cur || !cur.cards.length) h += '<div class="tw-empty">Aucun chantier dans cette colonne.</div>';
       else h += '<div class="tw-list">' + cur.cards.map(function (c) {
-        var t = parseTitle(c.name), g = org.groups[norm(c.name)];
+        var t = parseTitle(c.name), g = org.groups[gkey(c.name)];
         var nAtt = g ? attachmentsOf(g).length : (c.attachments || []).length;
         var labels = (c.labels || []).map(function (l) { return '<span class="tw-lbl" title="' + esc(l.name || '') + '" style="background:' + (LABEL_COLORS[(l.color || '').split('_')[0]] || '#C1C7D0') + '"></span>'; }).join('');
         var cl = c.badges && c.badges.checkItems ? '☑ ' + c.badges.checkItemsChecked + '/' + c.badges.checkItems : '';
@@ -410,7 +418,7 @@
 
     function openCard(id) {
       var org = state.org, c = state.data.cards.find(function (x) { return x.id === id; }); if (!c) return;
-      var g = org.groups[norm(c.name)] || { cards: [c], weeks: [] };
+      var g = org.groups[gkey(c.name)] || { cards: [c], weeks: [] };
       var t = parseTitle(c.name), atts = attachmentsOf(g);
       var desc = g.cards.map(function (x) { return x.desc; }).filter(Boolean).sort(function (a, b) { return b.length - a.length; })[0] || '';
       var ov = document.createElement('div'); ov.className = 'tw-ov';
@@ -470,7 +478,7 @@
   window.RTrello = {
     connected: function () { return !!(key() && token()); },
     hasBoard: function () { return !!lsGet(LS.board); },
-    cached: cached, organize: organize, parseWeek: parseWeek, parseTitle: parseTitle, norm: norm,
+    cached: cached, organize: organize, parseWeek: parseWeek, parseTitle: parseTitle, norm: norm, gkey: gkey,
     getData: getData, attachmentsOf: attachmentsOf, openAttachment: openAttachment, downloadBlob: downloadBlob,
     kindOf: kindOf, fileIcon: fileIcon, fmtBytes: fmtBytes, fmtD: fmtD, suggestStatus: suggestStatus, cardOf: cardOf,
     mountWeek: mountWeek, connect: connect, disconnect: disconnect
