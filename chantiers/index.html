@@ -9,6 +9,7 @@
 <title>Chantiers — Risse S.A.</title>
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
+<script src="../commun.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -1020,7 +1021,20 @@ function openPdfViewer(name, url){
     v.innerHTML='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--navy);color:#fff"><button id="pdf-v-close" style="border:none;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;height:36px;padding:0 14px;font-size:14px;font-weight:700">✕ Fermer</button><div id="pdf-v-name" style="flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div><a id="pdf-v-open" target="_blank" rel="noopener" style="color:#fff;font-size:13px;font-weight:600;text-decoration:none;background:rgba(255,255,255,.15);border-radius:10px;padding:9px 12px">↗ Ouvrir</a></div><div id="pdf-v-pages" style="flex:1;overflow-y:auto;padding:8px;-webkit-overflow-scrolling:touch"></div>';
     document.body.appendChild(v);
     v.querySelector('#pdf-v-close').onclick=()=>{ v.style.display='none'; v.querySelector('#pdf-v-pages').innerHTML=''; };
+    // Zoom à 2 doigts sur le devis (le zoom de la page entière est bloqué)
+    const pgs=v.querySelector('#pdf-v-pages'); pgs.style.overflow='auto';
+    let d0=0, z0=1;
+    const dist=e=>Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+    pgs.addEventListener('touchstart',e=>{ if(e.touches.length===2){ d0=dist(e); z0=pgs._z||1; } },{passive:true});
+    pgs.addEventListener('touchmove',e=>{
+      if(e.touches.length!==2||!d0) return;
+      e.preventDefault();
+      pgs._z=Math.max(1,Math.min(4,z0*dist(e)/d0));
+      pgs.querySelectorAll('canvas').forEach(c=>{ c.style.width=(pgs._z*100)+'%'; c.style.maxWidth='none'; });
+    },{passive:false});
+    pgs.addEventListener('touchend',e=>{ if(e.touches.length<2) d0=0; });
   }
+  v.querySelector('#pdf-v-pages')._z=1;
   v.querySelector('#pdf-v-name').textContent = name||'Devis';
   v.querySelector('#pdf-v-open').href = url;
   v.style.display='flex';
@@ -1070,7 +1084,7 @@ function rapEdit(id){
   window.location.href = '../rapport/index.html';
 }
 async function rapDel(id){
-  if (!confirm('Supprimer ce rapport du chantier ?')) return;
+  if (!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce rapport du chantier ?'))) return;
   const a = rapLocal(); a[currentDetailId] = (a[currentDetailId]||[]).filter(x=>String(x.id)!==String(id));
   localStorage.setItem(RAPK,JSON.stringify(a));
   try{ await deleteDoc(doc(db,'chantiers',`rap_${currentDetailId}_${id}`)); }catch(e){ console.warn(e); }
@@ -1151,12 +1165,12 @@ function openMenu(id){
   document.body.appendChild(ov);
 }
 function menuClose(){ const o = document.getElementById('menu-ov'); if (o) o.remove(); }
-function menuDo(a,id,k){
+async function menuDo(a,id,k){
   menuClose();
   if (a==='order') startReorder();
   else if (a==='edit') openAdd(id);
   else if (a==='st') { const d=load(); const i=d.findIndex(x=>x.id===id); if(i>-1){ d[i]={...d[i],statut:k}; save(d); renderList(); showToast('✓ Statut : '+STATUS_LABEL[k]); } }
-  else if (a==='del' && confirm('Supprimer ce chantier et ses rapports archivés ?')) { removeChantier(id); renderList(); showToast('🗑 Chantier supprimé'); }
+  else if (a==='del' && (await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce chantier et ses rapports archivés ?'))) { removeChantier(id); renderList(); showToast('🗑 Chantier supprimé'); }
 }
 
 // tabKey = 'plan' ou 'devis'. Le Devis reste un fichier unique ; le Plan est
@@ -1242,9 +1256,9 @@ function deletePlanClick(e, planId){
   if(e) e.stopPropagation();
   deletePlan(planId);
 }
-function deletePlan(planId){
+async function deletePlan(planId){
   console.log('🔎 [deletePlan] appelé avec planId=', planId, 'currentDetailId=', currentDetailId);
-  if(!confirm('Supprimer ce plan et ses cotes ?')) { console.log('🔎 [deletePlan] annulé par l\'utilisateur'); return; }
+  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce plan et ses cotes ?'))) { console.log('🔎 [deletePlan] annulé par l\'utilisateur'); return; }
   try{
     const data = [...load()];
     const idx = data.findIndex(x=>x.id===currentDetailId);
@@ -1457,9 +1471,9 @@ async function removeChantier(id){
   try{ const s = await getDocs(query(collection(db,'chantiers'),where('chantierId','==',id))); s.docs.forEach(x=>deleteDoc(x.ref)); }catch(e){ console.warn(e); }
   const a = rapLocal(); delete a[id]; localStorage.setItem(RAPK,JSON.stringify(a));
 }
-function deleteCurrentChantier() {
+async function deleteCurrentChantier() {
   if (!currentDetailId) return;
-  if (!confirm('Supprimer ce chantier et ses rapports archivés ?')) return;
+  if (!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce chantier et ses rapports archivés ?'))) return;
   removeChantier(currentDetailId);
   closeDetail(); renderList();
   showToast('🗑 Chantier supprimé');
