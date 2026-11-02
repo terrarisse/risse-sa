@@ -11,7 +11,7 @@
   'use strict';
 
   // ▼▼▼ Clé API Trello (publique, pas secrète) — à coller ici une fois créée ▼▼▼
-  var TRELLO_KEY = '';
+  var TRELLO_KEY = 'a3e14c63c958348e4255f81fa61d3440';
   // ▲▲▲ https://trello.com/apps/admin → ta Power-Up → onglet « Trello Auth » ▲▲▲
 
   var LS = { key: 'rv6_trello_key', token: 'rv6_trello_token', board: 'rv6_trello_board', cache: 'rv6_trello_cache' };
