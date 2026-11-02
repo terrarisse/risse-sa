@@ -12,6 +12,7 @@
 <title>Risse Heures</title>
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
+<script src="../commun.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -789,8 +790,8 @@ function unhideChMachine(ch,mach){
   saveHiddenChMachines(list);
 }
  
-function removeMachineFromChantier(ch,mach){
-  if(!confirm(`Retour au dépôt pour "${mach}" ?\nElle ne sera plus affichée comme active sur "${ch}". Les heures déjà enregistrées ne sont pas supprimées.`))return;
+async function removeMachineFromChantier(ch,mach){
+  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))(`Retour au dépôt pour "${mach}" ?\nElle ne sera plus affichée comme active sur "${ch}". Les heures déjà enregistrées ne sont pas supprimées.`)))return;
   const list=getHiddenChMachines();
   if(!list.some(h=>h.ch===ch&&h.mach===mach))list.push({ch,mach});
   saveHiddenChMachines(list);
@@ -853,9 +854,40 @@ function reorderArr(arr,fromIdx,toIdx){
 function attachMaintDragListeners(){
   document.querySelectorAll('#maint-list .maint-card[data-id]').forEach(el=>{
     initMaintItemDrag(el,el.dataset.id);
+    initMaintMouseDrag(el,el.dataset.id);
   });
 }
 
+// Glisser à la SOURIS (PC) : cliquer-glisser une carte pour changer l'ordre
+function initMaintMouseDrag(el,itemName){
+  el.addEventListener('mousedown',e=>{
+    if(e.button!==0||e.target.closest('input,textarea,select'))return;
+    const sx=e.clientX,sy=e.clientY;let dragging=false;
+    const under=ev=>{el.style.visibility='hidden';const t=document.elementFromPoint(ev.clientX,ev.clientY);el.style.visibility='';return t;};
+    const clear=()=>document.querySelectorAll('.maint-card').forEach(i=>i.classList.remove('drag-over'));
+    const sc=document.getElementById('scroll-area');
+    const onMove=ev=>{
+      if(!dragging){if(Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;dragging=true;el.classList.add('drag-ghost');document.body.style.cursor='grabbing';}
+      ev.preventDefault();clear();
+      const t=under(ev),ti=t&&t.closest('.maint-card[data-id]');if(ti&&ti!==el)ti.classList.add('drag-over');
+      if(sc){const r=sc.getBoundingClientRect();if(ev.clientY<r.top+50)sc.scrollTop-=14;else if(ev.clientY>r.bottom-50)sc.scrollTop+=14;}
+    };
+    const onUp=ev=>{
+      window.removeEventListener('mousemove',onMove);window.removeEventListener('mouseup',onUp);
+      if(!dragging)return;
+      el.classList.remove('drag-ghost');document.body.style.cursor='';clear();
+      const stop=c=>{c.stopPropagation();c.preventDefault();};
+      window.addEventListener('click',stop,{capture:true,once:true});setTimeout(()=>window.removeEventListener('click',stop,true),80);
+      const t=under(ev),ti=t&&t.closest('.maint-card[data-id]');
+      if(!ti||ti.dataset.id===itemName)return;
+      const all=getMachinesAndAccessoires().filter(item=>hasCarnet(item.name));
+      const order=sortByMaintOrder(all).map(i=>i.name);
+      const fromIdx=order.indexOf(itemName),toIdx=order.indexOf(ti.dataset.id);
+      if(fromIdx!==-1&&toIdx!==-1){saveMaintOrder(reorderArr(order,fromIdx,toIdx));renderMaintList();toast('✓ Ordre mis à jour');}
+    };
+    window.addEventListener('mousemove',onMove);window.addEventListener('mouseup',onUp);
+  });
+}
 function initMaintItemDrag(el,itemName){
   let startY,startX,moved=false;
 
@@ -1053,9 +1085,9 @@ function closeModal(id,e){if(!e||e.target===document.getElementById(id))document
 // ── UTILS ──
 function fd(d){return new Date(d+"T00:00:00").toLocaleDateString("fr-CH",{day:"2-digit",month:"2-digit",year:"2-digit"});}
 function fdl(d){return new Date(d+"T00:00:00").toLocaleDateString("fr-CH",{weekday:"long",day:"numeric",month:"long",year:"numeric"});}
-function confirmReset(){
-  if(confirm("Première confirmation — Supprimer TOUTES les données ?")){
-    if(confirm("Dernière confirmation — Cette action est irréversible. Continuer ?")){
+async function confirmReset(){
+  if(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))("Première confirmation — Supprimer TOUTES les données ?")){
+    if(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))("Dernière confirmation — Cette action est irréversible. Continuer ?")){
       localStorage.clear();
       toast("✓ Données réinitialisées");
       setTimeout(()=>location.reload(),1200);
