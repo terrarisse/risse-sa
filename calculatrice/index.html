@@ -6,6 +6,7 @@
 <title>Calculatrice — Risse S.A.</title>
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
+<script src="../commun.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -667,9 +668,9 @@ function deleteRow(id) {
   updateTotal();
 }
 
-function resetRows() {
+async function resetRows() {
   if (!rows.length) return;
-  if (!confirm('Effacer toutes les lignes ?')) return;
+  if (!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Effacer toutes les lignes ?'))) return;
   rows = []; rowCounter = 0;
   renderRows(); updateTotal();
 }
