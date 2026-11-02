@@ -14,6 +14,10 @@
   var TRELLO_KEY = 'a3e14c63c958348e4255f81fa61d3440';
   // ▲▲▲ https://trello.com/apps/admin → ta Power-Up → onglet « Trello Auth » ▲▲▲
 
+  // ▼▼▼ Adresse du relais Cloudflare (pour afficher les fichiers dans l'app) ▼▼▼
+  var TRELLO_PROXY = 'https://risse-trello.terrarisse.workers.dev';
+  // ▲▲▲ ex. 'https://risse-trello.TON-NOM.workers.dev' — voir trello-relais-cloudflare.js ▲▲▲
+
   var LS = { key: 'rv6_trello_key', token: 'rv6_trello_token', board: 'rv6_trello_board', cache: 'rv6_trello_cache' };
   var API = 'https://api.trello.com/1';
 
@@ -142,24 +146,95 @@
     return out;
   }
 
-  /* ── Ouverture d'une pièce jointe ──────────────────────── */
+  /* ── Ouverture d'une pièce jointe : visionneuse DANS l'app ── */
+  var PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  function loadPdfJs() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    return new Promise(function (res, rej) {
+      var sc = document.createElement('script'); sc.src = PDFJS + 'pdf.min.js';
+      sc.onload = function () { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; res(window.pdfjsLib); };
+      sc.onerror = rej; document.head.appendChild(sc);
+    });
+  }
+  function proxy() { return (TRELLO_PROXY || lsGet('rv6_trello_proxy') || '').replace(/\/+$/, ''); }
+  function downloadBlob(att, cardId) {
+    var path = '/1/cards/' + cardId + '/attachments/' + att.id + '/download/' + encodeURIComponent(att.name || 'fichier');
+    var auth = { Authorization: 'OAuth oauth_consumer_key="' + key() + '", oauth_token="' + token() + '"' };
+    var direct = function () { return fetch('https://api.trello.com' + path, { headers: auth }); };
+    var p = proxy() ? fetch(proxy() + path, { headers: auth }) : direct();
+    return p.then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); });
+  }
+
+  function kindOf(att) {
+    var n = (att.name || '').toLowerCase(), m = att.mimeType || '';
+    if (/pdf/.test(m) || /\.pdf$/.test(n)) return 'pdf';
+    if (/^image\//.test(m) || /\.(jpe?g|png|webp|gif)$/.test(n)) return 'img';
+    return 'other';
+  }
+
   function openAttachment(att, cardId, cardUrl) {
-    if (!att.isUpload) { window.open(att.url, '_blank'); return Promise.resolve(); }
-    // Fichier déposé sur Trello : téléchargement authentifié
-    var url = API + '/cards/' + cardId + '/attachments/' + att.id + '/download/' + encodeURIComponent(att.name || 'fichier');
-    var win = window.open('', '_blank'); // ouvert tout de suite (sinon bloqué comme pop-up)
-    if (win) win.document.write('<p style="font:16px sans-serif;padding:20px">Chargement de « ' + esc(att.name) + ' »…</p>');
-    return fetch(url, { headers: { Authorization: 'OAuth oauth_consumer_key="' + key() + '", oauth_token="' + token() + '"' } })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); })
-      .then(function (b) {
-        var u = URL.createObjectURL(b);
-        if (win) win.location.href = u; else window.open(u, '_blank');
-        setTimeout(function () { URL.revokeObjectURL(u); }, 120000);
-      })
-      .catch(function () {
-        // Si Trello refuse le téléchargement direct : on ouvre la carte dans Trello
-        if (win) win.location.href = cardUrl; else window.open(cardUrl, '_blank');
-      });
+    if (!att.isUpload) { window.open(att.url, '_blank'); return; }
+    var kind = kindOf(att);
+    var ov = document.createElement('div'); ov.className = 'tv-ov';
+    ov.innerHTML = '<div class="tv-hd">' +
+      '<button class="tv-b tv-x" aria-label="Fermer">✕</button>' +
+      '<div class="tv-n">' + esc(att.name) + '</div>' +
+      (kind !== 'other' ? '<button class="tv-b" data-z="-1" aria-label="Dézoomer">−</button><button class="tv-b" data-z="1" aria-label="Zoomer">+</button>' : '') +
+      '<a class="tv-b" data-dl aria-label="Télécharger" title="Télécharger" style="display:none">⬇</a>' +
+      '<a class="tv-b" href="' + esc(cardUrl) + '" target="_blank" rel="noopener" title="Ouvrir dans Trello">↗</a></div>' +
+      '<div class="tv-body"><div class="tv-msg">Chargement…</div></div>';
+    document.body.appendChild(ov);
+    var body = ov.querySelector('.tv-body'), z = 1, blobUrl = null;
+    function close() { ov.remove(); document.removeEventListener('keydown', onKey, true); if (blobUrl) setTimeout(function () { URL.revokeObjectURL(blobUrl); }, 1000); }
+    function onKey(e) { if (e.key === 'Escape') { e.stopImmediatePropagation(); close(); } }
+    document.addEventListener('keydown', onKey, true);
+    ov.querySelector('.tv-x').onclick = close;
+    function applyZoom() {
+      body.querySelectorAll('canvas,img').forEach(function (c) { c.style.width = (z * 100) + '%'; });
+    }
+    function zoomBy(f) { z = Math.max(1, Math.min(5, z * f)); applyZoom(); }
+    ov.querySelectorAll('[data-z]').forEach(function (b) { b.onclick = function () { zoomBy(+b.dataset.z > 0 ? 1.4 : 1 / 1.4); }; });
+    // pincement à 2 doigts / Ctrl+molette
+    var d0 = 0, z0 = 1;
+    function dist(e) { return Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); }
+    body.addEventListener('touchstart', function (e) { if (e.touches.length === 2) { d0 = dist(e); z0 = z; } }, { passive: true });
+    body.addEventListener('touchmove', function (e) { if (e.touches.length === 2 && d0) { e.preventDefault(); z = Math.max(1, Math.min(5, z0 * dist(e) / d0)); applyZoom(); } }, { passive: false });
+    body.addEventListener('touchend', function (e) { if (e.touches.length < 2) d0 = 0; });
+    body.addEventListener('wheel', function (e) { if (e.ctrlKey || e.metaKey) { e.preventDefault(); zoomBy(Math.exp(-e.deltaY * 0.003)); } }, { passive: false });
+
+    function fail() {
+      ov.querySelector('[data-dl]').style.display = 'none';
+      body.innerHTML = '<div class="tv-msg">Impossible d\'afficher ce fichier dans l\'app.' +
+        (proxy() ? '' : '<br><small>Le relais Trello n\'est pas encore configuré.</small>') +
+        '<a class="tv-cta" href="' + esc(cardUrl) + '" target="_blank" rel="noopener">Ouvrir la carte dans Trello ↗</a></div>';
+    }
+    downloadBlob(att, cardId).then(function (blob) {
+      blobUrl = URL.createObjectURL(blob);
+      var dl = ov.querySelector('[data-dl]'); dl.href = blobUrl; dl.download = att.name || 'fichier'; dl.style.display = '';
+      if (kind === 'img') {
+        body.innerHTML = '<img src="' + blobUrl + '" alt="">';
+      } else if (kind === 'pdf') {
+        return loadPdfJs().then(function (lib) { return blob.arrayBuffer().then(function (buf) { return lib.getDocument({ data: buf }).promise; }); })
+          .then(function (pdf) {
+            body.innerHTML = '';
+            var w = Math.min(body.clientWidth - 16, 1400) || 340, dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var chain = Promise.resolve();
+            for (var i = 1; i <= pdf.numPages; i++) (function (n) {
+              chain = chain.then(function () {
+                return pdf.getPage(n).then(function (pg) {
+                  var vp = pg.getViewport({ scale: (w / pg.getViewport({ scale: 1 }).width) * dpr * 1.5 });
+                  var cv = document.createElement('canvas'); cv.width = vp.width; cv.height = vp.height;
+                  body.appendChild(cv); applyZoom();
+                  return pg.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+                });
+              });
+            })(i);
+            return chain;
+          });
+      } else {
+        body.innerHTML = '<div class="tv-msg">Ce type de fichier ne peut pas être affiché dans l\'app.<a class="tv-cta" href="' + blobUrl + '" download="' + esc(att.name || 'fichier') + '">⬇ Télécharger « ' + esc(att.name) + ' »</a></div>';
+      }
+    }).catch(fail);
   }
 
   /* ── Interface : bloc « Programme de la semaine » ──────── */
@@ -198,7 +273,16 @@
     '.tw-open{display:block;text-align:center;margin-top:14px;padding:13px;border-radius:12px;background:#EAECF4;color:#1B3A6B;font-weight:700;font-size:14px;text-decoration:none;}' +
     'html.dk .tw-card:hover,html.dk .tw-att:hover{border-color:#1B3A6B;background:#fff;}' +
     'html.dk .tw-list{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}' +
-    'html.dk .tw-nav:not(:disabled):hover{background:rgba(255,255,255,.3);}';
+    'html.dk .tw-nav:not(:disabled):hover{background:rgba(255,255,255,.3);}' +
+    /* visionneuse */
+    '.tv-ov{position:fixed;inset:0;z-index:700;background:#111214;display:flex;flex-direction:column;font-family:Inter,sans-serif;padding-top:env(safe-area-inset-top,0px);}' +
+    '.tv-hd{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#1B3A6B;color:#fff;flex-shrink:0;}' +
+    '.tv-n{flex:1;min-width:0;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}' +
+    '.tv-b{flex-shrink:0;border:none;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;min-width:38px;height:38px;padding:0 10px;font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;}' +
+    '.tv-body{flex:1;overflow:auto;padding:8px;-webkit-overflow-scrolling:touch;text-align:center;}' +
+    '.tv-body canvas,.tv-body img{display:block;width:100%;max-width:none;margin:0 auto 8px;background:#fff;border-radius:4px;box-shadow:0 1px 6px rgba(0,0,0,.4);}' +
+    '.tv-msg{color:#C9CED8;font-size:14px;padding:40px 20px;line-height:1.5;}' +
+    '.tv-cta{display:block;max-width:320px;margin:18px auto 0;padding:13px;border-radius:12px;background:#F0A500;color:#1B3A6B;font-weight:700;text-decoration:none;}';
   function injectCss() {
     if (document.getElementById('tw-style')) return;
     var st = document.createElement('style'); st.id = 'tw-style'; st.textContent = CSS; document.head.appendChild(st);
