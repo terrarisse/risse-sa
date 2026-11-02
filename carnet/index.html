@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Carnet d'heure — Risse S.A.</title>
+<link rel="stylesheet" href="../desktop.css">
+<script src="../desktop.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 :root{
@@ -779,6 +781,41 @@ function setupZoom() {
     }
     lastTap = now2;
   });
+
+  // PC : Ctrl + molette (ou pincement du pavé tactile) = zoom ; double-clic = zoom avant/arrière
+  let wheelTimer = null;
+  scroll.addEventListener('wheel', e => {
+    if(!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    pdfScale = Math.max(0.3, Math.min(5, pdfScale * Math.exp(-e.deltaY * 0.0025)));
+    const canvas = $('pdfCanvas');
+    if(canvas){ canvas.style.transform = `scale(${pdfScale})`; canvas.style.transformOrigin = 'top left'; }
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(async () => {
+      const finalScale = Math.max(0.3, Math.min(8, pdfBaseScale * pdfScale));
+      pdfScale = 1;
+      await renderAtScale(finalScale);
+      pdfBaseScale = finalScale;
+    }, 220);
+  }, {passive:false});
+  scroll.addEventListener('dblclick', e => {
+    e.preventDefault();
+    const fit = Math.min(window.innerWidth - 20, 900) / 841;
+    pdfBaseScale = pdfBaseScale > fit * 1.5 ? fit : pdfBaseScale * 2;
+    renderAtScale(pdfBaseScale);
+  });
+  // PC : cliquer-glisser pour se déplacer dans le PDF zoomé
+  let panFrom = null;
+  scroll.addEventListener('mousedown', e => {
+    if(e.button !== 0) return;
+    panFrom = { x:e.clientX, y:e.clientY, l:scroll.scrollLeft, t:scroll.scrollTop };
+  });
+  window.addEventListener('mousemove', e => {
+    if(!panFrom) return;
+    scroll.scrollLeft = panFrom.l - (e.clientX - panFrom.x);
+    scroll.scrollTop  = panFrom.t - (e.clientY - panFrom.y);
+  });
+  window.addEventListener('mouseup', () => { panFrom = null; });
 }
 
 function drawEntriesOnCanvas(canvas, scale, moIdx, dpr) {
