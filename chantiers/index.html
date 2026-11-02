@@ -1310,8 +1310,8 @@ async function renderTrelloSection(fresh){
     el.innerHTML = `<div class="tr-box"><div class="tr-hd"><span>📌 ${esc(c.trello.name)}</span><button onclick="trUnlink()">Délier</button></div><div class="tr-body"><div class="tr-empty">Carte introuvable dans le programme actuel (archivée ou renommée ?).</div><button class="tr-cta" style="margin-top:8px" onclick="trPickLink()">🔗 Lier à une autre carte</button></div></div>`;
     return;
   }
-  const atts = TR.attachmentsOf(g);
   const card = TR.cardOf(g);
+  const atts = TR.attachmentsOf(g).map(x=>({...x, url:(g.cards.find(z=>z.id===x.cardId)||card).shortUrl}));
   const desc = g.cards.map(x=>x.desc).filter(Boolean).sort((a,b)=>b.length-a.length)[0]||'';
   el.innerHTML = `<div class="tr-box"><div class="tr-hd"><span>📌 ${esc(card.name)}</span><button onclick="trOpenCard()">↗</button><button onclick="trUnlink()">Délier</button></div><div class="tr-body">
     ${trWeeksHTML(g)}
@@ -1327,11 +1327,12 @@ function trAttRow(c, x, i, where){
   return `<div class="tr-att" onclick="trViewAtt(${i},'${where||'infos'}')"><span class="tr-att-i">${TR.fileIcon(a)}</span><div class="tr-att-b"><div class="tr-att-n">${esc(a.name||a.url)}</div><div class="tr-att-m">${[TR.fmtBytes(a.bytes), a.date?new Date(a.date).toLocaleDateString('fr-CH'):''].filter(Boolean).join(' · ')}</div></div>${imp}</div>`;
 }
 function trAttsFrom(where){ const el = document.getElementById(where==='plan'?'det-trello-plans':'det-trello-wrap'); return (el && el._atts) || []; }
-async function trViewAtt(i, where){
-  const x = trAttsFrom(where)[i]; if(!x) return;
-  const org = await TR.getData(false); const c = load().find(z=>z.id===currentDetailId); const g = trGroupOf(c, org);
-  const card = g && (g.cards.find(z=>z.id===x.cardId) || TR.cardOf(g));
-  TR.openAttachment(x.a, x.cardId, card ? card.shortUrl : 'https://trello.com');
+// Ouverture IMMÉDIATE (sans attente) : les liens externes doivent s'ouvrir dans le geste du doigt,
+// sinon le navigateur les bloque comme pop-up.
+function trViewAtt(i, where){
+  const x = trAttsFrom(where)[i];
+  if(!x){ showToast('⚠️ Pièce jointe introuvable — rouvre la fiche'); renderTrelloSection(true); return; }
+  TR.openAttachment(x.a, x.cardId, x.url || 'https://trello.com');
 }
 async function trOpenCard(){
   const org = await TR.getData(false); const c = load().find(z=>z.id===currentDetailId); const g = trGroupOf(c, org);
@@ -1364,7 +1365,7 @@ async function renderTrelloPlans(){
   const el = document.getElementById('det-trello-plans'); if(!el || !TR || !TR.connected()) return;
   const c = load().find(x=>x.id===currentDetailId); if(!c || !c.trello) return;
   const org = await TR.getData(!TR.cached()); const g = trGroupOf(c, org); if(!g) return;
-  const atts = TR.attachmentsOf(g).filter(x=>TR.kindOf(x.a)==='pdf' && x.a.isUpload);
+  const atts = TR.attachmentsOf(g).filter(x=>TR.kindOf(x.a)==='pdf' && x.a.isUpload).map(x=>({...x, url:(g.cards.find(z=>z.id===x.cardId)||TR.cardOf(g)).shortUrl}));
   if(!atts.length) return;
   el._atts = atts;
   el.innerHTML = `<div class="tr-box" style="margin-top:16px"><div class="tr-hd"><span>📌 PDF sur la carte Trello</span></div><div class="tr-body">${atts.map((x,i)=>trAttRow(c,x,i,'plan')).join('')}</div></div>`;
