@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
 <script src="../commun.js"></script>
+<script src="../trello.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -71,6 +72,32 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .search-input::placeholder{color:var(--text3);}
 .add-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shm);transition:all .15s;}
 .add-fab:active{transform:scale(.92);}
+.trello-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:#fff;color:#C0392B;border:1.5px solid var(--border);font-size:19px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.trello-fab:active{transform:scale(.92);}
+.tr-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin-top:12px;overflow:hidden;}
+.tr-hd{display:flex;align-items:center;gap:8px;padding:10px 12px;background:linear-gradient(90deg,#B03A2E,#E2622C);color:#fff;font-size:13px;font-weight:700;}
+.tr-hd span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tr-hd button{border:none;background:rgba(255,255,255,.2);color:#fff;border-radius:8px;padding:5px 9px;font:600 11px 'Inter',sans-serif;cursor:pointer;}
+.tr-body{padding:10px 12px 12px;}
+.tr-weeks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.tr-wk{font-size:10.5px;font-weight:700;background:#FFF3E6;color:#B4541A;padding:3px 8px;border-radius:20px;}
+.tr-wk.now{background:#B4541A;color:#fff;}
+.tr-desc{font-size:12.5px;color:var(--text2);line-height:1.45;white-space:pre-line;margin-bottom:8px;}
+.tr-att{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--border);border-radius:10px;margin-top:6px;cursor:pointer;background:#fff;}
+.tr-att-i{font-size:20px;flex-shrink:0;}
+.tr-att-b{flex:1;min-width:0;}.tr-att-n{font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tr-att-m{font-size:10.5px;color:var(--text3);margin-top:1px;}
+.tr-imp{flex-shrink:0;border:none;border-radius:8px;padding:7px 10px;font:700 11px 'Inter',sans-serif;cursor:pointer;background:var(--teal);color:#fff;}
+.tr-imp.done{background:var(--bg2);color:var(--text3);cursor:default;}
+.tr-empty{font-size:12px;color:var(--text3);padding:4px 0;}
+.tr-cta{width:100%;margin-top:4px;border:none;border-radius:10px;padding:11px;font:700 13px 'Inter',sans-serif;background:var(--navy);color:#fff;cursor:pointer;}
+.tr-pick{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:7px;cursor:pointer;background:#fff;}
+.tr-pick input{width:18px;height:18px;flex-shrink:0;accent-color:var(--navy);}
+.tr-pick-b{flex:1;min-width:0;}.tr-pick-n{font-size:13.5px;font-weight:700;color:var(--text);}
+.tr-pick-m{font-size:11px;color:var(--text3);margin-top:2px;}
+.tr-st{font-size:9px;font-weight:700;padding:3px 7px;border-radius:20px;text-transform:uppercase;flex-shrink:0;}
+html.dk .tr-att:hover,html.dk .tr-pick:hover{border-color:var(--navy);}
+html.dk .trello-fab:hover{background:#FFF3E6;}
  
 /* ── FILTRES STATUT ── */
 .filter-row{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none;}
@@ -242,6 +269,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 <div class="scroll">
   <div class="toolbar">
     <input class="search-input" type="search" placeholder="🔍  Rechercher un chantier…" oninput="onSearch(this.value)" autocomplete="off">
+    <button class="trello-fab" onclick="openTrelloImport()" title="Importer depuis Trello">📌</button>
     <button class="add-fab" onclick="openAdd()">＋</button>
   </div>
  
@@ -362,6 +390,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
   <div class="det-tab-content" id="det-tab-infos">
     <div class="st-row" id="det-st-row"></div>
     <div class="det-info-card"><div id="det-rows"></div></div>
+    <div id="det-trello-wrap"></div>
     <div id="det-lnotes-wrap"></div>
     <div id="det-devis-wrap"></div>
     <div id="det-notes-wrap"></div>
@@ -672,6 +701,7 @@ function renderList() {
     const planCount = getPlansOf(c).length;
     if (planCount) pills.push({ label: '📐 '+(planCount>1?planCount+' plans':'Plan') });
     if (c.pdf && (c.pdf.data||c.pdf.pdfKey)) pills.push({ label: '📄 Devis' });
+    if (c.trello) pills.push({ label: '📌 Trello' });
  
     return `
     <div class="chantier-card" data-id="${c.id}" ${reorderMode?'':`onclick="cardTap('${c.id}')"`}>
@@ -906,6 +936,7 @@ function refreshDetail(){
   document.getElementById('det-notes-wrap').innerHTML = c.notes
     ? `<div class="det-label" style="margin-top:12px;margin-bottom:6px">Description</div><div class="det-notes">${esc(c.notes)}</div>` : '';
   renderLinkedNotes();
+  renderTrelloSection();
   _devisInlineOpen = false;
   const f = c.pdf;
   const bt = (t,fn,cls)=>`<button class="det-file-btn ${cls}" onclick="${fn}">${t}</button>`;
@@ -1217,6 +1248,210 @@ async function renderDetFileTab(tabKey){
   `;
 }
 
+// ════════════════════════════════════════════
+// TRELLO : fiche liée à la carte du programme (lecture seule)
+// c.trello = { key: <titre normalisé>, name: <titre de la carte> }
+// ════════════════════════════════════════════
+const TR = window.RTrello;
+function trGroupOf(c, org){
+  if(!c || !c.trello || !org) return null;
+  return org.groups[c.trello.key] || Object.values(org.groups).find(g=>g.cards.some(x=>x.name===c.trello.name)) || null;
+}
+// Recherche une carte qui correspond au chantier (nom ou client identiques)
+function trSuggest(c, org){
+  if(!org) return null;
+  const linked = new Set(load().filter(x=>x.trello).map(x=>x.trello.key));
+  const cands = [TR.norm(c.nom||''), TR.norm(c.client||'')].filter(x=>x.length>3);
+  return Object.values(org.groups).find(g=>!linked.has(g.key) && cands.some(k=>{
+    const gk = g.key, gc = TR.norm(TR.parseTitle(g.cards[0].name).client);
+    return gk===k || gc===k || gk.startsWith(k) || k.startsWith(gc);
+  })) || null;
+}
+// Chantier existant (pas encore lié) qui correspond à un groupe Trello
+function trExistingFor(g, list){
+  const t = TR.parseTitle(TR.cardOf(g).name);
+  const gk = g.key, gc = TR.norm(t.client);
+  return list.find(c=>!c.trello && [TR.norm(c.nom||''), TR.norm(c.client||'')].some(k=>k.length>3 && (k===gk || k===gc || gk.startsWith(k))));
+}
+function trWeeksHTML(g){
+  const now = new Date();
+  return g.weeks.length ? `<div class="tr-weeks">${g.weeks.map(w=>`<span class="tr-wk${now>=w.week.start&&now<=w.week.end?' now':''}">S${w.week.num||''} · ${TR.fmtD(w.week.start)}–${TR.fmtD(w.week.end)}</span>`).join('')}</div>`
+    : `<div class="tr-weeks"><span class="tr-wk">À réaliser</span></div>`;
+}
+async function renderTrelloSection(fresh){
+  const el = document.getElementById('det-trello-wrap'); if(!el || !TR) return;
+  const c = load().find(x=>x.id===currentDetailId); if(!c) return;
+  if(!TR.connected() || !TR.hasBoard()){
+    el.innerHTML = c.trello ? `<div class="tr-box"><div class="tr-hd"><span>📌 ${esc(c.trello.name)}</span></div><div class="tr-body"><div class="tr-empty">Trello n'est pas connecté sur cet appareil — <a href="../index.html" style="color:var(--navy)">connecter depuis l'accueil</a>.</div></div></div>` : '';
+    return;
+  }
+  const org = await TR.getData(fresh);
+  if(currentDetailId!==c.id) return;
+  const g = trGroupOf(c, org);
+  if(!c.trello){
+    const sug = trSuggest(c, org);
+    el.innerHTML = `<div class="tr-box"><div class="tr-hd"><span>📌 Trello</span></div><div class="tr-body">
+      ${sug ? `<div class="tr-empty" style="margin-bottom:8px">Carte trouvée dans le programme : <b style="color:var(--text)">${esc(sug.cards[0].name)}</b></div>
+        <button class="tr-cta" onclick="trLink('${encodeURIComponent(sug.key)}')">🔗 Lier à cette carte</button>
+        <button class="tr-cta" style="background:var(--bg2);color:var(--text2);margin-top:6px" onclick="trPickLink()">Choisir une autre carte…</button>`
+      : `<button class="tr-cta" onclick="trPickLink()">🔗 Lier à une carte Trello</button>`}
+    </div></div>`;
+    return;
+  }
+  if(!g){
+    el.innerHTML = `<div class="tr-box"><div class="tr-hd"><span>📌 ${esc(c.trello.name)}</span><button onclick="trUnlink()">Délier</button></div><div class="tr-body"><div class="tr-empty">Carte introuvable dans le programme actuel (archivée ou renommée ?).</div><button class="tr-cta" style="margin-top:8px" onclick="trPickLink()">🔗 Lier à une autre carte</button></div></div>`;
+    return;
+  }
+  const atts = TR.attachmentsOf(g);
+  const card = TR.cardOf(g);
+  const desc = g.cards.map(x=>x.desc).filter(Boolean).sort((a,b)=>b.length-a.length)[0]||'';
+  el.innerHTML = `<div class="tr-box"><div class="tr-hd"><span>📌 ${esc(card.name)}</span><button onclick="trOpenCard()">↗</button><button onclick="trUnlink()">Délier</button></div><div class="tr-body">
+    ${trWeeksHTML(g)}
+    ${desc?`<div class="tr-desc">${esc(desc)}</div>`:''}
+    ${atts.length ? atts.map((x,i)=>trAttRow(c,x,i)).join('') : '<div class="tr-empty">Aucune pièce jointe sur la carte.</div>'}
+  </div></div>`;
+  el._atts = atts;
+}
+function trIsImported(c, attId){ return getPlansOf(c).some(p=>p.trelloAtt===attId); }
+function trAttRow(c, x, i, where){
+  const a = x.a, isPdf = TR.kindOf(a)==='pdf' && a.isUpload;
+  const imp = isPdf ? (trIsImported(c,a.id) ? `<button class="tr-imp done" onclick="event.stopPropagation()">✓ Dans Plans</button>` : `<button class="tr-imp" onclick="event.stopPropagation();trImportPlan(${i},'${where||'infos'}')">📐 Vers Plans</button>`) : '';
+  return `<div class="tr-att" onclick="trViewAtt(${i},'${where||'infos'}')"><span class="tr-att-i">${TR.fileIcon(a)}</span><div class="tr-att-b"><div class="tr-att-n">${esc(a.name||a.url)}</div><div class="tr-att-m">${[TR.fmtBytes(a.bytes), a.date?new Date(a.date).toLocaleDateString('fr-CH'):''].filter(Boolean).join(' · ')}</div></div>${imp}</div>`;
+}
+function trAttsFrom(where){ const el = document.getElementById(where==='plan'?'det-trello-plans':'det-trello-wrap'); return (el && el._atts) || []; }
+async function trViewAtt(i, where){
+  const x = trAttsFrom(where)[i]; if(!x) return;
+  const org = await TR.getData(false); const c = load().find(z=>z.id===currentDetailId); const g = trGroupOf(c, org);
+  const card = g && (g.cards.find(z=>z.id===x.cardId) || TR.cardOf(g));
+  TR.openAttachment(x.a, x.cardId, card ? card.shortUrl : 'https://trello.com');
+}
+async function trOpenCard(){
+  const org = await TR.getData(false); const c = load().find(z=>z.id===currentDetailId); const g = trGroupOf(c, org);
+  if(g) window.open(TR.cardOf(g).shortUrl, '_blank');
+}
+// Copie un PDF de Trello dans les plans du chantier (→ ouvrable dans le Coteur, même hors ligne)
+async function trImportPlan(i, where){
+  const x = trAttsFrom(where)[i]; if(!x) return;
+  const cid = currentDetailId;
+  showToast('⏳ Téléchargement du plan…', 15000);
+  try{
+    const blob = await TR.downloadBlob(x.a, x.cardId);
+    if(!blob || blob.size<100) throw new Error('fichier vide');
+    const planId = 'p_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    const pdfKey = `plan_${cid}_${planId}`;
+    await savePdfBlob(pdfKey, new Blob([blob],{type:'application/pdf'}));
+    const data = [...load()]; const idx = data.findIndex(z=>z.id===cid); if(idx<0) return;
+    if(trIsImported(data[idx], x.a.id)){ showToast('✓ Déjà dans les plans'); return; }
+    data[idx] = {...data[idx], plans:[...getPlansOf(data[idx]), { id:planId, name:x.a.name||'Plan Trello.pdf', size:(blob.size/1024).toFixed(0)+' Ko', pdfKey, measures:null, addedAt:new Date().toISOString(), trelloAtt:x.a.id }]};
+    if(!save(data)) return;
+    renderList(); refreshDetail(); if(currentDetTab==='plan') renderPlanList();
+    showToast('✓ Plan ajouté — ouvre-le dans l\'onglet 📐 Plan');
+  }catch(e){
+    console.warn('Import plan Trello', e);
+    showToast('❌ Impossible de récupérer le fichier depuis Trello', 6000);
+  }
+}
+// Onglet Plan : PDF de la carte Trello pas encore importés
+async function renderTrelloPlans(){
+  const el = document.getElementById('det-trello-plans'); if(!el || !TR || !TR.connected()) return;
+  const c = load().find(x=>x.id===currentDetailId); if(!c || !c.trello) return;
+  const org = await TR.getData(false); const g = trGroupOf(c, org); if(!g) return;
+  const atts = TR.attachmentsOf(g).filter(x=>TR.kindOf(x.a)==='pdf' && x.a.isUpload);
+  if(!atts.length) return;
+  el._atts = atts;
+  el.innerHTML = `<div class="tr-box" style="margin-top:16px"><div class="tr-hd"><span>📌 PDF sur la carte Trello</span></div><div class="tr-body">${atts.map((x,i)=>trAttRow(c,x,i,'plan')).join('')}</div></div>`;
+}
+async function trLink(encKey){
+  const key = decodeURIComponent(encKey);
+  const org = await TR.getData(false); const g = org && org.groups[key]; if(!g) return;
+  const d = load(); const i = d.findIndex(x=>x.id===currentDetailId); if(i<0) return;
+  d[i] = {...d[i], trello:{ key, name: TR.cardOf(g).name }}; save(d);
+  closeTrPicker(); renderTrelloSection(); renderList(); showToast('✓ Lié à Trello');
+}
+async function trUnlink(){
+  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Délier ce chantier de la carte Trello ?', {ok:'Délier'}))) return;
+  const d = load(); const i = d.findIndex(x=>x.id===currentDetailId); if(i<0) return;
+  const copy = {...d[i]}; delete copy.trello; d[i] = copy; save(d);
+  renderTrelloSection(); renderList();
+}
+// Sélecteur de carte (lier) et import multiple
+function trSheet(title, inner, footer){
+  closeTrPicker();
+  const ov = document.createElement('div'); ov.className = 'modal-ov open'; ov.id = 'tr-picker';
+  ov.onclick = e=>{ if(e.target===ov) closeTrPicker(); };
+  ov.innerHTML = `<div class="modal-sh"><div class="modal-drag"><div class="modal-handle"></div></div><div class="modal-hdr"><div class="modal-title">${title}</div><button class="modal-close" onclick="closeTrPicker()">✕</button></div><div class="modal-body">${inner}</div>${footer||''}</div>`;
+  document.body.appendChild(ov);
+  return ov;
+}
+function closeTrPicker(){ const o = document.getElementById('tr-picker'); if(o) o.remove(); }
+const TR_ST = { actif:['Actif','#E8F5E9','#2E7D32'], prospect:['Devisé','#E3F2FD','#1565C0'], termine:['Terminé','#EEF0F4','#6B7280'], pause:['En pause','#FFF8E1','#B7791F'] };
+function trGroupRows(groups, mode){
+  return groups.map(g=>{
+    const card = TR.cardOf(g), t = TR.parseTitle(card.name), st = TR.suggestStatus(g), sl = TR_ST[st];
+    const nAtt = TR.attachmentsOf(g).length;
+    const meta = [t.lieu?'📍 '+t.lieu:'', g.weeks.length? g.weeks.length+' sem. au programme' : 'À réaliser', nAtt?'📎 '+nAtt:''].filter(Boolean).join(' · ');
+    const k = encodeURIComponent(g.key);
+    return mode==='link'
+      ? `<div class="tr-pick" onclick="trLink('${k}')"><div class="tr-pick-b"><div class="tr-pick-n">${esc(card.name)}</div><div class="tr-pick-m">${esc(meta)}</div></div><span class="tr-st" style="background:${sl[1]};color:${sl[2]}">${sl[0]}</span></div>`
+      : (()=>{ const ex = trExistingFor(g, load());
+          return `<label class="tr-pick"><input type="checkbox" value="${k}" ${st!=='termine'?'checked':''}><div class="tr-pick-b"><div class="tr-pick-n">${esc(t.client)}</div><div class="tr-pick-m">${esc(meta)}${t.note?' · '+esc(t.note):''}</div>${ex?`<div class="tr-pick-m" style="color:var(--teal);font-weight:700">🔗 Déjà dans l'app : sera lié à « ${esc(ex.nom)} »</div>`:''}</div><span class="tr-st" style="background:${sl[1]};color:${sl[2]}">${sl[0]}</span></label>`; })();
+  }).join('');
+}
+async function trReady(){
+  if(!TR){ showToast('❌ Module Trello non chargé'); return null; }
+  if(!TR.connected() || !TR.hasBoard()){
+    if(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))("Trello n'est pas encore connecté sur cet appareil.\nLa connexion se fait depuis l'accueil (bloc Programme).", {ok:"Aller à l'accueil", danger:false, icon:'📌'})) location.href='../index.html';
+    return null;
+  }
+  showToast('⏳ Lecture du programme Trello…', 8000);
+  const org = await TR.getData(true);
+  document.getElementById('toast').classList.remove('show');
+  return org;
+}
+function trSortedGroups(org){
+  const order = { actif:0, prospect:1, pause:2, termine:3 };
+  return Object.values(org.groups).filter(g=>!/^liste\b/.test(g.key)).sort((a,b)=>(order[TR.suggestStatus(a)]-order[TR.suggestStatus(b)]) || a.key.localeCompare(b.key));
+}
+async function trPickLink(){
+  const org = await trReady(); if(!org) return;
+  const linked = new Set(load().filter(x=>x.trello && x.id!==currentDetailId).map(x=>x.trello.key));
+  const groups = trSortedGroups(org).filter(g=>!linked.has(g.key));
+  trSheet('🔗 Lier à une carte Trello', groups.length ? trGroupRows(groups,'link') : '<div class="tr-empty">Toutes les cartes sont déjà liées.</div>');
+}
+async function openTrelloImport(){
+  const org = await trReady(); if(!org) return;
+  const linked = new Set(load().filter(x=>x.trello).map(x=>x.trello.key));
+  const groups = trSortedGroups(org).filter(g=>!linked.has(g.key));
+  if(!groups.length){ showToast('✓ Tous les chantiers Trello sont déjà dans l\'app'); return; }
+  const ov = trSheet('📌 Importer depuis Trello',
+    `<div class="tr-empty" style="margin-bottom:10px">Chantiers du programme pas encore dans l'app. Les fiches seront créées et liées à leur carte (client, lieu, remarque, statut).</div>${trGroupRows(groups,'import')}`,
+    `<div style="padding:12px 16px calc(14px + var(--safe-b));border-top:1px solid var(--border)"><button class="tr-cta" id="tr-do-import">Importer la sélection</button></div>`);
+  ov.querySelector('#tr-do-import').onclick = ()=>{
+    const keys = [...ov.querySelectorAll('input[type=checkbox]:checked')].map(i=>decodeURIComponent(i.value));
+    if(!keys.length){ showToast('Rien de sélectionné'); return; }
+    const d = load();
+    keys.forEach((k,n)=>{
+      const g = org.groups[k]; if(!g) return;
+      const card = TR.cardOf(g), t = TR.parseTitle(card.name);
+      const ex = trExistingFor(g, d);
+      if(ex){ ex.trello = { key: k, name: card.name }; return; }
+      const desc = g.cards.map(x=>x.desc).filter(Boolean).sort((a,b)=>b.length-a.length)[0]||'';
+      d.unshift({
+        id: 'c_'+Date.now().toString(36)+n+Math.random().toString(36).slice(2,5),
+        nom: t.lieu ? `${t.client} – ${t.lieu}` : t.client,
+        client: t.client, adresse:'', commune: t.lieu, statut: TR.suggestStatus(g),
+        debut: g.weeks[0] ? (d0=>`${d0.getFullYear()}-${String(d0.getMonth()+1).padStart(2,'0')}-${String(d0.getDate()).padStart(2,'0')}`)(g.weeks[0].week.start) : '', fin:'', montant:'', marche:'',
+        notes: [t.note, desc].filter(Boolean).join('\n'),
+        color: COLORS[(d.length+n) % COLORS.length], pdf: null, plans: [], o: 1, documents: [], photos: [], contacts: [], travaux: [],
+        trello: { key: k, name: card.name }, createdAt: new Date().toISOString()
+      });
+    });
+    save(d); closeTrPicker(); renderList();
+    showToast(`✓ ${keys.length} chantier${keys.length>1?'s':''} importé${keys.length>1?'s':''} depuis Trello`);
+  };
+}
+Object.assign(window,{renderTrelloSection,trLink,trUnlink,trPickLink,closeTrPicker,openTrelloImport,trViewAtt,trImportPlan,trOpenCard});
+
 // ── Onglet Plan : liste des plans importés pour ce chantier ──
 function renderPlanList(){
   const c = load().find(x=>x.id===currentDetailId);
@@ -1228,7 +1463,8 @@ function renderPlanList(){
       <div class="det-empty-icon">📐</div>
       <div class="det-empty-text">Aucun plan pour l'instant</div>
       <button class="det-empty-btn" onclick="document.getElementById('det-plan-input').click()">📂 Importer un plan</button>
-    </div>`;
+    </div><div id="det-trello-plans"></div>`;
+    renderTrelloPlans();
     updatePlanFullscreenState();
     return;
   }
@@ -1248,7 +1484,9 @@ function renderPlanList(){
       `).join('')}
     </div>
     <button class="btn btn-teal" style="width:100%;margin-top:14px" onclick="document.getElementById('det-plan-input').click()">+ Importer un plan</button>
+    <div id="det-trello-plans"></div>
   `;
+  renderTrelloPlans();
   updatePlanFullscreenState();
 }
 

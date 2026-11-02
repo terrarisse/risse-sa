@@ -101,7 +101,9 @@
   // « Client / Lieu (remarque) »
   function parseTitle(name) {
     var s = String(name), notes = [];
-    s = s.replace(/\(([^)]*)\)/g, function (_, n) { notes.push(n.trim()); return ' '; }).replace(/\s+/g, ' ').trim();
+    s = s.replace(/\(([^)]*)\)/g, function (_, n) { notes.push(n.trim()); return ' '; })
+      .replace(/\s(depuis|dès|des|à partir du)\s.*$/i, function (m) { notes.push(m.trim()); return ' '; })
+      .replace(/\s+/g, ' ').trim();
     var parts = s.split(/\s+\/\s+|\s\/|\/\s/);
     return { client: (parts[0] || s).trim(), lieu: (parts.slice(1).join(' / ') || '').trim(), note: notes.join(' · ') };
   }
@@ -447,9 +449,30 @@
     document.body.appendChild(ov);
   }
 
+  // Données organisées (cache immédiat, puis actualisation réseau si demandé)
+  var _org = null, _orgAt = 0, _pending = null;
+  function getData(fresh) {
+    var c = cached();
+    if (c && (!_org || _orgAt !== c.at)) { _org = organize(c); _org.board = c.board; _org.at = c.at; _org.cards = c.cards; _orgAt = c.at; }
+    if (!fresh || !(key() && token() && lsGet(LS.board))) return Promise.resolve(_org);
+    if (!_pending) _pending = loadBoard(lsGet(LS.board)).then(function () { _pending = null; return getData(false); }, function (e) { _pending = null; if (e && e.code === 401) disconnect(); return _org; });
+    return _pending;
+  }
+  // Statut suggéré pour un groupe de cartes (chantier)
+  function suggestStatus(group) {
+    var now = new Date();
+    if (group.weeks.some(function (w) { return w.week.end >= now; })) return 'actif';
+    if (group.weeks.length) return 'termine';
+    return 'prospect';
+  }
+  function cardOf(group) { return group.cards[group.cards.length - 1]; }
+
   window.RTrello = {
     connected: function () { return !!(key() && token()); },
+    hasBoard: function () { return !!lsGet(LS.board); },
     cached: cached, organize: organize, parseWeek: parseWeek, parseTitle: parseTitle, norm: norm,
+    getData: getData, attachmentsOf: attachmentsOf, openAttachment: openAttachment, downloadBlob: downloadBlob,
+    kindOf: kindOf, fileIcon: fileIcon, fmtBytes: fmtBytes, fmtD: fmtD, suggestStatus: suggestStatus, cardOf: cardOf,
     mountWeek: mountWeek, connect: connect, disconnect: disconnect
   };
 })();
