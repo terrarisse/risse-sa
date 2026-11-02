@@ -2,2150 +2,1294 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#1B3A6B">
-<title>Ressources — Risse S.A.</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Calculatrice — Risse S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#1B3A6B;--navy2:#122952;--yellow:#F0A500;--teal:#1A7F72;
-  --red:#E53935;--green:#2E7D32;
-  --bg:#F4F6FB;--bg2:#EAECF4;--card:#fff;
-  --border:#E0E4EF;--text:#1A2340;--text2:#4A5878;--text3:#9AA3BC;
-  --safe-b:env(safe-area-inset-bottom,0px);--safe-t:env(safe-area-inset-top,0px);
-  --r:14px;--rs:8px;
-  --sh:0 2px 12px rgba(27,58,107,.10);--shm:0 4px 24px rgba(27,58,107,.18);
-  --nb-h:62px;
+:root {
+  --navy:#1B3A6B; --teal:#1A7F72; --gold:#F0A500;
+  --bg:#f5f6fa; --white:#fff;
+  --gray1:#f0f1f5; --gray2:#e2e4ec; --gray3:#9ca3af;
+  --text:#1a1f2e; --radius:12px; --radius-sm:8px;
+  --header-h:56px;
+  --shadow:0 2px 12px rgba(27,58,107,.10);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;overflow:hidden;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
- 
-/* ── HEADER ── */
-.header{background:var(--navy);padding-top:var(--safe-t);flex-shrink:0;box-shadow:0 2px 14px rgba(0,0,0,.28);z-index:10;}
-.header-inner{display:flex;align-items:center;gap:12px;padding:14px 16px 12px;}
-.back-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
-.back-btn:active{background:rgba(255,255,255,.25);}
-.header-titles{flex:1;}
-.header-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px;}
-.header-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.8px;text-transform:uppercase;}
-.header-actions{display:flex;gap:8px;align-items:center;}
-.header-count{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;flex-shrink:0;}
-.cat-mgr-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;}
-.cat-mgr-btn:active{background:rgba(255,255,255,.25);}
- 
-/* ── BOTTOM NAV ── */
-.bottom-nav{height:var(--nb-h);padding-bottom:var(--safe-b);background:#fff;border-top:1px solid var(--border);display:flex;flex-shrink:0;box-shadow:0 -2px 12px rgba(27,58,107,.08);z-index:10;}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all .15s;padding:6px 0;position:relative;border:none;background:none;}
-.nav-item.active .nav-label{color:var(--navy);font-weight:700;}
-.nav-item.active::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:32px;height:3px;background:var(--navy);border-radius:0 0 3px 3px;}
-.nav-icon{font-size:20px;}
-.nav-label{font-size:9px;font-weight:500;color:var(--text3);letter-spacing:.2px;}
-.nav-badge{position:absolute;top:4px;right:calc(50% - 20px);background:var(--navy);color:#fff;font-size:8px;font-weight:700;min-width:15px;height:15px;border-radius:8px;padding:0 3px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;}
- 
-/* ── PAGES ── */
-.pages{flex:1;overflow:hidden;position:relative;}
-.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:12px 14px calc(12px);display:none;}
-.page.active{display:block;}
- 
-/* ── TOOLBAR ── */
-.toolbar{display:flex;gap:8px;margin-bottom:14px;position:sticky;top:0;z-index:5;background:var(--bg);padding:2px 0 8px;}
-.search-input{flex:1;background:#fff;border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 14px;border-radius:24px;-webkit-appearance:none;transition:border-color .15s;}
-.search-input:focus{outline:none;border-color:var(--navy);}
-.search-input::placeholder{color:var(--text3);}
-.add-fab{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shm);transition:all .15s;}
-.add-fab:active{transform:scale(.92);}
- 
-/* ── ACCORDÉON ── */
-.accordion{margin-bottom:10px;}
-.acc-header{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r);
-  display:flex;align-items:center;gap:10px;padding:12px 14px;
-  cursor:pointer;transition:all .15s;user-select:none;
-  box-shadow:var(--sh);
-}
-.acc-header.open{border-radius:var(--r) var(--r) 0 0;border-bottom-color:transparent;box-shadow:none;border-bottom:none;}
-.acc-header:active{background:var(--bg);}
-.acc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.acc-name{flex:1;font-size:14px;font-weight:700;color:var(--text);}
-.acc-count{font-size:11px;font-weight:700;color:var(--text3);background:var(--bg2);padding:2px 8px;border-radius:10px;}
-.acc-chevron{font-size:14px;color:var(--text3);transition:transform .22s;}
-.acc-header.open .acc-chevron{transform:rotate(90deg);}
-.acc-quick-add{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .13s;}
-.acc-quick-add:active{transform:scale(.88);}
- 
-.acc-body{
-  background:#fff;border:1px solid var(--border);border-top:none;
-  border-radius:0 0 var(--r) var(--r);
-  overflow:hidden;
-  max-height:0;transition:max-height .28s ease;
-  box-shadow:var(--sh);
-}
-.acc-body.open{max-height:2000px;}
-.acc-inner{padding:10px 12px 12px;}
- 
-/* ── ITEMS DANS ACCORDÉON ── */
-.res-item{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;transition:all .13s;}
-.res-item:last-child{margin-bottom:0;}
-.res-item:active{transform:scale(.98);background:var(--bg2);}
-.res-item-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center;}
-.res-item-body{flex:1;min-width:0;}
-.res-item-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.res-item-sub{font-size:10px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.res-item-price{font-size:12px;font-weight:700;color:var(--teal);white-space:nowrap;flex-shrink:0;}
-.res-item-arrow{color:var(--text3);font-size:14px;flex-shrink:0;}
- 
-.acc-empty{text-align:center;padding:16px;color:var(--text3);font-size:12px;}
-.acc-add-inline{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--border);cursor:pointer;transition:background .13s;}
-.acc-add-inline:active{background:var(--bg);}
-.acc-add-inline span{font-size:12px;font-weight:600;color:var(--teal);}
- 
-/* ── MACHINE CARD + ACCESSOIRES ── */
-.machine-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;box-shadow:var(--sh);overflow:hidden;}
-.machine-row{margin-bottom:0;background:#fff;border:none;border-radius:0;cursor:pointer;transition:background .13s;}
-.machine-row:active{background:var(--bg);}
-.machine-row .acc-chevron{font-size:14px;color:var(--text3);transition:transform .22s;flex-shrink:0;}
-.machine-row.open .acc-chevron{transform:rotate(90deg);}
-.machine-edit-btn{background:var(--bg);border:1px solid var(--border);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;flex-shrink:0;transition:background .13s;}
-.machine-edit-btn:active{background:var(--bg2);}
-.acc-acc-body{max-height:0;overflow:hidden;transition:max-height .26s ease;background:#fff;border-top:1px solid var(--border);}
-.acc-acc-body.open{max-height:2000px;border-top:1px solid var(--border);}
-.acc-acc-inner{padding:8px 10px;background:var(--bg);}
-.accessoire-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:9px 11px;display:flex;align-items:center;gap:9px;margin-bottom:6px;cursor:pointer;transition:all .13s;}
-.accessoire-item:last-child{margin-bottom:0;}
-.accessoire-item:active{transform:scale(.98);background:var(--bg2);}
-.accessoire-item .res-item-icon{font-size:16px;width:24px;}
-.accessoire-item .res-item-name{font-size:12.5px;}
-.accessoire-item .res-item-sub{font-size:9.5px;}
-.acc-add-accessoire{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;margin-top:2px;border-radius:var(--rs);border:1.5px dashed var(--border);cursor:pointer;transition:all .13s;background:#fff;}
-.acc-add-accessoire:active{background:var(--bg2);}
-.acc-add-accessoire span{font-size:12px;font-weight:700;color:var(--teal);}
- 
-/* Sans catégorie */
-.no-cat-section{margin-bottom:10px;}
-.no-cat-header{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;padding:6px 2px;display:flex;align-items:center;gap:8px;}
-.no-cat-header::after{content:'';flex:1;height:1px;background:var(--border);}
- 
-/* ── PAGE VIDE ── */
-.empty-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:var(--text3);text-align:center;padding:40px 20px;}
-.empty-icon{font-size:48px;margin-bottom:12px;opacity:.6;}
-.empty-txt{font-size:14px;font-weight:600;color:var(--text2);}
-.empty-hint{font-size:12px;margin-top:6px;}
- 
-/* ── MODALS ── */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:300;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
-.modal-ov.open{display:flex;}
-.modal-sh{background:#fff;border-radius:22px 22px 0 0;padding:0;width:100%;max-height:92vh;display:flex;flex-direction:column;}
-.modal-drag{padding:14px 16px 0;}
-.modal-handle{width:36px;height:4px;background:var(--bg2);border-radius:2px;margin:0 auto 14px;}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 16px 14px;border-bottom:1px solid var(--border);}
-.modal-title{font-size:17px;font-weight:700;color:var(--navy);}
-.modal-close{width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:16px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.modal-body{flex:1;overflow-y:auto;padding:16px;}
-.modal-footer{padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);}
- 
-/* ── FORM ── */
-.form-sec-label{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px;}
-.form-sec-label:first-child{margin-top:0;}
-.form-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
-.field{margin-bottom:10px;}
-.field label{display:block;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
-.field input,.field select,.field textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;padding:11px 13px;border-radius:var(--rs);-webkit-appearance:none;appearance:none;transition:border-color .15s;}
-.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
-.field textarea{min-height:72px;resize:vertical;line-height:1.5;}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--navy);background:#fff;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
- 
-/* ── BOUTONS ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;padding:13px 18px;border:none;border-radius:var(--rs);cursor:pointer;transition:all .14s;width:100%;}
-.btn:active{transform:scale(.97);}
-.btn-navy{background:var(--navy);color:#fff;}
-.btn-ghost{background:#fff;color:var(--text2);border:1.5px solid var(--border);}
-.btn-danger{background:#FFF0F0;color:var(--red);border:1.5px solid rgba(229,57,53,.2);}
-.btn-teal{background:var(--teal);color:#fff;}
-.btn-sm{padding:10px 14px;font-size:13px;}
-.mt8{margin-top:8px;}
-.gap8{display:flex;gap:8px;}
- 
-/* ── GESTIONNAIRE CATÉGORIES ── */
-.cat-list-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);}
-.cat-list-item:last-child{border-bottom:none;}
-.cat-color-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
-.cat-list-name{flex:1;font-size:14px;font-weight:600;color:var(--text);}
-.cat-list-count{font-size:11px;color:var(--text3);}
-.cat-del-btn{background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:4px;border-radius:6px;}
-.cat-del-btn:active{color:var(--red);}
-.cat-add-row{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
-.cat-add-input{flex:1;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:10px 12px;border-radius:var(--rs);}
-.cat-add-input:focus{outline:none;border-color:var(--navy);}
-.color-picker{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
-.color-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .13s;}
-.color-swatch.selected{border-color:var(--navy);transform:scale(1.2);}
- 
-/* ── DETAIL SHEET ── */
-.detail-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
-.detail-ov.open{display:flex;}
-.detail-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:90vh;display:flex;flex-direction:column;}
-.detail-drag{padding:14px 16px 0;}
-.detail-top{padding:0 16px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);}
-.detail-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
-.detail-name{font-size:18px;font-weight:700;color:var(--text);}
-.detail-type{font-size:11px;color:var(--text3);margin-top:2px;}
-.detail-body{flex:1;overflow-y:auto;padding:16px;}
-.detail-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--bg2);}
-.detail-row:last-child{border-bottom:none;}
-.detail-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;}
-.detail-val{font-size:14px;font-weight:600;color:var(--text);text-align:right;max-width:60%;}
-.detail-notes{background:var(--bg);border-radius:var(--rs);padding:12px;font-size:13px;color:var(--text2);line-height:1.5;margin-top:4px;}
-.detail-footer{padding:12px 16px calc(12px + var(--safe-b));display:flex;gap:8px;border-top:1px solid var(--border);}
- 
-/* ── PHOTO/ICON UPLOAD ── */
-.media-zone{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.media-preview{width:72px;height:72px;border-radius:var(--r);background:var(--bg);border:1.5px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;cursor:pointer;transition:border-color .15s;font-size:32px;}
-.media-preview:active{border-color:var(--navy);}
-.media-preview img{width:100%;height:100%;object-fit:cover;}
-.media-btns{display:flex;flex-direction:column;gap:5px;}
-.media-btn{background:none;border:1px solid var(--border);border-radius:var(--rs);padding:6px 12px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .13s;display:flex;align-items:center;gap:4px;}
-.media-btn:active{background:var(--bg);}
-.media-btn-del{color:var(--red);border-color:rgba(229,57,53,.2);}
-.detail-photo{width:100%;border-radius:var(--r);margin-bottom:12px;max-height:200px;object-fit:cover;}
- 
-/* ── EMOJI PICKER GLOBAL ── */
-.epicker-ov{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:400;display:none;align-items:flex-end;backdrop-filter:blur(2px);}
-.epicker-ov.open{display:flex;}
-.epicker-sh{background:#fff;border-radius:22px 22px 0 0;width:100%;max-height:70vh;display:flex;flex-direction:column;}
-.epicker-drag{padding:14px 16px 0;}
-.epicker-search{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:10px 14px;border-radius:24px;margin:0 0 10px;-webkit-appearance:none;}
-.epicker-search:focus{outline:none;border-color:var(--navy);}
-.epicker-cats{display:flex;gap:4px;overflow-x:auto;padding:0 0 8px;scrollbar-width:none;border-bottom:1px solid var(--border);}
-.epicker-cats::-webkit-scrollbar{display:none;}
-.epicker-cat-btn{flex-shrink:0;padding:5px 10px;font-size:11px;font-weight:600;border-radius:16px;border:1px solid var(--border);background:#fff;color:var(--text2);cursor:pointer;white-space:nowrap;}
-.epicker-cat-btn.on{background:var(--navy);color:#fff;border-color:var(--navy);}
-.epicker-grid{flex:1;overflow-y:auto;padding:12px 0;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;}
-.epicker-item{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:background .1s;border:1.5px solid transparent;}
-.epicker-item:active{background:var(--bg2);}
-.epicker-item.sel{border-color:var(--navy);background:var(--navy)11;}
-.epicker-footer{padding:10px 16px calc(10px + var(--safe-b));border-top:1px solid var(--border);display:flex;gap:8px;}
-.epicker-none{text-align:center;padding:30px;color:var(--text3);font-size:13px;}
- 
-/* ── DRAG & DROP RÉORDONNANCEMENT ── */
-.draggable{touch-action:none;user-select:none;}
-.drag-handle{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:16px;cursor:grab;flex-shrink:0;border-radius:6px;transition:background .13s;}
-.drag-handle:active{cursor:grabbing;background:var(--bg2);}
-.drag-ghost{opacity:.4;background:var(--bg2)!important;border:2px dashed var(--border)!important;border-radius:var(--r)!important;}
-.drag-over{border-top:2px solid var(--teal)!important;}
-.drop-target{background:var(--teal)!important;box-shadow:0 0 0 2px var(--teal) inset!important;}
-.drop-target.acc-header .acc-name{color:#fff!important;}
-.drop-target.acc-header .acc-count{background:rgba(255,255,255,.25)!important;color:#fff!important;}
-.drop-target.sub-acc-header > div{color:#fff!important;}
-.drop-target.sub-acc-header > div[style*="background:var(--bg2)"]{background:rgba(255,255,255,.25)!important;}
-body.mat-dragging{cursor:grabbing!important;}
-body.mat-dragging *{cursor:grabbing!important;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:calc(var(--safe-b) + var(--nb-h) + 10px);left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:30px;box-shadow:var(--shm);opacity:0;transition:all .26s;z-index:999;pointer-events:none;white-space:nowrap;border-left:3px solid var(--teal);}
+/* HEADER */
+.header{background:var(--navy);position:sticky;top:0;z-index:100;}
+.header-top{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);padding:0 16px;}
+.header-top .logo-area{display:flex;align-items:center;gap:10px;min-width:0;}
+.back-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;width:34px;height:34px;border-radius:8px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.header-title{color:#fff;font-size:17px;font-weight:700;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.header-subtitle{color:rgba(255,255,255,.6);font-size:12px;margin-top:2px;}
+.header-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.btn-header-icon{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:15px;font-family:inherit;width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.btn-header-icon:active{opacity:.7;}
+
+/* OVERLAY CALCULATRICE (popup, identique au module Rapport) */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;}
+.overlay.open{display:flex;}
+.bottom-sheet{background:var(--white);border-radius:20px 20px 0 0;width:100%;padding:20px 16px 32px;max-height:88vh;overflow-y:auto;}
+.sheet-handle{width:36px;height:4px;background:var(--gray2);border-radius:2px;margin:0 auto 16px;}
+.calc-sheet-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.calc-sheet-title{font-size:16px;font-weight:700;color:var(--text);}
+.btn-calc-clear-hist{border:none;background:none;font-size:16px;color:var(--gray3);cursor:pointer;padding:4px 6px;}
+.btn-calc-clear-hist:active{opacity:.6;}
+.calc-expr-line{font-size:13px;color:var(--gray3);text-align:right;min-height:16px;padding:0 14px;}
+.calc-display{background:var(--bg);border-radius:var(--radius-sm);padding:10px 14px 16px;text-align:right;font-size:28px;font-weight:700;margin-bottom:10px;color:var(--text);overflow-x:auto;white-space:nowrap;}
+.calc-history-box{background:var(--bg);border-radius:var(--radius-sm);padding:6px 12px;margin-bottom:10px;max-height:110px;overflow-y:auto;}
+.calc-history-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--gray2);cursor:pointer;}
+.calc-history-row:first-child{border-top:none;}
+.calc-history-row:active{opacity:.6;}
+.calc-history-expr{font-size:12px;color:var(--gray3);}
+.calc-history-result{font-size:12px;font-weight:700;color:var(--text);}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.calc-btn{border:none;background:var(--bg);color:var(--text);font-family:inherit;font-size:18px;font-weight:600;padding:16px 0;border-radius:var(--radius-sm);cursor:pointer;}
+.calc-btn:active{opacity:.7;}
+.calc-btn.op{background:var(--navy);color:#fff;}
+.calc-btn.eq{background:var(--gold);color:var(--navy);grid-row:span 2;}
+.calc-btn.span2{grid-column:span 2;}
+
+/* MAIN TABS (Métrés / Poids) */
+.tabs-bar{display:flex;padding:0 16px 12px;gap:0;}
+.tab-btn{flex:1;background:rgba(255,255,255,.10);border:none;color:rgba(255,255,255,.65);padding:8px 4px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s;white-space:nowrap;}
+.tab-btn:first-child{border-radius:10px 0 0 10px;}
+.tab-btn:last-child{border-radius:0 10px 10px 0;}
+.tab-btn.active{background:var(--gold);color:var(--navy);}
+
+/* CONTENT */
+.content{padding:16px;padding-bottom:40px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* MODE SELECTOR (Longueur / Surface / Volume) */
+.mode-bar{display:flex;gap:8px;margin-bottom:16px;}
+.mode-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;background:var(--white);border:2px solid var(--gray2);border-radius:var(--radius);cursor:pointer;font-family:inherit;transition:all .18s;}
+.mode-btn:active{transform:scale(.96);}
+.mode-btn.active{border-color:var(--navy);background:rgba(27,58,107,.04);}
+.mode-icon{font-size:20px;}
+.mode-label{font-size:11px;font-weight:700;color:var(--gray3);}
+.mode-unit{font-size:10px;color:var(--gray3);}
+.mode-btn.active .mode-label{color:var(--navy);}
+.mode-btn.active .mode-unit{color:var(--teal);}
+
+/* CARD */
+.section-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--gray2);}
+.card-title{font-size:14px;font-weight:700;color:var(--navy);}
+.card-total{font-size:13px;font-weight:700;color:var(--teal);background:rgba(26,127,114,.1);padding:4px 10px;border-radius:20px;}
+
+/* ROW */
+.metree-row{display:flex;align-items:center;border-bottom:1px solid var(--gray2);}
+.metree-row:last-child{border-bottom:none;}
+.shape-btn{background:var(--gray1);border:none;border-right:1px solid var(--gray2);width:44px;flex-shrink:0;align-self:stretch;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:background .15s;}
+.shape-btn:active{background:var(--gray2);}
+.metree-inputs{flex:1;display:flex;align-items:center;flex-wrap:wrap;}
+.metree-field{display:flex;flex-direction:column;padding:6px 8px;flex:1;min-width:54px;}
+.metree-field+.metree-field{border-left:1px solid var(--gray2);}
+.metree-field-label{font-size:9px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;}
+.metree-input{border:none;outline:none;background:transparent;font-size:15px;font-weight:600;font-family:inherit;color:var(--text);width:100%;padding:2px 0;}
+.metree-input::placeholder{color:var(--gray2);font-weight:400;}
+.metree-result{padding:0 10px;flex-shrink:0;font-size:12px;font-weight:700;color:var(--teal);min-width:68px;text-align:right;border-left:1px solid var(--gray2);align-self:stretch;display:flex;align-items:center;justify-content:flex-end;}
+.metree-del{background:none;border:none;border-left:1px solid var(--gray2);color:var(--gray3);width:36px;align-self:stretch;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:color .15s;}
+.metree-del:active{color:#e53e3e;}
+
+/* ADD ROW */
+.add-row-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:11px;background:none;border:none;border-top:1px solid var(--gray2);color:var(--teal);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+/* SHAPES LEGEND */
+.shapes-legend{display:flex;gap:6px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--gray2);background:var(--gray1);}
+.shape-chip{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--gray3);padding:2px 8px;background:white;border-radius:20px;border:1px solid var(--gray2);}
+
+/* TOTAL BAR */
+.total-bar{background:linear-gradient(135deg,var(--navy),#2a5298);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;box-shadow:0 4px 16px rgba(27,58,107,.25);}
+.total-label{color:rgba(255,255,255,.75);font-size:13px;font-weight:600;}
+.total-value{color:#fff;font-size:26px;font-weight:800;}
+.total-unit{color:rgba(255,255,255,.6);font-size:13px;}
+
+/* RESET */
+.reset-btn{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px;}
+
+/* EMPTY */
+.metree-empty{padding:24px;text-align:center;color:var(--gray3);font-size:13px;}
+
+/* POIDS */
+.poids-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.poids-header{background:linear-gradient(135deg,rgba(26,127,114,.07),rgba(26,127,114,.02));border-bottom:1px solid var(--gray2);padding:14px 16px;}
+.poids-title{font-size:14px;font-weight:700;color:var(--navy);}
+.poids-body{padding:16px;}
+.mat-label{font-size:11px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:block;}
+.mat-select-wrap{position:relative;margin-bottom:14px;}
+.mat-select{width:100%;padding:12px 40px 12px 14px;border:1.5px solid var(--gray2);border-radius:10px;font-size:15px;font-family:inherit;color:var(--text);background:#fff;appearance:none;outline:none;cursor:pointer;transition:border-color .15s;}
+.mat-select:focus{border-color:var(--teal);}
+.mat-select-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--gray3);font-size:12px;}
+.vol-row{display:flex;gap:10px;align-items:flex-end;margin-bottom:16px;}
+.vol-group{flex:1;}
+.vol-input-wrap{position:relative;}
+.vol-input{width:100%;padding:12px 50px 12px 14px;border:1.5px solid var(--gray2);border-radius:10px;font-size:18px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .15s;}
+.vol-input:focus{border-color:var(--teal);}
+.vol-unit{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--gray3);pointer-events:none;}
+.vol-from-btn{padding:12px 14px;background:rgba(26,127,114,.1);border:1.5px solid rgba(26,127,114,.25);border-radius:10px;color:var(--teal);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;line-height:1.2;text-align:center;}
+.vol-from-btn:active{background:rgba(26,127,114,.2);}
+.density-info{display:flex;align-items:center;gap:8px;background:var(--gray1);border-radius:10px;padding:10px 12px;margin-bottom:16px;font-size:13px;color:var(--gray3);}
+.density-info.has-density{background:rgba(26,127,114,.07);color:var(--teal);}
+.density-dot{width:8px;height:8px;border-radius:50%;background:var(--gray3);flex-shrink:0;}
+.density-info.has-density .density-dot{background:var(--teal);}
+.poids-result{border-radius:12px;overflow:hidden;border:2px solid var(--gray2);transition:border-color .25s;}
+.poids-result.active{border-color:var(--gold);}
+.poids-result-main{background:var(--gray1);padding:20px;display:flex;align-items:baseline;gap:8px;justify-content:center;transition:background .25s;}
+.poids-result.active .poids-result-main{background:linear-gradient(135deg,#fffbf0,#fff8e0);}
+.poids-number{font-size:42px;font-weight:800;color:var(--navy);}
+.poids-unit-big{font-size:20px;font-weight:600;color:var(--gray3);}
+.poids-result-sub{background:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--gray2);}
+.poids-sub-item{text-align:center;}
+.poids-sub-val{font-size:15px;font-weight:700;color:var(--text);}
+.poids-sub-label{font-size:11px;color:var(--gray3);font-weight:500;}
+.poids-divider{width:1px;height:32px;background:var(--gray2);}
+.no-mat-state{text-align:center;padding:24px 16px;color:var(--gray3);font-size:13px;}
+.no-mat-icon{font-size:32px;margin-bottom:8px;}
+.no-mat-link{display:inline-block;margin-top:10px;color:var(--teal);font-weight:700;font-size:13px;text-decoration:none;background:rgba(26,127,114,.08);padding:8px 16px;border-radius:20px;}
+
+/* PENTE */
+.pente-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.pente-header{background:linear-gradient(135deg,rgba(240,165,0,.07),rgba(240,165,0,.02));border-bottom:1px solid var(--gray2);padding:14px 16px;}
+.pente-title{font-size:14px;font-weight:700;color:var(--navy);}
+.pente-body{padding:16px;}
+.pente-inputs{display:flex;gap:12px;margin-bottom:16px;}
+.pente-field{flex:1;}
+.pente-field label{font-size:11px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;}
+.pente-input-wrap{position:relative;}
+.pente-input{width:100%;padding:14px 44px 14px 14px;border:1.5px solid var(--gray2);border-radius:10px;font-size:18px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .15s;}
+.pente-input:focus{border-color:var(--teal);}
+.pente-unit{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:var(--gray3);pointer-events:none;}
+.pente-schema{background:var(--gray1);border-radius:12px;padding:16px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;}
+.pente-result-card{border-radius:12px;overflow:hidden;border:2px solid var(--gray2);transition:border-color .25s;}
+.pente-result-card.active{border-color:var(--gold);}
+.pente-result-main{background:var(--gray1);padding:24px 20px;display:flex;align-items:baseline;gap:6px;justify-content:center;transition:background .25s;}
+.pente-result-card.active .pente-result-main{background:linear-gradient(135deg,#fffbf0,#fff8e0);}
+.pente-big{font-size:52px;font-weight:800;color:var(--navy);}
+.pente-pct{font-size:28px;font-weight:700;color:var(--gray3);}
+.pente-result-sub{background:#fff;padding:12px 20px;display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--gray2);}
+.pente-qualify{display:inline-block;margin-top:12px;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;text-align:center;width:100%;}
+.pente-reset{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:12px;}
+
+/* ANGLE 90° */
+.angle-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.angle-header{background:linear-gradient(135deg,rgba(27,58,107,.07),rgba(27,58,107,.02));border-bottom:1px solid var(--gray2);padding:14px 16px;}
+.angle-title{font-size:14px;font-weight:700;color:var(--navy);}
+.angle-body{padding:16px;}
+.angle-hint{font-size:12px;color:var(--gray3);margin-bottom:14px;line-height:1.4;}
+.angle-schema-wrap{background:var(--gray1);border-radius:12px;padding:18px 12px 54px;margin-bottom:16px;}
+.angle-schema-pos{position:relative;}
+.angle-field{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;transform:translate(-50%,-50%);}
+.angle-field-label{font-size:9.5px;font-weight:700;color:var(--gray3);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;}
+.angle-input{width:70px;padding:7px 4px;border:1.5px solid var(--gray2);border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;color:var(--text);background:#fff;outline:none;text-align:center;transition:border-color .15s,background .15s;}
+.angle-input:focus{border-color:var(--teal);}
+.angle-input.is-computed{background:rgba(26,127,114,.08);border-color:var(--teal);color:var(--teal);}
+/* Côté A : base horizontale, décalée sous le triangle pour ne pas chevaucher le trait → 55.6%, 106% */
+.angle-field-a{left:55.6%;top:106%;}
+/* Côté B : vertical gauche, décalée à gauche du trait pour ne pas le chevaucher → 9%, 48.1% */
+.angle-field-b{left:9%;top:48.1%;}
+/* Diagonale C : milieu (200,125), décalée perpendiculairement vers le haut-droite → 67%, 32% */
+.angle-field-c{left:67%;top:32%;}
+.angle-deg-result{background:var(--white);border:1.5px solid var(--gray2);border-radius:10px;padding:12px 20px;display:flex;justify-content:space-around;align-items:center;margin-bottom:14px;}
+.angle-reset-prompt{display:none;align-items:center;gap:10px;background:rgba(240,165,0,.1);border:1.5px solid rgba(240,165,0,.35);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12.5px;color:#8a6300;}
+.angle-reset-prompt.show{display:flex;}
+.angle-reset-prompt button{flex-shrink:0;background:var(--gold);border:none;color:var(--navy);font-weight:700;font-size:12px;padding:7px 12px;border-radius:8px;cursor:pointer;font-family:inherit;}
+.angle-calc-btn{width:100%;padding:13px;background:var(--teal);border:none;border-radius:10px;color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:10px;transition:background .15s,opacity .15s;}
+.angle-calc-btn:disabled{background:var(--gray2);color:var(--gray3);cursor:not-allowed;opacity:.7;}
+.angle-calc-btn:not(:disabled):active{background:#156158;}
+.angle-reset{width:100%;padding:11px;background:none;border:1.5px solid var(--gray2);border-radius:10px;color:var(--gray3);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:999;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* QUICK ADD BAR (au-dessus du clavier) */
+.quickadd-bar{position:fixed;left:0;right:0;bottom:0;z-index:998;background:var(--white);border-top:1px solid var(--gray2);box-shadow:0 -2px 10px rgba(27,58,107,.10);padding:8px 12px;display:flex;justify-content:center;transform:translateY(100%);transition:transform .15s ease-out;}
+.quickadd-bar.show{transform:translateY(0);}
+.quickadd-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;max-width:420px;padding:11px;background:var(--teal);border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+.quickadd-btn:active{background:#156158;}
 </style>
 </head>
 <body>
- 
-<!-- HEADER -->
+
 <div class="header">
-  <div class="header-inner">
-    <button class="back-btn" onclick="window.location.href='../index.html'">←</button>
-    <div class="header-titles">
-      <div class="header-title" id="hdrTitle">Ressources entreprise</div>
-      <div class="header-sub" id="hdrSub">Risse S.A.</div>
+  <div class="header-top">
+    <div class="logo-area">
+      <button class="back-btn" onclick="window.location.href='../index.html'" aria-label="Retour au menu">🏠</button>
+      <div style="min-width:0;">
+        <div class="header-title">Calculatrice</div>
+        <div class="header-subtitle" id="header-sub"></div>
+      </div>
     </div>
     <div class="header-actions">
-      <button class="cat-mgr-btn" onclick="openCatMgr()">⊞ Catégories</button>
-      <div class="header-count" id="hdrCount">0</div>
+      <button class="btn-header-icon" onclick="openCalculatrice()" aria-label="Calculatrice">🧮</button>
     </div>
   </div>
-</div>
- 
-<!-- PAGES -->
-<div class="pages">
-  <div class="page active" id="page-equipe"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('equipe',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('equipe')">＋</button></div><div id="content-equipe"></div></div>
-  <div class="page" id="page-machines"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('machines',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('machines')">＋</button></div><div id="content-machines"></div></div>
-  <div class="page" id="page-vehicules"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('vehicules',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('vehicules')">＋</button></div><div id="content-vehicules"></div></div>
-  <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
-  <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
-  <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
-</div>
- 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <button class="nav-item active" data-tab="equipe" onclick="switchTab('equipe')"><span class="nav-icon">👷</span><span class="nav-label">Équipe</span><span class="nav-badge" id="badge-equipe">0</span></button>
-  <button class="nav-item" data-tab="machines" onclick="switchTab('machines')"><span class="nav-icon">🚜</span><span class="nav-label">Machines</span><span class="nav-badge" id="badge-machines">0</span></button>
-  <button class="nav-item" data-tab="vehicules" onclick="switchTab('vehicules')"><span class="nav-icon">🚛</span><span class="nav-label">Véhicules</span><span class="nav-badge" id="badge-vehicules">0</span></button>
-  <button class="nav-item" data-tab="materiel" onclick="switchTab('materiel')"><span class="nav-icon">🔧</span><span class="nav-label">Matériel</span><span class="nav-badge" id="badge-materiel">0</span></button>
-  <button class="nav-item" data-tab="materiaux" onclick="switchTab('materiaux')"><span class="nav-icon">🪨</span><span class="nav-label">Matériaux</span><span class="nav-badge" id="badge-materiaux">0</span></button>
-  <button class="nav-item" data-tab="evacuations" onclick="switchTab('evacuations')"><span class="nav-icon">🚮</span><span class="nav-label">Évac.</span><span class="nav-badge" id="badge-evacuations">0</span></button>
-</nav>
- 
-<div class="toast" id="toast"></div>
- 
-<!-- ════════════════════════════════════
-     MODAL GESTIONNAIRE CATÉGORIES
-════════════════════════════════════ -->
-<div class="modal-ov" id="modal-catmgr">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr">
-      <div class="modal-title" id="catmgr-title">Catégories</div>
-      <button class="modal-close" onclick="closeCatMgr()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div id="catmgr-list"></div>
-      <div style="border-top:1px solid var(--border);margin-top:14px;padding-top:14px;">
-        <div class="form-sec-label" style="margin-top:0;">Nouvelle catégorie</div>
-        <div class="cat-add-row">
-          <div id="cat-icon-preview" style="width:42px;height:42px;border-radius:var(--rs);background:var(--bg);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex-shrink:0;overflow:hidden;" onclick="openEmojiPickerForCat()">＋</div>
-          <input class="cat-add-input" type="text" id="cat-new-name" placeholder="Nom de la catégorie…" autocomplete="off">
-          <button class="btn btn-teal" style="width:auto;padding:10px 16px;flex-shrink:0;" onclick="addCategory()">＋</button>
-        </div>
-        <div style="margin-top:6px;font-size:10px;color:var(--text3);">Tap le carré pour choisir une icône (optionnel)</div>
-        <!-- Couleur -->
-        <div style="margin-top:12px;">
-          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;">Couleur</div>
-          <div class="color-picker" id="cat-color-picker"></div>
-        </div>
-        <!-- Couleur -->
-        <div style="margin-top:12px;">
-          <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;">Couleur</div>
-          <div class="color-picker" id="cat-color-picker"></div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="closeCatMgr()">Fermer</button>
-    </div>
-  </div>
-</div>
- 
-<!-- ════════════════════════════════════
-     MODALS AJOUT ÉLÉMENTS
-════════════════════════════════════ -->
- 
-<!-- ÉQUIPE -->
-<div class="modal-ov" id="modal-add-equipe">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title">👷 Nouvel employé</div><button class="modal-close" onclick="closeAdd('equipe')">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-equipe" onclick="triggerPhoto('equipe')">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('equipe')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('equipe')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('equipe')" style="display:none" id="media-del-equipe">✕ Supprimer</button></div>
-      </div>
-      <div class="form-sec-label">Identité</div>
-      <div class="field-row">
-        <div class="field"><label>Prénom</label><input type="text" id="eq-prenom" placeholder="Prénom" autocomplete="off"></div>
-        <div class="field"><label>Nom</label><input type="text" id="eq-nom" placeholder="Nom" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Contact</div>
-      <div class="field"><label>Téléphone</label><input type="tel" id="eq-tel" placeholder="+41 79 000 00 00" autocomplete="off"></div>
-    </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('equipe')">Enregistrer</button></div>
-  </div>
-</div>
- 
-<!-- MACHINES -->
-<div class="modal-ov" id="modal-add-machines">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title">🚜 Nouvelle machine</div><button class="modal-close" onclick="closeAdd('machines')">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-machines" onclick="triggerPhoto('machines')">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('machines')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('machines')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('machines')" style="display:none" id="media-del-machines">✕ Supprimer</button></div>
-      </div>
-      <div class="form-sec-label">Identification</div>
-      <div class="field"><label>Nom / Modèle *</label><input type="text" id="ma-nom" placeholder="Mecalac MWR7" autocomplete="off"></div>
-      <div class="field-row">
-        <div class="field"><label>Type</label><select id="ma-type"><option value="">—</option><option>Pelle sur roues</option><option>Pelle sur chenilles</option><option>Chargeuse</option><option>Bulldozer</option><option>Compacteur</option><option>Grue mobile</option><option>Concasseur</option><option>Finisseur</option><option>Autre</option></select></div>
-        <div class="field"><label>Année</label><input type="number" id="ma-annee" placeholder="2018" min="1980" max="2030" autocomplete="off"></div>
-      </div>
-      <div class="field"><label>N° de série</label><input type="text" id="ma-serie" placeholder="SN-XXXX" autocomplete="off"></div>
-      <div class="form-sec-label">Caractéristiques</div>
-      <div class="field-row">
-        <div class="field"><label>Poids (t)</label><input type="number" id="ma-poids" placeholder="7.5" step="0.1" min="0" autocomplete="off"></div>
-        <div class="field"><label>Puissance (kW)</label><input type="number" id="ma-puissance" placeholder="55" min="0" autocomplete="off"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Heures actuelles</label><input type="number" id="ma-heures" placeholder="1250" min="0" autocomplete="off"></div>
-        <div class="field"><label>Carburant</label><select id="ma-carburant"><option value="">—</option><option>Diesel</option><option>Électrique</option><option>Hybride</option><option>Essence</option></select></div>
-      </div>
-      <div class="form-sec-label">Valeur</div>
-      <div class="field">
-        <div class="field"><label>Coût horaire (CHF/h)</label><input type="number" id="ma-cout-h" placeholder="85" step="0.5" min="0" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="ma-notes" placeholder="Entretien tous les 250h…"></textarea></div>
-    </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('machines')">Enregistrer</button></div>
-  </div>
-</div>
- 
-<!-- ACCESSOIRES (rattachés à une machine) -->
-<div class="modal-ov" id="modal-add-accessoire">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title" id="acs-modal-title">🧰 Nouvel accessoire</div><button class="modal-close" onclick="closeAccessoireModal()">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-accessoire" onclick="triggerAccessoirePhoto()">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerAccessoirePhoto()">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForAccessoire()">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearAccessoireMedia()" style="display:none" id="media-del-accessoire">✕ Supprimer</button></div>
-      </div>
-      <div class="form-sec-label">Identification</div>
-      <div class="field"><label>Nom / Modèle *</label><input type="text" id="acs-nom" placeholder="Godet 600mm" autocomplete="off"></div>
-      <div class="field-row">
-        <div class="field"><label>Type</label><input type="text" id="acs-type" placeholder="Godet, attache rapide…" autocomplete="off"></div>
-        <div class="field"><label>Année</label><input type="number" id="acs-annee" placeholder="2020" min="1980" max="2030" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Caractéristiques</div>
-      <div class="field-row">
-        <div class="field"><label>Poids (kg)</label><input type="number" id="acs-poids" placeholder="180" step="0.1" min="0" autocomplete="off"></div>
-        <div class="field"><label>Capacité</label><input type="text" id="acs-capacite" placeholder="0.6 m³" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="acs-notes" placeholder="Compatible avec…"></textarea></div>
-    </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveAccessoire()">Enregistrer</button></div>
-  </div>
-</div>
- 
-<!-- VÉHICULES -->
-<div class="modal-ov" id="modal-add-vehicules">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title">🚛 Nouveau véhicule</div><button class="modal-close" onclick="closeAdd('vehicules')">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-vehicules" onclick="triggerPhoto('vehicules')">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('vehicules')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('vehicules')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('vehicules')" style="display:none" id="media-del-vehicules">✕ Supprimer</button></div>
-      </div>
-      <div class="form-sec-label">Identification</div>
-      <div class="field"><label>Nom / Désignation *</label><input type="text" id="vh-nom" placeholder="Iveco Daily Benne" autocomplete="off"></div>
-      <div class="field-row">
-        <div class="field"><label>Immatriculation</label><input type="text" id="vh-immat" placeholder="VD 123 456" autocomplete="off" style="text-transform:uppercase"></div>
-        <div class="field"><label>Type</label><select id="vh-type"><option value="">—</option><option>Camion benne</option><option>Camion citerne</option><option>Semi-remorque</option><option>Remorque</option><option>Utilitaire</option><option>Voiture</option><option>Pick-up</option><option>Minibus</option><option>Autre</option></select></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Marque</label><input type="text" id="vh-marque" placeholder="Iveco" autocomplete="off"></div>
-        <div class="field"><label>Année</label><input type="number" id="vh-annee" placeholder="2020" min="1980" max="2030" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Poids & Capacité</div>
-      <div class="field-row">
-        <div class="field"><label>Poids véhicule (t)</label><input type="number" id="vh-poids" placeholder="6.5" step="0.1" min="0" autocomplete="off"></div>
-        <div class="field"><label>Charge utile (t)</label><input type="number" id="vh-charge" placeholder="10.0" step="0.5" min="0" autocomplete="off"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Poids maximum (t)</label><input type="number" id="vh-pma" placeholder="18.0" step="0.5" min="0" autocomplete="off"></div>
-        <div class="field"><label>Volume pont (m³)</label><input type="number" id="vh-volume" placeholder="8.0" step="0.5" min="0" autocomplete="off"></div>
-      </div>
-      <div class="field"><label>Dimensions (L×l×H)</label><input type="text" id="vh-dimensions" placeholder="6.20 × 2.45 × 2.80 m" autocomplete="off"></div>
-      <div class="form-sec-label">Coûts</div>
-      <div class="field">
-        <div class="field"><label>Coût / jour (CHF)</label><input type="number" id="vh-cout-j" placeholder="350" min="0" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="vh-notes" placeholder="Contrôle technique valable jusqu'à…"></textarea></div>
-    </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('vehicules')">Enregistrer</button></div>
-  </div>
-</div>
- 
-<!-- MATÉRIEL -->
-<div class="modal-ov" id="modal-add-materiel">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title">🔧 Nouveau matériel</div><button class="modal-close" onclick="closeAdd('materiel')">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-materiel" onclick="triggerPhoto('materiel')">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('materiel')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('materiel')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('materiel')" style="display:none" id="media-del-materiel">✕ Supprimer</button></div>
-      </div>
-      <div class="form-sec-label">Catégorie</div>
-      <div class="field"><label>Sous-catégorie</label><select id="mt-cat"><option value="">— Sans catégorie —</option></select></div>
-      <div class="form-sec-label">Identification</div>
-      <div class="field"><label>Nom / Modèle *</label><input type="text" id="mt-nom" placeholder="Marteau-piqueur Hilti TE 70" autocomplete="off"></div>
-      <div class="field-row">
-        <div class="field"><label>Catégorie type</label><select id="mt-type"><option value="">—</option><option>Outillage électroportatif</option><option>Outillage à main</option><option>Levage / élingage</option><option>Compresseur / pneumatique</option><option>Pompe</option><option>Mesure / topographie</option><option>Sécurité</option><option>Échafaudage</option><option>Coffrage</option><option>Soudure</option><option>Autre</option></select></div>
-        <div class="field"><label>Marque</label><input type="text" id="mt-marque" placeholder="Hilti" autocomplete="off"></div>
-      </div>
-      <div class="field"><label>Référence / N° série</label><input type="text" id="mt-ref" placeholder="SN-XXXXX" autocomplete="off"></div>
-      <div class="form-sec-label">Caractéristiques</div>
-      <div class="field-row">
-        <div class="field"><label>Poids (kg)</label><input type="number" id="mt-poids" placeholder="8.5" step="0.1" min="0" autocomplete="off"></div>
-        <div class="field"><label>Puissance (W)</label><input type="number" id="mt-puissance" placeholder="1500" min="0" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Valeur</div>
-      <div class="field-row">
-        <div class="field"><label>Prix achat (CHF)</label><input type="number" id="mt-prix" placeholder="1200" min="0" autocomplete="off"></div>
-        <div class="field"><label>Location /j (CHF)</label><input type="number" id="mt-location" placeholder="75" min="0" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="mt-notes" placeholder="Révision annuelle…"></textarea></div>
-    </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiel')">Enregistrer</button></div>
-  </div>
-</div>
- 
-<!-- MATÉRIAUX -->
-<div class="modal-ov" id="modal-add-materiaux">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title">🪨 Nouveau matériau</div><button class="modal-close" onclick="closeAdd('materiaux')">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-materiaux" onclick="triggerPhoto('materiaux')">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('materiaux')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('materiaux')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('materiaux')" style="display:none" id="media-del-materiaux">✕ Supprimer</button></div>
-      </div>
-      <div class="form-sec-label">Catégorie</div>
-      <div class="field"><label>Sous-catégorie</label><select id="mx-cat"><option value="">— Sans catégorie —</option></select></div>
-      <div class="form-sec-label">Identification</div>
-      <div class="field"><label>Nom / Désignation *</label><input type="text" id="mx-nom" placeholder="Béton C25/30" autocomplete="off"></div>
-      <div class="field"><label>Unité</label><select id="mx-unite"><option value="">—</option><option>m³</option><option>tonne (t)</option><option>kg</option><option>m²</option><option>ml</option><option>km</option><option>pièce</option><option>litre</option><option>sac</option></select></div>
-      <div class="form-sec-label">Caractéristiques techniques</div>
-      <div class="field-row">
-        <div class="field"><label>Masse volumique (kg/m³)</label><input type="number" id="mx-densite" placeholder="2400" step="1" min="0" autocomplete="off"></div>
-        <div class="field"><label>Classe / Résistance</label><input type="text" id="mx-classe" placeholder="C25/30…" autocomplete="off"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Granulométrie</label><input type="text" id="mx-granulo" placeholder="0/32 mm" autocomplete="off"></div>
-        <div class="field"><label>Fournisseur</label><input type="text" id="mx-fournisseur" placeholder="Holcim…" autocomplete="off"></div>
-      </div>
-      <div class="form-sec-label">Prix</div>
-      <div class="field"><label>Prix unitaire (CHF)</label><input type="number" id="mx-prix" placeholder="95.00" step="0.01" min="0" autocomplete="off"></div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="mx-notes" placeholder="Livraison 48h, camion toupie…"></textarea></div>
-    </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('materiaux')">Enregistrer</button></div>
+  <div class="tabs-bar">
+    <button class="tab-btn active" id="btn-metrees" onclick="switchTab('metrees')">📐 Métrés</button>
+    <button class="tab-btn" id="btn-poids" onclick="switchTab('poids')">⚖️ Poids</button>
+    <button class="tab-btn" id="btn-pente" onclick="switchTab('pente')">📉 Pente</button>
+    <button class="tab-btn" id="btn-angle" onclick="switchTab('angle')">📏 Angle 90°</button>
   </div>
 </div>
 
-<!-- ÉVACUATIONS -->
-<div class="modal-ov" id="modal-add-evacuations">
-  <div class="modal-sh">
-    <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title">🚮 Nouvelle évacuation</div><button class="modal-close" onclick="closeAdd('evacuations')">✕</button></div>
-    <div class="modal-body">
-      <div class="media-zone">
-        <div class="media-preview" id="media-prev-evacuations" onclick="triggerPhoto('evacuations')">📷</div>
-        <div class="media-btns"><button class="media-btn" onclick="triggerPhoto('evacuations')">📷 Photo</button><button class="media-btn" onclick="openEmojiPickerForItem('evacuations')">🎨 Icône</button><button class="media-btn media-btn-del" onclick="clearMedia('evacuations')" style="display:none" id="media-del-evacuations">✕ Supprimer</button></div>
+<div class="content">
+
+  <!-- ── TAB MÉTRÉS ── -->
+  <div class="tab-panel active" id="panel-metrees">
+
+    <!-- Mode selector -->
+    <div class="mode-bar">
+      <button class="mode-btn active" id="mode-btn-longueur" onclick="switchMode('longueur')">
+        <span class="mode-icon">📏</span>
+        <span class="mode-label">Longueur</span>
+        <span class="mode-unit">ml</span>
+      </button>
+      <button class="mode-btn" id="mode-btn-surface" onclick="switchMode('surface')">
+        <span class="mode-icon">⬜</span>
+        <span class="mode-label">Surface</span>
+        <span class="mode-unit">m²</span>
+      </button>
+      <button class="mode-btn" id="mode-btn-volume" onclick="switchMode('volume')">
+        <span class="mode-icon">📦</span>
+        <span class="mode-label">Volume</span>
+        <span class="mode-unit">m³</span>
+      </button>
+    </div>
+
+    <div class="section-card">
+      <div class="card-header">
+        <span class="card-title" id="card-title-label">Lignes de calcul</span>
+        <span class="card-total" id="metrees-total">0.00 ml</span>
       </div>
-      <div class="form-sec-label">Catégorie</div>
-      <div class="field"><label>Sous-catégorie</label><select id="ev-cat"><option value="">— Sans catégorie —</option></select></div>
-      <div class="form-sec-label">Identification</div>
-      <div class="field"><label>Nom / Désignation *</label><input type="text" id="ev-nom" placeholder="Gravats, Déblais terre…" autocomplete="off"></div>
-      <div class="field"><label>Unité par défaut</label><select id="ev-unite"><option value="">—</option><option>m³</option><option>T</option><option>kg</option><option>benne</option><option>pc</option><option>m</option><option>ml</option><option>m²</option><option>L</option><option>h</option><option>sac</option><option>forfait</option></select></div>
-      <div class="form-sec-label">Notes</div>
-      <div class="field"><label>Notes libres</label><textarea id="ev-notes" placeholder="Décharge, filière, prix à la tonne…"></textarea></div>
+      <div id="metrees-rows"></div>
+      <button class="add-row-btn" onclick="addRow()">＋ Ajouter une ligne</button>
+      <div class="shapes-legend" id="shapes-legend"></div>
     </div>
-    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('evacuations')">Enregistrer</button></div>
+
+    <div class="total-bar">
+      <div>
+        <div class="total-label" id="total-label-txt">Total longueur</div>
+        <div class="total-unit" id="total-unit-sub">métrés</div>
+      </div>
+      <div style="text-align:right">
+        <div class="total-value" id="total-display">0.00</div>
+        <div class="total-unit" id="total-unit-display">ml</div>
+      </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetRows()">🗑 Effacer toutes les lignes</button>
   </div>
-</div>
- 
-<!-- ════════════════════════════════════
-     DETAIL SHEET
-════════════════════════════════════ -->
-<div class="detail-ov" id="detail-ov">
-  <div class="detail-sh">
-    <div class="detail-drag"><div class="modal-handle"></div></div>
-    <div class="detail-top">
-      <div class="detail-icon" id="det-icon"></div>
-      <div><div class="detail-name" id="det-name"></div><div class="detail-type" id="det-type"></div></div>
-    </div>
-    <div class="detail-body" id="det-body"></div>
-    <div class="detail-footer">
-      <button class="btn btn-navy btn-sm" style="flex:2" onclick="editCurrentItem()">✏️ Modifier</button>
-      <button class="btn btn-danger btn-sm" style="flex:1" onclick="deleteCurrentItem()">🗑</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeDetail()">Fermer</button>
-    </div>
-  </div>
-</div>
- 
-<!-- Input file partagé pour photos éléments -->
-<input type="file" id="item-photo-input" accept="image/*" style="display:none">
- 
-<!-- ═══ EMOJI PICKER GLOBAL ═══ -->
-<div class="epicker-ov" id="epicker-ov">
-  <div class="epicker-sh">
-    <div class="epicker-drag"><div class="modal-handle"></div></div>
-    <div style="padding:0 16px;">
-      <input class="epicker-search" type="search" id="epicker-search" placeholder="🔍 Rechercher une icône…" autocomplete="off" oninput="filterEmojis(this.value)">
-      <div class="epicker-cats" id="epicker-cats"></div>
-    </div>
-    <div class="epicker-grid" id="epicker-grid" style="padding:12px 16px;"></div>
-    <div class="epicker-footer">
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="selectEmojiResult('')">Aucune icône</button>
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="closeEmojiPicker()">Annuler</button>
-    </div>
-  </div>
-</div>
- 
-<!-- ════════════════════════════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════════════════════════════ -->
-<script type="module">
-// ── FIREBASE ────────────────────────────────────────────
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
-  authDomain: "risse-sa.firebaseapp.com",
-  projectId: "risse-sa",
-  storageBucket: "risse-sa.firebasestorage.app",
-  messagingSenderId: "656425275771",
-  appId: "1:656425275771:web:b82c58557e41e6d1deadde"
-};
-const app  = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db   = getFirestore(app);
-
-// Auth guard
-onAuthStateChanged(auth, user => {
-  if (!user) { window.location.href = '../login.html'; return; }
-  initApp();
-});
-
-// ── CONFIG ──────────────────────────────────────────────
-const TABS    = ['equipe','machines','vehicules','materiel','materiaux','evacuations'];
-const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
-const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
-const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB',evacuations:'#F3F4F6'};
-const KEYS    = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
-const CAT_KEY = 'rv6_res_categories';
- 
-// Sections avec sous-catégories actives
-const HAS_CATS = ['materiel','materiaux','evacuations'];
- 
-const PALETTE = ['#E53935','#E67E22','#F0A500','#2E7D32','#1A7F72','#1B3A6B','#6C3483','#1565C0','#00838F','#4E342E'];
- 
-// ── EMOJI DB COMPLET AVEC RECHERCHE ─────────────────────
-const EMOJI_CATS = [
-  {id:'tous',label:'Tous'},
-  {id:'outils',label:'🔧 Outils'},
-  {id:'construction',label:'🏗 Construction'},
-  {id:'vehicules',label:'🚛 Véhicules'},
-  {id:'materiaux',label:'🪨 Matériaux'},
-  {id:'nature',label:'🌿 Nature'},
-  {id:'personnes',label:'👷 Personnes'},
-  {id:'objets',label:'📦 Objets'},
-  {id:'symboles',label:'⚡ Symboles'},
-];
- 
-const EMOJI_DB = [
-  // Outils
-  {e:'🔧',k:'clé outil réparation',c:'outils'},{e:'🔩',k:'boulon vis fixation',c:'outils'},{e:'🪛',k:'tournevis vis',c:'outils'},{e:'🔨',k:'marteau frappe clou',c:'outils'},{e:'🪚',k:'scie coupe bois',c:'outils'},{e:'⚙️',k:'engrenage mécanique réglage',c:'outils'},{e:'🗜',k:'étau serre pince',c:'outils'},{e:'🪝',k:'crochet levage accroche',c:'outils'},{e:'⛏',k:'pioche terrassement',c:'outils'},{e:'🪓',k:'hache coupe',c:'outils'},{e:'🧰',k:'boîte outils caisse',c:'outils'},{e:'🪣',k:'seau',c:'outils'},{e:'🧲',k:'aimant magnétique',c:'outils'},{e:'🔬',k:'microscope labo analyse',c:'outils'},{e:'📐',k:'équerre angle mesure',c:'outils'},{e:'📏',k:'règle mesure longueur',c:'outils'},{e:'🧭',k:'boussole direction',c:'outils'},{e:'🔑',k:'clé serrure',c:'outils'},{e:'🪤',k:'piège',c:'outils'},{e:'✂️',k:'ciseaux coupe',c:'outils'},{e:'🖊',k:'stylo écrire',c:'outils'},{e:'🪜',k:'échelle hauteur',c:'outils'},{e:'⛓',k:'chaîne maillon',c:'outils'},{e:'🧹',k:'balai nettoyage',c:'outils'},{e:'🧽',k:'éponge nettoyage',c:'outils'},{e:'🪠',k:'ventouse plomberie',c:'outils'},
-  // Construction
-  {e:'🏗',k:'grue chantier construction levage',c:'construction'},{e:'🧱',k:'brique mur maçonnerie',c:'construction'},{e:'🪵',k:'bois planche poutre coffrage',c:'construction'},{e:'🏠',k:'maison villa habitation',c:'construction'},{e:'🏢',k:'immeuble bâtiment bureau',c:'construction'},{e:'🏭',k:'usine industriel',c:'construction'},{e:'🏚',k:'ruine démolition',c:'construction'},{e:'🛖',k:'cabane abri',c:'construction'},{e:'⛺',k:'tente provisoire',c:'construction'},{e:'🏘',k:'quartier lotissement',c:'construction'},{e:'🏛',k:'monument colonne pierre',c:'construction'},{e:'🚧',k:'chantier barrière travaux',c:'construction'},{e:'🛣',k:'route autoroute chaussée',c:'construction'},{e:'🛤',k:'rails chemin fer voie',c:'construction'},{e:'🌉',k:'pont passerelle ouvrage',c:'construction'},{e:'🗼',k:'tour pylône',c:'construction'},{e:'⛲',k:'fontaine eau place',c:'construction'},{e:'🔌',k:'prise électrique branchement',c:'construction'},{e:'💡',k:'ampoule lumière éclairage',c:'construction'},{e:'🚰',k:'robinet eau plomberie',c:'construction'},{e:'🪟',k:'fenêtre vitre',c:'construction'},{e:'🚪',k:'porte entrée',c:'construction'},{e:'🛗',k:'ascenseur monte charge',c:'construction'},{e:'🪞',k:'miroir verre',c:'construction'},{e:'🧲',k:'magnétique métal',c:'construction'},
-  // Véhicules
-  {e:'🚜',k:'tracteur pelle engin chantier',c:'vehicules'},{e:'🚛',k:'camion benne poids lourd transport',c:'vehicules'},{e:'🚚',k:'camion livraison utilitaire',c:'vehicules'},{e:'🛻',k:'pickup benne',c:'vehicules'},{e:'🚗',k:'voiture auto véhicule',c:'vehicules'},{e:'🚐',k:'minibus fourgon van',c:'vehicules'},{e:'🚌',k:'bus transport',c:'vehicules'},{e:'🚑',k:'ambulance urgence',c:'vehicules'},{e:'🚒',k:'pompier incendie',c:'vehicules'},{e:'🏎',k:'course rapide',c:'vehicules'},{e:'🏍',k:'moto deux roues',c:'vehicules'},{e:'🛵',k:'scooter deux roues',c:'vehicules'},{e:'🚲',k:'vélo bicyclette',c:'vehicules'},{e:'🚁',k:'hélicoptère aérien',c:'vehicules'},{e:'✈️',k:'avion vol',c:'vehicules'},{e:'🚢',k:'bateau navire maritime',c:'vehicules'},{e:'⛽',k:'essence carburant diesel station',c:'vehicules'},{e:'🅿️',k:'parking stationnement',c:'vehicules'},{e:'🛞',k:'pneu roue',c:'vehicules'},{e:'⚓',k:'ancre maritime port',c:'vehicules'},
-  // Matériaux
-  {e:'🪨',k:'pierre roche caillou granit',c:'materiaux'},{e:'�ite',k:'',c:''},{e:'🧱',k:'brique bloc béton parpaing',c:'materiaux'},{e:'🪵',k:'bois planche poutre',c:'materiaux'},{e:'🪨',k:'gravier sable agrégat',c:'materiaux'},{e:'💎',k:'cristal pierre précieuse',c:'materiaux'},{e:'🧊',k:'glace gel froid',c:'materiaux'},{e:'🛢',k:'baril fuel huile bitume',c:'materiaux'},{e:'📦',k:'carton emballage palette',c:'materiaux'},{e:'🧴',k:'produit chimique colle',c:'materiaux'},{e:'🧪',k:'tube essai chimie',c:'materiaux'},{e:'💧',k:'eau liquide',c:'materiaux'},{e:'🪫',k:'batterie pile',c:'materiaux'},{e:'🔋',k:'batterie énergie',c:'materiaux'},{e:'⛓',k:'chaîne acier métal fer',c:'materiaux'},{e:'🪢',k:'noeud corde ficelle',c:'materiaux'},{e:'🧲',k:'aimant fer métal',c:'materiaux'},{e:'🪩',k:'boule miroir verre',c:'materiaux'},{e:'🎨',k:'peinture couleur',c:'materiaux'},{e:'🪣',k:'seau ciment mortier',c:'materiaux'},
-  // Nature
-  {e:'🌿',k:'plante herbe vert végétal',c:'nature'},{e:'🌳',k:'arbre forêt',c:'nature'},{e:'🌲',k:'sapin conifère',c:'nature'},{e:'🌾',k:'blé champ agriculture',c:'nature'},{e:'🌊',k:'vague eau mer',c:'nature'},{e:'🏔',k:'montagne alpes',c:'nature'},{e:'⛰',k:'montagne colline',c:'nature'},{e:'🌍',k:'terre globe monde',c:'nature'},{e:'☀️',k:'soleil chaleur',c:'nature'},{e:'🌧',k:'pluie nuage',c:'nature'},{e:'❄️',k:'neige froid hiver gel',c:'nature'},{e:'🔥',k:'feu flamme chaud',c:'nature'},{e:'💨',k:'vent air',c:'nature'},{e:'⚡',k:'éclair électricité foudre',c:'nature'},{e:'🌈',k:'arc en ciel',c:'nature'},{e:'💦',k:'goutte eau pluie',c:'nature'},{e:'🪴',k:'plante pot',c:'nature'},{e:'🌻',k:'fleur tournesol jardin',c:'nature'},{e:'🍂',k:'feuille automne',c:'nature'},{e:'🌱',k:'pousse graine semis',c:'nature'},
-  // Personnes
-  {e:'👷',k:'ouvrier chantier casque',c:'personnes'},{e:'👷‍♂️',k:'ouvrier homme chantier',c:'personnes'},{e:'👷‍♀️',k:'ouvrière femme chantier',c:'personnes'},{e:'🧑‍🔧',k:'mécanicien technicien',c:'personnes'},{e:'🧑‍💼',k:'bureau manager directeur',c:'personnes'},{e:'🧑‍🏫',k:'formateur prof enseignant',c:'personnes'},{e:'🧑‍⚕️',k:'médecin santé docteur',c:'personnes'},{e:'🧑‍🚒',k:'pompier sécurité',c:'personnes'},{e:'👨‍👩‍👦',k:'famille groupe',c:'personnes'},{e:'🤝',k:'poignée main accord contrat',c:'personnes'},{e:'💪',k:'force muscle',c:'personnes'},{e:'👍',k:'ok bien pouce',c:'personnes'},{e:'🙋',k:'main levée personne',c:'personnes'},{e:'🧑‍💻',k:'informatique ordinateur dev',c:'personnes'},{e:'🦺',k:'gilet sécurité haute visibilité',c:'personnes'},{e:'⛑',k:'casque secours',c:'personnes'},{e:'👨‍🏭',k:'ouvrier usine industrie',c:'personnes'},{e:'🧑‍🌾',k:'agriculteur fermier',c:'personnes'},
-  // Objets
-  {e:'📋',k:'presse papier liste rapport',c:'objets'},{e:'📁',k:'dossier fichier',c:'objets'},{e:'📂',k:'dossier ouvert',c:'objets'},{e:'🗂',k:'classeur onglets',c:'objets'},{e:'📑',k:'signet document',c:'objets'},{e:'📄',k:'page document feuille',c:'objets'},{e:'📊',k:'graphique stats statistiques',c:'objets'},{e:'📈',k:'hausse courbe progression',c:'objets'},{e:'🗺',k:'carte plan',c:'objets'},{e:'📷',k:'photo appareil caméra',c:'objets'},{e:'🖨',k:'imprimante print',c:'objets'},{e:'💻',k:'ordinateur portable',c:'objets'},{e:'📱',k:'téléphone mobile smartphone',c:'objets'},{e:'⌚',k:'montre heure temps',c:'objets'},{e:'⏱',k:'chrono minuteur timer',c:'objets'},{e:'📅',k:'calendrier date planning',c:'objets'},{e:'🗓',k:'calendrier agenda',c:'objets'},{e:'🔔',k:'cloche alerte notification',c:'objets'},{e:'📌',k:'punaise épingle',c:'objets'},{e:'🏷',k:'étiquette tag label prix',c:'objets'},{e:'💰',k:'argent sac monnaie',c:'objets'},{e:'💶',k:'euro billet argent',c:'objets'},{e:'🧾',k:'facture ticket reçu',c:'objets'},{e:'📐',k:'équerre angle',c:'objets'},{e:'🗑',k:'poubelle corbeille supprimer',c:'objets'},
-  // Symboles
-  {e:'⚠️',k:'attention danger avertissement',c:'symboles'},{e:'🚫',k:'interdit stop',c:'symboles'},{e:'❌',k:'croix erreur non',c:'symboles'},{e:'✅',k:'validé ok coché',c:'symboles'},{e:'❓',k:'question doute',c:'symboles'},{e:'❗',k:'exclamation important',c:'symboles'},{e:'🔴',k:'rouge cercle stop',c:'symboles'},{e:'🟢',k:'vert cercle ok',c:'symboles'},{e:'🟡',k:'jaune cercle attention',c:'symboles'},{e:'🔵',k:'bleu cercle info',c:'symboles'},{e:'⬜',k:'blanc carré vide',c:'symboles'},{e:'⬛',k:'noir carré plein',c:'symboles'},{e:'♻️',k:'recyclage environnement',c:'symboles'},{e:'☢️',k:'radioactif danger nucléaire',c:'symboles'},{e:'☣️',k:'biologique danger chimique',c:'symboles'},{e:'🏁',k:'drapeau arrivée fin',c:'symboles'},{e:'📍',k:'localisation lieu GPS',c:'symboles'},{e:'🔒',k:'cadenas verrouillé sécurité',c:'symboles'},{e:'🔓',k:'cadenas ouvert',c:'symboles'},{e:'⭐',k:'étoile favori',c:'symboles'},{e:'💯',k:'cent parfait',c:'symboles'},{e:'🔄',k:'rafraîchir recharger boucle',c:'symboles'},{e:'➡️',k:'flèche droite suivant',c:'symboles'},{e:'⬆️',k:'flèche haut monter',c:'symboles'},{e:'⬇️',k:'flèche bas descendre',c:'symboles'},
-].filter(x=>x.e&&x.c); // nettoyage entrées vides
- 
-let currentTab         = 'equipe';
-let currentDetailId    = null;
-let currentDetailSection = null;
-let editingId          = null;
-let editingSection     = null;
-let catMgrTab          = 'equipe';
-let selectedColor      = PALETTE[5];
-let selectedEmoji      = '';
-let selectedImage      = '';
-let openAccordions     = {};
-let searchFilters      = {};
- 
-// Photos et icônes éléments en cours d'édition
-let itemPhotos = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
-let itemIcons  = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
-let photoTargetSection = '';
-let emojiPickerCallback = null;
- 
-// ── ACCESSOIRES (rattachés à une machine) ───────────────
-let openAccessoireAccs = {};   // { machineId: bool } état ouverture accordéon accessoires
-let accsTargetMachineId = null; // machine ciblée par le modal accessoire en cours
-let accsEditingId       = null; // id de l'accessoire en édition (null = création)
-let accsPhoto = '';
-let accsIcon  = '';
- 
-// ── STORAGE (double écriture localStorage + Firestore) ──
-function load(s){ try{ const r=localStorage.getItem(KEYS[s]); return r?JSON.parse(r):[]; }catch(e){ return []; } }
-
-function save(s,d){
-  // 1. localStorage (immédiat, pour compatibilité autres modules)
-  localStorage.setItem(KEYS[s],JSON.stringify(d));
-  // 2. Firestore (async, pas bloquant)
-  const user = auth.currentUser;
-  if(user){
-    setDoc(doc(db,'ressources',s), { items: d, updatedAt: Date.now() })
-      .catch(e => console.warn('Firestore save error:',e));
-  }
-}
-
-function loadCats(){ try{ const r=localStorage.getItem(CAT_KEY); return r?JSON.parse(r):{equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[],evacuations:[]}; }catch(e){ return {equipe:[],machines:[],vehicules:[],materiel:[],materiaux:[],evacuations:[]}; } }
-
-function saveCats(d){
-  // 1. localStorage
-  localStorage.setItem(CAT_KEY,JSON.stringify(d));
-  // 2. Firestore
-  const user = auth.currentUser;
-  if(user){
-    setDoc(doc(db,'ressources','_categories'), { data: d, updatedAt: Date.now() })
-      .catch(e => console.warn('Firestore saveCats error:',e));
-  }
-}
-
-// ── SYNC FIRESTORE → localStorage au démarrage ──────────
-async function syncFromFirestore(){
-  try {
-    // Sync chaque section
-    for(const s of TABS){
-      const snap = await getDoc(doc(db,'ressources',s));
-      if(snap.exists()){
-        const items = snap.data().items || [];
-        localStorage.setItem(KEYS[s], JSON.stringify(items));
-      } else if(s==='evacuations'){
-        // Première fois : liste de départ (ids fixes, donc sans doublon si plusieurs appareils)
-        let cur = []; try{ cur = JSON.parse(localStorage.getItem(KEYS[s])||'[]'); }catch(e){}
-        save(s, cur.length ? cur : [['evac_gravats','Gravats','m³'],['evac_deblais','Déblais terre','m³'],['evac_enrobe','Enrobé','T'],['evac_beton','Béton concassé','m³'],['evac_ferraille','Ferraille','T'],['evac_dechets','Déchets chantier','benne'],['evac_boue','Boue/sédiments','m³'],['evac_bois','Bois','m³']].map(a=>({id:a[0],nom:a[1],unite:a[2],catId:'',subCatId:'',photo:'',icon:''})));
-      }
-    }
-    // Sync catégories
-    const catSnap = await getDoc(doc(db,'ressources','_categories'));
-    if(catSnap.exists()){
-      localStorage.setItem(CAT_KEY, JSON.stringify(catSnap.data().data));
-    }
-  } catch(e){
-    console.warn('Firestore sync error:',e);
-  }
-}
- 
-// ── NAVIGATION ──────────────────────────────────────────
-function switchTab(tab){
-  currentTab=tab;
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));
-  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+tab));
-  document.getElementById('hdrTitle').textContent=TITLES[tab];
-  renderContent(tab, searchFilters[tab]||'');
-  updateHeader();
-  const inp=document.querySelector('#page-'+tab+' .search-input');
-  if(inp) inp.value=searchFilters[tab]||'';
-}
- 
-function updateHeader(){
-  const cnt=load(currentTab).length;
-  document.getElementById('hdrCount').textContent=cnt;
-  document.getElementById('hdrSub').textContent=TITLES[currentTab];
-  // Bouton catégories visible seulement pour matériel et matériaux
-  const btn=document.querySelector('.cat-mgr-btn');
-  if(btn) btn.style.display=HAS_CATS.includes(currentTab)?'':'none';
-}
- 
-// ── RENDU ACCORDÉONS ────────────────────────────────────
-function renderContent(section, filter){
-  const items = load(section);
-  const cats  = HAS_CATS.includes(section) ? (loadCats()[section]||[]) : [];
-  const el    = document.getElementById('content-'+section);
-  const icon  = ICONS[section];
-  const color = COLORS[section];
-  const q     = (filter||'').toLowerCase();
- 
-  const filtered = items.filter(item=> !q || Object.values(item).some(v=>String(v).toLowerCase().includes(q)));
- 
-  if(!filtered.length && !cats.length){
-    el.innerHTML=`<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
-    return;
-  }
-  if(!filtered.length && q){
-    el.innerHTML=`<div class="empty-page"><div class="empty-icon">🔍</div><div class="empty-txt">Aucun résultat</div><div class="empty-hint">Modifiez la recherche</div></div>`;
-    return;
-  }
- 
-  let html='';
- 
-  if(cats.length){
-    cats.forEach(cat=>{
-      const subs = cat.children||[];
-      if(subs.length){
-        // Catégorie avec sous-catégories → accordéons imbriqués
-        const allCatItems = filtered.filter(i=>i.catId===cat.id);
-        const accKey = section+'__'+cat.id;
-        const isOpen = openAccordions[accKey]||false;
- 
-        // Construire le contenu interne : sous-accordéons + items "général"
-        let innerHtml = '';
-        subs.forEach(sub=>{
-          const subItems = allCatItems.filter(i=>i.subCatId===sub.id);
-          const subKey = section+'__'+cat.id+'__'+sub.id;
-          const subOpen = openAccordions[subKey]||false;
-          const subAddBtn = (section==='materiaux'||section==='evacuations')
-            ? `<button class="acc-quick-add" onclick="event.stopPropagation();openAdd('${section}','${cat.id}|${sub.id}')" title="Ajouter dans ${esc(sub.name)}">＋</button>`
-            : '';
-          innerHtml += `
-          <div class="sub-acc" data-sub-id="${sub.id}" style="margin-bottom:6px;">
-            <div class="sub-acc-header" style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:${subOpen?'var(--rs) var(--rs) 0 0':'var(--rs)'};cursor:pointer;user-select:none;" onclick="toggleAcc('${subKey}','${section}')">
-              <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.6;flex-shrink:0;"></div>
-              <div style="flex:1;font-size:12px;font-weight:600;color:var(--text2);">${esc(sub.name)}</div>
-              <div style="font-size:10px;color:var(--text3);font-weight:700;background:var(--bg2);padding:1px 6px;border-radius:8px;">${subItems.length}</div>
-              ${subAddBtn}
-              <div class="acc-chevron" style="${subOpen?'transform:rotate(90deg)':''}">›</div>
+  <!-- ── TAB POIDS ── -->
+  <div class="tab-panel" id="panel-poids">
+    <div class="poids-card">
+      <div class="poids-header"><div class="poids-title">Calcul de poids</div></div>
+      <div class="poids-body">
+        <label class="mat-label">Matériau</label>
+        <div id="mat-selector-wrap"></div>
+        <label class="mat-label">Volume</label>
+        <div class="vol-row">
+          <div class="vol-group">
+            <div class="vol-input-wrap">
+              <input class="vol-input" id="vol-input" type="number" min="0" step="0.01" placeholder="0.00" oninput="calcPoids()">
+              <span class="vol-unit">m³</span>
             </div>
-            <div style="max-height:${subOpen?'2000px':'0'};overflow:hidden;transition:max-height .25s ease;border:${subOpen?'1px solid var(--border)':'none'};border-top:none;border-radius:0 0 var(--rs) var(--rs);background:#fff;" id="acc-body-${subKey}">
-              <div style="padding:8px;">
-                ${subItems.length
-                  ? subItems.map(item=>renderItemHTML(item,section,icon,color)).join('')
-                  : `<div class="acc-empty">Aucun élément</div>`}
-              </div>
-            </div>
-          </div>`;
-        });
-        // Items dans la catégorie mais sans sous-catégorie
-        const generalItems = allCatItems.filter(i=>!i.subCatId || !subs.find(s=>s.id===i.subCatId));
-        if(generalItems.length){
-          innerHtml += generalItems.map(item=>renderItemHTML(item,section,icon,color)).join('');
-        }
- 
-        html += renderAccordionRaw(accKey, cat.name, cat, allCatItems.length, innerHtml, section, isOpen);
-      } else {
-        // Catégorie sans sous-catégories → accordéon simple
-        const catItems = filtered.filter(i=>i.catId===cat.id);
-        const accKey   = section+'__'+cat.id;
-        const isOpen   = openAccordions[accKey]||false;
-        html += renderAccordion(accKey, cat.name, cat, catItems, icon, color, section, isOpen);
-      }
-    });
-    const uncatItems = filtered.filter(i=>!i.catId || !cats.find(c=>c.id===i.catId));
-    if(uncatItems.length){
-      const accKey = section+'__none';
-      const isOpen = openAccordions[accKey]||false;
-      html += renderAccordion(accKey, 'Sans catégorie', {color:'#9AA3BC'}, uncatItems, icon, color, section, isOpen);
-    }
-  } else {
-    html = section==='machines'
-      ? filtered.map(item=>renderMachineCardHTML(item, icon, color)).join('')
-      : filtered.map(item=>renderItemHTML(item, section, icon, color)).join('');
-  }
- 
-  el.innerHTML = html || `<div class="empty-page"><div class="empty-icon">${icon}</div><div class="empty-txt">Aucun élément</div><div class="empty-hint">Appuyez sur ＋ pour ajouter</div></div>`;
-  // Attache les listeners drag & drop après rendu
-  requestAnimationFrame(()=>attachDragListeners(section));
-}
- 
-// Helper: génère l'indicateur visuel (image > emoji > dot couleur)
-function catIndicatorHTML(image, emoji, color, size){
-  const s = size||28;
-  if(image) return `<div style="width:${s}px;height:${s}px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="${image}" style="width:100%;height:100%;object-fit:cover;"></div>`;
-  if(emoji) return `<div style="width:${s}px;height:${s}px;border-radius:8px;background:${color}22;display:flex;align-items:center;justify-content:center;font-size:${Math.round(s*0.57)}px;flex-shrink:0;">${emoji}</div>`;
-  return `<div class="acc-dot" style="background:${color}"></div>`;
-}
- 
-// Accordéon avec contenu HTML libre (pour les sous-accordéons)
-function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen){
-  const showAddBtn = (section==='materiaux'||section==='evacuations') && cat.id;
-  return `
-  <div class="accordion" data-cat-id="${cat.id||''}">
-    <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
-      ${catIndicatorHTML(cat.image, cat.emoji, cat.color)}
-      <div class="acc-name">${esc(name)}</div>
-      <div class="acc-count">${count}</div>
-      ${showAddBtn?`<button class="acc-quick-add" onclick="event.stopPropagation();openAdd('${section}','${cat.id}')" title="Ajouter dans ${esc(name)}">＋</button>`:''}
-      <div class="acc-chevron">›</div>
-    </div>
-    <div class="acc-body${isOpen?' open':''}" id="acc-body-${accKey}">
-      <div class="acc-inner">
-        ${innerHtml || `<div class="acc-empty">Aucun élément</div>`}
-      </div>
-    </div>
-  </div>`;
-}
- 
-function renderAccordion(accKey, name, cat, items, icon, bgColor, section, isOpen){
-  const showAddBtn = (section==='materiaux'||section==='evacuations') && cat.id;
-  return `
-  <div class="accordion" data-cat-id="${cat.id||''}">
-    <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
-      ${catIndicatorHTML(cat.image, cat.emoji, cat.color)}
-      <div class="acc-name">${esc(name)}</div>
-      <div class="acc-count">${items.length}</div>
-      ${showAddBtn?`<button class="acc-quick-add" onclick="event.stopPropagation();openAdd('${section}','${cat.id}')" title="Ajouter dans ${esc(name)}">＋</button>`:''}
-      <div class="acc-chevron">›</div>
-    </div>
-    <div class="acc-body${isOpen?' open':''}" id="acc-body-${accKey}">
-      <div class="acc-inner">
-        ${items.length
-          ? items.map(item=>renderItemHTML(item, section, icon, bgColor)).join('')
-          : `<div class="acc-empty">Aucun élément dans cette catégorie</div>`
-        }
-      </div>
-    </div>
-  </div>`;
-}
- 
-function renderItemHTML(item, section, icon, color){
-  const sub  = getSubtitle(section, item);
-  const price= getPrice(section, item);
-  let iconHtml = '';
-  if(item.photo){
-    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`;
-  } else if(item.icon){
-    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${item.icon}</div>`;
-  } else if(section !== 'equipe'){
-    iconHtml = `<div class="res-item-icon">${icon}</div>`;
-  }
-  return `
-  <div class="res-item" data-id="${item.id}" onclick="openDetail('${section}','${item.id}')">
-    ${iconHtml}
-    <div class="res-item-body">
-      <div class="res-item-name">${esc(item.nom||'—')}</div>
-      ${sub?`<div class="res-item-sub">${esc(sub)}</div>`:''}
-    </div>
-    ${price?`<div class="res-item-price">${esc(price)}</div>`:''}
-    <div class="res-item-arrow">›</div>
-  </div>`;
-}
-
-// ── CARTE MACHINE + ACCORDÉON ACCESSOIRES ───────────────
-function renderMachineCardHTML(item, icon, color){
-  const sub = getSubtitle('machines', item);
-  const accessoires = item.accessoires || [];
-  const accOpen = openAccessoireAccs[item.id] || false;
-  const innerHtml = accessoires.length
-    ? accessoires.map(acs=>renderAccessoireItemHTML(item.id, acs)).join('')
-    : `<div class="acc-empty">Aucun accessoire</div>`;
-
-  let iconHtml = '';
-  if(item.photo){
-    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`;
-  } else if(item.icon){
-    iconHtml = `<div style="width:36px;height:36px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">${item.icon}</div>`;
-  } else {
-    iconHtml = `<div class="res-item-icon">${icon}</div>`;
-  }
-
-  return `
-  <div class="machine-card" data-id="${item.id}">
-    <div class="res-item machine-row${accOpen?' open':''}" onclick="toggleAccessoireAcc('${item.id}')">
-      ${iconHtml}
-      <div class="res-item-body">
-        <div class="res-item-name">${esc(item.nom||'—')}</div>
-        ${sub?`<div class="res-item-sub">${esc(sub)}</div>`:''}
-      </div>
-      <div class="acc-chevron">›</div>
-      <button class="machine-edit-btn" onclick="event.stopPropagation();openDetail('machines','${item.id}')">✏️</button>
-    </div>
-    <div class="acc-acc-body${accOpen?' open':''}" id="acc-acc-body-${item.id}">
-      <div class="acc-acc-inner">
-        ${innerHtml}
-        <div class="acc-add-accessoire" onclick="openAccessoireModal('${item.id}')"><span>＋ Ajouter un accessoire</span></div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function renderAccessoireItemHTML(machineId, acs){
-  const sub = [acs.type, acs.annee].filter(Boolean).join(' · ');
-  let iconHtml = '';
-  if(acs.photo){
-    iconHtml = `<div style="width:30px;height:30px;border-radius:7px;overflow:hidden;flex-shrink:0;"><img src="${acs.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`;
-  } else if(acs.icon){
-    iconHtml = `<div style="width:30px;height:30px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">${acs.icon}</div>`;
-  } else {
-    iconHtml = `<div class="res-item-icon">🧰</div>`;
-  }
-  return `
-  <div class="accessoire-item" data-id="${acs.id}" onclick="openAccessoireDetail('${machineId}','${acs.id}')">
-    ${iconHtml}
-    <div class="res-item-body">
-      <div class="res-item-name">${esc(acs.nom||'—')}</div>
-      ${sub?`<div class="res-item-sub">${esc(sub)}</div>`:''}
-    </div>
-    <div class="res-item-arrow">›</div>
-  </div>`;
-}
-
-function toggleAccessoireAcc(machineId){
-  openAccessoireAccs[machineId] = !openAccessoireAccs[machineId];
-  renderContent('machines', searchFilters['machines']||'');
-}
- 
-// ── TOGGLE ACCORDÉON ────────────────────────────────────
-function toggleAcc(accKey, section){
-  openAccordions[accKey] = !openAccordions[accKey];
-  // Re-render pour appliquer l'état correctement (y compris sous-accordéons)
-  renderContent(section, searchFilters[section]||'');
-}
- 
-// ── FILTRAGE ────────────────────────────────────────────
-function filterPage(section, val){
-  searchFilters[section]=val;
-  renderContent(section, val);
-}
- 
-// ── BADGES ──────────────────────────────────────────────
-function updateBadges(){
-  TABS.forEach(s=>{
-    const b=document.getElementById('badge-'+s);
-    if(b) b.textContent=load(s).length;
-  });
-  updateHeader();
-}
- 
-// ── GESTIONNAIRE CATÉGORIES ─────────────────────────────
-function openCatMgr(){
-  catMgrTab = currentTab;
-  selectedColor = PALETTE[5];
-  selectedEmoji = '';
-  selectedImage = '';
-  updateCatIconPreview();
-  renderCatMgr();
-  renderColorPicker();
-  document.getElementById('modal-catmgr').classList.add('open');
-}
-function closeCatMgr(){ document.getElementById('modal-catmgr').classList.remove('open'); }
- 
-function renderCatMgr(){
-  const cats  = loadCats()[catMgrTab]||[];
-  const items = load(catMgrTab);
-  document.getElementById('catmgr-title').textContent = `Catégories — ${TITLES[catMgrTab]}`;
- 
-  if(!cats.length){
-    document.getElementById('catmgr-list').innerHTML=`<div style="color:var(--text3);font-size:13px;text-align:center;padding:16px 0;">Aucune catégorie créée</div>`;
-  } else {
-    document.getElementById('catmgr-list').innerHTML = cats.map(cat=>{
-      const cnt = items.filter(i=>i.catId===cat.id).length;
-      const indicator = catIndicatorHTML(cat.image, cat.emoji, cat.color, 28);
-      const subs = cat.children||[];
-      const subsHtml = subs.length ? subs.map(sub=>{
-        const subCnt = items.filter(i=>i.catId===cat.id && i.subCatId===sub.id).length;
-        return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0 6px 40px;font-size:13px;">
-          <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.5;flex-shrink:0;"></div>
-          <span style="flex:1;color:var(--text2);">${esc(sub.name)}</span>
-          <span style="font-size:10px;color:var(--text3);">${subCnt}</span>
-          <button style="background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:2px;" onclick="deleteSubCategory('${cat.id}','${sub.id}')">✕</button>
-        </div>`;
-      }).join('') : '';
-      // Inline add sub-category
-      const addSubHtml = `<div style="display:flex;align-items:center;gap:6px;padding:4px 0 4px 40px;margin-top:2px;">
-        <input type="text" id="subcat-input-${cat.id}" placeholder="Sous-catégorie…" style="flex:1;font-size:12px;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-family:'Inter',sans-serif;background:var(--bg);" autocomplete="off" onkeydown="if(event.key==='Enter')addSubCategory('${cat.id}')">
-        <button style="background:var(--teal);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;padding:6px 10px;cursor:pointer;flex-shrink:0;" onclick="addSubCategory('${cat.id}')">＋</button>
-      </div>`;
-      return `
-      <div style="border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;">
-        <div class="cat-list-item" style="border-bottom:none;">
-          ${indicator}
-          <div class="cat-list-name">${esc(cat.name)}</div>
-          <div class="cat-list-count">${cnt}</div>
-          <button class="cat-del-btn" onclick="deleteCategory('${cat.id}')">✕</button>
-        </div>
-        ${subsHtml}
-        ${addSubHtml}
-      </div>`;
-    }).join('');
-  }
-}
- 
-// ── EMOJI PICKER GLOBAL ─────────────────────────────────
-let epickerCat = 'tous';
- 
-function openEmojiPicker(callback, currentEmoji){
-  emojiPickerCallback = callback;
-  epickerCat = 'tous';
-  document.getElementById('epicker-search').value = '';
-  renderEmojiPickerCats();
-  renderEmojiPickerGrid('', currentEmoji||'');
-  document.getElementById('epicker-ov').classList.add('open');
-  setTimeout(()=>document.getElementById('epicker-search').focus(), 150);
-}
- 
-function closeEmojiPicker(){
-  document.getElementById('epicker-ov').classList.remove('open');
-  emojiPickerCallback = null;
-}
- 
-document.getElementById('epicker-ov').addEventListener('click',e=>{
-  if(e.target===document.getElementById('epicker-ov')) closeEmojiPicker();
-});
- 
-function renderEmojiPickerCats(){
-  document.getElementById('epicker-cats').innerHTML = EMOJI_CATS.map(c=>
-    `<div class="epicker-cat-btn${c.id===epickerCat?' on':''}" onclick="setEpickerCat('${c.id}')">${c.label}</div>`
-  ).join('');
-}
- 
-function setEpickerCat(cat){
-  epickerCat = cat;
-  renderEmojiPickerCats();
-  const q = document.getElementById('epicker-search').value;
-  renderEmojiPickerGrid(q);
-}
- 
-function filterEmojis(q){ renderEmojiPickerGrid(q); }
- 
-function renderEmojiPickerGrid(q, selEmoji){
-  q = (q||'').toLowerCase();
-  let list = EMOJI_DB;
-  if(epickerCat!=='tous') list = list.filter(x=>x.c===epickerCat);
-  if(q) list = list.filter(x=>x.k.includes(q)||x.e.includes(q));
-  // Dédupliquer par emoji
-  const seen = new Set(); list = list.filter(x=>{ if(seen.has(x.e)) return false; seen.add(x.e); return true; });
- 
-  if(!list.length){
-    document.getElementById('epicker-grid').innerHTML = '<div class="epicker-none">Aucune icône trouvée</div>';
-    return;
-  }
-  document.getElementById('epicker-grid').innerHTML = list.map(x=>
-    `<div class="epicker-item${x.e===selEmoji?' sel':''}" onclick="selectEmojiResult('${x.e}')">${x.e}</div>`
-  ).join('');
-}
- 
-function selectEmojiResult(emoji){
-  if(emojiPickerCallback) emojiPickerCallback(emoji);
-  closeEmojiPicker();
-}
- 
-// ── EMOJI PICKER POUR CATÉGORIES ────────────────────────
-function openEmojiPickerForCat(){
-  openEmojiPicker(function(emoji){
-    selectedEmoji = emoji;
-    selectedImage = '';
-    updateCatIconPreview();
-  }, selectedEmoji);
-}
- 
-function updateCatIconPreview(){
-  const preview = document.getElementById('cat-icon-preview');
-  if(selectedImage){
-    preview.innerHTML = `<img src="${selectedImage}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`;
-  } else if(selectedEmoji){
-    preview.innerHTML = selectedEmoji;
-  } else {
-    preview.innerHTML = '＋';
-  }
-}
- 
-// ── EMOJI PICKER POUR ÉLÉMENTS ──────────────────────────
-function openEmojiPickerForItem(section){
-  openEmojiPicker(function(emoji){
-    itemIcons[section] = emoji;
-    if(emoji) itemPhotos[section] = ''; // icône prioritaire, enlever photo
-    updateMediaPreview(section);
-  }, itemIcons[section]);
-}
- 
-function renderColorPicker(){
-  document.getElementById('cat-color-picker').innerHTML = PALETTE.map(c=>
-    `<div class="color-swatch${c===selectedColor?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`
-  ).join('');
-}
- 
-function selectColor(c){ selectedColor=c; renderColorPicker(); }
- 
-function addCategory(){
-  const inp  = document.getElementById('cat-new-name');
-  const name = inp.value.trim();
-  if(!name) { inp.focus(); inp.style.borderColor='var(--red)'; return; }
-  inp.style.borderColor='';
- 
-  const cats = loadCats();
-  if(!cats[catMgrTab]) cats[catMgrTab]=[];
-  const id = 'cat'+Date.now().toString(36);
-  cats[catMgrTab].push({ id, name, color: selectedColor, emoji: selectedEmoji, image: selectedImage });
-  saveCats(cats);
- 
-  // Reset
-  inp.value='';
-  selectedEmoji='';
-  selectedImage='';
-  updateCatIconPreview();
- 
-  renderCatMgr();
-  renderContent(currentTab, searchFilters[currentTab]||'');
-  populateCatSelects(catMgrTab);
-  showToast('Catégorie créée ✓');
-}
- 
-function deleteCategory(catId){
-  const cats  = loadCats();
-  cats[catMgrTab] = (cats[catMgrTab]||[]).filter(c=>c.id!==catId);
-  saveCats(cats);
-  const items = load(catMgrTab).map(i=>i.catId===catId?{...i,catId:'',subCatId:''}:i);
-  save(catMgrTab, items);
-  renderCatMgr();
-  renderContent(currentTab, searchFilters[currentTab]||'');
-  populateCatSelects(catMgrTab);
-  showToast('Catégorie supprimée');
-}
- 
-function addSubCategory(catId){
-  const inp = document.getElementById('subcat-input-'+catId);
-  if(!inp) return;
-  const name = inp.value.trim();
-  if(!name) { inp.style.borderColor='var(--red)'; inp.focus(); return; }
-  inp.style.borderColor='';
- 
-  const cats = loadCats();
-  const cat = (cats[catMgrTab]||[]).find(c=>c.id===catId);
-  if(!cat) return;
-  if(!cat.children) cat.children=[];
-  cat.children.push({ id:'sub'+Date.now().toString(36), name });
-  saveCats(cats);
- 
-  inp.value='';
-  renderCatMgr();
-  renderContent(currentTab, searchFilters[currentTab]||'');
-  populateCatSelects(catMgrTab);
-  showToast('Sous-catégorie ajoutée ✓');
-}
- 
-function deleteSubCategory(catId, subId){
-  const cats = loadCats();
-  const cat = (cats[catMgrTab]||[]).find(c=>c.id===catId);
-  if(!cat || !cat.children) return;
-  cat.children = cat.children.filter(s=>s.id!==subId);
-  saveCats(cats);
-  // Désassigner les éléments de cette sous-catégorie
-  const items = load(catMgrTab).map(i=>i.subCatId===subId?{...i,subCatId:''}:i);
-  save(catMgrTab, items);
-  renderCatMgr();
-  renderContent(currentTab, searchFilters[currentTab]||'');
-  populateCatSelects(catMgrTab);
-  showToast('Sous-catégorie supprimée');
-}
- 
-// ── SELECT CATÉGORIES (seulement materiel et materiaux) ─
-const CAT_SELECT_IDS = {materiel:'mt-cat', materiaux:'mx-cat', evacuations:'ev-cat'};
- 
-function populateCatSelects(section){
-  if(!HAS_CATS.includes(section)) return;
-  const sel = document.getElementById(CAT_SELECT_IDS[section]);
-  if(!sel) return;
-  const cats = loadCats()[section]||[];
-  const cur  = sel.value;
-  let html = `<option value="">— Sans catégorie —</option>`;
-  cats.forEach(c=>{
-    const subs = c.children||[];
-    if(subs.length){
-      html += `<optgroup label="${c.emoji?c.emoji+' ':''}${esc(c.name)}">`;
-      // Option for category itself (without sub)
-      html += `<option value="${c.id}"${c.id===cur?' selected':''}>${c.emoji?c.emoji+' ':''}${esc(c.name)} (général)</option>`;
-      subs.forEach(s=>{
-        const val = c.id+'|'+s.id;
-        html += `<option value="${val}"${val===cur?' selected':''}>&nbsp;&nbsp;↳ ${esc(s.name)}</option>`;
-      });
-      html += `</optgroup>`;
-    } else {
-      html += `<option value="${c.id}"${c.id===cur?' selected':''}>${c.emoji?c.emoji+' ':''}${esc(c.name)}</option>`;
-    }
-  });
-  sel.innerHTML = html;
-}
- 
-function populateAllCatSelects(){
-  HAS_CATS.forEach(s=>populateCatSelects(s));
-}
- 
-// ── MODALS AJOUT ────────────────────────────────────────
-function openAdd(section, presetCatVal){
-  if(HAS_CATS.includes(section)) populateCatSelects(section);
-  if(presetCatVal!=null && CAT_SELECT_IDS[section]){
-    const sel = document.getElementById(CAT_SELECT_IDS[section]);
-    if(sel) sel.value = presetCatVal;
-  }
-  document.getElementById('modal-add-'+section).classList.add('open');
-  setTimeout(()=>{ const inp=document.querySelector('#modal-add-'+section+' input'); if(inp) inp.focus(); },150);
-}
-function closeAdd(section){
-  document.getElementById('modal-add-'+section).classList.remove('open');
-  if(editingId){ editingId=null; editingSection=null; resetModalTitle(section); }
-  itemPhotos[section]='';
-  itemIcons[section]='';
-  updateMediaPreview(section);
-}
- 
-document.querySelectorAll('.modal-ov').forEach(m=>{
-  m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('open'); });
-});
- 
-// ── SAUVEGARDE ──────────────────────────────────────────
-function g(id){ const el=document.getElementById(id); return el?(el.value||'').trim():''; }
- 
-function saveItem(section){
-  let item = { id: editingId || (Date.now().toString(36)+Math.random().toString(36).slice(2,5)) };
-  let req  = '';
- 
-  if(section==='equipe'){
-    const prenom=g('eq-prenom'), nom=g('eq-nom');
-    if(!prenom&&!nom){ highlight('eq-prenom'); return; }
-    item={...item, nom:(prenom+' '+nom).trim(), tel:g('eq-tel') };
-  } else if(section==='machines'){
-    if(!g('ma-nom')){ highlight('ma-nom'); return; }
-    item={...item, nom:g('ma-nom'), type:g('ma-type'), annee:g('ma-annee'), serie:g('ma-serie'), poids:g('ma-poids'), puissance:g('ma-puissance'), heures:g('ma-heures'), carburant:g('ma-carburant'), cout_h:g('ma-cout-h'), notes:g('ma-notes') };
-  } else if(section==='vehicules'){
-    if(!g('vh-nom')){ highlight('vh-nom'); return; }
-    item={...item, nom:g('vh-nom'), immat:g('vh-immat'), type:g('vh-type'), marque:g('vh-marque'), annee:g('vh-annee'), poids:g('vh-poids'), charge:g('vh-charge'), pma:g('vh-pma'), volume:g('vh-volume'), dimensions:g('vh-dimensions'), cout_j:g('vh-cout-j'), notes:g('vh-notes') };
-  } else if(section==='materiel'){
-    if(!g('mt-nom')){ highlight('mt-nom'); return; }
-    const catVal = g('mt-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
-    item={...item, catId:cId, subCatId:sId, nom:g('mt-nom'), type:g('mt-type'), marque:g('mt-marque'), ref:g('mt-ref'), poids:g('mt-poids'), puissance:g('mt-puissance'), prix:g('mt-prix'), location:g('mt-location'), notes:g('mt-notes') };
-  } else if(section==='materiaux'){
-    if(!g('mx-nom')){ highlight('mx-nom'); return; }
-    const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
-    item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), unite:g('mx-unite'), densite:g('mx-densite')?parseFloat(g('mx-densite')):null, masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), notes:g('mx-notes') };
-  } else if(section==='evacuations'){
-    if(!g('ev-nom')){ highlight('ev-nom'); return; }
-    const catVal = g('ev-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
-    item={...item, catId:cId, subCatId:sId, nom:g('ev-nom'), unite:g('ev-unite'), notes:g('ev-notes') };
-  }
- 
-  // Ajouter la photo et l'icône
-  item.photo = itemPhotos[section] || '';
-  item.icon  = itemIcons[section] || '';
- 
-  let data = load(section);
-  if(editingId){
-    data = data.map(i => i.id === editingId ? item : i);
-  } else {
-    data.push(item);
-  }
-  save(section, data);
- 
-  // Reset
-  editingId = null;
-  editingSection = null;
-  itemPhotos[section] = '';
-  itemIcons[section] = '';
-  updateMediaPreview(section);
-  resetModalTitle(section);
-  document.querySelectorAll(`#modal-add-${section} input, #modal-add-${section} select, #modal-add-${section} textarea`)
-    .forEach(el=>{ el.value=''; el.style.borderColor=''; });
- 
-  closeAdd(section);
-  renderContent(section, searchFilters[section]||'');
-  updateBadges();
-  showToast(ICONS[section]+' Enregistré avec succès');
-}
- 
-// ── ÉDITION ─────────────────────────────────────────────
-function editCurrentItem(){
-  if(currentDetailSection==='accessoire'){ editCurrentAccessoire(); return; }
-  if(!currentDetailId || !currentDetailSection) return;
-  const section = currentDetailSection;
-  const item = load(section).find(i=>i.id===currentDetailId);
-  if(!item) return;
- 
-  editingId = item.id;
-  editingSection = section;
- 
-  closeDetail();
- 
-  // Pré-remplir le formulaire
-  if(HAS_CATS.includes(section)) populateCatSelects(section);
-  fillForm(section, item);
- 
-  // Changer le titre du modal
-  const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
-  if(titleEl){
-    const icons = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
-    titleEl.textContent = icons[section]+' Modifier';
-  }
- 
-  document.getElementById('modal-add-'+section).classList.add('open');
-}
- 
-function fillForm(s, item){
-  function f(id,val){ const el=document.getElementById(id); if(el) el.value=val||''; }
- 
-  // Charger la photo et l'icône existantes
-  itemPhotos[s] = item.photo || '';
-  itemIcons[s]  = item.icon || '';
-  updateMediaPreview(s);
- 
-  if(s==='equipe'){
-    const parts = (item.nom||'').split(' ');
-    f('eq-prenom', parts[0]||'');
-    f('eq-nom', parts.slice(1).join(' ')||'');
-    f('eq-tel', item.tel);
-  }
-  if(s==='machines'){
-    f('ma-nom',item.nom); f('ma-type',item.type); f('ma-annee',item.annee);
-    f('ma-serie',item.serie); f('ma-poids',item.poids); f('ma-puissance',item.puissance);
-    f('ma-heures',item.heures); f('ma-carburant',item.carburant);
-    f('ma-cout-h',item.cout_h); f('ma-notes',item.notes);
-  }
-  if(s==='vehicules'){
-    f('vh-nom',item.nom); f('vh-immat',item.immat); f('vh-type',item.type);
-    f('vh-marque',item.marque); f('vh-annee',item.annee); f('vh-poids',item.poids);
-    f('vh-charge',item.charge); f('vh-pma',item.pma); f('vh-volume',item.volume);
-    f('vh-dimensions',item.dimensions); f('vh-cout-j',item.cout_j); f('vh-notes',item.notes);
-  }
-  if(s==='materiel'){
-    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
-    f('mt-cat',catVal); f('mt-nom',item.nom); f('mt-type',item.type);
-    f('mt-marque',item.marque); f('mt-ref',item.ref); f('mt-poids',item.poids);
-    f('mt-puissance',item.puissance); f('mt-prix',item.prix);
-    f('mt-location',item.location); f('mt-notes',item.notes);
-  }
-  if(s==='materiaux'){
-    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
-    f('mx-cat',catVal); f('mx-nom',item.nom);
-    f('mx-unite',item.unite); f('mx-densite',item.masse_volumique||item.densite); f('mx-classe',item.classe);
-    f('mx-granulo',item.granulo); f('mx-fournisseur',item.fournisseur);
-    f('mx-prix',item.prix); f('mx-notes',item.notes);
-  }
-  if(s==='evacuations'){
-    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
-    f('ev-cat',catVal); f('ev-nom',item.nom); f('ev-unite',item.unite); f('ev-notes',item.notes);
-  }
-}
- 
-function resetModalTitle(section){
-  const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
-  if(!titleEl) return;
-  const titles = {equipe:'👷 Nouvel employé',machines:'🚜 Nouvelle machine',vehicules:'🚛 Nouveau véhicule',materiel:'🔧 Nouveau matériel',materiaux:'🪨 Nouveau matériau',evacuations:'🚮 Nouvelle évacuation'};
-  titleEl.textContent = titles[section]||'';
-}
- 
-function highlight(id){ const el=document.getElementById(id); if(!el)return; el.style.borderColor='var(--red)'; el.focus(); setTimeout(()=>el.style.borderColor='',2000); }
- 
-// ── MEDIA ÉLÉMENTS (photo + icône) ──────────────────────
-function triggerPhoto(section){
-  photoTargetSection = section;
-  const inp = document.getElementById('item-photo-input');
-  inp.onchange = function(e){
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      const img = new Image();
-      img.onload = function(){
-        const canvas = document.createElement('canvas');
-        const maxSize = 400;
-        let w = img.width, h = img.height;
-        if(w > h){ h = Math.round(h * maxSize / w); w = maxSize; }
-        else { w = Math.round(w * maxSize / h); h = maxSize; }
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        itemPhotos[section] = canvas.toDataURL('image/jpeg', 0.75);
-        itemIcons[section] = ''; // photo prioritaire
-        updateMediaPreview(section);
-      };
-      img.src = ev.target.result;
-    };
-    reader.readAsDataURL(file);
-    inp.value = '';
-  };
-  inp.click();
-}
- 
-function clearMedia(section){
-  itemPhotos[section] = '';
-  itemIcons[section] = '';
-  updateMediaPreview(section);
-}
- 
-function updateMediaPreview(section){
-  const prev = document.getElementById('media-prev-'+section);
-  const del  = document.getElementById('media-del-'+section);
-  if(!prev) return;
-  if(itemPhotos[section]){
-    prev.innerHTML = `<img src="${itemPhotos[section]}">`;
-    if(del) del.style.display='';
-  } else if(itemIcons[section]){
-    prev.innerHTML = itemIcons[section];
-    prev.style.fontSize = '32px';
-    if(del) del.style.display='';
-  } else {
-    prev.innerHTML = '📷';
-    prev.style.fontSize = '32px';
-    if(del) del.style.display='none';
-  }
-}
- 
-// ── DETAIL ──────────────────────────────────────────────
-function getSubtitle(s,item){
-  if(s==='equipe') return item.tel||'';
-  if(s==='machines') return [item.type,item.annee].filter(Boolean).join(' · ');
-  if(s==='vehicules') return [item.type,item.immat].filter(Boolean).join(' · ');
-  if(s==='materiel') return [item.type,item.marque].filter(Boolean).join(' · ');
-  if(s==='materiaux'||s==='evacuations') return [item.unite].filter(Boolean).join(' · ');
-  return '';
-}
-function getPrice(s,item){
-  if(s==='equipe') return '';
-  if(s==='machines'&&item.cout_h) return 'CHF '+item.cout_h+'/h';
-  if(s==='vehicules'&&item.cout_j)return 'CHF '+item.cout_j+'/j';
-  if(s==='materiel'&&item.prix)   return 'CHF '+item.prix;
-  if(s==='materiaux'&&item.prix)  return 'CHF '+item.prix+'/'+(item.unite||'u.');
-  return '';
-}
- 
-function openDetail(section, id){
-  const item = load(section).find(i=>i.id===id);
-  if(!item) return;
-  currentDetailId=id; currentDetailSection=section;
- 
-  const catLabel = getCatLabel(section, item);
- 
-  document.getElementById('det-icon').textContent=ICONS[section];
-  document.getElementById('det-icon').style.background=COLORS[section];
-  document.getElementById('det-name').textContent=item.nom||'—';
-  document.getElementById('det-type').textContent=
-    [getSubtitle(section,item), catLabel].filter(Boolean).join(' · ');
- 
-  const photoHtml = item.photo ? `<img class="detail-photo" src="${item.photo}">` : '';
-  let bodyHtml = photoHtml + getDetailRows(section,item).map(r=>{
-    if(r.type==='note') return `<div style="margin-top:8px"><div class="detail-label" style="margin-bottom:6px">${r.label}</div><div class="detail-notes">${esc(r.val)}</div></div>`;
-    return `<div class="detail-row"><span class="detail-label">${r.label}</span><span class="detail-val">${esc(r.val)}</span></div>`;
-  }).join('');
-
-  if(section==='machines'){
-    bodyHtml += renderDetailAccessoiresHTML(item.accessoires||[]);
-  }
-
-  document.getElementById('det-body').innerHTML = bodyHtml;
- 
-  document.getElementById('detail-ov').classList.add('open');
-}
-
-function renderDetailAccessoiresHTML(accessoires){
-  const rows = accessoires.length
-    ? accessoires.map(acs=>{
-        const sub = [acs.type, acs.annee].filter(Boolean).join(' · ');
-        const iconTxt = acs.icon || '🧰';
-        const imgHtml = acs.photo
-          ? `<div style="width:28px;height:28px;border-radius:6px;overflow:hidden;flex-shrink:0;"><img src="${acs.photo}" style="width:100%;height:100%;object-fit:cover;"></div>`
-          : `<div style="width:28px;height:28px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">${iconTxt}</div>`;
-        return `<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--bg2);">
-          ${imgHtml}
-          <div style="flex:1;min-width:0;">
-            <div style="font-size:12.5px;font-weight:600;color:var(--text);">${esc(acs.nom||'—')}</div>
-            ${sub?`<div style="font-size:10px;color:var(--text3);margin-top:1px;">${esc(sub)}</div>`:''}
           </div>
-        </div>`;
-      }).join('')
-    : `<div style="font-size:12px;color:var(--text3);text-align:center;padding:10px 0;">Aucun accessoire</div>`;
+          <button class="vol-from-btn" onclick="importFromMetrees()">📐<br>Depuis<br>métrés</button>
+        </div>
+        <div class="density-info" id="density-info">
+          <div class="density-dot"></div>
+          <span id="density-text">Sélectionnez un matériau</span>
+        </div>
+        <div class="poids-result" id="poids-result">
+          <div class="poids-result-main">
+            <span class="poids-number" id="poids-tonnes">—</span>
+            <span class="poids-unit-big">t</span>
+          </div>
+          <div class="poids-result-sub">
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="poids-kg">—</div>
+              <div class="poids-sub-label">kilogrammes</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="poids-vol">—</div>
+              <div class="poids-sub-label">m³ utilisés</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="poids-densite">—</div>
+              <div class="poids-sub-label">kg/m³</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  return `<div style="margin-top:14px;">
-    <div class="detail-label" style="margin-bottom:6px;">🧰 Accessoires (${accessoires.length})</div>
-    <div>${rows}</div>
+  <!-- ── TAB PENTE ── -->
+  <div class="tab-panel" id="panel-pente">
+    <div class="pente-card">
+      <div class="pente-header"><div class="pente-title">Calcul de pente</div></div>
+      <div class="pente-body">
+
+        <div class="pente-inputs">
+          <div class="pente-field">
+            <label>Distance horizontale</label>
+            <div class="pente-input-wrap">
+              <input class="pente-input" id="pente-dist" type="number" min="0" step="0.01" placeholder="0.00" oninput="calcPente()">
+              <span class="pente-unit">m</span>
+            </div>
+          </div>
+          <div class="pente-field">
+            <label>Dénivelée</label>
+            <div class="pente-input-wrap">
+              <input class="pente-input" id="pente-denv" type="number" min="0" step="1" placeholder="0" oninput="calcPente()">
+              <span class="pente-unit">cm</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Schéma SVG -->
+        <div class="pente-schema">
+          <svg id="pente-svg" width="280" height="100" viewBox="0 0 280 100">
+            <!-- fond -->
+            <rect width="280" height="100" fill="transparent"/>
+            <!-- ligne horizontale -->
+            <line x1="20" y1="80" x2="220" y2="80" stroke="#e2e4ec" stroke-width="2" stroke-dasharray="4,3"/>
+            <!-- pente (triangle) -->
+            <polygon id="pente-poly" points="20,80 220,80 220,80" fill="rgba(26,127,114,0.08)" stroke="var(--teal)" stroke-width="2"/>
+            <!-- flèche horizontale -->
+            <line x1="20" y1="88" x2="220" y2="88" stroke="#9ca3af" stroke-width="1.5"/>
+            <text x="120" y="98" text-anchor="middle" font-size="10" fill="#9ca3af" font-family="DM Sans">distance (m)</text>
+            <!-- flèche verticale -->
+            <line id="pente-vline" x1="220" y1="80" x2="220" y2="80" stroke="#e53e3e" stroke-width="2"/>
+            <text id="pente-vlabel" x="235" y="75" font-size="10" fill="#e53e3e" font-family="DM Sans">Δh</text>
+            <!-- angle label -->
+            <text id="pente-angle-label" x="50" y="75" font-size="11" fill="var(--teal)" font-weight="bold" font-family="DM Sans"></text>
+          </svg>
+        </div>
+
+        <!-- Résultat -->
+        <div class="pente-result-card" id="pente-result">
+          <div class="pente-result-main">
+            <span class="pente-big" id="pente-pct-val">—</span>
+            <span class="pente-pct">%</span>
+          </div>
+          <div class="pente-result-sub">
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="pente-sub-dist">—</div>
+              <div class="poids-sub-label">distance (m)</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="pente-sub-denv">—</div>
+              <div class="poids-sub-label">dénivelée (cm)</div>
+            </div>
+            <div class="poids-divider"></div>
+            <div class="poids-sub-item">
+              <div class="poids-sub-val" id="pente-sub-angle">—</div>
+              <div class="poids-sub-label">angle (°)</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="pente-qualify-wrap"></div>
+        <button class="pente-reset" onclick="resetPente()">🗑 Effacer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB ANGLE 90° ── -->
+  <div class="tab-panel" id="panel-angle">
+    <div class="angle-card">
+      <div class="angle-header"><div class="angle-title">Vérifier / tracer un angle droit</div></div>
+      <div class="angle-body">
+
+        <div class="angle-hint">Remplis 2 des 3 longueurs (les 2 côtés ou un côté + la diagonale), puis appuie sur "Calculer".</div>
+
+        <div class="angle-reset-prompt" id="angle-reset-prompt">
+          <span>Les 3 valeurs sont remplies. Efface pour resaisir.</span>
+          <button onclick="resetAngle()">🗑 Effacer</button>
+        </div>
+
+        <!-- Schéma SVG -->
+        <div class="angle-schema-wrap" id="angle-schema-wrap">
+          <div class="angle-schema-pos">
+            <svg id="angle-svg" viewBox="0 0 360 260" preserveAspectRatio="none" style="display:block;width:100%;aspect-ratio:360/260;">
+              <polygon points="90,210 310,210 90,40" fill="rgba(27,58,107,0.06)" stroke="var(--navy)" stroke-width="2"/>
+              <!-- marqueur angle droit -->
+              <rect x="90" y="194" width="16" height="16" fill="none" stroke="var(--navy)" stroke-width="1.5"/>
+            </svg>
+
+            <!-- Côté A : base horizontale, du point (90,210) au point (310,210) → milieu (200,210) -->
+            <div class="angle-field angle-field-a">
+              <span class="angle-field-label">Côté A (cm)</span>
+              <input class="angle-input" id="angle-a" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
+            </div>
+            <!-- Côté B : vertical gauche, du point (90,40) au point (90,210) → milieu (90,125) -->
+            <div class="angle-field angle-field-b">
+              <span class="angle-field-label">Côté B (cm)</span>
+              <input class="angle-input" id="angle-b" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
+            </div>
+            <!-- Diagonale C : du point (310,210) au point (90,40) → milieu (200,125), décalée perpendiculairement -->
+            <div class="angle-field angle-field-c">
+              <span class="angle-field-label">Diagonale C (cm)</span>
+              <input class="angle-input" id="angle-c" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" oninput="updateAngleBtnState()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Angles calculés, affichés en dessous du schéma -->
+        <div class="angle-deg-result" id="angle-deg-result">
+          <div class="poids-sub-item">
+            <div class="poids-sub-val" id="angle-deg-r-val">—</div>
+            <div class="poids-sub-label">angle B/C (°)</div>
+          </div>
+          <div class="poids-divider"></div>
+          <div class="poids-sub-item">
+            <div class="poids-sub-val" id="angle-deg-q-val">—</div>
+            <div class="poids-sub-label">angle A/C (°)</div>
+          </div>
+        </div>
+
+        <button class="angle-calc-btn" id="angle-calc-btn" onclick="calcAngle()" disabled>🧮 Calculer</button>
+        <button class="angle-reset" onclick="resetAngle()">🗑 Effacer les 3 valeurs</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- OVERLAY CALCULATRICE -->
+<div class="overlay" id="overlay-calc" onclick="closeCalculatrice(event)">
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <div class="calc-sheet-header">
+      <div class="calc-sheet-title">🧮 Calculatrice</div>
+      <button class="btn-calc-clear-hist" onclick="calcClearHistory()" aria-label="Vider l'historique">🗑️</button>
+    </div>
+    <div class="calc-expr-line" id="calc-expr-line"></div>
+    <div class="calc-display" id="calc-display">0</div>
+    <div class="calc-history-box" id="calc-history-list"></div>
+    <div class="calc-grid">
+      <button class="calc-btn" onclick="calcClear()">C</button>
+      <button class="calc-btn" onclick="calcBackspace()" aria-label="Effacer le dernier caractère">⌫</button>
+      <button class="calc-btn op" onclick="calcOp('/')">÷</button>
+      <button class="calc-btn op" onclick="calcOp('*')">×</button>
+      <button class="calc-btn" onclick="calcDigit('7')">7</button>
+      <button class="calc-btn" onclick="calcDigit('8')">8</button>
+      <button class="calc-btn" onclick="calcDigit('9')">9</button>
+      <button class="calc-btn op" onclick="calcOp('-')">−</button>
+      <button class="calc-btn" onclick="calcDigit('4')">4</button>
+      <button class="calc-btn" onclick="calcDigit('5')">5</button>
+      <button class="calc-btn" onclick="calcDigit('6')">6</button>
+      <button class="calc-btn op" onclick="calcOp('+')">+</button>
+      <button class="calc-btn" onclick="calcDigit('1')">1</button>
+      <button class="calc-btn" onclick="calcDigit('2')">2</button>
+      <button class="calc-btn" onclick="calcDigit('3')">3</button>
+      <button class="calc-btn eq" onclick="calcEquals()">=</button>
+      <button class="calc-btn span2" onclick="calcDigit('0')">0</button>
+      <button class="calc-btn" onclick="calcDigit('.')">.</button>
+    </div>
+  </div>
+</div>
+
+<div class="quickadd-bar" id="quickadd-bar">
+  <button class="quickadd-btn" id="quickadd-btn" type="button">＋ Nouvelle ligne (même forme)</button>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+// DÉFINITIONS DES FORMES PAR MODE
+// ─────────────────────────────────────────────────────────────────
+
+const MODES = {
+  longueur: {
+    unit: 'ml',
+    label: 'Total longueur',
+    cardTitle: 'Lignes de calcul — Longueur',
+    shapes: ['—', '○', '◐'],
+    legend: [
+      {s:'—', l:'Ligne droite'},
+      {s:'○', l:'Cercle (2·π·r)'},
+      {s:'◐', l:'Demi-cercle (π·r)'},
+    ],
+    defs: {
+      '—': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'}],
+        calc: v => (v.l||0)
+      },
+      '○': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => 2 * Math.PI * (v.r||0)
+      },
+      '◐': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => Math.PI * (v.r||0)
+      }
+    }
+  },
+
+  surface: {
+    unit: 'm²',
+    label: 'Total surface',
+    cardTitle: 'Lignes de calcul — Surface',
+    shapes: ['□', '△', '⬡', '○', '◐'],
+    legend: [
+      {s:'□', l:'Rectangle'},
+      {s:'△', l:'Triangle'},
+      {s:'⬡', l:'Hexagone'},
+      {s:'○', l:'Cercle'},
+      {s:'◐', l:'Demi-cercle'},
+    ],
+    defs: {
+      '□': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'},{key:'w', label:'l (m)', ph:'0.00'}],
+        calc: v => (v.l||0)*(v.w||0)
+      },
+      '△': {
+        fields:[{key:'b', label:'Base (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => 0.5*(v.b||0)*(v.h||0)
+      },
+      '⬡': {
+        fields:[{key:'a', label:'Côté (m)', ph:'0.00'}],
+        calc: v => (3*Math.sqrt(3)/2)*(v.a||0)*(v.a||0)
+      },
+      '○': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => Math.PI*(v.r||0)*(v.r||0)
+      },
+      '◐': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'}],
+        calc: v => 0.5*Math.PI*(v.r||0)*(v.r||0)
+      }
+    }
+  },
+
+  volume: {
+    unit: 'm³',
+    label: 'Total volume',
+    cardTitle: 'Lignes de calcul — Volume',
+    shapes: ['□', '△', '⬡', '○', '◐'],
+    legend: [
+      {s:'□', l:'Parallélépipède'},
+      {s:'△', l:'Prisme triangulaire'},
+      {s:'⬡', l:'Prisme hexagonal'},
+      {s:'○', l:'Cylindre'},
+      {s:'◐', l:'Demi-cylindre'},
+    ],
+    defs: {
+      '□': {
+        fields:[{key:'l', label:'L (m)', ph:'0.00'},{key:'w', label:'l (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => (v.l||0)*(v.w||0)*(v.h||0)
+      },
+      '△': {
+        fields:[{key:'b', label:'Base (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'},{key:'e', label:'É (m)', ph:'0.00'}],
+        calc: v => 0.5*(v.b||0)*(v.h||0)*(v.e||0)
+      },
+      '⬡': {
+        fields:[{key:'a', label:'Côté (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => (3*Math.sqrt(3)/2)*(v.a||0)*(v.a||0)*(v.h||0)
+      },
+      '○': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => Math.PI*(v.r||0)*(v.r||0)*(v.h||0)
+      },
+      '◐': {
+        fields:[{key:'r', label:'Rayon (m)', ph:'0.00'},{key:'h', label:'H (m)', ph:'0.00'}],
+        calc: v => 0.5*Math.PI*(v.r||0)*(v.r||0)*(v.h||0)
+      }
+    }
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────
+let currentMode = 'longueur';
+let rows = [];
+let rowCounter = 0;
+
+function newRow() {
+  const shapes = MODES[currentMode].shapes;
+  return { id: ++rowCounter, shape: shapes[0], vals: {} };
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MODE SWITCH
+// ─────────────────────────────────────────────────────────────────
+function switchMode(mode) {
+  currentMode = mode;
+  rows = [];
+  rowCounter = 0;
+  hideQuickAdd();
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('mode-btn-' + mode).classList.add('active');
+  const m = MODES[mode];
+  document.getElementById('card-title-label').textContent = m.cardTitle;
+  document.getElementById('metrees-total').textContent = '0.00 ' + m.unit;
+  document.getElementById('total-label-txt').textContent = m.label;
+  document.getElementById('total-unit-sub').textContent = 'métrés';
+  document.getElementById('total-unit-display').textContent = m.unit;
+  document.getElementById('total-display').textContent = '0.00';
+  renderLegend();
+  renderRows();
+}
+
+function renderLegend() {
+  const legend = MODES[currentMode].legend;
+  document.getElementById('shapes-legend').innerHTML = legend.map(l =>
+    `<div class="shape-chip">${l.s} ${l.l}</div>`
+  ).join('');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// ROWS
+// ─────────────────────────────────────────────────────────────────
+function addRow() {
+  rows.push(newRow());
+  renderRows();
+}
+
+function deleteRow(id) {
+  rows = rows.filter(r => r.id !== id);
+  renderRows();
+  updateTotal();
+}
+
+function resetRows() {
+  if (!rows.length) return;
+  if (!confirm('Effacer toutes les lignes ?')) return;
+  rows = []; rowCounter = 0;
+  renderRows(); updateTotal();
+}
+
+// ─────────────────────────────────────────────────────────────────
+// QUICK ADD (barre au-dessus du clavier sur le dernier champ)
+// ─────────────────────────────────────────────────────────────────
+let quickAddRowId = null; // ligne dont le dernier champ a le focus
+let quickAddBlurTimer = null;
+
+function onFieldFocus(el) {
+  if (el.dataset.lastField !== '1') { hideQuickAdd(); return; }
+  quickAddRowId = parseInt(el.dataset.rowId, 10);
+  showQuickAdd();
+}
+
+function onFieldBlur(el) {
+  // Délai court : si le blur est causé par le tap sur le bouton quickadd,
+  // le mousedown/click du bouton a déjà fait son travail avant que ce timer se déclenche.
+  clearTimeout(quickAddBlurTimer);
+  quickAddBlurTimer = setTimeout(hideQuickAdd, 150);
+}
+
+function showQuickAdd() {
+  clearTimeout(quickAddBlurTimer);
+  document.getElementById('quickadd-bar').classList.add('show');
+}
+
+function hideQuickAdd() {
+  document.getElementById('quickadd-bar').classList.remove('show');
+  quickAddRowId = null;
+}
+
+function quickAddRow() {
+  const sourceRow = rows.find(r => r.id === quickAddRowId);
+  const shape = sourceRow ? sourceRow.shape : MODES[currentMode].shapes[0];
+  const row = { id: ++rowCounter, shape, vals: {} };
+  rows.push(row);
+  renderRows();
+  updateTotal();
+  // Focus sur le premier champ de la nouvelle ligne pour enchaîner la saisie
+  const firstInput = document.querySelector(`#row-${row.id} .metree-input`);
+  if (firstInput) firstInput.focus();
+}
+
+document.getElementById('quickadd-btn').addEventListener('mousedown', e => e.preventDefault());
+document.getElementById('quickadd-btn').addEventListener('click', quickAddRow);
+
+function cycleShape(id) {
+  const row = rows.find(r => r.id === id);
+  if (!row) return;
+  const shapes = MODES[currentMode].shapes;
+  const idx = shapes.indexOf(row.shape);
+  row.shape = shapes[(idx + 1) % shapes.length];
+  row.vals = {};
+  renderRows(); updateTotal();
+}
+
+function onInputChange(id, key, val) {
+  const row = rows.find(r => r.id === id);
+  if (!row) return;
+  row.vals[key] = parseFloat(val) || 0;
+  updateTotal();
+  const def = MODES[currentMode].defs[row.shape];
+  const result = def.calc(row.vals);
+  const cell = document.getElementById('res-' + id);
+  const unit = MODES[currentMode].unit;
+  if (cell) cell.textContent = result > 0 ? fmt(result) + ' ' + unit : '';
+}
+
+function renderRows() {
+  const container = document.getElementById('metrees-rows');
+  const unit = MODES[currentMode].unit;
+  if (!rows.length) {
+    container.innerHTML = `<div class="metree-empty">Aucune ligne — tap "Ajouter"</div>`;
+    return;
+  }
+  container.innerHTML = rows.map(row => {
+    const def = MODES[currentMode].defs[row.shape];
+    const result = def.calc(row.vals);
+    const lastIdx = def.fields.length - 1;
+    const fieldsHtml = def.fields.map((f, i) => `
+      <div class="metree-field">
+        <span class="metree-field-label">${f.label}</span>
+        <input class="metree-input" type="number" min="0" step="0.01"
+               placeholder="${f.ph}" value="${row.vals[f.key]||''}"
+               data-row-id="${row.id}" data-field-idx="${i}" ${i === lastIdx ? 'data-last-field="1"' : ''}
+               onfocus="onFieldFocus(this)" onblur="onFieldBlur(this)"
+               oninput="onInputChange(${row.id},'${f.key}',this.value)">
+      </div>`).join('');
+    return `<div class="metree-row" id="row-${row.id}">
+      <button class="shape-btn" onclick="cycleShape(${row.id})" title="Changer de forme">${row.shape}</button>
+      <div class="metree-inputs">${fieldsHtml}</div>
+      <div class="metree-result" id="res-${row.id}">${result > 0 ? fmt(result)+' '+unit : ''}</div>
+      <button class="metree-del" onclick="deleteRow(${row.id})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function updateTotal() {
+  const defs = MODES[currentMode].defs;
+  const unit = MODES[currentMode].unit;
+  let total = 0;
+  rows.forEach(row => { total += defs[row.shape].calc(row.vals); });
+  document.getElementById('metrees-total').textContent = fmt(total) + ' ' + unit;
+  document.getElementById('total-display').textContent = fmt(total);
+  return total;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MATÉRIAUX (lus depuis le module Ressources)
+// ─────────────────────────────────────────────────────────────────
+function loadMatCategories() {
+  try {
+    const cats = JSON.parse(localStorage.getItem('rv6_res_categories')) || {};
+    return cats.materiaux || [];
+  } catch { return []; }
+}
+
+function resolveCatLabel(cats, item) {
+  const cat = cats.find(c => c.id === item.catId);
+  if (!cat) return 'Sans catégorie';
+  let label = (cat.emoji ? cat.emoji + ' ' : '') + (cat.name || '');
+  if (item.subCatId && cat.children) {
+    const sub = cat.children.find(s => s.id === item.subCatId);
+    if (sub) label += ' → ' + sub.name;
+  }
+  return label || 'Sans catégorie';
+}
+
+function loadMateriaux() {
+  try {
+    const data = JSON.parse(localStorage.getItem('rv6_materials')) || [];
+    const cats = loadMatCategories();
+    const all = [];
+    data.forEach(item => {
+      const mv = item.masse_volumique || (item.densite ? parseFloat(item.densite) : null);
+      if (mv) {
+        all.push({
+          id: item.id,
+          name: item.nom || item.name || 'Sans nom',
+          masse_volumique: parseFloat(mv),
+          unite: item.unite || '',
+          cat: resolveCatLabel(cats, item)
+        });
+      }
+    });
+    return all;
+  } catch { return []; }
+}
+
+function buildMatSelector() {
+  const wrap = document.getElementById('mat-selector-wrap');
+  const mats = loadMateriaux();
+  if (!mats.length) {
+    wrap.innerHTML = `<div class="no-mat-state">
+      <div class="no-mat-icon">🪨</div>
+      Aucun matériau avec masse volumique.<br>
+      Allez dans <strong>Ressources → Matériaux</strong> et renseigne la "Masse volumique (kg/m³)" d'au moins un matériau.
+      <br><a class="no-mat-link" href="../ressources/index.html">Ouvrir Ressources</a>
+    </div>`;
+    return;
+  }
+  const groups = {};
+  mats.forEach(m => { if (!groups[m.cat]) groups[m.cat]=[]; groups[m.cat].push(m); });
+  let optHtml = `<option value="">— Choisir un matériau —</option>`;
+  Object.entries(groups).forEach(([cat, items]) => {
+    optHtml += `<optgroup label="${esc(cat)}">`;
+    items.forEach(m => {
+      optHtml += `<option value="${m.id}" data-mv="${m.masse_volumique}">${esc(m.name)} (${m.masse_volumique.toLocaleString('fr-CH')} kg/m³)</option>`;
+    });
+    optHtml += `</optgroup>`;
+  });
+  wrap.innerHTML = `<div class="mat-select-wrap">
+    <select class="mat-select" id="mat-select" onchange="onMatChange()">${optHtml}</select>
+    <span class="mat-select-arrow">▼</span>
   </div>`;
 }
- 
-function getCatLabel(section, item){
-  const cats = loadCats()[section]||[];
-  const cat = cats.find(c=>c.id===item.catId);
-  if(!cat) return '';
-  let label = (cat.emoji?cat.emoji+' ':'')+cat.name;
-  if(item.subCatId && cat.children){
-    const sub = cat.children.find(s=>s.id===item.subCatId);
-    if(sub) label += ' → '+sub.name;
+
+function onMatChange() {
+  const sel = document.getElementById('mat-select');
+  if (!sel) return;
+  const opt = sel.options[sel.selectedIndex];
+  const mv = parseFloat(opt.dataset.mv) || null;
+  const infoEl = document.getElementById('density-info');
+  const dotEl = infoEl.querySelector('.density-dot');
+  if (mv) {
+    infoEl.classList.add('has-density');
+    dotEl.style.background = 'var(--teal)';
+    document.getElementById('density-text').textContent = `Masse volumique : ${mv.toLocaleString('fr-CH')} kg/m³`;
+  } else {
+    infoEl.classList.remove('has-density');
+    dotEl.style.background = 'var(--gray3)';
+    document.getElementById('density-text').textContent = 'Sélectionnez un matériau';
   }
-  return '📁 '+label;
-}
- 
-function getDetailRows(s,item){
-  const r=[]; const add=(l,v,t)=>{ if(v) r.push({label:l,val:v,type:t}); };
-  if(s==='equipe'){ add('Téléphone',item.tel); }
-  if(s==='machines'){ add('Type',item.type); add('Année',item.annee); add('N° série',item.serie); add('Carburant',item.carburant); if(item.poids)add('Poids',item.poids+' t'); if(item.puissance)add('Puissance',item.puissance+' kW'); if(item.heures)add('Heures',item.heures+' h'); if(item.cout_h)add('Coût/heure','CHF '+item.cout_h); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='vehicules'){ add('Type',item.type); add('Immatriculation',item.immat); add('Marque',item.marque); add('Année',item.annee); if(item.poids)add('Poids véhicule',item.poids+' t'); if(item.charge)add('Charge utile',item.charge+' t'); if(item.pma)add('Poids maximum',item.pma+' t'); if(item.volume)add('Volume pont',item.volume+' m³'); add('Dimensions',item.dimensions); if(item.cout_j)add('Coût/jour','CHF '+item.cout_j); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='materiel'){ add('Catégorie',item.type); add('Marque',item.marque); add('Référence',item.ref); if(item.poids)add('Poids',item.poids+' kg'); if(item.puissance)add('Puissance',item.puissance+' W'); if(item.prix)add("Prix d'achat",'CHF '+item.prix); if(item.location)add('Location/jour','CHF '+item.location); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='evacuations'){ add('Unité',item.unite); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  if(s==='materiaux'){ add('Unité',item.unite); add('Fournisseur',item.fournisseur); add('Classe',item.classe); add('Granulométrie',item.granulo); if(item.masse_volumique||item.densite){ const mv=item.masse_volumique||item.densite; add('Masse volumique',mv+' kg/m³'); } if(item.prix)add('Prix','CHF '+item.prix+'/'+(item.unite||'u.')); if(item.notes)r.push({label:'Notes',val:item.notes,type:'note'}); }
-  return r;
-}
- 
-function closeDetail(){ document.getElementById('detail-ov').classList.remove('open'); }
- 
-function deleteCurrentItem(){
-  if(currentDetailSection==='accessoire'){ deleteCurrentAccessoire(); return; }
-  if(!currentDetailId||!currentDetailSection) return;
-  save(currentDetailSection, load(currentDetailSection).filter(i=>i.id!==currentDetailId));
-  closeDetail();
-  renderContent(currentDetailSection, searchFilters[currentDetailSection]||'');
-  updateBadges();
-  showToast('🗑 Élément supprimé');
-}
- 
-
-// ── ACCESSOIRES (rattachés à une machine) ───────────────
-let currentAccessoireMachineId = null;
-
-function getMachine(machineId){ return load('machines').find(m=>m.id===machineId); }
-
-function saveMachineAccessoires(machineId, accessoires){
-  const data = load('machines').map(m=>m.id===machineId?{...m, accessoires}:m);
-  save('machines', data);
+  calcPoids();
 }
 
-function openAccessoireModal(machineId, accessoireId){
-  accsTargetMachineId = machineId;
-  accsEditingId = accessoireId || null;
-  accsPhoto = '';
-  accsIcon  = '';
+function getCurrentMv() {
+  const sel = document.getElementById('mat-select');
+  if (!sel) return null;
+  return parseFloat(sel.options[sel.selectedIndex]?.dataset?.mv) || null;
+}
 
-  const titleEl = document.getElementById('acs-modal-title');
-  ['acs-nom','acs-type','acs-annee','acs-poids','acs-capacite','acs-notes'].forEach(id=>{
-    const el=document.getElementById(id); if(el){ el.value=''; el.style.borderColor=''; }
+// ─────────────────────────────────────────────────────────────────
+// CALCUL POIDS
+// ─────────────────────────────────────────────────────────────────
+function calcPoids() {
+  const mv = getCurrentMv();
+  const vol = parseFloat(document.getElementById('vol-input')?.value) || 0;
+  const resultEl = document.getElementById('poids-result');
+  if (!mv || vol <= 0) {
+    resultEl.classList.remove('active');
+    document.getElementById('poids-tonnes').textContent = '—';
+    document.getElementById('poids-kg').textContent = '—';
+    document.getElementById('poids-vol').textContent = '—';
+    document.getElementById('poids-densite').textContent = mv ? mv.toLocaleString('fr-CH') : '—';
+    return;
+  }
+  const kg = mv * vol;
+  const tonnes = kg / 1000;
+  resultEl.classList.add('active');
+  document.getElementById('poids-tonnes').textContent = fmtPoids(tonnes);
+  document.getElementById('poids-kg').textContent = Math.round(kg).toLocaleString('fr-CH') + ' kg';
+  document.getElementById('poids-vol').textContent = fmt(vol) + ' m³';
+  document.getElementById('poids-densite').textContent = mv.toLocaleString('fr-CH');
+}
+
+function fmtPoids(t) {
+  if (t >= 100) return Math.round(t).toLocaleString('fr-CH');
+  if (t >= 10) return t.toFixed(1);
+  return t.toFixed(2);
+}
+
+function importFromMetrees() {
+  // Uniquement si on est en mode volume
+  if (currentMode !== 'volume') {
+    showToast('Passez en mode Volume pour importer en m³');
+    return;
+  }
+  const defs = MODES['volume'].defs;
+  let total = 0;
+  rows.forEach(row => { total += defs[row.shape].calc(row.vals); });
+  if (total <= 0) { showToast('Aucun volume calculé dans les métrés'); return; }
+  const inp = document.getElementById('vol-input');
+  if (inp) { inp.value = fmt(total); calcPoids(); showToast('Volume importé ✓'); }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// TAB SWITCH
+// ─────────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  hideQuickAdd();
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.getElementById('btn-' + tab).classList.add('active');
+  if (tab === 'poids') { buildMatSelector(); onMatChange(); }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCUL PENTE
+// ─────────────────────────────────────────────────────────────────
+function calcPente() {
+  const dist = parseFloat(document.getElementById('pente-dist').value) || 0;
+  const denv = parseFloat(document.getElementById('pente-denv').value) || 0; // en cm
+  const resultEl = document.getElementById('pente-result');
+  const qualifyWrap = document.getElementById('pente-qualify-wrap');
+
+  if (dist <= 0 || denv <= 0) {
+    resultEl.classList.remove('active');
+    document.getElementById('pente-pct-val').textContent = '—';
+    document.getElementById('pente-sub-dist').textContent = '—';
+    document.getElementById('pente-sub-denv').textContent = '—';
+    document.getElementById('pente-sub-angle').textContent = '—';
+    qualifyWrap.innerHTML = '';
+    updatePenteSVG(0, 0);
+    return;
+  }
+
+  const denvM = denv / 100; // cm → m
+  const pct = (denvM / dist) * 100;
+  const angle = Math.atan(denvM / dist) * (180 / Math.PI);
+
+  resultEl.classList.add('active');
+  document.getElementById('pente-pct-val').textContent = pct.toFixed(1);
+  document.getElementById('pente-sub-dist').textContent = fmt(dist) + ' m';
+  document.getElementById('pente-sub-denv').textContent = Math.round(denv) + ' cm';
+  document.getElementById('pente-sub-angle').textContent = angle.toFixed(1) + '°';
+
+  // Qualificatif
+  let label = '', color = '';
+  if (pct < 2)       { label = '✅ Très faible'; color = '#38a169'; }
+  else if (pct < 5)  { label = '✅ Faible'; color = '#38a169'; }
+  else if (pct < 10) { label = '🟡 Modérée'; color = '#d69e2e'; }
+  else if (pct < 20) { label = '🟠 Forte'; color = '#ed8936'; }
+  else               { label = '🔴 Très forte'; color = '#e53e3e'; }
+  qualifyWrap.innerHTML = `<div class="pente-qualify" style="background:${color}18;color:${color};border:1.5px solid ${color}40">${label} — ${pct.toFixed(1)}%</div>`;
+
+  updatePenteSVG(dist, denvM);
+}
+
+function updatePenteSVG(dist, denvM) {
+  const poly = document.getElementById('pente-poly');
+  const vline = document.getElementById('pente-vline');
+  const vlabel = document.getElementById('pente-vlabel');
+  const angleLabel = document.getElementById('pente-angle-label');
+
+  if (dist <= 0 || denvM <= 0) {
+    poly.setAttribute('points', '20,80 220,80 220,80');
+    vline.setAttribute('x1','220'); vline.setAttribute('y1','80');
+    vline.setAttribute('x2','220'); vline.setAttribute('y2','80');
+    vlabel.textContent = 'Δh';
+    angleLabel.textContent = '';
+    return;
+  }
+
+  // Normaliser la hauteur max à 55px (pour garder le triangle lisible)
+  const maxH = 55;
+  const ratio = denvM / dist;
+  const svgH = Math.min(ratio * 200, maxH); // 200 px = 1m de dist virtuelle
+  const topY = 80 - svgH;
+
+  poly.setAttribute('points', `20,80 220,80 220,${topY}`);
+  vline.setAttribute('x1','220'); vline.setAttribute('y1', String(topY));
+  vline.setAttribute('x2','220'); vline.setAttribute('y2','80');
+  vlabel.setAttribute('y', String(topY + (80 - topY) / 2));
+  vlabel.textContent = Math.round(denvM * 100) + 'cm';
+  const pct = ratio * 100;
+  angleLabel.textContent = pct.toFixed(1) + '%';
+}
+
+function resetPente() {
+  document.getElementById('pente-dist').value = '';
+  document.getElementById('pente-denv').value = '';
+  calcPente();
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCUL ANGLE 90° (triangle rectangle — Pythagore)
+// ─────────────────────────────────────────────────────────────────
+const ANGLE_KEYS = ['a', 'b', 'c'];
+
+function angleInputEl(key) { return document.getElementById('angle-' + key); }
+
+function getAngleFilled() {
+  const vals = {};
+  ANGLE_KEYS.forEach(k => {
+    const raw = angleInputEl(k).value;
+    vals[k] = raw === '' ? null : parseFloat(raw);
   });
+  const filled = ANGLE_KEYS.filter(k => vals[k] !== null && vals[k] > 0);
+  return { vals, filled };
+}
 
-  if(accessoireId){
-    const machine = getMachine(machineId);
-    const acs = machine && (machine.accessoires||[]).find(a=>a.id===accessoireId);
-    if(acs){
-      document.getElementById('acs-nom').value      = acs.nom||'';
-      document.getElementById('acs-type').value     = acs.type||'';
-      document.getElementById('acs-annee').value    = acs.annee||'';
-      document.getElementById('acs-poids').value    = acs.poids||'';
-      document.getElementById('acs-capacite').value = acs.capacite||'';
-      document.getElementById('acs-notes').value    = acs.notes||'';
-      accsPhoto = acs.photo||'';
-      accsIcon  = acs.icon||'';
-    }
-    titleEl.textContent = '🧰 Modifier accessoire';
+// Appelé à chaque frappe : met juste à jour l'état du bouton "Calculer" et le bandeau,
+// ne calcule jamais automatiquement pendant la saisie.
+function updateAngleBtnState() {
+  const { filled } = getAngleFilled();
+  const btn = document.getElementById('angle-calc-btn');
+
+  clearAngleComputedStyle();
+  clearAngleDegrees();
+
+  if (filled.length === 3) {
+    showAngleResetPrompt(true);
+    btn.disabled = true;
+  } else if (filled.length === 2) {
+    showAngleResetPrompt(false);
+    btn.disabled = false;
   } else {
-    titleEl.textContent = '🧰 Nouvel accessoire';
-  }
-  updateAccessoireMediaPreview();
-  document.getElementById('modal-add-accessoire').classList.add('open');
-  setTimeout(()=>{ const inp=document.getElementById('acs-nom'); if(inp) inp.focus(); },150);
-}
-
-function closeAccessoireModal(){
-  document.getElementById('modal-add-accessoire').classList.remove('open');
-  accsTargetMachineId = null;
-  accsEditingId = null;
-  accsPhoto = '';
-  accsIcon  = '';
-}
-
-document.getElementById('modal-add-accessoire').addEventListener('click',e=>{
-  if(e.target===document.getElementById('modal-add-accessoire')) closeAccessoireModal();
-});
-
-function saveAccessoire(){
-  if(!accsTargetMachineId) return;
-  const nom = g('acs-nom');
-  if(!nom){ highlight('acs-nom'); return; }
-
-  const machine = getMachine(accsTargetMachineId);
-  if(!machine) return;
-  const accessoires = machine.accessoires ? [...machine.accessoires] : [];
-
-  const acs = {
-    id: accsEditingId || (Date.now().toString(36)+Math.random().toString(36).slice(2,5)),
-    nom, type: g('acs-type'), annee: g('acs-annee'),
-    poids: g('acs-poids'), capacite: g('acs-capacite'), notes: g('acs-notes'),
-    photo: accsPhoto||'', icon: accsIcon||''
-  };
-
-  const idx = accessoires.findIndex(a=>a.id===acs.id);
-  if(idx!==-1) accessoires[idx]=acs; else accessoires.push(acs);
-
-  saveMachineAccessoires(accsTargetMachineId, accessoires);
-  openAccessoireAccs[accsTargetMachineId] = true; // garder l'accordéon ouvert
-
-  closeAccessoireModal();
-  renderContent('machines', searchFilters['machines']||'');
-  showToast('🧰 Accessoire enregistré');
-}
-
-function triggerAccessoirePhoto(){
-  const inp = document.getElementById('item-photo-input');
-  inp.onchange = function(e){
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      const img = new Image();
-      img.onload = function(){
-        const canvas = document.createElement('canvas');
-        const maxSize = 400;
-        let w = img.width, h = img.height;
-        if(w > h){ h = Math.round(h * maxSize / w); w = maxSize; }
-        else { w = Math.round(w * maxSize / h); h = maxSize; }
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        accsPhoto = canvas.toDataURL('image/jpeg', 0.75);
-        accsIcon  = '';
-        updateAccessoireMediaPreview();
-      };
-      img.src = ev.target.result;
-    };
-    reader.readAsDataURL(file);
-    inp.value = '';
-  };
-  inp.click();
-}
-
-function clearAccessoireMedia(){
-  accsPhoto = '';
-  accsIcon  = '';
-  updateAccessoireMediaPreview();
-}
-
-function updateAccessoireMediaPreview(){
-  const prev = document.getElementById('media-prev-accessoire');
-  const del  = document.getElementById('media-del-accessoire');
-  if(!prev) return;
-  if(accsPhoto){
-    prev.innerHTML = `<img src="${accsPhoto}">`;
-    if(del) del.style.display='';
-  } else if(accsIcon){
-    prev.innerHTML = accsIcon;
-    prev.style.fontSize = '32px';
-    if(del) del.style.display='';
-  } else {
-    prev.innerHTML = '📷';
-    prev.style.fontSize = '32px';
-    if(del) del.style.display='none';
+    showAngleResetPrompt(false);
+    btn.disabled = true;
   }
 }
 
-function openEmojiPickerForAccessoire(){
-  openEmojiPicker(function(emoji){
-    accsIcon = emoji;
-    if(emoji) accsPhoto = '';
-    updateAccessoireMediaPreview();
-  }, accsIcon);
+// Appelé uniquement au clic sur "Calculer".
+function calcAngle() {
+  const { vals, filled } = getAngleFilled();
+
+  if (filled.length === 3) {
+    showAngleResetPrompt(true);
+    return;
+  }
+  if (filled.length !== 2) return; // bouton désactivé normalement, sécurité
+
+  const missing = ANGLE_KEYS.find(k => !filled.includes(k));
+  let result = null;
+
+  if (missing === 'c') {
+    result = Math.sqrt(vals.a * vals.a + vals.b * vals.b);
+  } else if (missing === 'a') {
+    if (vals.c <= vals.b) { return; } // diagonale doit être > côté, triangle impossible
+    result = Math.sqrt(vals.c * vals.c - vals.b * vals.b);
+  } else if (missing === 'b') {
+    if (vals.c <= vals.a) { return; }
+    result = Math.sqrt(vals.c * vals.c - vals.a * vals.a);
+  }
+
+  if (result === null || isNaN(result)) return;
+
+  angleInputEl(missing).value = fmt(result);
+  clearAngleComputedStyle();
+  angleInputEl(missing).classList.add('is-computed');
+  updateAngleDegrees(vals, missing, result);
+  updateAngleBtnState();
 }
 
-function openAccessoireDetail(machineId, accessoireId){
-  const machine = getMachine(machineId);
-  const acs = machine && (machine.accessoires||[]).find(a=>a.id===accessoireId);
-  if(!acs) return;
+// Calcule les 2 angles aigus (en degrés) une fois les 3 côtés connus.
+function updateAngleDegrees(vals, missing, result) {
+  const a = missing === 'a' ? result : vals.a;
+  const b = missing === 'b' ? result : vals.b;
+  if (!(a > 0) || !(b > 0)) { clearAngleDegrees(); return; }
 
-  currentDetailId = accessoireId;
-  currentDetailSection = 'accessoire';
-  currentAccessoireMachineId = machineId;
+  const angleQ = Math.atan2(b, a) * 180 / Math.PI; // sommet entre côté A et diagonale C
+  const angleR = 90 - angleQ;                       // sommet entre côté B et diagonale C
 
-  document.getElementById('det-icon').textContent = acs.icon || '🧰';
-  document.getElementById('det-icon').style.background = COLORS.machines;
-  document.getElementById('det-name').textContent = acs.nom||'—';
-  document.getElementById('det-type').textContent = [acs.type, acs.annee].filter(Boolean).join(' · ');
+  document.getElementById('angle-deg-q-val').textContent = fmt(angleQ) + '°';
+  document.getElementById('angle-deg-r-val').textContent = fmt(angleR) + '°';
+}
 
-  const photoHtml = acs.photo ? `<img class="detail-photo" src="${acs.photo}">` : '';
-  const rows = [];
-  const add=(l,v)=>{ if(v) rows.push({label:l,val:v,type:'row'}); };
-  add('Type', acs.type); add('Année', acs.annee);
-  if(acs.poids) add('Poids', acs.poids+' kg');
-  add('Capacité', acs.capacite);
-  if(acs.notes) rows.push({label:'Notes', val:acs.notes, type:'note'});
+function clearAngleDegrees() {
+  document.getElementById('angle-deg-q-val').textContent = '—';
+  document.getElementById('angle-deg-r-val').textContent = '—';
+}
 
-  document.getElementById('det-body').innerHTML = photoHtml + rows.map(r=>{
-    if(r.type==='note') return `<div style="margin-top:8px"><div class="detail-label" style="margin-bottom:6px">${r.label}</div><div class="detail-notes">${esc(r.val)}</div></div>`;
-    return `<div class="detail-row"><span class="detail-label">${r.label}</span><span class="detail-val">${esc(r.val)}</span></div>`;
+function clearAngleComputedStyle() {
+  ANGLE_KEYS.forEach(k => angleInputEl(k).classList.remove('is-computed'));
+}
+
+function showAngleResetPrompt(show) {
+  document.getElementById('angle-reset-prompt').classList.toggle('show', show);
+}
+
+function resetAngle() {
+  ANGLE_KEYS.forEach(k => { angleInputEl(k).value = ''; angleInputEl(k).classList.remove('is-computed'); });
+  showAngleResetPrompt(false);
+  clearAngleDegrees();
+  document.getElementById('angle-calc-btn').disabled = true;
+}
+
+// ─────────────────────────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────────────────────────
+function fmt(v) { return parseFloat(v).toFixed(2); }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// EN-TÊTE — date du jour
+// ─────────────────────────────────────────────────────────────────
+function updateHeaderDate() {
+  const sub = document.getElementById('header-sub');
+  const str = new Date().toLocaleDateString('fr-CH', {weekday:'long', day:'numeric', month:'long'});
+  sub.textContent = str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CALCULATRICE POPUP (identique au module Rapport, historique partagé)
+// ─────────────────────────────────────────────────────────────────
+let calcExpr = '';
+let calcShowingResult = false;
+const CALC_HISTORY_KEY = 'rv6_calc_history';
+const CALC_HISTORY_MAX_DAYS = 3;
+
+function calcPurgeHistory() {
+  let hist = [];
+  try { hist = JSON.parse(localStorage.getItem(CALC_HISTORY_KEY)) || []; } catch(e) { hist = []; }
+  const limit = Date.now() - (CALC_HISTORY_MAX_DAYS * 24 * 60 * 60 * 1000);
+  hist = hist.filter(h => h.ts >= limit);
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify(hist));
+  return hist;
+}
+
+function calcGetHistory() {
+  try { return JSON.parse(localStorage.getItem(CALC_HISTORY_KEY)) || []; } catch(e) { return []; }
+}
+
+function calcAddToHistory(expr, result) {
+  const hist = calcGetHistory();
+  hist.unshift({ expr, result, ts: Date.now() });
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify(hist.slice(0, 50)));
+  calcRenderHistory();
+}
+
+function calcRenderHistory() {
+  const box = document.getElementById('calc-history-list');
+  if (!box) return;
+  const hist = calcGetHistory();
+  if (hist.length === 0) {
+    box.innerHTML = '<div style="font-size:12px;color:var(--gray3);text-align:center;padding:6px 0;">Aucun calcul récent</div>';
+    return;
+  }
+  box.innerHTML = hist.map(h => {
+    const exprDisp = h.expr.replace(/\*/g, '×').replace(/\//g, '÷');
+    return `<div class="calc-history-row" onclick="calcUseHistory('${h.result}')">
+      <span class="calc-history-expr">${exprDisp} =</span>
+      <span class="calc-history-result">${h.result}</span>
+    </div>`;
   }).join('');
-
-  document.getElementById('detail-ov').classList.add('open');
 }
 
-function editCurrentAccessoire(){
-  if(!currentDetailId || currentDetailSection!=='accessoire' || !currentAccessoireMachineId) return;
-  const machineId = currentAccessoireMachineId;
-  const accessoireId = currentDetailId;
-  closeDetail();
-  openAccessoireModal(machineId, accessoireId);
-}
-
-function deleteCurrentAccessoire(){
-  if(!currentDetailId || currentDetailSection!=='accessoire' || !currentAccessoireMachineId) return;
-  const machine = getMachine(currentAccessoireMachineId);
-  if(!machine) return;
-  const accessoires = (machine.accessoires||[]).filter(a=>a.id!==currentDetailId);
-  saveMachineAccessoires(currentAccessoireMachineId, accessoires);
-  closeDetail();
-  renderContent('machines', searchFilters['machines']||'');
-  showToast('🗑 Accessoire supprimé');
-}
-
-document.getElementById('detail-ov').addEventListener('click',e=>{ if(e.target===document.getElementById('detail-ov')) closeDetail(); });
- 
-// ── TOAST ───────────────────────────────────────────────
-let toastTimer;
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200); }
- 
-// ── ESC ─────────────────────────────────────────────────
-function esc(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
- 
-// ── ENTRÉE CLAVIER ──────────────────────────────────────
-document.getElementById('cat-new-name').addEventListener('keydown',e=>{ if(e.key==='Enter') addCategory(); });
- 
-// ── INIT ────────────────────────────────────────────────
-// ── EXPOSE FONCTIONS AU HTML (nécessaire avec type="module") ──
-// ── DRAG & DROP RÉORDONNANCEMENT ────────────────────────
-// Gère le réordonnancement par appui prolongé + glisser
-// Fonctionne pour : items, catégories, sous-catégories
-
-let dragState = null;
-let longPressTimer = null;
-const LONG_PRESS_MS = 450;
-
-// Réordonne un tableau en déplaçant l'élément de fromIdx vers toIdx
-function reorder(arr, fromIdx, toIdx){
-  const copy = [...arr];
-  const [item] = copy.splice(fromIdx, 1);
-  copy.splice(toIdx, 0, item);
-  return copy;
-}
-
-// ── Drag items (equipe/machines/vehicules ou items dans catégorie) ──
-function initItemDrag(el, section, itemId){
-  let startY, startX, moved = false;
-  const itemSel = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
-  const itemCls = section==='machines' ? '.machine-card' : '.res-item';
-
-  function onLongPress(){
-    longPressTimer = null;
-    el.classList.add('drag-ghost');
-    dragState = { type:'item', section, itemId, el, startY, startX };
-    navigator.vibrate&&navigator.vibrate(40);
+function calcUseHistory(result) {
+  if (calcExpr === '' || calcShowingResult) {
+    calcExpr = String(result);
+  } else {
+    calcExpr += String(result);
   }
-
-  el.addEventListener('touchstart', e=>{
-    if(e.touches.length!==1) return;
-    const t = e.touches[0];
-    startY = t.clientY; startX = t.clientX; moved = false;
-    longPressTimer = setTimeout(onLongPress, LONG_PRESS_MS);
-  }, {passive:true});
-
-  el.addEventListener('touchmove', e=>{
-    if(!dragState||dragState.el!==el){ clearTimeout(longPressTimer); return; }
-    e.preventDefault();
-    moved = true;
-    const t = e.touches[0];
-    // Trouver l'élément cible sous le doigt
-    el.style.visibility='hidden';
-    const target = document.elementFromPoint(t.clientX, t.clientY);
-    el.style.visibility='';
-    if(!target) return;
-    const targetItem = target.closest(itemSel);
-    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
-    if(targetItem && targetItem !== el) targetItem.classList.add('drag-over');
-  }, {passive:false});
-
-  el.addEventListener('touchend', e=>{
-    clearTimeout(longPressTimer);
-    if(!dragState||dragState.el!==el){ el.classList.remove('drag-ghost'); return; }
-    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
-    if(moved){
-      const t = e.changedTouches[0];
-      el.style.visibility='hidden';
-      const target = document.elementFromPoint(t.clientX, t.clientY);
-      el.style.visibility='';
-      const targetItem = target&&target.closest(itemSel);
-      if(targetItem && targetItem.dataset.id !== itemId){
-        const data = load(section);
-        const fromIdx = data.findIndex(i=>i.id===itemId);
-        const toIdx   = data.findIndex(i=>i.id===targetItem.dataset.id);
-        if(fromIdx!==-1 && toIdx!==-1){
-          save(section, reorder(data, fromIdx, toIdx));
-          renderContent(section, searchFilters[section]||'');
-          showToast('✓ Ordre mis à jour');
-        }
-      }
-    }
-    el.classList.remove('drag-ghost');
-    dragState = null;
-  });
-
-  el.addEventListener('touchcancel', ()=>{
-    clearTimeout(longPressTimer);
-    el.classList.remove('drag-ghost');
-    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
-    dragState = null;
-  });
+  calcShowingResult = false;
+  calcRefreshDisplay();
 }
 
-// ── Drag souris desktop (Matériaux) : déplace un item vers une autre
-// catégorie/sous-catégorie en le déposant sur son en-tête, ouvert ou fermé.
-// Système indépendant du drag tactile ci-dessus (qui reste pour le réordre mobile).
-const MOUSE_DRAG_THRESHOLD = 5;
-
-function initMaterialMouseDrag(el, itemId, section){
-  let startX, startY, dragging = false, moved = false;
-
-  el.addEventListener('mousedown', e=>{
-    if(e.button!==0) return;
-    startX = e.clientX; startY = e.clientY;
-    moved = false; dragging = false;
-
-    const onMove = (ev)=>{
-      const dx = ev.clientX-startX, dy = ev.clientY-startY;
-      if(!dragging && Math.hypot(dx,dy) > MOUSE_DRAG_THRESHOLD){
-        dragging = true;
-        moved = true;
-        el.classList.add('drag-ghost');
-        document.body.classList.add('mat-dragging');
-      }
-      if(!dragging) return;
-      ev.preventDefault();
-      el.style.visibility='hidden';
-      const target = document.elementFromPoint(ev.clientX, ev.clientY);
-      el.style.visibility='';
-      document.querySelectorAll('.acc-header, .sub-acc-header').forEach(h=>h.classList.remove('drop-target'));
-      if(target){
-        const hdr = target.closest('.acc-header, .sub-acc-header');
-        if(hdr) hdr.classList.add('drop-target');
-      }
-    };
-
-    const onUp = (ev)=>{
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
-      document.querySelectorAll('.acc-header, .sub-acc-header').forEach(h=>h.classList.remove('drop-target'));
-      el.classList.remove('drag-ghost');
-      document.body.classList.remove('mat-dragging');
-      if(!moved) return;
-      el.style.visibility='hidden';
-      const target = document.elementFromPoint(ev.clientX, ev.clientY);
-      el.style.visibility='';
-      if(!target) return;
-      const subHdr = target.closest('.sub-acc-header');
-      const catHdr = !subHdr && target.closest('.acc-header');
-      let newCatId = null, newSubId = '';
-      if(subHdr){
-        const subAcc = subHdr.closest('.sub-acc[data-sub-id]');
-        const accordion = subHdr.closest('.accordion[data-cat-id]');
-        if(subAcc && accordion){ newCatId = accordion.dataset.catId; newSubId = subAcc.dataset.subId; }
-      } else if(catHdr){
-        const accordion = catHdr.closest('.accordion[data-cat-id]');
-        if(accordion) newCatId = accordion.dataset.catId || ''; // '' = "Sans catégorie"
-      }
-      if(newCatId===null) return; // pas déposé sur une cible valide
-      const data = load(section);
-      const item = data.find(i=>i.id===itemId);
-      if(!item) return;
-      if(item.catId===newCatId && (item.subCatId||'')===newSubId) return; // déjà là
-      item.catId = newCatId;
-      item.subCatId = newSubId;
-      save(section, data);
-      renderContent(section, searchFilters[section]||'');
-      showToast(newCatId ? '✓ Déplacé' : '✓ Retiré de la catégorie');
-    };
-
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-  });
+function calcClearHistory() {
+  localStorage.setItem(CALC_HISTORY_KEY, JSON.stringify([]));
+  calcRenderHistory();
 }
 
-// ── Drag catégories ──
-function initCatDrag(el, section, catId){
-  let startY, startX, moved = false;
+function openCalculatrice() {
+  calcExpr = '';
+  calcShowingResult = false;
+  calcPurgeHistory();
+  calcRefreshDisplay();
+  calcRenderHistory();
+  document.getElementById('overlay-calc').classList.add('open');
+}
 
-  function onLongPress(){
-    longPressTimer = null;
-    el.classList.add('drag-ghost');
-    dragState = { type:'cat', section, catId, el };
-    navigator.vibrate&&navigator.vibrate(40);
+function closeCalculatrice(e) {
+  if (e && e.target.id !== 'overlay-calc') return;
+  document.getElementById('overlay-calc').classList.remove('open');
+}
+
+function calcRefreshDisplay() {
+  const line = document.getElementById('calc-expr-line');
+  const d = document.getElementById('calc-display');
+  if (calcExpr === '') {
+    line.textContent = '';
+    d.textContent = '0';
+    return;
   }
-
-  el.addEventListener('touchstart', e=>{
-    if(e.touches.length!==1) return;
-    const t = e.touches[0];
-    startY = t.clientY; startX = t.clientX; moved = false;
-    longPressTimer = setTimeout(onLongPress, LONG_PRESS_MS);
-  }, {passive:true});
-
-  el.addEventListener('touchmove', e=>{
-    if(!dragState||dragState.el!==el){ clearTimeout(longPressTimer); return; }
-    e.preventDefault();
-    moved = true;
-    const t = e.touches[0];
-    el.style.visibility='hidden';
-    const target = document.elementFromPoint(t.clientX, t.clientY);
-    el.style.visibility='';
-    document.querySelectorAll('.accordion[data-cat-id]').forEach(a=>a.classList.remove('drag-over'));
-    if(target){
-      const acc = target.closest('.accordion[data-cat-id]');
-      if(acc && acc.dataset.catId !== catId) acc.classList.add('drag-over');
-    }
-  }, {passive:false});
-
-  el.addEventListener('touchend', e=>{
-    clearTimeout(longPressTimer);
-    if(!dragState||dragState.el!==el){ el.closest('.accordion')&&el.closest('.accordion').classList.remove('drag-ghost'); return; }
-    document.querySelectorAll('.accordion[data-cat-id]').forEach(a=>a.classList.remove('drag-over'));
-    if(moved){
-      const t = e.changedTouches[0];
-      el.style.visibility='hidden';
-      const target = document.elementFromPoint(t.clientX, t.clientY);
-      el.style.visibility='';
-      const acc = target&&target.closest('.accordion[data-cat-id]');
-      if(acc && acc.dataset.catId !== catId){
-        const allCats = loadCats();
-        const cats = allCats[section]||[];
-        const fromIdx = cats.findIndex(c=>c.id===catId);
-        const toIdx   = cats.findIndex(c=>c.id===acc.dataset.catId);
-        if(fromIdx!==-1 && toIdx!==-1){
-          allCats[section] = reorder(cats, fromIdx, toIdx);
-          saveCats(allCats);
-          renderContent(section, searchFilters[section]||'');
-          showToast('✓ Ordre catégories mis à jour');
-        }
-      }
-    }
-    el.closest('.accordion')&&el.closest('.accordion').classList.remove('drag-ghost');
-    dragState = null;
-  });
-
-  el.addEventListener('touchcancel', ()=>{
-    clearTimeout(longPressTimer);
-    document.querySelectorAll('.accordion[data-cat-id]').forEach(a=>a.classList.remove('drag-over'));
-    el.closest('.accordion')&&el.closest('.accordion').classList.remove('drag-ghost');
-    dragState = null;
-  });
+  line.textContent = '';
+  d.textContent = calcExpr.replace(/\*/g, '×').replace(/\//g, '÷');
 }
 
-// ── Drag sous-catégories ──
-function initSubCatDrag(el, section, catId, subId){
-  let moved = false;
-
-  function onLongPress(){
-    longPressTimer = null;
-    el.classList.add('drag-ghost');
-    dragState = { type:'subcat', section, catId, subId, el };
-    navigator.vibrate&&navigator.vibrate(40);
+function calcDigit(d) {
+  if (calcShowingResult) { calcExpr = ''; calcShowingResult = false; }
+  if (d === '.' ) {
+    const parts = calcExpr.split(/[+\-*/]/);
+    const last = parts[parts.length - 1];
+    if (last.includes('.')) return;
+    if (last === '') calcExpr += '0';
   }
-
-  el.addEventListener('touchstart', e=>{
-    if(e.touches.length!==1) return;
-    moved = false;
-    longPressTimer = setTimeout(onLongPress, LONG_PRESS_MS);
-  }, {passive:true});
-
-  el.addEventListener('touchmove', e=>{
-    if(!dragState||dragState.el!==el){ clearTimeout(longPressTimer); return; }
-    e.preventDefault();
-    moved = true;
-    const t = e.touches[0];
-    el.style.visibility='hidden';
-    const target = document.elementFromPoint(t.clientX, t.clientY);
-    el.style.visibility='';
-    document.querySelectorAll('.sub-acc[data-sub-id]').forEach(a=>a.classList.remove('drag-over'));
-    if(target){
-      const sa = target.closest('.sub-acc[data-sub-id]');
-      if(sa && sa.dataset.subId !== subId) sa.classList.add('drag-over');
-    }
-  }, {passive:false});
-
-  el.addEventListener('touchend', e=>{
-    clearTimeout(longPressTimer);
-    if(!dragState||dragState.el!==el){ el.classList.remove('drag-ghost'); return; }
-    document.querySelectorAll('.sub-acc[data-sub-id]').forEach(a=>a.classList.remove('drag-over'));
-    if(moved){
-      const t = e.changedTouches[0];
-      el.style.visibility='hidden';
-      const target = document.elementFromPoint(t.clientX, t.clientY);
-      el.style.visibility='';
-      const sa = target&&target.closest('.sub-acc[data-sub-id]');
-      if(sa && sa.dataset.subId !== subId){
-        const allCats = loadCats();
-        const cat = (allCats[section]||[]).find(c=>c.id===catId);
-        if(cat&&cat.children){
-          const fromIdx = cat.children.findIndex(s=>s.id===subId);
-          const toIdx   = cat.children.findIndex(s=>s.id===sa.dataset.subId);
-          if(fromIdx!==-1 && toIdx!==-1){
-            cat.children = reorder(cat.children, fromIdx, toIdx);
-            saveCats(allCats);
-            renderContent(section, searchFilters[section]||'');
-            showToast('✓ Ordre sous-catégories mis à jour');
-          }
-        }
-      }
-    }
-    el.classList.remove('drag-ghost');
-    dragState = null;
-  });
-
-  el.addEventListener('touchcancel', ()=>{
-    clearTimeout(longPressTimer);
-    el.classList.remove('drag-ghost');
-    document.querySelectorAll('.sub-acc[data-sub-id]').forEach(a=>a.classList.remove('drag-over'));
-    dragState = null;
-  });
+  calcExpr += d;
+  calcRefreshDisplay();
 }
 
-// Attache les listeners drag après chaque renderContent
-function attachDragListeners(section){
-  // Items (les machines utilisent .machine-card comme conteneur draggable)
-  const itemSelector = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
-  document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
-    initItemDrag(el, section, el.dataset.id);
-  });
-  // Catégories
-  document.querySelectorAll(`#content-${section} .accordion[data-cat-id] .acc-header`).forEach(el=>{
-    initCatDrag(el, section, el.closest('.accordion').dataset.catId);
-  });
-  // Sous-catégories
-  document.querySelectorAll(`#content-${section} .sub-acc[data-sub-id] .sub-acc-header`).forEach(el=>{
-    initSubCatDrag(el, section, el.closest('.accordion[data-cat-id]').dataset.catId, el.closest('.sub-acc').dataset.subId);
-  });
-  // Drag souris desktop (changement de catégorie) — Matériaux uniquement
-  if((section==='materiaux'||section==='evacuations')){
-    document.querySelectorAll(`#content-${section} ${itemSelector}`).forEach(el=>{
-      initMaterialMouseDrag(el, el.dataset.id, section);
-    });
+function calcOp(op) {
+  if (calcExpr === '') return;
+  if (calcShowingResult) { calcShowingResult = false; }
+  const lastChar = calcExpr.slice(-1);
+  if ('+-*/'.includes(lastChar)) {
+    calcExpr = calcExpr.slice(0, -1) + op;
+  } else {
+    calcExpr += op;
+  }
+  calcRefreshDisplay();
+}
+
+function calcClear() {
+  calcExpr = '';
+  calcShowingResult = false;
+  calcRefreshDisplay();
+}
+
+function calcBackspace() {
+  if (calcShowingResult) {
+    calcExpr = '';
+    calcShowingResult = false;
+  } else {
+    calcExpr = calcExpr.slice(0, -1);
+  }
+  calcRefreshDisplay();
+}
+
+function calcEquals() {
+  if (calcExpr === '' || calcShowingResult) return;
+  let safeExpr = calcExpr.replace(/[+\-*/]+$/, '');
+  if (!/^[0-9.+\-*/]+$/.test(safeExpr)) { calcClear(); return; }
+  try {
+    const result = Function('"use strict"; return (' + safeExpr + ')')();
+    if (!isFinite(result)) {
+      document.getElementById('calc-expr-line').textContent = '';
+      document.getElementById('calc-display').textContent = 'Erreur';
+      calcExpr = '';
+      return;
+    }
+    const rounded = Math.round(result * 100000) / 100000;
+    const exprForHistory = safeExpr;
+    document.getElementById('calc-expr-line').textContent = safeExpr.replace(/\*/g, '×').replace(/\//g, '÷') + ' =';
+    document.getElementById('calc-display').textContent = String(rounded);
+    calcExpr = String(rounded);
+    calcShowingResult = true;
+    calcAddToHistory(exprForHistory, rounded);
+  } catch(e) {
+    document.getElementById('calc-expr-line').textContent = '';
+    document.getElementById('calc-display').textContent = 'Erreur';
+    calcExpr = '';
+    calcShowingResult = false;
   }
 }
 
-async function initApp(){
-  await syncFromFirestore();
-  TABS.forEach(s => renderContent(s,''));
-  updateBadges();
-  populateAllCatSelects();
-}
-
-window.switchTab         = switchTab;
-window.filterPage        = filterPage;
-window.openAdd           = openAdd;
-window.closeAdd          = closeAdd;
-window.saveItem          = saveItem;
-window.openCatMgr        = openCatMgr;
-window.closeCatMgr       = closeCatMgr;
-window.addCategory       = addCategory;
-window.deleteCategory    = deleteCategory;
-window.addSubCategory    = addSubCategory;
-window.deleteSubCategory = deleteSubCategory;
-window.openEmojiPickerForCat  = openEmojiPickerForCat;
-window.openEmojiPickerForItem = openEmojiPickerForItem;
-window.setEpickerCat     = setEpickerCat;
-window.filterEmojis      = filterEmojis;
-window.selectEmojiResult = selectEmojiResult;
-window.closeEmojiPicker  = closeEmojiPicker;
-window.selectColor       = selectColor;
-window.toggleAcc         = toggleAcc;
-window.openDetail        = openDetail;
-window.closeDetail       = closeDetail;
-window.editCurrentItem   = editCurrentItem;
-window.deleteCurrentItem = deleteCurrentItem;
-window.triggerPhoto      = triggerPhoto;
-window.clearMedia        = clearMedia;
-window.toggleAccessoireAcc      = toggleAccessoireAcc;
-window.openAccessoireModal      = openAccessoireModal;
-window.closeAccessoireModal     = closeAccessoireModal;
-window.saveAccessoire           = saveAccessoire;
-window.triggerAccessoirePhoto   = triggerAccessoirePhoto;
-window.clearAccessoireMedia     = clearAccessoireMedia;
-window.openEmojiPickerForAccessoire = openEmojiPickerForAccessoire;
-window.openAccessoireDetail     = openAccessoireDetail;
-
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('../service-worker.js').catch(()=>{}); }
+// ─────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────
+updateHeaderDate();
+renderLegend();
+addRow();
 </script>
 <script type="module" src="../notes.js"></script>
 </body>
