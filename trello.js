@@ -18,7 +18,7 @@
   var TRELLO_PROXY = 'https://risse-trello.terrarisse.workers.dev';
   // ▲▲▲ ex. 'https://risse-trello.TON-NOM.workers.dev' — voir trello-relais-cloudflare.js ▲▲▲
 
-  var LS = { key: 'rv6_trello_key', token: 'rv6_trello_token', board: 'rv6_trello_board', cache: 'rv6_trello_cache' };
+  var LS = { key: 'rv6_trello_key', token: 'rv6_trello_token', board: 'rv6_trello_board', cache: 'rv6_trello_cache', fold: 'rv6_trello_fold' };
   var API = 'https://api.trello.com/1';
 
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -264,6 +264,8 @@
     '.tw-hd-t{flex:1;min-width:0;}.tw-hd-t b{display:block;font-size:14px;}.tw-hd-t small{display:block;font-size:11px;opacity:.8;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}' +
     '.tw-nav{background:rgba(255,255,255,.18);border:none;color:#fff;width:32px;height:32px;border-radius:8px;font-size:18px;cursor:pointer;flex-shrink:0;}' +
     '.tw-nav:disabled{opacity:.35;cursor:default;}' +
+    '.tw-folded{margin-bottom:28px;}.tw-folded .tw-hd{cursor:pointer;padding:12px 14px;}' +
+    '.tw-fold{font-size:16px;opacity:.9;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);border-radius:8px;}' +
     '.tw-tabs{display:flex;gap:6px;padding:10px 12px 0;overflow-x:auto;scrollbar-width:none;}.tw-tabs::-webkit-scrollbar{display:none;}' +
     '.tw-tab{flex-shrink:0;border:1px solid var(--border,#E0E4EF);background:#fff;color:#4A5878;font:600 11px Inter,sans-serif;padding:6px 10px;border-radius:20px;cursor:pointer;}' +
     '.tw-tab.on{background:#1B3A6B;border-color:#1B3A6B;color:#fff;}' +
@@ -358,10 +360,21 @@
       var isWeek = cur && !!cur.week;
       var title = !cur ? 'Programme' : isWeek ? 'Semaine ' + (cur.week.num || '') : cur.name;
       var sub = !cur ? '' : isWeek ? 'du ' + fmtD(cur.week.start) + ' au ' + fmtD(cur.week.end) + (isThisWeek(cur) ? ' · cette semaine' : '') : cur.cards.length + ' carte(s)';
+      // Bloc replié : uniquement la ligne orange (choix mémorisé sur l'appareil)
+      if (lsGet(LS.fold) === '1') {
+        var nowW = org.weeks[currentWeekIndex(org.weeks)];
+        el.innerHTML = '<div class="tw-box tw-folded"><div class="tw-hd" data-fold role="button" tabindex="0" aria-expanded="false" title="Afficher le programme">' +
+          '<div class="tw-hd-t"><b>📅 Programme</b><small>' + (nowW ? 'Semaine ' + esc(nowW.week.num || '') + ' · ' + nowW.cards.length + ' chantier' + (nowW.cards.length > 1 ? 's' : '') : '') + '</small></div>' +
+          '<span class="tw-fold">▾</span></div></div>';
+        el.querySelector('[data-fold]').onclick = toggleFold;
+        el.querySelector('[data-fold]').onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFold(); } };
+        return;
+      }
       h = '<div class="tw-box"><div class="tw-hd">' +
         '<button class="tw-nav" data-nav="-1" ' + (state.view <= 0 ? 'disabled' : '') + ' aria-label="Précédent">‹</button>' +
-        '<div class="tw-hd-t"><b>📅 ' + esc(title) + '</b><small>' + esc(sub) + '</small></div>' +
-        '<button class="tw-nav" data-nav="1" ' + (state.view >= tabs.length - 1 ? 'disabled' : '') + ' aria-label="Suivant">›</button></div>';
+        '<div class="tw-hd-t" data-fold title="Réduire le programme" style="cursor:pointer"><b>📅 ' + esc(title) + '</b><small>' + esc(sub) + '</small></div>' +
+        '<button class="tw-nav" data-nav="1" ' + (state.view >= tabs.length - 1 ? 'disabled' : '') + ' aria-label="Suivant">›</button>' +
+        '<button class="tw-nav" data-fold aria-label="Réduire le programme" title="Réduire">▴</button></div>';
       h += '<div class="tw-tabs">' + tabs.map(function (t, i) {
         var lbl = t.week ? 'S' + (t.week.num || fmtD(t.week.start)) : t.name;
         return '<button class="tw-tab' + (i === state.view ? ' on' : '') + '" data-tab="' + i + '">' + esc(lbl) + ' · ' + t.cards.length + '</button>';
@@ -385,10 +398,12 @@
       el.querySelectorAll('[data-nav]').forEach(function (b) { b.onclick = function () { state.view += +b.dataset.nav; render(); }; });
       el.querySelectorAll('[data-tab]').forEach(function (b) { b.onclick = function () { state.view = +b.dataset.tab; render(); }; });
       el.querySelectorAll('[data-card]').forEach(function (b) { b.onclick = function () { openCard(b.dataset.card); }; });
+      el.querySelectorAll('[data-fold]').forEach(function (b) { b.onclick = toggleFold; });
       el.querySelector('[data-act="refresh"]').onclick = refresh;
       el.querySelector('[data-act="settings"]').onclick = settings;
       var on = el.querySelector('.tw-tab.on'); if (on && on.scrollIntoView) on.scrollIntoView({ block: 'nearest', inline: 'center' });
     }
+    function toggleFold() { lsSet(LS.fold, lsGet(LS.fold) === '1' ? null : '1'); render(); }
     function isThisWeek(w) { var n = new Date(); return n >= w.week.start && n <= w.week.end; }
 
     function renderBoardPicker() {
