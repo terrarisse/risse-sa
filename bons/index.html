@@ -6,6 +6,7 @@
 <title>Bons — Risse S.A.</title>
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
+<script src="../commun.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -4648,7 +4649,7 @@ function togglePdfPreview() {
   if (chevron) chevron.style.transform = pdfPreviewOpen ? 'rotate(180deg)' : 'rotate(0deg)';
 }
 
-function modifierRapport(e, id) {
+async function modifierRapport(e, id) {
   e.stopPropagation();
   const reports = getReports();
   const r = reports.find(rep => String(rep.id) === String(id));
@@ -4657,7 +4658,7 @@ function modifierRapport(e, id) {
   // Confirmation si brouillon en cours
   const hasDraft = localStorage.getItem(STORAGE_KEY);
   if (hasDraft) {
-    if (!confirm('Un brouillon est en cours. Le remplacer par ce bon ?')) return;
+    if (!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Un brouillon est en cours. Le remplacer par ce bon ?'))) return;
   }
 
   // Supprimer de la liste des validés
