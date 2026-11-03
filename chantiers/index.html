@@ -449,7 +449,7 @@ html.dk .trello-fab:hover{background:#FFF3E6;}
 // ── FIREBASE ────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, deleteDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, deleteDoc, collection, query, where, getDocs, deleteField } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 // Firebase Storage mis de côté pour l'instant (nécessite le plan payant Blaze) —
 // les PDF (plans/devis) sont stockés en local via IndexedDB, voir plus bas.
 
@@ -1141,8 +1141,18 @@ function setupTrelloExport(){
   const col = collection(db,'chantiers');
   RTrelloRap.setup({
     store:{
-      loadExports: ()=>getDocs(query(col,where('type','==','trello_export'))).then(s=>{ const o={}; s.docs.forEach(d=>{ const x=d.data(); if(x&&x.root) o[x.root]=x; }); return o; }),
-      saveExport: rec=>setDoc(doc(db,'chantiers','trx_'+rec.root), rec),
+      loadExports: ()=>getDoc(doc(db,'chantiers','trello_exports')).then(s=>{
+        const recs = (s.exists() && s.data().recs) || {};
+        if (localStorage.getItem('rv6_trx_migr')) return recs;
+        // une seule fois : reprise des exports enregistrés avec l'ancienne version (documents trx_…)
+        return getDocs(query(col,where('type','==','trello_export'))).then(q=>{
+          const add={}; q.docs.forEach(d=>{ const x=d.data(); if(x&&x.root&&!recs[x.root]){ add[x.root]=x; recs[x.root]=x; } deleteDoc(d.ref).catch(()=>{}); });
+          localStorage.setItem('rv6_trx_migr','1');
+          if(Object.keys(add).length) setDoc(doc(db,'chantiers','trello_exports'),{type:'trello_exports',recs:add},{merge:true}).catch(()=>{});
+          return recs;
+        }).catch(()=>recs);
+      }),
+      saveExport: (rec,stale)=>{ const recs={[rec.root]:rec}; (stale||[]).forEach(k=>{ recs[k]=deleteField(); }); return setDoc(doc(db,'chantiers','trello_exports'), {type:'trello_exports',recs}, {merge:true}); },
       loadMap: ()=>getDoc(doc(db,'chantiers','trello_map')).then(s=>s.exists()?s.data():{}),
       saveMap: patch=>setDoc(doc(db,'chantiers','trello_map'), {type:'trello_map',...patch}, {merge:true})
     },

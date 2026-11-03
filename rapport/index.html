@@ -5517,8 +5517,18 @@ function setupTrelloExport() {
   const col = _db.collection('chantiers');
   RTrelloRap.setup({
     store: {
-      loadExports: () => col.where('type','==','trello_export').get().then(s => { const o = {}; s.forEach(d => { const x = d.data(); if (x && x.root) o[x.root] = x; }); return o; }),
-      saveExport: rec => col.doc('trx_' + rec.root).set(rec),
+      loadExports: () => col.doc('trello_exports').get().then(s => {
+        const recs = (s.exists && s.data().recs) || {};
+        if (localStorage.getItem('rv6_trx_migr')) return recs;
+        // une seule fois : reprise des exports enregistrés avec l'ancienne version (documents trx_…)
+        return col.where('type','==','trello_export').get().then(q => {
+          const add = {}; q.forEach(d => { const x = d.data(); if (x && x.root && !recs[x.root]) { add[x.root] = x; recs[x.root] = x; } d.ref.delete().catch(() => {}); });
+          localStorage.setItem('rv6_trx_migr', '1');
+          if (Object.keys(add).length) col.doc('trello_exports').set({ type: 'trello_exports', recs: add }, { merge: true }).catch(() => {});
+          return recs;
+        }).catch(() => recs);
+      }),
+      saveExport: (rec, stale) => { const recs = { [rec.root]: rec }; (stale||[]).forEach(k => { recs[k] = firebase.firestore.FieldValue.delete(); }); return col.doc('trello_exports').set({ type: 'trello_exports', recs }, { merge: true }); },
       loadMap: () => col.doc('trello_map').get().then(s => s.exists ? s.data() : {}),
       saveMap: patch => col.doc('trello_map').set(Object.assign({ type: 'trello_map' }, patch), { merge: true })
     },

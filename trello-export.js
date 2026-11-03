@@ -4,8 +4,9 @@
 
    • Un tap → carte créée dans le tableau Trello « Rapport »,
      dans la colonne du chantier.
-   • Statut partagé entre tous les appareils (Firestore, collection
-     « chantiers », documents trx_<rapport>) :
+   • Statut partagé entre tous les appareils (Firestore : UN seul document
+     chantiers/trello_exports → 1 lecture par ouverture, quel que soit le
+     nombre de rapports ; entrées de plus d'un an retirées automatiquement) :
        🔵 bleu   = seulement dans l'app
        🟠 orange = exporté sur Trello
        🔵 « modifié » = modifié depuis l'export → le prochain export
@@ -171,8 +172,12 @@
         date: r.date || '', cardId: card.id, url: card.shortUrl || card.url || (rec && rec.url) || '',
         listId: list.id, listName: list.name, at: Date.now(), by: cfg.user() || ''
       };
-      exportsCache[nr.root] = nr; lsS(LSK.exp, exportsCache);
-      if (cfg.store) return cfg.store.saveExport(nr).catch(function (e) { console.warn('Statut export:', e); }).then(function () { return nr; });
+      exportsCache[nr.root] = nr;
+      var old = Date.now() - 365 * 86400000;
+      var stale = Object.keys(exportsCache).filter(function (k) { return (exportsCache[k].at || 0) < old; });
+      stale.forEach(function (k) { delete exportsCache[k]; });
+      lsS(LSK.exp, exportsCache);
+      if (cfg.store) return cfg.store.saveExport(nr, stale).catch(function (e) { console.warn('Statut export:', e); }).then(function () { return nr; });
       return nr;
     });
   }
