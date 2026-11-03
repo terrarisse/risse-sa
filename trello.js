@@ -78,7 +78,8 @@
   /* ── Interprétation des titres ──────────────────────────── */
   // « Semaine 45 du 02.11 au 08.11 », « Semaine N° 48 du 23.11 au 29.11 »
   function parseWeek(name, refYear) {
-    var m = String(name).match(/du\s*(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?\s*au\s*(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?/i);
+    // « du 02.11 au 08.11 », « 02.11 - 08.11 », « 2/11 au 8/11/2026 »…
+    var m = String(name).match(/(\d{1,2})[.\/](\d{1,2})(?:[.\/](\d{2,4}))?\s*(?:au|à|a|-|–|—)\s*(\d{1,2})[.\/](\d{1,2})(?:[.\/](\d{2,4}))?/i);
     if (!m) return null;
     var y1 = m[3] ? +(m[3].length === 2 ? '20' + m[3] : m[3]) : null;
     var y2 = m[6] ? +(m[6].length === 2 ? '20' + m[6] : m[6]) : null;
@@ -122,11 +123,12 @@
     var byList = {};
     cards.forEach(function (c) { (byList[c.idList] = byList[c.idList] || []).push(c); });
     Object.keys(byList).forEach(function (k) { byList[k].sort(function (a, b) { return a.pos - b.pos; }); });
-    var weeks = [], others = [];
+    var weeks = [], others = [], all = [];
     lists.forEach(function (l) {
       var w = parseWeek(l.name);
       var entry = { id: l.id, name: l.name, cards: byList[l.id] || [], week: w };
       (w ? weeks : others).push(entry);
+      all.push(entry); // ordre exact des colonnes dans Trello
     });
     weeks.sort(function (a, b) { return a.week.start - b.week.start; });
     var groups = {};
@@ -136,7 +138,7 @@
       g.cards.push(c);
     });
     weeks.forEach(function (w) { w.cards.forEach(function (c) { var g = groups[gkey(c.name)]; if (g && g.weeks.indexOf(w) < 0) g.weeks.push(w); }); });
-    return { weeks: weeks, others: others, groups: groups };
+    return { weeks: weeks, others: others, all: all, groups: groups };
   }
   function currentWeekIndex(weeks) {
     var now = new Date();
@@ -354,8 +356,9 @@
         return;
       }
       state.org = state.org || organize(state.data);
-      var org = state.org, tabs = org.weeks.concat(org.others);
-      if (state.view == null) state.view = org.weeks.length ? currentWeekIndex(org.weeks) : 0;
+      // Onglets dans le même ordre que les colonnes du tableau Trello
+      var org = state.org, tabs = org.all;
+      if (state.view == null) state.view = org.weeks.length ? Math.max(0, tabs.indexOf(org.weeks[currentWeekIndex(org.weeks)])) : 0;
       var cur = tabs[state.view] || tabs[0];
       var isWeek = cur && !!cur.week;
       var title = !cur ? 'Programme' : isWeek ? 'Semaine ' + (cur.week.num || '') : cur.name;
