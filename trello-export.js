@@ -13,6 +13,9 @@
           met à jour la MÊME carte (pas de doublon).
    • Correspondance chantier → colonne mémorisée (doc trello_map).
    • Sans réseau : l'export est mis en attente et part au retour du réseau.
+   • Photos (onglet Travaux du Rapport) : gardées sur le téléphone (IndexedDB,
+     jamais dans Firebase) puis envoyées en pièces jointes sur la carte Trello
+     dès qu'elle existe ; effacées du téléphone une fois envoyées.
 
    Chaque module fournit le stockage via RTrelloRap.setup({ store, user, toast, onChange }).
    ═══════════════════════════════════════════════════════════════ */
@@ -185,7 +188,8 @@
   function exportOne(r, text) {
     if (!TR || !TR.connected() || !TR.canWrite()) return askWrite();
     return ensureBoard().then(function (bid) { return ensureList(bid, r.chantier || 'Sans chantier'); })
-      .then(function (list) { return pushCard(r, text, list); });
+      .then(function (list) { return pushCard(r, text, list); })
+      .then(function (rec) { flushPhotos(); return rec; });
   }
 
   function unqueue(r) { lsS(LSK.queue, lsJ(LSK.queue, []).filter(function (x) { return root(x.report) !== root(r); })); }
@@ -246,9 +250,107 @@
         return pushCard(it.report, it.text, list).then(function () { ok++; unqueue(it.report); }, function () {});
       });
     });
-    chain.then(function () { flushing = false; cfg.onChange(); if (ok) cfg.toast('🟠 ' + ok + ' rapport' + (ok > 1 ? 's' : '') + ' en attente exporté' + (ok > 1 ? 's' : '') + ' sur Trello'); });
+    chain.then(function () { flushing = false; flushPhotos(); cfg.onChange(); if (ok) cfg.toast('🟠 ' + ok + ' rapport' + (ok > 1 ? 's' : '') + ' en attente exporté' + (ok > 1 ? 's' : '') + ' sur Trello'); });
   }
-  window.addEventListener('online', function () { setTimeout(flushQueue, 1500); });
+  window.addEventListener('online', function () { setTimeout(function () { flushQueue(); flushPhotos(); }, 1500); });
+
+  /* ── Photos : stockage local jusqu'à l'envoi sur Trello ── */
+  var PDB = null, pending = {};
+  function pdb() {
+    if (PDB) return PDB;
+    PDB = new Promise(function (res, rej) {
+      if (!window.indexedDB) { rej(new Error('no idb')); return; }
+      var q = indexedDB.open('rv6_trx_photos', 1);
+      q.onupgradeneeded = function () { q.result.createObjectStore('p'); };
+      q.onsuccess = function () { res(q.result); };
+      q.onerror = function () { rej(q.error); };
+    });
+    return PDB;
+  }
+  function pGet(k) {
+    return pdb().then(function (db) { return new Promise(function (res) {
+      var r = db.transaction('p').objectStore('p').get(k);
+      r.onsuccess = function () { res(r.result || []); }; r.onerror = function () { res([]); };
+    }); }).catch(function () { return []; });
+  }
+  function pSet(k, v) {
+    return pdb().then(function (db) { return new Promise(function (res) {
+      var t = db.transaction('p', 'readwrite'), st = t.objectStore('p');
+      if (v && v.length) st.put(v, k); else st.delete(k);
+      t.oncomplete = function () { res(); }; t.onerror = function () { res(); };
+    }); }).catch(function () {});
+  }
+  function pKeys() {
+    return pdb().then(function (db) { return new Promise(function (res) {
+      var r = db.transaction('p').objectStore('p').getAllKeys();
+      r.onsuccess = function () { res(r.result || []); }; r.onerror = function () { res([]); };
+    }); }).catch(function () { return []; });
+  }
+  // Compte les photos en attente par rapport (affichage immédiat)
+  function scanPending() {
+    return pKeys().then(function (keys) {
+      var out = {};
+      return Promise.all(keys.filter(function (k) { return /^rep_/.test(k); }).map(function (k) {
+        return pGet(k).then(function (l) { if (l.length) out[k.slice(4)] = l.length; });
+      })).then(function () { pending = out; });
+    });
+  }
+  var photos = {
+    loadDraft: function () { return pGet('draft'); },
+    saveDraft: function (list) { return pSet('draft', (list || []).filter(Boolean)); },
+    clearDraft: function () { return pSet('draft', null); },
+    // À la validation : les photos du brouillon sont rattachées au rapport
+    attach: function (r, list) {
+      list = (list || []).filter(Boolean);
+      if (!list.length) return Promise.resolve();
+      var k = 'rep_' + root(r);
+      return pGet(k).then(function (old) { return pSet(k, old.concat(list)); })
+        .then(function () { pending[root(r)] = (pending[root(r)] || 0) + list.length; });
+    }
+  };
+
+  function toBlob(dataUrl) { return fetch(dataUrl).then(function (r) { return r.blob(); }); }
+  var flushingPh = false;
+  // Envoie les photos en attente dont la carte Trello existe déjà
+  function flushPhotos() {
+    if (flushingPh || navigator.onLine === false || !TR || !TR.canWrite()) return Promise.resolve(0);
+    flushingPh = true;
+    var sent = 0;
+    return pKeys().then(function (keys) {
+      var chain = Promise.resolve();
+      keys.filter(function (k) { return /^rep_/.test(k); }).forEach(function (k) {
+        var rt = k.slice(4), rec = exportsCache[rt];
+        if (!rec || !rec.cardId) return;
+        chain = chain.then(function () {
+          return pGet(k).then(function (list) {
+            var i = 0, n = 0, d = String(rec.date || '').split('-').reverse().join('.');
+            function next() {
+              if (i >= list.length) return Promise.resolve();
+              var url = list[i];
+              return toBlob(url).then(function (b) { return TR.upload(rec.cardId, b, 'Photo ' + d + ' (' + ((rec.photos || 0) + n + 1) + ').jpg'); })
+                .then(function () { i++; n++; sent++; pending[rt] = list.length - i; cfg.onChange(); return pSet(k, list.slice(i)).then(next); });
+            }
+            return next().catch(function (e) { console.warn('Photo Trello:', e); }).then(function () {
+              if (!n) return;
+              rec.photos = (rec.photos || 0) + n; rec.at = rec.at || Date.now();
+              exportsCache[rt] = rec; lsS(LSK.exp, exportsCache);
+              if (cfg.store) return cfg.store.saveExport(rec, []).catch(function () {});
+            });
+          });
+        });
+      });
+      return chain;
+    }).then(function () {
+      flushingPh = false; cfg.onChange();
+      if (sent) cfg.toast('🟠 ' + sent + ' photo' + (sent > 1 ? 's' : '') + ' envoyée' + (sent > 1 ? 's' : '') + ' sur Trello');
+      return sent;
+    }, function () { flushingPh = false; return 0; });
+  }
+  // « 📷 3 » (sur Trello) · « 📷 2 à envoyer » (encore sur le téléphone)
+  function photoLabel(r) {
+    var rec = exportsCache[root(r)], p = pending[root(r)] || 0, s = (rec && rec.photos) || 0;
+    return [s ? '📷 ' + s : '', p ? '📷 ' + p + ' à envoyer' : ''].filter(Boolean).join(' · ');
+  }
 
   function isBusy(r) { return !!busy[root(r)]; }
   function openCard(r) { var st = status(r); if (st.rec && st.rec.url) window.open(st.rec.url, '_blank', 'noopener'); }
@@ -315,12 +417,13 @@
   function setup(o) {
     Object.keys(o || {}).forEach(function (k) { cfg[k] = o[k]; });
     injectCss();
-    return refresh().then(function () { flushQueue(); });
+    return Promise.all([refresh(), scanPending()]).then(function () { cfg.onChange(); flushQueue(); flushPhotos(); });
   }
 
   window.RTrelloRap = {
     setup: setup, refresh: refresh, status: status, root: root, isBusy: isBusy,
     exportReport: exportReport, exportMany: exportMany, openCard: openCard, fmtAt: fmtAt,
-    textOf: textOf, buttonHtml: buttonHtml, flushQueue: flushQueue
+    textOf: textOf, buttonHtml: buttonHtml, flushQueue: flushQueue,
+    photos: photos, flushPhotos: flushPhotos, photoLabel: photoLabel
   };
 })();

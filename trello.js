@@ -73,6 +73,20 @@
     });
   }
 
+  // Pièce jointe (photo) envoyée directement du téléphone vers une carte
+  function upload(cardId, blob, name) {
+    var fd = new FormData();
+    fd.append('file', blob, name || 'photo.jpg');
+    fd.append('name', name || 'photo.jpg');
+    fd.append('setCover', 'false');
+    var q = 'key=' + encodeURIComponent(key()) + '&token=' + encodeURIComponent(token());
+    return fetch(API + '/cards/' + cardId + '/attachments?' + q, { method: 'POST', body: fd, cache: 'no-store' }).then(function (r) {
+      if (r.status === 401) { lsSet('rv6_trello_rw', null); var e = new Error('unauthorized'); e.code = 401; throw e; }
+      if (!r.ok) { var e2 = new Error('Trello ' + r.status); e2.code = r.status; throw e2; }
+      return r.json();
+    });
+  }
+
   /* ── Lecture du tableau ─────────────────────────────────── */
   function listBoards() { return api('/members/me/boards', { filter: 'open', fields: 'name,prefs' }); }
 
@@ -527,6 +541,6 @@
     getData: getData, attachmentsOf: attachmentsOf, openAttachment: openAttachment, downloadBlob: downloadBlob, viewFile: viewFile,
     kindOf: kindOf, fileIcon: fileIcon, fmtBytes: fmtBytes, fmtD: fmtD, suggestStatus: suggestStatus, cardOf: cardOf,
     mountWeek: mountWeek, connect: connect, disconnect: disconnect,
-    api: api, write: write, canWrite: canWrite, listBoards: listBoards, injectCss: injectCss, esc: esc, ask: rsAsk
+    api: api, write: write, upload: upload, canWrite: canWrite, listBoards: listBoards, injectCss: injectCss, esc: esc, ask: rsAsk
   };
 })();

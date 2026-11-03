@@ -3066,25 +3066,44 @@ function compressImage(file, maxPx = 1200, quality = 0.78) {
 }
 
 // ── PHOTOS ──
-function handlePhotos(input) {
+// Gardées sur le téléphone avec le brouillon, puis envoyées sur la carte Trello du rapport
+// (jamais dans Firebase). Voir trello-export.js.
+function addPhotoThumb(dataUrl) {
   const grid = document.getElementById('photos-grid');
+  const idx = photosData.length;
+  photosData.push(dataUrl);
+  const div = document.createElement('div');
+  div.className = 'photo-thumb';
+  div.id = `photo-${idx}`;
+  div.innerHTML = `
+    <img src="${dataUrl}" onclick="openAnnotate(${idx},'photo')">
+    <button class="del-photo" onclick="delPhoto(${idx})">✕</button>
+    <div class="photo-annotate-btn" onclick="openAnnotate(${idx},'photo')">✏️</div>
+  `;
+  grid.appendChild(div);
+}
+function saveDraftPhotos() { if (window.RTrelloRap) RTrelloRap.photos.saveDraft(photosData); }
+function handlePhotos(input) {
   [...input.files].forEach(async file => {
-    const compressed = await compressImage(file);
-    const idx = photosData.length;
-    photosData.push(compressed);
-    const div = document.createElement('div');
-    div.className = 'photo-thumb';
-    div.id = `photo-${idx}`;
-    div.innerHTML = `
-      <img src="${compressed}" onclick="openAnnotate(${idx},'photo')">
-      <button class="del-photo" onclick="delPhoto(${idx})">✕</button>
-      <div class="photo-annotate-btn" onclick="openAnnotate(${idx},'photo')">✏️</div>
-    `;
-    grid.appendChild(div);
+    const compressed = await compressImage(file, 1600, 0.8);
+    addPhotoThumb(compressed);
+    saveDraftPhotos();
   });
   input.value = '';
 }
-function delPhoto(idx) { photosData[idx] = null; document.getElementById(`photo-${idx}`)?.remove(); }
+function delPhoto(idx) { photosData[idx] = null; document.getElementById(`photo-${idx}`)?.remove(); saveDraftPhotos(); }
+function restoreDraftPhotos() {
+  if (!window.RTrelloRap) return;
+  RTrelloRap.photos.loadDraft().then(list => {
+    if (!list.length || photosData.some(Boolean)) return;
+    if (!extrasState.photos) toggleExtra('photos');
+    list.forEach(addPhotoThumb);
+  });
+}
+function clearPhotosUI() {
+  photosData.length = 0;
+  const g = document.getElementById('photos-grid'); if (g) g.innerHTML = '';
+}
 
 // ── BONS ──
 function handleBons(input) {
@@ -3684,6 +3703,7 @@ function confirmAnnotate() {
     photosData[annotateIdx] = data;
     const img = document.querySelector(`#photo-${annotateIdx} img`);
     if (img) img.src = data;
+    saveDraftPhotos();
   } else {
     bonsData[annotateIdx] = data;
     const img = document.querySelector(`#bon-${annotateIdx} img`);
@@ -4340,6 +4360,11 @@ function resetRapport() {
   if (evCat) evCat.innerHTML = '';
   renderEvacSelectionZone();
 
+  // Photos
+  clearPhotosUI();
+  if (extrasState.photos) toggleExtra('photos');
+  if (window.RTrelloRap) RTrelloRap.photos.clearDraft();
+
   updateHeader();
 }
 
@@ -4399,6 +4424,9 @@ function finaliserRapport() {
   }
 
   try { archiveToChantier(data); } catch(e) { console.warn('Archive chantier:', e); }
+
+  // Photos de l'onglet Travaux : restent sur le téléphone jusqu'à l'export Trello du rapport
+  try { if (window.RTrelloRap) RTrelloRap.photos.attach(data, photosData.slice()); } catch(e) { console.warn('Photos:', e); }
 
   // Reset immédiat
   resetRapport();
@@ -5366,7 +5394,8 @@ function renderHistoriqueInline() {
   shown.forEach(r => {
     const st     = TRX ? TRX.status(r) : { state: 'none' };
     const onTrello = st.state === 'done';
-    const trxMeta = onTrello ? ` · 🟠 Trello ${TRX.fmtAt(st.rec)}${st.rec.by ? ' · ' + st.rec.by : ''}` : st.state === 'modified' ? ' · ✏️ modifié depuis Trello' : st.state === 'pending' ? ' · ⏳ en attente' : '';
+    const phL = TRX ? TRX.photoLabel(r) : '';
+    const trxMeta = (onTrello ? ` · 🟠 Trello ${TRX.fmtAt(st.rec)}${st.rec.by ? ' · ' + st.rec.by : ''}` : st.state === 'modified' ? ' · ✏️ modifié depuis Trello' : st.state === 'pending' ? ' · ⏳ en attente' : '') + (phL ? ' · ' + phL : '');
     const d      = new Date((r.date||'') + 'T12:00:00');
     const day    = d.toLocaleDateString('fr-CH',{day:'2-digit'});
     const month  = d.toLocaleDateString('fr-CH',{month:'short'});
@@ -6378,6 +6407,7 @@ function initRapport() {
   renderEmployes();
   syncMoPresets();
   setupTrelloExport();
+  restoreDraftPhotos();
   updateHeader();
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
   document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); });
