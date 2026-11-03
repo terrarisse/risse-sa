@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   Risse S.A. — Liaison Trello (trello.js)  — LECTURE SEULE
+   Risse S.A. — Liaison Trello (trello.js)
+   • Lecture du programme + écriture des rapports (tableau « Rapport »).
    • Connexion : chaque appareil clique une fois sur « Connecter Trello ».
      Le jeton reste sur l'appareil (localStorage), jamais dans le code.
    • Lit le tableau « Programme » : colonnes « Semaine NN du JJ.MM au JJ.MM »
@@ -32,19 +33,23 @@
     var m = location.hash.match(/[#&]token=([0-9a-zA-Z]+)/);
     if (m) {
       lsSet(LS.token, m[1]);
+      if (lsGet('rv6_trello_rw_req')) { lsSet('rv6_trello_rw', '1'); lsSet('rv6_trello_rw_req', null); }
       history.replaceState(null, '', location.pathname + location.search);
     } else if (/[#&]error=/.test(location.hash)) {
       history.replaceState(null, '', location.pathname + location.search);
     }
   })();
 
+  // Autorisation en lecture + écriture (écriture = création des cartes rapport)
   function connect() {
     var ret = location.origin + location.pathname;
-    location.href = 'https://trello.com/1/authorize?expiration=never&scope=read' +
+    lsSet('rv6_trello_rw_req', '1');
+    location.href = 'https://trello.com/1/authorize?expiration=never&scope=read,write' +
       '&callback_method=fragment&name=' + encodeURIComponent('Risse S.A. — App chantier') +
       '&key=' + encodeURIComponent(key()) + '&return_url=' + encodeURIComponent(ret);
   }
-  function disconnect() { lsSet(LS.token, null); lsSet(LS.board, null); lsSet(LS.cache, null); }
+  function disconnect() { lsSet(LS.token, null); lsSet(LS.board, null); lsSet(LS.cache, null); lsSet('rv6_trello_rw', null); }
+  function canWrite() { return !!(key() && token() && lsGet('rv6_trello_rw')); }
 
   function api(path, params) {
     var q = 'key=' + encodeURIComponent(key()) + '&token=' + encodeURIComponent(token());
@@ -52,6 +57,18 @@
     return fetch(API + path + (path.indexOf('?') > -1 ? '&' : '?') + q, { cache: 'no-store' }).then(function (r) {
       if (r.status === 401) { var e = new Error('unauthorized'); e.code = 401; throw e; }
       if (!r.ok) throw new Error('Trello ' + r.status);
+      return r.json();
+    });
+  }
+
+  // Écriture (POST / PUT) : paramètres envoyés en formulaire
+  function write(method, path, params) {
+    var body = new URLSearchParams();
+    for (var p in (params || {})) if (params[p] != null) body.append(p, params[p]);
+    var q = 'key=' + encodeURIComponent(key()) + '&token=' + encodeURIComponent(token());
+    return fetch(API + path + (path.indexOf('?') > -1 ? '&' : '?') + q, { method: method, body: body, cache: 'no-store' }).then(function (r) {
+      if (r.status === 401) { lsSet('rv6_trello_rw', null); var e = new Error('unauthorized'); e.code = 401; throw e; }
+      if (!r.ok) { var e2 = new Error('Trello ' + r.status); e2.code = r.status; throw e2; }
       return r.json();
     });
   }
@@ -509,6 +526,7 @@
     cached: cached, organize: organize, parseWeek: parseWeek, parseTitle: parseTitle, norm: norm, gkey: gkey,
     getData: getData, attachmentsOf: attachmentsOf, openAttachment: openAttachment, downloadBlob: downloadBlob, viewFile: viewFile,
     kindOf: kindOf, fileIcon: fileIcon, fmtBytes: fmtBytes, fmtD: fmtD, suggestStatus: suggestStatus, cardOf: cardOf,
-    mountWeek: mountWeek, connect: connect, disconnect: disconnect
+    mountWeek: mountWeek, connect: connect, disconnect: disconnect,
+    api: api, write: write, canWrite: canWrite, listBoards: listBoards, injectCss: injectCss, esc: esc, ask: rsAsk
   };
 })();

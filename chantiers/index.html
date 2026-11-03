@@ -11,6 +11,7 @@
 <script src="../desktop.js"></script>
 <script src="../commun.js"></script>
 <script src="../trello.js"></script>
+<script src="../trello-export.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -245,6 +246,12 @@ html.dk .trello-fab:hover{background:#FFF3E6;}
 .rap-det{display:none;border-top:1px solid var(--bg2);margin-top:10px;padding-top:8px;font-size:12px;color:var(--text);line-height:1.6}
 .rap-det.open{display:block}
 .rap-row.opened .rap-tx{display:none}
+.rap-row{border-left:4px solid #1B3A6B}
+.rap-row.trx-on{border-left-color:#E2622C;background:#FFFBF7}
+.rap-act .trx-btn{width:auto;height:34px;border:none;margin-left:6px;padding:0 11px}
+.rap-act .trx-btn.go{background:#1B3A6B;color:#fff}
+.rap-act .trx-btn.on{background:linear-gradient(90deg,#B03A2E,#E2622C);color:#fff}
+.rap-act .trx-btn.wait{background:#EAECF4;color:#4A5878}
 .rap-det b{color:var(--text2)}
 .rap-lst{margin-top:4px}
 .rap-li{padding-left:10px;border-left:2px solid var(--bg2);margin:2px 0}
@@ -1097,7 +1104,9 @@ function rapRow(r,ed){
   const ev = (r.evacuations||[]).filter(e=>e.mat).map(e=>`${esc(e.mat)} ${esc(e.qte)} ${esc(e.unite)}`);
   const me = (r.metres||[]).map(m=>`${esc(m.desc)} ${esc(m.total)} ${esc(m.unit)}`);
   const tv = r.travaux||'';
-  return `<div class="rap-row"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open');this.parentNode.classList.toggle('opened')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}</div></div><div class="rap-act"><button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${LL('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`))}${LL('Location',loc)}${LL('Fournitures',fo)}${LL('Évacuations',ev)}${LL('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
+  const TRX = window.RTrelloRap, st = TRX ? TRX.status(r) : {state:'none'};
+  const trx = st.state==='done' ? ` · <span class="trx-tag orange">🟠 Trello ${TRX.fmtAt(st.rec)}</span>` : st.state==='modified' ? ` · <span class="trx-tag blue">✏️ modifié depuis Trello</span>` : st.state==='pending' ? ' · ⏳ en attente' : '';
+  return `<div class="rap-row${st.state==='done'?' trx-on':''}" data-rid="${esc(String(r.id))}"><div class="rap-top" onclick="this.parentNode.querySelector('.rap-det').classList.toggle('open');this.parentNode.classList.toggle('opened')"><div><div class="rap-date">${fmtDateLong(r.date)}</div><div class="rap-sub">${h.toFixed(1)} h · ${emp.length} pers.${editing?' · ✏️ en modification':''}${trx}</div></div><div class="rap-act">${TRX?TRX.buttonHtml(r,'rapTrello'):''}<button onclick="event.stopPropagation();rapEdit('${r.id}')">✏️</button><button onclick="event.stopPropagation();rapDel('${r.id}')">🗑</button></div></div>${tv?`<div class="rap-tx">${esc(tv.slice(0,90))}${tv.length>90?'…':''}</div>`:''}<div class="rap-det">${L('Rédigé par',esc(r.nom||''))}${LL('Équipe',emp.map(e=>`${esc(e.nom)} ${parseFloat(e.heures).toFixed(2)} h`))}${LL('Location',loc)}${LL('Fournitures',fo)}${LL('Évacuations',ev)}${LL('Métrés',me)}${L('Travaux',esc(tv).replace(/\n/g,'<br>'))}</div></div>`;
 }
 async function renderRapports(){
   const cid = currentDetailId, el = document.getElementById('det-tab-rapports');
@@ -1106,11 +1115,56 @@ async function renderRapports(){
     list = [...list].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||(b.id-a.id));
     document.getElementById('det-tab-btn-rapports').textContent = '📋 Rapports'+(list.length?' ('+list.length+')':'');
     let ed = null; try{ ed = JSON.parse(localStorage.getItem('rj_edit_from')||'null'); }catch(e){}
-    el.innerHTML = list.length ? list.map(r=>rapRow(r,ed)).join('') : '<div class="det-empty-state"><div class="det-empty-icon">📋</div><div class="det-empty-text">Aucun rapport validé pour ce chantier</div></div>';
+    const TRX = window.RTrelloRap;
+    const todo = TRX ? list.filter(r=>['none','modified'].includes(TRX.status(r).state)) : [];
+    const busy = TRX ? list.some(r=>TRX.isBusy(r)) : false;
+    const allBtn = todo.length ? `<button class="trx-all" ${busy?'disabled':''} onclick="rapTrelloAll()">📤 Exporter tout sur Trello (${todo.length})</button>` : '';
+    el.innerHTML = list.length ? allBtn + list.map(r=>rapRow(r,ed)).join('') : '<div class="det-empty-state"><div class="det-empty-icon">📋</div><div class="det-empty-text">Aucun rapport validé pour ce chantier</div></div>';
   };
   draw(rapLocal()[cid]||[]);
   draw(await loadRapports(cid));
 }
+// ── Export Trello des rapports (bleu = app · orange = Trello) ──
+function rapTrello(id){
+  const r = (rapLocal()[currentDetailId]||[]).find(x=>String(x.id)===String(id)); if(!r || !window.RTrelloRap) return;
+  if (RTrelloRap.status(r).state==='done') { RTrelloRap.openCard(r); return; }
+  RTrelloRap.exportReport(r, RTrelloRap.textOf(r));
+}
+function rapTrelloAll(){
+  if(!window.RTrelloRap) return;
+  const list = (rapLocal()[currentDetailId]||[]).filter(r=>['none','modified'].includes(RTrelloRap.status(r).state))
+    .sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||(a.id-b.id));
+  RTrelloRap.exportMany(list.map(r=>({report:r, text:RTrelloRap.textOf(r)})));
+}
+function setupTrelloExport(){
+  if(!window.RTrelloRap) return;
+  const col = collection(db,'chantiers');
+  RTrelloRap.setup({
+    store:{
+      loadExports: ()=>getDocs(query(col,where('type','==','trello_export'))).then(s=>{ const o={}; s.docs.forEach(d=>{ const x=d.data(); if(x&&x.root) o[x.root]=x; }); return o; }),
+      saveExport: rec=>setDoc(doc(db,'chantiers','trx_'+rec.root), rec),
+      loadMap: ()=>getDoc(doc(db,'chantiers','trello_map')).then(s=>s.exists()?s.data():{}),
+      saveMap: patch=>setDoc(doc(db,'chantiers','trello_map'), {type:'trello_map',...patch}, {merge:true})
+    },
+    user: ()=>{ const u=auth.currentUser; return u ? (u.displayName || (u.email||'').split('@')[0]) : ''; },
+    toast: m=>showToast(m, 2800),
+    onChange: ()=>{ if(currentDetTab==='rapports' && currentDetailId){ const el=document.getElementById('det-tab-rapports'); if(el && el.style.display!=='none') redrawRapports(); } }
+  });
+}
+function redrawRapports(){
+  const el = document.getElementById('det-tab-rapports'); if(!el) return;
+  const open = [...el.querySelectorAll('.rap-row.opened')].map(x=>x.dataset.rid);
+  const list = [...(rapLocal()[currentDetailId]||[])].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||(b.id-a.id));
+  let ed = null; try{ ed = JSON.parse(localStorage.getItem('rj_edit_from')||'null'); }catch(e){}
+  const TRX = window.RTrelloRap;
+  const todo = TRX ? list.filter(r=>['none','modified'].includes(TRX.status(r).state)) : [];
+  const busy = TRX ? list.some(r=>TRX.isBusy(r)) : false;
+  const allBtn = todo.length ? `<button class="trx-all" ${busy?'disabled':''} onclick="rapTrelloAll()">📤 Exporter tout sur Trello (${todo.length})</button>` : '';
+  if(!list.length) return;
+  el.innerHTML = allBtn + list.map(r=>rapRow(r,ed)).join('');
+  el.querySelectorAll('.rap-row').forEach(x=>{ if(open.includes(x.dataset.rid)){ x.classList.add('opened'); x.querySelector('.rap-det').classList.add('open'); } });
+}
+
 function rapEdit(id){
   const r = (rapLocal()[currentDetailId]||[]).find(x=>String(x.id)===String(id)); if(!r) return;
   localStorage.setItem('rj_edit_request', JSON.stringify(r));
@@ -1784,6 +1838,7 @@ async function initApp() {
   migrateOrder();
   renderList();
   flushPending().then(migrateRapports);
+  setupTrelloExport();
   requestPersistentStorage();
 }
 
@@ -1958,7 +2013,7 @@ window.calcOp                = calcOp;
 window.calcClear             = calcClear;
 window.calcBackspace         = calcBackspace;
 window.calcEquals            = calcEquals;
-Object.assign(window,{cardTap,openMenu,menuClose,menuDo,endReorder,editCurrent,setStatut,viewDevis,rapEdit,rapDel});
+Object.assign(window,{cardTap,openMenu,menuClose,menuDo,endReorder,editCurrent,setStatut,viewDevis,rapEdit,rapDel,rapTrello,rapTrelloAll});
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../service-worker.js').catch(()=>{});

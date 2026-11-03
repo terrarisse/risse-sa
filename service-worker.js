@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v17';
+const CACHE_NAME = 'risse-app-v18';
 const URLS = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const URLS = [
   './desktop.js',
   './commun.js',
   './trello.js',
+  './trello-export.js',
   './logo-pc.png',
   './icon-192.png',
   './icon-512.png',

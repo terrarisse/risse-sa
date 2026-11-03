@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
 <script src="../commun.js"></script>
+<script src="../trello.js"></script>
+<script src="../trello-export.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1872,6 +1874,7 @@ textarea { resize: none; }
     <!-- PANNEAU VALIDÉS -->
     <div id="rap-panel-valides" style="display:none;">
       <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;" id="histo-subtitle">30 derniers jours</div>
+      <div id="trx-bar"></div>
       <div id="histo-inline"></div>
     </div>
 
@@ -4372,6 +4375,10 @@ function finaliserRapport() {
 
   data.id = Date.now();
   data.savedAt = new Date().toISOString();
+  // Même carte Trello après une modification (✏️) : on garde l'identité d'origine
+  try { const _ef = JSON.parse(localStorage.getItem('rj_edit_from') || 'null'); if (_ef && _ef.root) data.trelloRoot = String(_ef.root); } catch(e) {}
+  // Texte du rapport enregistré (export Trello possible aussi depuis le module Chantiers)
+  try { data.texte = rapportToTexte(data); } catch(e) {}
 
   const reports = JSON.parse(localStorage.getItem(REPORTS_KEY) || '[]');
   reports.unshift(data);
@@ -5333,6 +5340,7 @@ function renderHistoriqueInline() {
 
   const subtitle = document.getElementById('histo-subtitle');
   if (subtitle) subtitle.textContent = `${reports.length} rapport${reports.length>1?'s':''} · 30 derniers jours`;
+  renderTrelloBar(reports);
 
   if (reports.length === 0 && trash.length === 0) {
     container.innerHTML = `<div class="histo-empty"><div class="icon">📭</div><p>Aucun rapport validé</p><p style="margin-top:6px;font-size:12px;">Les rapports validés apparaîtront ici</p></div>`;
@@ -5350,7 +5358,15 @@ function renderHistoriqueInline() {
 
   let html = '';
 
-  reports.forEach(r => {
+  const TRX = window.RTrelloRap;
+  const trxSt = r => TRX ? TRX.status(r).state : 'none';
+  const shown = reports.filter(r => rapTrxFilter === 'all' || (rapTrxFilter === 'orange') === (trxSt(r) === 'done'));
+  if (reports.length && !shown.length) html += `<div class="histo-empty"><div class="icon">${rapTrxFilter==='orange'?'🟠':'✅'}</div><p>${rapTrxFilter==='orange'?'Aucun rapport exporté sur Trello':'Tous les rapports sont sur Trello'}</p></div>`;
+
+  shown.forEach(r => {
+    const st     = TRX ? TRX.status(r) : { state: 'none' };
+    const onTrello = st.state === 'done';
+    const trxMeta = onTrello ? ` · 🟠 Trello ${TRX.fmtAt(st.rec)}${st.rec.by ? ' · ' + st.rec.by : ''}` : st.state === 'modified' ? ' · ✏️ modifié depuis Trello' : st.state === 'pending' ? ' · ⏳ en attente' : '';
     const d      = new Date((r.date||'') + 'T12:00:00');
     const day    = d.toLocaleDateString('fr-CH',{day:'2-digit'});
     const month  = d.toLocaleDateString('fr-CH',{month:'short'});
@@ -5398,16 +5414,17 @@ function renderHistoriqueInline() {
 
     html += `
     <div class="rapport-card" id="rcard-${r.id}">
-      <div class="rapport-card-header" onclick="toggleRapportCard('${r.id}')">
+      <div class="rapport-card-header${onTrello ? ' trx-orange' : ''}" onclick="toggleRapportCard('${r.id}')">
         <div class="rapport-card-date">
           <div class="day">${day}</div>
           <div class="month">${month}</div>
         </div>
         <div class="rapport-card-info">
           <div class="chantier">${r.chantier || 'Sans chantier'}</div>
-          <div class="meta">${weekday} · ${r.nom||'—'} · ${ageStr}</div>
+          <div class="meta">${weekday} · ${r.nom||'—'} · ${ageStr}${trxMeta}</div>
         </div>
         <div class="rapport-card-actions">
+          ${TRX ? TRX.buttonHtml(r, 'rapTrello') : ''}
           ${totalMO > 0 ? `<span class="badge-mo">${totalMO.toFixed(2)}h MO</span>` : ''}
           <button onclick="deleteRapportInline(event,'${r.id}')" style="background:none;border:none;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;padding:2px 4px;">🗑️</button>
         </div>
@@ -5465,6 +5482,50 @@ function renderHistoriqueInline() {
   }
 
   container.innerHTML = html;
+}
+
+// ─── EXPORT TRELLO (bleu = app · orange = Trello) ─────────────
+let rapTrxFilter = 'all';
+function renderTrelloBar(reports) {
+  const el = document.getElementById('trx-bar'); if (!el) return;
+  const TRX = window.RTrelloRap;
+  if (!TRX || !reports.length) { el.innerHTML = ''; return; }
+  const nOr = reports.filter(r => TRX.status(r).state === 'done').length, nBl = reports.length - nOr;
+  const todo = reports.filter(r => ['none','modified'].includes(TRX.status(r).state));
+  const busy = reports.some(r => TRX.isBusy(r));
+  el.innerHTML = `<div class="trx-filters">
+      <button class="trx-f all${rapTrxFilter==='all'?' on':''}" onclick="setRapTrxFilter('all')">Tous · ${reports.length}</button>
+      <button class="trx-f blue${rapTrxFilter==='blue'?' on':''}" onclick="setRapTrxFilter('blue')">🔵 À exporter · ${nBl}</button>
+      <button class="trx-f orange${rapTrxFilter==='orange'?' on':''}" onclick="setRapTrxFilter('orange')">🟠 Sur Trello · ${nOr}</button>
+    </div>` + (rapTrxFilter === 'blue' && todo.length ? `<button class="trx-all" ${busy?'disabled':''} onclick="rapTrelloAll()">📤 Exporter tout sur Trello (${todo.length})</button>` : '');
+}
+function setRapTrxFilter(f) { rapTrxFilter = f; renderHistoriqueInline(); }
+function rapTrello(id) {
+  const r = getReports().find(x => String(x.id) === String(id)); if (!r || !window.RTrelloRap) return;
+  const st = RTrelloRap.status(r);
+  if (st.state === 'done') { RTrelloRap.openCard(r); return; }
+  let text; try { text = r.texte || rapportToTexte(r); } catch(e) { text = RTrelloRap.textOf(r); }
+  RTrelloRap.exportReport(r, text);
+}
+function rapTrelloAll() {
+  if (!window.RTrelloRap) return;
+  const todo = getReports().filter(r => ['none','modified'].includes(RTrelloRap.status(r).state)).reverse();
+  RTrelloRap.exportMany(todo.map(r => { let t; try { t = r.texte || rapportToTexte(r); } catch(e) { t = RTrelloRap.textOf(r); } return { report: r, text: t }; }));
+}
+function setupTrelloExport() {
+  if (!window.RTrelloRap) return;
+  const col = _db.collection('chantiers');
+  RTrelloRap.setup({
+    store: {
+      loadExports: () => col.where('type','==','trello_export').get().then(s => { const o = {}; s.forEach(d => { const x = d.data(); if (x && x.root) o[x.root] = x; }); return o; }),
+      saveExport: rec => col.doc('trx_' + rec.root).set(rec),
+      loadMap: () => col.doc('trello_map').get().then(s => s.exists ? s.data() : {}),
+      saveMap: patch => col.doc('trello_map').set(Object.assign({ type: 'trello_map' }, patch), { merge: true })
+    },
+    user: () => { const u = _auth.currentUser; return u ? (u.displayName || (u.email || '').split('@')[0]) : ''; },
+    toast: m => showToast(m, m.startsWith('⚠') ? '#E53935' : (m.startsWith('🟠') ? '#E2622C' : 'var(--teal)')),
+    onChange: () => { const p = document.getElementById('rap-panel-valides'); if (p && p.style.display !== 'none') renderHistoriqueInline(); }
+  });
 }
 
 function partagerRapport(e, id) {
@@ -5657,7 +5718,7 @@ async function modifierRapport(e, id, obj) {
   try {
     const _cl = JSON.parse(localStorage.getItem('rv6_chantiers_v1') || '[]');
     const _cc = _cl.find(x => (x.nom || '').trim().toLowerCase() === (r.chantier || '').trim().toLowerCase());
-    localStorage.setItem('rj_edit_from', JSON.stringify({ id: r.id, cid: _cc ? _cc.id : null }));
+    localStorage.setItem('rj_edit_from', JSON.stringify({ id: r.id, cid: _cc ? _cc.id : null, root: String(r.trelloRoot || r.id) }));
   } catch(e) {}
   // Supprimer de la liste des validés
   const updated = reports.filter(rep => String(rep.id) !== String(id));
@@ -6306,6 +6367,7 @@ function initRapport() {
   if (!document.getElementById('rj-date').value) setDefaultDate();
   renderEmployes();
   syncMoPresets();
+  setupTrelloExport();
   updateHeader();
   document.getElementById('rj-chantier').addEventListener('input', updateHeader);
   document.getElementById('rj-date').addEventListener('change', () => { updateHeader(); buildLocationItems(); });
