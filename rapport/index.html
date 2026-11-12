@@ -9,6 +9,7 @@
 <script src="../commun.js"></script>
 <script src="../trello.js"></script>
 <script src="../trello-export.js"></script>
+<script src="../devis.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1494,6 +1495,32 @@ textarea { resize: none; }
 .tab-item{min-width:0}
 .r-item-name{cursor:pointer}
 .r-item-name.expanded{white-space:normal;overflow:visible;text-overflow:clip;word-break:break-word;line-height:1.25}
+
+/* ── POSITIONS DU DEVIS (onglet Travaux) ── */
+.dvx-btn{width:100%;display:flex;align-items:center;gap:10px;border:1.5px dashed var(--navy);background:#EEF3FB;color:var(--navy);border-radius:var(--radius);padding:12px 14px;font:700 14px 'Inter',sans-serif;cursor:pointer;margin-bottom:12px;text-align:left;}
+.dvx-btn small{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-top:1px;}
+.dvx-chips{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 12px;}
+.dvx-chip{display:flex;align-items:center;gap:6px;background:var(--navy);color:#fff;border-radius:20px;padding:5px 6px 5px 11px;font-size:12px;font-weight:700;}
+.dvx-chip button{border:none;background:rgba(255,255,255,.2);color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;cursor:pointer;padding:0;}
+.dvx-ov{position:fixed;inset:0;z-index:700;background:rgba(10,20,40,.5);display:flex;align-items:flex-end;}
+.dvx-sh{background:var(--bg);width:100%;max-height:92vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);}
+.dvx-hd{display:flex;align-items:center;gap:8px;padding:14px 14px 8px;}
+.dvx-hd h3{flex:1;margin:0;font-size:16px;color:var(--navy);}
+.dvx-x{border:none;background:var(--border);width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;}
+.dvx-q{margin:0 14px 8px;padding:11px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font:500 15px 'Inter',sans-serif;background:#fff;}
+.dvx-list{flex:1;overflow-y:auto;padding:0 14px 10px;}
+.dvx-ch{font-size:11px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.3px;margin:12px 0 6px;}
+.dvx-it{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px;cursor:pointer;}
+.dvx-it.on{border-color:var(--teal);background:#EAF6F4;}
+.dvx-top{display:flex;gap:8px;font-size:13px;color:var(--text);line-height:1.35;}
+.dvx-n{font-weight:800;color:var(--text-light);min-width:30px;}
+.dvx-dq{margin-left:auto;white-space:nowrap;font-size:11px;font-weight:700;color:var(--text-muted);padding-left:6px;}
+.dvx-qty{display:none;align-items:center;gap:8px;margin-top:8px;font-size:12px;font-weight:700;color:var(--teal);}
+.dvx-it.on .dvx-qty{display:flex;}
+.dvx-qty input{width:96px;padding:9px 10px;border:1.5px solid var(--teal);border-radius:8px;font:700 16px 'Inter',sans-serif;text-align:right;}
+.dvx-ft{padding:10px 14px 14px;border-top:1px solid var(--border);}
+.dvx-go{width:100%;border:none;border-radius:var(--radius);background:var(--teal);color:#fff;font:800 15px 'Inter',sans-serif;padding:15px;cursor:pointer;}
+.dvx-go:disabled{opacity:.45;}
 </style>
 </head>
 <body>
@@ -1654,6 +1681,9 @@ textarea { resize: none; }
        SECTION 3 : TRAVAUX RÉALISÉS
   ════════════════════════════════════ -->
   <div class="section" id="sec-3">
+
+    <!-- Positions du devis (si le chantier a un devis lu) -->
+    <div id="dvx-bar"></div>
 
     <!-- Description — toujours visible -->
     <div class="card">
@@ -2121,6 +2151,10 @@ const firebaseConfig = {
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const _auth = firebase.auth();
 const _db   = firebase.firestore();
+if (window.RDevis) RDevis.setup({
+  save: (cid, d) => _db.collection('chantiers').doc('devpos_' + cid).set(d),
+  load: cid => _db.collection('chantiers').doc('devpos_' + cid).get().then(x => x.exists ? x.data() : null)
+});
 
 // Auth guard
 firebase.auth().onAuthStateChanged(user => {
@@ -2213,6 +2247,7 @@ function updateHeader() {
   const titleEl = document.getElementById('header-title');
   const subEl = document.getElementById('header-sub');
   titleEl.textContent = chantier || 'Rapport journalier';
+  if (typeof renderDvBar === 'function') renderDvBar(false);
   if (date) {
     const d = new Date(date + 'T12:00:00');
     const str = d.toLocaleDateString('fr-CH', {weekday:'long', day:'numeric', month:'long'});
@@ -2750,7 +2785,7 @@ function goSection(n) {
   state.currentSection = n;
   document.getElementById('main-scroll').scrollTop = 0;
   updateStepBar(n);
-  if (n === 3) { autoGrowTravaux(); }
+  if (n === 3) { autoGrowTravaux(); renderDvBar(true); }
   if (n === 4) { buildFournitCatalogue(); }
   if (n === 6) { buildEvacCatalogue(); }
   if (n === 5) { buildRecapPreview(); renderHistoriqueInline(); showRapTab('brouillon'); }
@@ -4203,6 +4238,7 @@ function collectData() {
     location: locData,
     locSelection: locSelection,
     travaux: document.getElementById('tx-travaux').value,
+    devisLignes: devisLignes,
     metres: metresData,
     fournitures: fournitData,
     fournitSelection: fournitSelection,
@@ -4262,6 +4298,7 @@ function loadDraft() {
 
     // Travaux
     if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
+    devisLignes = Array.isArray(d.devisLignes) ? d.devisLignes : []; renderDvBar(false);
 
     // Métrés
     if (d.metres && d.metres.length > 0) {
@@ -4342,6 +4379,7 @@ function resetRapport() {
   // Travaux
   document.getElementById('tx-travaux').value = '';
   document.getElementById('tx-travaux').style.height = 'auto';
+  devisLignes = []; renderDvBar(false);
 
   // Métrés — fermer le bloc et vider la liste
   if (extrasState.metres) toggleExtra('metres');
@@ -5786,6 +5824,7 @@ async function modifierRapport(e, id, obj) {
   }
 
   if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
+  devisLignes = Array.isArray(d.devisLignes) ? d.devisLignes : []; renderDvBar(false);
 
   if (d.metres && d.metres.length > 0) {
     if (!extrasState.metres) toggleExtra('metres');
@@ -6161,6 +6200,101 @@ function prefillMachineHours(itemId, total) {
     renderLocSelectionZone();
     autoSaveDraft();
   }
+}
+
+// ─── POSITIONS DU DEVIS → LIGNES DE TRAVAUX ─────────────────────
+// Le module Chantiers lit le devis Sorba (devis.js) ; ici on propose ses positions.
+// Chaque position ajoutée = une ligne dans la description + une entrée dans
+// devisLignes (gardée pour le futur suivi d'avancement par position).
+var devisLignes = [];
+var dvxSel = {};
+var _dvxAsked = {};
+function dvxChantierId() {
+  const nom = (document.getElementById('rj-chantier').value || '').trim().toLowerCase();
+  if (!nom) return null;
+  try {
+    const list = JSON.parse(localStorage.getItem('rv6_chantiers_v1') || '[]');
+    const c = list.find(x => (x.nom || '').trim().toLowerCase() === nom);
+    return c ? c.id : null;
+  } catch (e) { return null; }
+}
+function dvxEsc(t) { return String(t == null ? '' : t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderDvBar(fetch) {
+  const el = document.getElementById('dvx-bar'); if (!el || !window.RDevis) return;
+  const cid = dvxChantierId();
+  const d = cid ? RDevis.get(cid) : null;
+  // Positions lues sur un autre appareil → récupérées une fois depuis le cloud
+  if (cid && fetch && !_dvxAsked[cid]) { _dvxAsked[cid] = 1; RDevis.fetchRemote(cid).then(r => { if (r) renderDvBar(false); }); }
+  const pos = d ? RDevis.travaux(d) : [];
+  let html = '';
+  if (pos.length) html += `<button class="dvx-btn" onclick="openDvx()"><span style="font-size:22px">📄</span><span style="flex:1">Ajouter depuis le devis<small>${pos.length} positions · ${dvxEsc(d.src)}</small></span><span>›</span></button>`;
+  if (devisLignes.length) html += `<div class="dvx-chips">${devisLignes.map((l, i) => `<span class="dvx-chip">${dvxEsc(l.id)}${l.q ? ' · ' + dvxEsc(RDevis.fmtQ(l.q)) + ' ' + dvxEsc(l.u || '') : ''}<button onclick="delDvx(${i})">✕</button></span>`).join('')}</div>`;
+  el.innerHTML = html;
+}
+function openDvx() {
+  const cid = dvxChantierId(); const d = cid && RDevis.get(cid); if (!d) return;
+  dvxSel = {};
+  const ov = document.createElement('div'); ov.className = 'dvx-ov'; ov.id = 'dvx-ov';
+  ov.onclick = e => { if (e.target === ov) closeDvx(); };
+  ov.innerHTML = `<div class="dvx-sh"><div class="dvx-hd"><h3>📄 Positions du devis</h3><button class="dvx-x" onclick="closeDvx()">✕</button></div>
+    <input class="dvx-q" id="dvx-q" type="search" placeholder="Rechercher (ex. carrelage, 1.17…)" oninput="dvxFilter()">
+    <div class="dvx-list" id="dvx-list"></div>
+    <div class="dvx-ft"><button class="dvx-go" id="dvx-go" disabled onclick="addDvx()">Choisis une ou plusieurs positions</button></div></div>`;
+  document.body.appendChild(ov);
+  const deja = new Set(devisLignes.map(l => l.id));
+  let html = '', last = null;
+  RDevis.travaux(d).forEach(p => {
+    if (p.chT !== last) { last = p.chT; html += `<div class="dvx-ch" data-ch>${dvxEsc(p.ch)} · ${dvxEsc(p.chT)}</div>`; }
+    const dq = p.q != null ? `${RDevis.fmtQ(p.q)} ${dvxEsc(p.u || '')}` : dvxEsc(p.u || '');
+    html += `<div class="dvx-it" data-id="${dvxEsc(p.id)}" data-s="${dvxEsc((p.id + ' ' + p.t).toLowerCase())}" onclick="dvxTap(this)">
+      <div class="dvx-top"><span class="dvx-n">${dvxEsc(p.id)}</span><span>${dvxEsc(p.t)}${deja.has(p.id) ? ' <b style="color:var(--teal)">✓</b>' : ''}</span><span class="dvx-dq">${dq ? 'devis ' + dq : ''}</span></div>
+      <div class="dvx-qty" onclick="event.stopPropagation()">Fait aujourd'hui <input type="text" inputmode="decimal" placeholder="—" oninput="dvxQty(this)"> ${dvxEsc(p.u || '')}</div></div>`;
+  });
+  document.getElementById('dvx-list').innerHTML = html;
+}
+function closeDvx() { const o = document.getElementById('dvx-ov'); if (o) o.remove(); }
+function dvxFilter() {
+  const q = document.getElementById('dvx-q').value.trim().toLowerCase();
+  document.querySelectorAll('#dvx-list .dvx-it').forEach(it => { it.style.display = !q || it.dataset.s.includes(q) || it.classList.contains('on') ? '' : 'none'; });
+  // Titres de chapitre : cachés s'il n'y a plus rien dessous
+  document.querySelectorAll('#dvx-list [data-ch]').forEach(h => {
+    let n = h.nextElementSibling, any = false;
+    while (n && !n.hasAttribute('data-ch')) { if (n.style.display !== 'none') any = true; n = n.nextElementSibling; }
+    h.style.display = any ? '' : 'none';
+  });
+}
+function dvxTap(el) {
+  const id = el.dataset.id;
+  if (dvxSel[id]) { delete dvxSel[id]; el.classList.remove('on'); }
+  else { dvxSel[id] = { q: '' }; el.classList.add('on'); const inp = el.querySelector('input'); setTimeout(() => inp && inp.focus(), 50); }
+  dvxBtn();
+}
+function dvxQty(inp) { const id = inp.closest('.dvx-it').dataset.id; if (dvxSel[id]) dvxSel[id].q = inp.value; }
+function dvxBtn() {
+  const n = Object.keys(dvxSel).length, b = document.getElementById('dvx-go');
+  b.disabled = !n; b.textContent = n ? `Ajouter ${n} ligne${n > 1 ? 's' : ''} au rapport` : 'Choisis une ou plusieurs positions';
+}
+function addDvx() {
+  const cid = dvxChantierId(); const d = cid && RDevis.get(cid); if (!d) return;
+  const ta = document.getElementById('tx-travaux');
+  const add = [];
+  d.items.filter(p => dvxSel[p.id]).forEach(p => {
+    const q = parseFloat(String(dvxSel[p.id].q).replace(',', '.'));
+    const qOk = !isNaN(q) && q > 0;
+    const line = `• ${p.id} ${RDevis.court(p.t)}${qOk ? ' — ' + RDevis.fmtQ(q) + ' ' + (p.u || '') : ''}`.trim();
+    add.push(line);
+    devisLignes.push({ id: p.id, t: RDevis.court(p.t), u: p.u || '', q: qOk ? q : null, l: line });
+  });
+  if (!add.length) return;
+  ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n' : '') + add.join('\n');
+  autoGrowTravaux(); closeDvx(); renderDvBar(false); autoSaveDraft();
+  showToast(`📄 ${add.length} ligne${add.length > 1 ? 's' : ''} ajoutée${add.length > 1 ? 's' : ''}`);
+}
+function delDvx(i) {
+  const l = devisLignes[i]; if (!l) return;
+  const ta = document.getElementById('tx-travaux');
+  if (l.l) { const lines = ta.value.split('\n'); const k = lines.indexOf(l.l); if (k >= 0) { lines.splice(k, 1); ta.value = lines.join('\n'); autoGrowTravaux(); } }
+  devisLignes.splice(i, 1); renderDvBar(false); autoSaveDraft();
 }
 
 // ─── AUTO-GROW DESCRIPTION TRAVAUX ─────────────────────────────

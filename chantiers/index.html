@@ -12,6 +12,7 @@
 <script src="../commun.js"></script>
 <script src="../trello.js"></script>
 <script src="../trello-export.js"></script>
+<script src="../devis.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -89,6 +90,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .tr-att-b{flex:1;min-width:0;}.tr-att-n{font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tr-att-m{font-size:10.5px;color:var(--text3);margin-top:1px;}
 .tr-imp{flex-shrink:0;border:none;border-radius:8px;padding:7px 10px;font:700 11px 'Inter',sans-serif;cursor:pointer;background:var(--teal);color:#fff;}
+.tr-imp.dv{background:var(--navy);margin-left:4px;}
+.dvp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh);margin:-4px 0 12px;display:flex;align-items:center;gap:10px;}
+.dvp-card .dvp-t{flex:1;min-width:0;font-size:13px;font-weight:700;color:var(--text);}
+.dvp-card .dvp-s{font-size:11px;font-weight:600;color:var(--text3);margin-top:2px;}
+.dvp-ch{font-size:11px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.3px;margin:12px 0 4px;}
+.dvp-row{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text);}
+.dvp-row .dvp-n{font-weight:800;color:var(--text3);min-width:34px;}
+.dvp-row .dvp-q{margin-left:auto;white-space:nowrap;font-weight:700;color:var(--text2);padding-left:6px;}
 .tr-imp.done{background:var(--bg2);color:var(--text3);cursor:default;}
 .tr-empty{font-size:12px;color:var(--text3);padding:4px 0;}
 .tr-cta{width:100%;margin-top:4px;border:none;border-radius:10px;padding:11px;font:700 13px 'Inter',sans-serif;background:var(--navy);color:#fff;cursor:pointer;}
@@ -464,6 +473,12 @@ const firebaseConfig = {
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
+// Positions du devis (devis.js) : un document par chantier, chantiers/devpos_<id>
+if (window.RDevis) RDevis.setup({
+  save: (cid, d) => setDoc(doc(db,'chantiers','devpos_'+cid), d),
+  load: cid => getDoc(doc(db,'chantiers','devpos_'+cid)).then(s => s.exists() ? s.data() : null),
+  del:  cid => deleteDoc(doc(db,'chantiers','devpos_'+cid))
+});
 
 // Auth guard
 onAuthStateChanged(auth, user => {
@@ -589,7 +604,7 @@ function save(d) {
       // les fichiers qu'il n'a pas). On ne synchronise que les infos du chantier.
       const forFirestore = d.map(c=>{
         const copy = {...c};
-        delete copy.plans; copy.pdf = (c.pdf && c.pdf.parts) ? {name:c.pdf.name,size:c.pdf.size,pdfKey:c.pdf.pdfKey,parts:c.pdf.parts} : undefined;
+        delete copy.plans; copy.pdf = (c.pdf && c.pdf.parts) ? {name:c.pdf.name,size:c.pdf.size,pdfKey:c.pdf.pdfKey,parts:c.pdf.parts,trelloAtt:c.pdf.trelloAtt} : undefined;
         delete copy.plan; delete copy.planMeasures; // ancien format legacy
         return copy;
       });
@@ -843,6 +858,7 @@ async function saveChantier() {
       await savePdfBlob(key, currentPdfFile);
       const parts = await uploadDevis(item.id, currentPdfFile);
       item.pdf = { name: currentPdfFile.name, size: (currentPdfFile.size/1024).toFixed(0)+' Ko', pdfKey: key, parts };
+      const f0 = currentPdfFile; setTimeout(()=>lireDevis(item.id, f0, f0.name, true), 600);
     } catch(e) { console.error('Devis (création)', e); showToast('⚠️ Devis non enregistré : '+e.message, 6000); }
   }
   const data = [item, ...load()];
@@ -947,7 +963,8 @@ function refreshDetail(){
   _devisInlineOpen = false;
   const f = c.pdf;
   const bt = (t,fn,cls)=>`<button class="det-file-btn ${cls}" onclick="${fn}">${t}</button>`;
-  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px${f?';cursor:pointer':''}" ${f?'onclick="viewDevis()"':''}><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size+' · toucher pour ouvrir':'Aucun fichier'}</div></div><div class="det-file-actions" onclick="event.stopPropagation()">${f?bt('Ouvrir','viewDevis()','primary'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div><div id="det-devis-inline" style="display:none;margin-top:8px"></div>`;
+  document.getElementById('det-devis-wrap').innerHTML = `<div class="det-file-card" style="margin-top:12px${f?';cursor:pointer':''}" ${f?'onclick="viewDevis()"':''}><span class="det-file-icon">📄</span><div class="det-file-info"><div class="det-file-name">${f?esc(f.name):'Devis (PDF)'}</div><div class="det-file-size">${f?f.size+' · toucher pour ouvrir':'Aucun fichier'}</div></div><div class="det-file-actions" onclick="event.stopPropagation()">${f?bt('Ouvrir','viewDevis()','primary'):''}${bt(f?'Remplacer':'Importer',"document.getElementById('det-devis-input').click()",'ghost')}</div></div><div id="det-devis-inline" style="display:none;margin-top:8px"></div><div id="det-devpos"></div>`;
+  renderDevPos();
 }
 function newLinkedNote(){ if(window.openNotes) window.openNotes({nouveau:true,chantierId:currentDetailId}); }
 window.newLinkedNote = newLinkedNote;
@@ -1388,7 +1405,9 @@ async function renderTrelloSection(fresh){
 function trIsImported(c, attId){ return getPlansOf(c).some(p=>p.trelloAtt===attId); }
 function trAttRow(c, x, i, where){
   const a = x.a, isPdf = TR.kindOf(a)==='pdf' && a.isUpload;
-  const imp = isPdf ? (trIsImported(c,a.id) ? `<button class="tr-imp done" onclick="event.stopPropagation()">✓ Dans Plans</button>` : `<button class="tr-imp" onclick="event.stopPropagation();trImportPlan(${i},'${where||'infos'}')">📐 Vers Plans</button>`) : '';
+  const isDv = c.pdf && c.pdf.trelloAtt===a.id;
+  const imp = isPdf ? ((trIsImported(c,a.id) ? `<button class="tr-imp done" onclick="event.stopPropagation()">✓ Dans Plans</button>` : `<button class="tr-imp" onclick="event.stopPropagation();trImportPlan(${i},'${where||'infos'}')">📐 Vers Plans</button>`)
+    + (where==='plan' ? '' : isDv ? `<button class="tr-imp done" style="margin-left:4px" onclick="event.stopPropagation()">✓ Devis</button>` : `<button class="tr-imp dv" onclick="event.stopPropagation();trImportDevis(${i})">📄 Devis</button>`)) : '';
   return `<div class="tr-att" onclick="trViewAtt(${i},'${where||'infos'}')"><span class="tr-att-i">${TR.fileIcon(a)}</span><div class="tr-att-b"><div class="tr-att-n">${esc(a.name||a.url)}</div><div class="tr-att-m">${[TR.fmtBytes(a.bytes), a.date?new Date(a.date).toLocaleDateString('fr-CH'):''].filter(Boolean).join(' · ')}</div></div>${imp}</div>`;
 }
 function trAttsFrom(where){ const el = document.getElementById(where==='plan'?'det-trello-plans':'det-trello-wrap'); return (el && el._atts) || []; }
@@ -1425,6 +1444,84 @@ async function trImportPlan(i, where){
     showToast('❌ Impossible de récupérer le fichier depuis Trello', 6000);
   }
 }
+// Copie un PDF de Trello comme devis du chantier, puis lit ses positions
+async function trImportDevis(i){
+  const x = trAttsFrom('infos')[i]; if(!x) return;
+  const cid = currentDetailId;
+  const cur = load().find(z=>z.id===cid);
+  if(cur && cur.pdf && !(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Remplacer le devis actuel par « '+(x.a.name||'ce PDF')+' » ?', {ok:'Remplacer'}))) return;
+  showToast('⏳ Téléchargement du devis…', 15000);
+  try{
+    const raw = await TR.downloadBlob(x.a, x.cardId);
+    if(!raw || raw.size<100) throw new Error('fichier vide');
+    const blob = new Blob([raw],{type:'application/pdf'});
+    const pdfKey = `devis_${cid}`;
+    await savePdfBlob(pdfKey, blob); delete blobUrlCache[pdfKey];
+    const parts = await uploadDevis(cid, blob);
+    const data = [...load()]; const idx = data.findIndex(z=>z.id===cid); if(idx<0) return;
+    data[idx] = {...data[idx], pdf:{ name:x.a.name||'Devis.pdf', size:(blob.size/1024).toFixed(0)+' Ko', pdfKey, parts, trelloAtt:x.a.id }};
+    if(!save(data)) return;
+    renderList(); if(currentDetailId===cid) refreshDetail();
+    showToast('✓ Devis enregistré');
+    lireDevis(cid, blob, x.a.name, true);
+  }catch(e){
+    console.warn('Import devis Trello', e);
+    showToast('❌ Impossible de récupérer le devis depuis Trello', 6000);
+  }
+}
+window.trImportDevis = trImportDevis;
+
+// ── Positions du devis (lecture automatique des devis Sorba) ──
+let _dvBusy = {};
+async function lireDevis(cid, src, name, auto){
+  if(!window.RDevis || _dvBusy[cid]) return;
+  _dvBusy[cid] = true; if(currentDetailId===cid) renderDevPos();
+  try{
+    const d = await RDevis.store(cid, src, name);
+    const n = RDevis.travaux(d).length;
+    showToast(`📋 ${n} position${n>1?'s':''} lue${n>1?'s':''} dans le devis`, 3500);
+  }catch(e){
+    console.warn('Lecture devis', e);
+    showToast((auto?'⚠️ Positions non lues : ':'❌ ')+e.message, 7000);
+  }finally{
+    delete _dvBusy[cid]; if(currentDetailId===cid) renderDevPos();
+  }
+}
+async function relireDevis(){
+  const c = load().find(x=>x.id===currentDetailId); if(!c||!c.pdf) return;
+  await ensureDevis(c);
+  const url = await getFileUrl(c.pdf);
+  if(!url){ showToast('❌ Devis introuvable sur cet appareil'); return; }
+  const blob = await fetch(url).then(r=>r.blob());
+  lireDevis(c.id, blob, c.pdf.name, false);
+}
+function renderDevPos(){
+  const el = document.getElementById('det-devpos'); if(!el || !window.RDevis) return;
+  const c = load().find(x=>x.id===currentDetailId); if(!c){ el.innerHTML=''; return; }
+  const d = RDevis.get(c.id);
+  if(_dvBusy[c.id]){ el.innerHTML = `<div class="dvp-card"><div class="dvp-t">⏳ Lecture du devis…</div></div>`; return; }
+  if(!d){
+    el.innerHTML = c.pdf ? `<div class="dvp-card"><div class="dvp-t">📋 Positions du devis<div class="dvp-s">Pas encore lues</div></div><button class="det-file-btn primary" onclick="relireDevis()">Lire le devis</button></div>` : '';
+    // Peut-être déjà lues sur un autre appareil
+    if(!d && !_dvTried[c.id]){ _dvTried[c.id]=1; RDevis.fetchRemote(c.id).then(r=>{ if(r && currentDetailId===c.id) renderDevPos(); }); }
+    return;
+  }
+  const tv = RDevis.travaux(d).length, rg = d.items.filter(p=>p.regie).length;
+  el.innerHTML = `<div class="dvp-card" style="cursor:pointer" onclick="voirDevPos()"><div class="dvp-t">📋 ${tv} position${tv>1?'s':''} de travaux${rg?` · ${rg} tarifs régie`:''}<div class="dvp-s">Lues le ${new Date(d.at).toLocaleDateString('fr-CH')} · proposées dans le Rapport</div></div><div onclick="event.stopPropagation()" style="display:flex;gap:6px">${c.pdf?`<button class="det-file-btn ghost" onclick="relireDevis()">Relire</button>`:''}<button class="det-file-btn primary" onclick="voirDevPos()">Voir</button></div></div>`;
+}
+const _dvTried = {};
+function voirDevPos(){
+  const d = RDevis.get(currentDetailId); if(!d) return;
+  const qs = p => p.q!=null ? `${RDevis.fmtQ(p.q)} ${esc(p.u||'')}` : (p.u ? `<span style="color:var(--text3)">${esc(p.u)}</span>` : '');
+  let html = '', last = null;
+  d.items.forEach(p=>{
+    if(p.chT!==last){ last = p.chT; html += `<div class="dvp-ch">${esc(p.ch)} · ${esc(p.chT)}</div>`; }
+    html += `<div class="dvp-row" style="${p.cache||p.regie?'opacity:.5':''}"><span class="dvp-n">${esc(p.n)}</span><span>${esc(p.t)}</span><span class="dvp-q">${qs(p)}</span></div>`;
+  });
+  trSheet('📋 Positions du devis', `<div style="font-size:11px;color:var(--text3);margin-bottom:4px">${esc(d.src)} — les lignes grisées (arrondi, imprévus, tarifs de régie) ne sont pas proposées dans les Travaux.</div>${html}`);
+}
+Object.assign(window,{relireDevis,voirDevPos});
+
 // Onglet Plan : PDF de la carte Trello pas encore importés
 async function renderTrelloPlans(){
   const el = document.getElementById('det-trello-plans'); if(!el || !TR || !TR.connected()) return;
@@ -1772,6 +1869,7 @@ async function handleDetFileUpload(event, field){
     if(field==='plan') renderPlanList(); else refreshDetail();
     renderList();
     showToast(`✓ ${field==='plan'?'Plan importé':'Devis enregistré'}`);
+    if(field==='pdf') lireDevis(currentDetailId, file, file.name, true);
   } catch(e){
     console.error('❌ Erreur enregistrement local:', e);
     showToast('❌ Enregistrement échoué : '+e.message, 8000);
@@ -1785,6 +1883,7 @@ async function removeChantier(id){
   save(load().filter(c=>c.id!==id));
   try{ const s = await getDocs(query(collection(db,'chantiers'),where('chantierId','==',id))); s.docs.forEach(x=>deleteDoc(x.ref)); }catch(e){ console.warn(e); }
   const a = rapLocal(); delete a[id]; localStorage.setItem(RAPK,JSON.stringify(a));
+  if(window.RDevis) RDevis.remove(id).catch(()=>{});
 }
 async function deleteCurrentChantier() {
   if (!currentDetailId) return;
