@@ -171,7 +171,106 @@
   function travaux(d){ return ((d && d.items) || []).filter(p => !p.regie && !p.cache); }
   // Texte court d'une position (pour la ligne de rapport)
   function court(t, max){ max = max || 90; if (t.length <= max) return t; const c = t.slice(0, max); return c.slice(0, Math.max(c.lastIndexOf(' '), 40)).replace(/[ ,;(]+$/, '') + '…'; }
+
+  // ── Tâches proposées pour une position (règles du métier) ─────────────
+  // « Mise à disposition d'un container…, y compris frais de transports »
+  //   → « Transport container… », « Replis container… »
+  const VERBES = ['installation','déconstruction','démolition','démontage','dépose','suppression','piquage','chargement','évacuation','coupe','coupes','traçage','creuse','remblayage','remblai','compactage','coffrage','ferraillage','bétonnage','pose','fourniture','fermeture','création','obturation','réglage','talochage','crépissage','rhabillage','implantation','établissement','étayage','protection','protections','nettoyage','sciage','carottage','forage','montage','terrassement','repérage','détection','recherche','entreposage','transport','raclage','encollage','signalisation','location','réalisation','façon','construction','percement','scellement','jointoyage','enrobage','curage','dégrappage','découpe','reprise','renforcement','remise en place','mise en place','remise en état','raccordement','exécution','confection','application','préparation','démolition','dallage','pavage','surfaçage','arrosage','sondage','sondages','tringlage','vidange','pompage','débroussaillage','déplacement','abattage','dessouchage','déblaiement','nivellement','talutage','enlèvement','remplissage','scarification','fraisage','sablage','hydrodémolition','injection','ancrage','chevillage','perçage','meulage','ponçage','bouchardage','lissage','repli','replis','déplacements','brossage','lavage','garnissage','toilage','réfection','transplantation','ébarbage','ragréage','dégagement','modification','ajustage'];
+  const LIENS = new Set(['et','de','d\'','du','des','la','le','les','l\'','pour','/',',','direct','directe','directs','franche','franches','soigné','soignée','soignés','éventuel','éventuelle','éventuels','éventuelles','ou','à','au','aux','main','machine','main/machine','manuel','manuelle']);
+  const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+  function nettoie(t){
+    return t.replace(/\s*,?\s*y\s*c(?:ompris|\.)\b.*$/i, '')
+      .replace(/\s*,?\s*(selon (estimation|bon( de livraison)?|métré|plans?)|métrée? (en plus[- ]value|selon .*)|cubée?s? sur v[ée]hicules?|\(effectués en régie\)|selon estimation)\.?\s*$/i, '')
+      .replace(/\s*,?\s*(selon (estimation|bon( de livraison)?)|cubée?s? sur v[ée]hicules?)\b.*$/i, '')
+      .replace(/[\s,.;]+$/, '').trim();
+  }
+  function objet(o){
+    o = o.replace(/\.\s+\(?[A-ZÀ-Ý].*$/, '').replace(/\s+pour (?:l')?évacuation\b.*$/i, '')
+         .replace(/\s*\([^()]*\)?/g, m => /\d/.test(m) && !/compris|forfait|compt/i.test(m) ? m : '').replace(/,?\s*\.\.\./g, '').replace(/[\s,.]*(\.\.\.|…)[\s,.]*$/, '').replace(/[\s,;]+$/, '');
+    o = o.replace(/,\s+[A-ZÀ-Ý].*$/, '').replace(/^(hors de l'emprise des travaux|sur (?:votre|la) propriété|après le chantier|(?:au )?mortier|sur place|en place|à pied d'oeuvre|(?:pour )?l'ensemble du chantier)\s+(?:(?:de|du|des)\s+|d')?/i, '')
+         .replace(/\s+(sur votre propriété|hors de l'emprise).*$/i, '').replace(/^(d'une|d'un|d'|de la|de l'|des|du|de|une|un|la|le|les|l')(?=\s|[a-zàâéèêîôû])\s*/i, '').trim();
+    return court(o, 75);
+  }
+  const VRX = new RegExp('^(' + VERBES.slice().sort((a, b) => b.length - a.length).map(v => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')s?(?=[\\s,/.]|$)', 'i');
+  function genere(t){
+    let x = nettoie(t), m;
+    // Cas particuliers
+    if (/^installation de chantier/i.test(x)) return ['Installation de chantier', 'Repli de chantier'];
+    if ((m = x.match(/^frais d'installation\s*\/\s*replis? (?:d'une |d'un |de |des )?(.+)$/i))) return ['Installation ' + objet(m[1]), 'Replis ' + objet(m[1])];
+    if ((m = x.match(/^(?:mise|montant) à dispos(?:i)?tion (?:d'une |d'un |de |des )(?!travaux|pour)(.+)$/i))) return ['Transport ' + objet(m[1]), 'Replis ' + objet(m[1])];
+    if ((m = x.match(/^(?:frais de )?déplacements? et replis? (?:de |des |d')?(.+)$/i))) return ['Amenée ' + objet(m[1]), 'Replis ' + objet(m[1])];
+    if ((m = x.match(/^frais (?:et taxes )?(?:de |d')(?:évacuation|décharge) (?:de |des |d'|du )?(.+)$/i))) return ['Évacuation ' + objet(m[1])];
+    if ((m = x.match(/^frais (?:et taxes )?(?:de |d')(déchets.+)$/i))) return ['Évacuation ' + objet(m[1])];
+    // Préfixes sans action
+    x = x.replace(/^(montant à dispos(?:i)?tion pour (?:la |les |l')?|forfait (?:pour |d')?|plus[- ]value pour (?:la |le |les |l')?|frais de )/i, '')
+         .replace(/^(travaux (?:éventuels? )?(?:de |d'|des |du )?)/i, '').replace(/^(la |le |les |l')/i, '');
+    return analyse(x, t, '');
+  }
+  // Suite d'actions en tête (« déconstruction et chargement direct pour évacuation de »)
+  // puis l'objet ; une 2e action plus loin (« , création de… », « et de chargement… »)
+  // donne ses propres tâches.
+  function analyse(x, t, objParent){
+    x = x.replace(/\s*\([^()]*\)/g, m => /\d/.test(m) ? m : '');
+    const verbes = []; let r = x, prov = false;
+    for (let n = 0; n < 12; n++) {
+      r = r.replace(/^[\s,/]+/, '');
+      const mv = r.match(VRX);
+      if (mv) { verbes.push(mv[1].toLowerCase()); r = r.slice(mv[0].length); continue; }
+      const ml = r.match(/^(et\/ou|et|de la|de l'|d'une|d'un|de|d'|du|des|la|le|les|l'|une|un|pour|ou|à|au|aux|directe?s?|franches?|soignée?s?|éventuel(?:le)?s?|main\/machine|main|machine|manuelle?|provisoires?|travaux|ponctuels?)(?=[\s,/]|$)|^(d'|l')/i);
+      if (ml) { if (/^provisoire/i.test(ml[0])) prov = true; r = r.slice(ml[0].length); continue; }
+      break;
+    }
+    if (!verbes.length) return [];
+    r = r.replace(/\s+pour (permettre|la réalisation|réaliser|isoler).*$/i, '');
+    // 2e action plus loin dans le texte
+    let suite = [];
+    const ms = r.match(new RegExp('(,\\s*|\\s+(?:et|ou)\\s+(?:de\\s+|d\'|du\\s+|des\\s+)?)' + VRX.source.slice(1), 'i'));
+    if (ms) { suite = analyse(r.slice(ms.index + ms[1].length), t, null); r = r.slice(0, ms.index); }
+    r = r.replace(/\s+pour (permettre|la réalisation|réaliser|isoler).*$/i, '');
+    let obj = objet(r);
+    if (!obj && objParent) obj = objParent;
+    const vs = [];
+    verbes.forEach(v => {
+      if (v === 'coupes') v = 'coupe'; if (v === 'protections') v = 'protection';
+      if (v === 'chargement' || v === 'évacuation') v = 'chargement et évacuation';
+      if (v === 'déplacements') v = 'déplacement'; if (v === 'repli') v = 'replis';
+      if (v === 'fourniture' && (verbes.includes('pose') || verbes.includes('mise en place'))) return;
+      if ((v === 'réalisation' || v === 'exécution' || v === 'façon' || v === 'confection') && verbes.length > 1 && !verbes.includes('replis')) return;
+      if (!vs.includes(v)) vs.push(v);
+    });
+    if (vs.includes('dépose') && vs.includes('chargement et évacuation')) { vs.splice(vs.indexOf('chargement et évacuation'), 1); vs[vs.indexOf('dépose')] = 'dépose et évacuation'; }
+    const out = vs.map(v => cap(v) + (prov ? ' provisoire' : '') + (obj ? ' ' + obj : (objParent === null ? '\u0000' : '')));
+    if ((prov || /provisoire|enlèvement après|^location et pose/i.test(t)) && obj && !vs.some(v => /dépose|enlèvement|replis/.test(v)))
+      out.push('Dépose ' + (prov ? vs[0] + ' provisoire ' : '') + obj);
+    // Les tâches de la 2e action sans objet reprennent celui-ci
+    return out.concat(suite.map(s2 => s2.replace('\u0000', obj ? ' ' + obj : '')));
+  }
+  function taches(p){
+    if (!p || !p.t) return [];
+    let g = [];
+    try { g = genere(p.t); } catch (e) { g = []; }
+    return g.filter((v, i, a) => v && v.length > 3 && a.indexOf(v) === i);
+  }
+
+  // ── Mémoire des tâches (corrections de l'équipe, partagées) ───────────
+  const MKEY = 'rv6_devtaches';
+  const cle = t => { const s = nettoie(t).toLowerCase().replace(/[^a-z0-9àâäçéèêëîïôöûüù]+/g, ' ').trim().slice(0, 80); let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return 'k' + (h >>> 0).toString(36); };
+  function memAll(){ try { return JSON.parse(localStorage.getItem(MKEY) || '{}'); } catch (e) { return {}; } }
+  function memoire(p){ return (memAll()[cle(p.t)] || []).slice(); }
+  function memSet(p, list){
+    const a = memAll(), k = cle(p.t);
+    if (list.length) a[k] = list.slice(0, 8); else delete a[k];
+    try { localStorage.setItem(MKEY, JSON.stringify(a)); } catch (e) {}
+    if (fs && fs.saveTaches) fs.saveTaches(k, list.length ? list.slice(0, 8) : null).catch(e => console.warn('Mémoire tâches', e));
+  }
+  function retenir(p, tache){ tache = (tache || '').trim(); if (!tache) return; const l = memoire(p).filter(x => x !== tache); l.unshift(tache); memSet(p, l); }
+  function oublier(p, tache){ memSet(p, memoire(p).filter(x => x !== tache)); }
+  async function syncMemoire(){
+    if (!fs || !fs.loadTaches) return;
+    try { const m = await fs.loadTaches(); if (m) { const a = memAll(); Object.assign(a, m); localStorage.setItem(MKEY, JSON.stringify(a)); } } catch (e) { console.warn('Mémoire tâches', e); }
+  }
+
   const fmtQ = q => (q == null || isNaN(q)) ? '' : (Math.round(q * 100) / 100).toLocaleString('fr-CH', { maximumFractionDigits: 2 });
 
-  window.RDevis = { parse, parsePages, setup, store, get, fetchRemote, remove, travaux, court, fmtQ, all };
+  window.RDevis = { parse, parsePages, setup, store, get, fetchRemote, remove, travaux, court, fmtQ, all, taches, memoire, retenir, oublier, syncMemoire, _nettoie: nettoie };
 })();

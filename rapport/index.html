@@ -1518,6 +1518,14 @@ textarea { resize: none; }
 .dvx-qty{display:none;align-items:center;gap:8px;margin-top:8px;font-size:12px;font-weight:700;color:var(--teal);}
 .dvx-it.on .dvx-qty{display:flex;}
 .dvx-qty input{width:96px;padding:9px 10px;border:1.5px solid var(--teal);border-radius:8px;font:700 16px 'Inter',sans-serif;text-align:right;}
+.dvx-tk{display:none;flex-wrap:wrap;gap:6px;margin-top:9px;}
+.dvx-it.on .dvx-tk{display:flex;}
+.dvx-t{border:1.5px solid var(--border);background:#fff;color:var(--text);border-radius:18px;padding:7px 11px;font:600 12px 'Inter',sans-serif;cursor:pointer;text-align:left;display:flex;align-items:center;gap:6px;}
+.dvx-t.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.dvx-t.mem{border-style:dashed;}
+.dvx-t i{font-style:normal;opacity:.6;font-size:11px;padding-left:2px;}
+.dvx-t.dvx-dv:not(.on){color:var(--text-muted);font-weight:500;}
+.dvx-t.autre{color:var(--navy);border-color:var(--navy);background:#EEF3FB;}
 .dvx-ft{padding:10px 14px 14px;border-top:1px solid var(--border);}
 .dvx-go{width:100%;border:none;border-radius:var(--radius);background:var(--teal);color:#fff;font:800 15px 'Inter',sans-serif;padding:15px;cursor:pointer;}
 .dvx-go:disabled{opacity:.45;}
@@ -2153,7 +2161,10 @@ const _auth = firebase.auth();
 const _db   = firebase.firestore();
 if (window.RDevis) RDevis.setup({
   save: (cid, d) => _db.collection('chantiers').doc('devpos_' + cid).set(d),
-  load: cid => _db.collection('chantiers').doc('devpos_' + cid).get().then(x => x.exists ? x.data() : null)
+  load: cid => _db.collection('chantiers').doc('devpos_' + cid).get().then(x => x.exists ? x.data() : null),
+  // Mémoire des tâches corrigées (partagée entre appareils)
+  saveTaches: (k, list) => _db.collection('chantiers').doc('devis_taches').set({ type: 'devis_taches', [k]: list || firebase.firestore.FieldValue.delete() }, { merge: true }),
+  loadTaches: () => _db.collection('chantiers').doc('devis_taches').get().then(x => { if (!x.exists) return null; const d = x.data(); delete d.type; return d; })
 });
 
 // Auth guard
@@ -6234,6 +6245,7 @@ function renderDvBar(fetch) {
 function openDvx() {
   const cid = dvxChantierId(); const d = cid && RDevis.get(cid); if (!d) return;
   dvxSel = {};
+  if (!window._dvxMemSync) { window._dvxMemSync = 1; RDevis.syncMemoire(); }
   const ov = document.createElement('div'); ov.className = 'dvx-ov'; ov.id = 'dvx-ov';
   ov.onclick = e => { if (e.target === ov) closeDvx(); };
   ov.innerHTML = `<div class="dvx-sh"><div class="dvx-hd"><h3>📄 Positions du devis</h3><button class="dvx-x" onclick="closeDvx()">✕</button></div>
@@ -6248,6 +6260,7 @@ function openDvx() {
     const dq = p.q != null ? `${RDevis.fmtQ(p.q)} ${dvxEsc(p.u || '')}` : dvxEsc(p.u || '');
     html += `<div class="dvx-it" data-id="${dvxEsc(p.id)}" data-s="${dvxEsc((p.id + ' ' + p.t).toLowerCase())}" onclick="dvxTap(this)">
       <div class="dvx-top"><span class="dvx-n">${dvxEsc(p.id)}</span><span>${dvxEsc(p.t)}${deja.has(p.id) ? ' <b style="color:var(--teal)">✓</b>' : ''}</span><span class="dvx-dq">${dq ? 'devis ' + dq : ''}</span></div>
+      <div class="dvx-tk" onclick="event.stopPropagation()"></div>
       <div class="dvx-qty" onclick="event.stopPropagation()">Fait aujourd'hui <input type="text" inputmode="decimal" placeholder="—" oninput="dvxQty(this)"> ${dvxEsc(p.u || '')}</div></div>`;
   });
   document.getElementById('dvx-list').innerHTML = html;
@@ -6266,8 +6279,36 @@ function dvxFilter() {
 function dvxTap(el) {
   const id = el.dataset.id;
   if (dvxSel[id]) { delete dvxSel[id]; el.classList.remove('on'); }
-  else { dvxSel[id] = { q: '' }; el.classList.add('on'); const inp = el.querySelector('input'); setTimeout(() => inp && inp.focus(), 50); }
+  else { dvxSel[id] = { q: '', t: null }; el.classList.add('on'); dvxTaches(el); }
   dvxBtn();
+}
+function dvxPos(id) { const cid = dvxChantierId(); const d = cid && RDevis.get(cid); return d ? d.items.find(p => p.id === id) : null; }
+// Tâches proposées : mémoire (corrigées par l'équipe) puis règles, puis le texte du devis
+function dvxTaches(el) {
+  const id = el.dataset.id, p = dvxPos(id); if (!p) return;
+  const mem = RDevis.memoire(p), gen = RDevis.taches(p).filter(t => !mem.includes(t));
+  const sel = dvxSel[id];
+  if (sel.t == null) sel.t = mem[0] || gen[0] || RDevis.court(p.t);
+  const chip = (t, cls, x) => `<button class="dvx-t ${cls}${sel.t === t ? ' on' : ''}" data-t="${dvxEsc(t)}" onclick="dvxPick(this)">${dvxEsc(t)}${x ? `<i onclick="event.stopPropagation();dvxOublie(this)">✕</i>` : ''}</button>`;
+  el.querySelector('.dvx-tk').innerHTML = mem.map(t => chip(t, 'mem', true)).join('') + gen.map(t => chip(t, '', false)).join('')
+    + chip(RDevis.court(p.t), '', false).replace('class="dvx-t ', 'class="dvx-t dvx-dv ')
+    + `<button class="dvx-t autre" onclick="dvxAutre(this)">✏️ Autre…</button>`;
+}
+function dvxPick(b) {
+  const el = b.closest('.dvx-it'); dvxSel[el.dataset.id].t = b.dataset.t;
+  el.querySelectorAll('.dvx-t').forEach(x => x.classList.toggle('on', x === b));
+}
+function dvxAutre(b) {
+  const el = b.closest('.dvx-it'), id = el.dataset.id, p = dvxPos(id);
+  const t = prompt('Tâche pour la position ' + id + ' :', dvxSel[id].t || '');
+  if (!t || !t.trim()) return;
+  RDevis.retenir(p, t.trim()); dvxSel[id].t = t.trim(); dvxTaches(el);
+}
+function dvxOublie(i) {
+  const b = i.closest('.dvx-t'), el = b.closest('.dvx-it'), id = el.dataset.id;
+  RDevis.oublier(dvxPos(id), b.dataset.t);
+  if (dvxSel[id].t === b.dataset.t) dvxSel[id].t = null;
+  dvxTaches(el);
 }
 function dvxQty(inp) { const id = inp.closest('.dvx-it').dataset.id; if (dvxSel[id]) dvxSel[id].q = inp.value; }
 function dvxBtn() {
@@ -6281,9 +6322,12 @@ function addDvx() {
   d.items.filter(p => dvxSel[p.id]).forEach(p => {
     const q = parseFloat(String(dvxSel[p.id].q).replace(',', '.'));
     const qOk = !isNaN(q) && q > 0;
-    const line = `• ${p.id} ${RDevis.court(p.t)}${qOk ? ' — ' + RDevis.fmtQ(q) + ' ' + (p.u || '') : ''}`.trim();
+    const tache = dvxSel[p.id].t || RDevis.court(p.t);
+    // Une tâche choisie (hors texte brut du devis) remonte en tête la prochaine fois
+    if (tache !== RDevis.court(p.t)) RDevis.retenir(p, tache);
+    const line = `• ${p.id} ${tache}${qOk ? ' — ' + RDevis.fmtQ(q) + ' ' + (p.u || '') : ''}`.trim();
     add.push(line);
-    devisLignes.push({ id: p.id, t: RDevis.court(p.t), u: p.u || '', q: qOk ? q : null, l: line });
+    devisLignes.push({ id: p.id, t: tache, u: p.u || '', q: qOk ? q : null, l: line });
   });
   if (!add.length) return;
   ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n' : '') + add.join('\n');
