@@ -189,7 +189,7 @@
          .replace(/\s*\([^()]*\)?/g, m => /\d/.test(m) && !/compris|forfait|compt/i.test(m) ? m : '').replace(/,?\s*\.\.\./g, '').replace(/[\s,.]*(\.\.\.|…)[\s,.]*$/, '').replace(/[\s,;]+$/, '');
     o = o.replace(/,\s+[A-ZÀ-Ý].*$/, '').replace(/^(hors de l'emprise des travaux|sur (?:votre|la) propriété|après le chantier|(?:au )?mortier|sur place|en place|à pied d'oeuvre|(?:pour )?l'ensemble du chantier)\s+(?:(?:de|du|des)\s+|d')?/i, '')
          .replace(/\s+(sur votre propriété|hors de l'emprise).*$/i, '').replace(/^(d'une|d'un|d'|de la|de l'|des|du|de|une|un|la|le|les|l')(?=\s|[a-zàâéèêîôû])\s*/i, '').trim();
-    return court(o, 75);
+    return o;
   }
   const VRX = new RegExp('^(' + VERBES.slice().sort((a, b) => b.length - a.length).map(v => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')s?(?=[\\s,/.]|$)', 'i');
   function genere(t){

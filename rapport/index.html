@@ -1500,8 +1500,10 @@ textarea { resize: none; }
 .dvx-btn{width:100%;display:flex;align-items:center;gap:10px;border:1.5px dashed var(--navy);background:#EEF3FB;color:var(--navy);border-radius:var(--radius);padding:12px 14px;font:700 14px 'Inter',sans-serif;cursor:pointer;margin-bottom:12px;text-align:left;}
 .dvx-btn small{display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-top:1px;}
 .dvx-chips{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 12px;}
-.dvx-chip{display:flex;align-items:center;gap:6px;background:var(--navy);color:#fff;border-radius:20px;padding:5px 6px 5px 11px;font-size:12px;font-weight:700;}
-.dvx-chip button{border:none;background:rgba(255,255,255,.2);color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;cursor:pointer;padding:0;}
+.dvx-chips{flex-direction:column;}
+.dvx-chip{display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:10px;padding:8px 8px 8px 12px;font-size:13px;font-weight:600;line-height:1.35;}
+.dvx-chip>span{flex:1;min-width:0;white-space:normal;}
+.dvx-chip button{flex-shrink:0;border:none;background:rgba(255,255,255,.2);color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;cursor:pointer;padding:0;}
 .dvx-ov{position:fixed;inset:0;z-index:700;background:rgba(10,20,40,.5);display:flex;align-items:flex-end;}
 .dvx-sh{background:var(--bg);width:100%;max-height:92vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);}
 .dvx-hd{display:flex;align-items:center;gap:8px;padding:14px 14px 8px;}
@@ -1518,14 +1520,20 @@ textarea { resize: none; }
 .dvx-qty{display:none;align-items:center;gap:8px;margin-top:8px;font-size:12px;font-weight:700;color:var(--teal);}
 .dvx-it.on .dvx-qty{display:flex;}
 .dvx-qty input{width:96px;padding:9px 10px;border:1.5px solid var(--teal);border-radius:8px;font:700 16px 'Inter',sans-serif;text-align:right;}
-.dvx-tk{display:none;flex-wrap:wrap;gap:6px;margin-top:9px;}
+.dvx-tk{display:none;flex-direction:column;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
 .dvx-it.on .dvx-tk{display:flex;}
-.dvx-t{border:1.5px solid var(--border);background:#fff;color:var(--text);border-radius:18px;padding:7px 11px;font:600 12px 'Inter',sans-serif;cursor:pointer;text-align:left;display:flex;align-items:center;gap:6px;}
-.dvx-t.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.dvx-tl{font-size:11px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.3px;}
+.dvx-t{width:100%;border:1.5px solid var(--border);background:#fff;color:var(--text);border-radius:10px;padding:11px 12px;font:600 14px/1.35 'Inter',sans-serif;cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:10px;}
+.dvx-t .dvx-r{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:2px solid var(--text-light);margin-top:1px;box-sizing:border-box;}
+.dvx-t .dvx-tx{flex:1;min-width:0;white-space:normal;word-break:break-word;}
+.dvx-t .dvx-tx small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--text-light);margin-bottom:2px;}
+.dvx-t.on{border-color:var(--teal);background:#EAF6F4;}
+.dvx-t.on .dvx-r{border:5px solid var(--teal);}
+.dvx-t.dvx-dv .dvx-tx{font-weight:500;font-size:13px;color:var(--text-muted);}
 .dvx-t.mem{border-style:dashed;}
-.dvx-t i{font-style:normal;opacity:.6;font-size:11px;padding-left:2px;}
-.dvx-t.dvx-dv:not(.on){color:var(--text-muted);font-weight:500;}
-.dvx-t.autre{color:var(--navy);border-color:var(--navy);background:#EEF3FB;}
+.dvx-t i{font-style:normal;color:var(--text-light);font-size:13px;padding:0 2px 0 6px;}
+.dvx-t.autre{justify-content:center;color:var(--navy);border-color:var(--navy);background:#EEF3FB;font-weight:700;}
+.dvx-it.on .dvx-top{color:var(--text-muted);font-size:12px;}
 .dvx-ft{padding:10px 14px 14px;border-top:1px solid var(--border);}
 .dvx-go{width:100%;border:none;border-radius:var(--radius);background:var(--teal);color:#fff;font:800 15px 'Inter',sans-serif;padding:15px;cursor:pointer;}
 .dvx-go:disabled{opacity:.45;}
@@ -6239,7 +6247,7 @@ function renderDvBar(fetch) {
   const pos = d ? RDevis.travaux(d) : [];
   let html = '';
   if (pos.length) html += `<button class="dvx-btn" onclick="openDvx()"><span style="font-size:22px">📄</span><span style="flex:1">Ajouter depuis le devis<small>${pos.length} positions · ${dvxEsc(d.src)}</small></span><span>›</span></button>`;
-  if (devisLignes.length) html += `<div class="dvx-chips">${devisLignes.map((l, i) => `<span class="dvx-chip">${dvxEsc(l.id)}${l.q ? ' · ' + dvxEsc(RDevis.fmtQ(l.q)) + ' ' + dvxEsc(l.u || '') : ''}<button onclick="delDvx(${i})">✕</button></span>`).join('')}</div>`;
+  if (devisLignes.length) html += `<div class="dvx-chips">${devisLignes.map((l, i) => `<span class="dvx-chip"><span>${dvxEsc(l.t || l.id)}${l.q ? ' — ' + dvxEsc(RDevis.fmtQ(l.q)) + ' ' + dvxEsc(l.u || '') : ''}</span><button onclick="delDvx(${i})">✕</button></span>`).join('')}</div>`;
   el.innerHTML = html;
 }
 function openDvx() {
@@ -6249,17 +6257,17 @@ function openDvx() {
   const ov = document.createElement('div'); ov.className = 'dvx-ov'; ov.id = 'dvx-ov';
   ov.onclick = e => { if (e.target === ov) closeDvx(); };
   ov.innerHTML = `<div class="dvx-sh"><div class="dvx-hd"><h3>📄 Positions du devis</h3><button class="dvx-x" onclick="closeDvx()">✕</button></div>
-    <input class="dvx-q" id="dvx-q" type="search" placeholder="Rechercher (ex. carrelage, 1.17…)" oninput="dvxFilter()">
+    <input class="dvx-q" id="dvx-q" type="search" placeholder="Rechercher (ex. carrelage, container…)" oninput="dvxFilter()">
     <div class="dvx-list" id="dvx-list"></div>
     <div class="dvx-ft"><button class="dvx-go" id="dvx-go" disabled onclick="addDvx()">Choisis une ou plusieurs positions</button></div></div>`;
   document.body.appendChild(ov);
   const deja = new Set(devisLignes.map(l => l.id));
   let html = '', last = null;
   RDevis.travaux(d).forEach(p => {
-    if (p.chT !== last) { last = p.chT; html += `<div class="dvx-ch" data-ch>${dvxEsc(p.ch)} · ${dvxEsc(p.chT)}</div>`; }
+    if (p.chT !== last) { last = p.chT; html += `<div class="dvx-ch" data-ch>${dvxEsc(p.chT)}</div>`; }
     const dq = p.q != null ? `${RDevis.fmtQ(p.q)} ${dvxEsc(p.u || '')}` : dvxEsc(p.u || '');
     html += `<div class="dvx-it" data-id="${dvxEsc(p.id)}" data-s="${dvxEsc((p.id + ' ' + p.t).toLowerCase())}" onclick="dvxTap(this)">
-      <div class="dvx-top"><span class="dvx-n">${dvxEsc(p.id)}</span><span>${dvxEsc(p.t)}${deja.has(p.id) ? ' <b style="color:var(--teal)">✓</b>' : ''}</span><span class="dvx-dq">${dq ? 'devis ' + dq : ''}</span></div>
+      <div class="dvx-top"><span>${dvxEsc(p.t)}${deja.has(p.id) ? ' <b style="color:var(--teal)">✓</b>' : ''}</span><span class="dvx-dq">${dq ? 'devis ' + dq : ''}</span></div>
       <div class="dvx-tk" onclick="event.stopPropagation()"></div>
       <div class="dvx-qty" onclick="event.stopPropagation()">Fait aujourd'hui <input type="text" inputmode="decimal" placeholder="—" oninput="dvxQty(this)"> ${dvxEsc(p.u || '')}</div></div>`;
   });
@@ -6288,11 +6296,12 @@ function dvxTaches(el) {
   const id = el.dataset.id, p = dvxPos(id); if (!p) return;
   const mem = RDevis.memoire(p), gen = RDevis.taches(p).filter(t => !mem.includes(t));
   const sel = dvxSel[id];
-  if (sel.t == null) sel.t = mem[0] || gen[0] || RDevis.court(p.t);
-  const chip = (t, cls, x) => `<button class="dvx-t ${cls}${sel.t === t ? ' on' : ''}" data-t="${dvxEsc(t)}" onclick="dvxPick(this)">${dvxEsc(t)}${x ? `<i onclick="event.stopPropagation();dvxOublie(this)">✕</i>` : ''}</button>`;
-  el.querySelector('.dvx-tk').innerHTML = mem.map(t => chip(t, 'mem', true)).join('') + gen.map(t => chip(t, '', false)).join('')
-    + chip(RDevis.court(p.t), '', false).replace('class="dvx-t ', 'class="dvx-t dvx-dv ')
-    + `<button class="dvx-t autre" onclick="dvxAutre(this)">✏️ Autre…</button>`;
+  if (sel.t == null) sel.t = mem[0] || gen[0] || p.t;
+  const chip = (t, cls, x) => `<button class="dvx-t ${cls}${sel.t === t ? ' on' : ''}" data-t="${dvxEsc(t)}" onclick="dvxPick(this)"><span class="dvx-r"></span><span class="dvx-tx">${cls.includes('dvx-dv') ? '<small>Texte du devis</small>' : ''}${dvxEsc(t)}</span>${x ? `<i onclick="event.stopPropagation();dvxOublie(this)" title="Oublier">✕</i>` : ''}</button>`;
+  el.querySelector('.dvx-tk').innerHTML = `<div class="dvx-tl">Tâche faite aujourd'hui</div>`
+    + mem.map(t => chip(t, 'mem', true)).join('') + gen.map(t => chip(t, '', false)).join('')
+    + chip(p.t, 'dvx-dv', false)
+    + `<button class="dvx-t autre" onclick="dvxAutre(this)">✏️ Écrire une autre tâche…</button>`;
 }
 function dvxPick(b) {
   const el = b.closest('.dvx-it'); dvxSel[el.dataset.id].t = b.dataset.t;
@@ -6322,10 +6331,10 @@ function addDvx() {
   d.items.filter(p => dvxSel[p.id]).forEach(p => {
     const q = parseFloat(String(dvxSel[p.id].q).replace(',', '.'));
     const qOk = !isNaN(q) && q > 0;
-    const tache = dvxSel[p.id].t || RDevis.court(p.t);
+    const tache = dvxSel[p.id].t || p.t;
     // Une tâche choisie (hors texte brut du devis) remonte en tête la prochaine fois
-    if (tache !== RDevis.court(p.t)) RDevis.retenir(p, tache);
-    const line = `• ${p.id} ${tache}${qOk ? ' — ' + RDevis.fmtQ(q) + ' ' + (p.u || '') : ''}`.trim();
+    if (tache !== p.t) RDevis.retenir(p, tache);
+    const line = `• ${tache}${qOk ? ' — ' + RDevis.fmtQ(q) + ' ' + (p.u || '') : ''}`.trim();
     add.push(line);
     devisLignes.push({ id: p.id, t: tache, u: p.u || '', q: qOk ? q : null, l: line });
   });
