@@ -10,6 +10,7 @@
 <script src="../trello.js"></script>
 <script src="../trello-export.js"></script>
 <script src="../devis.js"></script>
+<script src="../postes.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1503,6 +1504,11 @@ textarea { resize: none; }
 .dvx-chips{flex-direction:column;}
 .dvx-chip{display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:10px;padding:8px 8px 8px 12px;font-size:13px;font-weight:600;line-height:1.35;}
 .dvx-chip>span{flex:1;min-width:0;white-space:normal;}
+.pst-sugg{display:none;margin-top:6px;border:1.5px solid var(--navy);border-radius:var(--radius-sm);overflow:hidden;background:#fff;}
+.pst-sugg .pst-hd{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;padding:6px 12px;background:#EEF3FB;}
+.pst-sugg button{display:block;width:100%;text-align:left;padding:10px 12px;border:none;border-top:1px solid var(--border);background:#fff;font:500 13px 'Inter',sans-serif;line-height:1.35;color:var(--text);cursor:pointer;}
+.pst-sugg button:active{background:#EEF3FB;}
+.pst-sugg button small{display:block;font-size:10.5px;font-weight:600;color:var(--text-muted);margin-top:2px;}
 .dvx-chip button{flex-shrink:0;border:none;background:rgba(255,255,255,.2);color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;cursor:pointer;padding:0;}
 .dvx-ov{position:fixed;inset:0;z-index:700;background:rgba(10,20,40,.5);display:flex;align-items:flex-end;}
 .dvx-sh{background:var(--bg);width:100%;max-height:92vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);}
@@ -1705,7 +1711,8 @@ textarea { resize: none; }
     <div class="card">
       <div class="card-header"><span class="icon">📝</span><h2>Description</h2></div>
       <div class="card-body">
-        <textarea id="tx-travaux" rows="8" style="overflow-y:hidden;" placeholder="Décrire les travaux effectués aujourd'hui…" oninput="autoGrowTravaux()"></textarea>
+        <textarea id="tx-travaux" rows="8" style="overflow-y:hidden;" placeholder="Décrire les travaux effectués aujourd'hui… (les postes s'affichent en écrivant)" oninput="autoGrowTravaux();pstSuggest()" onclick="pstSuggest()" onblur="setTimeout(pstHide,150)"></textarea>
+        <div id="pst-sugg" class="pst-sugg"></div>
       </div>
     </div>
 
@@ -2179,6 +2186,10 @@ if (window.RDevis) RDevis.setup({
 firebase.auth().onAuthStateChanged(user => {
   if (!user) { window.location.href = '../login.html'; return; }
   initRapport();
+  // Postes de travaux (gérés dans Ressources) → copie locale pour les propositions
+  _db.collection('ressources').doc('postes').get().then(x => {
+    if (x.exists && window.RPostes) { const d = x.data(); RPostes.setLocal(d.items || [], d.seeded || []); }
+  }).catch(e => console.warn('Postes', e));
 });
 
 // ─── DATA ─────────────────────────────────────────────────────
@@ -6348,6 +6359,44 @@ function delDvx(i) {
   const ta = document.getElementById('tx-travaux');
   if (l.l) { const lines = ta.value.split('\n'); const k = lines.indexOf(l.l); if (k >= 0) { lines.splice(k, 1); ta.value = lines.join('\n'); autoGrowTravaux(); } }
   devisLignes.splice(i, 1); renderDvBar(false); autoSaveDraft();
+}
+
+
+// ─── POSTES DE TRAVAUX : propositions en écrivant ───────────────
+// En tapant une ligne dans la description, l'app propose les postes de la
+// base (Ressources › Postes) qui correspondent. Tap = la ligne est remplacée
+// par le texte complet du poste. Pas de quantité ici (elles sont ailleurs).
+function pstLigne() {
+  const ta = document.getElementById('tx-travaux');
+  const c = ta.selectionStart, v = ta.value;
+  const a = v.lastIndexOf('\n', c - 1) + 1;
+  let b = v.indexOf('\n', c); if (b < 0) b = v.length;
+  return { ta, a, b, frag: v.slice(a, c), ligne: v.slice(a, b) };
+}
+function pstHide() { const el = document.getElementById('pst-sugg'); if (el) { el.style.display = 'none'; el.innerHTML = ''; } }
+function pstSuggest() {
+  const el = document.getElementById('pst-sugg'); if (!el || !window.RPostes) return;
+  const L = pstLigne();
+  const q = L.frag.replace(/^\s*[•\-*]\s*/, '');
+  if (q.trim().length < 3 || q.trim().split(/\s+/).length > 6) return pstHide();
+  const ligne = L.ligne.replace(/^\s*[•\-*]\s*/, '').trim();
+  const res = RPostes.search(q, 5).filter(p => p.texte !== ligne);
+  if (!res.length) return pstHide();
+  el.innerHTML = `<div class="pst-hd">📋 Postes</div>` + res.map(p =>
+    `<button type="button" onpointerdown="event.preventDefault()" onclick="pstPick('${dvxEsc(p.id)}')">${dvxEsc(p.texte)}${p.cat ? `<small>${dvxEsc(p.cat)}</small>` : ''}</button>`).join('');
+  el.style.display = 'block';
+  const r = el.getBoundingClientRect();
+  if (r.bottom > window.innerHeight) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+function pstPick(id) {
+  const p = RPostes.list().find(x => x.id === id); if (!p) return;
+  const L = pstLigne(), v = L.ta.value;
+  const fin = L.b >= v.length;                 // dernière ligne → on ouvre une nouvelle ligne
+  const ins = '• ' + p.texte + (fin ? '\n' : '');
+  L.ta.value = v.slice(0, L.a) + ins + v.slice(L.b);
+  const pos = L.a + ins.length;
+  L.ta.focus(); L.ta.setSelectionRange(pos, pos);
+  RPostes.used(id); pstHide(); autoGrowTravaux(); autoSaveDraft();
 }
 
 // ─── AUTO-GROW DESCRIPTION TRAVAUX ─────────────────────────────

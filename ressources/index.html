@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
 <script src="../commun.js"></script>
+<script src="../postes.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -154,6 +155,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .form-sec-label:first-child{margin-top:0;}
 .form-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
 .field{margin-bottom:10px;}
+.pst-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:6px;font-size:13px;line-height:1.4;color:var(--text);cursor:pointer;}
+.pst-item:active{background:var(--bg2);}
+.pst-info{font-size:12px;color:var(--text2);background:#EEF3FB;border-radius:var(--rs);padding:10px 12px;margin-bottom:12px;line-height:1.45;}
 .field label{display:block;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px;}
 .field input,.field select,.field textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;font-weight:500;padding:11px 13px;border-radius:var(--rs);-webkit-appearance:none;appearance:none;transition:border-color .15s;}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239AA3BC' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
@@ -278,6 +282,7 @@ body.mat-dragging *{cursor:grabbing!important;}
   <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
   <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
   <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
+  <div class="page" id="page-postes"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher un poste…" oninput="filterPostes(this.value)" autocomplete="off"><button class="add-fab" onclick="openPoste(null)">＋</button></div><div id="content-postes"></div></div>
 </div>
  
 <!-- BOTTOM NAV -->
@@ -288,9 +293,22 @@ body.mat-dragging *{cursor:grabbing!important;}
   <button class="nav-item" data-tab="materiel" onclick="switchTab('materiel')"><span class="nav-icon">🔧</span><span class="nav-label">Matériel</span><span class="nav-badge" id="badge-materiel">0</span></button>
   <button class="nav-item" data-tab="materiaux" onclick="switchTab('materiaux')"><span class="nav-icon">🪨</span><span class="nav-label">Matériaux</span><span class="nav-badge" id="badge-materiaux">0</span></button>
   <button class="nav-item" data-tab="evacuations" onclick="switchTab('evacuations')"><span class="nav-icon">🚮</span><span class="nav-label">Évac.</span><span class="nav-badge" id="badge-evacuations">0</span></button>
+  <button class="nav-item" data-tab="postes" onclick="switchTab('postes')"><span class="nav-icon">📋</span><span class="nav-label">Postes</span><span class="nav-badge" id="badge-postes">0</span></button>
 </nav>
  
 <div class="toast" id="toast"></div>
+
+<div class="modal-ov" id="modal-poste" onclick="if(event.target===this)closePoste()">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title" id="pst-title">📋 Nouveau poste</div><button class="modal-close" onclick="closePoste()">✕</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Texte du poste *</label><textarea id="pst-texte" rows="5" placeholder="Fourniture et mise en place de…"></textarea></div>
+      <div class="field"><label>Catégorie</label><input type="text" id="pst-cat" list="pst-cats" placeholder="Aménagements extérieurs, Enrobé…" autocomplete="off"><datalist id="pst-cats"></datalist></div>
+    </div>
+    <div class="modal-footer" style="display:flex;gap:8px;"><button class="btn btn-danger" id="pst-del" onclick="deletePoste()" style="flex:0 0 auto;width:auto;padding-left:16px;padding-right:16px;">Supprimer</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="savePoste()">Enregistrer</button></div>
+  </div>
+</div>
  
 <!-- ════════════════════════════════════
      MODAL GESTIONNAIRE CATÉGORIES
@@ -620,10 +638,10 @@ onAuthStateChanged(auth, user => {
 
 // ── CONFIG ──────────────────────────────────────────────
 const TABS    = ['equipe','machines','vehicules','materiel','materiaux','evacuations'];
-const TITLES  = {equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
+const TITLES  = {postes:'Postes de travaux',equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
 const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
 const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB',evacuations:'#F3F4F6'};
-const KEYS    = {equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
+const KEYS    = {postes:'rv6_postes',equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
 const CAT_KEY = 'rv6_res_categories';
  
 // Sections avec sous-catégories actives
@@ -730,6 +748,14 @@ async function syncFromFirestore(){
         save(s, cur.length ? cur : [['evac_gravats','Gravats','m³'],['evac_deblais','Déblais terre','m³'],['evac_enrobe','Enrobé','T'],['evac_beton','Béton concassé','m³'],['evac_ferraille','Ferraille','T'],['evac_dechets','Déchets chantier','benne'],['evac_boue','Boue/sédiments','m³'],['evac_bois','Bois','m³']].map(a=>({id:a[0],nom:a[1],unite:a[2],catId:'',subCatId:'',photo:'',icon:''})));
       }
     }
+    // Postes de travaux (+ postes de base pas encore ajoutés)
+    try {
+      const ps = await getDoc(doc(db,'ressources','postes'));
+      const d = ps.exists() ? ps.data() : { items: load('postes'), seeded: RPostes.seededLocal() };
+      const m = RPostes.merge(d.items, d.seeded);
+      RPostes.setLocal(m.items, m.seeded);
+      if (m.changed || !ps.exists()) savePostes(m.items, m.seeded);
+    } catch(e){ console.warn('Sync postes', e); }
     // Sync catégories
     const catSnap = await getDoc(doc(db,'ressources','_categories'));
     if(catSnap.exists()){
@@ -746,6 +772,8 @@ function switchTab(tab){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+tab));
   document.getElementById('hdrTitle').textContent=TITLES[tab];
+  document.querySelectorAll('.cat-mgr-btn').forEach(b=>b.style.display = tab==='postes' ? 'none' : '');
+  if(tab==='postes'){ renderPostes(); updateHeader(); document.querySelectorAll('.cat-mgr-btn').forEach(b=>b.style.display='none'); return; }
   renderContent(tab, searchFilters[tab]||'');
   updateHeader();
   const inp=document.querySelector('#page-'+tab+' .search-input');
@@ -2219,7 +2247,67 @@ async function initApp(){
   TABS.forEach(s => renderContent(s,''));
   updateBadges();
   populateAllCatSelects();
+  renderPostes();
 }
+
+// ── POSTES DE TRAVAUX ───────────────────────────────────
+// Textes complets (style devis Sorba) proposés dans le Rapport quand on écrit
+// la description des travaux. Base dans ../postes.js.
+let postesFilter = '';
+function savePostes(items, seeded){
+  RPostes.setLocal(items, seeded);
+  const sd = seeded || RPostes.seededLocal();
+  if(auth.currentUser) setDoc(doc(db,'ressources','postes'), { items, seeded: sd, updatedAt: Date.now() }).catch(e=>console.warn('Firestore postes',e));
+  const b=document.getElementById('badge-postes'); if(b) b.textContent=items.length;
+}
+const pEsc = t => String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function renderPostes(){
+  const el=document.getElementById('content-postes'); if(!el) return;
+  const items=load('postes');
+  const b=document.getElementById('badge-postes'); if(b) b.textContent=items.length;
+  const q=RPostes.norm(postesFilter);
+  const vis=q? items.filter(p=>q.split(' ').every(w=>RPostes.norm(p.texte+' '+(p.cat||'')).includes(w))) : items;
+  const groups={};
+  vis.forEach(p=>{ const c=p.cat||'Sans catégorie'; (groups[c]=groups[c]||[]).push(p); });
+  let html = `<div class="pst-info">📋 Ces postes sont proposés dans le <b>Rapport</b> quand tu écris la description des travaux. Tape sur un poste pour le modifier.</div>`;
+  if(!vis.length) html += `<div class="acc-empty">${items.length?'Aucun poste trouvé':'Aucun poste'}</div>`;
+  Object.keys(groups).sort((a,b)=>a.localeCompare(b,'fr')).forEach(c=>{
+    const k='pst_'+c, open = q || openAccordions[k];
+    html += `<div class="accordion"><div class="acc-header${open?' open':''}" onclick="togglePostesCat('${pEsc(k).replace(/'/g,"\\'")}')"><span class="acc-name">${pEsc(c)}</span><span class="acc-count">${groups[c].length}</span><span class="acc-chevron">›</span></div>
+      <div class="acc-body${open?' open':''}"><div class="acc-inner">${groups[c].map(p=>`<div class="pst-item" onclick="openPoste('${pEsc(p.id)}')">${pEsc(p.texte)}</div>`).join('')}</div></div></div>`;
+  });
+  el.innerHTML=html;
+}
+function togglePostesCat(k){ openAccordions[k]=!openAccordions[k]; renderPostes(); }
+function filterPostes(v){ postesFilter=v; renderPostes(); }
+let posteEditId=null;
+function openPoste(id){
+  posteEditId=id;
+  const p = id ? load('postes').find(x=>x.id===id) : null;
+  document.getElementById('pst-title').textContent = p ? '📋 Modifier le poste' : '📋 Nouveau poste';
+  document.getElementById('pst-texte').value = p ? p.texte : '';
+  document.getElementById('pst-cat').value = p ? (p.cat||'') : '';
+  document.getElementById('pst-del').style.display = p ? '' : 'none';
+  const cats=[...new Set(load('postes').map(x=>x.cat).filter(Boolean))].sort();
+  document.getElementById('pst-cats').innerHTML = cats.map(c=>`<option value="${pEsc(c)}">`).join('');
+  document.getElementById('modal-poste').classList.add('open');
+}
+function closePoste(){ document.getElementById('modal-poste').classList.remove('open'); }
+function savePoste(){
+  const texte=document.getElementById('pst-texte').value.replace(/\s+/g,' ').trim();
+  const cat=document.getElementById('pst-cat').value.trim();
+  if(!texte){ showToast('Texte du poste obligatoire'); return; }
+  const items=load('postes');
+  if(posteEditId){ const p=items.find(x=>x.id===posteEditId); if(p){ p.texte=texte; p.cat=cat; } }
+  else items.unshift({ id:'p'+Date.now().toString(36), texte, cat });
+  savePostes(items); closePoste(); renderPostes(); updateHeader(); showToast('✅ Poste enregistré');
+}
+async function deletePoste(){
+  if(!posteEditId) return;
+  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce poste ?'))) return;
+  savePostes(load('postes').filter(x=>x.id!==posteEditId)); closePoste(); renderPostes(); updateHeader(); showToast('🗑 Poste supprimé');
+}
+window.filterPostes=filterPostes; window.togglePostesCat=togglePostesCat; window.openPoste=openPoste; window.closePoste=closePoste; window.savePoste=savePoste; window.deletePoste=deletePoste;
 
 window.switchTab         = switchTab;
 window.filterPage        = filterPage;
