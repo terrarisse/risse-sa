@@ -1503,9 +1503,6 @@ textarea { resize: none; }
 .dvx-chips{flex-direction:column;}
 .dvx-chip{display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:10px;padding:8px 8px 8px 12px;font-size:13px;font-weight:600;line-height:1.35;}
 .dvx-chip>span{flex:1;min-width:0;white-space:normal;}
-.auto-tl{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.3px;margin:0 0 6px 2px;}
-.auto-chip{background:var(--teal);}
-.auto-chip button+button{margin-left:-2px;}
 .dvx-chip button{flex-shrink:0;border:none;background:rgba(255,255,255,.2);color:#fff;width:20px;height:20px;border-radius:50%;font-size:11px;cursor:pointer;padding:0;}
 .dvx-ov{position:fixed;inset:0;z-index:700;background:rgba(10,20,40,.5);display:flex;align-items:flex-end;}
 .dvx-sh{background:var(--bg);width:100%;max-height:92vh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0px);}
@@ -1703,7 +1700,6 @@ textarea { resize: none; }
 
     <!-- Positions du devis (si le chantier a un devis lu) -->
     <div id="dvx-bar"></div>
-    <div id="auto-bar"></div>
 
     <!-- Description — toujours visible -->
     <div class="card">
@@ -4262,7 +4258,6 @@ function collectData() {
     locSelection: locSelection,
     travaux: document.getElementById('tx-travaux').value,
     devisLignes: devisLignes,
-    autoLignes: autoLignes,
     metres: metresData,
     fournitures: fournitData,
     fournitSelection: fournitSelection,
@@ -4323,7 +4318,6 @@ function loadDraft() {
     // Travaux
     if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
     devisLignes = Array.isArray(d.devisLignes) ? d.devisLignes : []; renderDvBar(false);
-    autoLignes = Array.isArray(d.autoLignes) ? d.autoLignes : []; renderAutoBar();
 
     // Métrés
     if (d.metres && d.metres.length > 0) {
@@ -4339,8 +4333,6 @@ function loadDraft() {
 
     // Évacuations
     restoreEvac(d);
-    // Brouillon d'avant les noms générés : ses articles sont considérés comme déjà traités
-    if (!Array.isArray(d.autoLignes)) { autoLignes = autoVoulues().map(w => ({ k: w.k, l: null })); renderAutoBar(); }
 
     updateHeader();
   } catch(e) { console.warn('Draft load error', e); }
@@ -4407,7 +4399,6 @@ function resetRapport() {
   document.getElementById('tx-travaux').value = '';
   document.getElementById('tx-travaux').style.height = 'auto';
   devisLignes = []; renderDvBar(false);
-  autoLignes = []; renderAutoBar();
 
   // Métrés — fermer le bloc et vider la liste
   if (extrasState.metres) toggleExtra('metres');
@@ -4858,7 +4849,6 @@ function toggleFournitSelect(key, catName, nom, defaultUnit, subCat) {
   }
   updateFournitCatCount();
   renderFournitSelectionZone();
-  autoNomsSync();
   autoSaveDraft();
 }
 
@@ -5157,7 +5147,7 @@ function wireEvacInlineControls(key, uid) {
   const stop = (e) => e.stopPropagation();
   [unitSel, btnHalf, btnOne, qtyInp, btnDel].forEach(el => el.addEventListener('click', stop));
 
-  unitSel.onchange = () => { evacSelection[key].unit = unitSel.value; renderEvacSelectionZone(); autoNomsSync(true); autoSaveDraft(); };
+  unitSel.onchange = () => { evacSelection[key].unit = unitSel.value; renderEvacSelectionZone(); autoSaveDraft(); };
 
   const updateQty = (val) => {
     const q = Math.round(val * 4) / 4;
@@ -5268,7 +5258,6 @@ function syncEvacInlineQty(key) {
   if (inp) inp.value = evacSelection[key]?.qty || '';
 }
 function syncEvacInlineUnit(key) {
-  autoNomsSync(true);
   const uid = window._evacUids?.[key];
   if (!uid) return;
   const sel = document.getElementById('ectrl-unit-' + uid);
@@ -5306,7 +5295,6 @@ function toggleEvacSelect(key, catName, nom, defaultUnit, subCat) {
   }
   updateEvacCatCount();
   renderEvacSelectionZone();
-  autoNomsSync();
   autoSaveDraft();
 }
 
@@ -5856,10 +5844,6 @@ async function modifierRapport(e, id, obj) {
 
   if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
   devisLignes = Array.isArray(d.devisLignes) ? d.devisLignes : []; renderDvBar(false);
-  autoLignes = Array.isArray(d.autoLignes) ? d.autoLignes : [];
-  // Ancien rapport sans suivi : on considère ses articles comme déjà traités
-  if (!Array.isArray(d.autoLignes)) { autoLignes = []; setTimeout(() => { autoVoulues().forEach(w => autoLignes.push({ k: w.k, l: null })); renderAutoBar(); }, 0); }
-  renderAutoBar();
 
   if (d.metres && d.metres.length > 0) {
     if (!extrasState.metres) toggleExtra('metres');
@@ -6364,125 +6348,6 @@ function delDvx(i) {
   const ta = document.getElementById('tx-travaux');
   if (l.l) { const lines = ta.value.split('\n'); const k = lines.indexOf(l.l); if (k >= 0) { lines.splice(k, 1); ta.value = lines.join('\n'); autoGrowTravaux(); } }
   devisLignes.splice(i, 1); renderDvBar(false); autoSaveDraft();
-}
-
-
-// ─── NOMS DE TRAVAUX GÉNÉRÉS (Fournitures / Évacuations) ────────
-// Chaque article choisi dans Fournit. ou Évac. ajoute tout seul une ligne de
-// travaux au style des devis Sorba (« Fourniture et mise en place de… »,
-// « Frais et taxes d'évacuation de…, cubés sur véhicule »). Plusieurs articles
-// d'une même sous-catégorie de fournitures = une seule ligne.
-// Lignes suivies dans autoLignes : retirées si l'article est désélectionné,
-// laissées tranquilles si l'utilisateur les a modifiées dans la description.
-// Corrections (✏️) retenues et partagées via la mémoire des tâches (RDevis).
-var autoLignes = [];
-const AUTO_OFF = '—';
-const AUTO_NOMS_COMMUNS = new Set(('bordure bordurette pavé pavés dalle dalles pierre gravier gravillon tout-venant terre boulet boulets sable grille '
-  + 'tuyau tube coude bouchon manchon embranchement réduction couvercle latte lambourde planche plateau panneau poutrelle carelet carrelet '
-  + 'distanceur réglette goutte liste bande laine treillis cage pannier natte géotextile béton mortier ciment chape brique gazon plastique '
-  + 'protection papier scotch profilé gravats déblais déblai enrobé ferraille déchets déchet boue boues bois souche souches gazon caniveau '
-  + 'regard chambre gaine drain fer acier tôle plaque').split(' '));
-function autoMin(t) {
-  // Met en minuscule le 1er mot s'il est un nom commun (garde les marques : Webermur, Holcim…)
-  const m = String(t || '').trim().match(/^(\S+)(.*)$/); if (!m) return '';
-  return AUTO_NOMS_COMMUNS.has(m[1].toLowerCase()) ? m[1].toLowerCase() + m[2] : m[1] + m[2];
-}
-function autoDe(obj) { return (/^[aeiouyhéèêàâîôûAEIOUYHÉÈÊ]/.test(obj) ? "d'" : 'de ') + obj; }
-function autoTrav(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
-// Gabarit selon la catégorie / le nom de la fourniture
-function autoNomFournit(items, sub) {
-  const ref = (items.map(i => (i.cat || '') + ' ' + (i.subCat || '') + ' ' + i.nom).join(' ') + ' ' + items.map(i => i.unit).join(' ')).toLowerCase();
-  let obj;
-  if (items.length === 1) obj = autoMin(items[0].nom);
-  else {
-    const noms = items.map(i => autoMin(i.nom));
-    obj = autoMin(sub) + ' (' + noms.slice(0, 3).join(', ') + (noms.length > 3 ? '…' : '') + ')';
-  }
-  if (/scotch|floorliner|papier de protection|protection|plastique|sicrall/.test(ref)) return 'Mise en place de protections (' + obj + ')';
-  if (/distanceur|taquet|goutte pendante|liste d'angle|réglette|coffrage/.test(ref)) return 'Fourniture de matériel de coffrage (' + obj + ')';
-  if (/pvc|\bpe\b|tube|tuyau|coude|manchon|embranchement|canalis|drain|regard|caniveau/.test(ref)) return 'Fourniture et pose ' + autoDe(obj);
-  if (/xps|eps|laine de|isolation|bande de rive/.test(ref)) return 'Fourniture et pose ' + (/isolation|laine|bande/.test(obj.toLowerCase()) ? autoDe(obj) : "d'isolation " + obj);
-  if (/treillis|armature|firipa|pannier|k335|k188/.test(ref)) return 'Fourniture et mise en place ' + autoDe(obj);
-  if (/mortier|ciment|chape|weber|sto ?crete|holcim|fixit|colle|enduit|\bsac\b|béton rapid|nanocrete|maxit/.test(ref)) return 'Fourniture et mise en œuvre ' + autoDe(obj);
-  return 'Fourniture et mise en place ' + autoDe(obj);
-}
-function autoNomEvac(v) {
-  const obj = autoMin(((v.subCat ? v.subCat + ' ' : '') + (v.nom || '')).trim());
-  const u = String(v.unit || '').toLowerCase();
-  const suf = /m³|m3/.test(u) ? ', cubés sur véhicule' : /^(t|kg|to)$/.test(u) ? ', à la pesée' : '';
-  return "Frais et taxes d'évacuation " + autoDe(obj) + suf;
-}
-// Liste voulue : [{k, gen}] dans l'ordre Fournit. puis Évac.
-function autoVoulues() {
-  const out = [], groupes = {};
-  Object.values(fournitSelection || {}).forEach(v => {
-    if (!v || !v.nom) return;
-    const g = v.subCat ? 'f:' + (v.cat || '') + '/' + v.subCat : 'f:' + v.nom;
-    (groupes[g] = groupes[g] || []).push(v);
-  });
-  Object.entries(groupes).forEach(([g, items]) => {
-    const k = items.length > 1 ? g : 'f:' + items[0].nom;
-    out.push({ k, gen: autoNomFournit(items, items[0].subCat || '') });
-  });
-  Object.values(evacSelection || {}).forEach(v => {
-    if (!v || !v.nom) return;
-    out.push({ k: 'e:' + (v.subCat ? v.subCat + ' ' : '') + v.nom, gen: autoNomEvac(v) });
-  });
-  return out;
-}
-function autoMem(k) { if (!window.RDevis) return null; const m = RDevis.memoire({ t: 'nom auto ' + k }); return m.length ? m[0] : null; }
-function autoTexte(w) { const m = autoMem(w.k); return m === AUTO_OFF ? null : (m || w.gen); }
-function autoNomsSync(silencieux) {
-  const ta = document.getElementById('tx-travaux'); if (!ta) return;
-  if (!window._dvxMemSync && window.RDevis) { window._dvxMemSync = 1; RDevis.syncMemoire(); }
-  let lines = ta.value ? ta.value.split('\n') : [];
-  const voulues = autoVoulues(), parK = {};
-  voulues.forEach(w => parK[w.k] = w);
-  const ajout = [];
-  // 1) lignes suivies : retirer / mettre à jour / oublier si modifiées à la main
-  autoLignes = autoLignes.filter(a => {
-    const idx = a.l ? lines.indexOf(a.l) : -1;
-    if (a.l && idx < 0) { a.l = null; }           // modifiée ou effacée à la main → plus suivie
-    const w = parK[a.k];
-    if (!w) { if (idx >= 0) lines.splice(idx, 1); return false; }
-    const t = autoTexte(w), l = t ? '• ' + t : null;
-    if (a.l && l !== a.l) { if (l) lines[idx] = l; else lines.splice(idx, 1); a.l = l; }
-    return true;
-  });
-  // 2) nouveaux articles → nouvelle ligne à la fin
-  const suivies = new Set(autoLignes.map(a => a.k));
-  voulues.forEach(w => {
-    if (suivies.has(w.k)) return;
-    const t = autoTexte(w), l = t ? '• ' + t : null;
-    autoLignes.push({ k: w.k, l });
-    if (l) { while (lines.length && !lines[lines.length - 1].trim()) lines.pop(); lines.push(l); ajout.push(t); }
-  });
-  ta.value = lines.join('\n');
-  autoGrowTravaux(); renderAutoBar();
-  if (!silencieux && ajout.length) showToast('✨ Ajouté aux travaux : ' + (ajout.length > 1 ? ajout.length + ' lignes' : ajout[0].slice(0, 60)));
-}
-function renderAutoBar() {
-  const el = document.getElementById('auto-bar'); if (!el) return;
-  const vis = autoLignes.map((a, i) => ({ a, i })).filter(x => x.a.l);
-  el.innerHTML = vis.length ? `<div class="auto-tl">✨ Lignes générées depuis Fournit. / Évac.</div><div class="dvx-chips">${vis.map(({ a, i }) =>
-    `<span class="dvx-chip auto-chip"><span>${dvxEsc(a.l.replace(/^•\s*/, ''))}</span><button onclick="autoEdit(${i})" title="Modifier">✏️</button><button onclick="autoDel(${i})" title="Retirer">✕</button></span>`).join('')}</div>` : '';
-}
-function autoEdit(i) {
-  const a = autoLignes[i]; if (!a || !a.l || !window.RDevis) return;
-  const t = prompt('Nom de la ligne (sera retenu pour les prochains rapports) :', a.l.replace(/^•\s*/, ''));
-  if (t == null) return;
-  const p = { t: 'nom auto ' + a.k };
-  RDevis.memoire(p).forEach(x => RDevis.oublier(p, x));
-  if (t.trim()) RDevis.retenir(p, t.trim());
-  autoNomsSync(true); autoSaveDraft();
-}
-function autoDel(i) {
-  const a = autoLignes[i]; if (!a || !a.l) return;
-  const ta = document.getElementById('tx-travaux');
-  const lines = ta.value.split('\n'), k = lines.indexOf(a.l);
-  if (k >= 0) { lines.splice(k, 1); ta.value = lines.join('\n'); autoGrowTravaux(); }
-  a.l = null; renderAutoBar(); autoSaveDraft();
-  if (window.RDevis && confirm('Ne plus proposer de ligne pour cet article ?')) RDevis.retenir({ t: 'nom auto ' + a.k }, AUTO_OFF);
 }
 
 // ─── AUTO-GROW DESCRIPTION TRAVAUX ─────────────────────────────
