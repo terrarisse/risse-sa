@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../desktop.css">
 <script src="../desktop.js"></script>
 <script src="../commun.js"></script>
+<script src="../devis.js"></script>
 <script src="../postes.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -298,13 +299,21 @@ body.mat-dragging *{cursor:grabbing!important;}
  
 <div class="toast" id="toast"></div>
 
+<div class="modal-ov" id="modal-pst2" onclick="if(event.target===this)closePst2()">
+  <div class="modal-sh">
+    <div class="modal-drag"><div class="modal-handle"></div></div>
+    <div class="modal-hdr"><div class="modal-title" id="pst2-title"></div><button class="modal-close" onclick="closePst2()">✕</button></div>
+    <div class="modal-body" id="pst2-body"></div>
+  </div>
+</div>
+
 <div class="modal-ov" id="modal-poste" onclick="if(event.target===this)closePoste()">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
     <div class="modal-hdr"><div class="modal-title" id="pst-title">📋 Nouveau poste</div><button class="modal-close" onclick="closePoste()">✕</button></div>
     <div class="modal-body">
       <div class="field"><label>Texte du poste *</label><textarea id="pst-texte" rows="5" placeholder="Fourniture et mise en place de…"></textarea></div>
-      <div class="field"><label>Catégorie</label><input type="text" id="pst-cat" list="pst-cats" placeholder="Aménagements extérieurs, Enrobé…" autocomplete="off"><datalist id="pst-cats"></datalist></div>
+      <div class="field"><label>Catégorie</label><select id="pst-cat" onchange="onPosteCatChange(this)"></select></div>
     </div>
     <div class="modal-footer" style="display:flex;gap:8px;"><button class="btn btn-danger" id="pst-del" onclick="deletePoste()" style="flex:0 0 auto;width:auto;padding-left:16px;padding-right:16px;">Supprimer</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="savePoste()">Enregistrer</button></div>
   </div>
@@ -616,7 +625,7 @@ body.mat-dragging *{cursor:grabbing!important;}
 // ── FIREBASE ────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where, documentId } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where, documentId, deleteField } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
@@ -629,6 +638,11 @@ const firebaseConfig = {
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
+// Actions proposées par position de devis (règles + corrections de l'équipe, devis.js)
+if (window.RDevis) RDevis.setup({
+  saveTaches: (k, list) => setDoc(doc(db,'chantiers','devis_taches'), { type:'devis_taches', [k]: list || deleteField() }, { merge:true }),
+  loadTaches: () => getDoc(doc(db,'chantiers','devis_taches')).then(x => { if(!x.exists()) return null; const d = x.data(); delete d.type; return d; })
+});
 if (window.RPostes) RPostes.setup({
   load: () => getDoc(doc(db,'ressources','postes')).then(x => x.exists() ? x.data() : null),
   save: d => setDoc(doc(db,'ressources','postes'), d)
@@ -757,7 +771,7 @@ async function syncFromFirestore(){
       const ps = await getDoc(doc(db,'ressources','postes'));
       const d = ps.exists() ? ps.data() : { items: load('postes'), seeded: RPostes.seededLocal() };
       const m = RPostes.merge(d.items, d.seeded);
-      RPostes.setLocal(m.items, m.seeded, d.ignores || []);
+      RPostes.setLocal(m.items, m.seeded, d.ignores || []); RPostes.setCats(d.cats || []);
       if (m.changed || !ps.exists()) savePostes(m.items, m.seeded);
     } catch(e){ console.warn('Sync postes', e); }
     // Sync catégories
@@ -2256,7 +2270,7 @@ async function initApp(){
 
 // ── POSTES DE TRAVAUX ───────────────────────────────────
 // Textes complets (style devis Sorba) proposés dans le Rapport quand on écrit
-// la description des travaux. Base dans ../postes.js.
+// la description des travaux. Base, catégories et import des devis : ../postes.js.
 let postesFilter = '';
 function savePostes(items, seeded){
   RPostes.setLocal(items, seeded);
@@ -2264,6 +2278,8 @@ function savePostes(items, seeded){
   const b=document.getElementById('badge-postes'); if(b) b.textContent=items.length;
 }
 const pEsc = t => String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const pJs  = t => pEsc(t).replace(/'/g,"\\'");
+const SANS_CAT = 'Sans catégorie';
 function renderPostes(){
   const el=document.getElementById('content-postes'); if(!el) return;
   const items=load('postes');
@@ -2271,38 +2287,54 @@ function renderPostes(){
   const q=RPostes.norm(postesFilter);
   const vis=q? items.filter(p=>q.split(' ').every(w=>RPostes.norm(p.texte+' '+(p.cat||'')).includes(w))) : items;
   const groups={};
-  vis.forEach(p=>{ const c=p.cat||'Sans catégorie'; (groups[c]=groups[c]||[]).push(p); });
-  let html = `<div class="pst-info">📋 Ces postes sont proposés dans le <b>Rapport</b> quand tu écris la description des travaux. Tape sur un poste pour le modifier.<br><button class="btn btn-ghost btn-sm" style="margin-top:8px;width:auto;" onclick="importPostesDevis()">📥 Importer depuis les devis des chantiers</button></div>`;
-  if(!vis.length) html += `<div class="acc-empty">${items.length?'Aucun poste trouvé':'Aucun poste'}</div>`;
-  Object.keys(groups).sort((a,b)=>a.localeCompare(b,'fr')).forEach(c=>{
+  if(!q) RPostes.cats().forEach(c=>groups[c]=[]);          // catégories créées, même vides
+  vis.forEach(p=>{ const c=p.cat||SANS_CAT; (groups[c]=groups[c]||[]).push(p); });
+  let html = `<div class="pst-info">📋 Ces postes sont proposés dans le <b>Rapport</b> quand tu écris la description des travaux. Tape sur un poste pour le modifier.
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="openPostesCats()">📁 Catégories</button></div></div>`;
+  if(!vis.length && q) html += `<div class="acc-empty">Aucun poste trouvé</div>`;
+  Object.keys(groups).sort((a,b)=> a===SANS_CAT ? 1 : b===SANS_CAT ? -1 : a.localeCompare(b,'fr')).forEach(c=>{
     const k='pst_'+c, open = q || openAccordions[k];
-    html += `<div class="accordion"><div class="acc-header${open?' open':''}" onclick="togglePostesCat('${pEsc(k).replace(/'/g,"\\'")}')"><span class="acc-name">${pEsc(c)}</span><span class="acc-count">${groups[c].length}</span><span class="acc-chevron">›</span></div>
-      <div class="acc-body${open?' open':''}"><div class="acc-inner">${groups[c].map(p=>`<div class="pst-item" onclick="openPoste('${pEsc(p.id)}')">${pEsc(p.texte)}</div>`).join('')}</div></div></div>`;
+    const cv = c===SANS_CAT ? '' : c;
+    html += `<div class="accordion"><div class="acc-header${open?' open':''}" onclick="togglePostesCat('${pJs(k)}')"><span class="acc-name">${pEsc(c)}</span><span class="acc-count">${groups[c].length}</span><button class="acc-quick-add" onclick="event.stopPropagation();openPoste(null,'${pJs(cv)}')">＋</button><span class="acc-chevron">›</span></div>
+      <div class="acc-body${open?' open':''}"><div class="acc-inner">${groups[c].length ? groups[c].map(p=>`<div class="pst-item" onclick="openPoste('${pJs(p.id)}')">${pEsc(p.texte)}</div>`).join('') : '<div class="acc-empty">Aucun poste — ＋ pour en ajouter</div>'}</div></div></div>`;
   });
   el.innerHTML=html;
 }
 function togglePostesCat(k){ openAccordions[k]=!openAccordions[k]; renderPostes(); }
 function filterPostes(v){ postesFilter=v; renderPostes(); }
+
+// Formulaire d'un poste
 let posteEditId=null;
-function openPoste(id){
+function fillPosteCatSelect(val){
+  const sel=document.getElementById('pst-cat');
+  const all=RPostes.cats(); if(val && !all.includes(val)) all.push(val);
+  sel.innerHTML = `<option value="">${SANS_CAT}</option>` + all.map(c=>`<option value="${pEsc(c)}"${c===val?' selected':''}>${pEsc(c)}</option>`).join('') + `<option value="__new">➕ Nouvelle catégorie…</option>`;
+  sel.value = val||'';
+}
+function onPosteCatChange(sel){
+  if(sel.value!=='__new') return;
+  const c=(prompt('Nom de la nouvelle catégorie :')||'').trim();
+  if(c){ RPostes.setCats([...RPostes.cats(), c]); RPostes.push(); }
+  fillPosteCatSelect(c||'');
+}
+function openPoste(id, cat){
   posteEditId=id;
   const p = id ? load('postes').find(x=>x.id===id) : null;
   document.getElementById('pst-title').textContent = p ? '📋 Modifier le poste' : '📋 Nouveau poste';
   document.getElementById('pst-texte').value = p ? p.texte : '';
-  document.getElementById('pst-cat').value = p ? (p.cat||'') : '';
+  fillPosteCatSelect(p ? (p.cat||'') : (cat||''));
   document.getElementById('pst-del').style.display = p ? '' : 'none';
-  const cats=[...new Set(load('postes').map(x=>x.cat).filter(Boolean))].sort();
-  document.getElementById('pst-cats').innerHTML = cats.map(c=>`<option value="${pEsc(c)}">`).join('');
   document.getElementById('modal-poste').classList.add('open');
 }
 function closePoste(){ document.getElementById('modal-poste').classList.remove('open'); }
 function savePoste(){
   const texte=document.getElementById('pst-texte').value.replace(/\s+/g,' ').trim();
-  const cat=document.getElementById('pst-cat').value.trim();
+  let cat=document.getElementById('pst-cat').value.trim(); if(cat==='__new') cat='';
   if(!texte){ showToast('Texte du poste obligatoire'); return; }
   const items=load('postes');
   if(posteEditId){ const p=items.find(x=>x.id===posteEditId); if(p){ p.texte=texte; p.cat=cat; } }
   else items.unshift({ id:'p'+Date.now().toString(36), texte, cat });
+  if(cat) RPostes.setCats([...RPostes.cats(), cat]);
   savePostes(items); closePoste(); renderPostes(); updateHeader(); showToast('✅ Poste enregistré');
 }
 async function deletePoste(){
@@ -2310,22 +2342,72 @@ async function deletePoste(){
   if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce poste ?'))) return;
   savePostes(load('postes').filter(x=>x.id!==posteEditId)); closePoste(); renderPostes(); updateHeader(); showToast('🗑 Poste supprimé');
 }
-async function importPostesDevis(){
-  showToast('⏳ Lecture des devis des chantiers…');
-  let positions = [];
-  try {
-    const snap = await getDocs(query(collection(db,'chantiers'), where(documentId(),'>=','devpos_'), where(documentId(),'<','devpos_\uf8ff')));
-    snap.forEach(x => { const d = x.data(); if (d && Array.isArray(d.items)) positions = positions.concat(d.items); });
-  } catch(e){
-    console.warn('Import postes', e);
-    try { Object.values(JSON.parse(localStorage.getItem('rv6_devpos')||'{}')).forEach(d => positions = positions.concat(d.items||[])); } catch(_){}
-  }
-  if(!positions.length){ showToast('Aucun devis lu dans les chantiers'); return; }
-  const n = await RPostes.proposer(positions, '', k => { renderPostes(); updateHeader(); if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`); });
-  if(!n) showToast('✓ Toutes les positions des devis sont déjà dans les postes');
+
+// Fenêtre générique (choix du devis, catégories)
+function pstSheet(title, html){
+  document.getElementById('pst2-title').textContent=title;
+  document.getElementById('pst2-body').innerHTML=html;
+  document.getElementById('modal-pst2').classList.add('open');
 }
-window.importPostesDevis=importPostesDevis;
-window.filterPostes=filterPostes; window.togglePostesCat=togglePostesCat; window.openPoste=openPoste; window.closePoste=closePoste; window.savePoste=savePoste; window.deletePoste=deletePoste;
+function closePst2(){ document.getElementById('modal-pst2').classList.remove('open'); }
+
+// Catégories : créer, renommer, supprimer
+function openPostesCats(){
+  const items=load('postes'), n=c=>items.filter(p=>p.cat===c).length;
+  const cs=RPostes.cats();
+  pstSheet('📁 Catégories des postes', `
+    <div style="display:flex;gap:8px;margin-bottom:12px;"><div class="field" style="flex:1;margin:0;"><input type="text" id="pst-newcat" placeholder="Nouvelle catégorie…" autocomplete="off" onkeydown="if(event.key==='Enter')addPostesCat()"></div><button class="btn btn-navy" style="width:auto;padding:0 16px;" onclick="addPostesCat()">Créer</button></div>
+    ${cs.length ? cs.map(c=>`<div class="pst-item" style="display:flex;align-items:center;gap:8px;cursor:default;">
+      <span style="flex:1;font-weight:600;">${pEsc(c)}</span><span class="acc-count">${n(c)}</span>
+      <button class="btn btn-ghost btn-sm" style="width:auto;" onclick="renamePostesCat('${pJs(c)}')">✏️</button>
+      <button class="btn btn-ghost btn-sm" style="width:auto;" onclick="deletePostesCat('${pJs(c)}')">🗑</button></div>`).join('') : '<div class="acc-empty">Aucune catégorie</div>'}
+    <div style="font-size:11px;color:var(--text3);margin-top:10px;">Supprimer une catégorie ne supprime pas ses postes : ils passent dans « ${SANS_CAT} ».</div>`);
+}
+function addPostesCat(){
+  const c=(document.getElementById('pst-newcat').value||'').trim(); if(!c) return;
+  if(RPostes.cats().some(x=>x.toLowerCase()===c.toLowerCase())){ showToast('Cette catégorie existe déjà'); return; }
+  RPostes.setCats([...RPostes.cats(), c]); RPostes.push(); openAccordions['pst_'+c]=true;
+  renderPostes(); openPostesCats(); showToast('📁 Catégorie créée');
+}
+function renamePostesCat(old){
+  const c=(prompt('Nouveau nom de la catégorie :', old)||'').trim(); if(!c || c===old) return;
+  const items=load('postes'); items.forEach(p=>{ if(p.cat===old) p.cat=c; });
+  RPostes.setCats([...RPostes.cats().filter(x=>x!==old), c]);
+  RPostes.setLocal(items); RPostes.setCats(RPostes.cats().filter(x=>x!==old));
+  savePostes(items); renderPostes(); openPostesCats();
+}
+async function deletePostesCat(c){
+  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))(`Supprimer la catégorie « ${c} » ? Ses postes passent dans « ${SANS_CAT} ».`))) return;
+  const items=load('postes'); items.forEach(p=>{ if(p.cat===c) p.cat=''; });
+  RPostes.setLocal(items); RPostes.setCats(RPostes.cats().filter(x=>x!==c));
+  savePostes(items); renderPostes(); openPostesCats();
+}
+
+// Import : choisir un devis lu dans un chantier
+let _pstDevis = [];
+async function importPostesDevis(){
+  showToast('⏳ Recherche des devis lus…');
+  let docs = [];
+  try {
+    const snap = await getDocs(query(collection(db,'chantiers'), where(documentId(),'>=','devpos_'), where(documentId(),'<','devpos_')));
+    snap.forEach(x => { const d = x.data(); if (d && Array.isArray(d.items)) docs.push(d); });
+  } catch(e){ console.warn('Import postes', e); }
+  if(!docs.length){ try { docs = Object.values(JSON.parse(localStorage.getItem('rv6_devpos')||'{}')).filter(d=>d && Array.isArray(d.items)); } catch(_){} }
+  if(!docs.length){ showToast('Aucun devis lu dans les chantiers'); return; }
+  let ch=[]; try{ ch=JSON.parse(localStorage.getItem('rv6_chantiers_v1')||'[]'); }catch(_){}
+  docs.forEach(d=>{ const c=ch.find(x=>x.id===d.chantierId); d._nom = c ? c.nom : ''; });
+  docs.sort((a,b)=>(b.at||0)-(a.at||0));
+  _pstDevis = docs;
+  pstSheet('📥 Importer un devis', `<div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Choisis le devis : l'app propose des actions par position et une catégorie pour chacune.</div>`
+    + docs.map((d,i)=>{ const n=d.items.filter(p=>!p.regie&&!p.cache).length; return `<div class="pst-item" onclick="importPostesDe(${i})"><b>${pEsc(d._nom||d.src||'Devis')}</b><div style="font-size:11px;color:var(--text3);margin-top:2px;">${pEsc(d._nom?d.src:'')}${d._nom?' · ':''}${n} positions${d.at?' · lu le '+new Date(d.at).toLocaleDateString('fr-CH'):''}</div></div>`; }).join(''));
+}
+async function importPostesDe(i){
+  const d=_pstDevis[i]; if(!d) return;
+  closePst2();
+  const n = await RPostes.proposer(d.items, d._nom || d.src, k => { renderPostes(); updateHeader(); if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`); });
+  if(!n) showToast('✓ Rien de nouveau dans ce devis (déjà dans les postes ou refusé)');
+}
+Object.assign(window,{importPostesDevis,importPostesDe,filterPostes,togglePostesCat,openPoste,closePoste,savePoste,deletePoste,onPosteCatChange,openPostesCats,addPostesCat,renamePostesCat,deletePostesCat,closePst2});
 
 window.switchTab         = switchTab;
 window.filterPage        = filterPage;

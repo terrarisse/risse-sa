@@ -483,7 +483,10 @@ if (window.RPostes) RPostes.setup({
 if (window.RDevis) RDevis.setup({
   save: (cid, d) => setDoc(doc(db,'chantiers','devpos_'+cid), d),
   load: cid => getDoc(doc(db,'chantiers','devpos_'+cid)).then(s => s.exists() ? s.data() : null),
-  del:  cid => deleteDoc(doc(db,'chantiers','devpos_'+cid))
+  del:  cid => deleteDoc(doc(db,'chantiers','devpos_'+cid)),
+  // Actions corrigées par l'équipe (partagées avec le Rapport et les Postes)
+  saveTaches: (k, list) => setDoc(doc(db,'chantiers','devis_taches'), { type:'devis_taches', [k]: list || deleteField() }, { merge:true }),
+  loadTaches: () => getDoc(doc(db,'chantiers','devis_taches')).then(x => { if(!x.exists()) return null; const d = x.data(); delete d.type; return d; })
 });
 
 // Auth guard
