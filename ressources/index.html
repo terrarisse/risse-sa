@@ -616,7 +616,7 @@ body.mat-dragging *{cursor:grabbing!important;}
 // ── FIREBASE ────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where, documentId } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA5Zk0TBr_Qr4_12CO8_x8oymsxO7u6IEE",
@@ -629,6 +629,10 @@ const firebaseConfig = {
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
+if (window.RPostes) RPostes.setup({
+  load: () => getDoc(doc(db,'ressources','postes')).then(x => x.exists() ? x.data() : null),
+  save: d => setDoc(doc(db,'ressources','postes'), d)
+});
 
 // Auth guard
 onAuthStateChanged(auth, user => {
@@ -753,7 +757,7 @@ async function syncFromFirestore(){
       const ps = await getDoc(doc(db,'ressources','postes'));
       const d = ps.exists() ? ps.data() : { items: load('postes'), seeded: RPostes.seededLocal() };
       const m = RPostes.merge(d.items, d.seeded);
-      RPostes.setLocal(m.items, m.seeded);
+      RPostes.setLocal(m.items, m.seeded, d.ignores || []);
       if (m.changed || !ps.exists()) savePostes(m.items, m.seeded);
     } catch(e){ console.warn('Sync postes', e); }
     // Sync catégories
@@ -2256,8 +2260,7 @@ async function initApp(){
 let postesFilter = '';
 function savePostes(items, seeded){
   RPostes.setLocal(items, seeded);
-  const sd = seeded || RPostes.seededLocal();
-  if(auth.currentUser) setDoc(doc(db,'ressources','postes'), { items, seeded: sd, updatedAt: Date.now() }).catch(e=>console.warn('Firestore postes',e));
+  if(auth.currentUser) RPostes.push();
   const b=document.getElementById('badge-postes'); if(b) b.textContent=items.length;
 }
 const pEsc = t => String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -2269,7 +2272,7 @@ function renderPostes(){
   const vis=q? items.filter(p=>q.split(' ').every(w=>RPostes.norm(p.texte+' '+(p.cat||'')).includes(w))) : items;
   const groups={};
   vis.forEach(p=>{ const c=p.cat||'Sans catégorie'; (groups[c]=groups[c]||[]).push(p); });
-  let html = `<div class="pst-info">📋 Ces postes sont proposés dans le <b>Rapport</b> quand tu écris la description des travaux. Tape sur un poste pour le modifier.</div>`;
+  let html = `<div class="pst-info">📋 Ces postes sont proposés dans le <b>Rapport</b> quand tu écris la description des travaux. Tape sur un poste pour le modifier.<br><button class="btn btn-ghost btn-sm" style="margin-top:8px;width:auto;" onclick="importPostesDevis()">📥 Importer depuis les devis des chantiers</button></div>`;
   if(!vis.length) html += `<div class="acc-empty">${items.length?'Aucun poste trouvé':'Aucun poste'}</div>`;
   Object.keys(groups).sort((a,b)=>a.localeCompare(b,'fr')).forEach(c=>{
     const k='pst_'+c, open = q || openAccordions[k];
@@ -2307,6 +2310,21 @@ async function deletePoste(){
   if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce poste ?'))) return;
   savePostes(load('postes').filter(x=>x.id!==posteEditId)); closePoste(); renderPostes(); updateHeader(); showToast('🗑 Poste supprimé');
 }
+async function importPostesDevis(){
+  showToast('⏳ Lecture des devis des chantiers…');
+  let positions = [];
+  try {
+    const snap = await getDocs(query(collection(db,'chantiers'), where(documentId(),'>=','devpos_'), where(documentId(),'<','devpos_\uf8ff')));
+    snap.forEach(x => { const d = x.data(); if (d && Array.isArray(d.items)) positions = positions.concat(d.items); });
+  } catch(e){
+    console.warn('Import postes', e);
+    try { Object.values(JSON.parse(localStorage.getItem('rv6_devpos')||'{}')).forEach(d => positions = positions.concat(d.items||[])); } catch(_){}
+  }
+  if(!positions.length){ showToast('Aucun devis lu dans les chantiers'); return; }
+  const n = await RPostes.proposer(positions, '', k => { renderPostes(); updateHeader(); if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`); });
+  if(!n) showToast('✓ Toutes les positions des devis sont déjà dans les postes');
+}
+window.importPostesDevis=importPostesDevis;
 window.filterPostes=filterPostes; window.togglePostesCat=togglePostesCat; window.openPoste=openPoste; window.closePoste=closePoste; window.savePoste=savePoste; window.deletePoste=deletePoste;
 
 window.switchTab         = switchTab;

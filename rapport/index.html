@@ -2174,6 +2174,10 @@ const firebaseConfig = {
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const _auth = firebase.auth();
 const _db   = firebase.firestore();
+if (window.RPostes) RPostes.setup({
+  load: () => _db.collection('ressources').doc('postes').get().then(x => x.exists ? x.data() : null),
+  save: d => _db.collection('ressources').doc('postes').set(d)
+});
 if (window.RDevis) RDevis.setup({
   save: (cid, d) => _db.collection('chantiers').doc('devpos_' + cid).set(d),
   load: cid => _db.collection('chantiers').doc('devpos_' + cid).get().then(x => x.exists ? x.data() : null),
@@ -2187,9 +2191,7 @@ firebase.auth().onAuthStateChanged(user => {
   if (!user) { window.location.href = '../login.html'; return; }
   initRapport();
   // Postes de travaux (gérés dans Ressources) → copie locale pour les propositions
-  _db.collection('ressources').doc('postes').get().then(x => {
-    if (x.exists && window.RPostes) { const d = x.data(); RPostes.setLocal(d.items || [], d.seeded || []); }
-  }).catch(e => console.warn('Postes', e));
+  if (window.RPostes) RPostes.sync().catch(e => console.warn('Postes', e));
 });
 
 // ─── DATA ─────────────────────────────────────────────────────

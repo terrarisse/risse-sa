@@ -8,7 +8,7 @@
 // Ressources ne revient pas.
 // ═══════════════════════════════════════════════════════════════
 (function () {
-  const KEY = 'rv6_postes', SEED_KEY = 'rv6_postes_seeded', USE_KEY = 'rv6_postes_usage';
+  const KEY = 'rv6_postes', SEED_KEY = 'rv6_postes_seeded', USE_KEY = 'rv6_postes_usage', IGN_KEY = 'rv6_postes_ign';
 
   // Pour ajouter des postes : nouvelles lignes avec un id jamais utilisé.
   const BASE = [
@@ -74,7 +74,7 @@
   }
   // Liste locale (avec la base pas encore enregistrée, pour qu'elle soit dispo tout de suite)
   function list() { return merge(rd(KEY, []), rd(SEED_KEY, [])).items; }
-  function setLocal(items, seeded) { wr(KEY, items); if (seeded) wr(SEED_KEY, seeded); }
+  function setLocal(items, seeded, ignores) { wr(KEY, items); if (seeded) wr(SEED_KEY, seeded); if (ignores) wr(IGN_KEY, ignores); }
   function seededLocal() { return rd(SEED_KEY, []); }
 
   // Recherche : chaque mot tapé doit commencer un mot du poste (sans accents)
@@ -98,5 +98,97 @@
   }
   function used(id) { const u = rd(USE_KEY, {}); u[id] = (u[id] || 0) + 1; wr(USE_KEY, u); }
 
-  window.RPostes = { BASE, merge, list, setLocal, seededLocal, search, used, norm, KEY, SEED_KEY };
+
+  // ── Lien Firestore (fourni par chaque module : load() → doc|null, save(doc)) ──
+  let io = null;
+  function setup(o) { io = o; }
+  function payload() { return { items: rd(KEY, []), seeded: rd(SEED_KEY, []), ignores: rd(IGN_KEY, []), updatedAt: Date.now() }; }
+  async function sync() {
+    if (!io) return;
+    const d = await io.load();
+    if (d) { const m = merge(d.items, d.seeded); setLocal(m.items, m.seeded, d.ignores || []); }
+  }
+  function push() { return io ? Promise.resolve(io.save(payload())).catch(e => console.warn('Postes', e)) : Promise.resolve(); }
+
+  // ── Positions de devis → nouveaux postes proposés ─────────────────────
+  // Texte nettoyé (espaces, apostrophes Sorba « d' oeuvre »), doublons filtrés
+  // (même mots à peu de chose près), positions refusées une fois = plus proposées.
+  function nettoie(t) {
+    return String(t || '').replace(/\s+/g, ' ').replace(/\b([dlj]|qu)' +/gi, "$1'").replace(/d'oeuvre/gi, "d'œuvre")
+      .replace(/\s+([,.;])/g, '$1').replace(/\. (?=[a-zà-ÿ])/g, ', ').replace(/compacatge/gi, 'compactage').replace(/liserai\b/gi, 'liseré').trim().replace(/[\s.;,]+$/, '');
+  }
+  const mots = t => new Set(norm(t).split(' ').filter(w => w.length >= 3).map(w => w.replace(/(es|s|e)$/, '')));
+  const cle = t => [...mots(t)].sort().join(' ');
+  function proche(a, b) {
+    const A = mots(a), B = mots(b); if (!A.size || !B.size) return false;
+    let n = 0; A.forEach(w => { if (B.has(w)) n++; });
+    return n / (A.size + B.size - n) >= 0.8;
+  }
+  function catDe(chT) {
+    let c = String(chT || '').replace(/^[\d.\s]+/, '').trim();
+    if (!c || /^(travaux (envisag|effectu|suppl)|divers|r[ée]capitulation|prix|tarif)/i.test(c)) return '';
+    if (c === c.toUpperCase()) c = c.charAt(0) + c.slice(1).toLowerCase();
+    return c;
+  }
+  function candidats(positions) {
+    const deja = list().map(p => p.texte), ign = new Set(rd(IGN_KEY, [])), out = [];
+    (positions || []).forEach(p => {
+      if (!p || p.regie || p.cache) return;
+      const texte = nettoie(p.t);
+      if (texte.length < 15 || /^(montant (à|a) disposition|position de r[ée]serve|report\b)/i.test(texte)) return;
+      if (ign.has(cle(texte))) return;
+      if (deja.some(x => proche(x, texte)) || out.some(x => proche(x.texte, texte))) return;
+      out.push({ texte, cat: catDe(p.chT) });
+    });
+    return out;
+  }
+  const esc = t => String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  // Ouvre la liste à cocher. Renvoie le nombre de positions proposées (0 = rien de nouveau).
+  async function proposer(positions, titre, onDone) {
+    try { await sync(); } catch (e) { console.warn('Postes', e); }
+    const cands = candidats(positions);
+    if (!cands.length) return 0;
+    const ov = document.createElement('div');
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;display:flex;align-items:flex-end;justify-content:center;font-family:Inter,sans-serif;';
+    ov.innerHTML = `<div style="background:#fff;width:100%;max-width:640px;max-height:88vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;">
+      <div style="padding:16px 16px 10px;border-bottom:1px solid #E0E4EF;">
+        <div style="font-size:17px;font-weight:700;color:#1B3A6B;">📋 Nouveaux postes ?</div>
+        <div style="font-size:12px;color:#4A5878;margin-top:4px;line-height:1.4;">${cands.length} position${cands.length > 1 ? 's' : ''} ${esc(titre ? 'de ' + titre : 'des devis')} pas encore dans les postes. Coche celles à ajouter.<br><span style="color:#9AA3BC">Celles non cochées ne seront plus proposées.</span></div>
+        <button data-all style="margin-top:8px;border:1.5px solid #1B3A6B;background:#fff;color:#1B3A6B;border-radius:16px;padding:5px 12px;font:600 12px Inter,sans-serif;cursor:pointer;">Tout cocher</button>
+      </div>
+      <div style="overflow-y:auto;flex:1;padding:8px 12px;">${cands.map((c, i) => `
+        <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 6px;border-bottom:1px solid #EEF0F5;cursor:pointer;">
+          <input type="checkbox" data-i="${i}" style="width:20px;height:20px;flex-shrink:0;margin-top:1px;accent-color:#1B3A6B;">
+          <span style="font-size:13px;line-height:1.4;color:#1A2340;">${esc(c.texte)}${c.cat ? `<small style="display:block;color:#9AA3BC;font-weight:600;margin-top:2px;">${esc(c.cat)}</small>` : ''}</span>
+        </label>`).join('')}</div>
+      <div style="display:flex;gap:8px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid #E0E4EF;">
+        <button data-later style="flex:0 0 auto;border:none;background:#F4F6FB;color:#4A5878;border-radius:12px;padding:13px 16px;font:600 14px Inter,sans-serif;cursor:pointer;">Plus tard</button>
+        <button data-ok style="flex:1;border:none;background:#1B3A6B;color:#fff;border-radius:12px;padding:13px;font:700 14px Inter,sans-serif;cursor:pointer;">Valider</button>
+      </div></div>`;
+    document.body.appendChild(ov);
+    const boxes = [...ov.querySelectorAll('input[type=checkbox]')];
+    const okBtn = ov.querySelector('[data-ok]');
+    const maj = () => { const n = boxes.filter(b => b.checked).length; okBtn.textContent = n ? `Ajouter ${n} poste${n > 1 ? 's' : ''}` : 'Ne rien ajouter'; };
+    boxes.forEach(b => b.onchange = maj); maj();
+    ov.querySelector('[data-all]').onclick = () => { const all = boxes.every(b => b.checked); boxes.forEach(b => b.checked = !all); maj(); };
+    const close = () => ov.remove();
+    ov.querySelector('[data-later]').onclick = close;
+    ov.onclick = e => { if (e.target === ov) close(); };
+    okBtn.onclick = async () => {
+      const items = list(), ign = rd(IGN_KEY, []);
+      let n = 0;
+      cands.forEach((c, i) => {
+        if (boxes[i].checked) { items.push({ id: 'p' + Date.now().toString(36) + i, texte: c.texte, cat: c.cat }); n++; }
+        else ign.push(cle(c.texte));
+      });
+      const m = merge(items, rd(SEED_KEY, []));
+      setLocal(m.items, m.seeded, ign.slice(-2000));
+      close(); await push();
+      if (onDone) onDone(n);
+    };
+    return cands.length;
+  }
+
+  window.RPostes = { BASE, merge, list, setLocal, seededLocal, search, used, norm, KEY, SEED_KEY,
+    setup, sync, push, payload, candidats, proposer, nettoie };
 })();

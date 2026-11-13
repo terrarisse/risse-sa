@@ -13,6 +13,7 @@
 <script src="../trello.js"></script>
 <script src="../trello-export.js"></script>
 <script src="../devis.js"></script>
+<script src="../postes.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -473,6 +474,11 @@ const firebaseConfig = {
 const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
+// Base de postes de travaux (postes.js, gérée dans Ressources)
+if (window.RPostes) RPostes.setup({
+  load: () => getDoc(doc(db,'ressources','postes')).then(x => x.exists() ? x.data() : null),
+  save: d => setDoc(doc(db,'ressources','postes'), d)
+});
 // Positions du devis (devis.js) : un document par chantier, chantiers/devpos_<id>
 if (window.RDevis) RDevis.setup({
   save: (cid, d) => setDoc(doc(db,'chantiers','devpos_'+cid), d),
@@ -1480,6 +1486,8 @@ async function lireDevis(cid, src, name, auto){
     const d = await RDevis.store(cid, src, name);
     const n = RDevis.travaux(d).length;
     showToast(`📋 ${n} position${n>1?'s':''} lue${n>1?'s':''} dans le devis`, 3500);
+    // Positions pas encore dans la base de postes → proposées à l'ajout
+    if (window.RPostes) RPostes.proposer(RDevis.travaux(d), d.src, k => { if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`); });
   }catch(e){
     console.warn('Lecture devis', e);
     showToast((auto?'⚠️ Positions non lues : ':'❌ ')+e.message, 7000);
@@ -1518,9 +1526,14 @@ function voirDevPos(){
     if(p.chT!==last){ last = p.chT; html += `<div class="dvp-ch">${esc(p.ch)} · ${esc(p.chT)}</div>`; }
     html += `<div class="dvp-row" style="${p.cache||p.regie?'opacity:.5':''}"><span class="dvp-n">${esc(p.n)}</span><span>${esc(p.t)}</span><span class="dvp-q">${qs(p)}</span></div>`;
   });
-  trSheet('📋 Positions du devis', `<div style="font-size:11px;color:var(--text3);margin-bottom:4px">${esc(d.src)} — les lignes grisées (arrondi, imprévus, tarifs de régie) ne sont pas proposées dans les Travaux.</div>${html}`);
+  trSheet('📋 Positions du devis', `${window.RPostes?`<button class="det-file-btn primary" style="width:100%;margin-bottom:10px" onclick="postesDepuisDevis()">📋 Ajouter aux postes de travaux</button>`:''}<div style="font-size:11px;color:var(--text3);margin-bottom:4px">${esc(d.src)} — les lignes grisées (arrondi, imprévus, tarifs de régie) ne sont pas proposées dans les Travaux.</div>${html}`);
 }
-Object.assign(window,{relireDevis,voirDevPos});
+async function postesDepuisDevis(){
+  const d = RDevis.get(currentDetailId); if(!d) return;
+  const n = await RPostes.proposer(RDevis.travaux(d), d.src, k => { if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`); });
+  if(!n) showToast('✓ Toutes les positions sont déjà dans les postes (ou refusées)');
+}
+Object.assign(window,{relireDevis,voirDevPos,postesDepuisDevis});
 
 // Onglet Plan : PDF de la carte Trello pas encore importés
 async function renderTrelloPlans(){
