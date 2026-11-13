@@ -156,6 +156,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .form-sec-label:first-child{margin-top:0;}
 .form-sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
 .field{margin-bottom:10px;}
+#content-postes .res-item-name{white-space:normal;font-weight:500;line-height:1.35;}
+#content-postes .res-item-icon{display:none;}
 .pst-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:6px;font-size:13px;line-height:1.4;color:var(--text);cursor:pointer;}
 .pst-item:active{background:var(--bg2);}
 .pst-info{font-size:12px;color:var(--text2);background:#EEF3FB;border-radius:var(--rs);padding:10px 12px;margin-bottom:12px;line-height:1.45;}
@@ -283,7 +285,10 @@ body.mat-dragging *{cursor:grabbing!important;}
   <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
   <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
   <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
-  <div class="page" id="page-postes"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher un poste…" oninput="filterPostes(this.value)" autocomplete="off"><button class="add-fab" onclick="openPoste(null)">＋</button></div><div id="content-postes"></div></div>
+  <div class="page" id="page-postes"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher un poste…" oninput="filterPage('postes',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('postes')">＋</button></div>
+    <div class="pst-info">📋 Postes proposés dans le <b>Rapport</b> quand tu écris les travaux. Catégories et sous-catégories : bouton <b>⊞ Catégories</b> en haut. <b>Appui long</b> sur un poste puis glisse-le sur une catégorie (ou entre deux postes) pour le déplacer.
+      <div style="margin-top:8px;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button></div></div>
+    <div id="content-postes"></div></div>
 </div>
  
 <!-- BOTTOM NAV -->
@@ -307,15 +312,15 @@ body.mat-dragging *{cursor:grabbing!important;}
   </div>
 </div>
 
-<div class="modal-ov" id="modal-poste" onclick="if(event.target===this)closePoste()">
+<div class="modal-ov" id="modal-add-postes">
   <div class="modal-sh">
     <div class="modal-drag"><div class="modal-handle"></div></div>
-    <div class="modal-hdr"><div class="modal-title" id="pst-title">📋 Nouveau poste</div><button class="modal-close" onclick="closePoste()">✕</button></div>
+    <div class="modal-hdr"><div class="modal-title">📋 Nouveau poste</div><button class="modal-close" onclick="closeAdd('postes')">✕</button></div>
     <div class="modal-body">
-      <div class="field"><label>Texte du poste *</label><textarea id="pst-texte" rows="5" placeholder="Fourniture et mise en place de…"></textarea></div>
-      <div class="field"><label>Catégorie</label><select id="pst-cat" onchange="onPosteCatChange(this)"></select></div>
+      <div class="field"><label>Catégorie</label><select id="po-cat"><option value="">— Sans catégorie —</option></select></div>
+      <div class="field"><label>Texte du poste *</label><textarea id="po-nom" rows="5" placeholder="Fourniture et mise en place de…"></textarea></div>
     </div>
-    <div class="modal-footer" style="display:flex;gap:8px;"><button class="btn btn-danger" id="pst-del" onclick="deletePoste()" style="flex:0 0 auto;width:auto;padding-left:16px;padding-right:16px;">Supprimer</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="savePoste()">Enregistrer</button></div>
+    <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('postes')">Enregistrer</button></div>
   </div>
 </div>
  
@@ -644,8 +649,15 @@ if (window.RDevis) RDevis.setup({
   loadTaches: () => getDoc(doc(db,'chantiers','devis_taches')).then(x => { if(!x.exists()) return null; const d = x.data(); delete d.type; return d; })
 });
 if (window.RPostes) RPostes.setup({
-  load: () => getDoc(doc(db,'ressources','postes')).then(x => x.exists() ? x.data() : null),
-  save: d => setDoc(doc(db,'ressources','postes'), d)
+  load: async () => {
+    const [p, m, c] = await Promise.all(['postes','postes_meta','_categories'].map(k => getDoc(doc(db,'ressources',k))));
+    const pd = p.exists() ? p.data() : {}, md = m.exists() ? m.data() : null, cd = c.exists() ? c.data().data : null;
+    return { items: pd.items || [], seeded: md ? md.seeded : pd.seeded, ignores: md ? md.ignores : pd.ignores,
+             tree: cd && Array.isArray(cd.postes) ? cd.postes : null, legacyCats: Array.isArray(pd.cats) ? pd.cats : [], metaManquante: !md };
+  },
+  saveItems: items => { localStorage.setItem(KEYS.postes, JSON.stringify(items)); return setDoc(doc(db,'ressources','postes'), { items, updatedAt: Date.now() }); },
+  saveMeta:  d => setDoc(doc(db,'ressources','postes_meta'), d),
+  saveCats:  () => { saveCats(loadCats()); return Promise.resolve(); }
 });
 
 // Auth guard
@@ -655,15 +667,17 @@ onAuthStateChanged(auth, user => {
 });
 
 // ── CONFIG ──────────────────────────────────────────────
-const TABS    = ['equipe','machines','vehicules','materiel','materiaux','evacuations'];
-const TITLES  = {postes:'Postes de travaux',equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
-const ICONS   = {equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
-const COLORS  = {equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB',evacuations:'#F3F4F6'};
+const TABS    = ['equipe','machines','vehicules','materiel','materiaux','evacuations','postes'];
+const TITLES  = {postes:'Postes',equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
+const ICONS   = {postes:'📋',equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
+const COLORS  = {postes:'#EEF3FB',equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB',evacuations:'#F3F4F6'};
 const KEYS    = {postes:'rv6_postes',equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
 const CAT_KEY = 'rv6_res_categories';
  
 // Sections avec sous-catégories actives
-const HAS_CATS = ['materiel','materiaux','evacuations'];
+const HAS_CATS = ['materiel','materiaux','evacuations','postes'];
+// Sections où l'on peut glisser un élément vers une autre catégorie
+const MOVE_CATS = ['materiaux','evacuations','postes'];
  
 const PALETTE = ['#E53935','#E67E22','#F0A500','#2E7D32','#1A7F72','#1B3A6B','#6C3483','#1565C0','#00838F','#4E342E'];
  
@@ -712,8 +726,8 @@ let openAccordions     = {};
 let searchFilters      = {};
  
 // Photos et icônes éléments en cours d'édition
-let itemPhotos = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
-let itemIcons  = {equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
+let itemPhotos = {postes:'',equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
+let itemIcons  = {postes:'',equipe:'',machines:'',vehicules:'',materiel:'',materiaux:'',evacuations:''};
 let photoTargetSection = '';
 let emojiPickerCallback = null;
  
@@ -766,14 +780,6 @@ async function syncFromFirestore(){
         save(s, cur.length ? cur : [['evac_gravats','Gravats','m³'],['evac_deblais','Déblais terre','m³'],['evac_enrobe','Enrobé','T'],['evac_beton','Béton concassé','m³'],['evac_ferraille','Ferraille','T'],['evac_dechets','Déchets chantier','benne'],['evac_boue','Boue/sédiments','m³'],['evac_bois','Bois','m³']].map(a=>({id:a[0],nom:a[1],unite:a[2],catId:'',subCatId:'',photo:'',icon:''})));
       }
     }
-    // Postes de travaux (+ postes de base pas encore ajoutés)
-    try {
-      const ps = await getDoc(doc(db,'ressources','postes'));
-      const d = ps.exists() ? ps.data() : { items: load('postes'), seeded: RPostes.seededLocal() };
-      const m = RPostes.merge(d.items, d.seeded);
-      RPostes.setLocal(m.items, m.seeded, d.ignores || []); RPostes.setCats(d.cats || []);
-      if (m.changed || !ps.exists()) savePostes(m.items, m.seeded);
-    } catch(e){ console.warn('Sync postes', e); }
     // Sync catégories
     const catSnap = await getDoc(doc(db,'ressources','_categories'));
     if(catSnap.exists()){
@@ -790,8 +796,6 @@ function switchTab(tab){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+tab));
   document.getElementById('hdrTitle').textContent=TITLES[tab];
-  document.querySelectorAll('.cat-mgr-btn').forEach(b=>b.style.display = tab==='postes' ? 'none' : '');
-  if(tab==='postes'){ renderPostes(); updateHeader(); document.querySelectorAll('.cat-mgr-btn').forEach(b=>b.style.display='none'); return; }
   renderContent(tab, searchFilters[tab]||'');
   updateHeader();
   const inp=document.querySelector('#page-'+tab+' .search-input');
@@ -844,7 +848,7 @@ function renderContent(section, filter){
           const subItems = allCatItems.filter(i=>i.subCatId===sub.id);
           const subKey = section+'__'+cat.id+'__'+sub.id;
           const subOpen = openAccordions[subKey]||false;
-          const subAddBtn = (section==='materiaux'||section==='evacuations')
+          const subAddBtn = MOVE_CATS.includes(section)
             ? `<button class="acc-quick-add" onclick="event.stopPropagation();openAdd('${section}','${cat.id}|${sub.id}')" title="Ajouter dans ${esc(sub.name)}">＋</button>`
             : '';
           innerHtml += `
@@ -907,7 +911,7 @@ function catIndicatorHTML(image, emoji, color, size){
  
 // Accordéon avec contenu HTML libre (pour les sous-accordéons)
 function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen){
-  const showAddBtn = (section==='materiaux'||section==='evacuations') && cat.id;
+  const showAddBtn = MOVE_CATS.includes(section) && cat.id;
   return `
   <div class="accordion" data-cat-id="${cat.id||''}">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
@@ -926,7 +930,7 @@ function renderAccordionRaw(accKey, name, cat, count, innerHtml, section, isOpen
 }
  
 function renderAccordion(accKey, name, cat, items, icon, bgColor, section, isOpen){
-  const showAddBtn = (section==='materiaux'||section==='evacuations') && cat.id;
+  const showAddBtn = MOVE_CATS.includes(section) && cat.id;
   return `
   <div class="accordion" data-cat-id="${cat.id||''}">
     <div class="acc-header${isOpen?' open':''}" onclick="toggleAcc('${accKey}','${section}')">
@@ -1279,7 +1283,7 @@ function deleteSubCategory(catId, subId){
 }
  
 // ── SELECT CATÉGORIES (seulement materiel et materiaux) ─
-const CAT_SELECT_IDS = {materiel:'mt-cat', materiaux:'mx-cat', evacuations:'ev-cat'};
+const CAT_SELECT_IDS = {postes:'po-cat',materiel:'mt-cat', materiaux:'mx-cat', evacuations:'ev-cat'};
  
 function populateCatSelects(section){
   if(!HAS_CATS.includes(section)) return;
@@ -1357,6 +1361,11 @@ function saveItem(section){
     if(!g('mx-nom')){ highlight('mx-nom'); return; }
     const catVal = g('mx-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
     item={...item, catId:cId, subCatId:sId, nom:g('mx-nom'), unite:g('mx-unite'), densite:g('mx-densite')?parseFloat(g('mx-densite')):null, masse_volumique:g('mx-densite')?parseFloat(g('mx-densite')):null, classe:g('mx-classe'), granulo:g('mx-granulo'), fournisseur:g('mx-fournisseur'), prix:g('mx-prix'), notes:g('mx-notes') };
+  } else if(section==='postes'){
+    const nom = g('po-nom').replace(/\s+/g,' ');
+    if(!nom){ highlight('po-nom'); return; }
+    const catVal = g('po-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
+    item={...item, catId:cId, subCatId:sId, nom };
   } else if(section==='evacuations'){
     if(!g('ev-nom')){ highlight('ev-nom'); return; }
     const catVal = g('ev-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
@@ -1458,6 +1467,10 @@ function fillForm(s, item){
     f('mx-granulo',item.granulo); f('mx-fournisseur',item.fournisseur);
     f('mx-prix',item.prix); f('mx-notes',item.notes);
   }
+  if(s==='postes'){
+    const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
+    f('po-cat',catVal); f('po-nom',item.nom);
+  }
   if(s==='evacuations'){
     const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
     f('ev-cat',catVal); f('ev-nom',item.nom); f('ev-unite',item.unite); f('ev-notes',item.notes);
@@ -1467,7 +1480,7 @@ function fillForm(s, item){
 function resetModalTitle(section){
   const titleEl = document.querySelector('#modal-add-'+section+' .modal-title');
   if(!titleEl) return;
-  const titles = {equipe:'👷 Nouvel employé',machines:'🚜 Nouvelle machine',vehicules:'🚛 Nouveau véhicule',materiel:'🔧 Nouveau matériel',materiaux:'🪨 Nouveau matériau',evacuations:'🚮 Nouvelle évacuation'};
+  const titles = {postes:'📋 Nouveau poste',equipe:'👷 Nouvel employé',machines:'🚜 Nouvelle machine',vehicules:'🚛 Nouveau véhicule',materiel:'🔧 Nouveau matériel',materiaux:'🪨 Nouveau matériau',evacuations:'🚮 Nouvelle évacuation'};
   titleEl.textContent = titles[section]||'';
 }
  
@@ -1885,7 +1898,9 @@ function initItemDrag(el, section, itemId){
     el.style.visibility='';
     if(!target) return;
     const targetItem = target.closest(itemSel);
-    document.querySelectorAll(itemCls).forEach(i=>i.classList.remove('drag-over'));
+    clearDragMarks();
+    const hdr = MOVE_CATS.includes(section) && target.closest('.acc-header, .sub-acc-header');
+    if(hdr){ hdr.classList.add('drop-target'); return; }
     if(targetItem && targetItem !== el) targetItem.classList.add('drag-over');
   }, {passive:false});
 
@@ -1898,17 +1913,8 @@ function initItemDrag(el, section, itemId){
       el.style.visibility='hidden';
       const target = document.elementFromPoint(t.clientX, t.clientY);
       el.style.visibility='';
-      const targetItem = target&&target.closest(itemSel);
-      if(targetItem && targetItem.dataset.id !== itemId){
-        const data = load(section);
-        const fromIdx = data.findIndex(i=>i.id===itemId);
-        const toIdx   = data.findIndex(i=>i.id===targetItem.dataset.id);
-        if(fromIdx!==-1 && toIdx!==-1){
-          save(section, reorder(data, fromIdx, toIdx));
-          renderContent(section, searchFilters[section]||'');
-          showToast('✓ Ordre mis à jour');
-        }
-      }
+      clearDragMarks();
+      dropItemOn(section, itemId, target);
     }
     el.classList.remove('drag-ghost');
     dragState = null;
@@ -2169,7 +2175,7 @@ function clearDragMarks(){
 }
 function initItemMouseDrag(el, section, itemId){
   const itemSel = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
-  const canMoveCat = section==='materiaux' || section==='evacuations';
+  const canMoveCat = MOVE_CATS.includes(section);
   mouseDrag(el, {
     clear: clearDragMarks,
     over(t){
@@ -2177,7 +2183,15 @@ function initItemMouseDrag(el, section, itemId){
       if(hdr){ hdr.classList.add('drop-target'); return; }
       const it = t.closest(itemSel); if(it && it!==el) it.classList.add('drag-over');
     },
-    drop(t){
+    drop(t){ dropItemOn(section, itemId, t); }
+  });
+}
+// Dépôt d'un élément glissé (souris ou appui long) : sur un en-tête de (sous-)catégorie
+// → il y est déplacé ; sur un autre élément → il prend sa place (et sa catégorie).
+function dropItemOn(section, itemId, t){
+      if(!t) return;
+      const itemSel = section==='machines' ? '.machine-card[data-id]' : '.res-item[data-id]';
+      const canMoveCat = MOVE_CATS.includes(section);
       const data = load(section);
       const item = data.find(i=>i.id===itemId); if(!item) return;
       const subHdr = canMoveCat && t.closest('.sub-acc-header');
@@ -2201,8 +2215,6 @@ function initItemMouseDrag(el, section, itemId){
       save(section, reorder(data, fromIdx, toIdx));
       renderContent(section, searchFilters[section]||'');
       showToast('✓ Ordre mis à jour');
-    }
-  });
 }
 function initCatMouseDrag(el, section, catId){
   mouseDrag(el, {
@@ -2265,125 +2277,20 @@ async function initApp(){
   TABS.forEach(s => renderContent(s,''));
   updateBadges();
   populateAllCatSelects();
-  renderPostes();
+  // Postes : ajout des postes de base / migration de l'ancien format, puis ré-affichage
+  try { if (await RPostes.sync()) { renderContent('postes', searchFilters.postes||''); updateBadges(); populateCatSelects('postes'); } } catch(e){ console.warn('Sync postes', e); }
 }
 
-// ── POSTES DE TRAVAUX ───────────────────────────────────
-// Textes complets (style devis Sorba) proposés dans le Rapport quand on écrit
-// la description des travaux. Base, catégories et import des devis : ../postes.js.
-let postesFilter = '';
-function savePostes(items, seeded){
-  RPostes.setLocal(items, seeded);
-  if(auth.currentUser) RPostes.push();
-  const b=document.getElementById('badge-postes'); if(b) b.textContent=items.length;
-}
+// ── POSTES DE TRAVAUX : import depuis un devis lu dans un chantier ──
+// (la liste elle-même est une section normale : catégories, sous-catégories,
+//  glisser-déposer — base, import et propositions du Rapport : ../postes.js)
 const pEsc = t => String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-const pJs  = t => pEsc(t).replace(/'/g,"\\'");
-const SANS_CAT = 'Sans catégorie';
-function renderPostes(){
-  const el=document.getElementById('content-postes'); if(!el) return;
-  const items=load('postes');
-  const b=document.getElementById('badge-postes'); if(b) b.textContent=items.length;
-  const q=RPostes.norm(postesFilter);
-  const vis=q? items.filter(p=>q.split(' ').every(w=>RPostes.norm(p.texte+' '+(p.cat||'')).includes(w))) : items;
-  const groups={};
-  if(!q) RPostes.cats().forEach(c=>groups[c]=[]);          // catégories créées, même vides
-  vis.forEach(p=>{ const c=p.cat||SANS_CAT; (groups[c]=groups[c]||[]).push(p); });
-  let html = `<div class="pst-info">📋 Ces postes sont proposés dans le <b>Rapport</b> quand tu écris la description des travaux. Tape sur un poste pour le modifier.
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="openPostesCats()">📁 Catégories</button></div></div>`;
-  if(!vis.length && q) html += `<div class="acc-empty">Aucun poste trouvé</div>`;
-  Object.keys(groups).sort((a,b)=> a===SANS_CAT ? 1 : b===SANS_CAT ? -1 : a.localeCompare(b,'fr')).forEach(c=>{
-    const k='pst_'+c, open = q || openAccordions[k];
-    const cv = c===SANS_CAT ? '' : c;
-    html += `<div class="accordion"><div class="acc-header${open?' open':''}" onclick="togglePostesCat('${pJs(k)}')"><span class="acc-name">${pEsc(c)}</span><span class="acc-count">${groups[c].length}</span><button class="acc-quick-add" onclick="event.stopPropagation();openPoste(null,'${pJs(cv)}')">＋</button><span class="acc-chevron">›</span></div>
-      <div class="acc-body${open?' open':''}"><div class="acc-inner">${groups[c].length ? groups[c].map(p=>`<div class="pst-item" onclick="openPoste('${pJs(p.id)}')">${pEsc(p.texte)}</div>`).join('') : '<div class="acc-empty">Aucun poste — ＋ pour en ajouter</div>'}</div></div></div>`;
-  });
-  el.innerHTML=html;
-}
-function togglePostesCat(k){ openAccordions[k]=!openAccordions[k]; renderPostes(); }
-function filterPostes(v){ postesFilter=v; renderPostes(); }
-
-// Formulaire d'un poste
-let posteEditId=null;
-function fillPosteCatSelect(val){
-  const sel=document.getElementById('pst-cat');
-  const all=RPostes.cats(); if(val && !all.includes(val)) all.push(val);
-  sel.innerHTML = `<option value="">${SANS_CAT}</option>` + all.map(c=>`<option value="${pEsc(c)}"${c===val?' selected':''}>${pEsc(c)}</option>`).join('') + `<option value="__new">➕ Nouvelle catégorie…</option>`;
-  sel.value = val||'';
-}
-function onPosteCatChange(sel){
-  if(sel.value!=='__new') return;
-  const c=(prompt('Nom de la nouvelle catégorie :')||'').trim();
-  if(c){ RPostes.setCats([...RPostes.cats(), c]); RPostes.push(); }
-  fillPosteCatSelect(c||'');
-}
-function openPoste(id, cat){
-  posteEditId=id;
-  const p = id ? load('postes').find(x=>x.id===id) : null;
-  document.getElementById('pst-title').textContent = p ? '📋 Modifier le poste' : '📋 Nouveau poste';
-  document.getElementById('pst-texte').value = p ? p.texte : '';
-  fillPosteCatSelect(p ? (p.cat||'') : (cat||''));
-  document.getElementById('pst-del').style.display = p ? '' : 'none';
-  document.getElementById('modal-poste').classList.add('open');
-}
-function closePoste(){ document.getElementById('modal-poste').classList.remove('open'); }
-function savePoste(){
-  const texte=document.getElementById('pst-texte').value.replace(/\s+/g,' ').trim();
-  let cat=document.getElementById('pst-cat').value.trim(); if(cat==='__new') cat='';
-  if(!texte){ showToast('Texte du poste obligatoire'); return; }
-  const items=load('postes');
-  if(posteEditId){ const p=items.find(x=>x.id===posteEditId); if(p){ p.texte=texte; p.cat=cat; } }
-  else items.unshift({ id:'p'+Date.now().toString(36), texte, cat });
-  if(cat) RPostes.setCats([...RPostes.cats(), cat]);
-  savePostes(items); closePoste(); renderPostes(); updateHeader(); showToast('✅ Poste enregistré');
-}
-async function deletePoste(){
-  if(!posteEditId) return;
-  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))('Supprimer ce poste ?'))) return;
-  savePostes(load('postes').filter(x=>x.id!==posteEditId)); closePoste(); renderPostes(); updateHeader(); showToast('🗑 Poste supprimé');
-}
-
-// Fenêtre générique (choix du devis, catégories)
 function pstSheet(title, html){
   document.getElementById('pst2-title').textContent=title;
   document.getElementById('pst2-body').innerHTML=html;
   document.getElementById('modal-pst2').classList.add('open');
 }
 function closePst2(){ document.getElementById('modal-pst2').classList.remove('open'); }
-
-// Catégories : créer, renommer, supprimer
-function openPostesCats(){
-  const items=load('postes'), n=c=>items.filter(p=>p.cat===c).length;
-  const cs=RPostes.cats();
-  pstSheet('📁 Catégories des postes', `
-    <div style="display:flex;gap:8px;margin-bottom:12px;"><div class="field" style="flex:1;margin:0;"><input type="text" id="pst-newcat" placeholder="Nouvelle catégorie…" autocomplete="off" onkeydown="if(event.key==='Enter')addPostesCat()"></div><button class="btn btn-navy" style="width:auto;padding:0 16px;" onclick="addPostesCat()">Créer</button></div>
-    ${cs.length ? cs.map(c=>`<div class="pst-item" style="display:flex;align-items:center;gap:8px;cursor:default;">
-      <span style="flex:1;font-weight:600;">${pEsc(c)}</span><span class="acc-count">${n(c)}</span>
-      <button class="btn btn-ghost btn-sm" style="width:auto;" onclick="renamePostesCat('${pJs(c)}')">✏️</button>
-      <button class="btn btn-ghost btn-sm" style="width:auto;" onclick="deletePostesCat('${pJs(c)}')">🗑</button></div>`).join('') : '<div class="acc-empty">Aucune catégorie</div>'}
-    <div style="font-size:11px;color:var(--text3);margin-top:10px;">Supprimer une catégorie ne supprime pas ses postes : ils passent dans « ${SANS_CAT} ».</div>`);
-}
-function addPostesCat(){
-  const c=(document.getElementById('pst-newcat').value||'').trim(); if(!c) return;
-  if(RPostes.cats().some(x=>x.toLowerCase()===c.toLowerCase())){ showToast('Cette catégorie existe déjà'); return; }
-  RPostes.setCats([...RPostes.cats(), c]); RPostes.push(); openAccordions['pst_'+c]=true;
-  renderPostes(); openPostesCats(); showToast('📁 Catégorie créée');
-}
-function renamePostesCat(old){
-  const c=(prompt('Nouveau nom de la catégorie :', old)||'').trim(); if(!c || c===old) return;
-  const items=load('postes'); items.forEach(p=>{ if(p.cat===old) p.cat=c; });
-  RPostes.setCats([...RPostes.cats().filter(x=>x!==old), c]);
-  RPostes.setLocal(items); RPostes.setCats(RPostes.cats().filter(x=>x!==old));
-  savePostes(items); renderPostes(); openPostesCats();
-}
-async function deletePostesCat(c){
-  if(!(await (window.rsConfirm||(m=>Promise.resolve(confirm(m))))(`Supprimer la catégorie « ${c} » ? Ses postes passent dans « ${SANS_CAT} ».`))) return;
-  const items=load('postes'); items.forEach(p=>{ if(p.cat===c) p.cat=''; });
-  RPostes.setLocal(items); RPostes.setCats(RPostes.cats().filter(x=>x!==c));
-  savePostes(items); renderPostes(); openPostesCats();
-}
-
-// Import : choisir un devis lu dans un chantier
 let _pstDevis = [];
 async function importPostesDevis(){
   showToast('⏳ Recherche des devis lus…');
@@ -2404,10 +2311,13 @@ async function importPostesDevis(){
 async function importPostesDe(i){
   const d=_pstDevis[i]; if(!d) return;
   closePst2();
-  const n = await RPostes.proposer(d.items, d._nom || d.src, k => { renderPostes(); updateHeader(); if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`); });
+  const n = await RPostes.proposer(d.items, d._nom || d.src, k => {
+    renderContent('postes', searchFilters.postes||''); updateBadges(); populateCatSelects('postes');
+    if(k) showToast(`✅ ${k} poste${k>1?'s':''} ajouté${k>1?'s':''}`);
+  });
   if(!n) showToast('✓ Rien de nouveau dans ce devis (déjà dans les postes ou refusé)');
 }
-Object.assign(window,{importPostesDevis,importPostesDe,filterPostes,togglePostesCat,openPoste,closePoste,savePoste,deletePoste,onPosteCatChange,openPostesCats,addPostesCat,renamePostesCat,deletePostesCat,closePst2});
+Object.assign(window,{importPostesDevis,importPostesDe,closePst2,dropItemOn});
 
 window.switchTab         = switchTab;
 window.filterPage        = filterPage;
@@ -2417,7 +2327,7 @@ window.saveItem          = saveItem;
 window.openCatMgr        = openCatMgr;
 
 // ── EXPORT des listes (fichier à importer dans une autre installation) ──
-const EXPORT_LABELS = {equipe:'👷 Équipe',machines:'🚜 Machines',vehicules:'🚛 Véhicules',materiel:'🔧 Matériel',materiaux:'🪨 Matériaux',evacuations:'🚮 Évacuations'};
+const EXPORT_LABELS = {postes:'📋 Postes',equipe:'👷 Équipe',machines:'🚜 Machines',vehicules:'🚛 Véhicules',materiel:'🔧 Matériel',materiaux:'🪨 Matériaux',evacuations:'🚮 Évacuations'};
 function openExport(){
   let ov = document.getElementById('export-ov');
   if(!ov){

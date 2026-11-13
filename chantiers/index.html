@@ -476,8 +476,21 @@ const auth = getAuth(app);
 const db   = getFirestore(app);
 // Base de postes de travaux (postes.js, gérée dans Ressources)
 if (window.RPostes) RPostes.setup({
-  load: () => getDoc(doc(db,'ressources','postes')).then(x => x.exists() ? x.data() : null),
-  save: d => setDoc(doc(db,'ressources','postes'), d)
+  load: async () => {
+    const [p, m, c] = await Promise.all(['postes','postes_meta','_categories'].map(k => getDoc(doc(db,'ressources',k))));
+    const pd = p.exists() ? p.data() : {}, md = m.exists() ? m.data() : null, cd = c.exists() ? c.data().data : null;
+    return { items: pd.items || [], seeded: md ? md.seeded : pd.seeded, ignores: md ? md.ignores : pd.ignores,
+             tree: cd && Array.isArray(cd.postes) ? cd.postes : null, legacyCats: Array.isArray(pd.cats) ? pd.cats : [], metaManquante: !md };
+  },
+  saveItems: items => setDoc(doc(db,'ressources','postes'), { items, updatedAt: Date.now() }),
+  saveMeta:  d => setDoc(doc(db,'ressources','postes_meta'), d),
+  // Catégories : on ne touche qu'aux catégories des postes (les autres listes restent intactes)
+  saveCats:  async tree => {
+    const c = await getDoc(doc(db,'ressources','_categories'));
+    const data = (c.exists() && c.data().data) || {};
+    data.postes = tree;
+    await setDoc(doc(db,'ressources','_categories'), { data, updatedAt: Date.now() });
+  }
 });
 // Positions du devis (devis.js) : un document par chantier, chantiers/devpos_<id>
 if (window.RDevis) RDevis.setup({

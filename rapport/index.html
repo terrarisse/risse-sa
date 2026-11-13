@@ -2175,8 +2175,13 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const _auth = firebase.auth();
 const _db   = firebase.firestore();
 if (window.RPostes) RPostes.setup({
-  load: () => _db.collection('ressources').doc('postes').get().then(x => x.exists ? x.data() : null),
-  save: d => _db.collection('ressources').doc('postes').set(d)
+  // Lecture seule : postes, méta et catégories (gérés dans Ressources)
+  load: async () => {
+    const [p, m, c] = await Promise.all(['postes','postes_meta','_categories'].map(k => _db.collection('ressources').doc(k).get()));
+    const pd = p.exists ? p.data() : {}, md = m.exists ? m.data() : null, cd = c.exists ? c.data().data : null;
+    return { items: pd.items || [], seeded: md ? md.seeded : pd.seeded, ignores: md ? md.ignores : pd.ignores,
+             tree: cd && Array.isArray(cd.postes) ? cd.postes : null, legacyCats: Array.isArray(pd.cats) ? pd.cats : [] };
+  }
 });
 if (window.RDevis) RDevis.setup({
   save: (cid, d) => _db.collection('chantiers').doc('devpos_' + cid).set(d),
