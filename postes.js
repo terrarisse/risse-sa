@@ -12,7 +12,7 @@
 // Ressources ne revient pas.
 // ═══════════════════════════════════════════════════════════════
 (function () {
-  const KEY = 'rv6_postes', SEED_KEY = 'rv6_postes_seeded', USE_KEY = 'rv6_postes_usage', IGN_KEY = 'rv6_postes_ign', CATS_KEY = 'rv6_res_categories';
+  const KEY = 'rv6_postes', SEED_KEY = 'rv6_postes_seeded', USE_KEY = 'rv6_postes_usage', IGN_KEY = 'rv6_postes_ign', CATS_KEY = 'rv6_res_categories', HAB_KEY = 'rv6_postes_hab';
 
   // Pour ajouter des postes : nouvelles lignes avec un id jamais utilisé.
   const BASE = [
@@ -174,9 +174,49 @@
     const m = merge(d.items, d.seeded, t);
     const migre = (d.items || []).some(p => p && (p.texte != null || p.cat != null));
     wr(KEY, m.items); wr(SEED_KEY, m.seeded); wr(IGN_KEY, d.ignores || []); setTree(t);
+    if (d.hab) wr(HAB_KEY, d.hab);
     const catsChg = JSON.stringify(t) !== avant;
     if (m.changed || migre || d.metaManquante || catsChg) await push({ items: m.changed || migre, meta: 1, cats: catsChg });
     return m.changed || migre || catsChg;
+  }
+
+  // ── Fournitures / évacuations liées à un poste (proposées dans le Rapport) ──
+  // Mélange de 3 sources, dans cet ordre :
+  //  1. manuel   : p.fourn = ['f:<id matériau>', 'e:<id évacuation>'] (fiche du poste)
+  //  2. habitude : ce que l'équipe met dans les rapports avec ce poste
+  //                (au moins 2 fois et dans au moins la moitié des rapports)
+  //  3. texte    : matériaux (et évacuations si le poste parle d'évacuation)
+  //                dont le nom se retrouve dans le texte du poste
+  function ressources(t) { return rd(t === 'f' ? 'rv6_materials' : 'rv6_evacuations', []); }
+  function nomDans(nom, texte) {
+    const tw = norm(texte).split(' ').filter(Boolean);
+    const nw = norm(nom).split(' ').filter(w => w.length >= 3 || /\d/.test(w));
+    if (!nw.length) return false;
+    return nw.every(w => tw.some(x => x === w || (w.length >= 4 && x.length >= 4 && (x.startsWith(w.slice(0, 5)) || w.startsWith(x.slice(0, 5))))));
+  }
+  function liees(p, exclure) {
+    if (!p) return [];
+    const out = [], vu = new Set(exclure || []);
+    const add = (t, id, src) => {
+      const k = t + ':' + id; if (vu.has(k)) return;
+      const it = ressources(t).find(x => x.id === id); if (!it) return;
+      vu.add(k); out.push({ t, id, k, nom: it.nom, unite: it.unite || '', src });
+    };
+    (p.fourn || []).forEach(k => { const i = k.indexOf(':'); add(k.slice(0, i), k.slice(i + 1), 'manuel'); });
+    const h = rd(HAB_KEY, {})[p.id] || {}, n = h._n || 0;
+    Object.entries(h).filter(([k, v]) => k !== '_n' && v >= 2 && v >= n * 0.5).sort((a, b) => b[1] - a[1])
+      .forEach(([k]) => { const i = k.indexOf(':'); add(k.slice(0, i), k.slice(i + 1), 'habitude'); });
+    ressources('f').forEach(it => { if (nomDans(it.nom, p.nom)) add('f', it.id, 'texte'); });
+    if (/[ée]vacu|d[ée]charg|\btaxes?\b|d[ée]grapp|d[ée]moli/i.test(p.nom)) ressources('e').forEach(it => { if (nomDans(it.nom, p.nom)) add('e', it.id, 'texte'); });
+    return out.slice(0, 6);
+  }
+  // Rapport validé : chaque poste choisi « apprend » les fournitures / évacuations du rapport
+  function retenirHab(pids, keys) {
+    pids = [...new Set(pids || [])]; if (!pids.length) return;
+    const h = rd(HAB_KEY, {}), upd = {};
+    pids.forEach(pid => { const e = h[pid] = h[pid] || {}; e._n = (e._n || 0) + 1; keys.forEach(k => { e[k] = (e[k] || 0) + 1; }); upd[pid] = keys; });
+    wr(HAB_KEY, h);
+    if (io && io.saveHab) Promise.resolve(io.saveHab(upd)).catch(e => console.warn('Habitudes postes', e));
   }
 
   // ── Positions de devis → actions proposées comme postes ───────────────
@@ -347,5 +387,5 @@
     return grps.length;
   }
 
-  window.RPostes = { BASE, list, search, used, norm, setup, sync, push, candidats, proposer, nettoie, tree, label, seededLocal, KEY, devineMetre, metreDe };
+  window.RPostes = { BASE, list, search, used, norm, setup, sync, push, candidats, proposer, nettoie, tree, label, seededLocal, KEY, devineMetre, metreDe, liees, retenirHab, ressources };
 })();

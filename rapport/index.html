@@ -1504,6 +1504,17 @@ textarea { resize: none; }
 .dvx-chips{flex-direction:column;}
 .dvx-chip{display:flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:10px;padding:8px 8px 8px 12px;font-size:13px;font-weight:600;line-height:1.35;}
 .dvx-chip>span{flex:1;min-width:0;white-space:normal;}
+.pf-card{margin-top:10px;border:1.5px solid var(--teal);border-radius:var(--radius-sm);background:#F0FAF8;padding:10px 12px;}
+.pf-hd{font-size:13px;font-weight:700;color:var(--teal);margin-bottom:8px;}
+.pf-hd small{display:block;font-size:11px;font-weight:500;color:var(--text-muted);margin-top:2px;}
+.pf-ch{display:inline-flex;align-items:center;gap:4px;border:1.5px solid #CFE3DF;background:#fff;color:var(--text);border-radius:16px;padding:6px 10px;font:600 12.5px 'Inter',sans-serif;margin:0 6px 6px 0;cursor:pointer;}
+.pf-ch.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.pf-ch small{font-weight:500;opacity:.75;}
+.pf-bt{display:flex;gap:8px;margin-top:4px;}
+.pf-bt button{border:none;border-radius:10px;padding:10px 12px;font:700 13px 'Inter',sans-serif;cursor:pointer;}
+.pf-no{background:#fff;color:var(--text-muted);border:1px solid var(--border)!important;}
+.pf-ok{flex:1;background:var(--teal);color:#fff;}
+.pf-ok:disabled{opacity:.5;}
 .pst-sugg{display:none;margin-top:6px;border:1.5px solid var(--navy);border-radius:var(--radius-sm);overflow:hidden;background:#fff;}
 .pst-sugg .pst-hd{font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;padding:6px 12px;background:#EEF3FB;}
 .pst-sugg button{display:block;width:100%;text-align:left;padding:10px 12px;border:none;border-top:1px solid var(--border);background:#fff;font:500 13px 'Inter',sans-serif;line-height:1.35;color:var(--text);cursor:pointer;}
@@ -1713,6 +1724,7 @@ textarea { resize: none; }
       <div class="card-body">
         <textarea id="tx-travaux" rows="8" style="overflow-y:hidden;" placeholder="Décrire les travaux effectués aujourd'hui… (les postes s'affichent en écrivant)" oninput="autoGrowTravaux();pstSuggest()" onclick="pstSuggest()" onblur="setTimeout(pstHide,150)"></textarea>
         <div id="pst-sugg" class="pst-sugg"></div>
+        <div id="pst-fourn"></div>
       </div>
     </div>
 
@@ -2175,12 +2187,18 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const _auth = firebase.auth();
 const _db   = firebase.firestore();
 if (window.RPostes) RPostes.setup({
-  // Lecture seule : postes, méta et catégories (gérés dans Ressources)
+  // Postes, méta et catégories en lecture (gérés dans Ressources) + habitudes poste → fournitures
   load: async () => {
-    const [p, m, c] = await Promise.all(['postes','postes_meta','_categories'].map(k => _db.collection('ressources').doc(k).get()));
+    const [p, m, c, h] = await Promise.all(['postes','postes_meta','_categories','postes_hab'].map(k => _db.collection('ressources').doc(k).get()));
     const pd = p.exists ? p.data() : {}, md = m.exists ? m.data() : null, cd = c.exists ? c.data().data : null;
     return { items: pd.items || [], seeded: md ? md.seeded : pd.seeded, ignores: md ? md.ignores : pd.ignores,
-             tree: cd && Array.isArray(cd.postes) ? cd.postes : null, legacyCats: Array.isArray(pd.cats) ? pd.cats : [] };
+             tree: cd && Array.isArray(cd.postes) ? cd.postes : null, legacyCats: Array.isArray(pd.cats) ? pd.cats : [],
+             hab: h.exists ? h.data() : null };
+  },
+  saveHab: upd => {
+    const inc = firebase.firestore.FieldValue.increment(1), o = {};
+    Object.entries(upd).forEach(([pid, keys]) => { o[pid] = { _n: inc }; keys.forEach(k => { o[pid][k] = inc; }); });
+    return _db.collection('ressources').doc('postes_hab').set(o, { merge: true });
   }
 });
 if (window.RDevis) RDevis.setup({
@@ -4057,6 +4075,7 @@ function calcMetreTotal(cardId) {
   });
   const el = document.getElementById(`mt-val-${cardId}`);
   if (el) el.textContent = total > 0 ? fmtNum(total) : '—';
+  majLiensMetre(cardId, total);
 }
 
 
@@ -4276,6 +4295,7 @@ function collectData() {
     locSelection: locSelection,
     travaux: document.getElementById('tx-travaux').value,
     devisLignes: devisLignes,
+    postesChoisis: postesChoisis,
     metres: metresData,
     fournitures: fournitData,
     fournitSelection: fournitSelection,
@@ -4336,6 +4356,7 @@ function loadDraft() {
     // Travaux
     if (d.travaux) { document.getElementById('tx-travaux').value = d.travaux; autoGrowTravaux(); }
     devisLignes = Array.isArray(d.devisLignes) ? d.devisLignes : []; renderDvBar(false);
+    postesChoisis = Array.isArray(d.postesChoisis) ? d.postesChoisis : [];
 
     // Métrés
     if (d.metres && d.metres.length > 0) {
@@ -4417,6 +4438,7 @@ function resetRapport() {
   document.getElementById('tx-travaux').value = '';
   document.getElementById('tx-travaux').style.height = 'auto';
   devisLignes = []; renderDvBar(false);
+  postesChoisis = []; lienMetre = []; const _pf = document.getElementById('pst-fourn'); if (_pf) _pf.innerHTML = '';
 
   // Métrés — fermer le bloc et vider la liste
   if (extrasState.metres) toggleExtra('metres');
@@ -4475,6 +4497,14 @@ function finaliserRapport() {
 
   data.id = Date.now();
   data.savedAt = new Date().toISOString();
+  // Habitudes poste → fournitures / évacuations (pour les prochaines propositions)
+  try {
+    if (window.RPostes && Array.isArray(data.postesChoisis) && data.postesChoisis.length) {
+      const ks = Object.entries(fournitSelection).filter(([, v]) => v && parseFloat(v.qty) > 0).map(([k]) => 'f:' + k)
+        .concat(Object.entries(evacSelection).filter(([, v]) => v && parseFloat(v.qty) > 0).map(([k]) => 'e:' + k));
+      RPostes.retenirHab(data.postesChoisis, ks);
+    }
+  } catch(e) { console.warn('Habitudes', e); }
   // Même carte Trello après une modification (✏️) : on garde l'identité d'origine
   try { const _ef = JSON.parse(localStorage.getItem('rj_edit_from') || 'null'); if (_ef && _ef.root) data.trelloRoot = String(_ef.root); } catch(e) {}
   // Texte du rapport enregistré (export Trello possible aussi depuis le module Chantiers)
@@ -6417,7 +6447,85 @@ function pstPick(id) {
       showToast('📐 Métré ajouté — ✕ pour le retirer');
     }
   }
+  if (!postesChoisis.includes(p.id)) postesChoisis.push(p.id);
+  pfProposer(p, p.metre ? metresCount : null);
   autoSaveDraft();
+}
+
+// ─── POSTE → FOURNITURES / ÉVACUATIONS PROPOSÉES ────────────────
+// Après le choix d'un poste : carte « 🧱 Fournitures pour ce poste » à valider
+// (sources : fiche du poste, habitudes de l'équipe, texte du poste — postes.js).
+// Quantité reprise du métré du poste tant qu'elle n'est pas modifiée à la main
+// (même unité : ml / m² / m³).
+var postesChoisis = [];
+var lienMetre = [];               // [{ t:'f'|'e', key, card, last }]
+var _pfProps = [];                // propositions affichées
+const pfUnit = u => { u = String(u || '').toLowerCase().replace('³', '3').replace('²', '2').trim(); return u === 'm' ? 'ml' : u; };
+const pfMetreUnit = t => t === 'coupe' ? 'ml' : t === 'volume' ? 'm3' : 'm2';
+function pfMeta(t, id) {
+  const it = RPostes.ressources(t).find(x => x.id === id); if (!it) return null;
+  const sec = t === 'f' ? 'materiaux' : 'evacuations';
+  let cats = []; try { cats = (JSON.parse(localStorage.getItem('rv6_res_categories') || '{}')[sec]) || []; } catch (e) {}
+  const c = cats.find(x => x.id === it.catId), s = c && (c.children || []).find(x => x.id === it.subCatId);
+  return { catName: it.famille || (t === 'f' ? 'Matériaux' : 'Évacuations'), nom: it.nom, defaultUnit: it.unite || (t === 'f' ? 'pc' : 'm³'), subCat: s ? s.name : '' };
+}
+function pfProposer(p, card) {
+  if (!window.RPostes) return;
+  const deja = Object.keys(fournitSelection).map(k => 'f:' + k).concat(Object.keys(evacSelection).map(k => 'e:' + k));
+  const items = RPostes.liees(p, deja);
+  if (!items.length) return;
+  _pfProps.push({ p, card, items, on: new Set(items.map(x => x.k)) });
+  renderPfProps();
+}
+function renderPfProps() {
+  const el = document.getElementById('pst-fourn'); if (!el) return;
+  el.innerHTML = _pfProps.map((pr, i) => `<div class="pf-card">
+    <div class="pf-hd">🧱 Fournitures pour ce poste<small>${dvxEsc(pr.p.nom.length > 70 ? pr.p.nom.slice(0, 70) + '…' : pr.p.nom)}</small></div>
+    <div>${pr.items.map(x => `<button type="button" class="pf-ch${pr.on.has(x.k) ? ' on' : ''}" onclick="pfTap(${i},'${dvxEsc(x.k)}')">${x.t === 'e' ? '🚛' : '🧱'} ${dvxEsc(x.nom)}${x.unite ? ` <small>${dvxEsc(x.unite)}</small>` : ''}</button>`).join('')}</div>
+    <div class="pf-bt"><button type="button" class="pf-no" onclick="pfNon(${i})">Non merci</button><button type="button" class="pf-ok" onclick="pfOui(${i})" ${pr.on.size ? '' : 'disabled'}>Ajouter${pr.on.size ? ' (' + pr.on.size + ')' : ''}</button></div>
+  </div>`).join('');
+}
+function pfTap(i, k) { const pr = _pfProps[i]; if (!pr) return; if (pr.on.has(k)) pr.on.delete(k); else pr.on.add(k); renderPfProps(); }
+function pfNon(i) { _pfProps.splice(i, 1); renderPfProps(); }
+function pfOui(i) {
+  const pr = _pfProps[i]; if (!pr) return;
+  let n = 0;
+  pr.items.filter(x => pr.on.has(x.k)).forEach(x => {
+    const m = pfMeta(x.t, x.id); if (!m) return;
+    if (x.t === 'f') {
+      if (!fournitSelection[x.id]) { window._fournitMeta = window._fournitMeta || {}; if (!window._fournitMeta[x.id]) window._fournitMeta[x.id] = m; toggleFournitSelect(x.id, m.catName, m.nom, m.defaultUnit, m.subCat); }
+    } else {
+      if (!evacSelection[x.id]) { window._evacMeta = window._evacMeta || {}; if (!window._evacMeta[x.id]) window._evacMeta[x.id] = m; toggleEvacSelect(x.id, m.catName, m.nom, m.defaultUnit, m.subCat); }
+    }
+    if (pr.card != null) lienMetre.push({ t: x.t, key: x.id, card: pr.card, last: '' });
+    n++;
+  });
+  _pfProps.splice(i, 1); renderPfProps();
+  if (pr.card != null) calcMetreTotal(pr.card);
+  autoSaveDraft();
+  if (n) showToast(`🧱 ${n} ajouté${n > 1 ? 's' : ''} aux fournitures / évacuations`);
+}
+function majLiensMetre(cardId, total) {
+  if (!lienMetre.length) return;
+  const typ = metreTypes[cardId]; let chg = false;
+  lienMetre = lienMetre.filter(l => {
+    const sel = (l.t === 'f' ? fournitSelection : evacSelection)[l.key];
+    if (!sel) return false;                                   // retiré entre-temps
+    if (l.card !== cardId) return true;
+    if (!document.getElementById('mc-' + cardId)) return false; // métré supprimé
+    if (pfUnit(sel.unit) !== pfMetreUnit(typ)) return true;    // unités différentes : rien
+    const cur = sel.qty === '' || sel.qty == null ? '' : String(sel.qty);
+    if (cur !== '' && cur !== String(l.last)) return false;    // modifiée à la main : on ne touche plus
+    const q = total > 0 ? Math.round(total * 100) / 100 : '';
+    if (String(q) !== cur) { sel.qty = q; l.last = q; chg = true; }
+    return true;
+  });
+  if (chg) {
+    renderFournitSelectionZone(); renderEvacSelectionZone();
+    Object.keys(fournitSelection).forEach(k => { if (typeof syncFournitInlineQty === 'function') syncFournitInlineQty(k); });
+    Object.keys(evacSelection).forEach(k => syncEvacInlineQty(k));
+    autoSaveDraft();
+  }
 }
 
 // ─── AUTO-GROW DESCRIPTION TRAVAUX ─────────────────────────────
