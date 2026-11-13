@@ -1812,6 +1812,11 @@ textarea { resize: none; }
         <span id="extras-menu-chevron" style="color:rgba(255,255,255,0.6);font-size:13px;transition:transform 0.25s;">▼</span>
       </div>
       <div id="extras-menu-body" style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:white;">
+        <div class="extra-toggle-row" id="dvx-menu-row" style="display:none;border-bottom:1px solid var(--border);" onclick="openDvx()">
+          <span class="extra-toggle-icon">📄</span>
+          <span class="extra-toggle-label">Depuis le devis<small id="dvx-menu-sub" style="display:block;font-size:11px;font-weight:500;color:var(--text-muted);margin-top:1px;"></small></span>
+          <span style="color:var(--text-muted);font-size:20px;padding:0 4px;">›</span>
+        </div>
         <div class="extra-toggle-row" onclick="toggleExtra('metres')">
           <span class="extra-toggle-icon">📐</span>
           <span class="extra-toggle-label">Métrés travaux</span>
@@ -6294,7 +6299,14 @@ function renderDvBar(fetch) {
   if (cid && fetch && !_dvxAsked[cid]) { _dvxAsked[cid] = 1; RDevis.fetchRemote(cid).then(r => { if (r) renderDvBar(false); }); }
   const pos = d ? RDevis.travaux(d) : [];
   let html = '';
-  if (pos.length) html += `<button class="dvx-btn" onclick="openDvx()"><span style="font-size:22px">📄</span><span style="flex:1">Ajouter depuis le devis<small>${pos.length} positions · ${dvxEsc(d.src)}</small></span><span>›</span></button>`;
+  // Bouton rangé dans le menu « Ajouter au rapport » (visible seulement si le chantier a un devis lu)
+  const row = document.getElementById('dvx-menu-row');
+  if (row) {
+    row.style.display = pos.length ? '' : 'none';
+    const sub = document.getElementById('dvx-menu-sub'); if (sub && pos.length) sub.textContent = pos.length + ' positions · ' + (d.src || '');
+    const body = document.getElementById('extras-menu-body');
+    if (body && body.style.maxHeight && body.style.maxHeight !== '0px') body.style.maxHeight = body.scrollHeight + 'px';
+  }
   if (devisLignes.length) html += `<div class="dvx-chips">${devisLignes.map((l, i) => `<span class="dvx-chip"><span>${dvxEsc(l.t || l.id)}${l.q ? ' — ' + dvxEsc(RDevis.fmtQ(l.q)) + ' ' + dvxEsc(l.u || '') : ''}</span><button onclick="delDvx(${i})">✕</button></span>`).join('')}</div>`;
   el.innerHTML = html;
 }
