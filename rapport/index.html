@@ -6403,7 +6403,21 @@ function pstPick(id) {
   L.ta.value = v.slice(0, L.a) + ins + v.slice(L.b);
   const pos = L.a + ins.length;
   L.ta.focus(); L.ta.setSelectionRange(pos, pos);
-  RPostes.used(id); pstHide(); autoGrowTravaux(); autoSaveDraft();
+  RPostes.used(id); pstHide(); autoGrowTravaux();
+  // Poste avec métré (ml / m² / m³) → carte métré ouverte, prête à remplir (✕ pour la supprimer)
+  if (p.metre) {
+    if (!extrasState.metres) toggleExtra('metres');
+    addMetreRow({ type: p.metre });
+    const card = document.getElementById('mc-' + metresCount);
+    if (card) {
+      card.querySelector('.metre-desc').value = p.nom;
+      card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      const inp = card.querySelector('.metre-sublines input');
+      setTimeout(() => { if (inp) inp.focus(); }, 350);
+      showToast('📐 Métré ajouté — ✕ pour le retirer');
+    }
+  }
+  autoSaveDraft();
 }
 
 // ─── AUTO-GROW DESCRIPTION TRAVAUX ─────────────────────────────

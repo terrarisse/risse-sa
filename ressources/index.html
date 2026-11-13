@@ -319,6 +319,7 @@ body.mat-dragging *{cursor:grabbing!important;}
     <div class="modal-body">
       <div class="field"><label>Catégorie</label><select id="po-cat"><option value="">— Sans catégorie —</option></select></div>
       <div class="field"><label>Texte du poste *</label><textarea id="po-nom" rows="5" placeholder="Fourniture et mise en place de…"></textarea></div>
+      <div class="field"><label>Métré ouvert dans le Rapport</label><select id="po-metre"><option value="auto">Automatique (d'après le texte)</option><option value="none">Aucun</option><option value="coupe">📏 Longueur (ml)</option><option value="surface">📐 Surface (m²)</option><option value="volume">📦 Volume (m³)</option></select></div>
     </div>
     <div class="modal-footer"><button class="btn btn-navy" onclick="saveItem('postes')">Enregistrer</button></div>
   </div>
@@ -1321,6 +1322,7 @@ function openAdd(section, presetCatVal){
     const sel = document.getElementById(CAT_SELECT_IDS[section]);
     if(sel) sel.value = presetCatVal;
   }
+  if(section==='postes'){ const m=document.getElementById('po-metre'); if(m && !m.value) m.value='auto'; }
   document.getElementById('modal-add-'+section).classList.add('open');
   setTimeout(()=>{ const inp=document.querySelector('#modal-add-'+section+' input'); if(inp) inp.focus(); },150);
 }
@@ -1365,7 +1367,7 @@ function saveItem(section){
     const nom = g('po-nom').replace(/\s+/g,' ');
     if(!nom){ highlight('po-nom'); return; }
     const catVal = g('po-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
-    item={...item, catId:cId, subCatId:sId, nom };
+    item={...item, catId:cId, subCatId:sId, nom, metre: g('po-metre')||'auto' };
   } else if(section==='evacuations'){
     if(!g('ev-nom')){ highlight('ev-nom'); return; }
     const catVal = g('ev-cat'); const [cId,sId] = catVal.includes('|') ? catVal.split('|') : [catVal,''];
@@ -1469,7 +1471,7 @@ function fillForm(s, item){
   }
   if(s==='postes'){
     const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
-    f('po-cat',catVal); f('po-nom',item.nom);
+    f('po-cat',catVal); f('po-nom',item.nom); f('po-metre',item.metre||'auto');
   }
   if(s==='evacuations'){
     const catVal = item.subCatId ? item.catId+'|'+item.subCatId : (item.catId||'');
@@ -1542,6 +1544,7 @@ function updateMediaPreview(section){
  
 // ── DETAIL ──────────────────────────────────────────────
 function getSubtitle(s,item){
+  if(s==='postes'){ const m=window.RPostes?RPostes.metreDe(item):''; return m?({coupe:'📏 Métré longueur (ml)',surface:'📐 Métré surface (m²)',volume:'📦 Métré volume (m³)'})[m]:''; }
   if(s==='equipe') return item.tel||'';
   if(s==='machines') return [item.type,item.annee].filter(Boolean).join(' · ');
   if(s==='vehicules') return [item.type,item.immat].filter(Boolean).join(' · ');

@@ -111,9 +111,24 @@
   // Liste pour l'affichage / la recherche : { id, nom, texte (= nom), cat (libellé), catId, subCatId }
   function list() {
     const t = JSON.parse(JSON.stringify(tree()));
-    return merge(rd(KEY, []), rd(SEED_KEY, []), t).items.map(p => ({ ...p, texte: p.nom, cat: label(p, t) }));
+    return merge(rd(KEY, []), rd(SEED_KEY, []), t).items.map(p => ({ ...p, texte: p.nom, cat: label(p, t), metre: metreDe(p) }));
   }
   function seededLocal() { return rd(SEED_KEY, []); }
+
+  // ── Métré associé (ouvert automatiquement dans le Rapport) ────────────
+  // p.metre : 'coupe' (ml) | 'surface' (m²) | 'volume' (m³) | 'none' | absent/'auto' = deviné
+  function devineMetre(texte, unite) {
+    const u = String(unite || '').toLowerCase().trim();
+    if (u) { if (/m3|m³/.test(u)) return 'volume'; if (/m2|m²/.test(u)) return 'surface'; if (/^(ml|m)$/.test(u)) return 'coupe'; return ''; }
+    const t = String(texte || '').toLowerCase();
+    if (/^(forfait|installation|d[ée]placements?|signalisation|implantation|travaux de remise en [ée]tat)|fourniture (à|a) pied|pour plaque/.test(t)) return '';
+    if (/\bcub[ée]|\bm3\b|m³/.test(t)) return 'volume';
+    if (/bordur|coupes?\b|\bml\b|liser|caniveau|tuyau|canalis|bande|arr[êe]ts? francs|joint/.test(t)) return 'coupe';
+    if (/creuse|fouille|remblai|d[ée]blai|concassage/.test(t)) return 'volume';
+    if (/surface|pav[ée]|pavage|dalle|enrob|r[ée]glage|compactage|planie|cr[ée]pi|enduit|g[ée]otextile|ensemencement|chape|\bmurs?\b|isolation|piquage/.test(t)) return 'surface';
+    return '';
+  }
+  function metreDe(p) { const m = p && p.metre; return m && m !== 'auto' ? (m === 'none' ? '' : m) : devineMetre(p && p.nom); }
 
   // Recherche : chaque mot tapé doit commencer un mot du poste (sans accents)
   const norm = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/œ/g, 'oe').replace(/[^a-z0-9/.]+/g, ' ').trim();
@@ -236,7 +251,7 @@
       opts = opts.filter((o, i) => opts.findIndex(x => x.toLowerCase() === o.toLowerCase()) === i)
                  .filter(o => !deja.some(x => proche(x, o)));
       if (!opts.length) return;
-      out.push({ id: p.id || '', texte, raw: p.t, options: opts, cat: suggereCat(texte, p.chT) });
+      out.push({ id: p.id || '', texte, raw: p.t, u: p.u || '', options: opts, cat: suggereCat(texte, p.chT) });
     });
     return out;
   }
@@ -323,7 +338,7 @@
         if (!sel[i].size) { ign.push(cle(g.texte)); return; }
         const v = catSel[i] || '';
         const c = v.startsWith('new:') ? ensureCat(v.slice(4), t) : { catId: v.split('|')[0] || '', subCatId: v.split('|')[1] || '' };
-        [...sel[i]].sort((a, b) => a - b).forEach(k => { items.push({ id: 'p' + uid(), nom: g.options[k], ...c, icon: '', photo: '' }); n++; });
+        [...sel[i]].sort((a, b) => a - b).forEach(k => { items.push({ id: 'p' + uid(), nom: g.options[k], ...c, metre: devineMetre(g.options[k], g.u) || 'none', icon: '', photo: '' }); n++; });
       });
       wr(KEY, items); wr(IGN_KEY, ign.slice(-2000)); setTree(t);
       close(); await push({ items: n > 0, meta: 1, cats: JSON.stringify(t) !== avant });
@@ -332,5 +347,5 @@
     return grps.length;
   }
 
-  window.RPostes = { BASE, list, search, used, norm, setup, sync, push, candidats, proposer, nettoie, tree, label, seededLocal, KEY };
+  window.RPostes = { BASE, list, search, used, norm, setup, sync, push, candidats, proposer, nettoie, tree, label, seededLocal, KEY, devineMetre, metreDe };
 })();
