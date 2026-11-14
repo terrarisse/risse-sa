@@ -1,0 +1,423 @@
+{
+ "id": "ch3",
+ "titre": "CAN 114 — Échafaudages",
+ "note": "Échafaudages de façades, ponts de corniches, toitures provisoires, régie",
+ "postes": [
+  {
+   "id": "ch3-16-0",
+   "num": "16",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage lourd en tubulaire ou bois, largeur utile 1,20 m, charge utile max. 400 kg/m², hauteur jusqu'à 15 m, location jusqu'à 2 mois",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-17-1",
+   "num": "17",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value échafaudage lourd pour hauteur de 15 à 25 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-18-2",
+   "num": "18",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value échafaudage lourd par semaine de location supplémentaire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-19-3",
+   "num": "19",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage lourd, largeur utile 1 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-20-4",
+   "num": "20",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage mi-lourd en tubulaire ou bois, largeur utile 0,90 à 1 m, charge utile 200 kg/m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-21a-5",
+   "num": "21a",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage léger en cadres tubulaires, largeur 60 cm, charge 200 kg/m², hauteur jusqu'à 15 m, location 2 mois, pour réfection de peintures",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-21b-6",
+   "num": "21b",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage léger en cadres tubulaires, largeur 60 cm, charge 200 kg/m², hauteur jusqu'à 15 m, location 2 mois, pour crépissage ou construction neuve",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-22-7",
+   "num": "22",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value échafaudage léger pour hauteur de 16 à 25 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-23-8",
+   "num": "23",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value échafaudage léger par semaine de location supplémentaire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-23b-9",
+   "num": "23b",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value pour ponts de ferblantiers en porte-à-faux, 60 cm de large au niveau du chéneau",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-23c-10",
+   "num": "23c",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Ponts de lucarnes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-23d-11",
+   "num": "23d",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Ponts de membron",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-24a-12",
+   "num": "24a",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage léger à consoles métalliques et perches bois, largeur 60 cm, charge 150 kg/m², hauteur jusqu'à 13 m, pour réfection de peinture",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-24b-13",
+   "num": "24b",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échafaudage léger à consoles métalliques et perches bois, pour crépissage ou construction neuve",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-24c-14",
+   "num": "24c",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value échafaudage à consoles pour hauteur de 14 à 20 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-24d-15",
+   "num": "24d",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value échafaudage à consoles par semaine de location supplémentaire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-24e-16",
+   "num": "24e",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value pour charge utile de 200 kg/m² avec distance max. de 1,90 m entre poutrelles",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-25-17",
+   "num": "25",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Plus-value pour ponts de ferblantiers montés en porte-à-faux, 60 cm de large au niveau du chéneau",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-26-18",
+   "num": "26",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Échelles d'accès inclinées avec mains courantes et départ mobile",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-27-19",
+   "num": "27",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Auvent de protection à 45° formé d'un platelage jointif fixé à l'échafaudage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-28a-20",
+   "num": "28a",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Paroi de protection pour habillage latéral ou frontal de l'échafaudage en planches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-28b-21",
+   "num": "28b",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Paroi de protection pour habillage de l'échafaudage en feuilles de plastique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-28c-22",
+   "num": "28c",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Paroi de protection pour habillage de l'échafaudage en filet nylon",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-29-23",
+   "num": "29",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Dévaloir à gravats avec bouche et coulisse à chaque étage, Ø 30 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-30-24",
+   "num": "30",
+   "cat": "114 Échafaudages",
+   "sub": "Échafaudages de façades",
+   "nom": "Dévaloir pour couvreurs, pont de départ avec entonnoir au niveau du toit, tuyau Ø 30 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-31-25",
+   "num": "31",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Pont pour réfection de corniche, système bois, pointelles avec consoles métalliques, location 2 mois, hauteur jusqu'à 10 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-32-26",
+   "num": "32",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Pont simple pour couvreurs, saillie max. 90 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-33-27",
+   "num": "33",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Pont double (intérieur sous plafond d'avant-toit et extérieur en porte-à-faux) pour le couvreur, saillie 90 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-34a-28",
+   "num": "34a",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Plus-value pont de corniche pour hauteur plus grande, par mètre de hauteur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-34b-29",
+   "num": "34b",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Plus-value pont de corniche pour avant-toit plus saillant, jusqu'à 1,20 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-35-30",
+   "num": "35",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Plus-value pont de corniche par semaine de location supplémentaire",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-36-31",
+   "num": "36",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Tunnel à piétons sous échafaudage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-37-32",
+   "num": "37",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Échafaudage roulant léger (type « peintres ») en éléments métalliques, hauteur jusqu'à 6 m, location 1 semaine",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-38-33",
+   "num": "38",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Plus-value échafaudage roulant par semaine supplémentaire",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-39-34",
+   "num": "39",
+   "cat": "114 Échafaudages",
+   "sub": "Ponts pour réfection de corniches",
+   "nom": "Échafaudage roulant en construction tubulaire pour travaux lourds, selon dimensions",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-49-35",
+   "num": "49",
+   "cat": "114 Échafaudages",
+   "sub": "Toitures provisoires",
+   "nom": "Toiture provisoire système bois (pannes, chevronnage, lambrissage, carton bitumé), construction, location 2 mois et démolition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-50-36",
+   "num": "50",
+   "cat": "114 Échafaudages",
+   "sub": "Toitures provisoires",
+   "nom": "Plus-value toiture provisoire par mois supplémentaire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-51-37",
+   "num": "51",
+   "cat": "114 Échafaudages",
+   "sub": "Toitures provisoires",
+   "nom": "Toiture provisoire sans lambrissage, avec plastique sur chevrons, location 2 mois",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-52-38",
+   "num": "52",
+   "cat": "114 Échafaudages",
+   "sub": "Toitures provisoires",
+   "nom": "Plus-value toiture provisoire sans lambrissage par mois supplémentaire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-53-39",
+   "num": "53",
+   "cat": "114 Échafaudages",
+   "sub": "Toitures provisoires",
+   "nom": "Supplément toiture provisoire pour hauteur jusqu'à 20 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-54-40",
+   "num": "54",
+   "cat": "114 Échafaudages",
+   "sub": "Toitures provisoires",
+   "nom": "Écran de protection en lattis de roseaux ou treillis nylon pour toiture provisoire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch3-1-41",
+   "num": "1",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Surveillance de chantier d'échafaudage, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-2-42",
+   "num": "2",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Chef monteur d'échafaudage, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-3-43",
+   "num": "3",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Monteur d'échafaudage, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-4-44",
+   "num": "4",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Fourniture en régie de crosses, pointes diverses, feuillard",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-5-45",
+   "num": "5",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Fourniture en régie de lattes 27/35 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-6-46",
+   "num": "6",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Fourniture en régie de lambourdes 27/60 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch3-7-47",
+   "num": "7",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Fourniture en régie de planches, plateaux, carrelets",
+   "metre": "volume"
+  },
+  {
+   "id": "ch3-10-48",
+   "num": "10",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Location de liens d'échafaudage, par pièce et par semaine",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-12-49",
+   "num": "12",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Location de consoles d'échafaudage en fer, par semaine",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-14-50",
+   "num": "14",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Location de galets de roulement orientables pour échafaudages mobiles (roues en fer ou à bandages caoutchouc)",
+   "metre": "none"
+  },
+  {
+   "id": "ch3-15-51",
+   "num": "15",
+   "cat": "114 Échafaudages",
+   "sub": "Régie et location",
+   "nom": "Location de bâches, par 100 m² et par jour (1re semaine) puis par m² et par jour",
+   "metre": "surface"
+  }
+ ]
+}

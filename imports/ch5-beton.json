@@ -1,0 +1,1487 @@
+{
+ "id": "ch5",
+ "titre": "CAN 241 — Béton coulé sur place",
+ "note": "Bétons, coffrages, armatures, éléments en béton",
+ "postes": [
+  {
+   "id": "ch5-121112-0",
+   "num": "121.112",
+   "cat": "241 Béton",
+   "sub": "Béton de propreté, remplissage",
+   "nom": "Lit de béton de propreté horizontal ou incliné jusqu'à 5 %, béton CEM 150 kg/m³, épaisseur 5 à 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-122212-1",
+   "num": "122.212",
+   "cat": "241 Béton",
+   "sub": "Béton de propreté, remplissage",
+   "nom": "Lit de béton de propreté incliné de plus de 5 %, béton CEM 150 kg/m³, épaisseur 5 à 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-123111-2",
+   "num": "123.111",
+   "cat": "241 Béton",
+   "sub": "Béton de propreté, remplissage",
+   "nom": "Lit de béton poreux sous fondation ou radier, CEM 150 kg/m³, épaisseur jusqu'à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-123112-3",
+   "num": "123.112",
+   "cat": "241 Béton",
+   "sub": "Béton de propreté, remplissage",
+   "nom": "Lit de béton poreux sous fondation ou radier, CEM 150 kg/m³, épaisseur 0,31 à 0,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-123211-4",
+   "num": "123.211",
+   "cat": "241 Béton",
+   "sub": "Béton de propreté, remplissage",
+   "nom": "Remplissage en béton CEM 150 kg/m³ derrière mur ou fondation, toutes épaisseurs",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-611111-5",
+   "num": "611.111",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour semelles de fondation isolées rectangulaires, béton NPK A, jusqu'à 0,5 m³ par pièce",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-611112-6",
+   "num": "611.112",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour semelles de fondation isolées rectangulaires, béton NPK A, 0,51 à 1,0 m³ par pièce",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-613111-7",
+   "num": "613.111",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour semelles de fondation continues ou filantes, entretoises et longrines, béton NPK A, jusqu'à 0,5 m³/m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-613112-8",
+   "num": "613.112",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour semelles de fondation continues ou filantes, béton NPK A, 0,51 à 1,0 m³/m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-615111-9",
+   "num": "615.111",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour radier, dalle de transition ou dalle sur têtes de pieux, béton NPK A, épaisseur jusqu'à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-615112-10",
+   "num": "615.112",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour radier, dalle de transition ou dalle sur têtes de pieux, béton NPK A, épaisseur 0,21 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-615211-11",
+   "num": "615.211",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour radier en pente 5 à 10 %, béton NPK A, épaisseur jusqu'à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-615212-12",
+   "num": "615.212",
+   "cat": "241 Béton",
+   "sub": "Fondations, radiers",
+   "nom": "Béton pour radier en pente 5 à 10 %, béton NPK A, épaisseur 0,21 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-621111-13",
+   "num": "621.111",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour caniveau et élément similaire de section rectangulaire, béton NPK A, section jusqu'à 0,50 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-621112-14",
+   "num": "621.112",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour caniveau et élément similaire de section rectangulaire, béton NPK A, section 0,51 à 1,00 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-622110-15",
+   "num": "622.110",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour parois de fosses et de regards, profondeur jusqu'à 1,50 m, béton NPK A, épaisseur 0,15 à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-622110-16",
+   "num": "622.110",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour parois de fosses et de regards, profondeur jusqu'à 1,50 m, béton NPK A, épaisseur 0,21 à 0,25 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-622110-17",
+   "num": "622.110",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour parois de fosses et de regards, profondeur jusqu'à 1,50 m, béton NPK A, épaisseur 0,26 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-622210-18",
+   "num": "622.210",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour parois de fosses et de regards, profondeur 1,51 à 2,50 m, béton NPK A, épaisseur 0,15 à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-622210-19",
+   "num": "622.210",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour parois de fosses et de regards, profondeur 1,51 à 2,50 m, béton NPK A, épaisseur 0,21 à 0,25 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-622210-20",
+   "num": "622.210",
+   "cat": "241 Béton",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Béton pour parois de fosses et de regards, profondeur 1,51 à 2,50 m, béton NPK A, épaisseur 0,26 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-631-21",
+   "num": "631",
+   "cat": "241 Béton",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Béton pour paroi ou mur de soutènement sans fruit, hauteur jusqu'à 2,50 m, béton NPK A, épaisseur 0,15 à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-631-22",
+   "num": "631",
+   "cat": "241 Béton",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Béton pour paroi ou mur de soutènement sans fruit, hauteur jusqu'à 2,50 m, béton NPK A, épaisseur 0,21 à 0,25 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-631-23",
+   "num": "631",
+   "cat": "241 Béton",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Béton pour paroi ou mur de soutènement sans fruit, hauteur jusqu'à 2,50 m, béton NPK A, épaisseur 0,26 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-631-24",
+   "num": "631",
+   "cat": "241 Béton",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Béton pour paroi ou mur de soutènement sans fruit, hauteur 2,51 à 3,50 m, béton NPK A, épaisseur 0,15 à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-631-25",
+   "num": "631",
+   "cat": "241 Béton",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Béton pour paroi ou mur de soutènement sans fruit, hauteur 2,51 à 3,50 m, béton NPK A, épaisseur 0,21 à 0,25 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-631-26",
+   "num": "631",
+   "cat": "241 Béton",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Béton pour paroi ou mur de soutènement sans fruit, hauteur 2,51 à 3,50 m, béton NPK A, épaisseur 0,26 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-651-27",
+   "num": "651",
+   "cat": "241 Béton",
+   "sub": "Piliers",
+   "nom": "Béton pour pilier de section constante (carrée, rectangulaire ou ronde), hauteur jusqu'à 3,50 m, béton NPK A, section jusqu'à 0,100 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-651-28",
+   "num": "651",
+   "cat": "241 Béton",
+   "sub": "Piliers",
+   "nom": "Béton pour pilier de section constante (carrée, rectangulaire ou ronde), hauteur jusqu'à 3,50 m, béton NPK A, section 0,101 à 0,250 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-651-29",
+   "num": "651",
+   "cat": "241 Béton",
+   "sub": "Piliers",
+   "nom": "Béton pour pilier de section constante (carrée, rectangulaire ou ronde), hauteur supérieure à 3,50 m, béton NPK A, section jusqu'à 0,100 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-651-30",
+   "num": "651",
+   "cat": "241 Béton",
+   "sub": "Piliers",
+   "nom": "Béton pour pilier de section constante (carrée, rectangulaire ou ronde), hauteur supérieure à 3,50 m, béton NPK A, section 0,101 à 0,250 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-711101-31",
+   "num": "711.101",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour escalier rectiligne, béton NPK A, épaisseur de paillasse jusqu'à 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-711102-32",
+   "num": "711.102",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour escalier rectiligne, béton NPK A, épaisseur de paillasse 0,21 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-712101-33",
+   "num": "712.101",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour palier d'escalier, béton NPK A, épaisseur jusqu'à 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-712102-34",
+   "num": "712.102",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour palier d'escalier, béton NPK A, épaisseur 0,21 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-721100-35",
+   "num": "721.100",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour dalle de plancher horizontale ou en pente jusqu'à 5 %, béton NPK A, épaisseur jusqu'à 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-721100-36",
+   "num": "721.100",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour dalle de plancher horizontale ou en pente jusqu'à 5 %, béton NPK A, épaisseur 0,21 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-721100-37",
+   "num": "721.100",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour dalle de plancher horizontale ou en pente jusqu'à 5 %, béton NPK A, épaisseur 0,31 à 0,40 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-722100-38",
+   "num": "722.100",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour dalle en porte-à-faux horizontale ou en pente jusqu'à 5 %, béton NPK A, épaisseur jusqu'à 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-722100-39",
+   "num": "722.100",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour dalle en porte-à-faux horizontale ou en pente jusqu'à 5 %, béton NPK A, épaisseur 0,21 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-722100-40",
+   "num": "722.100",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton pour dalle en porte-à-faux horizontale ou en pente jusqu'à 5 %, béton NPK A, épaisseur 0,31 à 0,40 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-726001-41",
+   "num": "726.001",
+   "cat": "241 Béton",
+   "sub": "Escaliers, dalles",
+   "nom": "Béton de recharge sur dalle existante, béton NPK A, épaisseur 0,15 à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-741110-42",
+   "num": "741.110",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau rectiligne bétonné avec la dalle, béton NPK A, section jusqu'à 0,100 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-741110-43",
+   "num": "741.110",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau rectiligne bétonné avec la dalle, béton NPK A, section 0,101 à 0,250 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-741110-44",
+   "num": "741.110",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau rectiligne bétonné avec la dalle, béton NPK A, section 0,251 à 0,500 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-741120-45",
+   "num": "741.120",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau rectiligne, bétonnage séparé, béton NPK A, section jusqu'à 0,100 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-741120-46",
+   "num": "741.120",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau rectiligne, bétonnage séparé, béton NPK A, section 0,101 à 0,250 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-741120-47",
+   "num": "741.120",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau rectiligne, bétonnage séparé, béton NPK A, section 0,251 à 0,500 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-742-48",
+   "num": "742",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau en pente 5 à 10 %, béton NPK A, section jusqu'à 0,100 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-742-49",
+   "num": "742",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau en pente 5 à 10 %, béton NPK A, section 0,101 à 0,250 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-742-50",
+   "num": "742",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier, poutre ou linteau en pente 5 à 10 %, béton NPK A, section 0,251 à 0,500 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-746-51",
+   "num": "746",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier renversé ou parapet rectiligne, béton NPK A, épaisseur 0,15 à 0,20 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-746-52",
+   "num": "746",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier renversé ou parapet rectiligne, béton NPK A, épaisseur 0,21 à 0,25 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-746-53",
+   "num": "746",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Béton pour sommier renversé ou parapet rectiligne, béton NPK A, épaisseur 0,26 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-746300-54",
+   "num": "746.300",
+   "cat": "241 Béton",
+   "sub": "Sommiers, poutres, linteaux",
+   "nom": "Bétonnage ultérieur de sommier renversé ou parapet",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771-55",
+   "num": "771",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans radier ou dalle de plancher, épaisseur 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771-56",
+   "num": "771",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans radier ou dalle de plancher, épaisseur 0,21 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771-57",
+   "num": "771",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans radier ou dalle de plancher, épaisseur 0,31 à 0,40 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771-58",
+   "num": "771",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans dalle en porte-à-faux ou encorbellement, épaisseur 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771-59",
+   "num": "771",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans dalle en porte-à-faux ou encorbellement, épaisseur 0,21 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771-60",
+   "num": "771",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans dalle en porte-à-faux ou encorbellement, épaisseur 0,31 à 0,40 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771300-61",
+   "num": "771.300",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans sommier ou poutre, section jusqu'à 0,100 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771300-62",
+   "num": "771.300",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans sommier ou poutre, section 0,101 à 0,250 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771300-63",
+   "num": "771.300",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans sommier ou poutre, section 0,251 à 0,500 m²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771400-64",
+   "num": "771.400",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans paroi ou mur de soutènement, épaisseur 0,15 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771400-65",
+   "num": "771.400",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans paroi ou mur de soutènement, épaisseur 0,21 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-771400-66",
+   "num": "771.400",
+   "cat": "241 Béton",
+   "sub": "Joints de retrait (obturation)",
+   "nom": "Béton pour obturation de joint de retrait dans paroi ou mur de soutènement, épaisseur 0,26 à 0,30 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch5-811111-67",
+   "num": "811.111",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Traitement des surfaces de béton au balai pour les rendre rugueuses, immédiatement après bétonnage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-811112-68",
+   "num": "811.112",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Traitement des surfaces de joints de reprise au balai, immédiatement après bétonnage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-811121-69",
+   "num": "811.121",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Traitement des surfaces de béton aux abrasifs pour les rendre rugueuses",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-811122-70",
+   "num": "811.122",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Traitement des surfaces de joints de reprise aux abrasifs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-811201-71",
+   "num": "811.201",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Traitement des surfaces de béton après durcissement pour les rendre rugueuses",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-811202-72",
+   "num": "811.202",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Traitement des surfaces de joints de reprise après durcissement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-812101-73",
+   "num": "812.101",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Talochage de surface de béton horizontale ou en pente jusqu'à 5 %, sans ajout de mortier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-812102-74",
+   "num": "812.102",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Talochage de surface de béton horizontale ou en pente jusqu'à 5 %, avec ajout de mortier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-812201-75",
+   "num": "812.201",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Talochage de surface de béton en pente sur plusieurs côtés, sans ajout de mortier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-812202-76",
+   "num": "812.202",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Talochage de surface de béton en pente sur plusieurs côtés, avec ajout de mortier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-813001-77",
+   "num": "813.001",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Microbéton CEM 400 kg/m³ pour joint de reprise, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-813002-78",
+   "num": "813.002",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Microbéton CEM 400 kg/m³ pour joint de reprise, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-814101-79",
+   "num": "814.101",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Couronnement de paroi, mur, bordure ou parapet taloché immédiatement après bétonnage, largeur jusqu'à 0,30 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-814102-80",
+   "num": "814.102",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Couronnement de paroi, mur, bordure ou parapet taloché immédiatement après bétonnage, largeur 0,31 à 0,50 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-814201-81",
+   "num": "814.201",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Couronnement avec application ultérieure d'une chape ou lissage, chanfreinage compris, largeur jusqu'à 0,30 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-814202-82",
+   "num": "814.202",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Couronnement avec application ultérieure d'une chape ou lissage, chanfreinage compris, largeur 0,31 à 0,50 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-815101-83",
+   "num": "815.101",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Traitements de surface",
+   "nom": "Façon de gorge, rayon jusqu'à 50 mm, préparation du support comprise",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-821111-84",
+   "num": "821.111",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Protection contre la dessiccation par feuille de polyéthylène 0,20 mm collée, surface horizontale ou pente jusqu'à 5 %",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-821112-85",
+   "num": "821.112",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Protection contre la dessiccation par feuille de polyéthylène 0,20 mm collée, surface en pente supérieure à 5 %",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-821211-86",
+   "num": "821.211",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Mise à disposition et entretien de la feuille de polyéthylène de cure, par semaine",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-822001-87",
+   "num": "822.001",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Fourniture et répandage d'un produit de cure contre la dessiccation du béton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-823101-88",
+   "num": "823.101",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Humidification permanente du béton par arrosage après mise en œuvre, surfaces horizontales",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-823102-89",
+   "num": "823.102",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Humidification permanente du béton par arrosage après mise en œuvre, surfaces en pente",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-823103-90",
+   "num": "823.103",
+   "cat": "241 Béton — travaux accessoires",
+   "sub": "Cure du béton",
+   "nom": "Humidification permanente du béton par arrosage après mise en œuvre, surfaces verticales",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-211-91",
+   "num": "211",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage une face pour béton de remplissage ou béton poreux, type 1, hauteur constante, face verticale (selon hauteur de coffrage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-211-92",
+   "num": "211",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage une face pour béton de remplissage ou béton poreux, type 1, hauteur constante, face inclinée (selon hauteur de coffrage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-211-93",
+   "num": "211",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage une face pour béton de remplissage ou béton poreux, type 1, hauteur variable, face verticale (selon hauteur de coffrage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-211-94",
+   "num": "211",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage une face pour béton de remplissage ou béton poreux, type 1, hauteur variable, face inclinée (selon hauteur de coffrage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-212100-95",
+   "num": "212.100",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage de semelle de fondation isolée rectangulaire, type 1, hauteur constante (selon hauteur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-212120-96",
+   "num": "212.120",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage de semelle de fondation isolée rectangulaire, type 1, hauteur variable",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-214100-97",
+   "num": "214.100",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage de semelle de fondation filante, entretoise ou longrine, type 1, hauteur constante (selon hauteur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-214120-98",
+   "num": "214.120",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage de semelle de fondation filante, entretoise ou longrine, type 1, hauteur variable",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-216111-99",
+   "num": "216.111",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage de radier, dalle de transition ou dalle sur pieux, type 1, hauteur constante jusqu'à 0,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-216121-100",
+   "num": "216.121",
+   "cat": "241 Coffrages",
+   "sub": "Fondations, radiers",
+   "nom": "Coffrage de radier ou dalle de transition, type 1, hauteur variable jusqu'à 0,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-221100-101",
+   "num": "221.100",
+   "cat": "241 Coffrages",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Coffrage 1 face pour caniveau, type 2, section rectangulaire (selon section libre)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-222100-102",
+   "num": "222.100",
+   "cat": "241 Coffrages",
+   "sub": "Caniveaux, fosses, regards",
+   "nom": "Coffrage 2 faces pour caniveau, type 2, section rectangulaire (selon section libre)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-231-103",
+   "num": "231",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage vertical 2 faces pour paroi ou mur de soutènement, type 2 (selon hauteur jusqu'à 1,50, 2,50 ou 3,50 m)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-231-104",
+   "num": "231",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage vertical 2 faces pour paroi ou mur de soutènement, type 3-1 (selon hauteur jusqu'à 1,50, 2,50 ou 3,50 m)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-231-105",
+   "num": "231",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage vertical 2 faces pour paroi ou mur de soutènement, type 4-1 (selon hauteur jusqu'à 1,50, 2,50 ou 3,50 m)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-231200-106",
+   "num": "231.200",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage vertical 1 face pour paroi ou mur de soutènement, type 2 (selon hauteur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-231200-107",
+   "num": "231.200",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage vertical 1 face pour paroi ou mur de soutènement, type 3-1 (selon hauteur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-231200-108",
+   "num": "231.200",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage vertical 1 face pour paroi ou mur de soutènement, type 4-1 (selon hauteur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-235110-109",
+   "num": "235.110",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage de reprise ou contre-coffrage sans armature traversante, mur d'épaisseur constante, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-235120-110",
+   "num": "235.120",
+   "cat": "241 Coffrages",
+   "sub": "Murs, murs de soutènement",
+   "nom": "Coffrage de reprise ou contre-coffrage sans armature traversante, mur d'épaisseur variable, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-251-111",
+   "num": "251",
+   "cat": "241 Coffrages",
+   "sub": "Piliers",
+   "nom": "Coffrage de pilier de section carrée ou rectangulaire constante, 1 à 5 piliers identiques, type 2 (selon hauteur et section)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-251-112",
+   "num": "251",
+   "cat": "241 Coffrages",
+   "sub": "Piliers",
+   "nom": "Coffrage de pilier de section carrée ou rectangulaire constante, 1 à 5 piliers identiques, type 3-1 (selon hauteur et section)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-252-113",
+   "num": "252",
+   "cat": "241 Coffrages",
+   "sub": "Piliers",
+   "nom": "Coffrage de pilier de section circulaire constante, 1 à 5 piliers identiques, type 2 (selon hauteur et section)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-252-114",
+   "num": "252",
+   "cat": "241 Coffrages",
+   "sub": "Piliers",
+   "nom": "Coffrage de pilier de section circulaire constante, 1 à 5 piliers identiques, type 3-1 (selon hauteur et section)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-311-115",
+   "num": "311",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de volée d'escalier rectiligne, type 2, avec coffrage latéral sur 1 côté (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-311-116",
+   "num": "311",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de volée d'escalier rectiligne, type 2, avec coffrage latéral sur 2 côtés (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-311-117",
+   "num": "311",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de volée d'escalier rectiligne, type 2, sans coffrage latéral (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-311-118",
+   "num": "311",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de volée d'escalier rectiligne, type 3-1, avec coffrage latéral sur 1 côté (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-311-119",
+   "num": "311",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de volée d'escalier rectiligne, type 3-1, avec coffrage latéral sur 2 côtés (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-311-120",
+   "num": "311",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de volée d'escalier rectiligne, type 3-1, sans coffrage latéral (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-312-121",
+   "num": "312",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de palier d'escalier, type 2, avec coffrages de rive",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-312-122",
+   "num": "312",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de palier d'escalier, type 2, sans coffrages de rive",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-312-123",
+   "num": "312",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de palier d'escalier, type 3-1, avec coffrages de rive",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-312-124",
+   "num": "312",
+   "cat": "241 Coffrages",
+   "sub": "Escaliers, paliers",
+   "nom": "Coffrage de palier d'escalier, type 3-1, sans coffrages de rive",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-321-125",
+   "num": "321",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face horizontale de dalle de plancher, type 2, épaisseur jusqu'à 0,35 m, sans contre-flèche (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-321-126",
+   "num": "321",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face horizontale de dalle de plancher, type 4-1, épaisseur jusqu'à 0,35 m, sans contre-flèche (selon hauteur d'étayage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-322-127",
+   "num": "322",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face horizontale de dalle en porte-à-faux, type 2, épaisseur jusqu'à 0,35 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-322-128",
+   "num": "322",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face horizontale de dalle en porte-à-faux, type 4-1, épaisseur jusqu'à 0,35 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-323-129",
+   "num": "323",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face de dalle de plancher en pente sur 1 côté jusqu'à 5 %, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-323-130",
+   "num": "323",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face de dalle de plancher en pente sur 1 côté jusqu'à 5 %, type 4-1",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-324-131",
+   "num": "324",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face de dalle en porte-à-faux en pente jusqu'à 5 %, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-324-132",
+   "num": "324",
+   "cat": "241 Coffrages",
+   "sub": "Dalles",
+   "nom": "Coffrage de sous-face de dalle en porte-à-faux en pente jusqu'à 5 %, type 4-1",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-342100-133",
+   "num": "342.100",
+   "cat": "241 Coffrages",
+   "sub": "Poutres, sommiers, parapets",
+   "nom": "Coffrage de sommier horizontal rectiligne, type 2 (selon hauteur d'étayage et section)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-343100-134",
+   "num": "343.100",
+   "cat": "241 Coffrages",
+   "sub": "Poutres, sommiers, parapets",
+   "nom": "Coffrage de sommier en pente jusqu'à 5 % rectiligne, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-343200-135",
+   "num": "343.200",
+   "cat": "241 Coffrages",
+   "sub": "Poutres, sommiers, parapets",
+   "nom": "Coffrage de sommier en pente jusqu'à 5 % rectiligne, type 4-1",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-346110-136",
+   "num": "346.110",
+   "cat": "241 Coffrages",
+   "sub": "Poutres, sommiers, parapets",
+   "nom": "Coffrage de sommier renversé ou parapet rectiligne, type 2, hauteur de coffrage jusqu'à 0,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-346110-137",
+   "num": "346.110",
+   "cat": "241 Coffrages",
+   "sub": "Poutres, sommiers, parapets",
+   "nom": "Coffrage de sommier renversé ou parapet rectiligne, type 2, hauteur de coffrage 0,51 à 1,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-346110-138",
+   "num": "346.110",
+   "cat": "241 Coffrages",
+   "sub": "Poutres, sommiers, parapets",
+   "nom": "Coffrage de sommier renversé ou parapet rectiligne, type 2, hauteur de coffrage 1,01 à 1,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-371101-139",
+   "num": "371.101",
+   "cat": "241 Coffrages",
+   "sub": "Coffrages perdus",
+   "nom": "Coffrage perdu pour fondations et parties d'ouvrages similaires, type 1/2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-372101-140",
+   "num": "372.101",
+   "cat": "241 Coffrages",
+   "sub": "Coffrages perdus",
+   "nom": "Cales d'espacement et écarteurs de coffrage sans trous de part en part, paroi 2 faces, épaisseur 0,25 à 0,30 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-372102-141",
+   "num": "372.102",
+   "cat": "241 Coffrages",
+   "sub": "Coffrages perdus",
+   "nom": "Cales d'espacement et écarteurs de coffrage sans trous de part en part, paroi 2 faces, épaisseur 0,31 à 0,35 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-381101-142",
+   "num": "381.101",
+   "cat": "241 Coffrages",
+   "sub": "Coffrages perdus",
+   "nom": "Coffrage pour obturation de joint de retrait de radier, dalle sur pieux ou dalle de transition, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-381201-143",
+   "num": "381.201",
+   "cat": "241 Coffrages",
+   "sub": "Coffrages perdus",
+   "nom": "Coffrage pour obturation de joint de retrait de paroi ou mur de soutènement, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-381301-144",
+   "num": "381.301",
+   "cat": "241 Coffrages",
+   "sub": "Coffrages perdus",
+   "nom": "Coffrage pour obturation de joint de retrait de dalle de plancher, type 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch5-412100-145",
+   "num": "412.100",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de réservation rectangulaire, profondeur jusqu'à 0,25 m, section jusqu'à 0,050 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-412100-146",
+   "num": "412.100",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de réservation rectangulaire, profondeur jusqu'à 0,25 m, section 0,051 à 0,150 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-412100-147",
+   "num": "412.100",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de réservation rectangulaire, profondeur jusqu'à 0,25 m, section 0,151 à 0,250 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-412200-148",
+   "num": "412.200",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de réservation rectangulaire, profondeur 0,26 à 0,50 m, section jusqu'à 0,050 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-412200-149",
+   "num": "412.200",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de réservation rectangulaire, profondeur 0,26 à 0,50 m, section 0,051 à 0,150 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-412200-150",
+   "num": "412.200",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de réservation rectangulaire, profondeur 0,26 à 0,50 m, section 0,151 à 0,250 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-413110-151",
+   "num": "413.110",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de niche ou saignée rectangulaire dans paroi ou mur, selon section",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-413210-152",
+   "num": "413.210",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Coffrage de niche ou saignée rectangulaire dans dalle, selon section",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-421101-153",
+   "num": "421.101",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Incorporé de section rectangulaire pour coffrage de reprise (feuillures de joints, fenêtres, portes), jusqu'à 50×50 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-422100-154",
+   "num": "422.100",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Incorporé de section triangulaire ou trapézoïdale pour coffrage de reprise, jusqu'à 30×30 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-422101-155",
+   "num": "422.101",
+   "cat": "241 Coffrages",
+   "sub": "Réservations, niches, saignées",
+   "nom": "Incorporé de section triangulaire ou trapézoïdale pour coffrage de reprise, 31×31 à 50×50 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch5-511110-156",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 8 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-157",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 10 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-158",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 12 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-159",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 14 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-160",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 16 à 22 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-161",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 26 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-162",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 30 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511110-163",
+   "num": "511.110",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B, longueurs fixes ou de stock coupées sur chantier, Ø 34 à 40 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-164",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 8 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-165",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 10 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-166",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 12 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-167",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 14 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-168",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 16 à 22 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-169",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 26 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-170",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 30 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-511130-171",
+   "num": "511.130",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Fourniture et pose d'acier d'armature B 500 A/B façonné simple, Ø 34 à 40 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-512111-172",
+   "num": "512.111",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Supplément pour nombre de positions de la liste des aciers",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-512211-173",
+   "num": "512.211",
+   "cat": "241 Armatures",
+   "sub": "Aciers d'armature",
+   "nom": "Supplément pour petites quantités d'armature, moins de 3 t par liste",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-521111-174",
+   "num": "521.111",
+   "cat": "241 Armatures",
+   "sub": "Treillis",
+   "nom": "Fourniture et pose de treillis d'armature B 500 A/B de stock, non coupé, tous types",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-523101-175",
+   "num": "523.101",
+   "cat": "241 Armatures",
+   "sub": "Treillis",
+   "nom": "Supplément pour coupe droite de treillis",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-523102-176",
+   "num": "523.102",
+   "cat": "241 Armatures",
+   "sub": "Treillis",
+   "nom": "Supplément pour coupe biaise de treillis",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-523201-177",
+   "num": "523.201",
+   "cat": "241 Armatures",
+   "sub": "Treillis",
+   "nom": "Supplément pour pliage de treillis ou portion de treillis jusqu'à 10 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-523202-178",
+   "num": "523.202",
+   "cat": "241 Armatures",
+   "sub": "Treillis",
+   "nom": "Supplément pour pliage de treillis de plus de 10 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-531110-179",
+   "num": "531.110",
+   "cat": "241 Armatures",
+   "sub": "Armatures spéciales",
+   "nom": "Fourniture et pose d'étrier d'écartement avec pieds en matière synthétique, hauteur jusqu'à 10 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-531110-180",
+   "num": "531.110",
+   "cat": "241 Armatures",
+   "sub": "Armatures spéciales",
+   "nom": "Fourniture et pose d'étrier d'écartement avec pieds en matière synthétique, hauteur 11 à 15 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-531110-181",
+   "num": "531.110",
+   "cat": "241 Armatures",
+   "sub": "Armatures spéciales",
+   "nom": "Fourniture et pose d'étrier d'écartement avec pieds en matière synthétique, hauteur 16 à 20 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-531110-182",
+   "num": "531.110",
+   "cat": "241 Armatures",
+   "sub": "Armatures spéciales",
+   "nom": "Fourniture et pose d'étrier d'écartement avec pieds en matière synthétique, hauteur 21 à 25 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-531110-183",
+   "num": "531.110",
+   "cat": "241 Armatures",
+   "sub": "Armatures spéciales",
+   "nom": "Fourniture et pose d'étrier d'écartement avec pieds en matière synthétique, hauteur 26 à 30 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch5-531110-184",
+   "num": "531.110",
+   "cat": "241 Armatures",
+   "sub": "Armatures spéciales",
+   "nom": "Fourniture et pose d'étrier d'écartement avec pieds en matière synthétique, hauteur 31 à 35 cm",
+   "metre": "none"
+  }
+ ]
+}

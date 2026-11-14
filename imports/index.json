@@ -18,12 +18,28 @@
    "ordre": 2
   },
   {
+   "id": "ch3",
+   "titre": "CAN 114 — Échafaudages",
+   "fichier": "ch3-echafaudages.json",
+   "n": 52,
+   "note": "Échafaudages de façades, ponts de corniches, toitures provisoires, régie",
+   "ordre": 3
+  },
+  {
    "id": "can4",
    "titre": "CAN 4 — Maçonnerie, crépis, chapes",
    "fichier": "can4-maconnerie.json",
    "n": 704,
    "note": "Maçonnerie (CAN 314), crépis et enduits de façades (348), chapes (661), installation de chantier (113), démolitions (112)",
    "ordre": 4
+  },
+  {
+   "id": "ch5",
+   "titre": "CAN 241 — Béton coulé sur place",
+   "fichier": "ch5-beton.json",
+   "n": 185,
+   "note": "Bétons, coffrages, armatures, éléments en béton",
+   "ordre": 5
   }
  ]
 }
