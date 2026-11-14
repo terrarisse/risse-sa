@@ -1118,6 +1118,7 @@ function renderCatMgr(){
           <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.5;flex-shrink:0;"></div>
           <span style="flex:1;color:var(--text2);">${esc(sub.name)}</span>
           <span style="font-size:10px;color:var(--text3);">${subCnt}</span>
+          <button title="Déplacer" style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--navy);font-size:12px;font-weight:700;cursor:pointer;padding:3px 7px;" onclick="openMoveSubCat('${cat.id}','${sub.id}')">⇄</button>
           <button style="background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:2px;" onclick="deleteSubCategory('${cat.id}','${sub.id}')">✕</button>
         </div>`;
       }).join('') : '';
@@ -1294,6 +1295,53 @@ function addSubCategory(catId){
   showToast('Sous-catégorie ajoutée ✓');
 }
  
+// Déplacer une sous-catégorie : en faire une catégorie à part ou la mettre dans une autre catégorie
+// (les éléments qu'elle contient suivent).
+function openMoveSubCat(catId, subId){
+  const cats = loadCats()[catMgrTab]||[];
+  const cat = cats.find(c=>c.id===catId); const sub = cat && (cat.children||[]).find(s=>s.id===subId);
+  if(!sub) return;
+  const ov = document.createElement('div'); ov.id='movesub-ov';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2000;display:flex;align-items:flex-end;justify-content:center;';
+  const btn = (onc, html) => `<button onclick="${onc}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:6px;font:600 14px Inter,sans-serif;color:var(--text);cursor:pointer;">${html}</button>`;
+  ov.innerHTML = `<div style="background:#fff;width:100%;max-width:560px;max-height:80vh;overflow-y:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));">
+    <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px;">⇄ Déplacer « ${esc(sub.name)} »</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">Actuellement dans ${esc(cat.name)}. Les éléments de la sous-catégorie suivent.</div>
+    ${btn(`moveSubCat('${catId}','${subId}','')`, `<span style="font-size:18px;">⬆</span><span>En faire une catégorie à part</span>`)}
+    <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;margin:12px 0 6px;">Mettre dans la catégorie</div>
+    ${cats.filter(c=>c.id!==catId).map(c=>btn(`moveSubCat('${catId}','${subId}','${c.id}')`, `${catIndicatorHTML(c.image,c.emoji,c.color,22)}<span>${esc(c.name)}</span>`)).join('') || '<div style="font-size:12px;color:var(--text3);">Aucune autre catégorie</div>'}
+    <button onclick="document.getElementById('movesub-ov').remove()" style="width:100%;margin-top:8px;background:var(--bg2);border:none;border-radius:10px;padding:12px;font:600 14px Inter,sans-serif;color:var(--text2);cursor:pointer;">Annuler</button>
+  </div>`;
+  ov.onclick = e => { if(e.target===ov) ov.remove(); };
+  document.body.appendChild(ov);
+}
+function moveSubCat(catId, subId, targetId){
+  const all = loadCats(); const cats = all[catMgrTab]||[];
+  const cat = cats.find(c=>c.id===catId); const sub = cat && (cat.children||[]).find(s=>s.id===subId);
+  if(!sub) return;
+  cat.children = cat.children.filter(s=>s.id!==subId);
+  let newCatId, newSubId = '';
+  if(!targetId){
+    // Nouvelle catégorie juste après la catégorie d'origine
+    const nc = { id:'cat'+Date.now().toString(36), name:sub.name, color:cat.color, emoji:'', image:'', children:[] };
+    cats.splice(cats.indexOf(cat)+1, 0, nc);
+    newCatId = nc.id;
+  } else {
+    const tgt = cats.find(c=>c.id===targetId); if(!tgt) return;
+    tgt.children = tgt.children || [];
+    const same = tgt.children.find(s=>(s.name||'').toLowerCase()===(sub.name||'').toLowerCase());
+    if(same) newSubId = same.id; else { tgt.children.push({ id:sub.id, name:sub.name }); newSubId = sub.id; }
+    newCatId = tgt.id;
+  }
+  all[catMgrTab] = cats; saveCats(all);
+  const items = load(catMgrTab).map(i => (i.catId===catId && i.subCatId===subId) ? { ...i, catId:newCatId, subCatId:newSubId } : i);
+  save(catMgrTab, items);
+  const ov=document.getElementById('movesub-ov'); if(ov) ov.remove();
+  renderCatMgr(); renderContent(currentTab, searchFilters[currentTab]||''); populateCatSelects(catMgrTab); updateBadges();
+  showToast(targetId ? '⇄ Sous-catégorie déplacée' : '⬆ Sous-catégorie devenue catégorie');
+}
+window.openMoveSubCat=openMoveSubCat; window.moveSubCat=moveSubCat;
+
 function deleteSubCategory(catId, subId){
   const cats = loadCats();
   const cat = (cats[catMgrTab]||[]).find(c=>c.id===catId);
