@@ -1,0 +1,983 @@
+{
+ "id": "ch2",
+ "titre": "CAN 211 — Terrassements",
+ "note": "Décapage, fouilles en tranchée et en pleine masse, difficultés, transports, taxes",
+ "postes": [
+  {
+   "id": "ch2-211100-0",
+   "num": "211.100",
+   "cat": "211 Terrassements",
+   "sub": "Décapage de terre végétale",
+   "nom": "Décapage de terre végétale à la machine, largeur jusqu'à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-211100-1",
+   "num": "211.100",
+   "cat": "211 Terrassements",
+   "sub": "Décapage de terre végétale",
+   "nom": "Décapage de terre végétale à la machine, largeur 2,01 à 5,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-211100-2",
+   "num": "211.100",
+   "cat": "211 Terrassements",
+   "sub": "Décapage de terre végétale",
+   "nom": "Décapage de terre végétale à la machine, largeur plus de 10,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-211201-3",
+   "num": "211.201",
+   "cat": "211 Terrassements",
+   "sub": "Décapage de terre végétale",
+   "nom": "Décapage de terre végétale à la main, largeur jusqu'à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-212001-4",
+   "num": "212.001",
+   "cat": "211 Terrassements",
+   "sub": "Décapage de terre végétale",
+   "nom": "Découpage, prélèvement et repose de mottes de gazon, mise en dépôt latéral comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-212002-5",
+   "num": "212.002",
+   "cat": "211 Terrassements",
+   "sub": "Décapage de terre végétale",
+   "nom": "Découpage, prélèvement et repose de mottes de gazon, transport jusqu'à 30 m compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-221110-6",
+   "num": "221.110",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, sans étayage, profondeur jusqu'à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221110-7",
+   "num": "221.110",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, sans étayage, profondeur 1,51 à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221110-8",
+   "num": "221.110",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, sans étayage, profondeur 2,01 à 3,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221120-9",
+   "num": "221.120",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place jusqu'à 1,50 m, profondeur 1,51 à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221120-10",
+   "num": "221.120",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place jusqu'à 1,50 m, profondeur 2,01 à 3,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221120-11",
+   "num": "221.120",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place jusqu'à 1,50 m, profondeur 3,01 à 4,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221120-12",
+   "num": "221.120",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place jusqu'à 1,50 m, profondeur 4,01 à 5,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221130-13",
+   "num": "221.130",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place sur toute la profondeur, profondeur jusqu'à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221130-14",
+   "num": "221.130",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place sur toute la profondeur, profondeur 1,51 à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221130-15",
+   "num": "221.130",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place sur toute la profondeur, profondeur 2,01 à 3,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221130-16",
+   "num": "221.130",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place sur toute la profondeur, profondeur 3,01 à 4,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-221130-17",
+   "num": "221.130",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois verticales à la machine, étayage déjà en place sur toute la profondeur, profondeur 4,01 à 5,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-222100-18",
+   "num": "222.100",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois obliques à la machine, profondeur jusqu'à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-222100-19",
+   "num": "222.100",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois obliques à la machine, profondeur 1,51 à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-222100-20",
+   "num": "222.100",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois obliques à la machine, profondeur 2,01 à 3,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-222301-21",
+   "num": "222.301",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles en tranchée",
+   "nom": "Fouille en tranchée à parois obliques à la main, profondeur jusqu'à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-231110-22",
+   "num": "231.110",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Fouille pour fondations, regards et similaires à la machine, sans étayage, profondeur jusqu'à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-231110-23",
+   "num": "231.110",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Fouille pour fondations, regards et similaires à la machine, sans étayage, profondeur 1,51 à 2,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-231110-24",
+   "num": "231.110",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Fouille pour fondations, regards et similaires à la machine, sans étayage, profondeur 2,01 à 3,00 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-231311-25",
+   "num": "231.311",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Fouille pour fondations, regards et similaires à la main, sans étayage, profondeur jusqu'à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-241210-26",
+   "num": "241.210",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Excavation par étapes pour reprise en sous-œuvre de fondations, chargement dans benne de grue, étape jusqu'à 1,25 m³",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-241210-27",
+   "num": "241.210",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Excavation par étapes pour reprise en sous-œuvre de fondations, chargement dans benne de grue, étape 1,26 à 2,50 m³",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-241210-28",
+   "num": "241.210",
+   "cat": "211 Terrassements",
+   "sub": "Fouilles pour fondations, regards",
+   "nom": "Excavation par étapes pour reprise en sous-œuvre de fondations, chargement dans benne de grue, étape 2,51 à 5,00 m³",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-251100-29",
+   "num": "251.100",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton bitumineux, épaisseur jusqu'à 50 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-251100-30",
+   "num": "251.100",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton bitumineux, épaisseur 51 à 100 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-251100-31",
+   "num": "251.100",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton bitumineux, épaisseur 101 à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-251100-32",
+   "num": "251.100",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton bitumineux, épaisseur 151 à 200 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-251200-33",
+   "num": "251.200",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton de ciment, épaisseur jusqu'à 100 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-251200-34",
+   "num": "251.200",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton de ciment, épaisseur 101 à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-251200-35",
+   "num": "251.200",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Coupe de revêtement en béton de ciment, épaisseur 151 à 200 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-252-36",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux à la machine, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-37",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux à la machine, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-38",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux à la machine, épaisseur 101 à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-39",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux à la machine, épaisseur 151 à 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-40",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé à la machine, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-41",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé à la machine, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-42",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé à la machine, épaisseur 101 à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-43",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé à la machine, épaisseur 151 à 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-44",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé à la machine, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-45",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé à la machine, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-46",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé à la machine, épaisseur 101 à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252-47",
+   "num": "252",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé à la machine, épaisseur 151 à 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-48",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux, excavation combinée ou à la main, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-49",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux, excavation combinée ou à la main, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-50",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux, excavation combinée ou à la main, épaisseur 101 à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-51",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton bitumineux, excavation combinée ou à la main, épaisseur 151 à 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-52",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé, excavation combinée ou à la main, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-53",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé, excavation combinée ou à la main, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-54",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé, excavation combinée ou à la main, épaisseur 101 à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-55",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment non armé, excavation combinée ou à la main, épaisseur 151 à 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-56",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé, excavation combinée ou à la main, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-57",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé, excavation combinée ou à la main, épaisseur 51 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-58",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé, excavation combinée ou à la main, épaisseur 101 à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-253-59",
+   "num": "253",
+   "cat": "211 Terrassements",
+   "sub": "Coupe et défonçage de revêtements",
+   "nom": "Défonçage de revêtement en béton de ciment armé, excavation combinée ou à la main, épaisseur 151 à 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-252601-60",
+   "num": "252.601",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Supplément pour bloc isolé de plus de 0,25 m³ (excavation à la machine)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-252605-61",
+   "num": "252.605",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Supplément pour roche difficilement exploitable (excavation à la machine)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-252711-62",
+   "num": "252.711",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Roche exploitable à l'explosif, largeur jusqu'à 1,40 m, profondeur d'excavation jusqu'à 0,80 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-252712-63",
+   "num": "252.712",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Roche exploitable à l'explosif, largeur jusqu'à 1,40 m, profondeur d'excavation 0,81 à 1,50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-253601-64",
+   "num": "253.601",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Supplément pour bloc isolé de plus de 0,02 m³ (excavation à la main)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-253604-65",
+   "num": "253.604",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Supplément pour roche exploitable à la pioche",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-253605-66",
+   "num": "253.605",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Supplément pour roche facilement exploitable au marteau pneumatique",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-254101-67",
+   "num": "254.101",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Difficultés en présence de conduites le long de la fouille",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch2-254102-68",
+   "num": "254.102",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Difficultés en présence de conduites en travers de la fouille",
+   "metre": "none"
+  },
+  {
+   "id": "ch2-256101-69",
+   "num": "256.101",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Installation, mise à disposition et enlèvement de l'équipement pour l'emploi d'explosifs",
+   "metre": "none"
+  },
+  {
+   "id": "ch2-257101-70",
+   "num": "257.101",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Chargement des matériaux d'excavation sur véhicule à la machine, nettoyage de la place de dépôt compris (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-257102-71",
+   "num": "257.102",
+   "cat": "211 Terrassements",
+   "sub": "Difficultés",
+   "nom": "Chargement des matériaux d'excavation sur véhicule à la main (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311110-72",
+   "num": "311.110",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport de matériaux à la place de déchargement du maître d'ouvrage, sans taxe de dépôt, distance jusqu'à 100 m (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311110-73",
+   "num": "311.110",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport de matériaux à la place de déchargement du maître d'ouvrage, sans taxe de dépôt, distance 101 à 200 m (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311110-74",
+   "num": "311.110",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport de matériaux à la place de déchargement du maître d'ouvrage, sans taxe de dépôt, distance 201 à 500 m (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311200-75",
+   "num": "311.200",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport au dépôt du maître d'ouvrage ou de l'entrepreneur : terre végétale (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311200-76",
+   "num": "311.200",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport au dépôt du maître d'ouvrage ou de l'entrepreneur : matériaux d'excavation (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311200-77",
+   "num": "311.200",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport au dépôt du maître d'ouvrage ou de l'entrepreneur : roche (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311200-78",
+   "num": "311.200",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport au dépôt du maître d'ouvrage ou de l'entrepreneur : matériaux de démolition inertes (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-311200-79",
+   "num": "311.200",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport au dépôt du maître d'ouvrage ou de l'entrepreneur : matériaux non triés de démolition (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-31200-80",
+   "num": "312.00",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport intermédiaire depuis la fouille au véhicule ou au dépôt du chantier, distance jusqu'à 25 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-31200-81",
+   "num": "312.00",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport intermédiaire depuis la fouille au véhicule ou au dépôt du chantier, distance 26 à 50 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-31200-82",
+   "num": "312.00",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Transport intermédiaire depuis la fouille au véhicule ou au dépôt du chantier, distance 51 à 100 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-351110-83",
+   "num": "351.110",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Taxe de dépôt de matériaux non souillés au dépôt de l'entrepreneur",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-351112-84",
+   "num": "351.112",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Taxe de dépôt de matériaux d'excavation non souillés",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-351113-85",
+   "num": "351.113",
+   "cat": "211 Terrassements",
+   "sub": "Transports et taxes",
+   "nom": "Taxe de dépôt de roche",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-411001-86",
+   "num": "411.001",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Protection de talus par feuille de plastique, recouvrement min. 20 cm, matériel de fixation et enlèvement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-412101-87",
+   "num": "412.101",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Couche de mortier de ciment CP 300 sur talus, épaisseur jusqu'à 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-413101-88",
+   "num": "413.101",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Treillis sur talus en fils d'acier, matériel de fixation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421101-89",
+   "num": "421.101",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage de tranchée à claire-voie, espacement max. 20 cm, étayage réciproque, profondeur jusqu'à 1,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421200-90",
+   "num": "421.200",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de tranchée, étayage réciproque, profondeur jusqu'à 1,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421200-91",
+   "num": "421.200",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de tranchée, étayage réciproque, profondeur 1,51 à 3,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421200-92",
+   "num": "421.200",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de tranchée, étayage réciproque, profondeur 3,01 à 5,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421300-93",
+   "num": "421.300",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de tranchée, étayage réciproque, fonçage à l'avancement, profondeur jusqu'à 1,50 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421300-94",
+   "num": "421.300",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de tranchée, étayage réciproque, fonçage à l'avancement, profondeur 1,51 à 3,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-421300-95",
+   "num": "421.300",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de tranchée, étayage réciproque, fonçage à l'avancement, profondeur 3,01 à 5,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-422110-96",
+   "num": "422.110",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage de fouille à claire-voie, espacement max. 20 cm, étayage réciproque",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-422210-97",
+   "num": "422.210",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de fouille, étayage réciproque",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-422310-98",
+   "num": "422.310",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Boisage jointif de fouille, étayage réciproque, fonçage à l'avancement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-43101-99",
+   "num": "431.01",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Installation de fonçage et d'extraction pour palplanches légères : mise en place, transport, montage, démontage et mise à disposition",
+   "metre": "none"
+  },
+  {
+   "id": "ch2-431002-100",
+   "num": "431.002",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Déplacement de l'installation de palplanches légères",
+   "metre": "none"
+  },
+  {
+   "id": "ch2-432101-101",
+   "num": "432.101",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Blindage de tranchée en palplanches légères, fonçage à l'avancement, profondeur jusqu'à 4,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-432301-102",
+   "num": "432.301",
+   "cat": "211 Terrassements",
+   "sub": "Protection de talus, boisage, blindage",
+   "nom": "Blindage de tranchée en palplanches légères, fonçage avant excavation sur toute la profondeur, jusqu'à 4,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-611111-103",
+   "num": "611.111",
+   "cat": "211 Terrassements",
+   "sub": "Remblayages",
+   "nom": "Remblayage et compactage de tranchée ou fouille à la machine avec matériaux d'excavation du dépôt latéral (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-611121-104",
+   "num": "611.121",
+   "cat": "211 Terrassements",
+   "sub": "Remblayages",
+   "nom": "Remblayage et compactage de tranchée avec matériaux d'excavation, à la grue du chantier (benne de grue)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-611131-105",
+   "num": "611.131",
+   "cat": "211 Terrassements",
+   "sub": "Remblayages",
+   "nom": "Remblayage et compactage de tranchée ou fouille à la main avec matériaux d'excavation",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-621111-106",
+   "num": "621.111",
+   "cat": "211 Terrassements",
+   "sub": "Remblayages",
+   "nom": "Remblayage et compactage contre ouvrage à la machine avec matériaux d'excavation (volume foisonné)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-621121-107",
+   "num": "621.121",
+   "cat": "211 Terrassements",
+   "sub": "Remblayages",
+   "nom": "Remblayage et compactage contre ouvrage avec matériaux d'excavation, à la grue du chantier",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-621131-108",
+   "num": "621.131",
+   "cat": "211 Terrassements",
+   "sub": "Remblayages",
+   "nom": "Remblayage et compactage contre ouvrage à la main avec matériaux d'excavation",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-631001-109",
+   "num": "631.001",
+   "cat": "211 Terrassements",
+   "sub": "Fonds de fouille, couches de fondation",
+   "nom": "Réglage et compactage du fond de fouille",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-633111-110",
+   "num": "633.111",
+   "cat": "211 Terrassements",
+   "sub": "Fonds de fouille, couches de fondation",
+   "nom": "Couche de fondation en grave sous radier ou fondations, mise en place à la machine, réglage et compactage, épaisseur jusqu'à 25 cm",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-633112-111",
+   "num": "633.112",
+   "cat": "211 Terrassements",
+   "sub": "Fonds de fouille, couches de fondation",
+   "nom": "Couche de fondation en grave sous radier ou fondations, mise en place à la machine, réglage et compactage, épaisseur 26 à 30 cm",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-641001-112",
+   "num": "641.001",
+   "cat": "211 Terrassements",
+   "sub": "Fonds de fouille, couches de fondation",
+   "nom": "Fourniture et pose de natte de séparation géotextile comme support de couche de fondation, lés à recouvrement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-651101-113",
+   "num": "651.101",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Égalisation de terre excédentaire (matériaux d'excavation) à la main",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-651102-114",
+   "num": "651.102",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Égalisation de terre excédentaire (matériaux d'excavation) à la machine",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-651201-115",
+   "num": "651.201",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Égalisation de terre végétale excédentaire à la main",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-651202-116",
+   "num": "651.202",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Égalisation de terre végétale excédentaire à la machine",
+   "metre": "volume"
+  },
+  {
+   "id": "ch2-652101-117",
+   "num": "652.101",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Mise en place de terre végétale à la machine, épaisseur jusqu'à 30 cm, largeur jusqu'à 2,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-652102-118",
+   "num": "652.102",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Mise en place de terre végétale à la machine, épaisseur jusqu'à 30 cm, largeur 2,01 à 5,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-652301-119",
+   "num": "652.301",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Mise en place de terre végétale à la main, épaisseur jusqu'à 30 cm, largeur jusqu'à 2,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-654101-120",
+   "num": "654.101",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Scarification par passes croisées des surfaces de terre végétale compactées par les véhicules, profondeur jusqu'à 30 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch2-656001-121",
+   "num": "656.001",
+   "cat": "211 Terrassements",
+   "sub": "Terre végétale, réglage de la forme",
+   "nom": "Ensemencement d'herbe de prairie à la machine ou à la main, mise en terre et cylindrage compris",
+   "metre": "surface"
+  }
+ ]
+}

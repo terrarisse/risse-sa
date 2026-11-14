@@ -6,14 +6,24 @@
    "titre": "CAN 17 — Fondations spéciales",
    "fichier": "can17-fondations-speciales.json",
    "n": 245,
-   "note": "Sondages, pieux, parois moulées, ancrages, wellpoints, pousse-tubes"
+   "note": "Sondages, pieux, parois moulées, ancrages, wellpoints, pousse-tubes",
+   "ordre": 1
+  },
+  {
+   "id": "ch2",
+   "titre": "CAN 211 — Terrassements",
+   "fichier": "ch2-terrassements.json",
+   "n": 122,
+   "note": "Décapage, fouilles en tranchée et en pleine masse, difficultés, transports, taxes",
+   "ordre": 2
   },
   {
    "id": "can4",
    "titre": "CAN 4 — Maçonnerie, crépis, chapes",
    "fichier": "can4-maconnerie.json",
    "n": 704,
-   "note": "Maçonnerie (CAN 314), crépis et enduits de façades (348), chapes (661), installation de chantier (113), démolitions (112)"
+   "note": "Maçonnerie (CAN 314), crépis et enduits de façades (348), chapes (661), installation de chantier (113), démolitions (112)",
+   "ordre": 4
   }
  ]
 }
