@@ -158,6 +158,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .field{margin-bottom:10px;}
 #content-postes .res-item-name{white-space:normal;font-weight:500;line-height:1.35;}
 #content-postes .res-item-icon{display:none;}
+.imp-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:900;display:flex;align-items:flex-end;justify-content:center;}
+.imp-sh{background:#fff;width:100%;max-width:720px;height:94vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;}
+.imp-hd{padding:14px 14px 10px;border-bottom:1px solid var(--border);}
+.imp-body{flex:1;overflow-y:auto;padding:6px 10px 20px;}
+.imp-ft{display:flex;gap:8px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--border);}
+.imp-cat{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--navy);padding:14px 4px 6px;}
+.imp-cat span{flex:1;}
+.imp-cat button,.imp-sub button{border:none;background:none;font-size:15px;cursor:pointer;padding:2px 4px;}
+.imp-grp{border:1px solid var(--border);border-radius:var(--rs);margin-bottom:6px;overflow:hidden;}
+.imp-sub{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg2);cursor:pointer;}
+.imp-sub input,.imp-it input{width:20px;height:20px;flex-shrink:0;accent-color:var(--navy);}
+.imp-subname{flex:1;font-size:13px;font-weight:600;color:var(--text);}
+.imp-cnt{font-size:11px;font-weight:700;color:var(--text3);}
+.imp-chev{color:var(--text3);transition:transform .2s;}.imp-chev.open{transform:rotate(90deg);}
+.imp-it{display:flex;align-items:flex-start;gap:8px;padding:9px 10px;border-top:1px solid var(--border);background:#fff;}
+.imp-it.off .imp-txt{opacity:.45;}
+.imp-txt{flex:1;font-size:13px;line-height:1.4;color:var(--text);min-width:0;}
+.imp-txt b{color:var(--text3);font-weight:700;margin-right:2px;}
+.imp-flag{font-size:11px;color:#B26A00;margin-top:3px;}
+.imp-ta{width:100%;font:inherit;font-size:13px;border:1.5px solid var(--navy);border-radius:8px;padding:6px;}
+.imp-m{flex-shrink:0;min-width:44px;border:1.5px solid var(--border);background:#fff;border-radius:8px;padding:5px 6px;font:700 12px Inter,sans-serif;color:var(--navy);cursor:pointer;}
 .pst-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:6px;font-size:13px;line-height:1.4;color:var(--text);cursor:pointer;}
 .pst-item:active{background:var(--bg2);}
 .pst-info{font-size:12px;color:var(--text2);background:#EEF3FB;border-radius:var(--rs);padding:10px 12px;margin-bottom:12px;line-height:1.45;}
@@ -287,7 +308,7 @@ body.mat-dragging *{cursor:grabbing!important;}
   <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
   <div class="page" id="page-postes"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher un poste…" oninput="filterPage('postes',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('postes')">＋</button></div>
     <div class="pst-info">📋 Postes proposés dans le <b>Rapport</b> quand tu écris les travaux. Catégories et sous-catégories : bouton <b>⊞ Catégories</b> en haut. <b>Appui long</b> sur un poste puis glisse-le sur une catégorie (ou entre deux postes) pour le déplacer.
-      <div style="margin-top:8px;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button></div></div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesListe()">📚 Importer une liste</button></div></div>
     <div id="content-postes"></div></div>
 </div>
  
@@ -2330,6 +2351,104 @@ async function importPostesDe(i){
   if(!n) showToast('✓ Rien de nouveau dans ce devis (déjà dans les postes ou refusé)');
 }
 Object.assign(window,{importPostesDevis,importPostesDe,closePst2,dropItemOn});
+
+// ── POSTES : import d'une liste préparée (imports/*.json, ex. chapitres du CAN) ──
+// Écran de tri : cocher / décocher, modifier le texte, renommer catégories et
+// sous-catégories, choisir le métré ; postes déjà importés et doublons signalés.
+let _impListes = [], _imp = null;
+const IMP_METRES = [['auto','Auto'],['none','Aucun'],['coupe','ml'],['surface','m²'],['volume','m³']];
+async function importPostesListe(){
+  showToast('⏳ Recherche des listes…');
+  let idx = null;
+  try { idx = await fetch('../imports/index.json?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()); } catch(e){ console.warn('Listes', e); }
+  _impListes = (idx && idx.listes) || [];
+  if(!_impListes.length){ showToast('Aucune liste prête pour le moment'); return; }
+  const ids = new Set(load('postes').map(p=>p.id));
+  pstSheet('📥 Importer une liste', `<div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Listes préparées (par ex. chapitres du CAN). Tu pourras trier avant d'importer.</div>`
+    + _impListes.map((l,i)=>`<div class="pst-item" onclick="openImportListe(${i})"><b>${pEsc(l.titre||l.id)}</b><div style="font-size:11px;color:var(--text3);margin-top:2px;">${l.n?l.n+' postes':''}${l.note?' · '+pEsc(l.note):''}</div></div>`).join(''));
+}
+async function openImportListe(i){
+  const l = _impListes[i]; if(!l) return;
+  let d = null;
+  try { d = await fetch('../imports/'+l.fichier+'?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()); } catch(e){ showToast('⚠ Liste illisible'); return; }
+  closePst2();
+  const rows = (d.postes||[]).map(p=>{
+    const deja = RPostes.existe(p.id), dbl = !deja && RPostes.doublon(p.nom);
+    return { ...p, cat:p.cat||'', sub:p.sub||'', metre:p.metre||'auto', deja, dbl: dbl ? dbl.nom : '', on: !deja && !dbl };
+  });
+  _imp = { titre: d.titre||l.titre||l.id, src: d.id||l.id, rows, q:'', ouverts:{} };
+  renderImport();
+}
+function impGroups(){
+  const g = [], idx = {};
+  _imp.rows.forEach((r,i)=>{
+    const k = r.cat+'¦'+r.sub;
+    if(!(k in idx)){ idx[k]=g.length; g.push({ k, cat:r.cat, sub:r.sub, items:[] }); }
+    g[idx[k]].items.push(i);
+  });
+  return g;
+}
+function renderImport(){
+  let ov = document.getElementById('imp-ov');
+  if(!ov){ ov=document.createElement('div'); ov.id='imp-ov'; ov.className='imp-ov'; document.body.appendChild(ov); }
+  const q = RPostes.norm(_imp.q);
+  const vis = i => { const r=_imp.rows[i]; return !q || q.split(' ').every(w=>RPostes.norm(r.nom+' '+r.cat+' '+r.sub+' '+(r.num||'')).includes(w)); };
+  const nOn = _imp.rows.filter(r=>r.on).length, nDeja = _imp.rows.filter(r=>r.deja).length;
+  let lastCat = null, html = '';
+  impGroups().forEach((g,gi)=>{
+    const its = g.items.filter(vis); if(!its.length) return;
+    if(g.cat!==lastCat){ lastCat=g.cat; html += `<div class="imp-cat"><span>📁 ${pEsc(g.cat||'Sans catégorie')}</span><button onclick="impRename('cat',${gi})">✏️</button></div>`; }
+    const open = q || _imp.ouverts[g.k];
+    const on = its.filter(i=>_imp.rows[i].on).length;
+    html += `<div class="imp-grp"><div class="imp-sub" onclick="impToggleOpen(${gi})">
+        <input type="checkbox" ${on===its.length?'checked':''} ${on&&on<its.length?'data-mid="1"':''} onclick="event.stopPropagation();impCheckGroup(${gi},this.checked)">
+        <span class="imp-subname">${g.sub?pEsc(g.sub):'<i>(sans sous-catégorie)</i>'}</span>
+        <span class="imp-cnt">${on}/${its.length}</span>
+        ${g.sub?`<button onclick="event.stopPropagation();impRename('sub',${gi})">✏️</button>`:''}
+        <span class="imp-chev${open?' open':''}">›</span></div>`;
+    if(open) html += its.map(i=>{ const r=_imp.rows[i]; return `<div class="imp-it${r.on?'':' off'}">
+        <input type="checkbox" ${r.on?'checked':''} ${r.deja?'disabled':''} onchange="impCheck(${i},this.checked)">
+        <div class="imp-txt">${r.num?`<b>${pEsc(r.num)}</b> `:''}<span id="imp-t-${i}" onclick="impEdit(${i})">${pEsc(r.nom)}</span>
+          ${r.deja?'<div class="imp-flag">✓ déjà importé</div>':''}${r.dbl?`<div class="imp-flag">≈ ressemble à : ${pEsc(r.dbl.slice(0,80))}</div>`:''}</div>
+        <button class="imp-m" onclick="impMetre(${i})">${(IMP_METRES.find(m=>m[0]===r.metre)||IMP_METRES[0])[1]}</button></div>`; }).join('');
+    html += `</div>`;
+  });
+  ov.innerHTML = `<div class="imp-sh">
+    <div class="imp-hd"><div style="display:flex;align-items:center;gap:8px;"><div style="flex:1;font-size:16px;font-weight:700;color:var(--navy);">📥 ${pEsc(_imp.titre)}</div><button class="modal-close" onclick="closeImport()">✕</button></div>
+      <div style="font-size:12px;color:var(--text2);margin:4px 0 8px;">${nOn} coché${nOn>1?'s':''} sur ${_imp.rows.length}${nDeja?' · '+nDeja+' déjà importé'+(nDeja>1?'s':''):''}. Tape un texte pour le modifier, ✏️ pour renommer une catégorie, le bouton de droite pour le métré.</div>
+      <div style="display:flex;gap:6px;"><input class="search-input" style="flex:1;min-width:0;" type="search" placeholder="🔍 Filtrer…" value="${pEsc(_imp.q)}" oninput="impFilter(this.value)"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="impAll(true)">Tout</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="impAll(false)">Rien</button></div></div>
+    <div class="imp-body">${html||'<div class="acc-empty">Rien à afficher</div>'}</div>
+    <div class="imp-ft"><button class="btn btn-ghost" style="width:auto;padding:0 16px;" onclick="closeImport()">Annuler</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="doImport()" ${nOn?'':'disabled'}>Importer ${nOn} poste${nOn>1?'s':''}</button></div></div>`;
+  ov.querySelectorAll('input[data-mid]').forEach(c=>c.indeterminate=true);
+}
+function impToggleOpen(gi){ const g=impGroups()[gi]; _imp.ouverts[g.k]=!_imp.ouverts[g.k]; renderImport(); }
+function impCheck(i,v){ _imp.rows[i].on=v; renderImport(); }
+function impCheckGroup(gi,v){ impGroups()[gi].items.forEach(i=>{ if(!_imp.rows[i].deja) _imp.rows[i].on=v; }); renderImport(); }
+function impAll(v){ _imp.rows.forEach(r=>{ if(!r.deja) r.on=v; }); renderImport(); }
+function impFilter(v){ _imp.q=v; renderImport(); const s=document.querySelector('#imp-ov .search-input'); if(s){ s.focus(); s.setSelectionRange(v.length,v.length); } }
+function impMetre(i){ const r=_imp.rows[i]; const k=IMP_METRES.findIndex(m=>m[0]===r.metre); r.metre=IMP_METRES[(k+1)%IMP_METRES.length][0]; renderImport(); }
+function impEdit(i){
+  const sp=document.getElementById('imp-t-'+i); if(!sp) return;
+  const ta=document.createElement('textarea'); ta.className='imp-ta'; ta.value=_imp.rows[i].nom; ta.rows=3;
+  sp.replaceWith(ta); ta.focus();
+  ta.onblur=()=>{ const v=ta.value.replace(/\s+/g,' ').trim(); if(v) _imp.rows[i].nom=v; renderImport(); };
+}
+function impRename(kind, gi){
+  const g=impGroups()[gi]; const old = kind==='cat' ? g.cat : g.sub;
+  const v=(prompt(kind==='cat'?'Nom de la catégorie :':'Nom de la sous-catégorie :', old)||'').trim(); if(!v || v===old) return;
+  _imp.rows.forEach(r=>{ if(kind==='cat' ? r.cat===old : (r.cat===g.cat && r.sub===old)) { if(kind==='cat') r.cat=v; else r.sub=v; } });
+  renderImport();
+}
+function closeImport(){ const ov=document.getElementById('imp-ov'); if(ov) ov.remove(); _imp=null; }
+async function doImport(){
+  const rows=_imp.rows.filter(r=>r.on && !r.deja).map(r=>({ id:r.id, nom:r.nom, cat: r.cat + (r.sub ? ' › '+r.sub : ''), metre:r.metre, src:_imp.src }));
+  const n = await RPostes.importer(rows);
+  closeImport();
+  renderContent('postes', searchFilters.postes||''); updateBadges(); populateCatSelects('postes');
+  showToast(`✅ ${n} poste${n>1?'s':''} importé${n>1?'s':''}`);
+}
+Object.assign(window,{importPostesListe,openImportListe,impToggleOpen,impCheck,impCheckGroup,impAll,impFilter,impMetre,impEdit,impRename,closeImport,doImport});
+
 
 window.switchTab         = switchTab;
 window.filterPage        = filterPage;

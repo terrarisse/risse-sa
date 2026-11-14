@@ -219,6 +219,23 @@
     if (io && io.saveHab) Promise.resolve(io.saveHab(upd)).catch(e => console.warn('Habitudes postes', e));
   }
 
+  // ── Import d'une liste préparée (dossier imports/, ex. chapitres du CAN) ──
+  // rows : [{ id, nom, cat: 'Catégorie' ou 'Catégorie › Sous-catégorie', metre, src }]
+  function importer(rows) {
+    const t = tree(), avant = JSON.stringify(t);
+    const items = normalise(rd(KEY, []), t), ids = new Set(items.map(i => i.id));
+    let n = 0;
+    (rows || []).forEach(r => {
+      if (!r || !r.nom || ids.has(r.id)) return;
+      items.push({ id: r.id, nom: nettoie(r.nom), ...ensureCat(r.cat, t), metre: r.metre || 'auto', src: r.src || '', icon: '', photo: '' });
+      ids.add(r.id); n++;
+    });
+    wr(KEY, items); setTree(t);
+    return push({ items: n > 0, cats: JSON.stringify(t) !== avant }).then(() => n);
+  }
+  function existe(id) { return rd(KEY, []).some(p => p.id === id); }
+  function doublon(nom) { return list().find(p => proche(p.nom, nom)) || null; }
+
   // ── Positions de devis → actions proposées comme postes ───────────────
   function nettoie(t) {
     return String(t || '').replace(/\s+/g, ' ').replace(/\b([dlj]|qu)' +/gi, "$1'").replace(/d'oeuvre/gi, "d'œuvre")
@@ -387,5 +404,5 @@
     return grps.length;
   }
 
-  window.RPostes = { BASE, list, search, used, norm, setup, sync, push, candidats, proposer, nettoie, tree, label, seededLocal, KEY, devineMetre, metreDe, liees, retenirHab, ressources };
+  window.RPostes = { BASE, list, search, used, norm, setup, sync, push, candidats, proposer, nettoie, tree, label, seededLocal, KEY, devineMetre, metreDe, liees, retenirHab, ressources, importer, existe, doublon };
 })();
