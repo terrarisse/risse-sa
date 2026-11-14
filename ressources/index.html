@@ -1117,6 +1117,7 @@ function renderCatMgr(){
         return `<div style="display:flex;align-items:center;gap:8px;padding:6px 0 6px 40px;font-size:13px;">
           <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.5;flex-shrink:0;"></div>
           <span style="flex:1;color:var(--text2);">${esc(sub.name)}</span>
+          <button title="Renommer" style="background:none;border:none;font-size:13px;cursor:pointer;padding:2px;" onclick="renameSubCat('${cat.id}','${sub.id}')">✏️</button>
           <span style="font-size:10px;color:var(--text3);">${subCnt}</span>
           <button title="Déplacer" style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--navy);font-size:12px;font-weight:700;cursor:pointer;padding:3px 7px;" onclick="openMoveSubCat('${cat.id}','${sub.id}')">⇄</button>
           <button style="background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:2px;" onclick="deleteSubCategory('${cat.id}','${sub.id}')">✕</button>
@@ -1133,6 +1134,8 @@ function renderCatMgr(){
           ${indicator}
           <div class="cat-list-name">${esc(cat.name)}</div>
           <div class="cat-list-count">${cnt}</div>
+          <button title="Renommer" style="background:none;border:none;font-size:15px;cursor:pointer;padding:2px 4px;" onclick="renameCat('${cat.id}')">✏️</button>
+          <button title="Dupliquer avec son contenu" style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--navy);font-size:13px;font-weight:700;cursor:pointer;padding:3px 7px;" onclick="duplicateCat('${cat.id}')">⧉</button>
           <button class="cat-del-btn" onclick="deleteCategory('${cat.id}')">✕</button>
         </div>
         ${subsHtml}
@@ -1341,6 +1344,34 @@ function moveSubCat(catId, subId, targetId){
   showToast(targetId ? '⇄ Sous-catégorie déplacée' : '⬆ Sous-catégorie devenue catégorie');
 }
 window.openMoveSubCat=openMoveSubCat; window.moveSubCat=moveSubCat;
+
+// Renommer une catégorie / sous-catégorie (les éléments gardent leur rattachement par identifiant)
+function catMgrRefresh(){ renderCatMgr(); renderContent(currentTab, searchFilters[currentTab]||''); populateCatSelects(catMgrTab); updateBadges(); }
+function renameCat(catId){
+  const all = loadCats(); const cat = (all[catMgrTab]||[]).find(c=>c.id===catId); if(!cat) return;
+  const v = (prompt('Nouveau nom de la catégorie :', cat.name)||'').trim(); if(!v || v===cat.name) return;
+  cat.name = v; saveCats(all); catMgrRefresh(); showToast('✏️ Catégorie renommée');
+}
+function renameSubCat(catId, subId){
+  const all = loadCats(); const cat = (all[catMgrTab]||[]).find(c=>c.id===catId);
+  const sub = cat && (cat.children||[]).find(s=>s.id===subId); if(!sub) return;
+  const v = (prompt('Nouveau nom de la sous-catégorie :', sub.name)||'').trim(); if(!v || v===sub.name) return;
+  sub.name = v; saveCats(all); catMgrRefresh(); showToast('✏️ Sous-catégorie renommée');
+}
+// Dupliquer une catégorie avec ses sous-catégories et tous ses éléments
+function duplicateCat(catId){
+  const all = loadCats(); const cats = all[catMgrTab]||[]; const cat = cats.find(c=>c.id===catId); if(!cat) return;
+  const items = load(catMgrTab); const n = items.filter(i=>i.catId===catId).length;
+  const v = (prompt(`Nom de la copie (${n} élément${n>1?'s':''} seront dupliqués) :`, cat.name+' (copie)')||'').trim(); if(!v) return;
+  const t = Date.now().toString(36), subMap = {};
+  const nc = { ...cat, id:'cat'+t, name:v, children:(cat.children||[]).map((s,k)=>{ const id='sub'+t+k; subMap[s.id]=id; return { ...s, id }; }) };
+  cats.splice(cats.indexOf(cat)+1, 0, nc); all[catMgrTab]=cats; saveCats(all);
+  const copies = items.filter(i=>i.catId===catId).map((i,k)=>({ ...i, id:'d'+t+k, catId:nc.id, subCatId: i.subCatId ? (subMap[i.subCatId]||'') : '' }));
+  const out = []; items.forEach(i=>{ out.push(i); }); 
+  save(catMgrTab, out.concat(copies));
+  catMgrRefresh(); showToast(`⧉ Catégorie dupliquée (${copies.length} élément${copies.length>1?'s':''})`);
+}
+window.renameCat=renameCat; window.renameSubCat=renameSubCat; window.duplicateCat=duplicateCat;
 
 function deleteSubCategory(catId, subId){
   const cats = loadCats();
