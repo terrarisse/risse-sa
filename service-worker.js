@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v39';
+const CACHE_NAME = 'risse-app-v40';
 const URLS = [
   './',
   './index.html',
@@ -39,7 +39,9 @@ const URLS = [
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(URLS))
+    // Fichier par fichier : un fichier absent (ex. modèles PDF pas encore ajoutés)
+    // ne doit pas empêcher l'installation du service worker
+    caches.open(CACHE_NAME).then(cache => Promise.all(URLS.map(u => cache.add(u).catch(() => null))))
   );
   self.skipWaiting();
 });
