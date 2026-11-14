@@ -1,0 +1,527 @@
+{
+ "id": "ch9",
+ "titre": "CAN 346 — Similipierre et ciment moulé",
+ "note": "Encadrements, tablettes, revêtements, couvertes, enduits, escaliers",
+ "postes": [
+  {
+   "id": "ch9-1-0",
+   "num": "1",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en ciment moulé",
+   "nom": "Encadrement de baie ou appareil de façade en ciment moulé, sans moulure, battues et goutte pendante encastrée, CP 250, jointoiement compris (toisé 20/20 ou 30/30)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-2-1",
+   "num": "2",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en ciment moulé",
+   "nom": "Encadrement de baie ou appareil de façade en ciment moulé, mouluré",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-3-2",
+   "num": "3",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en ciment moulé",
+   "nom": "Tablettes saillantes seules en ciment moulé, unies",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-4-3",
+   "num": "4",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en ciment moulé",
+   "nom": "Tablettes saillantes seules en ciment moulé, moulurées",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-5-4",
+   "num": "5",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en similipierre",
+   "nom": "Encadrement de porte, fenêtre ou appareil de façade en similipierre unie égrisée, battues et goutte pendante encastrée",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-6-5",
+   "num": "6",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en similipierre",
+   "nom": "Encadrement en similipierre moulurée",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-7-6",
+   "num": "7",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en similipierre",
+   "nom": "Tablettes saillantes seules en similipierre, unies",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-8-7",
+   "num": "8",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en similipierre",
+   "nom": "Tablettes saillantes seules en similipierre, moulurées",
+   "metre": "volume"
+  },
+  {
+   "id": "ch9-mm-8",
+   "num": "MM",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Éléments en similipierre",
+   "nom": "Plus-value pour similipierre cintrée en plan ou en élévation, travaillée au parement à gradiner ou à gros grain",
+   "metre": "none"
+  },
+  {
+   "id": "ch9-11a-9",
+   "num": "11a",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Placage en similipierre unie égrisée pour revêtement de devantures, porches, agrafes en fer galvanisé comprises",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-11b-10",
+   "num": "11b",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Placage en similipierre de soubassement de bâtiment, avec soupiraux",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-11c-11",
+   "num": "11c",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Placage en similipierre de façade en toute surface (échafaudages non compris)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-12-12",
+   "num": "12",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Plus-value pour ravalement au repaioir ou au taillant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-13-13",
+   "num": "13",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Plus-value pour assises de moins de 0,30 m de hauteur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-14-14",
+   "num": "14",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Fourniture et pose de goujons ou fortes pattes à scellement en fer galvanisé",
+   "metre": "none"
+  },
+  {
+   "id": "ch9-15a-15",
+   "num": "15a",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Dallage régulier en similipierre épaisseur 5 cm, mortier de pose 2 cm, bouchardé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-15b-16",
+   "num": "15b",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Revêtements, dallages",
+   "nom": "Dallage régulier en similipierre épaisseur 5 cm, mortier de pose 2 cm, égrisé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-17-17",
+   "num": "17",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Couvertes de murs et parapets",
+   "nom": "Couverte de mur ou parapet en ciment sans goutte pendante, selon section (10/20 à 12/60)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-18-18",
+   "num": "18",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Couvertes de murs et parapets",
+   "nom": "Couverte de mur ou parapet en similipierre, selon section",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-19-19",
+   "num": "19",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Couvertes de murs et parapets",
+   "nom": "Plus-value pour gouttes pendantes sur couvertes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-20-20",
+   "num": "20",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Couvertes de murs et parapets",
+   "nom": "Plus-value pour couvertes cintrées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-21-21",
+   "num": "21",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Enduit appliqué uni en ciment ou similipierre sur crépissage payé à part, ravalement à la boucharde compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-22-22",
+   "num": "22",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value pour arête ciselée, chanfrein ou arrondi",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-23-23",
+   "num": "23",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Enduit mouluré en ciment ou similipierre, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-24-24",
+   "num": "24",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Chaîne d'angle unie (enduit 15 mm sur fond déjà crépi), ravalement à la boucharde compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-25-25",
+   "num": "25",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Encadrement de porte ou fenêtre uni en enduit, ravalement à la boucharde compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-26-26",
+   "num": "26",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Encadrement en enduit avec battue et double battue",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-27-27",
+   "num": "27",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Corniche moulée sur place (contremoule en plâtre et enduit), jusqu'à 50 cm de largeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-29-28",
+   "num": "29",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Enduit pour dessous de dalles de balcons et auvents, parties unies",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-30-29",
+   "num": "30",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Enduit des dessus de dalles de balcons",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-31-30",
+   "num": "31",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plinthe en application de 20 mm de saillie, jusqu'à 20 cm de haut, à chanfrein",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-32-31",
+   "num": "32",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plinthe en application de 21 à 30 cm de haut",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-33-32",
+   "num": "33",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plinthe en application de plus de 30 cm de haut",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-34-33",
+   "num": "34",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value par cm d'épaisseur de plinthe en sus de 20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-35-34",
+   "num": "35",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value sur plinthes unies avec dessus mouluré",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-36-35",
+   "num": "36",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value pour parties rampantes de plinthes des cages d'escalier",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-37-36",
+   "num": "37",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value pour parties de plinthes cintrées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-38-37",
+   "num": "38",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Façon de joints simulés dans les enduits (au fer rond ou en creux carrés)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-39-38",
+   "num": "39",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value pour joints au ciment blanc",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-40-39",
+   "num": "40",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Plus-value pour enduits au ciment blanc au lieu de ciment Portland",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-41-40",
+   "num": "41",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Seuil de porte jusqu'à 8 cm de hauteur et 40 cm de largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-42-41",
+   "num": "42",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Seuil de porte de plus de 40 cm de largeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-43-42",
+   "num": "43",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Ressemelage de marches carrées en ciment, protection comprise (portées des 2 bouts ou par la coupe)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-44-43",
+   "num": "44",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Ressemelage de marches à boudin et filet ou à mouchette",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-45-44",
+   "num": "45",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Enduits appliqués",
+   "nom": "Ressemelage de contremarches",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-46-45",
+   "num": "46",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Marches carrées en ciment moulé ou similipierre, droites ou tournantes, portées des 2 bouts (protection comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-47-46",
+   "num": "47",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Marches à sifflet en ciment moulé ou similipierre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-48-47",
+   "num": "48",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Marches à mouchette ou à boudin en ciment moulé ou similipierre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-49-48",
+   "num": "49",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Marches à panneau en ciment moulé ou similipierre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-50-49",
+   "num": "50",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Paliers carrés à sifflet, à boudin et filet, à mouchette ou à panneau, portés des 2 bouts",
+   "metre": "surface"
+  },
+  {
+   "id": "ch9-51-50",
+   "num": "51",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Plus-value pour marches ou paliers portés par la coupe",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-52-51",
+   "num": "52",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Plus-value pour dessous propre de marches ou paliers",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-53-52",
+   "num": "53",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Plus-value pour marches à têtes retournées ou propres",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-54-53",
+   "num": "54",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers en ciment moulé et similipierre",
+   "nom": "Plus-value pour bordures palières en 1 ou 2 pièces",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-57-54",
+   "num": "57",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Limon en similipierre, haute, 4 faces vues, tube pour main courante compris, selon longueur (2,50 à 5,50 m)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-58-55",
+   "num": "58",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Limon en similipierre bas, 4 faces vues",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-59-56",
+   "num": "59",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Limon en similipierre contre mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-60-57",
+   "num": "60",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Plus-value pour quantités inférieures de limons, selon nombre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-61-58",
+   "num": "61",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Plus-value pour limon central d'arrivée à l'étage supérieur",
+   "metre": "none"
+  },
+  {
+   "id": "ch9-62-59",
+   "num": "62",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Marche en similipierre forme L, courante",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-63-60",
+   "num": "63",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Marche en similipierre avec décrochements contre limons",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-64-61",
+   "num": "64",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Marche d'arrivée plane en similipierre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-65-62",
+   "num": "65",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Semelle d'escalier en similipierre égrisée 30 à 34 cm × 5 à 6 cm, dessous brut, sur béton brut en forme",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-66-63",
+   "num": "66",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Semelle d'escalier en similipierre, dessous propre, posée sur limons",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch9-67-64",
+   "num": "67",
+   "cat": "346 Similipierre et ciment moulé",
+   "sub": "Escaliers sur limons",
+   "nom": "Contremarche en similipierre",
+   "metre": "coupe"
+  }
+ ]
+}

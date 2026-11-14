@@ -64,6 +64,22 @@
    "n": 275,
    "note": "Poutraisons, charpente chêne et sapin, fermes, lamellé-collé, chevronnages, lambrissages, planchers, régie",
    "ordre": 8
+  },
+  {
+   "id": "ch9",
+   "titre": "CAN 346 — Similipierre et ciment moulé",
+   "fichier": "ch9-similipierre.json",
+   "n": 65,
+   "note": "Encadrements, tablettes, revêtements, couvertes, enduits, escaliers",
+   "ordre": 9
+  },
+  {
+   "id": "ch10",
+   "titre": "CAN 351 — Ferblanterie",
+   "fichier": "ch10-ferblanterie.json",
+   "n": 127,
+   "note": "Chéneaux, garnitures, couvertures, descentes, paratonnerres",
+   "ordre": 10
   }
  ]
 }

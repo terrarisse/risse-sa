@@ -1,0 +1,1023 @@
+{
+ "id": "ch10",
+ "titre": "CAN 351 — Ferblanterie",
+ "note": "Chéneaux, garnitures, couvertures, descentes, paratonnerres",
+ "postes": [
+  {
+   "id": "ch10-39-0",
+   "num": "39",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Chéneau ordinaire demi-rond (cuivre, tôle galvanisée, zinc-titane, aluman ou inox), selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-40-1",
+   "num": "40",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Fond sphérique de chéneau",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-41-2",
+   "num": "41",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Fond droit de chéneau contre mur",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-42-3",
+   "num": "42",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Plus-value pour équerres de chéneau ordinaire à 90°",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-43-4",
+   "num": "43",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Chéneau carré ou de profil simple (cuivre, tôle galvanisée, zinc-titane, aluman ou inox), selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-45-5",
+   "num": "45",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Plus-value pour équerres de chéneau carré tous degrés",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-46-6",
+   "num": "46",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Dilatation Néoprène doublée pour chéneau carré et demi-rond",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-47-7",
+   "num": "47",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Crochets cloués sur bois pour chéneau ordinaire demi-rond",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-48-8",
+   "num": "48",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Crochets cloués sur bois pour chéneau ordinaire carré",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-49-9",
+   "num": "49",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux ordinaires",
+   "nom": "Plus-value pour crochets fixés sur pierre ou béton, percement et vis à scellement compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-56-10",
+   "num": "56",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Chéneau encaissé 6 plis, coupe et pliage selon pente (cuivre, tôle galvanisée, zinc-titane, aluman ou inox), selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-57-11",
+   "num": "57",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Équerre de chéneau encaissé, fond droit ou fond en biais",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-58-12",
+   "num": "58",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Chéneau encaissé épaisseur 0,80 mm, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-59-13",
+   "num": "59",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Équerre, fond droit ou fond en biais pour chéneau encaissé 0,80 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-60-14",
+   "num": "60",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Cimaises extérieures profilées coupées droites 5 plis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-61-15",
+   "num": "61",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Crochets de revêtement carrés plats cloués sur bois",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-62-16",
+   "num": "62",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Crochets de cimaises extérieures profilées, plats couchés sur bois",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-63-17",
+   "num": "63",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Brides-supports de chéneau",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-64-18",
+   "num": "64",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Fonds droits pour revêtements et cimaises",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-65-19",
+   "num": "65",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Fonds de dilatation pour chéneau encaissé avec couvercle",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-66-20",
+   "num": "66",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Plus-value pour tringle dans boudins de chéneau en tube de fer galvanisé ¼\"",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-67-21",
+   "num": "67",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Bavettes-larmiers 3 plis avec pattes de fixation sur bois (coupé droit)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-68-22",
+   "num": "68",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Noue encaissée jusqu'à 7 plis coupée selon pente",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-69-23",
+   "num": "69",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Fond droit de noue encaissée",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-70-24",
+   "num": "70",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Fond en biais de noue encaissée",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-70a-25",
+   "num": "70a",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Raccord à un autre profil de tôle",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-71-26",
+   "num": "71",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Équerres tous degrés de noue encaissée",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-72-27",
+   "num": "72",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Équerres de faîtage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-73-28",
+   "num": "73",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Naissance simple droite pour chéneau mi-rond, selon diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-74-29",
+   "num": "74",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Naissance conique à suspendre pour chéneau mi-rond",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-75-30",
+   "num": "75",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Naissance simple droite pour chéneau carré ou doublage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-76-31",
+   "num": "76",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Naissance avec entonnoir rond pour chéneau carré ou doublage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-77-32",
+   "num": "77",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Naissance oblique ou biaise",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-78-33",
+   "num": "78",
+   "cat": "351 Ferblanterie",
+   "sub": "Chéneaux encaissés",
+   "nom": "Crapaudine de naissance",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-79-34",
+   "num": "79",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Couloir simple, bande d'équerre jusqu'à 3 plis sans abergement, toit en pente ou toit plat (cuivre, tôle galvanisée, zinc-titane, aluman ou inox)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-80-35",
+   "num": "80",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour équerres de couloir",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-81-36",
+   "num": "81",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Fonds-têtes de couloir",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-82-37",
+   "num": "82",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Tablettes et revêtement sur toiture 3-4 plis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-83-38",
+   "num": "83",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour fonds, tous matériaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-84-39",
+   "num": "84",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour équerres, tous matériaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-85-40",
+   "num": "85",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Tablettes et tablettes pour fenêtres 5-7 plis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-86-41",
+   "num": "86",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour fonds de tablettes",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-87-42",
+   "num": "87",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour équerres de tablettes",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-88-43",
+   "num": "88",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour dilatation de tablettes",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-89-44",
+   "num": "89",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Recouvrement de murs avec double goutte pendante",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-90-45",
+   "num": "90",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour équerres et têtes de recouvrement",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-91-46",
+   "num": "91",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour fonds sur mur",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-92-47",
+   "num": "92",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Faîtage et arêtier avec arrondi central",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-93-48",
+   "num": "93",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Étrier de fixation de faîtage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-94-49",
+   "num": "94",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Équerre de tête de faîtage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-95-50",
+   "num": "95",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Garniture de cheminée avec bandes de dilatation, hauteur jusqu'à 20 cm, sans abergement, pente max. 30° (prix de base 4 équerres + pourtour)",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-96-51",
+   "num": "96",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Garniture de cheminée sur toit plat avec plaques de collage et bandes de dilatation (prix de base + pourtour)",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-97-52",
+   "num": "97",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Garniture de cheminée sur placages avec bandes de dilatation (prix de base + pourtour)",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-972-53",
+   "num": "97.2",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value pour joint au mastic sur bande de dilatation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-98-54",
+   "num": "98",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Bande de dilatation sans solin, fixée par clous acier dur, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-99-55",
+   "num": "99",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Solins à la règle en ciment sur bandes de dilatation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-100-56",
+   "num": "100",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Garde-gravier perforé 60/30 avec tablette 3 plis à croisures étanches",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-101-57",
+   "num": "101",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value garde-gravier pour fonds, équerres, raccords sur autres profils",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-102-58",
+   "num": "102",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Godet de barrière sur toiture plate rempli de bitume, sans cône ni collerette, fixation sur béton Ø 50",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-103-59",
+   "num": "103",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Godet de barrière avec collerette soudée sur montant",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-104-60",
+   "num": "104",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Couloir d'équerre pour toit plat à croisures étanches et coupés droits",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-105-61",
+   "num": "105",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value couloir d'équerre pour fonds et équerres",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-106-62",
+   "num": "106",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Virement-couloir pour toit plat avec arrêt-gravier ou asphalte à croisures étanches",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-107-63",
+   "num": "107",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value virement-couloir pour fonds et équerres, tous matériaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-108-64",
+   "num": "108",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Fixation sur béton de garniture, selon choix de fixation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-109-65",
+   "num": "109",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Étamage sur cuivre pour surfaces au contact de l'asphalte, largeur 12-15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-110-66",
+   "num": "110",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Abergement soudé ou agrafé en plomb laminé 1 mm pour tuiles plates, ardoises ou tuiles mécaniques",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-111-67",
+   "num": "111",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Noquets de toiture",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-112-68",
+   "num": "112",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Membrons profilés carrés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-113-69",
+   "num": "113",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Plus-value membrons pour fonds de mur, équerres, dilatation, profils cintrés",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-117-70",
+   "num": "117",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Recouvrement en plomb laminé, selon épaisseur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-118-71",
+   "num": "118",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Châssis à tabatière sans abergement, vitré, avec crémaillère, de série",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-119-72",
+   "num": "119",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Châssis de toiture Velux type GGL (pose et garniture), selon modèle et dimensions",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-1192-73",
+   "num": "119.2",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Garniture de raccordement sur toiture en tuiles ou ardoises sans abergement (prix de base 4 équerres + pourtour fenêtre)",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-120-74",
+   "num": "120",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Garde-neige (barres de sécurité) en tuyaux revêtus ¾\" à deux traverses, crochets et feuilles d'abergement compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-121-75",
+   "num": "121",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Crochets supplémentaires de garde-neige",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-122-76",
+   "num": "122",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Main courante sur toiture brisée, 1 seul tuyau",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-123-77",
+   "num": "123",
+   "cat": "351 Ferblanterie",
+   "sub": "Garnitures et recouvrements",
+   "nom": "Crochets de service, garniture en fer galvanisé",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-124-78",
+   "num": "124",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Placage à double agrafe en bande de 67 cm de largeur (cuivre), agrafes comprises",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-125-79",
+   "num": "125",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Placage à double agrafe en bande de 50 cm de largeur (cuivre)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-126-80",
+   "num": "126",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Placage à tasseaux en bande de 75 cm de largeur (cuivre), couvre-joints compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-127-81",
+   "num": "127",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Placage à tasseaux en bande de 67 cm de largeur (cuivre), couvre-joints compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-1282-82",
+   "num": "128.2",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Plus-value pour agrafes droites relevées",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-1283-83",
+   "num": "128.3",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Plus-value pour placages cintrés, bombés, irréguliers et verticaux",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-129-84",
+   "num": "129",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Plus-value placage pour faîtages et arêtiers (couvre-joints, tasseaux de bois), têtes et raccords, coupes biaises",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-130-85",
+   "num": "130",
+   "cat": "351 Ferblanterie",
+   "sub": "Couvertures métalliques",
+   "nom": "Revêtement vertical et recouvrement à double agrafe pour lucarnes et autres constructions sur toiture",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-131-86",
+   "num": "131",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Tuyau de descente et de ventilation (cuivre, tôle galvanisée, zinc-titane, aluman ou inox), selon diamètre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-132-87",
+   "num": "132",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Plus-value pour coudes unis à 70° ou 85°",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-133-88",
+   "num": "133",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Plus-value pour boudins sur colliers",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-134-89",
+   "num": "134",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Collier à fixer par cône sur béton",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-135-90",
+   "num": "135",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Collerette sur dauphin avec coulisseau",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-136-91",
+   "num": "136",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Embranchement égal ou réduit",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-137-92",
+   "num": "137",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Plus-value pour col-de-cygne monté par sections",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-138-93",
+   "num": "138",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Tuyau de descente en fonte",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-139-94",
+   "num": "139",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Tuyau de descente en acier plastifié",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-140-95",
+   "num": "140",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Tuyau de descente en matière plastique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-141-96",
+   "num": "141",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Collier à scellement pour dauphins galvanisés",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-142-97",
+   "num": "142",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Coudes et équerres 70° ou 85°",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-143-98",
+   "num": "143",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Coude et contre-coude de fabrication spéciale",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-144-99",
+   "num": "144",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Cape de ventilation simple avec support",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-145-100",
+   "num": "145",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Cape à manteau",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-146-101",
+   "num": "146",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Garniture pour ventilation sans abergement sur tuiles",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-147-102",
+   "num": "147",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Garniture pour ventilation sur terrasses, tous métaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-148-103",
+   "num": "148",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Garniture pour ventilation sur placages, tous métaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-149-104",
+   "num": "149",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Entonnoir pour raccords de tuyaux d'eau pluviale sur colonne en fonte, avec crapaudines",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-150-105",
+   "num": "150",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Naissance en plomb avec plaque pour terrasse",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-151-106",
+   "num": "151",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Tuyau de cheminée en pièce de 1 m en tôle de cuivre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-152-107",
+   "num": "152",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Coudes plissés 90°-45° cuivre",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-153-108",
+   "num": "153",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Réductions",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-154-109",
+   "num": "154",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Tés 90°",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-155-110",
+   "num": "155",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Coupe-tirage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-156-111",
+   "num": "156",
+   "cat": "351 Ferblanterie",
+   "sub": "Descentes et ventilations",
+   "nom": "Capes tournantes",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-157-112",
+   "num": "157",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Câble de paratonnerre (fil) sur toit incliné (cuivre, fer ou aluman)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-158-113",
+   "num": "158",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Brides supplémentaires de paratonnerre",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-159-114",
+   "num": "159",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Colliers supplémentaires de paratonnerre",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-160-115",
+   "num": "160",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Serre-fils de dérivation",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-161-116",
+   "num": "161",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Cosses de raccordement aux tôles",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-162-117",
+   "num": "162",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Serre-fils pour placage",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-163-118",
+   "num": "163",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Tube de protection fendu avec collier ½\" galvanisé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-164-119",
+   "num": "164",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Ligne de terre et circuit en cuivre, fer ou cuivre nickelé (sans les fouilles), selon diamètre",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch10-1642-120",
+   "num": "164.2",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Plaque de terre verticale en forte tôle 250×2000 mm (cuivre 1 mm ou fer galvanisé 2 mm), sans les fouilles",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-165-121",
+   "num": "165",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Peinture antirouille 1 couche sur vieilles tôles",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-166-122",
+   "num": "166",
+   "cat": "351 Ferblanterie",
+   "sub": "Paratonnerres, peinture",
+   "nom": "Peinture antirouille 2 couches sur vieilles tôles",
+   "metre": "surface"
+  },
+  {
+   "id": "ch10-rgie-123",
+   "num": "Régie",
+   "cat": "351 Ferblanterie",
+   "sub": "Régie",
+   "nom": "Contremaître - chef de chantier (ferblanterie), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-rgie-124",
+   "num": "Régie",
+   "cat": "351 Ferblanterie",
+   "sub": "Régie",
+   "nom": "Ouvrier qualifié (ferblanterie), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-rgie-125",
+   "num": "Régie",
+   "cat": "351 Ferblanterie",
+   "sub": "Régie",
+   "nom": "Aide qualifié (ferblanterie), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch10-rgie-126",
+   "num": "Régie",
+   "cat": "351 Ferblanterie",
+   "sub": "Régie",
+   "nom": "Aide (ferblanterie), heure en régie",
+   "metre": "none"
+  }
+ ]
+}
