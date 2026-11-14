@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v38';
+const CACHE_NAME = 'risse-app-v39';
 const URLS = [
   './',
   './index.html',
@@ -72,9 +72,10 @@ self.addEventListener('fetch', e => {
   // Fichiers de l'app : toujours revalidés auprès du serveur (sinon le cache HTTP de
   // GitHub Pages, ~10 min, peut servir une ancienne version juste après une mise à jour)
   const sameOrigin = new URL(e.request.url).origin === self.location.origin;
-  const req = sameOrigin ? new Request(e.request, { cache: 'no-cache' }) : e.request;
+  const req = sameOrigin ? new Request(e.request.url, { cache: 'no-cache', credentials: 'same-origin', redirect: 'follow' }) : e.request;
   e.respondWith(
     fetch(req)
+      .then(r => (sameOrigin && r.redirected) ? r.blob().then(b => new Response(b, { status: r.status, statusText: r.statusText, headers: r.headers })) : r)
       .then(response => {
         const clone = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
