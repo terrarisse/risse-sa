@@ -1,0 +1,1967 @@
+{
+ "id": "can17",
+ "titre": "CAN 17 — Fondations spéciales",
+ "note": "Sondages, pieux, parois moulées, ancrages, wellpoints, pousse-tubes",
+ "postes": [
+  {
+   "id": "can17-son-a1-0",
+   "num": "A.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Préparation du matériel, transport, installation générale et repli en fin de travaux, déplacements du personnel (une sondeuse, Ø final 86 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a1a-1",
+   "num": "A.1a",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Plus-value pour une sondeuse supplémentaire (installation, transport et repli)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a21-2",
+   "num": "A.2.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Installation de la sondeuse autotractée à l'emplacement de chaque sondage, déplacement jusqu'à 30 m compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a22-3",
+   "num": "A.2.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Installation de la sondeuse sur remorque à l'emplacement de chaque sondage, déplacement jusqu'à 30 m compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a23-4",
+   "num": "A.2.3",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Installation de la sondeuse sur pont de travail à l'emplacement de chaque sondage, déplacement jusqu'à 30 m compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a3a-5",
+   "num": "A.3a",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Sondage à rotation ou percussion avec tubage télescopique, carottage continu à sec en terrain meuble, profondeur 0 à 5 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a3b-6",
+   "num": "A.3b",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Sondage à rotation ou percussion avec tubage télescopique, carottage continu à sec en terrain meuble, profondeur 5 à 10 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a3c-7",
+   "num": "A.3c",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Sondage à rotation ou percussion avec tubage télescopique, carottage continu à sec en terrain meuble, profondeur 10 à 15 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a3d-8",
+   "num": "A.3d",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Sondage à rotation ou percussion avec tubage télescopique, carottage continu à sec en terrain meuble, profondeur 15 à 20 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a4-9",
+   "num": "A.4",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Plus-value pour sondage dans sol fluent",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a5-10",
+   "num": "A.5",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Plus-value pour traversée de blocs Ø 10 cm et plus, par heure de passage",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a61a-11",
+   "num": "A.6.1a",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Sondage à rotation à l'eau dans le rocher en place, non tubé, Ø min. 76 mm, carottier simple, profondeur 0 à 10 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a61b-12",
+   "num": "A.6.1b",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Sondage à rotation à l'eau dans le rocher en place, non tubé, Ø min. 76 mm, carottier simple, profondeur 10 à 20 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a62-13",
+   "num": "A.6.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Plus-value pour carottier double",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a63-14",
+   "num": "A.6.3",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Plus-value pour utilisation de couronnes diamantées",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a7-15",
+   "num": "A.7",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture de caisses pour la conservation des carottes, par mètre de compartiment",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a811-16",
+   "num": "A.8.1.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture et pose d'un tube piézométrique métallique Ø 50 mm, normal, avec chemise de gravier filtrant",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a812-17",
+   "num": "A.8.1.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture et pose d'un tube piézométrique métallique Ø 50 mm, perforé, avec chemise de gravier filtrant",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a813-18",
+   "num": "A.8.1.3",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture et pose d'un bouchon pour tube piézométrique métallique Ø 50 mm",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a821-19",
+   "num": "A.8.2.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture et pose d'un tube piézométrique en plastique Ø 50 mm, normal, avec chemise de gravier filtrant",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a822-20",
+   "num": "A.8.2.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture et pose d'un tube piézométrique en plastique Ø 50 mm, perforé, avec chemise de gravier filtrant",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-a823-21",
+   "num": "A.8.2.3",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Fourniture et pose d'un bouchon pour tube piézométrique en plastique Ø 50 mm",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a91-22",
+   "num": "A.9.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Prélèvement d'échantillon remanié pour laboratoire, en sac plastique étanche",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a92-23",
+   "num": "A.9.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Prélèvement d'échantillon remanié pour laboratoire, enrobé à la paraffine",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a101-24",
+   "num": "A.10.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Prélèvement d'échantillon intact pour laboratoire, carottier battu type Casagrande",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a102-25",
+   "num": "A.10.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Prélèvement d'échantillon intact pour laboratoire, carottier à piston",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a111-26",
+   "num": "A.11.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de perméabilité dans le sondage par abaissement du niveau (remplissage à l'eau), avec interprétation",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a112-27",
+   "num": "A.11.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de perméabilité dans le sondage par remontée du niveau (pompage), avec interprétation",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a121-28",
+   "num": "A.12.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de perméabilité par pompage de courte durée : installation et retrait de la pompe immergée",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a122-29",
+   "num": "A.12.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de perméabilité par pompage : heure de fonctionnement de la pompe",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a13-30",
+   "num": "A.13",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de pénétration par battage à l'intérieur du forage, par essai",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a14-31",
+   "num": "A.14",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de pénétration « Standard » (SPT) dans le forage, par essai",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-a15-32",
+   "num": "A.15",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Essai de résistance au cisaillement (scissomètre) au fond du sondage, par essai",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-rgie-33",
+   "num": "Régie",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Remplissage des sondages (en régie)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-rgie-34",
+   "num": "Régie",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Dispositif de protection ou d'isolement de nappes phréatiques dans le sondage (en régie)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-rgie-35",
+   "num": "Régie",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Mesures de déformation des sondages (en régie)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-rgie-36",
+   "num": "Régie",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Socle en béton pour la protection et le repérage de la tête de sondage (en régie)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-45-37",
+   "num": "4.5",
+   "cat": "17 Sondages",
+   "sub": "Sondages carottés",
+   "nom": "Évacuation des échantillons, boues de forage et matériaux provenant du forage",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-son-b1-38",
+   "num": "B.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages au pénétromètre",
+   "nom": "Préparation du matériel, transport, installation générale et repli du pénétromètre, déplacements du personnel",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-b2-39",
+   "num": "B.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages au pénétromètre",
+   "nom": "Installation du pénétromètre à l'emplacement de chaque sondage, déplacement jusqu'à 30 m compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-son-b3a-40",
+   "num": "B.3a",
+   "cat": "17 Sondages",
+   "sub": "Sondages au pénétromètre",
+   "nom": "Essai de pénétration par battage en terrain meuble léger sans blocs, par passes de 20 cm, profondeur 0 à 5 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-b3b-41",
+   "num": "B.3b",
+   "cat": "17 Sondages",
+   "sub": "Sondages au pénétromètre",
+   "nom": "Essai de pénétration par battage en terrain meuble léger sans blocs, par passes de 20 cm, profondeur 5 à 10 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-b41-42",
+   "num": "B.4.1",
+   "cat": "17 Sondages",
+   "sub": "Sondages au pénétromètre",
+   "nom": "Plus-value pénétromètre en terrain moyen à dur, 60 à 150 coups par passe de 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-son-b42-43",
+   "num": "B.4.2",
+   "cat": "17 Sondages",
+   "sub": "Sondages au pénétromètre",
+   "nom": "Plus-value pénétromètre en terrain dur, plus de 150 coups par passe de 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-31-44",
+   "num": "3.1",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Chargement des déblais de forage et mise en décharge, taxes comprises",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pil-32-45",
+   "num": "3.2",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Hors-profils de béton des pieux (quantité réelle moins volume théorique majoré)",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pil-33-46",
+   "num": "3.3",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Plus-value pour bétonnage de pieux sous l'eau, selon diamètre",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-34-47",
+   "num": "3.4",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Travail au trépan pour traversée d'obstacles (blocs, couches cimentées, bois…), par heure de groupe",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-35-48",
+   "num": "3.5",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Déplacement des outillages sur une autre plate-forme ou d'un niveau à un autre",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-36-49",
+   "num": "3.6",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Mesures par temps de neige ou de gel (déblaiement, mesures spéciales sous 0 °C)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-37-50",
+   "num": "3.7",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Temps d'attente non imputable à l'entreprise",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-43-51",
+   "num": "4.3",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Supplément pour pieu battu de moins de 8 m de longueur bétonnée",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-44-52",
+   "num": "4.4",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Prestations particulières",
+   "nom": "Exécution de bulbes en pied de pieu",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-a1-53",
+   "num": "A.1",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Installation",
+   "nom": "Installation et repli de chantier pour pieux forés ou tubes battus, transport, montage et démontage de la machine",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-a2-54",
+   "num": "A.2",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Installation",
+   "nom": "Plus-value pour amenée d'une machine supplémentaire",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-a3-55",
+   "num": "A.3",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Installation",
+   "nom": "Déplacement horizontal de la machine d'un pieu à l'autre",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-a4-56",
+   "num": "A.4",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Installation",
+   "nom": "Plus-value sur déplacement de machine, par tranche de 5 m de distance en plus",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-a5-57",
+   "num": "A.5",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Installation",
+   "nom": "Déplacement vertical d'une unité d'excavation d'une plate-forme de travail à l'autre, par mètre de dénivellation",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-a6-58",
+   "num": "A.6",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Installation",
+   "nom": "Mise en place d'une installation de réduction du bruit sur la machine",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b7-59",
+   "num": "B.7",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Exécution de pieu vertical en béton foré ou à tube battu, Ø 70 cm, armature comptée à part",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b7-60",
+   "num": "B.7",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Exécution de pieu vertical en béton foré ou à tube battu, Ø 100 cm, armature comptée à part",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b7-61",
+   "num": "B.7",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Exécution de pieu vertical en béton foré ou à tube battu, Ø 130 cm, armature comptée à part",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b8-62",
+   "num": "B.8",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Longueur perdue de pieu Ø 70 cm entre la plate-forme de travail et l'arase de la tête",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b8-63",
+   "num": "B.8",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Longueur perdue de pieu Ø 100 cm entre la plate-forme de travail et l'arase de la tête",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b8-64",
+   "num": "B.8",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Longueur perdue de pieu Ø 130 cm entre la plate-forme de travail et l'arase de la tête",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b9-65",
+   "num": "B.9",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour trépanage ou explosif dans pieu Ø 70 cm (blocs, souches, couches dures), par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b9-66",
+   "num": "B.9",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour trépanage ou explosif dans pieu Ø 100 cm (blocs, souches, couches dures), par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b9-67",
+   "num": "B.9",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour trépanage ou explosif dans pieu Ø 130 cm (blocs, souches, couches dures), par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b10-68",
+   "num": "B.10",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Fourniture et mise en place d'armature en tête de pieu en acier ordinaire, sans crochets ni frettage",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b11a-69",
+   "num": "B.11a",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Fourniture, façonnage et pose d'armature de pieu sur toute la longueur, barres longitudinales acier III",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b11b-70",
+   "num": "B.11b",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Fourniture, façonnage et pose d'armature de pieu sur toute la longueur, frettes",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-b12-71",
+   "num": "B.12",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour surdosage de ciment du béton de pieu",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b13-72",
+   "num": "B.13",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour surdosage de ciment en cas de bétonnage sous l'eau",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b14-73",
+   "num": "B.14",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour longueurs bétonnées supérieures à la longueur prévue",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b15-74",
+   "num": "B.15",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour pieux plus courts que la longueur prévue",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b16-75",
+   "num": "B.16",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour longueurs perdues plus grandes que prévu",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b17-76",
+   "num": "B.17",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour emploi de ciment spécial",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b18-77",
+   "num": "B.18",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Plus-value pour perte de rendement due à la réduction du bruit",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-b18bis-78",
+   "num": "B.18bis",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Exécution des pieux",
+   "nom": "Chargement et évacuation des déblais de pieux à la décharge, par mètre de pieu selon diamètre",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pil-c19a-79",
+   "num": "C.19a",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Essais de charge",
+   "nom": "Essai de charge sur pieu, immobilisation du personnel et du matériel compris, premier essai",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pil-c19b-80",
+   "num": "C.19b",
+   "cat": "17 Pilotages (pieux)",
+   "sub": "Essais de charge",
+   "nom": "Essai de charge sur pieu, essais suivants",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-31-81",
+   "num": "3.1",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Consommation supplémentaire de bentonite (au-delà de 0,50 kg/m² de paroi)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-31b-82",
+   "num": "3.1b",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Perte de boue de bentonite due à des cavités, conduites ou couches instables",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-32-83",
+   "num": "3.2",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Hors-profils de béton de paroi moulée",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-par-32b-84",
+   "num": "3.2b",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Repiquage des hors-profils des faces apparentes de paroi moulée",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-par-33-85",
+   "num": "3.3",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Démolition des murets de guidage",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-par-34-86",
+   "num": "3.4",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Travail au trépan pour traversée ou enlèvement d'obstacles dans la tranchée, par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-35-87",
+   "num": "3.5",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Déplacement d'installations fixes et passages sur une autre plate-forme de travail",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-35b-88",
+   "num": "3.5b",
+   "cat": "17 Parois moulées",
+   "sub": "Prestations particulières",
+   "nom": "Remblayage des zones de tranchée non bétonnées en matériaux appropriés",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-par-a1-89",
+   "num": "A.1",
+   "cat": "17 Parois moulées",
+   "sub": "Installation",
+   "nom": "Installation et repli de chantier pour paroi moulée, transport, montage et démontage du matériel, une unité d'excavation",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-a2-90",
+   "num": "A.2",
+   "cat": "17 Parois moulées",
+   "sub": "Installation",
+   "nom": "Installation et repli d'une unité d'excavation supplémentaire",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-a3-91",
+   "num": "A.3",
+   "cat": "17 Parois moulées",
+   "sub": "Installation",
+   "nom": "Déplacement vertical d'une unité d'excavation d'une plate-forme à l'autre, par mètre de hauteur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-par-b4-92",
+   "num": "B.4",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Exécution de deux murets de guidage en béton légèrement armé, profondeur 1,20 m, étayage et évacuation des déblais compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-par-b5-93",
+   "num": "B.5",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Exécution d'un seul muret de guidage en béton légèrement armé, profondeur 1,20 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-par-b6a-94",
+   "num": "B.6a",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Exécution de paroi moulée épaisseur 60 cm, profondeur max. 25 m, boue de bentonite, béton CP 350 et évacuation des déblais compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-par-b6b-95",
+   "num": "B.6b",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Exécution de paroi moulée épaisseur 80 cm, profondeur max. 25 m, boue de bentonite, béton CP 350 et évacuation des déblais compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-par-b7-96",
+   "num": "B.7",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Surface perdue de paroi moulée entre la plate-forme de travail et l'arase",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-par-b8-97",
+   "num": "B.8",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Plus-value pour trépanage ou explosif dans la paroi (vieux massifs, blocs, souches, couches dures), par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-b9-98",
+   "num": "B.9",
+   "cat": "17 Parois moulées",
+   "sub": "Exécution de la paroi",
+   "nom": "Fourniture, montage, soudure et mise en place des cages d'armature de paroi moulée, acier IIIa",
+   "metre": "none"
+  },
+  {
+   "id": "can17-par-c10-99",
+   "num": "C.10",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Recépage de l'arête supérieure de la paroi moulée à la cote prévue, déblais laissés sur place",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-par-c11-100",
+   "num": "C.11",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Repiquage et nettoyage de la face intérieure de la paroi, ragréage des nids de gravier",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-par-c12-101",
+   "num": "C.12",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Recépage des hors-profils extraordinaires de paroi (obstacles imprévus, poches de gravier…)",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-par-c13-102",
+   "num": "C.13",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Drainage vertical dans les joints entre éléments de paroi pour récolter les infiltrations",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-par-c14-103",
+   "num": "C.14",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Application d'un crépi ou gunitage épaisseur 4 cm sur la face intérieure de la paroi",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-par-c15-104",
+   "num": "C.15",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Application d'un enduit non dressé épaisseur moyenne 3 cm, talochage soigné, échafaudages compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-par-c16-105",
+   "num": "C.16",
+   "cat": "17 Parois moulées",
+   "sub": "Finitions",
+   "nom": "Plus-value pour consommation de matériaux secs supérieure à 54 l/m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-anc-411-106",
+   "num": "4.1.1",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Prestations particulières",
+   "nom": "Travaux de terrassement et d'échafaudage, clôture et signalisation de chantier pour ancrages",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-412-107",
+   "num": "4.1.2",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Prestations particulières",
+   "nom": "Éclairage et ventilation des places de travail et accès",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-413-108",
+   "num": "4.1.3",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Prestations particulières",
+   "nom": "Déplacements d'installations ou de matériaux provoqués par le commettant",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-43-109",
+   "num": "4.3",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Prestations particulières",
+   "nom": "Mesures particulières en cas de neige, gel, inondation ou chutes de pierres",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-44-110",
+   "num": "4.4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Prestations particulières",
+   "nom": "Temps d'attente non inhérent à l'entreprise d'ancrage",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-45-111",
+   "num": "4.5",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Prestations particulières",
+   "nom": "Indemnités pour travaux d'ancrage en dehors de l'horaire normal",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-11-112",
+   "num": "1.1",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Installation",
+   "nom": "Préparation, transport aller-retour et repli d'un groupe de forage et d'injection, installation générale, pour une phase d'intervention continue",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-12-113",
+   "num": "1.2",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Installation",
+   "nom": "Plus-value pour interruption de chantier de courte durée (ancrages)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-13-114",
+   "num": "1.3",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Installation",
+   "nom": "Plus-value pour équipement de sondage à rotation",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-21-115",
+   "num": "2.1",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Installation",
+   "nom": "Installation à chaque emplacement de forage, par tirant, déplacement sur la même plate-forme compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-22-116",
+   "num": "2.2",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Installation",
+   "nom": "Plus-value pour déplacement d'une étape ou plate-forme de travail à la suivante",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-3-117",
+   "num": "3",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Installation",
+   "nom": "Mise à disposition d'échafaudages pour la réalisation des tirants, montage et démontage, par tirant",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-4-118",
+   "num": "4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Exécution de tirant d'ancrage précontraint en alluvions ou rocher, perforation non tubée, force d'utilisation Vg = 30 t",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-4-119",
+   "num": "4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Exécution de tirant d'ancrage précontraint en alluvions ou rocher, perforation non tubée, force d'utilisation Vg = 50 t",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-4-120",
+   "num": "4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Exécution de tirant d'ancrage précontraint en alluvions ou rocher, perforation non tubée, force d'utilisation Vg = 70 t",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-4-121",
+   "num": "4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Exécution de tirant d'ancrage précontraint en alluvions ou rocher, perforation non tubée, force d'utilisation Vg = 100 t",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-5-122",
+   "num": "5",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Prix fixe par tirant Vg = 30 t : scellement, plaque d'appui, tête d'ancrage et mise en tension",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-5-123",
+   "num": "5",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Prix fixe par tirant Vg = 50 t : scellement, plaque d'appui, tête d'ancrage et mise en tension",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-5-124",
+   "num": "5",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Prix fixe par tirant Vg = 70 t : scellement, plaque d'appui, tête d'ancrage et mise en tension",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-5-125",
+   "num": "5",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Prix fixe par tirant Vg = 100 t : scellement, plaque d'appui, tête d'ancrage et mise en tension",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-61-126",
+   "num": "6.1",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value forage de tirant pour traversée d'obstacles (blocs, couches cimentées…)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-62-127",
+   "num": "6.2",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value forage de tirant au travers du béton sans passage d'armatures",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-63-128",
+   "num": "6.3",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value pour passage d'armatures, par cm² de section d'acier",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-64-129",
+   "num": "6.4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Exécution de forage carotté pour tirant",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-7-130",
+   "num": "7",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Injection de coulis de ciment complémentaire pour scellement de tirant, fourniture comprise",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-8-131",
+   "num": "8",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value pour ciment ultra-rapide permettant la mise en tension à 3 jours",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-9-132",
+   "num": "9",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value pour forage tubé de tirant en terrain meuble ou rocher non stable",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-101-133",
+   "num": "10.1",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Essai de perméabilité du rocher avant scellement des tirants",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-102-134",
+   "num": "10.2",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Injection d'étanchéité et de consolidation du rocher, heures d'équipe (coulis, injection et nettoyage)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-103-135",
+   "num": "10.3",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Fourniture du ciment pour injection d'étanchéité",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-104-136",
+   "num": "10.4",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Reforage des longueurs injectées",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-105-137",
+   "num": "10.5",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Déplacement des machines pour reforages",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-11-138",
+   "num": "11",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value pour tirants réinjectables",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-121-139",
+   "num": "12.1",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value pour protection contre la corrosion du tirant, longueur libre",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-122-140",
+   "num": "12.2",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Plus-value pour protection contre la corrosion du tirant, longueur de scellement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-anc-13-141",
+   "num": "13",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Fourniture et pose de tube de réservation au travers du béton pour tirant",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-14-142",
+   "num": "14",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Intervention complémentaire pour mise en tension, contrôle ou détente des tirants",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-15-143",
+   "num": "15",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Contrôle des tirants pendant la durée du chantier",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-16-144",
+   "num": "16",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Épreuve poussée de mise en tension de tirant (observation prolongée)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-17-145",
+   "num": "17",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Cachetage des têtes de tirant avec béton",
+   "metre": "none"
+  },
+  {
+   "id": "can17-anc-18-146",
+   "num": "18",
+   "cat": "17 Ancrages (tirants)",
+   "sub": "Exécution des tirants",
+   "nom": "Détente des tirants",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-41-147",
+   "num": "4.1",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Attentes provoquées ou imposées par la direction des travaux (rabattement de nappe)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-42-148",
+   "num": "4.2",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Mesures contre la neige et le froid pour maintenir l'installation en activité",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-43-149",
+   "num": "4.3",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Déplacements répétés des engins ou nécessitant un véhicule routier",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-44-150",
+   "num": "4.4",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Étais, fouilles et pontages pour conduites d'aspiration et de refoulement, échafaudages de protection",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-45-151",
+   "num": "4.5",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Mesures spéciales de protection contre le bruit (installation de pompage)",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-46-152",
+   "num": "4.6",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Fourniture, montage et service d'installations de jaugeage du débit pompé et de clarification des eaux",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-47-153",
+   "num": "4.7",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Réparation de dégâts dus aux éboulements de talus",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-481-154",
+   "num": "4.8.1",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Chargement des matériaux extraits des puits, transport à la décharge, taxes comprises",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-wel-482-155",
+   "num": "4.8.2",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Trépanage pour traversée d'obstacles lors du fonçage, en heures de groupe",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-483-156",
+   "num": "4.8.3",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Retrait, colmatage et coupe des tubes filtrants, fermeture des manchons d'étanchéité",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-49-157",
+   "num": "4.9",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Prestations particulières",
+   "nom": "Perte de filtres de fonçage par impossibilité de retrait",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-a1-158",
+   "num": "A.1",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Essai de pompage",
+   "nom": "Simple essai de fonçage et de pompage avec une lance, transport, installation et repli compris, durée 12 h",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-a2-159",
+   "num": "A.2",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Essai de pompage",
+   "nom": "Essai de fonçage et de pompage avec un groupe de lances et piézomètres, transport, installation et repli compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-a3-160",
+   "num": "A.3",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Essai de pompage",
+   "nom": "Plus-value par jour supplémentaire de 24 h de pompage d'essai",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-b1-161",
+   "num": "B.1",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Amenée et repli du matériel Wellpoint, montage et démontage du groupe de pompes et d'un groupe électrogène de secours",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-b2-162",
+   "num": "B.2",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Déplacement des pompes pour les étapes suivantes",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-b3-163",
+   "num": "B.3",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Plus-value pour amenée d'un engin spécial pour mise en place des lances en terrain dur",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-b4-164",
+   "num": "B.4",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Montage, démontage et location des conduites d'évacuation",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-wel-b5-165",
+   "num": "B.5",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Montage et démontage de la conduite principale d'aspiration",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-wel-b6-166",
+   "num": "B.6",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Enfoncement et retrait des lances Wellpoint",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-wel-b7-167",
+   "num": "B.7",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Plus-value pour mise en œuvre des lances dans des forages tubés avec filtre gravier-sable",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-b7bis-168",
+   "num": "B.7bis",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Plus-value pour mise en œuvre des lances avec vibrateur",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-b8-169",
+   "num": "B.8",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Installations",
+   "nom": "Fourniture et mise en place d'agrégats de sable lavés pour filtres, cubés sur camion",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-wel-c1-170",
+   "num": "C.1",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Exploitation",
+   "nom": "Maintien en service, entretien et surveillance de l'installation de rabattement, par jour calendrier",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-c2-171",
+   "num": "C.2",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Exploitation",
+   "nom": "Plus-value pour mise en service du groupe électrogène en cas d'interruption du courant, par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-wel-c4-172",
+   "num": "C.4",
+   "cat": "17 Wellpoints (rabattement de nappe)",
+   "sub": "Exploitation",
+   "nom": "Location du matériel de rabattement sans pompage pendant les arrêts du chantier, par jour",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-a1-173",
+   "num": "A.1",
+   "cat": "17 Pousse-tubes",
+   "sub": "Installations",
+   "nom": "Installations générales de pousse-tubes : amenée, location et repli des baraques, outils et machines, raccordements, signalisation et éclairage",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-a2a-174",
+   "num": "A.2a",
+   "cat": "17 Pousse-tubes",
+   "sub": "Installations",
+   "nom": "Installation de battage de palplanches métalliques légères type KD II, transport, montage et démontage",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-a2b-175",
+   "num": "A.2b",
+   "cat": "17 Pousse-tubes",
+   "sub": "Installations",
+   "nom": "Installation de battage de palplanches type Larssen, transport, montage et démontage",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-a3-176",
+   "num": "A.3",
+   "cat": "17 Pousse-tubes",
+   "sub": "Installations",
+   "nom": "Mise en place et démontage du matériel de poussée dans la cellule",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-a4-177",
+   "num": "A.4",
+   "cat": "17 Pousse-tubes",
+   "sub": "Installations",
+   "nom": "Retournement des installations de pousse-tubes dans la même cellule pour une autre direction",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-a5-178",
+   "num": "A.5",
+   "cat": "17 Pousse-tubes",
+   "sub": "Installations",
+   "nom": "Installation d'une pompe d'injection 1000 l/min, amenée, montage, démontage et repli",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-b1a-179",
+   "num": "B.1a",
+   "cat": "17 Pousse-tubes",
+   "sub": "Épuisement des eaux",
+   "nom": "Installation d'une pompe 1000 l/min dans la cellule de poussée, avec puisard et 20 m de conduite d'évacuation",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-b1b-180",
+   "num": "B.1b",
+   "cat": "17 Pousse-tubes",
+   "sub": "Épuisement des eaux",
+   "nom": "Location de la pompe d'épuisement 1000 l/min, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-b1c-181",
+   "num": "B.1c",
+   "cat": "17 Pousse-tubes",
+   "sub": "Épuisement des eaux",
+   "nom": "Exploitation de la pompe d'épuisement, par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-b1d-182",
+   "num": "B.1d",
+   "cat": "17 Pousse-tubes",
+   "sub": "Épuisement des eaux",
+   "nom": "Plus-value pour exploitation des pompes en dehors des heures normales de travail, surveillance comprise",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-b2-183",
+   "num": "B.2",
+   "cat": "17 Pousse-tubes",
+   "sub": "Épuisement des eaux",
+   "nom": "Conduite d'évacuation supplémentaire pour épuisement, montage, location et repli",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pou-b3-184",
+   "num": "B.3",
+   "cat": "17 Pousse-tubes",
+   "sub": "Épuisement des eaux",
+   "nom": "Installation de pompage à l'avancement depuis le front d'attaque jusqu'à la cellule, amenée, exploitation et repli",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-c1a-185",
+   "num": "C.1a",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Excavation à la machine de la cellule de poussée, mise en dépôt ou chargement, profondeur 0 à 8 m",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c1b-186",
+   "num": "C.1b",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Excavation à la machine de la cellule de poussée, mise en dépôt ou chargement, profondeur 8 à 12 m",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c2-187",
+   "num": "C.2",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour excavation à la main dans la cellule",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c3-188",
+   "num": "C.3",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour extraction de revêtement de chaussée",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-pou-c4-189",
+   "num": "C.4",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour extraction de blocs de plus de 100 l",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c5-190",
+   "num": "C.5",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour excavation de rocher exploitable à la pioche",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c6-191",
+   "num": "C.6",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour démolition de fondations ou murs en béton non armé",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c7-192",
+   "num": "C.7",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour démolition de fondations ou murs en béton armé",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c8-193",
+   "num": "C.8",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour démolition de fondations ou murs en maçonnerie",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c9-194",
+   "num": "C.9",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour exploitation de rocher à l'explosif",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c10-195",
+   "num": "C.10",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour roche dure et compacte au marteau-pic",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c11-196",
+   "num": "C.11",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour travail en présence d'eau",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c12-197",
+   "num": "C.12",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Évacuation à la décharge des matériaux d'excavation, taxe comprise, cubé sur camion",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c13-198",
+   "num": "C.13",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Fourniture, mise en place et compactage de ballast TV 0/100 mm, cubé sur camion",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c14a-199",
+   "num": "C.14a",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Rideau de palplanches légères KD II avec étayage, location et enlèvement",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-pou-c14b-200",
+   "num": "C.14b",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Rideau de palplanches type Larssen avec étayage, location et enlèvement",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-pou-c15a-201",
+   "num": "C.15a",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour palplanches légères KD II perdues",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-pou-c15b-202",
+   "num": "C.15b",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Plus-value pour palplanches Larssen perdues",
+   "metre": "surface"
+  },
+  {
+   "id": "can17-pou-c16-203",
+   "num": "C.16",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Fourniture et mise en place de béton BH 300 pour radier, appuis des vérins et portail, coffrages et armatures compris",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c17-204",
+   "num": "C.17",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Remblayage et compactage de la cellule en matériaux d'excavation graveleux",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-c18-205",
+   "num": "C.18",
+   "cat": "17 Pousse-tubes",
+   "sub": "Cellule de poussée",
+   "nom": "Remise en état des lieux autour de la cellule de poussée",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-d1-206",
+   "num": "D.1",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Fourniture et poussage de tuyaux armés Ø int. 100 cm, excavation au fur et à mesure en matériaux meubles, évacuation et lubrification compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pou-d1-207",
+   "num": "D.1",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Fourniture et poussage de tuyaux armés Ø int. 125 cm, excavation au fur et à mesure en matériaux meubles, évacuation et lubrification compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pou-d1-208",
+   "num": "D.1",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Fourniture et poussage de tuyaux armés Ø int. 150 cm, excavation au fur et à mesure en matériaux meubles, évacuation et lubrification compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pou-d1d-209",
+   "num": "D.1d",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Fourniture et poussage de tuyaux armés d'un autre diamètre, excavation au fur et à mesure en matériaux meubles",
+   "metre": "coupe"
+  },
+  {
+   "id": "can17-pou-d2-210",
+   "num": "D.2",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour extraction de blocs de plus de 30 l",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d3-211",
+   "num": "D.3",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour démolition de maçonnerie aux outils pneumatiques",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d4-212",
+   "num": "D.4",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour démolition de béton non armé aux outils pneumatiques",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d5-213",
+   "num": "D.5",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour démolition de béton armé aux outils pneumatiques",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d6-214",
+   "num": "D.6",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour excavation de roche tendre délitée à la pioche",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d7-215",
+   "num": "D.7",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour excavation en terrain compact aux outils pneumatiques",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d8-216",
+   "num": "D.8",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour rocher en bancs (moins de la moitié de la section) aux outils pneumatiques",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d9-217",
+   "num": "D.9",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour rocher en bancs (plus de la moitié de la section) aux outils pneumatiques",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d10-218",
+   "num": "D.10",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour rocher en bancs (plus de la moitié de la section) à l'explosif",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d11-219",
+   "num": "D.11",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value poussage pour arrivée d'eau au front d'attaque",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d12-220",
+   "num": "D.12",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Évacuation des matériaux d'excavation du poussage à la décharge, cube selon profil théorique",
+   "metre": "volume"
+  },
+  {
+   "id": "can17-pou-d13-221",
+   "num": "D.13",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Liaison et jointoiement des tuyaux poussés Ø 1,00 m",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-d13-222",
+   "num": "D.13",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Liaison et jointoiement des tuyaux poussés Ø 1,25 m",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-d13-223",
+   "num": "D.13",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Liaison et jointoiement des tuyaux poussés Ø 1,50 m",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-d14-224",
+   "num": "D.14",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Enlèvement du couteau d'avancement à l'extrémité d'arrivée, étayage éventuel compris",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-d15-225",
+   "num": "D.15",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Plus-value pour démontage du couteau d'avancement et sortie par la cellule de poussée",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-d16-226",
+   "num": "D.16",
+   "cat": "17 Pousse-tubes",
+   "sub": "Poussage",
+   "nom": "Installation, location et démontage d'une station de poussée intermédiaire",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-e1-227",
+   "num": "E.1",
+   "cat": "17 Pousse-tubes",
+   "sub": "Travaux de protection",
+   "nom": "Injection à l'avancement en matériaux sans cohésion (forage, lances, coulis de ciment), par sac de ciment",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-e2a-228",
+   "num": "E.2a",
+   "cat": "17 Pousse-tubes",
+   "sub": "Travaux de protection",
+   "nom": "Injection de contact entre tube et terrain au coulis opalit-ciment, par sac de ciment",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-e2b-229",
+   "num": "E.2b",
+   "cat": "17 Pousse-tubes",
+   "sub": "Travaux de protection",
+   "nom": "Injection de contact entre tube et terrain au coulis opalit-ciment, par sac d'opalit",
+   "metre": "none"
+  },
+  {
+   "id": "can17-pou-f2-230",
+   "num": "F.2",
+   "cat": "17 Pousse-tubes",
+   "sub": "Travaux de protection",
+   "nom": "Heures d'attente de l'installation de pousse-tubes",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-231",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Contremaître en travaux spéciaux, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-232",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Chef d'équipe travaux spéciaux, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-233",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Foreur, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-234",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Spécialiste en injection, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-235",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Aide foreur, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-236",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Chef sondeur, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-237",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Personnel",
+   "nom": "Ouvrier qualifié travaux spéciaux, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-238",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Location d'équipement de forage en attente, par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-239",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Location d'équipement de forage en service (sans main-d'œuvre), par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-240",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Sondeuse en service, par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-241",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Sondeuse en attente, par heure",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-242",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Trépanage, par heure de groupe",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-243",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Location d'une installation de rabattement complète en attente, par jour calendrier",
+   "metre": "none"
+  },
+  {
+   "id": "can17-reg-rgie-244",
+   "num": "Régie",
+   "cat": "17 Régie travaux spéciaux",
+   "sub": "Matériel",
+   "nom": "Matériaux fournis en régie, au prix coûtant majoré",
+   "metre": "none"
+  }
+ ]
+}

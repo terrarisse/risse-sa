@@ -1,4 +1,12 @@
 {
-  "info": "Listes de postes à importer (Ressources › Postes › Importer une liste). Une entrée par fichier.",
-  "listes": []
+ "info": "Listes de postes à importer (Ressources › Postes › Importer une liste). Une entrée par fichier.",
+ "listes": [
+  {
+   "id": "can17",
+   "titre": "CAN 17 — Fondations spéciales",
+   "fichier": "can17-fondations-speciales.json",
+   "n": 245,
+   "note": "Sondages, pieux, parois moulées, ancrages, wellpoints, pousse-tubes"
+  }
+ ]
 }
