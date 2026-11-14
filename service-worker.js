@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v37';
+const CACHE_NAME = 'risse-app-v38';
 const URLS = [
   './',
   './index.html',
@@ -69,8 +69,12 @@ self.addEventListener('fetch', e => {
   // Trello : données privées et toujours fraîches → jamais mises en cache
   if (/(^|\.)trello\.com$/.test(new URL(e.request.url).hostname)) return;
 
+  // Fichiers de l'app : toujours revalidés auprès du serveur (sinon le cache HTTP de
+  // GitHub Pages, ~10 min, peut servir une ancienne version juste après une mise à jour)
+  const sameOrigin = new URL(e.request.url).origin === self.location.origin;
+  const req = sameOrigin ? new Request(e.request, { cache: 'no-cache' }) : e.request;
   e.respondWith(
-    fetch(e.request)
+    fetch(req)
       .then(response => {
         const clone = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
