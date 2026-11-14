@@ -1118,6 +1118,7 @@ function renderCatMgr(){
           <div style="width:6px;height:6px;border-radius:50%;background:${cat.color};opacity:.5;flex-shrink:0;"></div>
           <span style="flex:1;color:var(--text2);">${esc(sub.name)}</span>
           <button title="Renommer" style="background:none;border:none;font-size:13px;cursor:pointer;padding:2px;" onclick="renameSubCat('${cat.id}','${sub.id}')">✏️</button>
+          <button title="Dupliquer avec son contenu" style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--navy);font-size:11px;font-weight:700;cursor:pointer;padding:3px 6px;" onclick="duplicateSubCat('${cat.id}','${sub.id}')">⧉</button>
           <span style="font-size:10px;color:var(--text3);">${subCnt}</span>
           <button title="Déplacer" style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--navy);font-size:12px;font-weight:700;cursor:pointer;padding:3px 7px;" onclick="openMoveSubCat('${cat.id}','${sub.id}')">⇄</button>
           <button style="background:none;border:none;color:var(--text3);font-size:14px;cursor:pointer;padding:2px;" onclick="deleteSubCategory('${cat.id}','${sub.id}')">✕</button>
@@ -1371,6 +1372,18 @@ function duplicateCat(catId){
   save(catMgrTab, out.concat(copies));
   catMgrRefresh(); showToast(`⧉ Catégorie dupliquée (${copies.length} élément${copies.length>1?'s':''})`);
 }
+// Dupliquer une sous-catégorie (dans la même catégorie) avec tous ses éléments
+function duplicateSubCat(catId, subId){
+  const all = loadCats(); const cat = (all[catMgrTab]||[]).find(c=>c.id===catId);
+  const sub = cat && (cat.children||[]).find(s=>s.id===subId); if(!sub) return;
+  const items = load(catMgrTab), src = items.filter(i=>i.catId===catId && i.subCatId===subId);
+  const v = (prompt(`Nom de la copie (${src.length} élément${src.length>1?'s':''} seront dupliqués) :`, sub.name+' (copie)')||'').trim(); if(!v) return;
+  const t = Date.now().toString(36), ns = { ...sub, id:'sub'+t, name:v };
+  cat.children.splice(cat.children.indexOf(sub)+1, 0, ns); saveCats(all);
+  save(catMgrTab, items.concat(src.map((i,k)=>({ ...i, id:'d'+t+k, subCatId:ns.id }))));
+  catMgrRefresh(); showToast(`⧉ Sous-catégorie dupliquée (${src.length} élément${src.length>1?'s':''})`);
+}
+window.duplicateSubCat=duplicateSubCat;
 window.renameCat=renameCat; window.renameSubCat=renameSubCat; window.duplicateCat=duplicateCat;
 
 function deleteSubCategory(catId, subId){
