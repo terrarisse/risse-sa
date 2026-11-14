@@ -1,0 +1,5639 @@
+{
+ "id": "can4",
+ "titre": "CAN 4 — Maçonnerie, crépis, chapes",
+ "note": "Maçonnerie (CAN 314), crépis et enduits de façades (348), chapes (661), installation de chantier (113), démolitions (112)",
+ "postes": [
+  {
+   "id": "can314-111100-0",
+   "num": "111.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, hourdage à joints pleins, épaisseur jusqu'à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111100-1",
+   "num": "111.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, hourdage à joints pleins, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111100-2",
+   "num": "111.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, hourdage à joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111100-3",
+   "num": "111.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, hourdage à joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111100-4",
+   "num": "111.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, hourdage à joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111100-5",
+   "num": "111.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, hourdage à joints pleins, épaisseur 225 à 275 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111200-6",
+   "num": "111.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, joints verticaux non remplis, épaisseur jusqu'à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111200-7",
+   "num": "111.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, joints verticaux non remplis, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111200-8",
+   "num": "111.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, joints verticaux non remplis, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111200-9",
+   "num": "111.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, joints verticaux non remplis, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-111200-10",
+   "num": "111.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Mur en briques de terre cuite MB monté avec le gros œuvre, joints verticaux non remplis, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-112100-11",
+   "num": "112.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Galandage en carreaux de terre cuite monté après le gros œuvre, joints pleins, épaisseur jusqu'à 65 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-112100-12",
+   "num": "112.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Galandage en carreaux de terre cuite monté après le gros œuvre, joints pleins, épaisseur 70 à 85 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-112100-13",
+   "num": "112.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Galandage en carreaux de terre cuite monté après le gros œuvre, joints pleins, épaisseur 90 à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-113100-14",
+   "num": "113.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite monolithique",
+   "nom": "Mur monolithique en briques de terre cuite monté avec le gros œuvre, joints pleins, épaisseur jusqu'à 275 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-113100-15",
+   "num": "113.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite monolithique",
+   "nom": "Mur monolithique en briques de terre cuite monté avec le gros œuvre, joints pleins, épaisseur 280 à 320 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-113200-16",
+   "num": "113.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite monolithique",
+   "nom": "Mur monolithique en briques de terre cuite monté avec le gros œuvre, joints verticaux non remplis, épaisseur jusqu'à 275 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-113200-17",
+   "num": "113.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite monolithique",
+   "nom": "Mur monolithique en briques de terre cuite monté avec le gros œuvre, joints verticaux non remplis, épaisseur 280 à 320 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114100-18",
+   "num": "114.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Doublage extérieur en briques de terre cuite monté après le gros œuvre, joints pleins, épaisseur jusqu'à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114100-19",
+   "num": "114.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Doublage extérieur en briques de terre cuite monté après le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114100-20",
+   "num": "114.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Doublage extérieur en briques de terre cuite monté après le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114200-21",
+   "num": "114.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Maçonnerie insonorisante en briques de terre cuite montée avec le gros œuvre, joints pleins, épaisseur jusqu'à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114200-22",
+   "num": "114.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Maçonnerie insonorisante en briques de terre cuite montée avec le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114200-23",
+   "num": "114.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Maçonnerie insonorisante en briques de terre cuite montée avec le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-114200-24",
+   "num": "114.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite spéciale (doublage, isolation phonique)",
+   "nom": "Maçonnerie insonorisante en briques de terre cuite montée avec le gros œuvre, joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-118001-25",
+   "num": "118.001",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Terre cuite MB (parpaings)",
+   "nom": "Pilier en maçonnerie de briques de terre cuite, section 0,25 × 0,25 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-131100-26",
+   "num": "131.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Mur en briques silico-calcaires monté avec le gros œuvre, joints pleins, épaisseur jusqu'à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-131100-27",
+   "num": "131.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Mur en briques silico-calcaires monté avec le gros œuvre, joints pleins, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-131100-28",
+   "num": "131.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Mur en briques silico-calcaires monté avec le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-131100-29",
+   "num": "131.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Mur en briques silico-calcaires monté avec le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-131100-30",
+   "num": "131.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Mur en briques silico-calcaires monté avec le gros œuvre, joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-134100-31",
+   "num": "134.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Doublage extérieur en briques silico-calcaires monté après le gros œuvre, joints pleins, épaisseur jusqu'à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-134100-32",
+   "num": "134.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Doublage extérieur en briques silico-calcaires monté après le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-134100-33",
+   "num": "134.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Doublage extérieur en briques silico-calcaires monté après le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-134200-34",
+   "num": "134.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Maçonnerie insonorisante en briques silico-calcaires montée avec le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-134200-35",
+   "num": "134.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Maçonnerie insonorisante en briques silico-calcaires montée avec le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-134200-36",
+   "num": "134.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Silico-calcaire MK",
+   "nom": "Maçonnerie insonorisante en briques silico-calcaires montée avec le gros œuvre, joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141100-37",
+   "num": "141.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux (Rapid) monté avec le gros œuvre, joints pleins, épaisseur jusqu'à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141100-38",
+   "num": "141.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux (Rapid) monté avec le gros œuvre, joints pleins, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141100-39",
+   "num": "141.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux (Rapid) monté avec le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141100-40",
+   "num": "141.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux (Rapid) monté avec le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141100-41",
+   "num": "141.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux (Rapid) monté avec le gros œuvre, joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141100-42",
+   "num": "141.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux (Rapid) monté avec le gros œuvre, joints pleins, épaisseur 225 à 275 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-141200-43",
+   "num": "141.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton creux monté avec le gros œuvre, joints verticaux non remplis, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-142100-44",
+   "num": "142.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Galandage en carreaux de béton creux monté après le gros œuvre, joints pleins, épaisseur jusqu'à 65 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-142100-45",
+   "num": "142.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Galandage en carreaux de béton creux monté après le gros œuvre, joints pleins, épaisseur 70 à 85 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-143100-46",
+   "num": "143.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton pleins monté avec le gros œuvre, joints pleins, épaisseur jusqu'à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-143100-47",
+   "num": "143.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton pleins monté avec le gros œuvre, joints pleins, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-143100-48",
+   "num": "143.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton pleins monté avec le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-143100-49",
+   "num": "143.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton pleins monté avec le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-143100-50",
+   "num": "143.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Mur en agglomérés de béton pleins monté avec le gros œuvre, joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144100-51",
+   "num": "144.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Doublage extérieur en agglomérés de béton monté après le gros œuvre, joints pleins, épaisseur jusqu'à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144100-52",
+   "num": "144.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Doublage extérieur en agglomérés de béton monté après le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144100-53",
+   "num": "144.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Doublage extérieur en agglomérés de béton monté après le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144200-54",
+   "num": "144.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie insonorisante en agglomérés de béton montée avec le gros œuvre, joints pleins, épaisseur jusqu'à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144200-55",
+   "num": "144.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie insonorisante en agglomérés de béton montée avec le gros œuvre, joints pleins, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144200-56",
+   "num": "144.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie insonorisante en agglomérés de béton montée avec le gros œuvre, joints pleins, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-144200-57",
+   "num": "144.200",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie insonorisante en agglomérés de béton montée avec le gros œuvre, joints pleins, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-147100-58",
+   "num": "147.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie en blocs coffrants de béton montée avec le gros œuvre, remplissage au béton CEM I 42,5 kg/m³ 250 compris, épaisseur jusqu'à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-147100-59",
+   "num": "147.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie en blocs coffrants de béton montée avec le gros œuvre, remplissage au béton CEM I 42,5 kg/m³ 250 compris, épaisseur 170 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-147100-60",
+   "num": "147.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie en blocs coffrants de béton montée avec le gros œuvre, remplissage au béton CEM I 42,5 kg/m³ 250 compris, épaisseur 230 à 270 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-147100-61",
+   "num": "147.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Agglomérés de béton MC",
+   "nom": "Maçonnerie en blocs coffrants de béton montée avec le gros œuvre, remplissage au béton CEM I 42,5 kg/m³ 250 compris, épaisseur 280 à 320 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-161100-62",
+   "num": "161.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire monté avec le gros œuvre, épaisseur 115 à 135 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-161100-63",
+   "num": "161.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire monté avec le gros œuvre, épaisseur 140 à 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-161100-64",
+   "num": "161.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire monté avec le gros œuvre, épaisseur 165 à 185 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-161100-65",
+   "num": "161.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire monté avec le gros œuvre, épaisseur 190 à 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-161100-66",
+   "num": "161.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire monté avec le gros œuvre, épaisseur 225 à 275 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-171100-67",
+   "num": "171.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire léger (type Ytong) monté avec le gros œuvre, épaisseur 225 à 275 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-171100-68",
+   "num": "171.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire léger (type Ytong) monté avec le gros œuvre, épaisseur 280 à 320 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-171100-69",
+   "num": "171.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire léger (type Ytong) monté avec le gros œuvre, épaisseur 325 à 345 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-171100-70",
+   "num": "171.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Mur en agglomérés de béton cellulaire léger (type Ytong) monté avec le gros œuvre, épaisseur 350 à 375 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-172100-71",
+   "num": "172.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Galandage en carreaux de béton cellulaire léger monté après le gros œuvre, épaisseur jusqu'à 65 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-172100-72",
+   "num": "172.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Galandage en carreaux de béton cellulaire léger monté après le gros œuvre, épaisseur 70 à 85 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-172100-73",
+   "num": "172.100",
+   "cat": "314 Maçonnerie de briques",
+   "sub": "Béton cellulaire MP / MPL",
+   "nom": "Galandage en carreaux de béton cellulaire léger monté après le gros œuvre, épaisseur 90 à 110 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-211110-74",
+   "num": "211.110",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Têtes de murs, embrasures, angles",
+   "nom": "Façon de tête de mur, embrasure ou tableau à angle droit (maçonnerie MB / MBL)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211200-75",
+   "num": "211.200",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Têtes de murs, embrasures, angles",
+   "nom": "Façon d'angle de mur oblique (maçonnerie MB / MBL)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-221110-76",
+   "num": "221.110",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Têtes de murs, embrasures, angles",
+   "nom": "Façon de tête de mur, embrasure ou tableau à angle droit (maçonnerie MK)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-221200-77",
+   "num": "221.200",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Têtes de murs, embrasures, angles",
+   "nom": "Façon d'angle de mur oblique (maçonnerie MK)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-212110-78",
+   "num": "212.110",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Couronnements, remplissages",
+   "nom": "Couronnement horizontal de mur, glacis au mortier",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-212120-79",
+   "num": "212.120",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Couronnements, remplissages",
+   "nom": "Couronnement incliné de mur, glacis au mortier",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-212210-80",
+   "num": "212.210",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Couronnements, remplissages",
+   "nom": "Remplissage entre chevrons ou le long des chevrons, arasement au nu supérieur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-212220-81",
+   "num": "212.220",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Couronnements, remplissages",
+   "nom": "Remplissage entre solives, garnissage sous les solives et arasement au nu supérieur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-222110-82",
+   "num": "222.110",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Couronnements, remplissages",
+   "nom": "Couronnement horizontal de mur en maçonnerie MK",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-222120-83",
+   "num": "222.120",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Couronnements, remplissages",
+   "nom": "Couronnement incliné de mur en maçonnerie MK",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-213100-84",
+   "num": "213.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Qualité de surface",
+   "nom": "Supplément pour planéité de la surface de maçonnerie",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-213200-85",
+   "num": "213.200",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Qualité de surface",
+   "nom": "Supplément pour maçonnerie restant apparente (briques choisies, joints tirés à la truelle)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-213300-86",
+   "num": "213.300",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Qualité de surface",
+   "nom": "Supplément pour maçonnerie frottée au sac",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-213400-87",
+   "num": "213.400",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Qualité de surface",
+   "nom": "Application d'une barbotine sur la maçonnerie",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-214100-88",
+   "num": "214.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Suppléments de montage",
+   "nom": "Supplément pour maçonnerie montée après coup (parpaings ou monolithique), épaisseur jusqu'à 110 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-214100-89",
+   "num": "214.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Suppléments de montage",
+   "nom": "Supplément pour maçonnerie montée après coup (parpaings ou monolithique), épaisseur 115 à 135 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-214100-90",
+   "num": "214.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Suppléments de montage",
+   "nom": "Supplément pour maçonnerie montée après coup (parpaings ou monolithique), épaisseur 140 à 160 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-214100-91",
+   "num": "214.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Suppléments de montage",
+   "nom": "Supplément pour maçonnerie montée après coup (parpaings ou monolithique), épaisseur 165 à 185 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-214200-92",
+   "num": "214.200",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Suppléments de montage",
+   "nom": "Supplément pour maçonnerie courbe, selon rayon intérieur",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-214600-93",
+   "num": "214.600",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Suppléments de montage",
+   "nom": "Supplément pour murage ultérieur de gaines techniques ou parois d'installations, sur 1, 2 ou 3 faces",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-261100-94",
+   "num": "261.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Linteaux",
+   "nom": "Linteau plein en terre cuite (supplément sur maçonnerie), selon largeur du mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-261200-95",
+   "num": "261.200",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Linteaux",
+   "nom": "Linteau plein en béton (supplément sur maçonnerie), selon largeur du mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-261300-96",
+   "num": "261.300",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Linteaux",
+   "nom": "Linteau plein en béton cellulaire (supplément sur maçonnerie), selon largeur du mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-272100-97",
+   "num": "272.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Linteaux",
+   "nom": "Fourniture et pose de linteau spécial avec retombée en béton fin armé de fibre de verre, pour caisson de volet roulant ou store",
+   "metre": "none"
+  },
+  {
+   "id": "can314-272200-98",
+   "num": "272.200",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Linteaux",
+   "nom": "Fourniture et pose de linteau spécial avec retombée en béton ou terre cuite, pour caisson de volet roulant ou store",
+   "metre": "none"
+  },
+  {
+   "id": "can314-274100-99",
+   "num": "274.100",
+   "cat": "314 Suppléments maçonnerie, linteaux",
+   "sub": "Linteaux",
+   "nom": "Fourniture et pose de linteau-caisson en béton fin armé de fibre de verre, avec isolation thermique, pour volet roulant ou store",
+   "metre": "none"
+  },
+  {
+   "id": "can314-311100-100",
+   "num": "311.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Doublage extérieur en briques de terre cuite de parement 250×120×140 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311100-101",
+   "num": "311.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Doublage extérieur en briques de terre cuite de parement 250×120×90 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311100-102",
+   "num": "311.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Doublage extérieur en briques de terre cuite de parement 250×120×65 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311100-103",
+   "num": "311.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Doublage extérieur en briques de terre cuite de parement 290×140×140 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-312100-104",
+   "num": "312.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Doublage extérieur en briques clinker de parement 240×115×71 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-312100-105",
+   "num": "312.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Doublage extérieur en briques clinker de parement 240×115×52 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-351100-106",
+   "num": "351.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques de terre cuite de parement 250×120×140 mm (intérieur, non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-351100-107",
+   "num": "351.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques de terre cuite de parement 250×120×65 mm (intérieur, non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-351100-108",
+   "num": "351.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques de terre cuite de parement 290×140×140 mm (intérieur, non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-351100-109",
+   "num": "351.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques de terre cuite de parement 290×140×90 mm (intérieur, non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-351100-110",
+   "num": "351.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques de terre cuite de parement 290×140×65 mm (intérieur, non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-352100-111",
+   "num": "352.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques clinker de parement 240×115×71 mm (non exposé), monté avec le gros œuvre",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-352100-112",
+   "num": "352.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Terre cuite apparente MB",
+   "nom": "Mur en briques clinker de parement 240×115×52 mm (non exposé), monté avec le gros œuvre",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321100-113",
+   "num": "321.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Doublage extérieur en briques silico-calcaires de parement 250×120×140 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321100-114",
+   "num": "321.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Doublage extérieur en briques silico-calcaires de parement 250×120×90 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321100-115",
+   "num": "321.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Doublage extérieur en briques silico-calcaires de parement 250×120×65 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321100-116",
+   "num": "321.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Doublage extérieur en briques silico-calcaires de parement 250×150×140 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321100-117",
+   "num": "321.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Doublage extérieur en briques silico-calcaires de parement 250×150×90 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321100-118",
+   "num": "321.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Doublage extérieur en briques silico-calcaires de parement 250×150×65 mm, monté après le gros œuvre, joints affleurés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-361100-119",
+   "num": "361.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Mur en briques silico-calcaires de parement 250×120×140 mm (non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-361100-120",
+   "num": "361.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Mur en briques silico-calcaires de parement 250×120×90 mm (non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-361100-121",
+   "num": "361.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Mur en briques silico-calcaires de parement 250×120×65 mm (non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-361100-122",
+   "num": "361.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Mur en briques silico-calcaires de parement 250×150×140 mm (non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-361100-123",
+   "num": "361.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Mur en briques silico-calcaires de parement 250×150×90 mm (non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-361100-124",
+   "num": "361.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Silico-calcaire apparente MK",
+   "nom": "Mur en briques silico-calcaires de parement 250×150×65 mm (non exposé), monté avec le gros œuvre, joints tirés à la truelle",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-413100-125",
+   "num": "413.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Façon de tête de mur, embrasure ou tableau à angle droit en maçonnerie de parement MB",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-413510-126",
+   "num": "413.510",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Remplissage entre chevrons en maçonnerie de parement, arasement au nu supérieur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-413520-127",
+   "num": "413.520",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Remplissage entre solives en maçonnerie de parement, garnissage et arasement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-414400-128",
+   "num": "414.400",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Supplément pour maçonnerie de parement MB courbe, briques entières ou sciées, selon rayon",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-421100-129",
+   "num": "421.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Supplément pour briques de parement MK de teinte spéciale",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-421210-130",
+   "num": "421.210",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Supplément pour briques de parement MK à surface brute cassée",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-421220-131",
+   "num": "421.220",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Supplément pour briques de parement MK à nervures larges",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-423100-132",
+   "num": "423.100",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Façon de tête de mur, embrasure ou tableau à angle droit en maçonnerie de parement MK",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-423300-133",
+   "num": "423.300",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Linteau plein en béton pour maçonnerie de parement, hauteur 65 ou 140 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-423400-134",
+   "num": "423.400",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Façon de couronnement en briques de parement posées de chant (entières ou sciées)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-423500-135",
+   "num": "423.500",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Remplissage entre chevrons ou solives en maçonnerie de parement MK",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-424400-136",
+   "num": "424.400",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Supplément pour maçonnerie de parement MK courbe, briques entières ou sciées, selon rayon",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-425-137",
+   "num": "425",
+   "cat": "314 Maçonnerie de parement",
+   "sub": "Suppléments parement",
+   "nom": "Supplément pour montage après coup de maçonnerie de parement MK non exposée",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511100-138",
+   "num": "511.100",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Coupures de capillarité, armatures",
+   "nom": "Coupure de capillarité à la base de la maçonnerie, lit de mortier compris, largeur de bande jusqu'à 200 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-511100-139",
+   "num": "511.100",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Coupures de capillarité, armatures",
+   "nom": "Coupure de capillarité à la base de la maçonnerie, lit de mortier compris, largeur de bande 210 à 300 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-521110-140",
+   "num": "521.110",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Coupures de capillarité, armatures",
+   "nom": "Armature de joints d'assise, 2 barres longitudinales Ø 4 mm, acier zingué",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-521120-141",
+   "num": "521.120",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Coupures de capillarité, armatures",
+   "nom": "Armature de joints d'assise, 2 barres longitudinales Ø 5 mm, acier zingué",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-521400-142",
+   "num": "521.400",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Coupures de capillarité, armatures",
+   "nom": "Armature de joints d'assise en treillis de fibre de verre résistant aux alcalis",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-521500-143",
+   "num": "521.500",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Coupures de capillarité, armatures",
+   "nom": "Étriers pour angle de maçonnerie, acier zingué Ø 4 mm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-531100-144",
+   "num": "531.100",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Attaches d'ancrage torsadées en acier inox pour murs à plusieurs parois, 2 extrémités scellées dans les joints, selon espacement des parois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-531200-145",
+   "num": "531.200",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Attaches d'ancrage pour murs à plusieurs parois, une extrémité ancrée dans le béton, selon espacement",
+   "metre": "none"
+  },
+  {
+   "id": "can314-531300-146",
+   "num": "531.300",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Attaches d'ancrage pour murs à plusieurs parois, une extrémité ancrée par injection dans la maçonnerie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-531400-147",
+   "num": "531.400",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Attaches d'ancrage pour murs à plusieurs parois, une extrémité fixée par douille dans la maçonnerie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-532100-148",
+   "num": "532.100",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Attaches d'ancrage articulées en acier inox, 2 extrémités scellées dans les joints d'assise",
+   "metre": "none"
+  },
+  {
+   "id": "can314-541100-149",
+   "num": "541.100",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Scellement d'étriers d'attente dans les joints d'assise pour jonction de murs perpendiculaires, acier zingué Ø 4 mm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-542101-150",
+   "num": "542.101",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Jonction de mur en cours de montage à un mur existant en briques de terre cuite",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-542102-151",
+   "num": "542.102",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Jonction de mur en cours de montage à un mur existant en briques silico-calcaires ou agglomérés de béton",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-542103-152",
+   "num": "542.103",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Jonction de mur en cours de montage à un mur existant en béton",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-542104-153",
+   "num": "542.104",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Attaches et jonctions de murs",
+   "nom": "Jonction de mur en cours de montage à un mur existant en agglomérés ou éléments préfabriqués de béton cellulaire",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-551110-154",
+   "num": "551.110",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Couches de séparation, additifs",
+   "nom": "Couche de séparation horizontale entre mur non porteur et plafond, épaisseur 10 à 20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-551210-155",
+   "num": "551.210",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Couches de séparation, additifs",
+   "nom": "Couche de séparation horizontale sur mur porteur, épaisseur 10 à 20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-552100-156",
+   "num": "552.100",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Couches de séparation, additifs",
+   "nom": "Couche de séparation verticale entre deux murs ou au droit de joints de dilatation, épaisseur 10 à 20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-561001-157",
+   "num": "561.001",
+   "cat": "314 Compléments à la maçonnerie",
+   "sub": "Couches de séparation, additifs",
+   "nom": "Additif au mortier (plastifiant ou autre), sur accord de la direction des travaux",
+   "metre": "none"
+  },
+  {
+   "id": "can314-611100-158",
+   "num": "611.100",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle calorifuge (type Thermur) sur lit de mortier à la base d'un mur porteur, hauteur 90 mm, mur, épaisseur 115 à 135 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611100-159",
+   "num": "611.100",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle calorifuge (type Thermur) sur lit de mortier à la base d'un mur porteur, hauteur 90 mm, mur, épaisseur 140 à 160 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611100-160",
+   "num": "611.100",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle calorifuge (type Thermur) sur lit de mortier à la base d'un mur porteur, hauteur 90 mm, mur, épaisseur 165 à 185 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611120-161",
+   "num": "611.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle calorifuge à la base d'un mur porteur, hauteur 140 mm, mur, épaisseur 115 à 135 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611120-162",
+   "num": "611.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle calorifuge à la base d'un mur porteur, hauteur 140 mm, mur, épaisseur 140 à 160 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611120-163",
+   "num": "611.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle calorifuge à la base d'un mur porteur, hauteur 140 mm, mur, épaisseur 165 à 185 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-612100-164",
+   "num": "612.100",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle insonorisante (type Pronouveau) sous mur porteur, posée sur support plan, selon épaisseur du mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-612200-165",
+   "num": "612.200",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Semelle insonorisante sous mur non porteur, posée sur support plan, selon épaisseur du mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-613100-166",
+   "num": "613.100",
+   "cat": "314 Isolations",
+   "sub": "Isolation à la base et au sommet des murs",
+   "nom": "Couche insonorisante au sommet de mur porteur, lit de mortier compris, selon épaisseur du mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-621110-167",
+   "num": "621.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche fixé sur maçonnerie, sans barrière de vapeur, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-168",
+   "num": "621.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche fixé sur maçonnerie, sans barrière de vapeur, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-169",
+   "num": "621.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche fixé sur maçonnerie, sans barrière de vapeur, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-170",
+   "num": "621.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche fixé sur maçonnerie, sans barrière de vapeur, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-171",
+   "num": "621.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche fixé sur maçonnerie, sans barrière de vapeur, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-172",
+   "num": "621.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche fixé sur maçonnerie, sans barrière de vapeur, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621120-173",
+   "num": "621.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche avec barrière de vapeur fixé sur maçonnerie, épaisseur 60 ou 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621130-174",
+   "num": "621.130",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de roche haute densité (env. 60 kg/m³) fixé sur maçonnerie, épaisseur 30 à 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621140-175",
+   "num": "621.140",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre fixé sur maçonnerie, sans barrière de vapeur, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621140-176",
+   "num": "621.140",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre fixé sur maçonnerie, sans barrière de vapeur, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621140-177",
+   "num": "621.140",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre fixé sur maçonnerie, sans barrière de vapeur, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621140-178",
+   "num": "621.140",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre fixé sur maçonnerie, sans barrière de vapeur, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621140-179",
+   "num": "621.140",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre fixé sur maçonnerie, sans barrière de vapeur, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621140-180",
+   "num": "621.140",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre fixé sur maçonnerie, sans barrière de vapeur, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621150-181",
+   "num": "621.150",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre avec barrière de vapeur fixé sur maçonnerie, épaisseur 60 ou 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621160-182",
+   "num": "621.160",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en laine de verre haute densité (env. 60 kg/m³) fixé sur maçonnerie, épaisseur 30 à 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621210-183",
+   "num": "621.210",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en verre cellulaire (type Foamglas) fixé sur maçonnerie, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621210-184",
+   "num": "621.210",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en verre cellulaire (type Foamglas) fixé sur maçonnerie, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621210-185",
+   "num": "621.210",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en verre cellulaire (type Foamglas) fixé sur maçonnerie, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621210-186",
+   "num": "621.210",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en verre cellulaire (type Foamglas) fixé sur maçonnerie, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621310-187",
+   "num": "621.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 20 kg/m³ fixé sur maçonnerie, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621310-188",
+   "num": "621.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 20 kg/m³ fixé sur maçonnerie, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621310-189",
+   "num": "621.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 20 kg/m³ fixé sur maçonnerie, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621310-190",
+   "num": "621.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 20 kg/m³ fixé sur maçonnerie, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621310-191",
+   "num": "621.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 20 kg/m³ fixé sur maçonnerie, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621310-192",
+   "num": "621.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 20 kg/m³ fixé sur maçonnerie, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621320-193",
+   "num": "621.320",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène expansé EPS 30 kg/m³ fixé sur maçonnerie, épaisseur 30 à 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621330-194",
+   "num": "621.330",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé XPS (type Styrofoam) fixé sur maçonnerie, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621330-195",
+   "num": "621.330",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé XPS (type Styrofoam) fixé sur maçonnerie, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621330-196",
+   "num": "621.330",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé XPS (type Styrofoam) fixé sur maçonnerie, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621330-197",
+   "num": "621.330",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé XPS (type Styrofoam) fixé sur maçonnerie, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621330-198",
+   "num": "621.330",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé XPS (type Styrofoam) fixé sur maçonnerie, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621330-199",
+   "num": "621.330",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé XPS (type Styrofoam) fixé sur maçonnerie, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621410-200",
+   "num": "621.410",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau sandwich en laine de bois liée au ciment avec âme en laine de roche, fixé sur maçonnerie, épaisseur 50 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621420-201",
+   "num": "621.420",
+   "cat": "314 Isolations",
+   "sub": "Isolation contre murs et plafonds",
+   "nom": "Panneau sandwich en laine de bois liée au ciment avec âme en polystyrène, fixé sur maçonnerie, épaisseur 50 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622110-202",
+   "num": "622.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène expansé 20 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622110-203",
+   "num": "622.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène expansé 20 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622110-204",
+   "num": "622.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène expansé 20 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622120-205",
+   "num": "622.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622120-206",
+   "num": "622.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622120-207",
+   "num": "622.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622120-208",
+   "num": "622.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622120-209",
+   "num": "622.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622120-210",
+   "num": "622.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation entre doublage et gros œuvre",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ posé entre doublage et gros œuvre au montage, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623110-211",
+   "num": "623.110",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau sandwich en laine de bois liée au ciment avec âme en laine de roche, fixé mécaniquement sous plafond, épaisseur 50 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623120-212",
+   "num": "623.120",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau sandwich en laine de bois liée au ciment avec âme en polystyrène, fixé mécaniquement sous plafond, épaisseur 50 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623210-213",
+   "num": "623.210",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau bicouche en laine de bois liée au ciment et polystyrène, fixé mécaniquement sous plafond, épaisseur 50 à 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623310-214",
+   "num": "623.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ fixé mécaniquement sous plafond, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623310-215",
+   "num": "623.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ fixé mécaniquement sous plafond, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623310-216",
+   "num": "623.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ fixé mécaniquement sous plafond, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623310-217",
+   "num": "623.310",
+   "cat": "314 Isolations",
+   "sub": "Isolation sous plafonds",
+   "nom": "Panneau isolant en polystyrène extrudé 30 kg/m³ fixé mécaniquement sous plafond, épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-624101-218",
+   "num": "624.101",
+   "cat": "314 Isolations",
+   "sub": "Ajustage des isolations",
+   "nom": "Découpe courbe dans panneau isolant",
+   "metre": "none"
+  },
+  {
+   "id": "can314-624102-219",
+   "num": "624.102",
+   "cat": "314 Isolations",
+   "sub": "Ajustage des isolations",
+   "nom": "Découpe angulaire dans panneau isolant",
+   "metre": "none"
+  },
+  {
+   "id": "can314-624201-220",
+   "num": "624.201",
+   "cat": "314 Isolations",
+   "sub": "Ajustage des isolations",
+   "nom": "Coupe oblique de panneau isolant contre parois",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-711100-221",
+   "num": "711.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte blindée d'abri type PB 1 (0,80×1,85 m), mur 200 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711100-222",
+   "num": "711.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte blindée d'abri type PB 2 (1,00×1,85 m), mur 200 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711100-223",
+   "num": "711.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte blindée d'abri type PB 3 (1,40×2,20 m), mur 200 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711100-224",
+   "num": "711.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte blindée d'abri type PB 4 (0,60×1,20 m), mur 200 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711300-225",
+   "num": "711.300",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte-pression d'abri type PP 1 (0,80×1,85 m), mur 100 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711300-226",
+   "num": "711.300",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte-pression d'abri type PP 2 (1,00×1,85 m), mur 100 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711300-227",
+   "num": "711.300",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de porte-pression d'abri type PP 3 (1,40×2,20 m), mur 100 mm, remplissage au béton et façon de seuil compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-711400-228",
+   "num": "711.400",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Pose de volet blindé d'abri type VB (0,60×0,80 m), mur 200 mm, remplissage au béton et façon d'appui compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712101-229",
+   "num": "712.101",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de tuyau en béton circulaire DN 1000 pour voie d'évacuation d'abri",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-712102-230",
+   "num": "712.102",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de tuyau en béton ovoïde DN 800/1200 pour voie d'évacuation d'abri",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-712200-231",
+   "num": "712.200",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Raccord du tuyau de voie d'évacuation au mur extérieur de l'abri",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712300-232",
+   "num": "712.300",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de puits de sortie avec fond en béton, raccord au tuyau d'évacuation compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712401-233",
+   "num": "712.401",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de rehausse en béton DN 1000 pour puits de sortie, hauteur 1,00 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712402-234",
+   "num": "712.402",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de rehausse conique en béton DN 1000/600 pour puits de sortie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712403-235",
+   "num": "712.403",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de couvercle DN 600 (type Von Roll) pour puits de sortie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712501-236",
+   "num": "712.501",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et mise en place de sable pour enrobage des tuyaux d'évacuation d'abri",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-712502-237",
+   "num": "712.502",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et mise en place de grave tout-venant pour enrobage des tuyaux d'évacuation d'abri",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-712503-238",
+   "num": "712.503",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et mise en place de béton CEM I 42,5 pour enrobage des tuyaux d'évacuation d'abri",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-713100-239",
+   "num": "713.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton 0,8×0,6 m, hauteur 1,3 m, grille caillebotis zinguée et fond en galets compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-713100-240",
+   "num": "713.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton 0,8×0,6 m, hauteur 1,5 m, grille caillebotis zinguée et fond en galets compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-713100-241",
+   "num": "713.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton 0,8×0,6 m, hauteur 1,8 m, grille caillebotis zinguée et fond en galets compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-714100-242",
+   "num": "714.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose d'échelle en alu (type MSU), longueur 1,50 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-714200-243",
+   "num": "714.200",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et pose d'échelons en alu coudés (type MSU)",
+   "metre": "none"
+  },
+  {
+   "id": "can314-715100-244",
+   "num": "715.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et mise en place dans le coffrage de conduit d'aération en PVC dur jusqu'à DN 150",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-715200-245",
+   "num": "715.200",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et mise en place dans le coffrage de coude PVC dur jusqu'à DN 150 pour conduit d'aération",
+   "metre": "none"
+  },
+  {
+   "id": "can314-715300-246",
+   "num": "715.300",
+   "cat": "314 Travaux accessoires",
+   "sub": "Abris de protection civile",
+   "nom": "Fourniture et mise en place dans le coffrage de coude avec contre-coude PVC dur jusqu'à DN 150",
+   "metre": "none"
+  },
+  {
+   "id": "can314-724100-247",
+   "num": "724.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Sauts-de-loup, fenêtres de soubassement",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton armé 1,0×0,6 m, grille caillebotis zinguée et fond en galets compris, selon hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "can314-724100-248",
+   "num": "724.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Sauts-de-loup, fenêtres de soubassement",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton armé 1,2×0,6 m, grille caillebotis zinguée et fond en galets compris, selon hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "can314-724100-249",
+   "num": "724.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Sauts-de-loup, fenêtres de soubassement",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton armé 1,4×0,6 m, grille caillebotis zinguée et fond en galets compris, selon hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "can314-724100-250",
+   "num": "724.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Sauts-de-loup, fenêtres de soubassement",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton armé 1,6×0,6 m, grille caillebotis zinguée et fond en galets compris, selon hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "can314-724100-251",
+   "num": "724.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Sauts-de-loup, fenêtres de soubassement",
+   "nom": "Fourniture et pose de saut-de-loup préfabriqué en béton armé 1,8×0,6 m, grille caillebotis zinguée et fond en galets compris, selon hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "can314-731100-252",
+   "num": "731.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Façon de socle en maçonnerie ou béton pour conduit de fumée, coffrage compris, jusqu'à 0,55×0,55 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-732101-253",
+   "num": "732.101",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de support en acier pour conduit de fumée (type Schiedel)",
+   "metre": "none"
+  },
+  {
+   "id": "can314-732201-254",
+   "num": "732.201",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de raccord conique pour conduit de fumée (type Schiedel)",
+   "metre": "none"
+  },
+  {
+   "id": "can314-732301-255",
+   "num": "732.301",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de boisseau de départ pour conduit de fumée (type Schiedel)",
+   "metre": "none"
+  },
+  {
+   "id": "can314-733110-256",
+   "num": "733.110",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux à triple paroi, Ø intérieur jusqu'à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-733110-257",
+   "num": "733.110",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux à triple paroi, Ø intérieur 160 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-733110-258",
+   "num": "733.110",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux à triple paroi, Ø intérieur 180 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-733110-259",
+   "num": "733.110",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux à triple paroi, Ø intérieur 200 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-733210-260",
+   "num": "733.210",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux alvéolaires (type Isolit), Ø intérieur 200 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-733210-261",
+   "num": "733.210",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux alvéolaires (type Isolit), Ø intérieur 250 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-733210-262",
+   "num": "733.210",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de conduit de fumée simple en boisseaux alvéolaires (type Isolit), Ø intérieur 300 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-734100-263",
+   "num": "734.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de prise d'air pour conduit avec aération (type Schiedel)",
+   "metre": "none"
+  },
+  {
+   "id": "can314-734200-264",
+   "num": "734.200",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de raccord de traînasse (tuyau de fumée) incliné 30 ou 45°, selon diamètre du conduit",
+   "metre": "none"
+  },
+  {
+   "id": "can314-734300-265",
+   "num": "734.300",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de clapet d'explosion combiné avec porte de ramonage et régulateur de tirage, selon diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "can314-734320-266",
+   "num": "734.320",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de cadre de recouvrement pour doublage de conduit de fumée",
+   "metre": "none"
+  },
+  {
+   "id": "can314-734410-267",
+   "num": "734.410",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de porte de ramonage étanche aux gaz, selon diamètre du conduit",
+   "metre": "none"
+  },
+  {
+   "id": "can314-734441-268",
+   "num": "734.441",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de porte de ramonage avec cadre en applique sur doublage, exécution zinc",
+   "metre": "none"
+  },
+  {
+   "id": "can314-735100-269",
+   "num": "735.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Fourniture et pose de dallette de couronnement avec manchon de dilatation inox pour souche de conduit, selon diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "can314-736100-270",
+   "num": "736.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Remplissage d'enchevêtrure au béton autour de conduit de fumée, couche de séparation comprise",
+   "metre": "none"
+  },
+  {
+   "id": "can314-736110-271",
+   "num": "736.110",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Enchevêtrure au béton horizontale ou inclinée jusqu'à 20°, coffrage de sous-face compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-736120-272",
+   "num": "736.120",
+   "cat": "314 Travaux accessoires",
+   "sub": "Conduits de fumée",
+   "nom": "Enchevêtrure au béton inclinée de plus de 20°, coffrage de sous-face et contre-coffrage compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-741100-273",
+   "num": "741.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Locaux réservoirs (citernes)",
+   "nom": "Mise en place et enlèvement d'une toiture provisoire sur local réservoir (citerne), selon surface du local",
+   "metre": "none"
+  },
+  {
+   "id": "can314-744100-274",
+   "num": "744.100",
+   "cat": "314 Travaux accessoires",
+   "sub": "Locaux réservoirs (citernes)",
+   "nom": "Protection provisoire des réservoirs par feuille de plastique, mise en place et enlèvement",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-811101-275",
+   "num": "811.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Réglage et compactage du fond de fouille, sans revêtement (sol en terre battue)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-811102-276",
+   "num": "811.102",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Réglage et compactage du fond de fouille destiné à recevoir une couche de gravier",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-812100-277",
+   "num": "812.100",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Dallage en béton sur couche de gravier roulé ou concassé, grain 32 à 50 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-812200-278",
+   "num": "812.200",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Coffrage type 1 pour rives et joints de dallage, hauteur jusqu'à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-812301-279",
+   "num": "812.301",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Fourniture et pose de treillis d'armature K 71 pour dallage, coupe et pliage compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-812411-280",
+   "num": "812.411",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Dallage en béton B 25/15 CEM I 42,5 200 kg/m³, horizontal ou en pente jusqu'à 3 %, épaisseur jusqu'à 100 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-812412-281",
+   "num": "812.412",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Dallage en béton B 25/15 CEM I 42,5 200 kg/m³, horizontal ou en pente jusqu'à 3 %, épaisseur 110 à 150 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-814101-282",
+   "num": "814.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Couche de gravier roulé ou gravillon 5 à 10 mm sur sol en terre battue",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-815101-283",
+   "num": "815.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Nettoyage au balai ou au jet d'eau du support en béton avant béton de recharge",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-815201-284",
+   "num": "815.201",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Coffrage type 1 pour rives et joints de béton de recharge, hauteur jusqu'à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-815311-285",
+   "num": "815.311",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Béton de recharge B 25/15 mis en place à la règle, horizontal ou en pente jusqu'à 3 %, épaisseur jusqu'à 100 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-815312-286",
+   "num": "815.312",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Fonds de fouille, dallages",
+   "nom": "Béton de recharge B 25/15 mis en place à la règle, horizontal ou en pente jusqu'à 3 %, épaisseur 110 à 150 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-813111-287",
+   "num": "813.111",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Chape en mortier de ciment dans caves, garages individuels, locaux réservoirs, épaisseur jusqu'à 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-813121-288",
+   "num": "813.121",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Chape en mortier de ciment sur paliers d'escaliers, épaisseur jusqu'à 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-813131-289",
+   "num": "813.131",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Chape en mortier de ciment sur marches d'escaliers avec nez arrondi, giron jusqu'à 400 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-813141-290",
+   "num": "813.141",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Chape en mortier de ciment sur balcons et terrasses, épaisseur jusqu'à 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-813151-291",
+   "num": "813.151",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Chape en mortier de ciment dans gaines ou similaires, épaisseur jusqu'à 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-813201-292",
+   "num": "813.201",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Ribbage de tête de dalle avec arête supérieure arrondie, hauteur de tête jusqu'à 300 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-813202-293",
+   "num": "813.202",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Ribbage de tête de dalle avec arête supérieure arrondie, hauteur de tête 310 à 500 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-813311-294",
+   "num": "813.311",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Supplément sur chape pour pente à un versant, jusqu'à 3 %",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-813321-295",
+   "num": "813.321",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Chapes",
+   "nom": "Supplément sur chape pour pente à plusieurs versants, jusqu'à 3 %",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-821101-296",
+   "num": "821.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Façon de gorge en mortier de ciment, rayon jusqu'à 100 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-821201-297",
+   "num": "821.201",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Façon de seuil rapporté en mortier de ciment, 2 arêtes arrondies et coffrage compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-821202-298",
+   "num": "821.202",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Façon de seuil coulé entre cornières (posées par d'autres) en mortier de ciment",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-821301-299",
+   "num": "821.301",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Seuil de balcon en béton et mortier de ciment, coffrage et forme de pente compris, hauteur jusqu'à 100 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-821302-300",
+   "num": "821.302",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Seuil de balcon en béton et mortier de ciment, coffrage et forme de pente compris, hauteur 110 à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-821401-301",
+   "num": "821.401",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Seuil de garage en mortier de ciment avec forme de pente, largeur jusqu'à 300 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-822101-302",
+   "num": "822.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Glacis de tablette de fenêtre en mortier de ciment, arête chanfreinée et forme de pente comprises",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-822102-303",
+   "num": "822.102",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Glacis de tablette de fenêtre en mortier de ciment avec gorge pour eaux de condensation",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-822211-304",
+   "num": "822.211",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Glacis de couronnement de mur en mortier de ciment, arêtes chanfreinées, largeur jusqu'à 300 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-822212-305",
+   "num": "822.212",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Glacis de couronnement de mur en mortier de ciment, arêtes chanfreinées, largeur 310 à 500 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-823101-306",
+   "num": "823.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Gorges, seuils, tablettes",
+   "nom": "Crépissage de surface d'appui de feuillure de baie, largeur jusqu'à 150 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-832001-307",
+   "num": "832.001",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Pose d'éléments divers",
+   "nom": "Fourniture et répartition aux étages du mortier pour remplissage des huisseries métalliques",
+   "metre": "none"
+  },
+  {
+   "id": "can314-832002-308",
+   "num": "832.002",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Pose d'éléments divers",
+   "nom": "Mise en place d'huisserie métallique et remplissage au mortier, fourniture non comprise",
+   "metre": "none"
+  },
+  {
+   "id": "can314-834101-309",
+   "num": "834.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Pose d'éléments divers",
+   "nom": "Fourniture, pose et scellement de fourreau dans réservation, Ø jusqu'à 300 mm, longueur jusqu'à 200 mm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-834102-310",
+   "num": "834.102",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Pose d'éléments divers",
+   "nom": "Fourniture, pose et scellement de fourreau dans réservation, Ø jusqu'à 300 mm, longueur 210 à 350 mm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-841101-311",
+   "num": "841.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Exécution de socle de baignoire, couche de séparation comprise",
+   "metre": "none"
+  },
+  {
+   "id": "can314-841211-312",
+   "num": "841.211",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Tablier de baignoire en maçonnerie, face droite, longueur jusqu'à 1,0 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-841212-313",
+   "num": "841.212",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Tablier de baignoire en maçonnerie, face droite, longueur supérieure à 1,0 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-841301-314",
+   "num": "841.301",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Murage de bac de douche, calage du bac compris, selon nombre de faces",
+   "metre": "none"
+  },
+  {
+   "id": "can314-843111-315",
+   "num": "843.111",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Socle en béton, surface jusqu'à 1,0 m², hauteur jusqu'à 150 mm, ribbage et coffrage de rive compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-843112-316",
+   "num": "843.112",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Socle en béton, surface jusqu'à 1,0 m², hauteur 160 à 300 mm, ribbage et coffrage de rive compris",
+   "metre": "none"
+  },
+  {
+   "id": "can314-843121-317",
+   "num": "843.121",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Socle en béton, surface supérieure à 1,0 m², hauteur jusqu'à 150 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-843122-318",
+   "num": "843.122",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Socle en béton, surface supérieure à 1,0 m², hauteur 160 à 300 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-843210-319",
+   "num": "843.210",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Isolation phonique et antivibrations en liège comprimé 10 mm sous socle",
+   "metre": "none"
+  },
+  {
+   "id": "can314-844101-320",
+   "num": "844.101",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Habillages, socles, marches",
+   "nom": "Marche en béton de section orthogonale, hauteur jusqu'à 200 mm, giron jusqu'à 300 mm, coffrage et baguette compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-862100-321",
+   "num": "862.100",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Obturation de percement à travers dalle autour d'éléments traversants, adaptation du coffrage comprise, selon surface",
+   "metre": "none"
+  },
+  {
+   "id": "can314-863100-322",
+   "num": "863.100",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Obturation de percement à travers mur par bétonnage autour d'éléments traversants, selon surface",
+   "metre": "none"
+  },
+  {
+   "id": "can314-863200-323",
+   "num": "863.200",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Obturation de percement à travers mur en maçonnerie autour d'éléments traversants, selon surface",
+   "metre": "none"
+  },
+  {
+   "id": "can314-864100-324",
+   "num": "864.100",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Obturation de saignée dans maçonnerie par bétonnage, coffrage compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-864200-325",
+   "num": "864.200",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Obturation de saignée dans maçonnerie en maçonnerie",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-864401-326",
+   "num": "864.401",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Garnissage par jet de mortier de saignées pour conduits électriques, sur feuille de matière synthétique, affleurement compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-865100-327",
+   "num": "865.100",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Rhabillage au mortier de percement dans maçonnerie restant apparente, selon surface",
+   "metre": "none"
+  },
+  {
+   "id": "can314-865200-328",
+   "num": "865.200",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Rhabillage au mortier de percement dans dalle, selon nombre de surfaces apparentes",
+   "metre": "none"
+  },
+  {
+   "id": "can314-865301-329",
+   "num": "865.301",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Rhabillage au mortier de saignée, largeur jusqu'à 100 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-865302-330",
+   "num": "865.302",
+   "cat": "314 Sols, chapes, travaux complémentaires",
+   "sub": "Obturation de percements et saignées",
+   "nom": "Rhabillage au mortier de saignée, largeur 110 à 200 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-911100-331",
+   "num": "911.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place ou déplacement de paroi provisoire en planches calées entre sol et plafond, hauteur jusqu'à 4,0 m",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-911200-332",
+   "num": "911.200",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place ou déplacement de paroi provisoire étanche à la poussière calée entre sol et plafond, hauteur jusqu'à 4,0 m",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-911300-333",
+   "num": "911.300",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place ou déplacement de paroi provisoire en planches posée sur le sol, hauteur jusqu'à 4,0 m",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-912100-334",
+   "num": "912.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Fermeture provisoire de baie en planches, selon surface d'ouverture",
+   "metre": "none"
+  },
+  {
+   "id": "can314-912200-335",
+   "num": "912.200",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Fermeture provisoire de baie avec feuille de plastique sur châssis de lattes, selon surface d'ouverture",
+   "metre": "none"
+  },
+  {
+   "id": "can314-913101-336",
+   "num": "913.101",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de porte intérieure provisoire verrouillable, ouverture jusqu'à 2,0 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-913201-337",
+   "num": "913.201",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de porte extérieure provisoire verrouillable, ouverture jusqu'à 2,0 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-913301-338",
+   "num": "913.301",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de fermeture extérieure provisoire de bâtiment avec porte verrouillable, ouverture jusqu'à 8,0 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-914101-339",
+   "num": "914.101",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de garde-corps provisoire pour escalier droit",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-914102-340",
+   "num": "914.102",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de garde-corps provisoire pour escalier tournant",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-914201-341",
+   "num": "914.201",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de garde-corps provisoire en bord de trémie, bord droit",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-914202-342",
+   "num": "914.202",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de garde-corps provisoire en bord de trémie, bord courbe",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-914301-343",
+   "num": "914.301",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de garde-corps provisoire en bord de dalle, bord droit",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-914302-344",
+   "num": "914.302",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Fermetures provisoires",
+   "nom": "Mise en place de garde-corps provisoire en bord de dalle, bord courbe",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-931-345",
+   "num": "931",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des sols par papier de protection collé, enlèvement et évacuation en fin de travaux compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-931-346",
+   "num": "931",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des sols par feuille de plastique, enlèvement et évacuation en fin de travaux compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-931-347",
+   "num": "931",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des sols par feuille de plastique collée, enlèvement et évacuation en fin de travaux compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-931-348",
+   "num": "931",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des sols par panneaux durs en fibre de bois posés libres, enlèvement et évacuation en fin de travaux compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-931-349",
+   "num": "931",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des sols par panneaux durs en fibre de bois avec joints recouverts de ruban adhésif, enlèvement et évacuation en fin de travaux compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-931-350",
+   "num": "931",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des sols par plateaux ou planches de coffrage sur feuille synthétique, enlèvement et évacuation en fin de travaux compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-932100-351",
+   "num": "932.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des parois par papier de protection collé, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-932200-352",
+   "num": "932.200",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des parois par feuille de plastique collée, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-932300-353",
+   "num": "932.300",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des parois par panneaux durs en fibre de bois sur ossature de lattes, enlèvement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-932400-354",
+   "num": "932.400",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection des parois par panneaux durs en fibre de bois sur lattes, joints recouverts de ruban adhésif, enlèvement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-933101-355",
+   "num": "933.101",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection de marches d'escalier par planches sur feuille synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-933201-356",
+   "num": "933.201",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection de tablettes extérieures de fenêtres par planches",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-933301-357",
+   "num": "933.301",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Protection des sols et parois",
+   "nom": "Protection d'encadrements de fenêtres par planches",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-941101-358",
+   "num": "941.101",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage par chevalets avec platelage jointif, installation ou déplacement, hauteur 0,70 à 1,20 m",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-941102-359",
+   "num": "941.102",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage par chevalets avec platelage jointif, installation ou déplacement, hauteur 1,21 à 2,00 m",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-942100-360",
+   "num": "942.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage à l'intérieur de gaine sur douilles d'ancrage, installation ou déplacement, selon section de la gaine",
+   "metre": "none"
+  },
+  {
+   "id": "can314-943001-361",
+   "num": "943.001",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage autour de souche de cheminée, installation ou déplacement, base d'appui",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-944100-362",
+   "num": "944.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage roulant avec garde-corps et accès, installation ou déplacement, hauteur jusqu'à 2,0 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-944100-363",
+   "num": "944.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage roulant avec garde-corps et accès, installation ou déplacement, hauteur 2,1 à 4,0 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-944100-364",
+   "num": "944.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage roulant avec garde-corps et accès, installation ou déplacement, hauteur 4,1 à 6,0 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-944100-365",
+   "num": "944.100",
+   "cat": "314 Installations provisoires, protections",
+   "sub": "Échafaudages, ponts de travail",
+   "nom": "Échafaudage roulant avec garde-corps et accès, installation ou déplacement, hauteur 6,1 à 8,0 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-121001-366",
+   "num": "121.001",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection des sols par feuille de plastique collée, avant crépissage",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121002-367",
+   "num": "121.002",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection des sols par panneaux durs en fibre de bois posés sans fixation, joints collés au ruban adhésif",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121003-368",
+   "num": "121.003",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection des sols par planches d'échafaudage posées sans fixation",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-122001-369",
+   "num": "122.001",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection des parois par feuille de plastique collée, avant crépissage",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-123001-370",
+   "num": "123.001",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection de fenêtres, portes et ouvertures par feuille de plastique tendue sur châssis de lattes",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-124101-371",
+   "num": "124.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection d'appuis de fenêtres par feuille de plastique ou papier fort et planches, largeur jusqu'à 30 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-125111-372",
+   "num": "125.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection d'escalier droit par feuille de plastique ou papier fort et planches",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-125121-373",
+   "num": "125.121",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Protections",
+   "nom": "Protection d'escalier tournant par feuille de plastique ou papier fort et planches",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-151111-374",
+   "num": "151.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement intégral d'ancien crépi facile à enlever sur maçonnerie mixte ou moellons, nettoyage au balai, évacuation des gravats",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151112-375",
+   "num": "151.112",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement intégral d'ancien crépi difficile à enlever sur maçonnerie mixte ou moellons, évacuation des gravats",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151121-376",
+   "num": "151.121",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement intégral d'ancien crépi facile à enlever sur béton ou briques, évacuation des gravats",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151122-377",
+   "num": "151.122",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement intégral d'ancien crépi difficile à enlever sur béton ou briques, évacuation des gravats",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151131-378",
+   "num": "151.131",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement d'ancien crépi facile sur maçonnerie de remplissage (colombages)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151132-379",
+   "num": "151.132",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement d'ancien crépi difficile sur maçonnerie de remplissage (colombages)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151210-380",
+   "num": "151.210",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement de couche de finition minérale uniquement, selon grain",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151220-381",
+   "num": "151.220",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Enlèvement d'enduit synthétique ou crépi au silicate, selon grain",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-151231-382",
+   "num": "151.231",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Grattage des aspérités de couches de finition rugueuses",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-153101-383",
+   "num": "153.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Nettoyage du support de façade à l'eau froide à haute pression, protections comprises",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-153102-384",
+   "num": "153.102",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Nettoyage du support de façade à l'eau chaude à haute pression, protections comprises",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-153103-385",
+   "num": "153.103",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enlèvement d'anciens crépis, nettoyage",
+   "nom": "Nettoyage du support à la brosse et rinçage à l'eau",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-154111-386",
+   "num": "154.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Réparations, obturation de saignées",
+   "nom": "Réparation de fissure : fraisage jusqu'à 10 mm, dépoussiérage, couche d'apprêt et rebouchage au mortier spécial",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-154211-387",
+   "num": "154.211",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Réparations, obturation de saignées",
+   "nom": "Obturation de saignée pour conduites, section jusqu'à 5×5 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-154212-388",
+   "num": "154.212",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Réparations, obturation de saignées",
+   "nom": "Obturation de saignée pour conduites, section de 5×5 à 10×5 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211110-389",
+   "num": "211.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature en bandes sur saignées et évidements : treillis en fibre de verre résistant aux alcalis, marouflé ou collé, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211120-390",
+   "num": "211.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature en bandes : treillis zingué (rabitz) fixé mécaniquement, enrobage au mortier de ciment compris, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211130-391",
+   "num": "211.130",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature en bandes : treillis céramique fixé mécaniquement, enrobage au mortier bâtard compris, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211210-392",
+   "num": "211.210",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur éléments en bois ou métal : treillis zingué (rabitz) sur carton bitumé, enrobage au mortier de ciment compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211220-393",
+   "num": "211.220",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur éléments en bois ou métal : treillis céramique sur carton bitumé, enrobage au mortier bâtard compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-211311-394",
+   "num": "211.311",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Bande de dilatation autocollante et tissu d'armature marouflé sur linteau, largeur jusqu'à 30 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-212110-395",
+   "num": "212.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur ouverture murée : treillis en fibre de verre marouflé ou collé, selon surface",
+   "metre": "none"
+  },
+  {
+   "id": "can314-213101-396",
+   "num": "213.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur toute la surface : treillis en fibre de verre noyé dans la sous-couche, sur béton ou briques/agglomérés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-213201-397",
+   "num": "213.201",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur toute la surface : treillis zingué (rabitz) fixé mécaniquement, enrobage au mortier de ciment, sur béton ou briques",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-213202-398",
+   "num": "213.202",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur toute la surface : treillis zingué (rabitz) sur panneau de particules, liège ou laine de bois",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-213301-399",
+   "num": "213.301",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Armatures, supports de crépi",
+   "nom": "Armature sur toute la surface : treillis céramique fixé mécaniquement, enrobage au mortier bâtard, sur maçonnerie mixte",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-231110-400",
+   "num": "231.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Profilés",
+   "nom": "Pose de profilé d'arête en tôle zinguée ou plastifiée avant crépissage, sur béton ou briques, selon épaisseur de couche",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-231120-401",
+   "num": "231.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Profilés",
+   "nom": "Pose de profilé d'arête avant crépissage sur maçonnerie mixte ou moellons, selon épaisseur de couche",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-232110-402",
+   "num": "232.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Profilés",
+   "nom": "Pose de profilé d'arête pour crépi calorifuge, sur béton ou briques, épaisseur 40 à 80 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-232120-403",
+   "num": "232.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Profilés",
+   "nom": "Pose de profilé d'arête pour crépi calorifuge, sur maçonnerie mixte ou moellons, épaisseur 40 à 80 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-235111-404",
+   "num": "235.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Profilés",
+   "nom": "Pose de profilé de joint de dilatation et de retrait avant crépissage, joint avec profilé d'arrêt d'un côté",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-235112-405",
+   "num": "235.112",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Profilés",
+   "nom": "Pose de profilé de joint de dilatation et de retrait avant crépissage, des deux côtés",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-241111-406",
+   "num": "241.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier de ciment (gobetis) sur maçonnerie en briques de terre cuite ou silico-calcaires",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241112-407",
+   "num": "241.112",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier de ciment (gobetis) sur béton brut ou maçonnerie d'agglomérés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241113-408",
+   "num": "241.113",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier de ciment (gobetis) sur maçonnerie mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241121-409",
+   "num": "241.121",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier de ciment sur maçonnerie de remplissage (colombages)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241211-410",
+   "num": "241.211",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier de ciment avec additif d'accrochage sur surface de béton lisse",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241311-411",
+   "num": "241.311",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier bâtard avec additif d'accrochage sur maçonnerie mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241312-412",
+   "num": "241.312",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier bâtard avec additif d'accrochage sur pierre ponce ou tuf",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-241321-413",
+   "num": "241.321",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Jet de mortier bâtard sur maçonnerie de remplissage (colombages)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-242111-414",
+   "num": "242.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Couche d'accrochage à liant synthétique appliquée à la spatule dentelée sur béton ou support lisse",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-251101-415",
+   "num": "251.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Couche d'apprêt : fond pénétrant diluable à l'eau, une passe",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-251102-416",
+   "num": "251.102",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Couche d'apprêt : fond pénétrant contenant du solvant, une passe",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-251103-417",
+   "num": "251.103",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Couche d'apprêt : fond pénétrant contenant du solvant, deux passes",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-251104-418",
+   "num": "251.104",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Couche d'apprêt au silicate, une passe",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-252101-419",
+   "num": "252.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Fond isolant entre support et crépi (protection contre décolorations)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-253101-420",
+   "num": "253.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Couches d'accrochage, préparation",
+   "nom": "Couche d'accrochage à liant synthétique sur peinture résistante nettoyée, plaques fibres-ciment ou ragréage",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-261111-421",
+   "num": "261.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Ragréages",
+   "nom": "Ragréage au ciment sur béton, sur toute la surface, pour couche de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-261112-422",
+   "num": "261.112",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Ragréages",
+   "nom": "Ragréage au ciment sur sous-couche ou crépi ribbé, grain jusqu'à 3 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-261131-423",
+   "num": "261.131",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Ragréages",
+   "nom": "Ragréage au ciment de plafonds, horizontaux ou en pente jusqu'à 25 %",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-261211-424",
+   "num": "261.211",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Ragréages",
+   "nom": "Ragréage à liant synthétique sur béton",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-261212-425",
+   "num": "261.212",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Ragréages",
+   "nom": "Ragréage à liant synthétique sur sous-couche ou crépi ribbé",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-261231-426",
+   "num": "261.231",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Ragréages",
+   "nom": "Ragréage à liant synthétique de plafonds en béton",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311100-427",
+   "num": "311.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur maçonnerie de briques terre cuite ou silico-calcaires, épaisseur 15 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311120-428",
+   "num": "311.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311200-429",
+   "num": "311.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur béton ou maçonnerie de briques/agglomérés, épaisseur 15 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311300-430",
+   "num": "311.300",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur maçonnerie mixte ou moellons, épaisseur jusqu'à 25 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311820-431",
+   "num": "311.820",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Supplément pour surépaisseur de sous-couche (jusqu'à 5, 6 à 10 ou 11 à 15 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-312110-432",
+   "num": "312.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur embrasures, sous-faces de linteaux, têtes de mur, arêtes comprises, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-312200-433",
+   "num": "312.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur embrasures et têtes de mur en maçonnerie mixte ou moellons, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-313110-434",
+   "num": "313.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur pilier à 4 faces et 4 arêtes, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-313120-435",
+   "num": "313.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur pilastre à 3 faces, 2 arêtes et 2 raccords, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-313130-436",
+   "num": "313.130",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur colonne, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-321100-437",
+   "num": "321.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche avec granulat léger sur béton cellulaire ou maçonnerie de briques légères, épaisseur 15 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-321120-438",
+   "num": "321.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche avec granulat léger sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-322100-439",
+   "num": "322.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche avec granulat léger sur embrasures, sous-faces de linteaux et têtes de mur, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-331110-440",
+   "num": "331.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Crépi de soubassement exposé aux éclaboussures, sous-couche au ciment sur béton ou briques, pour couche de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-331112-441",
+   "num": "331.112",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Crépi de soubassement monocouche ribbé à peindre, sur béton ou briques",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-331113-442",
+   "num": "331.113",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Crépi de soubassement monocouche lissé à peindre, sur béton ou briques",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-331120-443",
+   "num": "331.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Crépi de soubassement sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-331200-444",
+   "num": "331.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Crépi de soubassement exposé aux éclaboussures sur maçonnerie mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-341100-445",
+   "num": "341.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur maçonnerie de remplissage (colombage) en briques de terre cuite, selon surface de remplissage",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-341200-446",
+   "num": "341.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur maçonnerie de remplissage (colombage) mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-352100-447",
+   "num": "352.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Pose de baguettes de réservation pour faux joints (imitation pierres de taille)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-352110-448",
+   "num": "352.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Traçage du calepin des faux joints avant pose des baguettes",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-352120-449",
+   "num": "352.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Fixation des baguettes de faux joints, enlèvement après la sous-couche compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-352200-450",
+   "num": "352.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Sous-couche au mortier de chaux ou bâtard sur première sous-couche avec faux joints, raccord aux baguettes compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-352230-451",
+   "num": "352.230",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Sous-couches",
+   "nom": "Finition des faux joints au mortier fin, baguette trapézoïdale jusqu'à 40/30×30 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-422101-452",
+   "num": "422.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Jet de mortier de ciment ou bâtard avant enduit poreux, sur maçonnerie de briques ou agglomérés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-422102-453",
+   "num": "422.102",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Jet de mortier de ciment ou bâtard avant enduit poreux, sur maçonnerie mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-422201-454",
+   "num": "422.201",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Ragréage avec enduit poreux sur support à forte teneur en sel, maçonnerie de briques ou agglomérés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-422202-455",
+   "num": "422.202",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Ragréage avec enduit poreux sur support à forte teneur en sel, maçonnerie mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-422810-456",
+   "num": "422.810",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Supplément pour surépaisseur d'enduit poreux (jusqu'à 5, 6 à 10 ou 11 à 15 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-423101-457",
+   "num": "423.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Enduit d'assainissement sur parois et allèges, maçonnerie de briques ou enduit poreux, épaisseur 15 à 20 mm, pour couche de finition minérale",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-423102-458",
+   "num": "423.102",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Enduit d'assainissement sur parois et allèges, surface ribbée",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-424110-459",
+   "num": "424.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Enduit d'assainissement sur embrasures, têtes de mur et trumeaux, pour couche de finition minérale, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-424120-460",
+   "num": "424.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Enduit d'assainissement sur embrasures et têtes de mur, surface ribbée, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-433111-461",
+   "num": "433.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Crépi de restauration monocouche au mortier de chaux éteinte en fosse, traité à la truelle, badigeon compris, sur maçonnerie mixte ou moellons",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433112-462",
+   "num": "433.112",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits d'assainissement",
+   "nom": "Crépi de restauration monocouche au mortier de chaux éteinte, sur maçonnerie de pierre ponce ou tuf",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511110-463",
+   "num": "511.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé au mortier de chaux, à peindre, sur parois, grain jusqu'à 2,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511110-464",
+   "num": "511.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé au mortier de chaux, à peindre, sur parois, grain 2,1 à 3,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511110-465",
+   "num": "511.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé au mortier de chaux, à peindre, sur parois, grain 3,1 à 5,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511120-466",
+   "num": "511.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé au mortier de chaux, à peindre, sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511210-467",
+   "num": "511.210",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi ribbé au mortier de parement blanc, teinte naturelle, sur parois, grain jusqu'à 2,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511210-468",
+   "num": "511.210",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi ribbé au mortier de parement blanc, teinte naturelle, sur parois, grain 2,1 à 3,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511210-469",
+   "num": "511.210",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi ribbé au mortier de parement blanc, teinte naturelle, sur parois, grain 3,1 à 5,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511220-470",
+   "num": "511.220",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi ribbé au mortier de parement blanc sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511310-471",
+   "num": "511.310",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi jeté-truellé au mortier de chaux, à peindre, sur parois, grain 4,0 à 6,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511310-472",
+   "num": "511.310",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi jeté-truellé au mortier de chaux, à peindre, sur parois, grain 6,1 à 8,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511310-473",
+   "num": "511.310",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi jeté-truellé au mortier de chaux, à peindre, sur parois, grain 8,1 à 10,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511320-474",
+   "num": "511.320",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi jeté-truellé au mortier de chaux sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511410-475",
+   "num": "511.410",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi rustique régulier au mortier de chaux, à peindre, sur parois",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511420-476",
+   "num": "511.420",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi rustique régulier au mortier de chaux sur parapets, allèges et petites surfaces",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511510-477",
+   "num": "511.510",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi rustique régulier au mortier de parement blanc, teinte naturelle, sur parois",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511520-478",
+   "num": "511.520",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi rustique régulier au mortier de parement blanc sur parapets, allèges et petites surfaces",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511610-479",
+   "num": "511.610",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi gratté au mortier de parement blanc, teinte naturelle, sur parois, grain 4,0 à 5,0 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-511620-480",
+   "num": "511.620",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi gratté au mortier de parement blanc sur parapets, allèges et petites surfaces",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-512110-481",
+   "num": "512.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur embrasures, sous-faces de linteaux, têtes de mur et trumeaux, arêtes et raccords compris, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-513110-482",
+   "num": "513.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur pilier à 4 faces et 4 arêtes, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-513120-483",
+   "num": "513.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur pilastre à 3 faces, 2 arêtes et 2 raccords, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-514100-484",
+   "num": "514.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur plafonds, sous-faces de balcons et similaires",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-515110-485",
+   "num": "515.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur rive de dalle, arêtes et raccords compris, selon hauteur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-515120-486",
+   "num": "515.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur bande en bord de plafond, largeur jusqu'à 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-516110-487",
+   "num": "516.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur poutre à 3 faces, 2 arêtes et 2 raccords, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-516120-488",
+   "num": "516.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Crépis de finition minéraux",
+   "nom": "Crépi minéral ribbé sur poutre à 2 faces, 1 arête et 2 raccords, selon développement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-531110-489",
+   "num": "531.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé blanc, teinte naturelle, sur parois, grain jusqu'à 2,0 mm, couche d'apprêt comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531110-490",
+   "num": "531.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé blanc, teinte naturelle, sur parois, grain 2,1 à 3,0 mm, couche d'apprêt comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531110-491",
+   "num": "531.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé blanc, teinte naturelle, sur parois, grain 3,1 à 4,0 mm, couche d'apprêt comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531110-492",
+   "num": "531.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé blanc, teinte naturelle, sur parois, grain 4,1 à 5,0 mm, couche d'apprêt comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531120-493",
+   "num": "531.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531210-494",
+   "num": "531.210",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique projeté avec granulat minéral blanc, teinte naturelle, sur parois",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531220-495",
+   "num": "531.220",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique projeté sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531310-496",
+   "num": "531.310",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique rustique régulier blanc, teinte naturelle, sur parois",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531320-497",
+   "num": "531.320",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique rustique régulier sur parapets, allèges et petites surfaces",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-532100-498",
+   "num": "532.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé sur embrasures, sous-faces de linteaux, têtes de mur et trumeaux, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-534100-499",
+   "num": "534.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé sur plafonds, sous-faces de balcons et similaires",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-535110-500",
+   "num": "535.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé sur rive de dalle, hauteur jusqu'à 40 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-535120-501",
+   "num": "535.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition synthétiques",
+   "nom": "Enduit de finition synthétique ribbé sur bande en bord de plafond, largeur jusqu'à 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-541110-502",
+   "num": "541.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition au silicone",
+   "nom": "Enduit de finition au silicone ribbé blanc, teinte naturelle, sur parois, couche de fond comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-541120-503",
+   "num": "541.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition au silicone",
+   "nom": "Enduit de finition au silicone ribbé sur parapets, allèges et petites surfaces jusqu'à 5 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-542100-504",
+   "num": "542.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition au silicone",
+   "nom": "Enduit de finition au silicone ribbé sur embrasures, sous-faces de linteaux et têtes de mur, selon largeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-551101-505",
+   "num": "551.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition au silicone",
+   "nom": "Crépi de mortier de ciment ribbé à peindre, exposé aux éclaboussures, hauteur jusqu'à 100 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-561101-506",
+   "num": "561.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition au silicone",
+   "nom": "Enduit bitumineux en pâte sur surfaces enterrées, hauteur jusqu'à 50 cm, env. 3,0 kg/m²",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-561201-507",
+   "num": "561.201",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Enduits de finition au silicone",
+   "nom": "Enduit bitumineux fluide sur surfaces enterrées, 2 applications, env. 0,5 kg/m²",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611110-508",
+   "num": "611.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Dressage d'arête vive ou arrondie pour sous-couche et couche de finition, sans profilé",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611120-509",
+   "num": "611.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Dressage d'arête chanfreinée pour sous-couche et couche de finition, selon largeur de chanfrein",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-611130-510",
+   "num": "611.130",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Dressage d'angle rentrant ou gorge pour sous-couche et couche de finition",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-612100-511",
+   "num": "612.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Exécution de redent dans soubassement (saillie ou retrait sur le nu de façade), horizontal ou vertical",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-612200-512",
+   "num": "612.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Exécution de redent dans soubassement pour enduit d'assainissement",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-613111-513",
+   "num": "613.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Raccord de crépi à des éléments en bois ou métal (encadrements, huisseries)",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-613120-514",
+   "num": "613.120",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Raccord de crépi à poutres, pannes, conduites, cadres et similaires, selon développement",
+   "metre": "none"
+  },
+  {
+   "id": "can314-621110-515",
+   "num": "621.110",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Joint de séparation (joint suédois) au travers de la sous-couche et de la finition, raccord à parties d'ouvrage",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-621111-516",
+   "num": "621.111",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Joint de séparation (joint suédois) au raccord avec des supports de nature différente",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-622101-517",
+   "num": "622.101",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Joint de dilatation et de retrait dans la sous-couche, dressage de l'arête d'un côté",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-622102-518",
+   "num": "622.102",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Joint de dilatation et de retrait dans la sous-couche, dressage des arêtes des deux côtés",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-622200-519",
+   "num": "622.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Joint d'ombre dans l'épaisseur de la sous-couche, dressage d'une ou des deux arêtes",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-631100-520",
+   "num": "631.100",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Étanchement de joint au mastic silicone blanc ou gris, nettoyage, bourrage et apprêt compris, largeur 15 ou 20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-631200-521",
+   "num": "631.200",
+   "cat": "348 Crépis et enduits de façades",
+   "sub": "Arêtes, raccords et joints de crépi",
+   "nom": "Étanchement de joint au mastic acrylique blanc ou gris, largeur 15 ou 20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-121100-522",
+   "num": "121.100",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des sols par papier de protection collé à recouvrement, 250 g/m², enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121200-523",
+   "num": "121.200",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des sols par feuille de plastique recyclé 0,1 mm à recouvrement, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121300-524",
+   "num": "121.300",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des sols par feuille de plastique collée à recouvrement, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121400-525",
+   "num": "121.400",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des sols par panneaux durs en fibre de bois posés libres, enlèvement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121500-526",
+   "num": "121.500",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des sols par panneaux durs en fibre de bois, joints recouverts de ruban adhésif, enlèvement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-121600-527",
+   "num": "121.600",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des sols par planches ou panneaux de coffrage sur feuille de plastique, enlèvement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-122100-528",
+   "num": "122.100",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des parois avant chape par papier de protection collé, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-122200-529",
+   "num": "122.200",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des parois avant chape par feuille de plastique à recouvrement, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-122300-530",
+   "num": "122.300",
+   "cat": "661 Chapes",
+   "sub": "Protections",
+   "nom": "Protection des parois avant chape par feuille de plastique collée, enlèvement et évacuation compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-212101-531",
+   "num": "212.101",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Réparation du fond avec mortier de ciment CP 200 à 300, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-221110-532",
+   "num": "221.110",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Étanchéité contre l'humidité sur fond horizontal en 2 couches de lés de bitume (V 60 + ALU 80), relevé contre parois compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-221210-533",
+   "num": "221.210",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Étanchéité contre l'humidité sur fond horizontal en 1 couche de lés de bitume VA 4 (double armature), relevé compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-221220-534",
+   "num": "221.220",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Étanchéité contre l'humidité sur fond horizontal en 1 couche de lés de bitume ALU 80 collés en plein",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-221230-535",
+   "num": "221.230",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Étanchéité contre l'humidité sur fond horizontal en 1 couche de lés de bitume GV 3 (voile de verre), recouvrements soudés ou collés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-221311-536",
+   "num": "221.311",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Façon de gorges et d'arêtes pour étanchéité en lés de bitume",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-221321-537",
+   "num": "221.321",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Raccord d'étanchéité aux pénétrations, pourtour jusqu'à 30 cm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-221331-538",
+   "num": "221.331",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Raccord d'étanchéité aux garnitures d'écoulement, Ø jusqu'à 30 cm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-221341-539",
+   "num": "221.341",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Supplément pour pose d'étanchéité sur escaliers",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-222100-540",
+   "num": "222.100",
+   "cat": "661 Chapes",
+   "sub": "Étanchéité à l'humidité ascendante",
+   "nom": "Étanchéité contre l'humidité sur parois en lés de bitume VA 4, imprégnation d'accrochage comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-231100-541",
+   "num": "231.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de verre cellulaire collés au bitume sur béton, épaisseur 30 mm, enduisage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-231100-542",
+   "num": "231.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de verre cellulaire collés au bitume sur béton, épaisseur 40 mm, enduisage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-231100-543",
+   "num": "231.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de verre cellulaire collés au bitume sur béton, épaisseur 50 mm, enduisage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-231100-544",
+   "num": "231.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de verre cellulaire collés au bitume sur béton, épaisseur 60 mm, enduisage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-231311-545",
+   "num": "231.311",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Raccord de panneaux de verre cellulaire aux pénétrations, pourtour jusqu'à 30 cm",
+   "metre": "none"
+  },
+  {
+   "id": "can314-231321-546",
+   "num": "231.321",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Bitume à chaud supplémentaire pour inégalités du fond, sur accord de la direction des travaux",
+   "metre": "none"
+  },
+  {
+   "id": "can314-313110-547",
+   "num": "313.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de polystyrène expansé EPS 20 kg/m³ sous chape, pose libre, sur support plan, épaisseur 10 à 60 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-313120-548",
+   "num": "313.120",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de polystyrène expansé EPS 20 kg/m³ sous chape, sur plancher entre poutres, épaisseur 10 à 60 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-313200-549",
+   "num": "313.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneaux de polystyrène expansé EPS 30 kg/m³ sous chape, pose libre, épaisseur 10 à 60 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-314111-550",
+   "num": "314.111",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneau de répartition des charges en fibre de bois tendre, épaisseur env. 8 mm, pose libre",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-314121-551",
+   "num": "314.121",
+   "cat": "661 Chapes",
+   "sub": "Isolation sous chape",
+   "nom": "Panneau de répartition des charges en fibre de bois dur, épaisseur 3,2 ou 5 mm, pose libre",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311101-552",
+   "num": "311.101",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Pose d'une feuille de protection (papier Kraft) sur poutraison et plancher avant couche d'égalisation à sec",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311102-553",
+   "num": "311.102",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Pose d'une feuille de polyéthylène 0,2 mm sur poutraison et plancher avant couche d'égalisation à sec",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311201-554",
+   "num": "311.201",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Pose d'une feuille de protection (papier Kraft) sur support plan avant couche d'égalisation à sec",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-311202-555",
+   "num": "311.202",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Pose d'une feuille de polyéthylène 0,2 mm sur support plan avant couche d'égalisation à sec",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-312110-556",
+   "num": "312.110",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation à sec en granulat minéral enrobé de bitume, en vrac, sur support plan, épaisseur jusqu'à 100 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-312120-557",
+   "num": "312.120",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation à sec en granulat minéral enrobé de bitume, sur plancher entre poutres",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-312210-558",
+   "num": "312.210",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation à sec en sable séché au four, compacté, sur support plan, épaisseur jusqu'à 100 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-312220-559",
+   "num": "312.220",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation à sec en sable séché au four, sur plancher entre poutres",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-321101-560",
+   "num": "321.101",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Pose d'une feuille de polyéthylène 0,2 mm collée pour protéger le support avant béton léger, relevé contre parois compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-322110-561",
+   "num": "322.110",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation en béton léger de polystyrène CP 300 sur support plan, épaisseur 20 à 100 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-322120-562",
+   "num": "322.120",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation en béton léger de polystyrène sur poutraison et plancher entre poutres",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-322210-563",
+   "num": "322.210",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation en béton d'argile expansée CP 250 sur support plan, épaisseur 20 à 100 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-322220-564",
+   "num": "322.220",
+   "cat": "661 Chapes",
+   "sub": "Couches d'égalisation",
+   "nom": "Couche d'égalisation en béton d'argile expansée sur plancher entre poutres",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-421100-565",
+   "num": "421.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas de granulés de liège non revêtu contre les bruits de chocs, 1 couche, relevé contre parois compris, épaisseur 5 à 10 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-421200-566",
+   "num": "421.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas de granulés de liège contre les bruits de chocs, 2 couches croisées",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-422100-567",
+   "num": "422.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas de laine minérale revêtu de papier Kraft contre les bruits de chocs, 1 couche, épaisseur 10 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-422200-568",
+   "num": "422.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas de laine minérale revêtu de papier Kraft contre les bruits de chocs, 2 couches croisées",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-423100-569",
+   "num": "423.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas de feutre revêtu de plastique contre les bruits de chocs, 1 couche, épaisseur 6 à 9 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-423200-570",
+   "num": "423.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas de feutre revêtu de plastique contre les bruits de chocs, 2 couches croisées",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-424100-571",
+   "num": "424.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas en mousse de polyéthylène PE non revêtu contre les bruits de chocs, 1 couche, épaisseur 5 à 10 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-424200-572",
+   "num": "424.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Matelas en mousse de polyéthylène PE contre les bruits de chocs, 2 couches croisées",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-431110-573",
+   "num": "431.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de roche contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 15 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-431110-574",
+   "num": "431.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de roche contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-431110-575",
+   "num": "431.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de roche contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 25 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-431120-576",
+   "num": "431.120",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de roche contre les bruits de chocs, 2 couches décalées",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-432110-577",
+   "num": "432.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de verre contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 12 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-432110-578",
+   "num": "432.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de verre contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 15 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-432110-579",
+   "num": "432.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de verre contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-432110-580",
+   "num": "432.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de verre contre les bruits de chocs, 1 couche, bandes de rive comprises, épaisseur 25 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-432120-581",
+   "num": "432.120",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de verre contre les bruits de chocs, 2 couches décalées",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-432200-582",
+   "num": "432.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de laine de verre revêtus d'une feuille quadrillée en rouleau contre les bruits de chocs",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433100-583",
+   "num": "433.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de mousse de polystyrène élastifié T/SE contre les bruits de chocs, non revêtus, épaisseur 15 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433100-584",
+   "num": "433.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de mousse de polystyrène élastifié T/SE contre les bruits de chocs, non revêtus, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433100-585",
+   "num": "433.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de mousse de polystyrène élastifié T/SE contre les bruits de chocs, non revêtus, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433300-586",
+   "num": "433.300",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de polystyrène élastifié revêtus de papier Kraft quadrillé pour fixation des tubes de chauffage par le sol",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433400-587",
+   "num": "433.400",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de polystyrène élastifié revêtus de papier Kraft quadrillé, en rouleau",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-433500-588",
+   "num": "433.500",
+   "cat": "661 Chapes",
+   "sub": "Isolation contre les bruits de chocs",
+   "nom": "Panneaux de polystyrène élastifié revêtus de feuille d'aluminium quadrillée et tissu de renfort pour chauffage par le sol",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441100-589",
+   "num": "441.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège non revêtus sous chape, 1 couche, bandes de rive comprises, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441100-590",
+   "num": "441.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège non revêtus sous chape, 1 couche, bandes de rive comprises, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441100-591",
+   "num": "441.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège non revêtus sous chape, 1 couche, bandes de rive comprises, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441100-592",
+   "num": "441.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège non revêtus sous chape, 1 couche, bandes de rive comprises, épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441100-593",
+   "num": "441.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège non revêtus sous chape, 1 couche, bandes de rive comprises, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441100-594",
+   "num": "441.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège non revêtus sous chape, 1 couche, bandes de rive comprises, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-441200-595",
+   "num": "441.200",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de liège sous chape, 2 couches décalées (20+20 à 20+60 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-442100-596",
+   "num": "442.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de laine de roche non revêtus sous chape, 1 couche, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-442100-597",
+   "num": "442.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de laine de roche non revêtus sous chape, 1 couche, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-442100-598",
+   "num": "442.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de laine de roche non revêtus sous chape, 1 couche, épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-443100-599",
+   "num": "443.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de laine de verre non revêtus sous chape, 1 couche, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-443100-600",
+   "num": "443.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de laine de verre non revêtus sous chape, 1 couche, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-443100-601",
+   "num": "443.100",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux de laine de verre non revêtus sous chape, 1 couche, épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-447150-602",
+   "num": "447.150",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polystyrène extrudé XPS sous chape, 1 couche, épaisseur 40 ou 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448110-603",
+   "num": "448.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus de papier Kraft sous chape, 1 couche, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448110-604",
+   "num": "448.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus de papier Kraft sous chape, 1 couche, épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448110-605",
+   "num": "448.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus de papier Kraft sous chape, 1 couche, épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448110-606",
+   "num": "448.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus de papier Kraft sous chape, 1 couche, épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448110-607",
+   "num": "448.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus de papier Kraft sous chape, 1 couche, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448120-608",
+   "num": "448.120",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus d'aluminium sous chape, 1 couche, épaisseur 20 à 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-448210-609",
+   "num": "448.210",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Panneaux en mousse de polyuréthane PUR revêtus de papier Kraft sous chape, 2 couches (20+20 à 20+60 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-471110-610",
+   "num": "471.110",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Isolation combinée bruits de chocs et thermique : laine de verre (12 à 20 mm) + polystyrène expansé EPS (20 à 30 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-471120-611",
+   "num": "471.120",
+   "cat": "661 Chapes",
+   "sub": "Isolation thermique sous chape",
+   "nom": "Isolation combinée bruits de chocs et thermique : laine de roche (15 à 20 mm) + polystyrène expansé EPS (20 à 30 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-512101-612",
+   "num": "512.101",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Réparation du fond avec mortier de ciment CP 200 à 300 avant chape, épaisseur 20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-521110-613",
+   "num": "521.110",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Couche de séparation en papier Kraft, recouvrement min. 10 cm, pose libre",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-521120-614",
+   "num": "521.120",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Couche de séparation en papier Kraft, recouvrements collés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531110-615",
+   "num": "531.110",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Couche de séparation en lés de bitume F3, pose libre, recouvrement min. 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-531120-616",
+   "num": "531.120",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Couche de séparation en lés de bitume F3, recouvrements collés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-541110-617",
+   "num": "541.110",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Couche de séparation en feuille de polyéthylène PE 0,20 mm, pose libre, recouvrement min. 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-541120-618",
+   "num": "541.120",
+   "cat": "661 Chapes",
+   "sub": "Couches de séparation et de glissement",
+   "nom": "Couche de séparation en feuille de polyéthylène PE 0,20 mm, recouvrements collés",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-611110-619",
+   "num": "611.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape flottante en mortier de ciment tirée à la règle et lissée, charge utile 2,0 kN/m², épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-611110-620",
+   "num": "611.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape flottante en mortier de ciment tirée à la règle et lissée, charge utile 2,0 kN/m², épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-611110-621",
+   "num": "611.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape flottante en mortier de ciment tirée à la règle et lissée, charge utile 2,0 kN/m², épaisseur 70 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-611200-622",
+   "num": "611.200",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Supplément pour surépaisseur de chape en mortier de ciment (5 ou 10 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-623",
+   "num": "621.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape flottante en mortier de ciment à prise rapide, prête à recevoir un revêtement après 24 h, épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-624",
+   "num": "621.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape flottante en mortier de ciment à prise rapide, prête à recevoir un revêtement après 24 h, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621110-625",
+   "num": "621.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape flottante en mortier de ciment à prise rapide, prête à recevoir un revêtement après 24 h, épaisseur 70 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-621200-626",
+   "num": "621.200",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Supplément pour surépaisseur de chape à prise rapide (5 ou 10 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622101-627",
+   "num": "622.101",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Supplément pour forme de pente de chape jusqu'à 1 %",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-622201-628",
+   "num": "622.201",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Supplément pour forme de pente de chape à plusieurs versants",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-623101-629",
+   "num": "623.101",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Ressaut dans la chape en cas d'épaisseurs de revêtements différentes, hauteur jusqu'à 40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-631110-630",
+   "num": "631.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite (sulfate de calcium), charge utile 2,0 kN/m², épaisseur 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-631110-631",
+   "num": "631.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite (sulfate de calcium), charge utile 2,0 kN/m², épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-631110-632",
+   "num": "631.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite (sulfate de calcium), charge utile 2,0 kN/m², épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-631200-633",
+   "num": "631.200",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Supplément pour surépaisseur de chape fluide à l'anhydrite (5 ou 10 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-632110-634",
+   "num": "632.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite, charge utile 4,0 kN/m², épaisseur 35 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-632110-635",
+   "num": "632.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite, charge utile 4,0 kN/m², épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-632110-636",
+   "num": "632.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite, charge utile 4,0 kN/m², épaisseur 45 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-632110-637",
+   "num": "632.110",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Chape fluide à l'anhydrite, charge utile 4,0 kN/m², épaisseur 50 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-634101-638",
+   "num": "634.101",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Ressaut dans la chape fluide à l'anhydrite, hauteur jusqu'à 40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-635101-639",
+   "num": "635.101",
+   "cat": "661 Chapes",
+   "sub": "Chapes flottantes",
+   "nom": "Traitement ultérieur de la surface de chape à l'anhydrite : ponçage et nettoyage à sec",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-625111-640",
+   "num": "625.111",
+   "cat": "661 Chapes",
+   "sub": "Joints de chape",
+   "nom": "Joint de dilatation dans la chape avec bande d'isolant pour chape avec chauffage par le sol, épaisseur 10 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-625201-641",
+   "num": "625.201",
+   "cat": "661 Chapes",
+   "sub": "Joints de chape",
+   "nom": "Joint de retrait (zone de rupture) dans la chape, coupe avec fer à joints",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-625321-642",
+   "num": "625.321",
+   "cat": "661 Chapes",
+   "sub": "Joints de chape",
+   "nom": "Jointoyage adhérent des joints de retrait à la colle à 2 composants",
+   "metre": "none"
+  },
+  {
+   "id": "can314-633111-643",
+   "num": "633.111",
+   "cat": "661 Chapes",
+   "sub": "Joints de chape",
+   "nom": "Joint de dilatation dans la chape à l'anhydrite avec bande d'isolant, épaisseur 10 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-633221-644",
+   "num": "633.221",
+   "cat": "661 Chapes",
+   "sub": "Joints de chape",
+   "nom": "Jointoyage adhérent des joints de retrait de chape à l'anhydrite à la colle à 2 composants",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4283-645",
+   "num": "428.3",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Installation d'un container personnel / bureau jusqu'à 20 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4284-646",
+   "num": "428.4",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Déplacement d'un container personnel / bureau jusqu'à 20 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4285-647",
+   "num": "428.5",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Location d'un container personnel / bureau jusqu'à 20 m², par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4283-648",
+   "num": "428.3",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Installation d'un container sanitaire jusqu'à 7,5 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4284-649",
+   "num": "428.4",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Déplacement d'un container sanitaire jusqu'à 7,5 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4285-650",
+   "num": "428.5",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Location d'un container sanitaire jusqu'à 7,5 m², par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4283-651",
+   "num": "428.3",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Installation d'un roulotte personnel / bureau jusqu'à 3,5 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4284-652",
+   "num": "428.4",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Déplacement d'un roulotte personnel / bureau jusqu'à 3,5 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-4285-653",
+   "num": "428.5",
+   "cat": "113 Installation de chantier",
+   "sub": "Locaux de chantier",
+   "nom": "Location d'un roulotte personnel / bureau jusqu'à 3,5 m, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-442321-654",
+   "num": "442.321",
+   "cat": "113 Installation de chantier",
+   "sub": "Entrepôts et ateliers",
+   "nom": "Installation d'une baraque à paroi simple jusqu'à 25 m² (entrepôt)",
+   "metre": "none"
+  },
+  {
+   "id": "can314-442421-655",
+   "num": "442.421",
+   "cat": "113 Installation de chantier",
+   "sub": "Entrepôts et ateliers",
+   "nom": "Déplacement d'une baraque à paroi simple jusqu'à 25 m²",
+   "metre": "none"
+  },
+  {
+   "id": "can314-442521-656",
+   "num": "442.521",
+   "cat": "113 Installation de chantier",
+   "sub": "Entrepôts et ateliers",
+   "nom": "Location d'une baraque à paroi simple jusqu'à 25 m², par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-512323-657",
+   "num": "512.323",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Installation d'une grue à montage rapide sur châssis, 30 mt / 25 m, stationnaire",
+   "metre": "none"
+  },
+  {
+   "id": "can314-512423-658",
+   "num": "512.423",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Déplacement d'une grue à montage rapide, 30 mt / 25 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-512523-659",
+   "num": "512.523",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Location d'une grue à montage rapide, 30 mt / 25 m, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-516311-660",
+   "num": "516.311",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Installation d'un monte-charge pour matériel, charge admissible 0,3 t",
+   "metre": "none"
+  },
+  {
+   "id": "can314-516511-661",
+   "num": "516.511",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Location d'un monte-charge pour matériel 0,3 t, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-532312-662",
+   "num": "532.312",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Installation d'un convoyeur à ruban tracté, largeur jusqu'à 500 mm, longueur 12 m",
+   "metre": "none"
+  },
+  {
+   "id": "can314-532512-663",
+   "num": "532.512",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Location d'un convoyeur à ruban tracté, 500 mm, 12 m, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-563311-664",
+   "num": "563.311",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Installation d'un silo à ciment avec filtre, jusqu'à 25 t",
+   "metre": "none"
+  },
+  {
+   "id": "can314-563511-665",
+   "num": "563.511",
+   "cat": "113 Installation de chantier",
+   "sub": "Levage et transport",
+   "nom": "Location d'un silo à ciment avec filtre, jusqu'à 25 t, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-622312-666",
+   "num": "622.312",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Installation d'une bétonnière à tambour jusqu'à 150 l",
+   "metre": "none"
+  },
+  {
+   "id": "can314-622353-667",
+   "num": "622.353",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Installation d'une centrale à béton avec silo jusqu'à 500/350 l",
+   "metre": "none"
+  },
+  {
+   "id": "can314-622412-668",
+   "num": "622.412",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Déplacement d'une bétonnière à tambour jusqu'à 150 l",
+   "metre": "none"
+  },
+  {
+   "id": "can314-622453-669",
+   "num": "622.453",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Déplacement d'une centrale à béton jusqu'à 500/350 l",
+   "metre": "none"
+  },
+  {
+   "id": "can314-622512-670",
+   "num": "622.512",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Location d'une bétonnière à tambour jusqu'à 150 l, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-622553-671",
+   "num": "622.553",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Location d'une centrale à béton jusqu'à 500/350 l, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712311-672",
+   "num": "712.311",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Installation d'un silo de transbordement du béton, contenance 6 m³",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712411-673",
+   "num": "712.411",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Déplacement d'un silo de transbordement du béton, 6 m³",
+   "metre": "none"
+  },
+  {
+   "id": "can314-712511-674",
+   "num": "712.511",
+   "cat": "113 Installation de chantier",
+   "sub": "Fabrication et mise en œuvre du béton",
+   "nom": "Location d'un silo de transbordement du béton, 6 m³, par mois",
+   "metre": "none"
+  },
+  {
+   "id": "can314-511009-675",
+   "num": "511.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de toiture en tuiles (contre-lattage, lattage, chevrons, voligeage, carton bitumé), tri et chargement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "can314-521009-676",
+   "num": "521.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de plancher, dalle en béton coulée sur place épaisseur 200 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-531009-677",
+   "num": "531.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de mur en béton armé épaisseur 250 mm (enduits et crépis enlevés à part)",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-532286-678",
+   "num": "532.286",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de mur en maçonnerie de béton cellulaire",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-532287-679",
+   "num": "532.287",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de cloison en carreaux de plâtre",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-532288-680",
+   "num": "532.288",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de maçonnerie en ciment et en brique",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-532289-681",
+   "num": "532.289",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de maçonnerie en moellons",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-532889-682",
+   "num": "532.889",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de cloison en béton non armé",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-541009-683",
+   "num": "541.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de piliers, poteaux, escaliers ou parapets, section 400×400 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-551009-684",
+   "num": "551.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de conduit de fumée en boisseaux 400×400 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-561009-685",
+   "num": "561.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de dalles et murs d'abri PC en béton armé épaisseur 350 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-564109-686",
+   "num": "564.109",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de voie d'évacuation d'abri en tuyau béton DN 1000, transport au dépôt du chantier jusqu'à 50 m compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-564209-687",
+   "num": "564.209",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de voie d'évacuation d'abri en tuyau béton DN 1000, longueur jusqu'à 2000 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "can314-571009-688",
+   "num": "571.009",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de dalle de fond en béton armé épaisseur 250 mm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-574209-689",
+   "num": "574.209",
+   "cat": "112 Démolitions",
+   "sub": "Bâtiments : gros œuvre",
+   "nom": "Démolition de radier ou dalle de fond en béton non armé épaisseur 12 cm",
+   "metre": "volume"
+  },
+  {
+   "id": "can314-rgie-690",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Conducteur de travaux, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-691",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Contremaître bâtiment, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-692",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Chef d'équipe, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-693",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Maçon en bricole, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-694",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Maçon, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-695",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Charpentier construction, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-696",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Ferrailleur, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-697",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Grutier, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-698",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Machiniste, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-699",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Ouvrier de la construction, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-rgie-700",
+   "num": "Régie",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Personnel",
+   "nom": "Apprenti, heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "can314-2112-701",
+   "num": "211.2",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Engins de levage",
+   "nom": "Grue à montage rapide sur châssis, jusqu'à 40 mt / 30 m : forfait de mise à disposition, location journalière ou exploitation",
+   "metre": "none"
+  },
+  {
+   "id": "can314-2124-702",
+   "num": "212.4",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Engins de levage",
+   "nom": "Grue à tour sur châssis, jusqu'à 120 mt / 50 m : forfait de mise à disposition, location journalière ou exploitation",
+   "metre": "none"
+  },
+  {
+   "id": "can314-2311-703",
+   "num": "231.1",
+   "cat": "211 Régie maçonnerie",
+   "sub": "Engins de levage",
+   "nom": "Monte-charge pour matériel, mât vertical jusqu'à 20 m : forfait, location journalière ou exploitation",
+   "metre": "none"
+  }
+ ]
+}
