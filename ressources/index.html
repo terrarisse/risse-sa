@@ -177,6 +177,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .imp-txt{flex:1;font-size:13px;line-height:1.4;color:var(--text);min-width:0;}
 .imp-txt b{color:var(--text3);font-weight:700;margin-right:2px;}
 .imp-flag{font-size:11px;color:#B26A00;margin-top:3px;}
+.cat-add{flex-shrink:0;width:38px;height:34px;border:1.5px solid var(--navy);background:#fff;border-radius:8px;font-size:15px;cursor:pointer;}
+.cat-in{flex-shrink:0;font-size:11px;font-weight:700;color:var(--teal);white-space:nowrap;padding-top:4px;}
 .imp-ed{outline:none;border-radius:6px;padding:2px 4px;margin:-2px -4px;border:1px dashed transparent;}
 .imp-ed:focus{border-color:var(--navy);background:#F4F7FD;}
 .imp-it .imp-ed{border-bottom:1px dashed #C9D1E3;}
@@ -311,8 +313,9 @@ body.mat-dragging *{cursor:grabbing!important;}
   <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
   <div class="page" id="page-postes"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher un poste…" oninput="filterPage('postes',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('postes')">＋</button></div>
     <div class="pst-info">📋 Postes proposés dans le <b>Rapport</b> quand tu écris les travaux. Catégories et sous-catégories : bouton <b>⊞ Catégories</b> en haut. <b>Appui long</b> sur un poste puis glisse-le sur une catégorie (ou entre deux postes) pour le déplacer.
-      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesListe()">📚 Importer une liste</button></div></div>
+      <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importPostesDevis()">📥 Importer un devis</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="switchTab('catalogue')">📚 Catalogue articles</button></div></div>
     <div id="content-postes"></div></div>
+  <div class="page" id="page-catalogue"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher dans tout le catalogue…" oninput="catFilter(this.value)" autocomplete="off"></div><div id="content-catalogue"></div></div>
 </div>
  
 <!-- BOTTOM NAV -->
@@ -323,6 +326,7 @@ body.mat-dragging *{cursor:grabbing!important;}
   <button class="nav-item" data-tab="materiel" onclick="switchTab('materiel')"><span class="nav-icon">🔧</span><span class="nav-label">Matériel</span><span class="nav-badge" id="badge-materiel">0</span></button>
   <button class="nav-item" data-tab="materiaux" onclick="switchTab('materiaux')"><span class="nav-icon">🪨</span><span class="nav-label">Matériaux</span><span class="nav-badge" id="badge-materiaux">0</span></button>
   <button class="nav-item" data-tab="evacuations" onclick="switchTab('evacuations')"><span class="nav-icon">🚮</span><span class="nav-label">Évac.</span><span class="nav-badge" id="badge-evacuations">0</span></button>
+  <button class="nav-item" data-tab="catalogue" onclick="switchTab('catalogue')"><span class="nav-icon">📚</span><span class="nav-label">Catalogue</span></button>
   <button class="nav-item" data-tab="postes" onclick="switchTab('postes')"><span class="nav-icon">📋</span><span class="nav-label">Postes</span><span class="nav-badge" id="badge-postes">0</span></button>
 </nav>
  
@@ -695,7 +699,7 @@ onAuthStateChanged(auth, user => {
 
 // ── CONFIG ──────────────────────────────────────────────
 const TABS    = ['equipe','machines','vehicules','materiel','materiaux','evacuations','postes'];
-const TITLES  = {postes:'Postes',equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
+const TITLES  = {catalogue:'Catalogue articles',postes:'Postes',equipe:'Équipe',machines:'Machines',vehicules:'Véhicules',materiel:'Matériel & outillage',materiaux:'Matériaux',evacuations:'Évacuations'};
 const ICONS   = {postes:'📋',equipe:'👷',machines:'🚜',vehicules:'🚛',materiel:'🔧',materiaux:'🪨',evacuations:'🚮'};
 const COLORS  = {postes:'#EEF3FB',equipe:'#EEF2FF',machines:'#F0FDF4',vehicules:'#FFF7ED',materiel:'#FFF1F2',materiaux:'#F5F0EB',evacuations:'#F3F4F6'};
 const KEYS    = {postes:'rv6_postes',equipe:'rv6_equipe',machines:'rv6_m',vehicules:'rv6_vehicles',materiel:'rv6_equipment',materiaux:'rv6_materials',evacuations:'rv6_evacuations'};
@@ -823,6 +827,9 @@ function switchTab(tab){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.tab===tab));
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+tab));
   document.getElementById('hdrTitle').textContent=TITLES[tab];
+  document.querySelectorAll('.cat-mgr-btn').forEach(b=>b.style.display = tab==='catalogue' ? 'none' : '');
+  { const hc=document.getElementById('hdrCount'); if(hc) hc.style.display = tab==='catalogue' ? 'none' : ''; }
+  if(tab==='catalogue'){ renderCatalogue(); return; }
   renderContent(tab, searchFilters[tab]||'');
   updateHeader();
   const inp=document.querySelector('#page-'+tab+' .search-input');
@@ -2546,8 +2553,86 @@ async function doImport(){
   const n = await RPostes.importer(rows);
   closeImport();
   renderContent('postes', searchFilters.postes||''); updateBadges(); populateCatSelects('postes');
+  if(currentTab==='catalogue') renderCatalogue();
   showToast(`✅ ${n} poste${n>1?'s':''} importé${n>1?'s':''}`);
 }
+// ── CATALOGUE ARTICLES ─────────────────────────────────
+// Tous les chapitres numérisés (dossier imports/, ex. CAN 17, CAN 4) restent ici
+// en entier. On y choisit ce qui va dans l'onglet Postes (seuls les Postes sont
+// proposés dans le Rapport). Les articles du catalogue ne sont pas modifiés :
+// les modifications se font sur la copie dans Postes.
+let _cat = { listes:null, data:{}, open:null, ouverts:{}, q:'' };
+async function catLoad(){
+  if(_cat.listes) return;
+  try {
+    const idx = await fetch('../imports/index.json?v='+Date.now(), {cache:'no-store'}).then(r=>r.json());
+    _cat.listes = idx.listes || [];
+    await Promise.all(_cat.listes.map(l => fetch('../imports/'+l.fichier+'?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()).then(d=>{ _cat.data[l.id]=d; }).catch(()=>{})));
+    try { localStorage.setItem('rv6_catalogue_cache', JSON.stringify({ listes:_cat.listes, data:_cat.data })); } catch(e){}
+  } catch(e) {
+    try { const c = JSON.parse(localStorage.getItem('rv6_catalogue_cache')||'null'); if(c){ _cat.listes=c.listes; _cat.data=c.data; } } catch(_){}
+    if(!_cat.listes) _cat.listes = [];
+  }
+}
+async function renderCatalogue(){
+  const el = document.getElementById('content-catalogue'); if(!el) return;
+  if(!_cat.listes){ el.innerHTML = '<div class="acc-empty">⏳ Chargement du catalogue…</div>'; await catLoad(); }
+  const ids = new Set(load('postes').map(p=>p.id));
+  const page = document.getElementById('page-catalogue'), sc = page ? page.scrollTop : 0;
+  const q = RPostes.norm(_cat.q);
+  let html = '';
+  if(!_cat.listes.length){ el.innerHTML = '<div class="acc-empty">Aucun chapitre dans le catalogue pour le moment</div>'; return; }
+  const item = (l, p) => { const inP = ids.has(p.id); return `<div class="imp-it" id="cat-it-${pEsc(p.id)}"><div class="imp-txt">${pEsc(p.nom)}${q?`<div class="imp-flag" style="color:var(--text3);">${pEsc(p.cat)}${p.sub?' › '+pEsc(p.sub):''}</div>`:''}</div>
+      ${inP ? '<span class="cat-in">✓ Postes</span>' : `<button class="cat-add" onclick="catAdd('${pEsc(l.id)}','${pEsc(p.id)}')">➕</button>`}</div>`; };
+  if(q){
+    // Recherche dans tout le catalogue
+    let n = 0;
+    _cat.listes.forEach(l=>{
+      const d=_cat.data[l.id]; if(!d) return;
+      const res = (d.postes||[]).filter(p=>q.split(' ').every(w=>RPostes.norm(p.nom+' '+p.cat+' '+p.sub).includes(w))).slice(0,150);
+      if(!res.length) return; n += res.length;
+      html += `<div class="imp-cat"><span>📚 ${pEsc(l.titre)}</span></div><div class="imp-grp">${res.map(p=>item(l,p)).join('')}</div>`;
+    });
+    if(!n) html = '<div class="acc-empty">Aucun article trouvé</div>';
+  } else if(!_cat.open){
+    html = `<div class="pst-info">📚 Tous les chapitres numérisés restent ici en entier. Touche ➕ pour ajouter un article aux <b>Postes</b> (seuls les Postes sont proposés dans le Rapport), ou ouvre un chapitre pour en ajouter plusieurs d'un coup.</div>`
+      + _cat.listes.map(l=>{ const d=_cat.data[l.id]; const tot=d?(d.postes||[]).length:(l.n||0); const inP=d?(d.postes||[]).filter(p=>ids.has(p.id)).length:0;
+        return `<div class="pst-item" onclick="catOpen('${pEsc(l.id)}')" style="display:flex;align-items:center;gap:10px;"><div style="flex:1;"><b>${pEsc(l.titre)}</b><div style="font-size:11px;color:var(--text3);margin-top:2px;">${tot} articles · ${inP} dans Postes${l.note?' · '+pEsc(l.note):''}</div></div><span style="color:var(--text3);font-size:18px;">›</span></div>`; }).join('');
+  } else {
+    const l = _cat.listes.find(x=>x.id===_cat.open), d = l && _cat.data[l.id];
+    if(!d){ _cat.open=null; return renderCatalogue(); }
+    const groups = []; const gi = {};
+    (d.postes||[]).forEach(p=>{ const k=p.cat+'¦'+p.sub; if(!(k in gi)){ gi[k]=groups.length; groups.push({k,cat:p.cat,sub:p.sub,items:[]}); } groups[gi[k]].items.push(p); });
+    const inP = (d.postes||[]).filter(p=>ids.has(p.id)).length;
+    html = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="catOpen(null)">← Chapitres</button><div style="flex:1;font-weight:700;color:var(--navy);font-size:14px;">${pEsc(l.titre)}</div></div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">${(d.postes||[]).length} articles · ${inP} dans Postes</div>
+      <button class="btn btn-navy" style="margin-bottom:12px;" onclick="catImportChapitre('${pEsc(l.id)}')">☑️ Ajouter plusieurs aux Postes (écran de tri)</button>`;
+    let last=null;
+    groups.forEach((g,i)=>{
+      if(g.cat!==last){ last=g.cat; html+=`<div class="imp-cat"><span>📁 ${pEsc(g.cat||'Sans catégorie')}</span></div>`; }
+      const open=_cat.ouverts[g.k]; const nIn=g.items.filter(p=>ids.has(p.id)).length;
+      html += `<div class="imp-grp"><div class="imp-sub" onclick="catToggle('${pEsc(g.k).replace(/'/g,"\\'")}')"><span class="imp-subname">${g.sub?pEsc(g.sub):'<i>(sans sous-catégorie)</i>'}</span><span class="imp-cnt">${nIn}/${g.items.length}</span><span class="imp-chev${open?' open':''}">›</span></div>${open?g.items.map(p=>item(l,p)).join(''):''}</div>`;
+    });
+  }
+  el.innerHTML = html;
+  if(page) page.scrollTop = sc;
+}
+function catOpen(id){ _cat.open=id; _cat.ouverts={}; renderCatalogue(); const pg=document.getElementById('page-catalogue'); if(pg) pg.scrollTop=0; }
+function catToggle(k){ _cat.ouverts[k]=!_cat.ouverts[k]; renderCatalogue(); }
+function catFilter(v){ _cat.q=v; renderCatalogue(); }
+async function catAdd(lid, pid){
+  const l=_cat.listes.find(x=>x.id===lid), d=_cat.data[lid]; const p=d && (d.postes||[]).find(x=>x.id===pid); if(!p) return;
+  const n = await RPostes.importer([{ id:p.id, nom:p.nom, cat:p.cat+(p.sub?' › '+p.sub:''), metre:p.metre||'auto', src:lid }]);
+  renderContent('postes', searchFilters.postes||''); renderCatalogue(); updateBadges(); populateCatSelects('postes');
+  showToast(n ? '✅ Ajouté aux Postes' : 'Déjà dans les Postes');
+}
+async function catImportChapitre(lid){
+  _impListes = _cat.listes;
+  const i = _cat.listes.findIndex(x=>x.id===lid);
+  await openImportListe(i);
+}
+Object.assign(window,{renderCatalogue,catOpen,catToggle,catFilter,catAdd,catImportChapitre});
+
 Object.assign(window,{impTxt,impTxtEnd,importPostesListe,openImportListe,impToggleOpen,impCheck,impCheckGroup,impAll,impFilter,impMetre,impEdit,impRename,closeImport,doImport});
 
 
