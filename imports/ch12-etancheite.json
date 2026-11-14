@@ -280,7 +280,7 @@
    "num": "126",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 0 à 20 m²",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 mm en 1 couche",
    "metre": "surface"
   },
   {
@@ -288,7 +288,7 @@
    "num": "126",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 21 à 40 m²",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 20 mm en 1 couche",
    "metre": "surface"
   },
   {
@@ -296,7 +296,7 @@
    "num": "126",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 41 à 60 m²",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 25 mm en 1 couche",
    "metre": "surface"
   },
   {
@@ -304,75 +304,11 @@
    "num": "126",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 61 à 80 m²",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 30 mm en 1 couche",
    "metre": "surface"
   },
   {
-   "id": "ch12-126-38",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 81 à 100 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-39",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 101 à 150 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-40",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 151 à 200 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-41",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 201 à 300 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-42",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 301 à 500 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-43",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 501 à 750 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-44",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 751 à 1000 m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-126-45",
-   "num": "126",
-   "cat": "364 Asphalte coulé",
-   "sub": "Chapes d'asphalte",
-   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 1001 et plus m²",
-   "metre": "surface"
-  },
-  {
-   "id": "ch12-127a-46",
+   "id": "ch12-127a-38",
    "num": "127a",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -380,7 +316,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-127b-47",
+   "id": "ch12-127b-39",
    "num": "127b",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -388,7 +324,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-127c-48",
+   "id": "ch12-127c-40",
    "num": "127c",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -396,7 +332,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-128a-49",
+   "id": "ch12-128a-41",
    "num": "128a",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -404,7 +340,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-128b-50",
+   "id": "ch12-128b-42",
    "num": "128b",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -412,7 +348,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-128c-51",
+   "id": "ch12-128c-43",
    "num": "128c",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -420,7 +356,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-129-52",
+   "id": "ch12-129-44",
    "num": "129",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -428,7 +364,7 @@
    "metre": "coupe"
   },
   {
-   "id": "ch12-130-53",
+   "id": "ch12-130-45",
    "num": "130",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -436,7 +372,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-131-54",
+   "id": "ch12-131-46",
    "num": "131",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -444,7 +380,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-132a-55",
+   "id": "ch12-132a-47",
    "num": "132a",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -452,7 +388,7 @@
    "metre": "coupe"
   },
   {
-   "id": "ch12-132b-56",
+   "id": "ch12-132b-48",
    "num": "132b",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -460,7 +396,7 @@
    "metre": "coupe"
   },
   {
-   "id": "ch12-133-57",
+   "id": "ch12-133-49",
    "num": "133",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -468,7 +404,7 @@
    "metre": "coupe"
   },
   {
-   "id": "ch12-134-58",
+   "id": "ch12-134-50",
    "num": "134",
    "cat": "364 Asphalte coulé",
    "sub": "Chapes d'asphalte",
@@ -476,7 +412,7 @@
    "metre": "surface"
   },
   {
-   "id": "ch12-rgie-59",
+   "id": "ch12-rgie-51",
    "num": "Régie",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -484,7 +420,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-rgie-60",
+   "id": "ch12-rgie-52",
    "num": "Régie",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -492,7 +428,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-rgie-61",
+   "id": "ch12-rgie-53",
    "num": "Régie",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -500,7 +436,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-rgie-62",
+   "id": "ch12-rgie-54",
    "num": "Régie",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -508,7 +444,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-rgie-63",
+   "id": "ch12-rgie-55",
    "num": "Régie",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -516,7 +452,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-64",
+   "id": "ch12-location-56",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -524,7 +460,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-65",
+   "id": "ch12-location-57",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -532,7 +468,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-66",
+   "id": "ch12-location-58",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -540,7 +476,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-67",
+   "id": "ch12-location-59",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -548,7 +484,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-68",
+   "id": "ch12-location-60",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -556,7 +492,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-69",
+   "id": "ch12-location-61",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -564,7 +500,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-70",
+   "id": "ch12-location-62",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -572,7 +508,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-71",
+   "id": "ch12-location-63",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -580,7 +516,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-72",
+   "id": "ch12-location-64",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -588,7 +524,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-73",
+   "id": "ch12-location-65",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -596,7 +532,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-74",
+   "id": "ch12-location-66",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -604,7 +540,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-75",
+   "id": "ch12-location-67",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -612,7 +548,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-76",
+   "id": "ch12-location-68",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -620,7 +556,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-location-77",
+   "id": "ch12-location-69",
    "num": "Location",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -628,7 +564,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-18-78",
+   "id": "ch12-18-70",
    "num": "18",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -636,7 +572,7 @@
    "metre": "none"
   },
   {
-   "id": "ch12-19-79",
+   "id": "ch12-19-71",
    "num": "19",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
@@ -644,7 +580,7 @@
    "metre": "coupe"
   },
   {
-   "id": "ch12-20-80",
+   "id": "ch12-20-72",
    "num": "20",
    "cat": "364 Asphalte coulé",
    "sub": "Régie",
