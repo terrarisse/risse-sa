@@ -2486,6 +2486,8 @@ function impGroups(){
 function renderImport(){
   let ov = document.getElementById('imp-ov');
   if(!ov){ ov=document.createElement('div'); ov.id='imp-ov'; ov.className='imp-ov'; document.body.appendChild(ov); }
+  // Garder la position de défilement (sinon chaque coche ramène en haut de la liste)
+  const _b = ov.querySelector('.imp-body'), _scroll = _b ? _b.scrollTop : 0;
   const q = RPostes.norm(_imp.q);
   const vis = i => { const r=_imp.rows[i]; return !q || q.split(' ').every(w=>RPostes.norm(r.nom+' '+r.cat+' '+r.sub+' '+(r.num||'')).includes(w)); };
   const nOn = _imp.rows.filter(r=>r.on).length, nDeja = _imp.rows.filter(r=>r.deja).length;
@@ -2515,6 +2517,7 @@ function renderImport(){
     <div class="imp-body">${html||'<div class="acc-empty">Rien à afficher</div>'}</div>
     <div class="imp-ft"><button class="btn btn-ghost" style="width:auto;padding:0 16px;" onclick="closeImport()">Annuler</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="doImport()" ${nOn?'':'disabled'}>Importer ${nOn} poste${nOn>1?'s':''}</button></div></div>`;
   ov.querySelectorAll('input[data-mid]').forEach(c=>c.indeterminate=true);
+  const _nb = ov.querySelector('.imp-body'); if(_nb) _nb.scrollTop = _scroll;
 }
 function impToggleOpen(gi){ const g=impGroups()[gi]; _imp.ouverts[g.k]=!_imp.ouverts[g.k]; renderImport(); }
 function impCheck(i,v){ _imp.rows[i].on=v; renderImport(); }
