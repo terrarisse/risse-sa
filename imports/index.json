@@ -104,6 +104,14 @@
    "n": 722,
    "note": "Protections, démolitions, enduits, galandages, plafonds, isolations, régie",
    "ordre": 13
+  },
+  {
+   "id": "ch14",
+   "titre": "CAN 612 — Construction métallique (serrurerie)",
+   "fichier": "ch14-construction-metallique.json",
+   "n": 296,
+   "note": "Gros fers, escaliers, garde-corps, grilles, portes, clôtures, ferrements, régie",
+   "ordre": 14
   }
  ]
 }

@@ -1,0 +1,2375 @@
+{
+ "id": "ch14",
+ "titre": "CAN 612 — Construction métallique (serrurerie)",
+ "note": "Gros fers, escaliers, garde-corps, grilles, portes, clôtures, ferrements, régie",
+ "postes": [
+  {
+   "id": "ch14-10-0",
+   "num": "10",
+   "cat": "612 Construction métallique",
+   "sub": "Gros fers de bâtiment",
+   "nom": "Fourniture de profilés HEA, HEB, IPE, IPN, UPN, UAP jusqu'à 40 cm coupés de longueur, dressés, ébarbés, rendus à pied d'œuvre",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-11-1",
+   "num": "11",
+   "cat": "612 Construction métallique",
+   "sub": "Gros fers de bâtiment",
+   "nom": "Fourniture de tubes RHS, TPS, MSH carrés ou rectangulaires coupés de longueur, dressés, ébarbés, rendus à pied d'œuvre",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-12-2",
+   "num": "12",
+   "cat": "612 Construction métallique",
+   "sub": "Gros fers de bâtiment",
+   "nom": "Triage des fers fournis par le propriétaire et leur manutention sur le chantier (en régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-13-3",
+   "num": "13",
+   "cat": "612 Construction métallique",
+   "sub": "Gros fers de bâtiment",
+   "nom": "Coupe des profilés à l'atelier, profilés de 8 à 50 cm (par coupe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-34-4",
+   "num": "34",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Trous percés au chalumeau dans l'âme des profilés, jusqu'à 40 cm de hauteur, Ø jusqu'à 30 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-35-5",
+   "num": "35",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Trous percés dans les ailes des profilés",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-36-6",
+   "num": "36",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Coins en fer forgé",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-40-7",
+   "num": "40",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Tirants en fer rond ou plat, non posés",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-41-8",
+   "num": "41",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Pièces d'attaches des tirants et chaînages aux semelles (étriers, fourches, boulons)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-43-9",
+   "num": "43",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Boulons mécaniques 6 pans jusqu'à 20 cm de longueur et 16 mm de diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-44-10",
+   "num": "44",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Boulons mécaniques jusqu'à 20 cm de long et 20 mm de diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-49-11",
+   "num": "49",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Tire-fond tête 6 pans DIN 571 (Ø 12×100, 16×200, 16×100, 16×200)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-51-12",
+   "num": "51",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Pose des fers de bâtiments (clés, crampons, étriers, greppes)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-59-13",
+   "num": "59",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Passerelles de type courant pour accès aux installations de chauffage, ventilation (fers à U et platelage tôle striée ou métal déployé)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-60-14",
+   "num": "60",
+   "cat": "612 Construction métallique",
+   "sub": "Percements de trous",
+   "nom": "Passerelles d'accès aux cheminées, largeur max. 60 cm, entièrement zinguées au feu",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-80-15",
+   "num": "80",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Escalier droit à foulée normale en fer (limons en tôle 6 mm, semelles en tôle striée 4/6 mm), largeur jusqu'à 80 cm, par marche",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-83-16",
+   "num": "83",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Plus-value par 10 cm en plus de 80 cm de largeur pour marches droites ou tournantes",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-86-17",
+   "num": "86",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Marches tournantes d'escalier métallique",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-87-18",
+   "num": "87",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Plus-value par 10 cm en plus de 80 cm, marches droites ou tournantes",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-90-19",
+   "num": "90",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Plus-value pour marche de départ avec tête arrondie",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-91-20",
+   "num": "91",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Plus-value pour limon découpé en crémaillère, filière de renforcement et fers pour recevoir le plafond",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-92-21",
+   "num": "92",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers",
+   "nom": "Paliers pour escaliers avec semelle en tôle striée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-94-22",
+   "num": "94",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers en colimaçon",
+   "nom": "Escalier en colimaçon jusqu'à 1,30 m de diamètre, noyau en tube jusqu'à 150 mm, semelles en tôle striée 4/6 mm, par marche",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-96-23",
+   "num": "96",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers en colimaçon",
+   "nom": "Plus-value par 10 cm de diamètre en plus de 1,30 m, escalier colimaçon sans contremarche",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-97-24",
+   "num": "97",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers en colimaçon",
+   "nom": "Plus-value par 10 cm de diamètre en plus de 1,30 m, escalier colimaçon avec contremarches",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-98-25",
+   "num": "98",
+   "cat": "612 Construction métallique",
+   "sub": "Escaliers en colimaçon",
+   "nom": "Plus-value pour marche de départ à tête arrondie, escalier en colimaçon",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-100-26",
+   "num": "100",
+   "cat": "612 Construction métallique",
+   "sub": "Échelles",
+   "nom": "Échelle zinguée au feu jusqu'à 40 cm de largeur, montants en tube Ø 42 mm, échelons Ø 27 mm, fixations à tamponner, jusqu'à 3 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-101-27",
+   "num": "101",
+   "cat": "612 Construction métallique",
+   "sub": "Échelles",
+   "nom": "Échelle de plus de 3 m avec dispositif de sécurité obligatoire",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-102-28",
+   "num": "102",
+   "cat": "612 Construction métallique",
+   "sub": "Échelles",
+   "nom": "Fixations spéciales d'échelle contre corniches, cheminées (brides, colliers)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-103-29",
+   "num": "103",
+   "cat": "612 Construction métallique",
+   "sub": "Échelles",
+   "nom": "Échelons avec extrémités coudées à 2 fixations, contre murs en briques ou plots, fer rond 20 mm, 40×23 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-104-30",
+   "num": "104",
+   "cat": "612 Construction métallique",
+   "sub": "Échelles",
+   "nom": "Plus-value pour dispositif de sécurité obligatoire au-dessus de 3,0 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-106-31",
+   "num": "106",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Garde-corps type D acier : montants carré 20 mm, 2 filières intermédiaires, barreaudage rond 12 mm (vide max. 120 mm), main courante acier plat, 1 couche antirouille",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-106b-32",
+   "num": "106b",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Garde-corps type D acier, zingué à chaud",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-107a-33",
+   "num": "107a",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : partie horizontale cintrée en plan",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-107b-34",
+   "num": "107b",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : revêtement main courante plastique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-107c-35",
+   "num": "107c",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : changement de direction à 45-90°",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-107d-36",
+   "num": "107d",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : changement de direction à 180°",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-107e-37",
+   "num": "107e",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : embout de main courante façonné",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-107f-38",
+   "num": "107f",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : montant en col de cygne",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-107g-39",
+   "num": "107g",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps : pilastre de départ",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-108-40",
+   "num": "108",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Garde-corps type E mixte acier-aluminium éloxé : montants tubes acier zingué, main courante profil aluminium, verre feuilleté 2×6 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-109a-41",
+   "num": "109a",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps alu/verre : changement de direction à 45-90°",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-109b-42",
+   "num": "109b",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps alu/verre : changement de direction à 180°",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-109c-43",
+   "num": "109c",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps alu/verre : obturation de main courante",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-109d-44",
+   "num": "109d",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps alu/verre : montants avec base goujonnée",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-109e-45",
+   "num": "109e",
+   "cat": "612 Construction métallique",
+   "sub": "Garde-corps",
+   "nom": "Plus-value garde-corps alu/verre : montants en col de cygne",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-111-46",
+   "num": "111",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Filière 40/8 mm pour recevoir la main courante, montée sur supports à col de cygne scellés dans la maçonnerie",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112a-47",
+   "num": "112a",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en fer plat ou bombé de 40 à 50 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112b-48",
+   "num": "112b",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en tube acier Ø 34 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112c-49",
+   "num": "112c",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en tube acier Ø 42 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112d-50",
+   "num": "112d",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en métal léger éloxé couleur naturelle Ø 35 ou 40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112e-51",
+   "num": "112e",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en tube inox Ø 42,4 mm, grain 280×320, raccords intérieurs",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112f-52",
+   "num": "112f",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en métal léger plat ou profilé éloxé, largeur 45 à 65 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112g-53",
+   "num": "112g",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en tube acier rectangulaire 40/40 à 150/40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-112h-54",
+   "num": "112h",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Main courante en tube aluminium éloxé naturel 100×30 à 250×40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-113-55",
+   "num": "113",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Plus-value pour polissage brillant de main courante inox après fabrication",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-114-56",
+   "num": "114",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Plus-value pour extrémités de tubes fermées",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-115-57",
+   "num": "115",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Plus-value pour changement de direction de main courante 45° à 90°",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-116a-58",
+   "num": "116a",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Support scellé coudé en fer pour main courante en tube ou en bois",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-116b-59",
+   "num": "116b",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Support scellé droit en fer pour main courante en tube ou en bois",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-117a-60",
+   "num": "117a",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Support coudé en acier inox Ø 15 mm pour main courante",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-117b-61",
+   "num": "117b",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Support droit en acier inox Ø 15 mm pour main courante",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-118-62",
+   "num": "118",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Rosaces simples pour cache-scellements en acier",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-119-63",
+   "num": "119",
+   "cat": "612 Construction métallique",
+   "sub": "Filières, supports, mains courantes",
+   "nom": "Rosaces simples pour cache-scellements en acier inox",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-148-64",
+   "num": "148",
+   "cat": "612 Construction métallique",
+   "sub": "Banquettes de fenêtres",
+   "nom": "Banquette de fenêtre : filière en fer U avec main courante, barreaux, posée en tableau, hauteur 30 cm, jusqu'à 120 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-149-65",
+   "num": "149",
+   "cat": "612 Construction métallique",
+   "sub": "Banquettes de fenêtres",
+   "nom": "Banquette de fenêtre en tableau pour loggias ou terrasses",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-150-66",
+   "num": "150",
+   "cat": "612 Construction métallique",
+   "sub": "Banquettes de fenêtres",
+   "nom": "Banquette de fenêtre posée en saillie avec 2 retours et scellements en façade, jusqu'à 150 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-151-67",
+   "num": "151",
+   "cat": "612 Construction métallique",
+   "sub": "Banquettes de fenêtres",
+   "nom": "Banquette de fenêtre en saillie pour loggias ou terrasses",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-159-68",
+   "num": "159",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Grille 2 filières fer U 30/15/4, barreaudage carré 12 mm ou rond 16 mm, vide max. 120 mm, posée entre tableaux",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-160-69",
+   "num": "160",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Grille 2 filières fer U 35/17,5/4, barreaudage carré 18 mm ou rond 20 mm, vide max. 120 mm, posée entre tableaux",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-161-70",
+   "num": "161",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Plus-value pour filières supplémentaires de grille",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-162-71",
+   "num": "162",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Barreau isolé en tube avec 2 rosaces, scellement compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-163-72",
+   "num": "163",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Barreau isolé en fer carré posé à plat ou en diagonale",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-167-73",
+   "num": "167",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Grille caillebotis zinguée au feu en feuillards, non posée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-170-74",
+   "num": "170",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Plus-value sur grilles horizontales pour fermeture à carré",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-171a-75",
+   "num": "171a",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Plus-value grille pour pivots",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-171b-76",
+   "num": "171b",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Plus-value grille pour charnières (la paire)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-171c-77",
+   "num": "171c",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Plus-value grille pour brides de fixation",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-172-78",
+   "num": "172",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Cadre pour grilles ou paillassons zingué au feu, cornière L 30/30 avec assemblage d'angles et pattes de scellement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-175-79",
+   "num": "175",
+   "cat": "612 Construction métallique",
+   "sub": "Grilles et barreaudages",
+   "nom": "Cadre pour grille racle-pieds et natte, fer L 30/30/3 avec pattes, non posé (60/40 à 100/50)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-181-80",
+   "num": "181",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Barrière en fer, 2 filières U 30/15/4, barreaudage en rond appointi (Ø 12 à 18 mm), montants renforcés tous les 1,50 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-182-81",
+   "num": "182",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Plus-value pour barrière rampante",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-183-82",
+   "num": "183",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Plus-value pour barrière cintrée en plan",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-184-83",
+   "num": "184",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Barrière en fer, barreaudage en profil carré 12/12 à 18/18",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-193-84",
+   "num": "193",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 1 vantail fer carré 25 mm, barreaudage appointi, serrure et 2 clés, largeur 0,90 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-194-85",
+   "num": "194",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 1 vantail, largeur 1,10 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-195-86",
+   "num": "195",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 2 vantaux fer de 30/30, socle et dispositif de fermeture, largeur 1,50 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-196-87",
+   "num": "196",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 2 vantaux, largeur 2 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-197-88",
+   "num": "197",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 2 vantaux montants fer 35/35, largeur 2,50 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-198-89",
+   "num": "198",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 2 vantaux, largeur 3 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-199-90",
+   "num": "199",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Portail à 2 vantaux, largeur 3,50 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-200-91",
+   "num": "200",
+   "cat": "612 Construction métallique",
+   "sub": "Barrières et portails",
+   "nom": "Pilier de portail en tube",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-201-92",
+   "num": "201",
+   "cat": "612 Construction métallique",
+   "sub": "Cages d'ascenseur",
+   "nom": "Cage d'ascenseur continue à vitrer, montants et traverses en fer profilé, parecloses (sans fourniture de verre), surface des portes comprise",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-411-93",
+   "num": "411",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Fenêtre ou vitrage simple acier, cadre fixe seul sans traverses ni croisillons, verre posé au mastic, profilé acier série 34",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-411b-94",
+   "num": "411b",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Fenêtre ou vitrage simple, profilé acier série 50",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-411c-95",
+   "num": "411c",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Fenêtre ou vitrage simple en acier isolé",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-412-96",
+   "num": "412",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value pour vitrage d'une pièce seule",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-413-97",
+   "num": "413",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value pour pose de vitrage en plafond",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-414-98",
+   "num": "414",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Partie ouvrante à la française ou en imposte dans un vitrage fixe (ferrure avec loqueteau et tournets)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-415-99",
+   "num": "415",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value sur vitrage simple pour montants ou traverses intermédiaires sans assemblages",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-416-100",
+   "num": "416",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value sur montants et traverses pour assemblages contre cadre (coupe, soudure, meulage)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-417-101",
+   "num": "417",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value pour croisillon sans assemblage contre cadre",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-418-102",
+   "num": "418",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value sur vitrage simple pour renvoi d'eau en fer",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-419-103",
+   "num": "419",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value sur vitrage pour ferrure Ventus",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-420-104",
+   "num": "420",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value sur vitrage pour crémone à levier en métal léger",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-421-105",
+   "num": "421",
+   "cat": "612 Construction métallique",
+   "sub": "374 Vitrages simples acier",
+   "nom": "Plus-value sur vitrage pour compas de retenue (la paire)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-261-106",
+   "num": "261",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Porte métallique à châssis en profilés d'acier, encadrement acier, fiches, serrure à mortaiser et poignée, vantail 50 mm (dimensions selon plan)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-311-107",
+   "num": "311",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Porte métallique à châssis en profilés d'aluminium, encadrement aluminium, fiches, serrure à mortaiser et poignée, vantail 50 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-811-108",
+   "num": "811",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Plus-value porte : élargissement de l'encadrement (latéral, en haut), tube acier fixé par tampons",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-822-109",
+   "num": "822",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Plus-value porte : jointoyage au mastic silicone élastique, joint 10×10 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-830-110",
+   "num": "830",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Plus-value pour socle de porte, hauteur 250 à 300 mm, longueur min. 1 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-840-111",
+   "num": "840",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Ferme-porte en applique, grandeur moyenne (n° 3 ou 4)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-841-112",
+   "num": "841",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Ferme-porte à encastrer dans le sol, posé dans emplacement réservé",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-335-113",
+   "num": "335",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Porte métallique à châssis en profilés d'aluminium calorifugés, serrure à mortaiser et poignée, vantail 65 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-263-114",
+   "num": "263",
+   "cat": "612 Construction métallique",
+   "sub": "383 Portes métalliques",
+   "nom": "Porte coupe-feu en profilés du marché suisse, type E30 / EI30, à un ou deux vantaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-411-115",
+   "num": "411",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium calorifugé à vitrage fixe (env. 800×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-412-116",
+   "num": "412",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 1 vantail ouvrant à la française pour nettoyage seulement",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-413-117",
+   "num": "413",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 1 vantail ouvrant en imposte pour nettoyage, avec compas d'arrêt",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-414-118",
+   "num": "414",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 1 vantail ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-415-119",
+   "num": "415",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 1 vantail oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-416-120",
+   "num": "416",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 1 vantail ouvrant en imposte",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-417-121",
+   "num": "417",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 2 vantaux ouvrant à la française (env. 1600×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-418-122",
+   "num": "418",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 2 vantaux : 1 ouvrant à la française, 1 oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-421-123",
+   "num": "421",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 2 vantaux : 1 à la française, 1 large ouvrant en imposte pour nettoyage (env. 2100×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-216-124",
+   "num": "216",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Partie pleine de fenêtre aluminium : revêtement intérieur et extérieur alu éloxé, isolation thermique 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-914-125",
+   "num": "914",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Revêtements raccordés aux cadres de fenêtres aluminium, fonction encadrement en acier",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-925-126",
+   "num": "925",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Jointoyage de fenêtre aluminium au mastic silicone, joint 10×10 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-422-127",
+   "num": "422",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 2 vantaux : 1 oscillo-battant, 1 large ouvrant à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-423-128",
+   "num": "423",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 2 vantaux : 1 oscillo-battant, 1 large ouvrant en imposte pour nettoyage avec compas d'arrêt",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-424-129",
+   "num": "424",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 2 vantaux : 1 à la française, 1 large ouvrant pour nettoyage seulement",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-426-130",
+   "num": "426",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 3 vantaux : 2 à la française, 1 médian ouvrant en imposte pour nettoyage (env. 2400×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-427-131",
+   "num": "427",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Fenêtre aluminium à 3 vantaux : 1 oscillo-battant, 1 à la française, 1 médian en imposte pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-471-132",
+   "num": "471",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Porte-fenêtre aluminium à 1 vantail ouvrant à la française pour nettoyage seulement (env. 800×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-472-133",
+   "num": "472",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Porte-fenêtre aluminium à 1 vantail ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-473-134",
+   "num": "473",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres en aluminium (sans verre)",
+   "nom": "Porte-fenêtre aluminium à 2 vantaux ouvrant à la française (env. 1600×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-511-135",
+   "num": "511",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 2 vitrages fixes",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-512-136",
+   "num": "512",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 2 vantaux à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-513-137",
+   "num": "513",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 2 vantaux à la française dont 1 pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-514-138",
+   "num": "514",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 oscillo-battant, 1 à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-515-139",
+   "num": "515",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 2 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-516-140",
+   "num": "516",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 oscillo-battant, 1 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-517-141",
+   "num": "517",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 traverse d'appui, 1 allège pleine, 1 partie à 2 vantaux (oscillo-battant + française)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-518-142",
+   "num": "518",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 à la française, 1 large à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-519-143",
+   "num": "519",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 oscillo-battant, 1 large à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-521-144",
+   "num": "521",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : traverse d'appui, 1 montant, 1 allège pleine, 1 oscillo-battant, 1 large pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-522-145",
+   "num": "522",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 vantail pour nettoyage, 1 partie à 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-523-146",
+   "num": "523",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 vantail à la française, 1 partie à 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-524-147",
+   "num": "524",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 1 oscillo-battant, 1 partie à 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-525-148",
+   "num": "525",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : traverse d'appui, 1 montant, 1 allège pleine, 1 oscillo-battant, 1 partie à 2 vantaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-526-149",
+   "num": "526",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 2 vantaux à la française, 1 large pour nettoyage (env. 3100×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-527-150",
+   "num": "527",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant, 2 vantaux (française + oscillo-battant), 1 large pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-531-151",
+   "num": "531",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : traverse d'appui, 1 montant, allège pleine, 1 large pour nettoyage, 2 vantaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-532-152",
+   "num": "532",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 3 vantaux à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-533-153",
+   "num": "533",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 1 oscillo-battant, 1 pour nettoyage, 1 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-534-154",
+   "num": "534",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 1 oscillo-battant, 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-535-155",
+   "num": "535",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 4 parties : traverse d'appui, 2 montants, allège pleine, oscillo-battant, 2 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-536-156",
+   "num": "536",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 2 à la française, 1 large pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-537-157",
+   "num": "537",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 2 à la française, 1 à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-538-158",
+   "num": "538",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 3 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-541-159",
+   "num": "541",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants, 1 oscillo-battant, 1 large pour nettoyage, 1 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-542-160",
+   "num": "542",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 4 parties : traverse d'appui, 2 montants, allège pleine, oscillo-battant, large pour nettoyage, française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-543-161",
+   "num": "543",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'imposte, imposte pour nettoyage avec compas, 1 vantail à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-544-162",
+   "num": "544",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'imposte, 1 imposte, 1 vantail à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-545-163",
+   "num": "545",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'imposte, imposte pour nettoyage avec compas, 1 oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-546-164",
+   "num": "546",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'imposte, imposte pour nettoyage, 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-547-165",
+   "num": "547",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'imposte, 1 imposte, 2 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-548-166",
+   "num": "548",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'imposte, imposte pour nettoyage avec compas, 2 vantaux (oscillo-battant + française)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-551-167",
+   "num": "551",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'appui, vantail en allège ouvrant en imposte pour nettoyage, 1 vantail à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-552-168",
+   "num": "552",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'appui, vantail en allège ouvrant en imposte pour nettoyage, 1 oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-553-169",
+   "num": "553",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'appui, vantail en allège pour nettoyage, 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-554-170",
+   "num": "554",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : traverse d'appui, vantail en allège pour nettoyage, 2 vantaux (française + oscillo-battant)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-555-171",
+   "num": "555",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 montant (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-556-172",
+   "num": "556",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 2 montants (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-557-173",
+   "num": "557",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 2 parties : 1 traverse (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-558-174",
+   "num": "558",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de fenêtre aluminium à 3 parties : 1 traverse et 1 montant (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-571-175",
+   "num": "571",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 2 parties : 1 montant, 1 à la française, 1 à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-572-176",
+   "num": "572",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 2 parties : 1 montant, 2 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-573-177",
+   "num": "573",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 2 parties : 1 montant, 1 à la française, 1 large pour nettoyage (env. 2100×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-574-178",
+   "num": "574",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 3 parties : 2 montants, 3 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-575-179",
+   "num": "575",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 2 parties : 1 montant, 2 vantaux à la française, 1 large pour nettoyage (env. 2900×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-576-180",
+   "num": "576",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 2 parties : 1 montant, 1 vantail coulissant à lever, 1 vitrage fixe",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-577-181",
+   "num": "577",
+   "cat": "612 Construction métallique",
+   "sub": "375 Fenêtres alu — cadres composés",
+   "nom": "Élément de porte-fenêtre aluminium à 3 parties : 2 montants, 2 vitrages latéraux fixes, 1 partie médiane à 2 vantaux coulissants à lever",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-411-182",
+   "num": "411",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier calorifugé à vitrage fixe (env. 800×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-412-183",
+   "num": "412",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 1 vantail ouvrant à la française pour nettoyage seulement",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-413-184",
+   "num": "413",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 1 vantail ouvrant en imposte pour nettoyage, avec compas d'arrêt",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-414-185",
+   "num": "414",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 1 vantail ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-415-186",
+   "num": "415",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 1 vantail oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-416-187",
+   "num": "416",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 1 vantail ouvrant en imposte",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-417-188",
+   "num": "417",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 2 vantaux ouvrant à la française (env. 1600×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-418-189",
+   "num": "418",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 2 vantaux : 1 ouvrant à la française, 1 oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-421-190",
+   "num": "421",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 2 vantaux : 1 à la française, 1 large ouvrant en imposte pour nettoyage (env. 2100×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-216-191",
+   "num": "216",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Partie pleine de fenêtre acier : revêtement intérieur et extérieur tôle Zincor, isolation thermique 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-914-192",
+   "num": "914",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Revêtements raccordés aux cadres de fenêtres acier, fonction encadrement en acier",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-925-193",
+   "num": "925",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Jointoyage de fenêtre acier au mastic silicone, joint 10×10 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-422-194",
+   "num": "422",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 2 vantaux : 1 oscillo-battant, 1 large ouvrant à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-423-195",
+   "num": "423",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 2 vantaux : 1 oscillo-battant, 1 large ouvrant en imposte pour nettoyage avec compas d'arrêt",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-424-196",
+   "num": "424",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 2 vantaux : 1 à la française, 1 large ouvrant pour nettoyage seulement",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-426-197",
+   "num": "426",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 3 vantaux : 2 à la française, 1 médian ouvrant en imposte pour nettoyage (env. 2400×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-427-198",
+   "num": "427",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Fenêtre acier à 3 vantaux : 1 oscillo-battant, 1 à la française, 1 médian en imposte pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-471-199",
+   "num": "471",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Porte-fenêtre acier à 1 vantail ouvrant à la française pour nettoyage seulement (env. 800×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-472-200",
+   "num": "472",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Porte-fenêtre acier à 1 vantail ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-473-201",
+   "num": "473",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres en acier (sans verre)",
+   "nom": "Porte-fenêtre acier à 2 vantaux ouvrant à la française (env. 1600×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-511-202",
+   "num": "511",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 2 vitrages fixes",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-512-203",
+   "num": "512",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 2 vantaux à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-513-204",
+   "num": "513",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 2 vantaux à la française dont 1 pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-514-205",
+   "num": "514",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 oscillo-battant, 1 à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-515-206",
+   "num": "515",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 2 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-516-207",
+   "num": "516",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 oscillo-battant, 1 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-517-208",
+   "num": "517",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 traverse d'appui, 1 allège pleine, 1 partie à 2 vantaux (oscillo-battant + française)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-518-209",
+   "num": "518",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 à la française, 1 large à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-519-210",
+   "num": "519",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 oscillo-battant, 1 large à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-521-211",
+   "num": "521",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : traverse d'appui, 1 montant, 1 allège pleine, 1 oscillo-battant, 1 large pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-522-212",
+   "num": "522",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 vantail pour nettoyage, 1 partie à 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-523-213",
+   "num": "523",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 vantail à la française, 1 partie à 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-524-214",
+   "num": "524",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 1 oscillo-battant, 1 partie à 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-525-215",
+   "num": "525",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : traverse d'appui, 1 montant, 1 allège pleine, 1 oscillo-battant, 1 partie à 2 vantaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-526-216",
+   "num": "526",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 2 vantaux à la française, 1 large pour nettoyage (env. 3100×1200 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-527-217",
+   "num": "527",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant, 2 vantaux (française + oscillo-battant), 1 large pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-531-218",
+   "num": "531",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : traverse d'appui, 1 montant, allège pleine, 1 large pour nettoyage, 2 vantaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-532-219",
+   "num": "532",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 3 vantaux à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-533-220",
+   "num": "533",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 1 oscillo-battant, 1 pour nettoyage, 1 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-534-221",
+   "num": "534",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 1 oscillo-battant, 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-535-222",
+   "num": "535",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 4 parties : traverse d'appui, 2 montants, allège pleine, oscillo-battant, 2 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-536-223",
+   "num": "536",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 2 à la française, 1 large pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-537-224",
+   "num": "537",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 2 à la française, 1 à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-538-225",
+   "num": "538",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 3 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-541-226",
+   "num": "541",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants, 1 oscillo-battant, 1 large pour nettoyage, 1 à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-542-227",
+   "num": "542",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 4 parties : traverse d'appui, 2 montants, allège pleine, oscillo-battant, large pour nettoyage, française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-543-228",
+   "num": "543",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'imposte, imposte pour nettoyage avec compas, 1 vantail à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-544-229",
+   "num": "544",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'imposte, 1 imposte, 1 vantail à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-545-230",
+   "num": "545",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'imposte, imposte pour nettoyage avec compas, 1 oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-546-231",
+   "num": "546",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'imposte, imposte pour nettoyage, 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-547-232",
+   "num": "547",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'imposte, 1 imposte, 2 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-548-233",
+   "num": "548",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'imposte, imposte pour nettoyage avec compas, 2 vantaux (oscillo-battant + française)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-551-234",
+   "num": "551",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'appui, vantail en allège ouvrant en imposte pour nettoyage, 1 vantail à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-552-235",
+   "num": "552",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'appui, vantail en allège ouvrant en imposte pour nettoyage, 1 oscillo-battant",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-553-236",
+   "num": "553",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'appui, vantail en allège pour nettoyage, 2 vantaux à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-554-237",
+   "num": "554",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : traverse d'appui, vantail en allège pour nettoyage, 2 vantaux (française + oscillo-battant)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-555-238",
+   "num": "555",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 montant (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-556-239",
+   "num": "556",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 2 montants (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-557-240",
+   "num": "557",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 2 parties : 1 traverse (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-558-241",
+   "num": "558",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de fenêtre acier à 3 parties : 1 traverse et 1 montant (fixe)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-571-242",
+   "num": "571",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 2 parties : 1 montant, 1 à la française, 1 à la française pour nettoyage",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-572-243",
+   "num": "572",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 2 parties : 1 montant, 2 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-573-244",
+   "num": "573",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 2 parties : 1 montant, 1 à la française, 1 large pour nettoyage (env. 2100×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-574-245",
+   "num": "574",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 3 parties : 2 montants, 3 vantaux ouvrant à la française",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-575-246",
+   "num": "575",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 2 parties : 1 montant, 2 vantaux à la française, 1 large pour nettoyage (env. 2900×2100 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-576-247",
+   "num": "576",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 2 parties : 1 montant, 1 vantail coulissant à lever, 1 vitrage fixe",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-577-248",
+   "num": "577",
+   "cat": "612 Construction métallique",
+   "sub": "374 Fenêtres acier — cadres composés",
+   "nom": "Élément de porte-fenêtre acier à 3 parties : 2 montants, 2 vitrages latéraux fixes, 1 partie médiane à 2 vantaux coulissants à lever",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-249-249",
+   "num": "249",
+   "cat": "612 Construction métallique",
+   "sub": "Couvre-joints",
+   "nom": "Couvre-joint profilé simple, petite section (jusqu'à 3 cm), équerres, plats, U, posé sur fer ou alu, coupes d'onglets et fixations comprises",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-250-250",
+   "num": "250",
+   "cat": "612 Construction métallique",
+   "sub": "Couvre-joints",
+   "nom": "Couvre-joint de section moyenne (jusqu'à 6 cm), équerres, plats, carrés, profilés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-250b-251",
+   "num": "250b",
+   "cat": "612 Construction métallique",
+   "sub": "Couvre-joints",
+   "nom": "Couvre-joint de section jusqu'à 9 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-250c-252",
+   "num": "250c",
+   "cat": "612 Construction métallique",
+   "sub": "Couvre-joints",
+   "nom": "Couvre-joint de section jusqu'à 12 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-251-253",
+   "num": "251",
+   "cat": "612 Construction métallique",
+   "sub": "Couvre-joints",
+   "nom": "Plus-value pour baguettes et profils cintrés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-252a-254",
+   "num": "252a",
+   "cat": "612 Construction métallique",
+   "sub": "Revêtements de façades, marquises, piliers",
+   "nom": "Revêtement en tôle d'acier posé sur filières, sans vis apparente",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-252b-255",
+   "num": "252b",
+   "cat": "612 Construction métallique",
+   "sub": "Revêtements de façades, marquises, piliers",
+   "nom": "Revêtement en profilé aluminium éloxé couleur naturelle",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-254-256",
+   "num": "254",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte pleine à 1 vantail, simple tôle 2 mm sur bâti et cadre en tube acier, seuil, paumelles, serrure et poignées",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-255-257",
+   "num": "255",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte pleine à 2 vantaux, simple tôle, crémone pour le dormant comprise",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-256-258",
+   "num": "256",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte pleine à 1 vantail à double tôle et isolation",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-256b-259",
+   "num": "256b",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte pleine à 2 vantaux à double tôle et isolation, crémone pour le dormant comprise",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-257-260",
+   "num": "257",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Portillon en tôle 2 mm sur bâti fer T, cadre en L scellé, paumelles, serrure ou tournet à bouton",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-258-261",
+   "num": "258",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte normalisée pleine double face, cadre applique, tôle pliée, seuil, paumelles, serrure et poignée, 90×198 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-299-262",
+   "num": "299",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte de garage basculante au plafond à contrepoids, tablier lames sapin, serrure cylindre, 1 couche antirouille",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-300-263",
+   "num": "300",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte de garage basculante sans câble, sur pivots, contrepoids en béton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-300b-264",
+   "num": "300b",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte de garage basculante avec système par tension de ressorts",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-301-265",
+   "num": "301",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte de garage à 1 vantail roulant latéralement sur galets à billes, rail de roulement et guidage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-303-266",
+   "num": "303",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Plus-value porte de garage pour partie supérieure vitrée (verre non compris)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-305-267",
+   "num": "305",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Plus-value porte de garage pour portillon de passage piétons à 1 vantail",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-306-268",
+   "num": "306",
+   "cat": "612 Construction métallique",
+   "sub": "Portes pleines, garage, divers",
+   "nom": "Porte accordéon pliant latéralement, châssis tube acier, socle tôle, isolation, partie supérieure vitrée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch14-307-269",
+   "num": "307",
+   "cat": "612 Construction métallique",
+   "sub": "Séparations de balcons",
+   "nom": "Séparation de balcon : armature en fer profilé et tôle planée 2 mm, partie supérieure arrondie, hauteur jusqu'à 1,80 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-308-270",
+   "num": "308",
+   "cat": "612 Construction métallique",
+   "sub": "Séparations de balcons",
+   "nom": "Séparation de balcon avec partie supérieure vitrée, montants en fer sans croisillonnage (verre non compris)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-309-271",
+   "num": "309",
+   "cat": "612 Construction métallique",
+   "sub": "Séparations de balcons",
+   "nom": "Plus-value séparation de balcon pour croisillons",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-316-272",
+   "num": "316",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Étendage : supports de fils en fer L 40×40 mm percés tous les 25 cm, scellés contre mur tous les 1 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-317-273",
+   "num": "317",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Étendage en fer U ou L, crochets soudés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-318-274",
+   "num": "318",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Plus-value étendage par retour",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-318b-275",
+   "num": "318b",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Consoles d'étendage scellées au plafond",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-319-276",
+   "num": "319",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Fil de fer galvanisé 3 mm pour étendage, posé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-319b-277",
+   "num": "319b",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Fil de fer enrobé de plastique pour étendage, posé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-322-278",
+   "num": "322",
+   "cat": "612 Construction métallique",
+   "sub": "Étendages zingués",
+   "nom": "Tendeur galvanisé pour fil de fer",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-340a-279",
+   "num": "340a",
+   "cat": "612 Construction métallique",
+   "sub": "Boîtes aux lettres",
+   "nom": "Boîte aux lettres en aluminium éloxé naturel, caisson tôle Zincor poudrée 30×30×37, individuelle, non posée",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-340b-280",
+   "num": "340b",
+   "cat": "612 Construction métallique",
+   "sub": "Boîtes aux lettres",
+   "nom": "Boîtes aux lettres en aluminium éloxé naturel, en groupe, non posées",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-352-281",
+   "num": "352",
+   "cat": "612 Construction métallique",
+   "sub": "Divers",
+   "nom": "Support de bicyclettes sans abri, au sol, à simple rang (par place, min. 10 places)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14-356-282",
+   "num": "356",
+   "cat": "612 Construction métallique",
+   "sub": "Divers",
+   "nom": "Fer de protection d'angle avec pattes, cornière 30/30/3 mm, pose comprise",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-357-283",
+   "num": "357",
+   "cat": "612 Construction métallique",
+   "sub": "Divers",
+   "nom": "Fer de protection d'angle, profil avec arrondi 40/40/3 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch14-358-284",
+   "num": "358",
+   "cat": "612 Construction métallique",
+   "sub": "Divers",
+   "nom": "Plus-value par angle assemblé à onglet",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--285",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Technicien dessinateur-contremaître (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--286",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Chef d'équipe serrurier (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--287",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Ouvrier serrurier qualifié (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--288",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Ouvrier serrurier semi-qualifié (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--289",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Poste de soudure (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--290",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Location poste de soudage électrique jusqu'à 180 A",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--291",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Location poste de soudage électrique plus de 180 A",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--292",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Location poste de soudage oxyacétylénique",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--293",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Location perceuse magnétique 20 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--294",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Location meuleuse",
+   "metre": "none"
+  },
+  {
+   "id": "ch14--295",
+   "num": "",
+   "cat": "612 Construction métallique",
+   "sub": "Régie",
+   "nom": "Location scie sauteuse",
+   "metre": "none"
+  }
+ ]
+}
