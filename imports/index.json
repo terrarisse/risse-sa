@@ -96,6 +96,14 @@
    "n": 73,
    "note": "Barrières vapeur, isolations, étanchéités multicouche et monocouche, protections, asphalte, régie",
    "ordre": 12
+  },
+  {
+   "id": "ch13",
+   "titre": "CAN 643/651 — Plâtrerie",
+   "fichier": "ch13-platrerie-isolation.json",
+   "n": 725,
+   "note": "Protections, démolitions, enduits, galandages, plafonds, isolations, régie",
+   "ordre": 13
   }
  ]
 }
