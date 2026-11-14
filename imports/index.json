@@ -112,6 +112,14 @@
    "n": 296,
    "note": "Gros fers, escaliers, garde-corps, grilles, portes, clôtures, ferrements, régie",
    "ordre": 14
+  },
+  {
+   "id": "ch15",
+   "titre": "CAN 345 — Pierre naturelle, marbrerie",
+   "fichier": "ch15-pierre-naturelle.json",
+   "n": 77,
+   "note": "Rénovation de pierres, ravalement, seuils et tablettes, dallages, plinthes, escaliers, revêtements de façades. Scan de 4 pages (23.1-23.8)",
+   "ordre": 15
   }
  ]
 }

@@ -1,0 +1,623 @@
+{
+ "id": "ch15",
+ "titre": "CAN 345 — Pierre naturelle, marbrerie",
+ "note": "Rénovation de pierres, ravalement, seuils et tablettes, dallages, plinthes, escaliers, revêtements de façades. Scan de 4 pages (23.1-23.8)",
+ "postes": [
+  {
+   "id": "ch15--0",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Contremaître marbrier (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15--1",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Marbrier, tailleur de pierre (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15--2",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Manœuvre marbrerie (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15--3",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Supplément pour emploi de petites machines portatives (ponceuses, tronçonneuses)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15--4",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Débiteuse Ø jusqu'à 600 mm avec machiniste (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15--5",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Polisseuse avec machiniste (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15--6",
+   "num": "",
+   "cat": "345 Pierre naturelle",
+   "sub": "Régie",
+   "nom": "Polisseuse portative avec machiniste (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-6a-7",
+   "num": "6a",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement de parties unies, nettoyage et enlèvement des débris compris, jusqu'à 5 mm de profondeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-6b-8",
+   "num": "6b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement de parties unies, de 5 à 15 mm de profondeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-6c-9",
+   "num": "6c",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement de parties unies, de 15 à 40 mm de profondeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-7-10",
+   "num": "7",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement de molasse peinte à l'huile, jusqu'à 5 mm de profondeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-7b-11",
+   "num": "7b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Plus-value pour ravalement au rapoir",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-8a-12",
+   "num": "8a",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement d'éléments de moulures jusqu'à 5 mm de profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-8b-13",
+   "num": "8b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement d'éléments de moulures de 5 à 15 mm de profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-8c-14",
+   "num": "8c",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement d'éléments de moulures de 15 à 40 mm de profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-9a-15",
+   "num": "9a",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Remplacement de pièces de molasse droites : empochement, fourniture, façon, pose, ravalement et jointoyage",
+   "metre": "volume"
+  },
+  {
+   "id": "ch15-9b-16",
+   "num": "9b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Remplacement de pièces de molasse moulurées : empochement, fourniture, façon, pose, ravalement et jointoyage",
+   "metre": "volume"
+  },
+  {
+   "id": "ch15-9c-17",
+   "num": "9c",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Plus-value pour éléments cintrés (rayon jusqu'à 2 m / de 2 à 5 m / plus de 5 m)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-10-18",
+   "num": "10",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement au rabot de parties unies de pierres de Savonnières, Saint-Paul, profondeur jusqu'à 5 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-11-19",
+   "num": "11",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement au rabot d'éléments de moulures",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-12-20",
+   "num": "12",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Ravalement à la boucharde des parties unies en pierre dure",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-13-21",
+   "num": "13",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Rafraîchissement des ciselures",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-14-22",
+   "num": "14",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Lavage à l'acide de la pierre dure",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-15-23",
+   "num": "15",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Lavage à la vapeur de la pierre dure",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-16-24",
+   "num": "16",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement de façades",
+   "nom": "Rhabillages dans la pierre dure, rentrée des ciselures (en régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-17-25",
+   "num": "17",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement d'escaliers",
+   "nom": "Piquage des semelles de marches d'escalier en grès pour recevoir un nouveau revêtement, épaisseur 6 cm, évacuation des débris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-18-26",
+   "num": "18",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement d'escaliers",
+   "nom": "Ravalement de la contremarche, hauteur 10 à 12 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-19-27",
+   "num": "19",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement d'escaliers",
+   "nom": "Fourniture et pose de nouvelles semelles en grès poncé, épaisseur 6 cm, nez carré, largeur 35 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-20-28",
+   "num": "20",
+   "cat": "345 Pierre naturelle",
+   "sub": "Ravalement d'escaliers",
+   "nom": "Bouchardage des foulées d'anciennes marches d'escalier en calcaire ou grès, largeur 30 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-29",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en granit clair poncé, épaisseur 3 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-30",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en granit clair poncé, épaisseur 4 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-31",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en granit clair poncé, épaisseur 5 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-32",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en calcaire scié, épaisseur 3 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-33",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en calcaire scié, épaisseur 4 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-34",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en calcaire scié, épaisseur 5 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-35",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en grès de la Molière poncé, épaisseur 3 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-36",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en grès de la Molière poncé, épaisseur 4 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-21-37",
+   "num": "21",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre ou seuil de porte en grès de la Molière poncé, épaisseur 5 cm, posé sur lit de mortier, renvoi d'eau et goutte pendante, largeur 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-22a-38",
+   "num": "22a",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Encadrement de fenêtre en molasse, section jusqu'à 25×25 cm, battues pour volets, tablette droite sans profil",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-22b-39",
+   "num": "22b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Encadrement de fenêtre en calcaire du Jura poncé, section jusqu'à 25×25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-23-40",
+   "num": "23",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Plus-value pour rappel des montants taillés dans les tablettes (par tablette, 2 rappels)",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-24-41",
+   "num": "24",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Plus-value pour exécution bouchardée",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-25-42",
+   "num": "25",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Façon de trous pour gonds, exécutée en usine",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-26-43",
+   "num": "26",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette de fenêtre en marbre ou granit poncé, épaisseur 3 cm, goutte pendante et renvoi d'eau en aluminium, largeur jusqu'à 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-27-44",
+   "num": "27",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Plus-value pour têtes des tablettes vues poncées",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-28-45",
+   "num": "28",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Plus-value tablette par cm de largeur en plus",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-29-46",
+   "num": "29",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Tablette intérieure en marbre ou granit poli, épaisseur 3 cm, posée sur muret en maçonnerie, largeur jusqu'à 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-30-47",
+   "num": "30",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Plus-value sur tablettes intérieures pour 2 retours arrondis aux extrémités",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-31-48",
+   "num": "31",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Encadrement de porte, largeur 20 cm, 1 face, 1 chant et 1 retour sur 4 cm poli, épaisseur 2 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-31b-49",
+   "num": "31b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Seuils, tablettes, encadrements",
+   "nom": "Encadrement de porte, largeur 20 cm, poli, épaisseur 3 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-32a-50",
+   "num": "32a",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage en granit clair poncé posé sur lit de mortier, épaisseur 2 cm, carreaux posés à l'anglaise",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-32b-51",
+   "num": "32b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage en calcaire du Jura scié, épaisseur 3 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-32c-52",
+   "num": "32c",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage en grès de la Molière poncé, épaisseur 3 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-33-53",
+   "num": "33",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage uni en marbre poncé ou poli après pose, épaisseur 2 cm, carreaux à joints croisés (Travertin, Bardiglietto, Botticino, Perlato…)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-34-54",
+   "num": "34",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage en granit poncé ou poli en usine, épaisseur 2 cm (granit suisse ou étranger)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-35-55",
+   "num": "35",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage à damiers en marbre blanc et noir, épaisseur 2 cm, poncé ou poli",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-36-56",
+   "num": "36",
+   "cat": "345 Pierre naturelle",
+   "sub": "Dallages",
+   "nom": "Dallage en marbre blanc, carreaux 25×25 à 35×35 cm, avec écoinçons en marbre noir",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-37-57",
+   "num": "37",
+   "cat": "345 Pierre naturelle",
+   "sub": "Plinthes",
+   "nom": "Plinthe en marbre 1 face et 1 chant droit poli, épaisseur 2 cm, hauteur jusqu'à 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-38-58",
+   "num": "38",
+   "cat": "345 Pierre naturelle",
+   "sub": "Plinthes",
+   "nom": "Plus-value plinthe par cm de hauteur en plus",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-39-59",
+   "num": "39",
+   "cat": "345 Pierre naturelle",
+   "sub": "Plinthes",
+   "nom": "Plinthe rampante droite en marbre poli, épaisseur 2 cm, hauteur 10 cm, sur nez de marches",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-40-60",
+   "num": "40",
+   "cat": "345 Pierre naturelle",
+   "sub": "Plinthes",
+   "nom": "Plinthe à crémaillère en marbre poli, épaisseur 2 cm, hauteur 8 à 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-41-61",
+   "num": "41",
+   "cat": "345 Pierre naturelle",
+   "sub": "Plinthes",
+   "nom": "Plinthes rampantes et à crémaillères cintrées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-42-62",
+   "num": "42",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en granit clair posée sur lit de mortier, dessus scié, chants fraisés, largeur 30 cm, épaisseur 3 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-42-63",
+   "num": "42",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en granit clair posée sur lit de mortier, dessus scié, chants fraisés, largeur 30 cm, épaisseur 4 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-42-64",
+   "num": "42",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en granit clair posée sur lit de mortier, dessus scié, chants fraisés, largeur 30 cm, épaisseur 5 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-43-65",
+   "num": "43",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Plus-value semelle pour exécution poncée, nez poncé avec arêtes chanfreinées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-44-66",
+   "num": "44",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en grès de la Molière poncé, joints fraisés, largeur 30 cm, épaisseur 3 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-44-67",
+   "num": "44",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en grès de la Molière poncé, joints fraisés, largeur 30 cm, épaisseur 4 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-44-68",
+   "num": "44",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en grès de la Molière poncé, joints fraisés, largeur 30 cm, épaisseur 5 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-45-69",
+   "num": "45",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelle d'escalier en marbre ou granit droite, épaisseur 30 mm, poncée, largeur 32 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-46-70",
+   "num": "46",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Semelles de marche et contremarches cintrées en plan",
+   "metre": "none"
+  },
+  {
+   "id": "ch15-47-71",
+   "num": "47",
+   "cat": "345 Pierre naturelle",
+   "sub": "Escaliers",
+   "nom": "Contremarche droite polie, épaisseur 2 cm, hauteur jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch15-48a-72",
+   "num": "48a",
+   "cat": "345 Pierre naturelle",
+   "sub": "Revêtements de façades et parois",
+   "nom": "Revêtement de façade en Bernais poncé, épaisseur 3 cm, suspendu par pattes inox à 10 cm (isolant non compris)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-48b-73",
+   "num": "48b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Revêtements de façades et parois",
+   "nom": "Revêtement de façade en Travertin poncé, épaisseur 3 cm, suspendu par pattes inox",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-49-74",
+   "num": "49",
+   "cat": "345 Pierre naturelle",
+   "sub": "Revêtements de façades et parois",
+   "nom": "Revêtement de paroi en marbre, épaisseur 2 cm, poli brillant, fixé par agrafes (Travertin, Botticino, Perlato…)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-49b-75",
+   "num": "49b",
+   "cat": "345 Pierre naturelle",
+   "sub": "Revêtements de façades et parois",
+   "nom": "Plus-value pour marbre de 30 mm d'épaisseur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch15-50-76",
+   "num": "50",
+   "cat": "345 Pierre naturelle",
+   "sub": "Revêtements de façades et parois",
+   "nom": "Revêtement de paroi en granit, épaisseur 2 cm, poli brillant (granit suisse ou étranger)",
+   "metre": "surface"
+  }
+ ]
+}
