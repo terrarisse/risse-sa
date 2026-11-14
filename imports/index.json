@@ -136,6 +136,22 @@
    "n": 1046,
    "note": "Fouilles et terrassements, canalisations, routes, bordures, pavages… (génie civil, volumes VSS I à V)",
    "ordre": 17
+  },
+  {
+   "id": "ch18",
+   "titre": "CAN 181 — Aménagement de parcs, jardins, places de sports",
+   "fichier": "ch18-amenagements-exterieurs.json",
+   "n": 54,
+   "note": "Régie paysagiste, terrassements de jardins, constructions de jardins (murs, bordures, pavés, dalles, marches), plantations et gazon",
+   "ordre": 18
+  },
+  {
+   "id": "ch19",
+   "titre": "CAN 183 — Clôtures",
+   "fichier": "ch19-clotures.json",
+   "n": 109,
+   "note": "Clôtures en bois, portails en bois, clôtures et grillages métalliques, barrières, clôtures industrielles et de tennis, portails grillagés, murs d'espaliers",
+   "ordre": 19
   }
  ]
 }

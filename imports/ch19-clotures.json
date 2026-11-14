@@ -1,0 +1,879 @@
+{
+ "id": "ch19",
+ "titre": "CAN 183 — Clôtures",
+ "note": "Clôtures en bois, portails en bois, clôtures et grillages métalliques, barrières, clôtures industrielles et de tennis, portails grillagés, murs d'espaliers",
+ "postes": [
+  {
+   "id": "ch19--0",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Chef d'équipe clôtures (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--1",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Poseur de clôtures (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--2",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Aide-poseur (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--3",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Location compresseur avec 1 marteau et 1 homme",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--4",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Location camion 10 t avec chauffeur",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--5",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Location camionnette avec chauffeur",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--6",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Location trax (tarière) avec machiniste",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--7",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Location dumper 1000 litres avec chauffeur",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--8",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Régie",
+   "nom": "Poste à souder électrique mobile avec main-d'œuvre",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--9",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Grillage simple torsion maille 50×50, fil Ø 2,5, hauteur 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19--10",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Grillage simple torsion maille 50×50, fil Ø 2,5, hauteur 120 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19--11",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Plus-value pour grillage en rouleau inférieur à 25 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19--12",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Plus-value pour grillage plastifié vert",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19--13",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Montant galvanisé départ simple avec 1 jambe de force (long. 150 cm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--14",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Montant galvanisé départ avec tringle soudée et 1 jambe de force",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--15",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Montant galvanisé d'angle avec 2 jambes de force",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--16",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Montant galvanisé intermédiaire",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--17",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Fil de tension Ø 3 mm (kg)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--18",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Fil d'attache Ø 1,2 et 1,5 mm (kg)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19--19",
+   "num": "",
+   "cat": "422 Clôtures",
+   "sub": "Fournitures (franco chantier)",
+   "nom": "Régulateur n° 2",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-3-20",
+   "num": "3",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Plus-value pour longueur de 25 à 49 m (clôtures)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-3-21",
+   "num": "3",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Plus-value pour longueur de 1 à 24 m (clôtures)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-4-22",
+   "num": "4",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury en panneaux mélèze scié, double filière, 1 piquet de châtaignier tous les 1,50 m, hauteur 100 cm, posée",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-4-23",
+   "num": "4",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury hauteur 100 cm, fournie seulement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-5-24",
+   "num": "5",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury sans piquets, hauteur 100 cm, fournie",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-4-25",
+   "num": "4",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury en panneaux mélèze scié, double filière, 1 piquet de châtaignier tous les 1,50 m, hauteur 120 cm, posée",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-4-26",
+   "num": "4",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury hauteur 120 cm, fournie seulement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-5-27",
+   "num": "5",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury sans piquets, hauteur 120 cm, fournie",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-4-28",
+   "num": "4",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury en panneaux mélèze scié, double filière, 1 piquet de châtaignier tous les 1,50 m, hauteur 150 cm, posée",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-4-29",
+   "num": "4",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury hauteur 150 cm, fournie seulement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-5-30",
+   "num": "5",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Chabaury sans piquets, hauteur 150 cm, fournie",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-8-31",
+   "num": "8",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Imprégnation de la clôture en autoclave sous pression alternée au sel CCB",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-9-32",
+   "num": "9",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Pare-neige en panneaux de 3 m¹ mélèze scié, double filière, sans piquets, non posé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-10-33",
+   "num": "10",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Piquet de châtaignier rond refendu, pointe imprégnée, longueur 150 cm, non posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-10-34",
+   "num": "10",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Piquet de châtaignier rond refendu, pointe imprégnée, longueur 170 cm, non posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-10-35",
+   "num": "10",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Piquet de châtaignier rond refendu, pointe imprégnée, longueur 200 cm, non posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-11-36",
+   "num": "11",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Croisillon en panneaux mélèze scié, damettes plates, hauteur 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-11-37",
+   "num": "11",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Plus-value pour damettes mi-rondes (clôture Croisillon)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-11-38",
+   "num": "11",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Imprégnation en autoclave de clôture Croisillon",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-13-39",
+   "num": "13",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Plus-value pour imprégnation à l'huile selon couleur et qualité",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-14-40",
+   "num": "14",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Carrelets de mélèze appointis bois brut, pointe imprégnée, non posés (7×7, 6×8, 8×8 cm)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch19-15-41",
+   "num": "15",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Carrelets de chêne tête travaillée en pointe de diamant pour montants de portails, non posés (10×10, 12×12 cm)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch19-16-42",
+   "num": "16",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Plus-value pour imprégnation au sel CCB",
+   "metre": "volume"
+  },
+  {
+   "id": "ch19-17-43",
+   "num": "17",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture à damettes (palissade) en panneaux sapin ou mélèze, filières 60/40, damettes 60/24, hauteur 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-18-44",
+   "num": "18",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture à damettes avec montants en fer L 40/40/5 et filières en fer U, fixation sur mur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-18-45",
+   "num": "18",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture à damettes avec montants en fer scellés dans bases béton",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-20-46",
+   "num": "20",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Forestière en rondins, 2 traverses en biais, hauteur 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-21-47",
+   "num": "21",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Plus-value pour imprégnation au sel selon procédé RIL",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-22-48",
+   "num": "22",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Paddock, montants carrelets 10×10 cm, 2 traverses 15/2,5 cm, hauteur 100 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-23-49",
+   "num": "23",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Paddock, traverses 10/4 cm mortaisées aux montants",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-23b-50",
+   "num": "23b",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures en bois",
+   "nom": "Clôture Paddock, poteaux 8/12 et carrelets 5/5 posés en diagonale",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-24-51",
+   "num": "24",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Portail type Chabaury, cadre sapin mortaisé et chevillé, serrure galvanisée, 100×100 cm, posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-25-52",
+   "num": "25",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Portail type Chabaury, cadre en mélèze, montants scellés dans bases béton",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-26-53",
+   "num": "26",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Portail type Croisillon, cadre mélèze mortaisé et chevillé, serrure à 2 clés, 100×100 cm, posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-27-54",
+   "num": "27",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Portail type à damettes, cadre mortaisé et chevillé, montants renforcés et diagonale, 100×100 cm, posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-28-55",
+   "num": "28",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Portillon cadre cloué et collé en lambourdes avec frétalets, cadre sapin et garniture Chabaury, 100×100 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-28-56",
+   "num": "28",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Portillon cadre mélèze et garniture Croisillon, 100×100 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-29-57",
+   "num": "29",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Panneau mobile, lambourdes sapin et garniture Chabaury mélèze, 300×100 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-29-58",
+   "num": "29",
+   "cat": "422 Clôtures",
+   "sub": "Portails en bois",
+   "nom": "Panneau mobile, lambourdes mélèze et garniture Croisillon mélèze, 300×100 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-30-59",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Grillage galvanisé simple torsion 50×50 fil Ø 2,5, 3 fils de tension, hauteur 100 cm, sur mur, montants L 40/40/5 aux départs et T 35/35/4,5 intermédiaires",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-30-60",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Grillage galvanisé simple torsion, hauteur 100 cm, montants scellés dans bases béton, montants L 40/40/5 aux départs et T 35/35/4,5 intermédiaires",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-30-61",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Grillage galvanisé simple torsion 50×50 fil Ø 2,5, 3 fils de tension, hauteur 100 cm, sur mur, montants tube Ø 48 avec arcs-boutants Ø 33 et tube Ø 42 intermédiaires",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-30-62",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Grillage galvanisé simple torsion, hauteur 100 cm, montants scellés dans bases béton, montants tube Ø 48 avec arcs-boutants Ø 33 et tube Ø 42 intermédiaires",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-30-63",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Plus-value pour adjonction d'une main-courante en tube Ø 33 soudée sur les montants",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-30-64",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Réduction de la hauteur du grillage de 8 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-30-65",
+   "num": "30",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Clôture avec montants en béton armé 10×10 cm munis de goupilles galvanisées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-31-66",
+   "num": "31",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Plus-value pour grillage à fils Ø 2,8 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch19-33-67",
+   "num": "33",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Clôture Mixte avec planches béton armé 30×3 cm et grillage diagonal 50/50, hauteur 80 cm, montants L/T",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-33-68",
+   "num": "33",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Clôture Mixte avec planches béton, montants tube Ø 42 et arcs-boutants",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-33-69",
+   "num": "33",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Clôture Mixte avec planches béton, montants en béton armé à redents",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-34-70",
+   "num": "34",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Plus-value pour grillage à fils Ø 2,8 mm (clôture Mixte)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch19-35-71",
+   "num": "35",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Barrière tubulaire à panneaux grillagés, montants tube Ø 42 tous les 2 m, grillage diagonal 50/50, hauteur 80 cm, scellée dans trous réservés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-36-72",
+   "num": "36",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Moins-value pour suppression de la filière basse",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-37-73",
+   "num": "37",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures et grillages métalliques",
+   "nom": "Barrière tubulaire à panneaux grillagés scellée dans bases béton coulées sur place",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-38-74",
+   "num": "38",
+   "cat": "422 Clôtures",
+   "sub": "Barrières en fer I et tubes",
+   "nom": "Barrière avec montants I PN 8 tous les 2 m et 2 filières tube gaz Ø 48, hauteur 100 cm, scellée dans trous réservés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-39-75",
+   "num": "39",
+   "cat": "422 Clôtures",
+   "sub": "Barrières en fer I et tubes",
+   "nom": "Barrière montants I PN 8, montants scellés dans bases béton coulées sur place",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-40-76",
+   "num": "40",
+   "cat": "422 Clôtures",
+   "sub": "Barrières en fer I et tubes",
+   "nom": "Barrière type État : 3 filières tube gaz Ø 48 et Ø 33 mm, scellée dans trous réservés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-41-77",
+   "num": "41",
+   "cat": "422 Clôtures",
+   "sub": "Barrières en fer I et tubes",
+   "nom": "Barrière type État, montants scellés dans bases béton coulées sur place",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-43-78",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée type FIX, fils galvanisés Ø 3,4×2,7 mm, hauteur 80 cm, 4 fils horizontaux",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-43-79",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée type FIX, fils galvanisés Ø 3,4×2,7 mm, hauteur 100 cm, 6 fils horizontaux",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-43-80",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée type FIX, fils galvanisés Ø 3,4×2,7 mm, hauteur 120 cm, 8 fils horizontaux",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-43-81",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée type FIX, fils galvanisés Ø 3,4×2,7 mm, hauteur 150 cm, 10 fils horizontaux",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-44-82",
+   "num": "44",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée préfabriquée type Ursus, hauteur 90 cm, 8 fils, montants Ø 42/48 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-44-83",
+   "num": "44",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée préfabriquée type Ursus, hauteur 110 cm, 10 fils, montants Ø 42/48 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-44-84",
+   "num": "44",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée préfabriquée type Ursus, hauteur 130 cm, 11 fils, montants Ø 42/48 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-44-85",
+   "num": "44",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Clôture réticulée préfabriquée type Ursus, hauteur 150 cm, 12 fils, montants Ø 42/48 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-43-86",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau de départ à un arc-boutant (bouilleur), hauteur 80/90 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-87",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau d'angle à 2 arcs-boutants, hauteur 80/90 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-88",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau de départ à un arc-boutant (bouilleur), hauteur 100/110 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-89",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau d'angle à 2 arcs-boutants, hauteur 100/110 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-90",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau de départ à un arc-boutant (bouilleur), hauteur 120/130 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-91",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau d'angle à 2 arcs-boutants, hauteur 120/130 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-92",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau de départ à un arc-boutant (bouilleur), hauteur 150 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-43-93",
+   "num": "43",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value poteau d'angle à 2 arcs-boutants, hauteur 150 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-45-94",
+   "num": "45",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures industrielles",
+   "nom": "Plus-value pour flèches porteuses de fil de fer barbelé sur fils tendeurs",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-46-95",
+   "num": "46",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures de tennis",
+   "nom": "Clôture de tennis, montants galvanisés Ø 76 aux angles et Ø 60 intermédiaires, grillage diagonal 45/45, hauteur 4 m",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-46b-96",
+   "num": "46b",
+   "cat": "422 Clôtures",
+   "sub": "Clôtures de tennis",
+   "nom": "Plus-value pour grillage plastifié de couleur verte (tennis)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-48-97",
+   "num": "48",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Portail grillagé à 1 vantail, cadre tube Ø 33, grillage diagonal 50/50, serrure Soleure, 100×100 cm, entre piliers de maçonnerie",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-49-98",
+   "num": "49",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Plus-value pour fourniture et pose des montants en tube Ø 60 scellés dans bases béton (la paire)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-50-99",
+   "num": "50",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Moins-value pour suppression de la filière inférieure du portail",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-51-100",
+   "num": "51",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Portail grillagé à deux vantaux, verrou baïonnette, butée au sol, 300×100 cm, entre piliers",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-52-101",
+   "num": "52",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Plus-value pour montants en tube bouilleur Ø 76 (la paire)",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-54-102",
+   "num": "54",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Portail à coulisse avec rails, guidage et butée, 350/100",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-54-103",
+   "num": "54",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Portail à coulisse avec rails, guidage et butée, 600/150",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-54b-104",
+   "num": "54b",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Fondation armée pour portail à coulisse",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-55-105",
+   "num": "55",
+   "cat": "422 Clôtures",
+   "sub": "Portails tubulaires grillagés",
+   "nom": "Panneau mobile cadre tube Ø 33, grillage diagonal 50/50, berceaux de fixation et cadenas, 300×100 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch19-56-106",
+   "num": "56",
+   "cat": "422 Clôtures",
+   "sub": "Murs d'espaliers",
+   "nom": "Mur d'espalier en planches de béton armé cimentées entre poteaux béton scellés, hauteur 200 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-57-107",
+   "num": "57",
+   "cat": "422 Clôtures",
+   "sub": "Murs d'espaliers",
+   "nom": "Plus-value pour 4 fils de tension à raidisseurs sur poteaux d'espalier",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch19-58-108",
+   "num": "58",
+   "cat": "422 Clôtures",
+   "sub": "Murs d'espaliers",
+   "nom": "Plus-value pour auvent au-dessus du mur d'espalier, consoles comprises, hauteur 200 cm",
+   "metre": "coupe"
+  }
+ ]
+}

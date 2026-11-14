@@ -1,0 +1,439 @@
+{
+ "id": "ch18",
+ "titre": "CAN 181 — Aménagement de parcs, jardins, places de sports",
+ "note": "Régie paysagiste, terrassements de jardins, constructions de jardins (murs, bordures, pavés, dalles, marches), plantations et gazon",
+ "postes": [
+  {
+   "id": "ch18--0",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Technicien contremaître paysagiste (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18--1",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Chef de chantier, chef d'équipe, maçon, rocailleur spécialisé (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18--2",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Chef d'équipe d'entretien (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18--3",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Jardinier (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18--4",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Aide-jardinier et manœuvre (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18--5",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Plus-value pour travaux d'élagage et d'abattage de futaies de plus de 10 m ou dangereux",
+   "metre": "none"
+  },
+  {
+   "id": "ch18--6",
+   "num": "",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Régie",
+   "nom": "Honoraires pour évaluation, expertises et conseil (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18-21a-7",
+   "num": "2.1a",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Fouilles en rigoles dans terrain normal à la main, dépôt des matériaux sur berges",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21a-8",
+   "num": "2.1a",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Fouilles en rigoles dans terrain normal avec pelle 1,5 tonne, dépôt des matériaux sur berges",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21a-9",
+   "num": "2.1a",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Fouilles en rigoles dans terrain normal avec pelle 3-5 tonnes, dépôt des matériaux sur berges",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21b-10",
+   "num": "2.1b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Terrassement en pleine masse dans terrain normal pour mise en profil et nivellement, à la machine, dépôt dans le rayon d'action",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21b-11",
+   "num": "2.1b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Terrassement en pleine masse dans terrain normal, exécution à la main",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21c-12",
+   "num": "2.1c",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Décompactage en croix des terres de fond avec ripper pour liaison avec les terres végétales",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-21c-13",
+   "num": "2.1c",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Décompactage en croix des terres de fond à la main",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-21d-14",
+   "num": "2.1d",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Reprise en dépôt de terre végétale, transport max. 50 m, mise en place épaisseur 25-30 cm, avec chargeuse ou bac moyen",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21d-15",
+   "num": "2.1d",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Reprise en dépôt de terre végétale, mise en place avec chargeur compact",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-21d-16",
+   "num": "2.1d",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Terrassements de jardins",
+   "nom": "Reprise en dépôt de terre végétale, mise en place à la main",
+   "metre": "volume"
+  },
+  {
+   "id": "ch18-22a-17",
+   "num": "2.2a",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Mur en éléments préfabriqués, remplissage avec terre végétale du chantier (sans semelle ni drainage), selon modèle et teinte",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22b-18",
+   "num": "2.2b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Exécution de bordure en béton 8/25 cm, lit de béton et jointoyage compris (creuse non comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22b-19",
+   "num": "2.2b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Exécution de bordure en granite 4-5/24-28 cm, dessus brut, lit de béton et jointoyage compris (creuse non comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22b-20",
+   "num": "2.2b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Exécution de bordure en porphyre 5/20-28 cm, lit de béton et jointoyage compris (creuse non comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22b-21",
+   "num": "2.2b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Exécution de bordure en pavés béton 25/12,5/8 cm, lit de béton et jointoyage compris (creuse non comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22b-22",
+   "num": "2.2b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Exécution de bordure en pavés granite 8/11 cm, lit de béton et jointoyage compris (creuse non comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22b-23",
+   "num": "2.2b",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Exécution de bordure en pavés porphyre 8/11 cm, lit de béton et jointoyage compris (creuse non comprise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22c-24",
+   "num": "2.2c",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Pavés béton épaisseur 6 cm sur lit de gravillon 3/6 mm, sablage des joints et vibrage, selon modèle et teinte",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22d-25",
+   "num": "2.2d",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Grilles béton-gazon épaisseur 10 cm sur lit de sable 0/6, remplissage des alvéoles (terre-sable-compost), sans ensemencement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22e-26",
+   "num": "2.2e",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Dalles 50/50 cm épaisseur 3-4 cm sur lit de sable ou gravillon, aspect béton naturel, sablage des joints",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22e-27",
+   "num": "2.2e",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Dalles 50/50 cm épaisseur 3-4 cm, béton sablé couleur selon teinte",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22f-28",
+   "num": "2.2f",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Plus-value pour coupes de bords selon épaisseur du revêtement, coupes droites",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22g-29",
+   "num": "2.2g",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Pavés naturels en arc sur lit de sable 5-6 cm, sablage des joints, vibrage, arrosage — pavés granite 8/11 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22g-30",
+   "num": "2.2g",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Pavés naturels en arc sur lit de sable — pavés porphyre 8/11 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22h-31",
+   "num": "2.2h",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Dallage granite grand format opus incertum, joints max. 1 cm, sablage des joints",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-22i-32",
+   "num": "2.2i",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Passe-pieds, joints gazonnés env. 10 cm, pose sur lit de sable — dalles 50/50 cm béton naturel",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22i-33",
+   "num": "2.2i",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Passe-pieds — dalles 50/50 cm béton sablé selon teinte",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22i-34",
+   "num": "2.2i",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Passe-pieds — dalles granite, largeur 60 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22j-35",
+   "num": "2.2j",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Marches d'escalier en L béton naturel, assise de béton légèrement ferraillée",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22j-36",
+   "num": "2.2j",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Marches d'escalier en L béton sablé selon teinte",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-22j-37",
+   "num": "2.2j",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Constructions de jardins",
+   "nom": "Marches d'escalier en granite avec contremarches assorties",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch18-23-38",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Piochage superficiel des surfaces à planter et engazonner, dégagement des racines, pierrailles et déchets",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-39",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Ameublissement des surfaces à planter et engazonner jusqu'à 25 cm de profondeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-40",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Dressement général des surfaces à planter et engazonner, mouvements de terre max. 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-41",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Réglage définitif des surfaces à planter et à engazonner",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-42",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Plus-value pour exécution en talus de plus de 30°",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-43",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Fourniture de végétaux, prix départ pépinière (tarif Association des pépiniéristes suisses)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18-23-44",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Transport, distribution, plantation des végétaux et premier arrosage (40 à 50 % de la valeur des plantes)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18-23-45",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Tuteurage des plantes (en plus-value)",
+   "metre": "none"
+  },
+  {
+   "id": "ch18-23-46",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Ensemencement gazon standard 30-40 g/m², enfouissage et roulage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-47",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Plus-value pour placage de gazon en rouleau",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-48",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Ensemencement prairie fleurie courante 20 g/m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-49",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Fourniture et épandage d'engrais spécial pour gazon 30-40 g/m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-50",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Paillage de gazon pour semis d'été, dépaillage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-51",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Arrosage de gazon (en plus-value)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-52",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Première tonte de gazon, réensemencement des parties chauves, évacuation des coupes",
+   "metre": "surface"
+  },
+  {
+   "id": "ch18-23-53",
+   "num": "2.3",
+   "cat": "421 Aménagements extérieurs",
+   "sub": "Plantations et gazon",
+   "nom": "Roulage éventuel après la première tonte",
+   "metre": "surface"
+  }
+ ]
+}
