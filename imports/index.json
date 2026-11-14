@@ -80,6 +80,14 @@
    "n": 127,
    "note": "Chéneaux, garnitures, couvertures, descentes, paratonnerres",
    "ordre": 10
+  },
+  {
+   "id": "ch11",
+   "titre": "CAN 361/363 — Couverture",
+   "fichier": "ch11-couverture.json",
+   "n": 105,
+   "note": "Tuiles plates, flamandes, béton, ardoises, Eternit, lattages, régie",
+   "ordre": 11
   }
  ]
 }

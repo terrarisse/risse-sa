@@ -1,0 +1,847 @@
+{
+ "id": "ch11",
+ "titre": "CAN 361/363 — Couverture",
+ "note": "Tuiles plates, flamandes, béton, ardoises, Eternit, lattages, régie",
+ "postes": [
+  {
+   "id": "ch11-56-0",
+   "num": "56",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Couverture double en tuiles plates 37/17 cm sur lattes 27/40, pureau 15 cm (rouges, vieillies ou flammées)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-57-1",
+   "num": "57",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Couverture en tuiles plates, tuiles fournies par le propriétaire (fourniture des lattes et pointes comprise)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-58-2",
+   "num": "58",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Couverture double en tuiles plates de clocher carré ou rectangulaire 12/28 cm sur lattes 27/40, vieillies, non clouées",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-59-3",
+   "num": "59",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Taille de tuiles plates aux arêtiers, couloirs, noues (droite ou biaise)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-60-4",
+   "num": "60",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Plus-value pour lattage ciment sur mur mitoyen (largeur 30 ou 45 cm)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-61-5",
+   "num": "61",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Plus-value pour tuiles plates de rives agrafées (tuiles une et demie, crochets fil cuivre ou inox)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-62-6",
+   "num": "62",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Faîtage et arêtier en tuiles plates (créneaux 38 cm, recouvrement 6 cm), posés au bain de mortier",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-63-7",
+   "num": "63",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Plus-value pour double rang en tuiles plates haut et bas",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-64-8",
+   "num": "64",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Plus-value pour griffes d'about (rouges et vieillies)",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-65-9",
+   "num": "65",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Cabochons rouges et vieillis, tous modèles",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-66-10",
+   "num": "66",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Tuiles plates chatières avec treillis (rouges et vieillies)",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-67-11",
+   "num": "67",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Tuiles plates en verre",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-68-12",
+   "num": "68",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Découverture de toits en tuiles plates, arrachage des clous, triage, évacuation des débris (descente soignée ou jetée)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-69-13",
+   "num": "69",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Remaniement de toits en tuiles plates, couverture double, sans changement des lattes ni fourniture",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-70-14",
+   "num": "70",
+   "cat": "361 Couverture",
+   "sub": "Tuiles plates",
+   "nom": "Remaniement de toits en tuiles plates avec changement des lattes 24/48 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-71-15",
+   "num": "71",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Couverture en tuiles flamandes ou à double emboîtement sur lattes 27/40, pureau 33 à 35 cm (rouges, vieillies ou autres couleurs)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-72-16",
+   "num": "72",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Couverture en tuiles à emboîtement, tuiles fournies par le propriétaire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-73-17",
+   "num": "73",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Taille de tuiles aux arêtiers, couloirs, noues",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-74-18",
+   "num": "74",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Plus-value pour lattage ciment sur mur mitoyen (largeur 30 ou 45 cm)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-75-19",
+   "num": "75",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Plus-value pour tuiles de rives agrafées (crochets fil inox ou feuillard cuivre)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-76-20",
+   "num": "76",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Faîtage et arêtier (créneaux 38 cm), posés au bain de mortier, rouges et vieillis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-77-21",
+   "num": "77",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Plus-value pour griffes d'abouts",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-78-22",
+   "num": "78",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Cabochons rouges et vieillis",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-79-23",
+   "num": "79",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Tuiles chatières avec treillis, rouges et vieillies",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-80-24",
+   "num": "80",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Tuiles en verre (à emboîtement)",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-81-25",
+   "num": "81",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Découverture de toits en tuiles à emboîtement, enlèvement des lattes, triage et évacuation (descente soignée ou jetée)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-82-26",
+   "num": "82",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Remaniement de toits en tuiles à emboîtement sans changement des lattes ni fourniture",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-83-27",
+   "num": "83",
+   "cat": "361 Couverture",
+   "sub": "Tuiles flamandes et à double emboîtement",
+   "nom": "Remaniement de toits en tuiles à emboîtement avec changement des lattes 27/40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-96-28",
+   "num": "96",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Couverture en tuiles béton plates Tegalo, lattage 27/40 compris, pureau 33 à 35 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-96-29",
+   "num": "96",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Couverture en tuiles béton flamandes romaines, lattage 27/40 compris, pureau 33 à 35 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-96-30",
+   "num": "96",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Couverture en tuiles béton flamandes sablées, lattage 27/40 compris, pureau 33 à 35 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-96-31",
+   "num": "96",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Couverture en tuiles béton à profil lisse, lattage 27/40 compris, pureau 33 à 35 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-97-32",
+   "num": "97",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Cabochon pour tuiles béton",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-98-33",
+   "num": "98",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Faîtage pour tuiles béton, noquets et fixations compris (plates et à profil)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-99-34",
+   "num": "99",
+   "cat": "361 Couverture",
+   "sub": "Tuiles en béton",
+   "nom": "Plus-value pour tuiles de virevents (tuiles béton)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-100-35",
+   "num": "100",
+   "cat": "361 Couverture",
+   "sub": "Lattages",
+   "nom": "Lambourdage en lambourdes 24/48 mm, selon écartement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-101-36",
+   "num": "101",
+   "cat": "361 Couverture",
+   "sub": "Lattages",
+   "nom": "Lattage divers avec lattes de 27/40 mm, selon écartement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-102-37",
+   "num": "102",
+   "cat": "361 Couverture",
+   "sub": "Lattages",
+   "nom": "Sous-lattage (aération) avec lattes 27/40, 40/45 ou 45/50 mm, selon écartement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-103-38",
+   "num": "103",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Couverture double en ardoises naturelles 405×250 mm EF gris-bleu, avec crochets",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-104-39",
+   "num": "104",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Couverture double en ardoises naturelles 355×250 mm EF gris-bleu",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-105-40",
+   "num": "105",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Couverture double en ardoises naturelles 300×200 mm EF gris-bleu",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-106-41",
+   "num": "106",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Plus-value pour double rang d'ardoises haut et bas",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-107-42",
+   "num": "107",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Taille des ardoises aux arêtiers, couloirs, noues",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-108-43",
+   "num": "108",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Arêtiers à la française avec noquets",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-109-44",
+   "num": "109",
+   "cat": "361 Couverture",
+   "sub": "Ardoises naturelles (Angers)",
+   "nom": "Découverture de toits en ardoises, arrachage des pointes (descente soignée ou jetée)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-110-45",
+   "num": "110",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture double en ardoises Eternit 60/40, recouvrement 12 cm (sans lattage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-111-46",
+   "num": "111",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture double en ardoises Eternit 60/40, recouvrement 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-112-47",
+   "num": "112",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture double en ardoises Eternit 40/40, recouvrement 12 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-113-48",
+   "num": "113",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture double en ardoises Eternit 40/40, recouvrement 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-114-49",
+   "num": "114",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture double en ardoises Eternit 40/30, recouvrement 12 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-115-50",
+   "num": "115",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture double en ardoises Eternit 40/30, recouvrement 10 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-116-51",
+   "num": "116",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture en ardoises Eternit 30/60 horizontales, recouvrement 12/12 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-117-52",
+   "num": "117",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Couverture en ardoises Eternit, recouvrement 10-12 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-118-53",
+   "num": "118",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Coupes biaises d'ardoises Eternit, par ligne",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-119-54",
+   "num": "119",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Faîtage en ardoises Eternit 40/20 cm couleur, sans latte",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-120-55",
+   "num": "120",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Arêtiers à la française en ardoises Eternit, minimum 15° ou 28 %",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-121-56",
+   "num": "121",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Stackord 40/30-29 avec planches et noquets",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-122-57",
+   "num": "122",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Sous-toiture en plaques Gea de 250/120 ou 250/60",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-123-58",
+   "num": "123",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Plus-value pour pentes supérieures à 30° (Eternit)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-1232-59",
+   "num": "123.2",
+   "cat": "361 Couverture",
+   "sub": "Couvertures en Eternit",
+   "nom": "Plus-value pour coupes biaises, par ligne (Eternit)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-124a-60",
+   "num": "124a",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Couverture en Eternit ondulé Ondapress grandes ondes 177 mm sur bois, matériel de fixation compris (gris)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-124b-61",
+   "num": "124b",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Couverture en Eternit ondulé grandes ondes sur charpente en fer",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-124c-62",
+   "num": "124c",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Plus-value pour Eternit ondulé Ondacolor",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-125-63",
+   "num": "125",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Faîtage double pour Eternit ondulé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-126-64",
+   "num": "126",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "About pour faîtage Eternit ondulé",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-127-65",
+   "num": "127",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Faîtage pour shed (Eternit ondulé)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-128-66",
+   "num": "128",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "About pour faîtage de shed",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-129-67",
+   "num": "129",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Arêtier Eternit ondulé et about",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-130-68",
+   "num": "130",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Raccord pour Eternit ondulé supérieur ou latéral (pièce de clôture 250 mm)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-131-69",
+   "num": "131",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Pièces de rives Eternit ondulé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-132-70",
+   "num": "132",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Closoir ondulé pour raccord inférieur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-133-71",
+   "num": "133",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Plus-value pour coupe biaise d'Eternit ondulé, par ligne",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-134-72",
+   "num": "134",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Plus-value pour masticage des plaques Eternit ondulé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-1342-73",
+   "num": "134.2",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Plus-value pour plaques translucides ondulées grandes ondes 2,50/0,92",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-135-74",
+   "num": "135",
+   "cat": "361 Couverture",
+   "sub": "Eternit ondulé",
+   "nom": "Couverture entière en plaques translucides ondulées grandes ondes 2,50/0,92, fixation sur bois",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-136a-75",
+   "num": "136a",
+   "cat": "361 Couverture",
+   "sub": "Tôle ondulée",
+   "nom": "Couverture en tôle ondulée galvanisée 6 kg/m², recouvrement 10 cm, sur bois (vis galvanisées, rondelles plomb)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-136b-76",
+   "num": "136b",
+   "cat": "361 Couverture",
+   "sub": "Tôle ondulée",
+   "nom": "Couverture en tôle ondulée galvanisée sur charpente fer, avec crochets galvanisés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-137-77",
+   "num": "137",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade double en ardoises Eternit 15/60, recouvrement 3 cm, Tectura (sans lambourdage)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-138-78",
+   "num": "138",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade en ardoises Eternit 30/60 losange",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-139-79",
+   "num": "139",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade en ardoises Eternit 30/60 avec ou sans coins coupés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-140-80",
+   "num": "140",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade en ardoises Eternit 20/60 avec ou sans coins coupés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-141-81",
+   "num": "141",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade en ardoises Eternit 30/60 diagonale",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-142-82",
+   "num": "142",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Supplément pour bords et coupe biaise de revêtement de façade",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-143-83",
+   "num": "143",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Supplément pour bords et coupe droite de revêtement de façade",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-144-84",
+   "num": "144",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Forfaitaire par ouverture dans revêtement de façade Eternit",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-145-85",
+   "num": "145",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade pour Eternit Natura",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-146-86",
+   "num": "146",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Plus-value pour petites surfaces de revêtement (jusqu'à 3, 10 ou 50 m²)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-147-87",
+   "num": "147",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade en Eternit ondulé gris, matériel de fixation sur bois compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-148-88",
+   "num": "148",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de façade en Eternit ondulé sur fer",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-149-89",
+   "num": "149",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Cornière lisse sur manchon (Eternit ondulé)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-150-90",
+   "num": "150",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Raccord de clôture ondulé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-151-91",
+   "num": "151",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Cornière à ondes horizontales",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-152-92",
+   "num": "152",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Acrotère à ondes verticales ou horizontales",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-154-93",
+   "num": "154",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Raccords à Z ou à U (Eternit ondulé)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-156-94",
+   "num": "156",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Bordure de rive 250 (Eternit ondulé)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-157-95",
+   "num": "157",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Cornière arrondie (Eternit ondulé)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-158-96",
+   "num": "158",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Coupe droite ou biaise par ligne de coupe (Eternit ondulé)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-160-97",
+   "num": "160",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Plus-value pour couleur spéciale (Eternit ondulé)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch11-165-98",
+   "num": "165",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Revêtement de larmiers et virevents Plancolor sur bois (Eternit Vulcanit), selon largeur de bande",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-166-99",
+   "num": "166",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Supplément pour pose sur maçonnerie (revêtement de larmiers)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-167-100",
+   "num": "167",
+   "cat": "361 Couverture",
+   "sub": "Revêtements de façades en Eternit",
+   "nom": "Supplément pour autres couleurs (revêtement de larmiers)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch11-rgie-101",
+   "num": "Régie",
+   "cat": "361 Couverture",
+   "sub": "Régie",
+   "nom": "Couvreur (avec outillage) (couverture), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-rgie-102",
+   "num": "Régie",
+   "cat": "361 Couverture",
+   "sub": "Régie",
+   "nom": "Aide qualifié (couverture), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-rgie-103",
+   "num": "Régie",
+   "cat": "361 Couverture",
+   "sub": "Régie",
+   "nom": "Aide (couverture), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch11-rgie-104",
+   "num": "Régie",
+   "cat": "361 Couverture",
+   "sub": "Régie",
+   "nom": "Location de bâches sans manutention (6×4 m ou 6×8 m), par jour",
+   "metre": "none"
+  }
+ ]
+}
