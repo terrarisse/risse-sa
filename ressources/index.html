@@ -177,6 +177,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);displ
 .imp-txt{flex:1;font-size:13px;line-height:1.4;color:var(--text);min-width:0;}
 .imp-txt b{color:var(--text3);font-weight:700;margin-right:2px;}
 .imp-flag{font-size:11px;color:#B26A00;margin-top:3px;}
+.imp-ed{outline:none;border-radius:6px;padding:2px 4px;margin:-2px -4px;border:1px dashed transparent;}
+.imp-ed:focus{border-color:var(--navy);background:#F4F7FD;}
+.imp-it .imp-ed{border-bottom:1px dashed #C9D1E3;}
 .imp-ta{width:100%;font:inherit;font-size:13px;border:1.5px solid var(--navy);border-radius:8px;padding:6px;}
 .imp-m{flex-shrink:0;min-width:44px;border:1.5px solid var(--border);background:#fff;border-radius:8px;padding:5px 6px;font:700 12px Inter,sans-serif;color:var(--navy);cursor:pointer;}
 .pst-item{background:#fff;border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:6px;font-size:13px;line-height:1.4;color:var(--text);cursor:pointer;}
@@ -2408,14 +2411,14 @@ function renderImport(){
         <span class="imp-chev${open?' open':''}">›</span></div>`;
     if(open) html += its.map(i=>{ const r=_imp.rows[i]; return `<div class="imp-it${r.on?'':' off'}">
         <input type="checkbox" ${r.on?'checked':''} ${r.deja?'disabled':''} onchange="impCheck(${i},this.checked)">
-        <div class="imp-txt">${r.num?`<b>${pEsc(r.num)}</b> `:''}<span id="imp-t-${i}" onclick="impEdit(${i})">${pEsc(r.nom)}</span>
+        <div class="imp-txt"><div class="imp-ed" contenteditable="true" spellcheck="true" oninput="impTxt(${i},this)" onblur="impTxtEnd(${i},this)">${pEsc(r.nom)}</div>
           ${r.deja?'<div class="imp-flag">✓ déjà importé</div>':''}${r.dbl?`<div class="imp-flag">≈ ressemble à : ${pEsc(r.dbl.slice(0,80))}</div>`:''}</div>
         <button class="imp-m" onclick="impMetre(${i})">${(IMP_METRES.find(m=>m[0]===r.metre)||IMP_METRES[0])[1]}</button></div>`; }).join('');
     html += `</div>`;
   });
   ov.innerHTML = `<div class="imp-sh">
     <div class="imp-hd"><div style="display:flex;align-items:center;gap:8px;"><div style="flex:1;font-size:16px;font-weight:700;color:var(--navy);">📥 ${pEsc(_imp.titre)}</div><button class="modal-close" onclick="closeImport()">✕</button></div>
-      <div style="font-size:12px;color:var(--text2);margin:4px 0 8px;">${nOn} coché${nOn>1?'s':''} sur ${_imp.rows.length}${nDeja?' · '+nDeja+' déjà importé'+(nDeja>1?'s':''):''}. Tape un texte pour le modifier, ✏️ pour renommer une catégorie, le bouton de droite pour le métré.</div>
+      <div style="font-size:12px;color:var(--text2);margin:4px 0 8px;">${nOn} coché${nOn>1?'s':''} sur ${_imp.rows.length}${nDeja?' · '+nDeja+' déjà importé'+(nDeja>1?'s':''):''}. Touche un texte pour le modifier directement, ✏️ pour renommer une catégorie, le bouton de droite pour le métré.</div>
       <div style="display:flex;gap:6px;"><input class="search-input" style="flex:1;min-width:0;" type="search" placeholder="🔍 Filtrer…" value="${pEsc(_imp.q)}" oninput="impFilter(this.value)"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="impAll(true)">Tout</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="impAll(false)">Rien</button></div></div>
     <div class="imp-body">${html||'<div class="acc-empty">Rien à afficher</div>'}</div>
     <div class="imp-ft"><button class="btn btn-ghost" style="width:auto;padding:0 16px;" onclick="closeImport()">Annuler</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="doImport()" ${nOn?'':'disabled'}>Importer ${nOn} poste${nOn>1?'s':''}</button></div></div>`;
@@ -2427,6 +2430,9 @@ function impCheckGroup(gi,v){ impGroups()[gi].items.forEach(i=>{ if(!_imp.rows[i
 function impAll(v){ _imp.rows.forEach(r=>{ if(!r.deja) r.on=v; }); renderImport(); }
 function impFilter(v){ _imp.q=v; renderImport(); const s=document.querySelector('#imp-ov .search-input'); if(s){ s.focus(); s.setSelectionRange(v.length,v.length); } }
 function impMetre(i){ const r=_imp.rows[i]; const k=IMP_METRES.findIndex(m=>m[0]===r.metre); r.metre=IMP_METRES[(k+1)%IMP_METRES.length][0]; renderImport(); }
+// Texte modifiable directement dans la liste (pas de ré-affichage pendant la saisie)
+function impTxt(i,el){ const v=el.innerText.replace(/\s+/g,' ').trim(); if(v) _imp.rows[i].nom=v; }
+function impTxtEnd(i,el){ impTxt(i,el); el.innerText=_imp.rows[i].nom; }
 function impEdit(i){
   const sp=document.getElementById('imp-t-'+i); if(!sp) return;
   const ta=document.createElement('textarea'); ta.className='imp-ta'; ta.value=_imp.rows[i].nom; ta.rows=3;
@@ -2447,7 +2453,7 @@ async function doImport(){
   renderContent('postes', searchFilters.postes||''); updateBadges(); populateCatSelects('postes');
   showToast(`✅ ${n} poste${n>1?'s':''} importé${n>1?'s':''}`);
 }
-Object.assign(window,{importPostesListe,openImportListe,impToggleOpen,impCheck,impCheckGroup,impAll,impFilter,impMetre,impEdit,impRename,closeImport,doImport});
+Object.assign(window,{impTxt,impTxtEnd,importPostesListe,openImportListe,impToggleOpen,impCheck,impCheckGroup,impAll,impFilter,impMetre,impEdit,impRename,closeImport,doImport});
 
 
 window.switchTab         = switchTab;
