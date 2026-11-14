@@ -120,6 +120,14 @@
    "n": 77,
    "note": "Rénovation de pierres, ravalement, seuils et tablettes, dallages, plinthes, escaliers, revêtements de façades. Scan de 4 pages (23.1-23.8)",
    "ordre": 15
+  },
+  {
+   "id": "ch16",
+   "titre": "CAN 672 — Peinture",
+   "fichier": "ch16-peinture.json",
+   "n": 823,
+   "note": "Échafaudage, protection, décapage, lavage, ponçage, enduisage, assainissement du béton, peintures intérieures/extérieures, boiseries, métal, régie",
+   "ordre": 16
   }
  ]
 }

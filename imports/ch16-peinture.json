@@ -1,0 +1,6591 @@
+{
+ "id": "ch16",
+ "titre": "CAN 672 — Peinture",
+ "note": "Échafaudage, protection, décapage, lavage, ponçage, enduisage, assainissement du béton, peintures intérieures/extérieures, boiseries, métal, régie",
+ "postes": [
+  {
+   "id": "ch16--0",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Régie",
+   "nom": "Chef d'équipe peintre (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--1",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Régie",
+   "nom": "Plâtrier-peintre spécialisé (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--2",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Régie",
+   "nom": "Peintre (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--3",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Régie",
+   "nom": "Aide-peintre (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--4",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Régie",
+   "nom": "Apprenti peintre (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--5",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Régie",
+   "nom": "Matériel consommé en supplément sur l'heure de travail (régie)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--6",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location petit compresseur avec pistolet à peinture",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--7",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location grand compresseur pour projeter les crépis",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--8",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location appareil à projeter les crépis",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--9",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location appareil airless",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--10",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location nettoyeur haute pression à eau froide",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--11",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location nettoyeur haute pression à eau chaude",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--12",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location appareil à enlever les papiers",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--13",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location ponceuse sans papier ou disque abrasif",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--14",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location meuleuse sans disque",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--15",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location aspirateur universel",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--16",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location aspirateur industriel eau et poussière",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--17",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location table à tapisser",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--18",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location machine à encoller",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--19",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location appareil de chauffage électrique jusqu'à 1500 W",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--20",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location déshumidificateur jusqu'à 1500 W",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--21",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location projecteur halogène sur pied télescopique 1000 W",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--22",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location pont roulant alu léger 75×180 cm, hauteur de travail 5 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--23",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location pont roulant alu léger, hauteur de travail 10 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--24",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location pont roulant alu accès intérieur 120×250 cm, hauteur 10 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--25",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Location de benne 4 m³, transport et taxe compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--26",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Véhicule de livraison jusqu'à 1500 kg avec chauffeur",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--27",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Location d'outils et machines",
+   "nom": "Véhicule de livraison jusqu'à 3500 kg avec chauffeur",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--28",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Échafaudage façade : transport, montage, démontage, hauteur jusqu'à 12 m, location 2 mois",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--29",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Location supplémentaire d'échafaudage par semaine",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--30",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Plus-value échafaudage au-dessus de 12 m",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--31",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Pose d'un filet de protection avec fixation",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--32",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Pose d'une bâche de protection contre les intempéries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--33",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Plus-value pour exécution d'un pont de couvreur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--34",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Protection pour le passage des piétons",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--35",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Escalier de service d'échafaudage",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--36",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Protection pare-gravats",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--37",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Location camion-nacelle hauteur jusqu'à 8 m (sans chauffeur)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--38",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Location camion-nacelle hauteur jusqu'à 16 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--39",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Location camion-nacelle hauteur jusqu'à 30 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--40",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Échafaudage roulant hauteur 5 m, montage, démontage et location 2 semaines",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--41",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Échafaudage roulant hauteur 10 m, montage, démontage et location 2 semaines",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--42",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Location supplémentaire d'échafaudage roulant par semaine",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--43",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Supplément pour travail à l'échelle",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--44",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Supplément pour travail à l'échelle (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--45",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Dévaloir à gravats : transport, montage, démontage et location",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--46",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Échafaudage",
+   "nom": "Plus-value pour fixation du dévaloir à gravats",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--47",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection légère avec papier ou feuille PVC sans fixation",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--48",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des sols avec papier fort et joints collés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--49",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des sols avec feuilles en PVC",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--50",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des sols avec Pavatex dur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--51",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des sols avec panneaux de coffrage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--52",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des sols avec carton ondulé, joints collés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--53",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des marches d'escalier avec Pavatex dur (50×120 cm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--54",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des marches d'escalier avec papier fort",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--55",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection légère des murs avec feuille PVC",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--56",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection légère des murs avec papier et bande adhésive, largeur 30 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--57",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection d'ouvertures (fenêtres, portes) avec feuilles PVC jusqu'à 2 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--58",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection du mobilier (en bloc, par pièce)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--59",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des appareils sanitaires par salle de bains",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--60",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection des meubles de cuisine",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--61",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection de poutres, développement 30 à 40 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--62",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Protection de plafond avec papier Kraft et bande adhésive, largeur 60 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--63",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Dépose, numérotation et repose des plinthes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--64",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Dépose et numérotation des plinthes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--65",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Dépose et repose de joints caoutchouc",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--66",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Dépose et pose des volets avec numérotation (par pièce)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--67",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Protection et préparation",
+   "nom": "Volets : transport à l'atelier et retour (par pièce)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--68",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Décapage complet d'anciens vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--69",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Décapage complet d'anciens vernis sur main courante en bois",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--70",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Décapage complet d'anciens vernis, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--71",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Décapage complet d'anciennes peintures",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--72",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Décapage complet d'anciennes peintures, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--73",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Décapage complet d'anciens madriers avec ponçage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--74",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Traitement du bois par décapage et imprégnation par autocave VP (vide pression)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--75",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Éclaircissage du bois après décapage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--76",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Éclaircissage du bois après décapage, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--77",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Sablage d'anciens vernis sur bois avec nettoyage des déchets",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--78",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Sablage d'anciens vernis sur bois, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--79",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Sablage d'anciennes peintures sur métal",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--80",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Sablage d'anciennes peintures sur métal, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--81",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Sablage d'anciennes peintures sur barrières métalliques",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--82",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décapage et sablage",
+   "nom": "Sablage d'anciennes peintures sur barrières, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--83",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage à conserver sur plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--84",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage à conserver sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--85",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage à conserver sur boiseries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--86",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage à conserver sur boiseries, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--87",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage d'anciennes peintures sur plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--88",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage d'anciennes peintures sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--89",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage d'anciennes peintures sur boiseries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--90",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lessivage à l'ammoniac",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--91",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lavage complet d'anciens badigeons",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--92",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lavage, raclage d'anciens badigeons",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--93",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lavage à l'éponge",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--94",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lavage à la haute pression à l'eau froide",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--95",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lavage à la haute pression à l'eau chaude",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--96",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Lavage à haute pression et détergent",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--97",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Dégraissage au solvant des boiseries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--98",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Dégraissage au solvant des boiseries, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--99",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Dégraissage complet sur métal",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--100",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Lavage et lessivage",
+   "nom": "Dégraissage complet sur métal, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--101",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage des murs avant la pose du papier peint",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--102",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage des murs pour application d'une peinture",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--103",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage de boiseries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--104",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage de boiseries, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--105",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage à l'eau sur bois ou métal",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--106",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage à l'eau sur bois ou métal, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--107",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage d'anciennes boiseries à l'extérieur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--108",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Ponçage mécanique complet d'anciens vernis à l'extérieur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--109",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Brossage d'anciennes peintures à la chaux",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--110",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Brossage d'anciennes peintures sur crépi fin",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--111",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Brossage, ponçage de la rouille sur éléments métalliques",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--112",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Brossage, ponçage de la rouille, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--113",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Brossage, ponçage de la rouille sur les barrières",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--114",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Brossage, ponçage de la rouille sur barrières ou profils, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--115",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Dérouillage au produit liquide (acide phosphorique) sur éléments métalliques, brossage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--116",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Ponçage et brossage",
+   "nom": "Dérouillage au produit liquide, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--117",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage à une main sur boiseries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--118",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage à une main sur boiseries, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--119",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage à deux mains sur boiseries",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--120",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage à deux mains sur boiseries, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--121",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage à deux composants à deux mains",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--122",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage à deux composants, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--123",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage sur fonds rugueux à une main pour exécution d'un rustique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--124",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage standard qualité Q2 pour enduits décoratifs ou papier ingrain",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--125",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage qualité Q3 pour enduits décoratifs de moins de 1 mm, peintures mates sans grain",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--126",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage qualité Q4 pour revêtements muraux brillants, peintures et glacis satinés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--127",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduit garnissant giclé sur fond lisse (boiseries)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--128",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Enduisage d'anciens murs après l'arrachage du papier peint",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--129",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Masticage sur enduit plâtre avant la pose du papier peint",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--130",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Jointoyage au mastic acrylique jusqu'à 5 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--131",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Joint silicone jusqu'à 5 mm, scotch, nettoyage et couche de fond",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--132",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Joint silicone jusqu'à 5 mm avec bande adhésive",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--133",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Enduisage et masticage",
+   "nom": "Joint silicone de 5 à 10 mm avec primaire et cordon mousse",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--134",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Assainissement du béton",
+   "nom": "Piquage, brossage du béton endommagé jusqu'au béton sain, dégagement des fers d'armature",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--135",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Assainissement du béton",
+   "nom": "Dérouillage des fers d'armature et couche anticorrosion époxy à deux composants",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--136",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Assainissement du béton",
+   "nom": "Remplissage et reprofilage des trous au mortier de dégrossissage renforcé de résine",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--137",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Assainissement du béton",
+   "nom": "Égalisation et lissage des surfaces au mortier de finition à base de ciment",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--138",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur béton, 1 couche de fond incolore (stabilisant)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--139",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur béton, 1 couche de fond incolore (stabilisant) (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--140",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur plâtre, 1 couche de fond incolore (stabilisant)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--141",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur plâtre, 1 couche de fond incolore (stabilisant) (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--142",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur crépi fin, 1 couche de fond incolore (stabilisant)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--143",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur crépi fin, 1 couche de fond incolore (stabilisant) (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--144",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur crépi grain 2 à 3 mm, 1 couche de fond incolore (stabilisant)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--145",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Sur crépi grain 2 à 3 mm, 1 couche de fond incolore (stabilisant) (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--146",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure, 1 couche de fond incolore (stabilisant), développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--147",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi fin, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--148",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi fin, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--149",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi fin, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--150",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi fin, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--151",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi grain 2 à 3 mm, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--152",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi grain 2 à 3 mm, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--153",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi grain 2 à 3 mm, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--154",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond crépi grain 2 à 3 mm, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--155",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond béton, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--156",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond béton, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--157",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond béton, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--158",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond béton, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--159",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs béton, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--160",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs béton, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--161",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs béton, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--162",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs béton, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--163",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi fin, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--164",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi fin, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--165",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi fin, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--166",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi fin, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--167",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi grain 2 à 3 mm, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--168",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi grain 2 à 3 mm, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--169",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi grain 2 à 3 mm, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--170",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi grain 2 à 3 mm, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--171",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi ciment grossier projeté jusqu'à 5 mm, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--172",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi ciment grossier projeté jusqu'à 5 mm, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--173",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi ciment grossier projeté jusqu'à 5 mm, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--174",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs crépi ciment grossier projeté jusqu'à 5 mm, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--175",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs plot ou brique brute, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--176",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs plot ou brique brute, 1 couche dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--177",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs plot ou brique brute, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--178",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs plot ou brique brute, 2 couches dispersion (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--179",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure béton, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--180",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure béton, 1 couche dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--181",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure béton, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--182",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure béton, 2 couches dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--183",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--184",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, 1 couche dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--185",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--186",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, 2 couches dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--187",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--188",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 1 couche dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--189",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--190",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 2 couches dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--191",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 5 mm, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--192",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 5 mm, 1 couche dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--193",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 5 mm, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--194",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi grain 5 mm, 2 couches dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--195",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure plot ou brique brute, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--196",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure plot ou brique brute, 1 couche dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--197",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure plot ou brique brute, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--198",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure plot ou brique brute, 2 couches dispersion, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--199",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond plâtre, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--200",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond plâtre, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--201",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond sur papier ingrain, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--202",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond sur papier ingrain, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--203",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond sur toile en fibre de verre, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--204",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plafond sur toile en fibre de verre, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--205",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs plâtre, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--206",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs plâtre, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--207",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs sur papier ingrain, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--208",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs sur papier ingrain, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--209",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs sur toile en fibre de verre, 1 couche dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--210",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Murs sur toile en fibre de verre, 2 couches dispersion",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--211",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure papier ingrain, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--212",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure papier ingrain, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--213",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure toile en fibre de verre, 1 couche dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--214",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure toile en fibre de verre, 2 couches dispersion, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--215",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Mur crépi fin, dispersion armée 1 couche",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--216",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Mur crépi fin, dispersion armée 2 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--217",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, dispersion armée 1 couche, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--218",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, dispersion armée 2 couches, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--219",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Mur crépi fin, fourniture et pose d'un treillis collé au rouleau",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--220",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Embrasure crépi fin, fourniture et pose d'un treillis collé au rouleau",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--221",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Cage intérieure de l'ascenseur, dispersion 1 couche",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--222",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plus-value peinture pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--223",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plus-value pour dispersion satinée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--224",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plus-value peinture pour teinte pastel (catégorie 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--225",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plus-value peinture pour teinte moyenne (catégorie 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--226",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture dispersion",
+   "nom": "Plus-value peinture pour teinte vive (catégorie 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--227",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Sur béton, 1 couche de fond incolore (stabilisant) avant peinture au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--228",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Sur béton, 1 couche de fond incolore avant peinture au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--229",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Sur crépi fin, 1 couche de fond incolore (stabilisant) avant peinture au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--230",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Sur crépi fin, 1 couche de fond incolore avant peinture au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--231",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Sur crépi grossier, 1 couche de fond incolore (stabilisant) avant peinture au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--232",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Sur crépi grossier, 1 couche de fond incolore avant peinture au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--233",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond béton, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--234",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond béton, 1 couche de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--235",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond béton, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--236",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond béton, 2 couches de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--237",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur béton, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--238",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur béton, 1 couche de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--239",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur béton, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--240",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur béton, 2 couches de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--241",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi fin, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--242",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi fin, 1 couche de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--243",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi fin, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--244",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi fin, 2 couches de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--245",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi grain 2 à 3 mm, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--246",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi grain 2 à 3 mm, 1 couche de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--247",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi grain 2 à 3 mm, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--248",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi grain 2 à 3 mm, 2 couches de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--249",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi ciment projeté jusqu'à 5 mm, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--250",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi ciment projeté jusqu'à 5 mm, 1 couche de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--251",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi ciment projeté jusqu'à 5 mm, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--252",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur crépi ciment projeté jusqu'à 5 mm, 2 couches de peinture mate au solvant (extérieur)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--253",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure béton, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--254",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure béton, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--255",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure béton, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--256",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure béton, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--257",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi fin, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--258",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi fin, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--259",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi fin, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--260",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi fin, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--261",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--262",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--263",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--264",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--265",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi ciment projeté, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--266",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi ciment projeté, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--267",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi ciment projeté, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--268",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure crépi ciment projeté, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm (extérieur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--269",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond plâtre, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--270",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond plâtre, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--271",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond sur papier ingrain, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--272",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond sur papier ingrain, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--273",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond sur toile en fibre de verre, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--274",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plafond sur toile en fibre de verre, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--275",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur en plâtre, 1 couche de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--276",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Mur en plâtre, 2 couches de peinture mate au solvant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--277",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure en plâtre, 1 couche de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--278",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Embrasure en plâtre, 2 couches de peinture mate au solvant, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--279",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plus-value peinture au solvant pour réchampissage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--280",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plus-value peinture au solvant teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--281",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plus-value peinture au solvant teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--282",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture mate au solvant",
+   "nom": "Plus-value peinture au solvant teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--283",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond plâtre, 1 couche d'impression",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--284",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond plâtre, 1 couche d'apprêt synthétique et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--285",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond plâtre, 1 couche d'impression, 1 couche d'apprêt et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--286",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond plâtre, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--287",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs plâtre, 1 couche d'impression",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--288",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs plâtre, 1 couche d'apprêt synthétique et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--289",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs plâtre, 1 couche d'impression, 1 couche d'apprêt et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--290",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs plâtre, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--291",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond crépi ribé fin, 1 couche d'apprêt synthétique et 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--292",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond crépi ribé fin, 1 couche de fond, 1 couche d'apprêt synthétique et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--293",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond crépi ribé fin, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--294",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond crépi ribé grain 2 à 3 mm, 1 couche d'apprêt synthétique et 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--295",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond crépi ribé grain 2 à 3 mm, 1 couche de fond, 1 couche d'apprêt synthétique et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--296",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plafond crépi ribé grain 2 à 3 mm, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--297",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs crépi ribé fin, 1 couche d'apprêt synthétique et 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--298",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs crépi ribé fin, 1 couche de fond, 1 couche d'apprêt synthétique et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--299",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs crépi ribé fin, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--300",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs crépi ribé grain 2 à 3 mm, 1 couche d'apprêt synthétique et 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--301",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs crépi ribé grain 2 à 3 mm, 1 couche de fond, 1 couche d'apprêt synthétique et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--302",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Murs crépi ribé grain 2 à 3 mm, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--303",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Embrasure en plâtre, 1 couche de fond et 1 couche d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--304",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Embrasure en plâtre, 1 couche de fond et 2 couches d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--305",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Embrasure crépi fin, 1 couche de fond et 1 couche d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--306",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Embrasure crépi fin, 1 couche de fond et 2 couches d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--307",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Embrasure crépi rustique grain 2 à 3 mm, 1 couche de fond et 1 couche d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--308",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Embrasure crépi rustique grain 2 à 3 mm, 1 couche de fond et 2 couches d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--309",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plus-value email pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--310",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plus-value email pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--311",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plus-value email pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--312",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture à base de résine synthétique (email)",
+   "nom": "Plus-value email pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--313",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Sous dalle béton, 1 couche de glacis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--314",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Sous dalle béton, 2 couches de glacis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--315",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Murs béton, 1 couche de glacis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--316",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Murs béton, 2 couches de glacis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--317",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Embrasure béton, 1 couche de glacis, largeur jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--318",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Embrasure béton, 2 couches de glacis, largeur jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--319",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Béton structuré profondeur jusqu'à 2 cm, 1 couche de glacis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--320",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Béton structuré profondeur jusqu'à 2 cm, 2 couches de glacis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--321",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti 1 couche sur élément lisse",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--322",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti 2 couches sur élément lisse",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--323",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti à 2 composants, 1 couche sur élément lisse",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--324",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti à 2 composants, 2 couches sur élément lisse",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--325",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti 1 couche sur élément structuré jusqu'à 2 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--326",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti 2 couches sur élément structuré jusqu'à 2 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--327",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti à 2 composants, 1 couche sur élément structuré",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--328",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Glacis à base de dispersion et antigraffiti",
+   "nom": "Peinture antigraffiti à 2 composants, 2 couches sur élément structuré",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--329",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond plâtre, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--330",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond plâtre, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--331",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond béton, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--332",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond béton, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--333",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond crépi ribé fin, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--334",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond crépi ribé fin, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--335",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond crépi ribé grain 2 à 3 mm, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--336",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plafond crépi ribé grain 2 à 3 mm, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--337",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs plâtre, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--338",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs plâtre, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--339",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs béton, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--340",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs béton, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--341",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs crépi ribé fin, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--342",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs crépi ribé fin, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--343",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs crépi ribé grain 2 à 3 mm, 1 couche de fond de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--344",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Murs crépi ribé grain 2 à 3 mm, 2 couches de peinture minérale (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--345",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure plâtre, 1 couche de fond de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--346",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure plâtre, 2 couches de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--347",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure béton, 1 couche de fond de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--348",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure béton, 2 couches de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--349",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure crépi ribé fin, 1 couche de fond de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--350",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure crépi ribé fin, 2 couches de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--351",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure crépi ribé grain 2 à 3 mm, 1 couche de fond de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--352",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Embrasure crépi ribé grain 2 à 3 mm, 2 couches de peinture minérale, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--353",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plus-value peinture minérale pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--354",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plus-value peinture minérale pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--355",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plus-value peinture minérale pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--356",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture minérale",
+   "nom": "Plus-value peinture minérale pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--357",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plafond béton, 1 couche d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--358",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plafond béton, 2 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--359",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plafond béton, 3 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--360",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs béton, 1 couche d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--361",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs béton, 2 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--362",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs béton, 3 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--363",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs en briques terre cuite brutes, 1 couche d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--364",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs en briques terre cuite brutes, 2 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--365",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs en briques terre cuite brutes, 3 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--366",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs en plot de ciment brut, 1 couche d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--367",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs en plot de ciment brut, 2 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--368",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs en plot de ciment brut, 3 couches d'imprégnation au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--369",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure béton, 1 couche d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--370",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure béton, 2 couches d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--371",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure béton, 3 couches d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--372",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure briques terre cuite brutes, 1 couche d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--373",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure briques terre cuite brutes, 2 couches d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--374",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure briques terre cuite brutes, 3 couches d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--375",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure plot de ciment brut, 1 couche d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--376",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure plot de ciment brut, 2 couches d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--377",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure plot de ciment brut, 3 couches d'imprégnation au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--378",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs béton, 1 couche de peinture couvrante au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--379",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs béton, 2 couches de peinture couvrante au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--380",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs crépi fin, 1 couche de peinture couvrante au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--381",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs crépi fin, 2 couches de peinture couvrante au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--382",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs crépi grain 2 à 3 mm, 1 couche de peinture couvrante au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--383",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Murs crépi grain 2 à 3 mm, 2 couches de peinture couvrante au silicone (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--384",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure béton, 1 couche de peinture couvrante au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--385",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure béton, 2 couches de peinture couvrante au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--386",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure crépi fin, 1 couche de peinture couvrante au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--387",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure crépi fin, 2 couches de peinture couvrante au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--388",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 1 couche de peinture couvrante au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--389",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Embrasure crépi grain 2 à 3 mm, 2 couches de peinture couvrante au silicone, développement jusqu'à 25 cm (int./ext.)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--390",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plus-value peinture silicone pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--391",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plus-value peinture silicone pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--392",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plus-value peinture silicone pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--393",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture au silicone (imprégnation et couvrante)",
+   "nom": "Plus-value peinture silicone pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--394",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Plafond, exécution d'une couche d'impression",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--395",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Plafond, enduisage à 1 main",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--396",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Plafond, enduisage à 2 mains",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--397",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Plafond, peinture 1 couche teinte de fond",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--398",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Plafond, giclage d'une peinture en gouttelettes type Multiton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--399",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Plafond, 1 couche de fixation incolore sur peinture Multiton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--400",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Murs, exécution d'une couche d'impression",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--401",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Murs, enduisage qualité Q3",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--402",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Murs, enduisage qualité Q4",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--403",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Murs, peinture 1 couche teinte de fond",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--404",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Murs, giclage d'une peinture en gouttelettes type Multiton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--405",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Murs, 1 couche de fixation incolore sur peinture Multiton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--406",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Embrasure, 1 couche d'impression, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--407",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Embrasure, enduisage à 1 main, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--408",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Embrasure, enduisage à 2 mains, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--409",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Embrasure, peinture 1 couche teinte de fond, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--410",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Embrasure, giclage peinture en gouttelettes Multiton, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--411",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture Multiton",
+   "nom": "Embrasure, 1 couche de fixation incolore sur Multiton, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--412",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Sol chape ciment, 1 couche de fond stabilisant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--413",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Sol chape ciment, 2 couches de peinture époxy à 1 composant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--414",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Supplément pour une 3e couche de peinture époxy à 1 composant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--415",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Escaliers, 2 couches de peinture époxy à 1 composant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--416",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Murs, 1 couche de peinture époxy à 1 composant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--417",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Murs, 2 couches de peinture époxy à 1 composant",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--418",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Sol chape ciment, 2 couches de peinture époxy à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--419",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Supplément pour une 3e couche de peinture époxy à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--420",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Escaliers, 2 couches de peinture époxy à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--421",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Murs, 1 couche de peinture époxy à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--422",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Murs, 2 couches de peinture époxy à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--423",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Plinthe en peinture époxy hauteur jusqu'à 25 cm, traçage compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--424",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Plus-value sur peinture de sol pour sablage de la surface (antidérapant)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--425",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Tablette de fenêtre, 1 couche époxy 2 composants, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--426",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture époxy pour sol",
+   "nom": "Tablette de fenêtre, 2 couches époxy 2 composants, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--427",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Place de parc, traçage et peinture de ligne, largeur jusqu'à 12 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--428",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Place de parc, traçage et peinture de ligne en arrondi, largeur jusqu'à 12 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--429",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Place de parc, chiffre ou lettre hauteur 20 à 30 cm sur les murs",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--430",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Place de parc, chiffre ou lettre hauteur 20 à 30 cm sur le sol",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--431",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Motif en croix 100×100 cm, traçage compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--432",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Flèche de direction droite longueur jusqu'à 200 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--433",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Flèche de direction courbe longueur jusqu'à 200 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--434",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Motif et divers dimension 100×100 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--435",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Marquage de places de parc",
+   "nom": "Ligne pour passage piétons",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--436",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Enduisage 2 mains pour travaux de décoration",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--437",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Stucco Antico sur murs : couche de fond, Stucco à la truelle en 3 mains, ferrage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--438",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Main supplémentaire de Stucco Antico",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--439",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Marmorino sur murs : couche de fond, masticage, spatulage à 2 mains, ferrage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--440",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Essuyables sur murs : couche de fond, masticage, ponçage, 2 couches, finition patinée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--441",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Marbrés sur murs : couche de fond, masticage, ponçage, couche antigouttes, maroufle, lissage inox, ferrage à sec",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--442",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Enduit structuré patiné à la cire sur murs : fond, enduit relief, cire colorée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--443",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Chaux d'antan à la brosse : 1 couche de fond et 2 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--444",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Couche d'imperméabilisant (vernis incolore à l'eau)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--445",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Décoration",
+   "nom": "Application d'une couche de cire",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--446",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Boiserie, 1 couche d'impression",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--447",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Boiserie, masticage, ponçage, retouche et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--448",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Boiserie, masticage, ponçage, 1 couche d'email de fond et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--449",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Boiserie, 1 couche d'impression, masticage, ponçage, email de fond et de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--450",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Cadre de porte, masticage, ponçage, email de fond et de finition, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--451",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Cadre de porte, impression, masticage, ponçage, email de fond et de finition, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--452",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Fenêtre, 1 couche d'impression",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--453",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Fenêtre, masticage, ponçage, retouche et 1 couche d'email de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--454",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Fenêtre, masticage, ponçage, email de fond et de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--455",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Fenêtre, impression, masticage, ponçage, email de fond et de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--456",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Tablette de fenêtre, masticage, ponçage, retouche et email de finition, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--457",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Tablette de fenêtre, masticage, ponçage, email de fond et de finition, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--458",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Tablette de fenêtre, impression, masticage, ponçage, email de fond et de finition, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--459",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plinthe, masticage, ponçage, retouche et email de finition, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--460",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plinthe, masticage, ponçage, email de fond et de finition, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--461",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plinthe, impression, masticage, ponçage, email de fond et de finition, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--462",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Volets et stores, masticage, ponçage, 1 couche d'email de finition (métré SIA)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--463",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Volets et stores, impression, masticage, ponçage, email de fond et de finition (métré SIA)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--464",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Avant-toit, impression, masticage, ponçage, email de fond et de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--465",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Avant-toit, retouche à l'impression, ponçage et 2 couches de peinture acrylique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--466",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Liste, impression, masticage, ponçage et 2 couches d'email, développement jusqu'à 5 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--467",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Chant de porte, impression, ponçage, masticage et 2 couches d'email",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--468",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Enduisage à 1 main de boiserie",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--469",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Enduisage à 1 main de boiserie, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--470",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Enduisage à 2 mains de boiserie",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--471",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Enduisage à 2 mains de boiserie, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--472",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plus-value pour peinture en deux tons sur boiserie à panneaux ou réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--473",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plus-value email boiserie pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--474",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plus-value email boiserie pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--475",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plus-value email boiserie pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--476",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — peinture résine synthétique",
+   "nom": "Plus-value email boiserie pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--477",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, 1 couche d'imprégnation incolore",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--478",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, 1 couche d'imprégnation teintée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--479",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie non rabotée, 1 couche d'imprégnation teintée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--480",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie non rabotée, 1 couche d'imprégnation teintée et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--481",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, ponçage et 1 couche de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--482",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--483",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, imprégnation incolore, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--484",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, imprégnation teintée, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--485",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Cadre de porte, ponçage et 1 couche de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--486",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Cadre de porte, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--487",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Cadre de porte, imprégnation incolore, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--488",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Cadre de porte, imprégnation teintée, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--489",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre non vitrée, 1 couche d'imprégnation incolore",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--490",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre vitrée, 1 couche d'imprégnation incolore",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--491",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre non vitrée, 1 couche d'imprégnation teintée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--492",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre vitrée, 1 couche d'imprégnation teintée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--493",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre, ponçage et 1 couche de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--494",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--495",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre, imprégnation incolore, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--496",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Fenêtre, imprégnation teintée, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--497",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Tablette de fenêtre, 1 couche d'imprégnation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--498",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Tablette de fenêtre, ponçage et 1 couche de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--499",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Tablette de fenêtre, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--500",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Tablette de fenêtre, imprégnation, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--501",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Plinthe, ponçage et 1 couche de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--502",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Plinthe, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--503",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Plinthe, imprégnation, ponçage et 2 couches de vernis, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--504",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Liste, 2 couches de vernis, jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--505",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Chant de porte, 1 couche de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--506",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Chant de porte, 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--507",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Avant-toit, imprégnation teintée, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--508",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Avant-toit non raboté, 1 couche d'imprégnation",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--509",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Avant-toit non raboté, imprégnation et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--510",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Volet et store, retouche imprégnation, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--511",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Volet et store, imprégnation, ponçage et 2 couches de vernis",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--512",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Poutre, imprégnation et 1 couche de vernis, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--513",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Poutre, imprégnation et 2 couches de vernis, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--514",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Main courante en bois, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--515",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Main courante en bois, imprégnation, ponçage et 2 couches de vernis",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--516",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Escalier en bois, vernis parquet 2 composants, 2 couches, ponçage compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--517",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Marche d'escalier en bois, vernis parquet 2 composants, 2 couches (25×100 cm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--518",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Seuil en bois, vernis parquet 2 composants, 2 couches (20×90 cm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--519",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Lambris et parois, vernis nitro au pistolet, 2 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--520",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Lambris et parois, vernis nitro au pistolet, 3 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--521",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, vernis nitro au pistolet, 2 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--522",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Boiserie, vernis nitro au pistolet, 3 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--523",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Teintage chimique et vernis nitro, 2 couches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--524",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Boiseries — glacis et vernis",
+   "nom": "Plus-value vernis pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--525",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique partiellement rouillé, brossage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--526",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique partiellement rouillé, brossage (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--527",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, brossage complet des surfaces rouillées",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--528",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, brossage complet (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--529",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, dérouillage au produit liquide (acide phosphorique) avec brossage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--530",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, ponçage à l'eau",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--531",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, ponçage à l'eau (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--532",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, dégraissage complet avant couche de fond",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--533",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, dégraissage complet (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--534",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, enduisage au mastic à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--535",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, enduisage au mastic à 2 composants (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--536",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Barrière développée au m¹ de profil, 1 couche d'antirouille synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--537",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Barrière, 1 couche d'antirouille synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--538",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Charpente métallique, 1 couche d'antirouille synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--539",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Charpente métallique, 1 couche d'antirouille, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--540",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Charpente métallique, 1 couche d'antirouille, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--541",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche d'antirouille synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--542",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche d'antirouille synthétique (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--543",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de chromate de zinc",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--544",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de chromate de zinc (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--545",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de peinture à base de poudre de zinc",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--546",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de poudre de zinc (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--547",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 2 couches de peinture à base de poudre de zinc",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--548",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 2 couches de poudre de zinc (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--549",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche d'antirouille diluable à l'eau",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--550",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche d'antirouille diluable à l'eau (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--551",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 2 couches d'antirouille de finition",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--552",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 2 couches d'antirouille de finition (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--553",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de surfacer 1 composant (Wash-Primer)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--554",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, surfacer 1 composant (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--555",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de surfacer 2 composants (Wash-Primer)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--556",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, surfacer 2 composants (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--557",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche de peinture à base de résine époxy",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--558",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément métallique, 1 couche époxy (linéaire)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--559",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Chéneaux, 1 couche de chromate de zinc",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--560",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Descentes, 1 couche de chromate de zinc",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--561",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Ferblanterie toiture, 1 couche d'antirouille, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--562",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Dauphins, 1 couche d'antirouille synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--563",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Gonds, crochets, bergères, brossage et 1 couche d'antirouille",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--564",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Gonds, crochets, bergères, 1 couche de fond d'accrochage, dégraissage compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--565",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Grille, 1 couche d'antirouille",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--566",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Élément en aluminium, 1 couche de fond d'accrochage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--567",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Volet et store en aluminium, 1 couche de fond d'accrochage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--568",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — préparation, fond et antirouille",
+   "nom": "Fenêtre en aluminium, 1 couche de fond d'accrochage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--569",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Barrière, 1 couche d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--570",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Barrière, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--571",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Barrière développée au m¹ de profil, 1 couche d'email synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--572",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Barrière développée au m¹ de profil, 2 couches d'email synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--573",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Charpente métallique, 1 couche d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--574",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Charpente métallique, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--575",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Charpente métallique, 1 couche d'email, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--576",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Charpente métallique, 1 couche d'email, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--577",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Charpente métallique, 2 couches d'email, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--578",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Charpente métallique, 2 couches d'email, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--579",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Élément métallique, 1 couche d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--580",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Élément métallique, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--581",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Élément métallique, 1 couche d'email, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--582",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Élément métallique, 1 couche d'email, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--583",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Élément métallique, 2 couches d'email, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--584",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Élément métallique, 2 couches d'email, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--585",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tôle toiture, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--586",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Fenêtre métallique, 1 couche d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--587",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Fenêtre métallique, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--588",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Fenêtre fixe, 1 couche d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--589",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Fenêtre fixe, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--590",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Huisserie métallique, 1 couche d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--591",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Huisserie métallique, 2 couches d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--592",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Porte d'ascenseur, 1 couche d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--593",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Porte d'ascenseur, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--594",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Radiateur, 2 couches d'email synthétique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--595",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Radiateur, 2 couches d'email, jusqu'à 0,80 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--596",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Radiateur, 2 couches d'email, de 0,80 à 1,50 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--597",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Radiateur, 2 couches d'email, de 1,50 à 2,00 m²",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--598",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Ferblanterie toiture, 2 couches d'email, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--599",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Dauphins, 2 couches d'email synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--600",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Descentes, 2 couches d'email synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--601",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Chéneaux, 2 couches d'email synthétique",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--602",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Colliers, brides, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--603",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Gonds, crochets, bergères, 1 couche d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--604",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Gonds, crochets, bergères, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--605",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Équerre de volet, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--606",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Coulisseaux de store, 2 couches d'email",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--607",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Grille, 1 couche d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--608",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Grille, 2 couches d'email",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--609",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Coffret à incendie 130×130 cm, 2 couches d'email, 2 faces",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--610",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Portillon de chauffage 80×60 cm, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--611",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Portillon électrique 30×60 cm, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--612",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Grille de ventilation 20×20 cm, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--613",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Châssis de porte de garage 250×250 cm, 1 couche d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--614",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tuyaux, 1 couche d'email, développement 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--615",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tuyaux, 1 couche d'email, développement 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--616",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tuyaux, 1 couche d'email, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--617",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tuyaux, 2 couches d'email, développement 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--618",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tuyaux, 2 couches d'email, développement 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--619",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Tuyaux, 2 couches d'email, développement 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--620",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Porte d'abri épaisseur 20 cm, 2 couches d'email, 80×180 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--621",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Porte d'abri épaisseur 20 cm, 2 couches d'email, 100×180 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--622",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Porte d'abri épaisseur 20 cm, 2 couches d'email et dispersion sur le béton, 80×180 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--623",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Porte d'abri épaisseur 20 cm, 2 couches d'email et dispersion sur le béton, 100×180 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--624",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Volet d'abri 60×80 cm, 2 couches d'email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--625",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Volet d'abri 60×80 cm, 2 couches d'email et dispersion sur le béton",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--626",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Plus-value email métal pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--627",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Plus-value email métal pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--628",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Plus-value email métal pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--629",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — email synthétique",
+   "nom": "Plus-value email métal pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--630",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Charpente métallique, 2 couches d'email à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--631",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Charpente métallique, 2 couches d'email 2 composants, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--632",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Charpente métallique, 2 couches d'email 2 composants, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--633",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Élément métallique, 2 couches d'email à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--634",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Élément métallique, 2 couches d'email 2 composants, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--635",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Élément métallique, 2 couches d'email 2 composants, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--636",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Porte d'ascenseur, 2 couches d'email à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--637",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Tôle, 2 couches d'email à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--638",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Tuyaux, 2 couches d'email 2 composants, développement 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--639",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Tuyaux, 2 couches d'email 2 composants, développement 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--640",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Citerne métallique, 2 couches d'email à 2 composants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--641",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Plus-value email 2 composants pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--642",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Plus-value email 2 composants pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--643",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Plus-value email 2 composants pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--644",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture à deux composants",
+   "nom": "Plus-value email 2 composants pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--645",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Barrière, 2 couches d'email métallisé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--646",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Barrière développée au m¹ de profil, 2 couches d'email métallisé",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--647",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Charpente métallique, 2 couches d'email métallisé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--648",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Charpente métallique, 2 couches d'email métallisé, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--649",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Charpente métallique, 2 couches d'email métallisé, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--650",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Élément métallique, 1 couche d'email métallisé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--651",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Élément métallique, 1 couche d'email métallisé, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--652",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Élément métallique, 2 couches d'email métallisé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--653",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Élément métallique, 2 couches d'email métallisé, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--654",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Tôle toiture, 2 couches d'email métallisé",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--655",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Ferblanterie toiture, 2 couches d'email métallisé, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--656",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Porte d'ascenseur, 2 couches d'email à 2 composants martelé au pistolet",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--657",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Tuyaux, 2 couches d'email métallisé, développement jusqu'à 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--658",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Tuyaux, 2 couches d'email métallisé, développement de 10 à 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--659",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Tuyaux, 2 couches d'email métallisé, développement de 20 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--660",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Plus-value email métallisé pour réchampissage",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--661",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Plus-value email métallisé pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--662",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Plus-value email métallisé pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--663",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Métal — peinture métallisée",
+   "nom": "Plus-value email métallisé pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--664",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture antifeu",
+   "nom": "Pilier métallique, revêtement anti-feu F30",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--665",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture antifeu",
+   "nom": "Charpente métallique, revêtement anti-feu F30",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--666",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture antifeu",
+   "nom": "Charpente métallique, revêtement anti-feu F30, développement jusqu'à 15 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--667",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture antifeu",
+   "nom": "Charpente métallique, revêtement anti-feu F30, développement 15 à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--668",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Peinture antifeu",
+   "nom": "Élément métallique, revêtement anti-feu F30",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--669",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Arrachage complet de papier peint qualité courante, 1 papier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--670",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Arrachage supplémentaire de papier peint qualité courante, par couche",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--671",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Arrachage complet de tissu sur papier ou vinyle",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--672",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Arrachage de papier peint lessivable ou recouvert de peinture (moyens mécaniques)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--673",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Masticage, ponçage avant la pose de papier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--674",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Masticage et enduisage complet d'ancien fond",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--675",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Encollage avant la pose de papier peint",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--676",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Masticage, ponçage et encollage avant la pose de papier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--677",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — travaux de préparation",
+   "nom": "Impression 1 couche et préparation pour la pose de papiers spéciaux",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--678",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de maculature",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--679",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de papier Variovlies",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--680",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de papier ingrain à peindre sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--681",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de papier ingrain à peindre sur plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--682",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de voile de verre sur plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--683",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose d'un revêtement mural en fibre de verre sur plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--684",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose d'un revêtement mural en fibre de verre sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--685",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Sur ancien papier, ponçage, masticage des joints et pose d'un papier qualité courante",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--686",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de papier peint à joints vifs, qualité courante",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--687",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de papier métallique et Tekko sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--688",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de textile sur papier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--689",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de papier japonais",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--690",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de tissu tendu grande largeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--691",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de jute imprimée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--692",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de vinyle sur toile",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--693",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de revêtement isolant Sempatap 5 mm sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--694",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de revêtement isolant Sempatap 10 mm sur murs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--695",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de revêtement isolant, feuille de plomb sur papier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--696",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de revêtement isolant, plaque polystyrène expansé cartonnée 2 faces",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--697",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de plaque isolante décorative type Poron",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--698",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Fourniture et pose de bordures en papier peint",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--699",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose d'une frise décorative sur papier peint",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--700",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de moulures décoratives au plafond (Sagex) 6×6 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--701",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de baguettes décoratives bois sur murs",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--702",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de baguettes moulurées à peindre sur portes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--703",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de baguettes moulurées finies sur portes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--704",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de cordons",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--705",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Plus-value pour pose de papier peint dans halls, cuisines et locaux sanitaires",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--706",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Plus-value pour pose de papier peint dans escaliers et pièces mansardées",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--707",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de papier peint sur porte à 1 panneau",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--708",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de papier peint sur porte à 2 panneaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--709",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Pose de papier peint sur porte à 3 panneaux",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--710",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Plus-value pour découpe de papier peint autour des chevrons et divers",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--711",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Plus-value pour pose de papier peint entre poutres",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--712",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Plus-value pour pose de papier peint sur plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--713",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Papiers peints — pose",
+   "nom": "Plus-value pour pose au-dessus de 3,50 mètres",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--714",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi synthétique ribé grain 1 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--715",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi synthétique ribé grain 1 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--716",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi synthétique ribé grain 1,5 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--717",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi synthétique ribé grain 1,5 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--718",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi synthétique ribé grain 2 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--719",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi synthétique ribé grain 2 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--720",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi synthétique ribé grain 3 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--721",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi synthétique ribé grain 3 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--722",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi synthétique ribé grain 4 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--723",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi synthétique ribé grain 4 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--724",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi synthétique ribé grain 5 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--725",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi synthétique ribé grain 5 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--726",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi minéral ribé grain 1,5 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--727",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi minéral ribé grain 1,5 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--728",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi minéral ribé grain 2 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--729",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi minéral ribé grain 2 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--730",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi minéral ribé grain 3 mm sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--731",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi minéral ribé grain 3 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--732",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi mosaïque grain fin sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--733",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi mosaïque grain fin, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--734",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi mosaïque grain moyen sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--735",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi mosaïque grain moyen, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--736",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi antique fibreux structuré à la brosse jusqu'à 3 kg/m² sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--737",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi antique fibreux structuré à la brosse jusqu'à 3 kg/m², couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--738",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi antique fibreux structuré à la brosse 3 à 5 kg/m² sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--739",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi antique fibreux structuré à la brosse 3 à 5 kg/m², couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--740",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi enduit décoratif (Toupret) décor fin sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--741",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi enduit décoratif (Toupret) décor fin, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--742",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Crépi enduit décoratif (Toupret) gros décor sur parois gypsées ou crépies talochées, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--743",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi enduit décoratif (Toupret) gros décor, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--744",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Mur crépi jusqu'à 2 mm, fourniture et pose d'un treillis collé avec masse anti-fissure",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--745",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Embrasure crépi jusqu'à 2 mm, treillis collé avec masse anti-fissure, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--746",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Plus-value crépi pour changement de ton",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--747",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Plus-value crépi pour teinte pastel (cat. 1)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--748",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Plus-value crépi pour teinte moyenne (cat. 2)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--749",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur murs",
+   "nom": "Plus-value crépi pour teinte vive (cat. 3)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--750",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi synthétique ribé grain 1 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--751",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi synthétique ribé grain 1,5 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--752",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi synthétique ribé grain 2 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--753",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi synthétique ribé grain 3 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--754",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi synthétique ribé grain 4 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--755",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi synthétique ribé grain 5 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--756",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi minéral ribé grain 1,5 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--757",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi minéral ribé grain 2 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--758",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi minéral ribé grain 3 mm sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--759",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi mosaïque grain fin sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--760",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi mosaïque grain moyen sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--761",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi antique fibreux structuré à la brosse jusqu'à 3 kg/m² sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--762",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi antique fibreux structuré à la brosse 3 à 5 kg/m² sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--763",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi enduit décoratif (Toupret) décor fin sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--764",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis talochés sur plafonds",
+   "nom": "Crépi enduit décoratif (Toupret) gros décor sur plafond gypsé ou crépi taloché, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--765",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi synthétique grain 1 mm giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--766",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi synthétique grain 1 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--767",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi synthétique grain 2 mm giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--768",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi synthétique grain 2 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--769",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi synthétique grain 3 mm giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--770",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi synthétique grain 3 mm, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--771",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi antique fibreux 3 à 5 kg/m² giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--772",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi antique fibreux 3 à 5 kg/m², couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--773",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi antique fibreux 5 à 7 kg/m² giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--774",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi antique fibreux 5 à 7 kg/m², couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--775",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi antique fibreux 7 à 10 kg/m² giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--776",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi antique fibreux 7 à 10 kg/m², couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--777",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi ingrain sur fond plâtre giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--778",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi ingrain sur fond plâtre, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--779",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi Styropor ou similaire sur fond plâtre giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--780",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi Styropor ou similaire sur fond plâtre, couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--781",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Crépi minéral monocouche sur murs bruts (dégrossissage et finition) giclé sur fond gypsé ou crépi fin, couche de fond comprise (int./ext.)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--782",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Embrasure crépi minéral monocouche sur murs bruts (dégrossissage et finition), couche de fond comprise, développement jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--783",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé pour changement de ton",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--784",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value pour exécution de panneau décoratif, galon ou filet",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--785",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte pastel, grain 1",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--786",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte pastel, grain 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--787",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte pastel, grain 3",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--788",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte moyenne, grain 1",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--789",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte moyenne, grain 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--790",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte moyenne, grain 3",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--791",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte vive, grain 1",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--792",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte vive, grain 2",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--793",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Crépis giclés",
+   "nom": "Plus-value crépi giclé teinte vive, grain 3",
+   "metre": "surface"
+  },
+  {
+   "id": "ch16--794",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Traçage et exécution d'un filet jusqu'à 1 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--795",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Traçage et exécution d'un galon épaisseur 2 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--796",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Traçage et exécution d'un galon épaisseur 3 à 5 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--797",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Exécution de chiffre ou lettre au chablon hauteur jusqu'à 5 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--798",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Exécution de chiffre ou lettre au chablon hauteur 6 à 10 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--799",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Exécution de chiffre ou lettre au chablon hauteur 11 à 15 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--800",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Exécution de chiffre ou lettre au chablon hauteur 16 à 20 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--801",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Traçage et exécution de chaîne d'angle simple sans filet, largeur jusqu'à 40 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--802",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Marquage de tuyaux par cercles colorés 2 couches email, largeur 5 cm, Ø jusqu'à 5 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--803",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Marquage de tuyaux par cercles colorés, Ø jusqu'à 10 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--804",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Marquage de tuyaux par cercles colorés, Ø jusqu'à 15 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--805",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Marquage de tuyaux par cercles colorés, Ø jusqu'à 20 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--806",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Boîte aux lettres, face : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--807",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Boîte aux lettres, face et côtés : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--808",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Couvercle en fonte 1 face Ø jusqu'à 50 cm : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--809",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Grille de ventilation 20×20 cm : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--810",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Grille d'écoulement 20×20 cm : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--811",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Porte de ramonage : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--812",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Dauphin : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--813",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Racle-pieds : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--814",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Réservoir de chasse : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--815",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Ferrures de volets simples réchampies : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--816",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Espagnolettes de fenêtres non réchampies : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--817",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Espagnolettes de fenêtres réchampies : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--818",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Siphon : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--819",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Tubes électriques non réchampis : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--820",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Tubes électriques réchampis : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch16--821",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Boîtier de raccordement électrique : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  },
+  {
+   "id": "ch16--822",
+   "num": "",
+   "cat": "672 Peinture",
+   "sub": "Travaux divers",
+   "nom": "Garniture de cheminée simple : dégraissage ou lessivage, ponçage, retouche antirouille et 2 couches de peinture email",
+   "metre": "none"
+  }
+ ]
+}
