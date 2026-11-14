@@ -1,0 +1,583 @@
+{
+ "id": "ch6",
+ "titre": "CAN 132 — Forage et sciage du béton",
+ "note": "Carottage, sciage de murs, dalles et sols, évacuation, régie et équipements",
+ "postes": [
+  {
+   "id": "ch6-67110-0",
+   "num": "671.10",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de carottage",
+   "nom": "Amenée et évacuation de l'installation de carottage, par intervention, Ø jusqu'à 150 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-67110-1",
+   "num": "671.10",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de carottage",
+   "nom": "Amenée et évacuation de l'installation de carottage, par intervention, Ø 151 à 300 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-67110-2",
+   "num": "671.10",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de carottage",
+   "nom": "Amenée et évacuation de l'installation de carottage, par intervention, Ø 301 mm et plus",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-671212-3",
+   "num": "671.212",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de carottage",
+   "nom": "Déplacement de l'installation de carottage à un autre étage, Ø jusqu'à 300 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-671214-4",
+   "num": "671.214",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de carottage",
+   "nom": "Déplacement de l'installation de carottage à un autre étage, Ø supérieur à 300 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-672100-5",
+   "num": "672.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage horizontal dans béton armé ou maçonnerie de pierres naturelles (Ø 80, 100, 150, 200, 250, 300 ou 500 mm), selon profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-672400-6",
+   "num": "672.400",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage horizontal dans béton non armé (Ø 80, 100, 150, 200, 250, 300 ou 500 mm), selon profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-673100-7",
+   "num": "673.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage horizontal dans briques terre cuite, silico-calcaire ou agglomérés de ciment (Ø 80, 100, 150, 200, 250, 300 ou 500 mm), selon profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-674100-8",
+   "num": "674.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage vertical dans sol en béton armé (Ø 80, 100, 150, 200, 250, 300 ou 500 mm), selon profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-674400-9",
+   "num": "674.400",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage vertical dans sol en béton non armé (Ø 80, 100, 150, 200, 250, 300 ou 500 mm), selon profondeur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-675100-10",
+   "num": "675.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage vertical dans plafond en béton armé, Ø jusqu'à 80 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-675100-11",
+   "num": "675.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage vertical dans plafond en béton armé, Ø 200 à 250 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-675100-12",
+   "num": "675.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Carottage vertical dans plafond en béton armé, Ø 500 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-677101-13",
+   "num": "677.101",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Plus-value pour sectionnement d'armatures supérieures à 3 cm² par pièce (par cm² de section)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-678100-14",
+   "num": "678.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Chargement et transport à la décharge des carottes de plus de 20 kg, taxe comprise (21 à 50 kg ou 51 à 100 kg)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-678200-15",
+   "num": "678.200",
+   "cat": "132 Forage et sciage",
+   "sub": "Carottage",
+   "nom": "Chargement et transport à la décharge des carottes, au m³ ou par benne de 4 m³",
+   "metre": "volume"
+  },
+  {
+   "id": "ch6-681101-16",
+   "num": "681.101",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de sciage",
+   "nom": "Installation de scie universelle pour sciage dans sols, profondeur de sciage jusqu'à 250 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-681103-17",
+   "num": "681.103",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de sciage",
+   "nom": "Installation de scie universelle pour sciage dans parois, profondeur jusqu'à 250 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-681211-18",
+   "num": "681.211",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de sciage",
+   "nom": "Déplacement de l'installation de sciage au même étage, distance supérieure à 50 m",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-681105-19",
+   "num": "681.105",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de sciage",
+   "nom": "Installation de scie pour profondeur de coupe supérieure à 251 mm (sols)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-681107-20",
+   "num": "681.107",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de sciage",
+   "nom": "Installation de scie pour profondeur de coupe supérieure à 251 mm (parois)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-681213-21",
+   "num": "681.213",
+   "cat": "132 Forage et sciage",
+   "sub": "Installation de sciage",
+   "nom": "Déplacement de l'installation de sciage, profondeur de coupe supérieure à 251 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-682120-22",
+   "num": "682.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en béton armé, profondeur jusqu'à 15 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682120-23",
+   "num": "682.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en béton armé, profondeur 16 à 30 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682120-24",
+   "num": "682.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en béton armé, profondeur 31 à 50 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682220-25",
+   "num": "682.220",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en béton non armé, profondeur jusqu'à 15 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682220-26",
+   "num": "682.220",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en béton non armé, profondeur 16 à 30 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682220-27",
+   "num": "682.220",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en béton non armé, profondeur 31 à 50 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682225-28",
+   "num": "682.225",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans dalle en béton armé de bas en haut, profondeur 0 à 50 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682320-29",
+   "num": "682.320",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en briques terre cuite, silico-calcaire ou agglomérés de ciment, profondeur jusqu'à 15 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682320-30",
+   "num": "682.320",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en briques terre cuite, silico-calcaire ou agglomérés de ciment, profondeur 16 à 30 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-682320-31",
+   "num": "682.320",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans mur en briques terre cuite, silico-calcaire ou agglomérés de ciment, profondeur 31 à 50 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-683120-32",
+   "num": "683.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans sol en béton armé, profondeur 0 à 25 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-683220-33",
+   "num": "683.220",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Sciage dans dalle en béton non armé ou avec treillis, sans sous-sol, profondeur 0 à 25 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-685101-34",
+   "num": "685.101",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Assurage et fixation des parties découpées de mur ou de dalle en béton",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-685201-35",
+   "num": "685.201",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Étayage ou suspension de partie de dalle découpée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-686101-36",
+   "num": "686.101",
+   "cat": "132 Forage et sciage",
+   "sub": "Sciage",
+   "nom": "Plus-value pour sectionnement d'armatures de plus de 3 cm² par pièce (par cm² de section)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687100-37",
+   "num": "687.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de partie découpée de paroi en morceaux transportables, déposée sur place, pièce jusqu'à 100 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687100-38",
+   "num": "687.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de partie découpée de paroi en morceaux transportables, déposée sur place, pièce 101 à 500 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687100-39",
+   "num": "687.100",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de partie découpée de paroi en morceaux transportables, déposée sur place, pièce 501 à 1000 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687120-40",
+   "num": "687.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de morceau de plafond découpé, pièce jusqu'à 100 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687120-41",
+   "num": "687.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de morceau de plafond découpé, pièce 101 à 500 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687120-42",
+   "num": "687.120",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de morceau de plafond découpé, pièce 501 à 1000 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687130-43",
+   "num": "687.130",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de morceau de dalle découpée, pièce jusqu'à 100 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687130-44",
+   "num": "687.130",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de morceau de dalle découpée, pièce 101 à 500 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687130-45",
+   "num": "687.130",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Évacuation de morceau de dalle découpée, pièce 501 à 1000 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687200-46",
+   "num": "687.200",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Transport intermédiaire de pièce isolée découpée jusqu'à la décharge du chantier, pièce jusqu'à 100 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687200-47",
+   "num": "687.200",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Transport intermédiaire de pièce isolée découpée jusqu'à la décharge du chantier, pièce 101 à 500 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687200-48",
+   "num": "687.200",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Transport intermédiaire de pièce isolée découpée jusqu'à la décharge du chantier, pièce 501 à 1000 kg",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-687300-49",
+   "num": "687.300",
+   "cat": "132 Forage et sciage",
+   "sub": "Évacuation des parties découpées",
+   "nom": "Chargement et transport à la décharge des éléments découpés, sans taxes de décharge (au m³ ou par benne de 4 m³)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch6-rgie-50",
+   "num": "Régie",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Contremaître (forage et sciage), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-rgie-51",
+   "num": "Régie",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Scieur de béton (forage et sciage), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-rgie-52",
+   "num": "Régie",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Ouvrier spécialisé en sciage du béton (forage et sciage), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-rgie-53",
+   "num": "Régie",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Ouvrier en sciage du béton (forage et sciage), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-rgie-54",
+   "num": "Régie",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Apprenti (forage et sciage), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-outils-55",
+   "num": "Outils",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Couronne diamantée de forage, usure et consommation, par cm de profondeur selon diamètre (béton ou brique)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch6-outils-56",
+   "num": "Outils",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Disque diamanté de scie-sol sur roues, usure et consommation, par m² de surface de coupe",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-outils-57",
+   "num": "Outils",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Disque diamanté de scie universelle sur rails, usure et consommation, par m² de surface de coupe",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-outils-58",
+   "num": "Outils",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Câble diamanté, usure et consommation, par m² de surface de coupe",
+   "metre": "surface"
+  },
+  {
+   "id": "ch6-outils-59",
+   "num": "Outils",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Supplément sur couronnes et fraises pour découpage d'armature (par cm² au-delà de 3 cm²)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-60",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Foreuse (forfait journalier + heures opérationnelles), selon diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-61",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Scie-sol sur roues avec moteur électrique ou thermique (forfait journalier + heures), selon profondeur de coupe",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-62",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Scie universelle sur rails pour parois, plafonds et sols (forfait journalier + heures), selon profondeur de coupe",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-63",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Scie à câble pour profondeur de coupe variable (forfait journalier + heures)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-64",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Aspirateur d'eau (forfait journalier + heures)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-65",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Éclateur hydraulique (forfait journalier + heures)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-66",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Installation vacuum pour foreuse (forfait journalier + heures)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-67",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Génératrice mobile (forfait journalier + heures), selon puissance",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-68",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Pince hydraulique de démolition (forfait journalier + heures), selon ouverture des mâchoires",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-69",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Scie à disque portable, profondeur jusqu'à 15 cm (forfait journalier + heures)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-70",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Marteau-piqueur électrique jusqu'à 12 kg (forfait journalier + heures)",
+   "metre": "none"
+  },
+  {
+   "id": "ch6-quip-71",
+   "num": "Équip.",
+   "cat": "132 Forage et sciage",
+   "sub": "Régie et équipements",
+   "nom": "Véhicule de transport (voiture, minibus, fourgon, 4WD, remorque) : forfait journalier + km",
+   "metre": "none"
+  }
+ ]
+}

@@ -40,6 +40,22 @@
    "n": 185,
    "note": "Bétons, coffrages, armatures, éléments en béton",
    "ordre": 5
+  },
+  {
+   "id": "ch6",
+   "titre": "CAN 132 — Forage et sciage du béton",
+   "fichier": "ch6-forage-sciage.json",
+   "n": 72,
+   "note": "Carottage, sciage de murs, dalles et sols, évacuation, régie et équipements",
+   "ordre": 6
+  },
+  {
+   "id": "ch7",
+   "titre": "CAN 321 — Charpente métallique",
+   "fichier": "ch7-charpente-metallique.json",
+   "n": 58,
+   "note": "Ossature acier, escaliers, protection anticorrosion, tôles profilées, régie",
+   "ordre": 7
   }
  ]
 }

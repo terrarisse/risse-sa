@@ -1,0 +1,471 @@
+{
+ "id": "ch7",
+ "titre": "CAN 321 — Charpente métallique",
+ "note": "Ossature acier, escaliers, protection anticorrosion, tôles profilées, régie",
+ "postes": [
+  {
+   "id": "ch7-422a-0",
+   "num": "422a",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à âme pleine en profilés laminés, continue sur sommiers ou fermes (assemblage direct ou cornière), acier Fe E 235",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-422b-1",
+   "num": "422b",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à âme pleine en profilés laminés, continue entre sommiers ou fermes (cornière ou plaque d'about, entaille et soudure), acier Fe E 235",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-422c-2",
+   "num": "422c",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à âme pleine en profilés laminés, sans continuité, sur sommiers ou fermes (cornière, sans entailles), acier Fe E 235",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-422d-3",
+   "num": "422d",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à âme pleine en profilés laminés, sans continuité, entre sommiers ou fermes (cornières ou plaques d'about avec entailles), acier Fe E 235",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-423-4",
+   "num": "423",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à âme pleine en profil composé soudé",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-425-5",
+   "num": "425",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle ajourée en profilés composés soudés ou découpés en nids-d'abeilles",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-426a-6",
+   "num": "426a",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à treillis en profilés laminés",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-426b-7",
+   "num": "426b",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à treillis, membrures en profilés et treillis en tubes",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-426c-8",
+   "num": "426c",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Fabrication et livraison de poutrelle à treillis en tubes",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-14-9",
+   "num": "14",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Tirants entre pannes en fers cornières ou fers ronds",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-15-10",
+   "num": "15",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Entretoises de liaison entre pannes faîtières ou sablières",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-16-11",
+   "num": "16",
+   "cat": "321 Charpente métallique",
+   "sub": "Poutrelles, pannes, chevrons",
+   "nom": "Chevêtres en profilés laminés pour passages dans toitures ou planchers, attaches comprises",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-442-12",
+   "num": "442",
+   "cat": "321 Charpente métallique",
+   "sub": "Sommiers, fermes",
+   "nom": "Fabrication et livraison de sommier droit à âme pleine en profilés laminés (simple, continu avec plaques de tête ou liaisons soudées)",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-446-13",
+   "num": "446",
+   "cat": "321 Charpente métallique",
+   "sub": "Sommiers, fermes",
+   "nom": "Fabrication et livraison de sommier droit à âme pleine composé et soudé, hauteur constante",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-448-14",
+   "num": "448",
+   "cat": "321 Charpente métallique",
+   "sub": "Sommiers, fermes",
+   "nom": "Fabrication et livraison de sommier droit ajouré composé soudé ou découpé en nids-d'abeilles",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-446f-15",
+   "num": "446f",
+   "cat": "321 Charpente métallique",
+   "sub": "Sommiers, fermes",
+   "nom": "Fabrication et livraison de ferme à âme pleine à profil de hauteur variable, composée et soudée",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-447-16",
+   "num": "447",
+   "cat": "321 Charpente métallique",
+   "sub": "Sommiers, fermes",
+   "nom": "Tirants et sous-tirants pour fermes à âme pleine, goussets, plaques de tête et assemblages compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-453-17",
+   "num": "453",
+   "cat": "321 Charpente métallique",
+   "sub": "Sommiers, fermes",
+   "nom": "Poutre à simple treillis en profilés laminés avec goussets et attaches des barres",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-472-18",
+   "num": "472",
+   "cat": "321 Charpente métallique",
+   "sub": "Colonnes et poteaux",
+   "nom": "Fabrication et livraison de colonne à âme pleine en profilé laminé, plaques de tête et de pied soudées",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-473-19",
+   "num": "473",
+   "cat": "321 Charpente métallique",
+   "sub": "Colonnes et poteaux",
+   "nom": "Fabrication et livraison de colonne à âme pleine composée et soudée, plaques de tête et de pied soudées",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-474r-20",
+   "num": "474r",
+   "cat": "321 Charpente métallique",
+   "sub": "Colonnes et poteaux",
+   "nom": "Fabrication et livraison de poteau en tube rond, plaques de tête ou de pied soudées",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-474c-21",
+   "num": "474c",
+   "cat": "321 Charpente métallique",
+   "sub": "Colonnes et poteaux",
+   "nom": "Fabrication et livraison de poteau en tube rectangulaire ou carré, plaques de tête ou de pied soudées",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-475-22",
+   "num": "475",
+   "cat": "321 Charpente métallique",
+   "sub": "Colonnes et poteaux",
+   "nom": "Fabrication et livraison de colonne caissonnée soudée (profil laminé et plats soudés aux ailes)",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-482-23",
+   "num": "482",
+   "cat": "321 Charpente métallique",
+   "sub": "Colonnes et poteaux",
+   "nom": "Têtes de poinçonnement pour colonnes en profilés ou tôles soudés",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-382-24",
+   "num": "382",
+   "cat": "321 Charpente métallique",
+   "sub": "Façades, contreventements",
+   "nom": "Filières et montants pour façades et cloisons intérieures en profilés laminés à âme pleine",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-382t-25",
+   "num": "382t",
+   "cat": "321 Charpente métallique",
+   "sub": "Façades, contreventements",
+   "nom": "Filières et montants pour façades et cloisons en tubes rectangulaires ou carrés",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-542-26",
+   "num": "542",
+   "cat": "321 Charpente métallique",
+   "sub": "Façades, contreventements",
+   "nom": "Contreventements en toiture ou plan horizontal ou vertical en profilés laminés",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-542t-27",
+   "num": "542t",
+   "cat": "321 Charpente métallique",
+   "sub": "Façades, contreventements",
+   "nom": "Contreventements en toiture ou plan horizontal ou vertical en tubes ronds ou rectangulaires",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-621-28",
+   "num": "621",
+   "cat": "321 Charpente métallique",
+   "sub": "Escaliers, paliers, passerelles",
+   "nom": "Limons d'escaliers droits en profilés laminés, avec ou sans paliers",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-631-29",
+   "num": "631",
+   "cat": "321 Charpente métallique",
+   "sub": "Escaliers, paliers, passerelles",
+   "nom": "Marche d'escalier en grille-caillebotis zinguée 240×1000 mm, boulonnée aux limons",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-52-30",
+   "num": "52",
+   "cat": "321 Charpente métallique",
+   "sub": "Escaliers, paliers, passerelles",
+   "nom": "Plus-value ou moins-value par tranche de 20 cm de longueur de marche en caillebotis",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-632-31",
+   "num": "632",
+   "cat": "321 Charpente métallique",
+   "sub": "Escaliers, paliers, passerelles",
+   "nom": "Marche et contre-marche d'escalier en tôle pliée épaisseur 4 mm (300×1500 ou 300×2000 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-633-32",
+   "num": "633",
+   "cat": "321 Charpente métallique",
+   "sub": "Escaliers, paliers, passerelles",
+   "nom": "Platelage de palier et passerelle en grilles-caillebotis zinguées, fixations comprises",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-322-33",
+   "num": "322",
+   "cat": "321 Charpente métallique",
+   "sub": "Dispositifs d'appui et d'ancrage",
+   "nom": "Plaque d'appui ou de pose en large-plat ou tôle, avec pattes de scellement, pour colonnes ou poutres sur constructions en béton",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-323-34",
+   "num": "323",
+   "cat": "321 Charpente métallique",
+   "sub": "Dispositifs d'appui et d'ancrage",
+   "nom": "Plaque d'appui destinée à être posée dans le coffrage, avec ancrages",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-65-35",
+   "num": "65",
+   "cat": "321 Charpente métallique",
+   "sub": "Aciers spéciaux, protection anticorrosion",
+   "nom": "Plus-value pour acier de qualité spéciale Fe E 355 par rapport à Fe E 235",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-720-36",
+   "num": "720",
+   "cat": "321 Charpente métallique",
+   "sub": "Aciers spéciaux, protection anticorrosion",
+   "nom": "Dérouillage et couche de fond sur construction en acier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-722a-37",
+   "num": "722a",
+   "cat": "321 Charpente métallique",
+   "sub": "Aciers spéciaux, protection anticorrosion",
+   "nom": "Sablage Sa 2½ et couche de fond à la peinture à base de poudre de zinc 1×40 µm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-722b-38",
+   "num": "722b",
+   "cat": "321 Charpente métallique",
+   "sub": "Aciers spéciaux, protection anticorrosion",
+   "nom": "Sablage Sa 2½ et couche de fond à la peinture à base de poudre de zinc 2×40 µm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-782-39",
+   "num": "782",
+   "cat": "321 Charpente métallique",
+   "sub": "Aciers spéciaux, protection anticorrosion",
+   "nom": "Dérouillage par décapage au bain d'acide chlorhydrique et zingage au feu de 80 à 100 µm",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-75-40",
+   "num": "75",
+   "cat": "321 Charpente métallique",
+   "sub": "Montage",
+   "nom": "Montage de l'ossature métallique (selon ouvrage : halls et dépôts, bâtiments administratifs et scolaires)",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-921-41",
+   "num": "921",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Fourniture de tôles de toiture et de plancher profilées zinguées (procédé Sendzimir), franco chantier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-981a-42",
+   "num": "981a",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Montage de tôles profilées de toiture et plancher, fixation sur le support par clous au pistolet dans le fond de l'ondulation",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-981b-43",
+   "num": "981b",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Montage de tôles profilées, fixation par vis zinguées au sommet de l'ondulation avec garniture plastique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-981c-44",
+   "num": "981c",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Montage de tôles profilées de dalle mixte acier et béton avec goujons (étanchéité non comprise)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch7-87-45",
+   "num": "87",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Fourniture et pose d'étanchéité des joints de tôles par bande scotch 50 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch7-851-46",
+   "num": "851",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Fourniture et soudage de goujons à tête pour poutres mixtes acier et béton (en atelier ou sur chantier)",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-89-47",
+   "num": "89",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Connecteurs Hilti à clouer pour poutres mixtes",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-982-48",
+   "num": "982",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Plus-value pour découpes, ouvertures et coupes biaises dans tôles profilées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch7-221-49",
+   "num": "221",
+   "cat": "321 Charpente métallique",
+   "sub": "Tôles de toiture et de plancher",
+   "nom": "Dessins d'atelier, listes de pièces et chablons établis par l'entrepreneur",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-50",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Chef de chantier (charpente métallique), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-51",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Chef monteur (charpente métallique), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-52",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Monteur-ouvrier qualifié (charpente métallique), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-53",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Soudeur certifié (charpente métallique), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-54",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Ouvrier semi-qualifié (charpente métallique), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-55",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Technicien dessinateur (charpente métallique), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-56",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Location de grue sur pneus avec grutier, par heure, selon capacité",
+   "metre": "none"
+  },
+  {
+   "id": "ch7-rgie-57",
+   "num": "Régie",
+   "cat": "321 Charpente métallique",
+   "sub": "Régie",
+   "nom": "Location journalière d'outillage : poste de soudure, perceuse, boulonneuse, meuleuse, palan, cric, vérin hydraulique",
+   "metre": "none"
+  }
+ ]
+}
