@@ -128,6 +128,14 @@
    "n": 823,
    "note": "Échafaudage, protection, décapage, lavage, ponçage, enduisage, assainissement du béton, peintures intérieures/extérieures, boiseries, métal, régie",
    "ordre": 16
+  },
+  {
+   "id": "ch17",
+   "titre": "Génie civil — CAN 211 et suivants (VSS)",
+   "fichier": "ch17-genie-civil.json",
+   "n": 1046,
+   "note": "Fouilles et terrassements, canalisations, routes, bordures, pavages… (génie civil, volumes VSS I à V)",
+   "ordre": 17
   }
  ]
 }
