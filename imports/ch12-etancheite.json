@@ -1,0 +1,655 @@
+{
+ "id": "ch12",
+ "titre": "CAN 364 — Étanchéité, asphaltage, isolation",
+ "note": "Barrières vapeur, isolations, étanchéités multicouche et monocouche, protections, asphalte, régie",
+ "postes": [
+  {
+   "id": "ch12-102-0",
+   "num": "102",
+   "cat": "364 Étanchéité",
+   "sub": "Barrières vapeur",
+   "nom": "Barrière vapeur en voile de verre bitumé V 60 soudable, sur béton taloché fin",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-103-1",
+   "num": "103",
+   "cat": "364 Étanchéité",
+   "sub": "Barrières vapeur",
+   "nom": "Barrière vapeur Alu 80",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-104-2",
+   "num": "104",
+   "cat": "364 Étanchéité",
+   "sub": "Barrières vapeur",
+   "nom": "Une couche de bitume à chaud sur toute la surface",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-105-3",
+   "num": "105",
+   "cat": "364 Étanchéité",
+   "sub": "Barrières vapeur",
+   "nom": "Enduit d'apprêt bitumineux à froid",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-106-4",
+   "num": "106",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Panneaux de polyuréthane posés libres sur barrière vapeur, épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-106-5",
+   "num": "106",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Panneaux de polyuréthane posés libres sur barrière vapeur, épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-106-6",
+   "num": "106",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Panneaux de polyuréthane posés libres sur barrière vapeur, épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-107-7",
+   "num": "107",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Plus-value pour collage des panneaux isolants au bitume",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-108-8",
+   "num": "108",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Plus-value pour façon de gorges ou angles d'isolation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-109a-9",
+   "num": "109a",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Panneaux en verre cellulaire collés au bitume à chaud, épaisseur 80 mm (env. 5 kg bitume/m²)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-109b-10",
+   "num": "109b",
+   "cat": "364 Étanchéité",
+   "sub": "Isolations thermiques",
+   "nom": "Panneaux en verre cellulaire collés au bitume à chaud, épaisseur 100 mm (env. 6 kg bitume/m²)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-110-11",
+   "num": "110",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Étanchéité bicouche en lés de bitume modifié (1re couche armature tissu de verre ou jute, 2e couche bitume polymère armature voile de polyester)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-111a-12",
+   "num": "111a",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Plus-value étanchéité pour hauteur d'immeuble (10 à 15, 15 à 20, 20 à 30, plus de 30 m)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-111b-13",
+   "num": "111b",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Plus-value pour étanchéité verticale",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-111c-14",
+   "num": "111c",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Plus-value pour attiques et corniches",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-111d-15",
+   "num": "111d",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Raccord et renfort d'étanchéité sur ferblanterie",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-111e-16",
+   "num": "111e",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Raccord et renfort d'étanchéité aux naissances",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-111f-17",
+   "num": "111f",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Façon de gondole profondeur max. 10 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-112-18",
+   "num": "112",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité multicouche",
+   "nom": "Joint de dilatation en élastomère EPDM (Redline type 20 ou 40)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-113-19",
+   "num": "113",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité monocouche",
+   "nom": "Étanchéité monocouche PVC épaisseur 1,8 mm armé voile de verre, pose libre",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-114-20",
+   "num": "114",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité monocouche",
+   "nom": "Plus-value pour collage en plein de l'étanchéité monocouche",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-115-21",
+   "num": "115",
+   "cat": "364 Étanchéité",
+   "sub": "Étanchéité monocouche",
+   "nom": "Plus-value pour relevé d'étanchéité monocouche jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-116-22",
+   "num": "116",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Protection : 6 cm de gravier 8/15 à 15/30",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-117-23",
+   "num": "117",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Protection : 1 natte géotextile 150 g/m² et 5 cm de gravier 8/15 à 15/30",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-118-24",
+   "num": "118",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Protection en microbéton : natte géotextile 150 g/m², papier huilé et 4 cm de mortier",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-119-25",
+   "num": "119",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Plus-value pour treillis d'armature 150/150/3 mm dans protection",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-120-26",
+   "num": "120",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Crépissage en mortier de ciment de relevés, jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-121-27",
+   "num": "121",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Plus-value pour treillis type Rabitz dans crépissage, jusqu'à 25 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-122a-28",
+   "num": "122a",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Dallettes préfabriquées 50×50 cm en béton lavé posées sur taquets en mousse synthétique, croisillons compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-122b-29",
+   "num": "122b",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Plus-value dallettes pour surfaces inférieures à 100 m² et difficultés d'accès",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-122c-30",
+   "num": "122c",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Plus-value dallettes pour coupe droite",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-122d-31",
+   "num": "122d",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Plus-value dallettes pour découpes aux naissances, ventilations ou godets",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-123-32",
+   "num": "123",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Bande de serrage en cuivre type Dilob, développé 6,5 ou 16,5 cm, vis, tampons et joint de mastic compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-124-33",
+   "num": "124",
+   "cat": "364 Étanchéité",
+   "sub": "Protections et finitions",
+   "nom": "Plus-value bande de serrage pour angles et fonds",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-126-34",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 0 à 20 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-35",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 21 à 40 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-36",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 41 à 60 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-37",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 61 à 80 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-38",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 81 à 100 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-39",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 101 à 150 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-40",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 151 à 200 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-41",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 201 à 300 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-42",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 301 à 500 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-43",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 501 à 750 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-44",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 751 à 1000 m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-126-45",
+   "num": "126",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Chape d'asphalte naturel coulé à chaud sur béton, épaisseur 15 à 30 mm en 1 couche, surface 1001 et plus m²",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-127a-46",
+   "num": "127a",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Sous-couche de papier huilé paraffiné spécial sous asphalte",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-127b-47",
+   "num": "127b",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Sous-couche de voile de verre sous asphalte",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-127c-48",
+   "num": "127c",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Sous-couche de voile de verre bitumé sous asphalte",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-128a-49",
+   "num": "128a",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Plus-value asphalte pour attique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-128b-50",
+   "num": "128b",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Plus-value asphalte pour lissage à chaud ou talochage",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-128c-51",
+   "num": "128c",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Plus-value asphalte pour lissage au sable de quartz",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-129-52",
+   "num": "129",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Raccords d'asphalte aux garnitures",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-130-53",
+   "num": "130",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Raccords d'asphalte aux naissances",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-131-54",
+   "num": "131",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Raccords d'asphalte aux godets (sans remplissage)",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-132a-55",
+   "num": "132a",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Joint coulé à chaud, section 15/20",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-132b-56",
+   "num": "132b",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Joint de dilatation souple avec soufflet",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-133-57",
+   "num": "133",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Joints préformés type Promak 20×15 ou 20×20 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-134-58",
+   "num": "134",
+   "cat": "364 Asphalte coulé",
+   "sub": "Chapes d'asphalte",
+   "nom": "Plus-value asphalte pour hauteur d'immeuble (10 à 15, 15 à 20, 20 à 30, plus de 30 m)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch12-rgie-59",
+   "num": "Régie",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Chef d'équipe (étanchéité), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-rgie-60",
+   "num": "Régie",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Ouvrier qualifié avec apport technique (étanchéité), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-rgie-61",
+   "num": "Régie",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Aide qualifié avec apport technique (étanchéité), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-rgie-62",
+   "num": "Régie",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Ouvrier qualifié sur chantier (étanchéité), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-rgie-63",
+   "num": "Régie",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Aide sur chantier (étanchéité), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-64",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de fourgon utilitaire jusqu'à 3,5 t, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-65",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de camionnette jusqu'à 3,5 t avec chauffeur, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-66",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de camion basculant 2 essieux 8 t, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-67",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de camion basculant 3 essieux 10 t, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-68",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de camion malaxeur pour asphalte coulé avec chauffeur, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-69",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de dumper pour asphalte, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-70",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de aspirateur à eau, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-71",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de marteau électrique, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-72",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de scie à eau pour dallettes, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-73",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de machine à pression 150 bars, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-74",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de tronçonneuse, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-75",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de treuil élévateur, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-76",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de élévateur à nacelle 1 t, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-location-77",
+   "num": "Location",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Location de monte-charge Bocker, par heure ou par jour",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-18-78",
+   "num": "18",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Benne de 4 m³ taxes de décharge comprises (classe I, II ou minibenne 1 m³)",
+   "metre": "none"
+  },
+  {
+   "id": "ch12-19-79",
+   "num": "19",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Barrières de sécurité selon directives CNA, montage et démontage compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch12-20-80",
+   "num": "20",
+   "cat": "364 Asphalte coulé",
+   "sub": "Régie",
+   "nom": "Installation de chantier étanchéité (amenée et repli du matériel), travaux en régie",
+   "metre": "none"
+  }
+ ]
+}

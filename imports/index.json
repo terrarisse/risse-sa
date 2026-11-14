@@ -88,6 +88,14 @@
    "n": 105,
    "note": "Tuiles plates, flamandes, béton, ardoises, Eternit, lattages, régie",
    "ordre": 11
+  },
+  {
+   "id": "ch12",
+   "titre": "CAN 364 — Étanchéité, asphaltage, isolation",
+   "fichier": "ch12-etancheite.json",
+   "n": 81,
+   "note": "Barrières vapeur, isolations, étanchéités multicouche et monocouche, protections, asphalte, régie",
+   "ordre": 12
   }
  ]
 }
