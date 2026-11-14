@@ -56,6 +56,14 @@
    "n": 58,
    "note": "Ossature acier, escaliers, protection anticorrosion, tôles profilées, régie",
    "ordre": 7
+  },
+  {
+   "id": "ch8",
+   "titre": "CAN 331 — Charpente",
+   "fichier": "ch8-charpente.json",
+   "n": 275,
+   "note": "Poutraisons, charpente chêne et sapin, fermes, lamellé-collé, chevronnages, lambrissages, planchers, régie",
+   "ordre": 8
   }
  ]
 }

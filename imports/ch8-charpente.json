@@ -1,0 +1,2207 @@
+{
+ "id": "ch8",
+ "titre": "CAN 331 — Charpente",
+ "note": "Poutraisons, charpente chêne et sapin, fermes, lamellé-collé, chevronnages, lambrissages, planchers, régie",
+ "postes": [
+  {
+   "id": "ch8-55a-0",
+   "num": "55a",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutraison brute en bois (couvertes, arrière-couvertes, section min. 150 cm², jusqu'à 8 m), pose sur assises libres, tolérance de flache SIA 265",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-55b-1",
+   "num": "55b",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutraison brute en bois à vives arêtes, pose sur assises libres",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-55c-2",
+   "num": "55c",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutraison brute en bois à vives arêtes et sans cœur, pose sur assises libres",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-55d-3",
+   "num": "55d",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Plus-value poutraison pour bois de 8 à 10 m ou de plus de 10 m de longueur",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-56-4",
+   "num": "56",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Bois pour petites poutraisons (6/10, 6/12, 6/14, 8/12)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-57a-5",
+   "num": "57a",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutraison apparente en sapin équarri raboté 2e choix, à vives arêtes et cœur fendu, sections 150 à 300 cm²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57b-6",
+   "num": "57b",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutraison apparente en sapin équarri raboté 2e choix, à vives arêtes et hors cœur",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57c-7",
+   "num": "57c",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Plus-value poutraison apparente pour bois de 8 à 10 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57d-8",
+   "num": "57d",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutraison apparente posée en locaux fermés (sous dalles), empochements et fixations compris",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57e-9",
+   "num": "57e",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Plus-value poutraison pour chêne, mélèze et bois exotiques",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57f-10",
+   "num": "57f",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Poutres en caissons, en bois assemblés",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57g-11",
+   "num": "57g",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Plus-value poutraison pour séchage artificiel",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-57bis-12",
+   "num": "57bis",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Rabotage à la machine de poutraison",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-57bis-13",
+   "num": "57bis",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Ponçage à la machine après rabotage de poutraison, par face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-57bis-14",
+   "num": "57bis",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Rifflage à la main de solives rabotées, par face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-57bis-15",
+   "num": "57bis",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Chanfrein jusqu'à 3 cm de développement sur solive",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-57bis-16",
+   "num": "57bis",
+   "cat": "331 Charpente bois",
+   "sub": "Poutraisons",
+   "nom": "Arrêt de chanfrein à la main sur solive",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-58-17",
+   "num": "58",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Assemblage de solives à tenon et mortaise ou queue d'aronde pour enchevêtrures",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-58bis-18",
+   "num": "58bis",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Assemblage de solives à tenon et mortaise renforcé",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-59-19",
+   "num": "59",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Entaille A sur latte crossée, avec portée dans le sommier, sans tenon",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-60-20",
+   "num": "60",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Entaille B sur latte crossée, sans portée dans le sommier et sans tenon",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-61-21",
+   "num": "61",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Entaille C d'extrémité de solive sur l'aile du sommier en fer",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-62-22",
+   "num": "62",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Entailles D et E dessus et dessous de solive, par extrémité de solive",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-66-23",
+   "num": "66",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Carrelets fixés contre sommiers ou poutres par des crosses ordinaires",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-67-24",
+   "num": "67",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Étrésillons posés entre poutres, jusqu'à 0,60 m de longueur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-68-25",
+   "num": "68",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Imprégnation fongicide ou insecticide des têtes de poutres",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-69-26",
+   "num": "69",
+   "cat": "331 Charpente bois",
+   "sub": "Assemblages de solives",
+   "nom": "Protection des têtes de poutres avec carton organique",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-70-27",
+   "num": "70",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en chêne",
+   "nom": "Bois de charpente en chêne à vives arêtes, jusqu'à 4 m, section 150 à 250 cm², pour sommiers, colonnes",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-72-28",
+   "num": "72",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en chêne",
+   "nom": "Semelles en bois dur pour sabots",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-73-29",
+   "num": "73",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en chêne",
+   "nom": "Rabotage de charpente en chêne, par face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-74-30",
+   "num": "74",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en chêne",
+   "nom": "Chanfreins plats sur chêne, jusqu'à 3 cm ou par cm au-delà",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-75-31",
+   "num": "75",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en chêne",
+   "nom": "Arrêt de chanfrein à la main sur chêne",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-77-32",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour toiture à 2 pans, sans ferme",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77-33",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour toiture avec fermes assemblées",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77-34",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour toiture à 4 pans avec fermes assemblées",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77-35",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour toiture à 4 pans, sans ferme",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77-36",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour lucarnes",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77-37",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour clochetons, tourelles",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77-38",
+   "num": "77",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Bois de charpente C24 équarri, tolérance de flache SIA 265, jusqu'à 8 m, pour vérandas, auvents (bois sans cœur à vives arêtes, petit équarrissage)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-77h-39",
+   "num": "77h",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Console d'avant-toit VAHC rabotée, longueur min. 80 cm, sans fixations",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-78-40",
+   "num": "78",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Plus-value charpente pour bois de 8 à 10 m ou au-dessus de 10 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-79-41",
+   "num": "79",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Plus-value pour délardement de noues ou arêtiers",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-80-42",
+   "num": "80",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Plus-value pour délardement simple",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-81-43",
+   "num": "81",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Plus-value pour bois de charpente à vives arêtes",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-82-44",
+   "num": "82",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Plus-value pour bois sans cœur",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-84-45",
+   "num": "84",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Rabotage partiel de pièces de charpente ou poutraisons, par face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-85-46",
+   "num": "85",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Chantournage simple d'une tête de poutre ou panne",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-88-47",
+   "num": "88",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Chantignoles courantes ou d'angles",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-89-48",
+   "num": "89",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Façon de rainure",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-90-49",
+   "num": "90",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Plus-value pour arrêt de rainure",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-91-50",
+   "num": "91",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Imprégnation insecticide et fongicide préventive de charpente par trempage (bois vert, mi-sec ou sec)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-91c-51",
+   "num": "91c",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Imprégnation de charpente en autoclave, bois vert sans séchage",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-92a-52",
+   "num": "92a",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Traitement curatif de charpente par pulvérisation",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-92b-53",
+   "num": "92b",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Traitement curatif de charpente par injection, bouchons compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-94-54",
+   "num": "94",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Charpente en sapin",
+   "nom": "Application sur toutes les faces d'un glacis de protection incolore avant montage (bois raboté ou têtes de chevrons)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-95-55",
+   "num": "95",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Fermes (portée 8 à 10 m)",
+   "nom": "Fermes clouées en bois équarri à vives arêtes, cœur refendu, posées",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-96-56",
+   "num": "96",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Fermes (portée 8 à 10 m)",
+   "nom": "Fermes assemblées en bois lamellé-collé",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-97-57",
+   "num": "97",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Fermes (portée 8 à 10 m)",
+   "nom": "Fermes assemblées en bois équarri à vives arêtes, avec goujons annulaires",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-98-58",
+   "num": "98",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Lamellé-collé (GL 24)",
+   "nom": "Élément de charpente lamellé-collé GL 24 en lames de sapin, rabotage B/FB aspect N et enduit de protection compris, droit et de section constante",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-98-59",
+   "num": "98",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Lamellé-collé (GL 24)",
+   "nom": "Élément de charpente lamellé-collé GL 24 en lames de sapin, rabotage B/FB aspect N et enduit de protection compris, cintré et de section constante",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-98-60",
+   "num": "98",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Lamellé-collé (GL 24)",
+   "nom": "Élément de charpente lamellé-collé GL 24 en lames de sapin, rabotage B/FB aspect N et enduit de protection compris, droit de section variable",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-98-61",
+   "num": "98",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Lamellé-collé (GL 24)",
+   "nom": "Élément de charpente lamellé-collé GL 24 en lames de sapin, rabotage B/FB aspect N et enduit de protection compris, cintré de section variable",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-98bis-62",
+   "num": "98bis",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Lamellé-collé (GL 24)",
+   "nom": "Plus-value lamellé-collé pour qualité A/FA",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-99-63",
+   "num": "99",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Lamellé-collé (GL 24)",
+   "nom": "Plus-value pour traitement soigné des surfaces visibles, rabotage propre (aspect A)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-100-64",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 8/12",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-65",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 8/14",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-66",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 8/16",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-67",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 10/12",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-68",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 10/14",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-69",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 10/16",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-70",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 10/18",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-100-71",
+   "num": "100",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons C24 jusqu'à 8 m, bois scié 4 faces, 10/20",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-1001-72",
+   "num": "100.1",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chevrons en lamellé BLC Duo industriel, section supérieure à 140 cm²",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-101-73",
+   "num": "101",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Plus-value chevrons de 8 à 10 m ou de plus de 10 m",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-102-74",
+   "num": "102",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Coyaux (révellons) droits",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-103-75",
+   "num": "103",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Coyaux (révellons) cintrés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-104-76",
+   "num": "104",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Plus-value pour coupe d'empannons, par extrémité",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-105-77",
+   "num": "105",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Chantournage de chevrons (jusqu'à ou au-dessus de 40 cm de développement, arrondi à l'extrémité, rainure pour cache-moineau)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-106-78",
+   "num": "106",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Rabotage de chevrons",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-107-79",
+   "num": "107",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Membrons pour toits brisés (mansards), à boudin et doucine, en planches brutes ou rabotées",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-111-80",
+   "num": "111",
+   "cat": "331 Charpente chêne et sapin",
+   "sub": "Chevronnages (C24)",
+   "nom": "Ossature bois C24 : pans de bois en sapin assemblés (poteaux, filières), section min. 100 cm² (ou Duo industriel)",
+   "metre": "volume"
+  },
+  {
+   "id": "ch8-120-81",
+   "num": "120",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Lambrissage brut cloué sur chevrons, posé à joints plats (voliges 18 mm, planches 24 ou 27 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-121-82",
+   "num": "121",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Lambrissage brut cloué sur chevrons, rainé crêté",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1211-83",
+   "num": "121.1",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Sous-toiture Pavaroof W Plus",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1212-84",
+   "num": "121.2",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Isoroof 22 mm (nature joints collés, KN 35 ou KN 52)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-122-85",
+   "num": "122",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Lambrissage posé à recouvrement de 3 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-123-86",
+   "num": "123",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Lambrissage rainé crêté raboté, profil chanfrein ou Canada, largeur fixe, qualité IIA, épaisseur 16 ou 21 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-124a-87",
+   "num": "124a",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Plus-value lambrissage pour coupe sur noue ou arêtier par ligne",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-124b-88",
+   "num": "124b",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Plus-value lambrissage pour pente supérieure à 30° ou 50°",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-124c-89",
+   "num": "124c",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Plus-value pour lambrissage de vérandas et auvents",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-125-90",
+   "num": "125",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Lambrissage d'avant-toit posé sur chevrons, raboté 1 face, lames crêtées chanfrein ou Canada (2e ou 3e choix)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-125bis-91",
+   "num": "125bis",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Plus-value pour lambrissage de clochetons, tourelles, lucarnes",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-128-92",
+   "num": "128",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lambrissage sur toitures",
+   "nom": "Fermeture entre chevrons, rabotée 1 face, 21 mm, posée dans rainures, hauteur jusqu'à 20 cm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-129-93",
+   "num": "129",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lés de sous-couverture",
+   "nom": "Lé de sous-couverture agrafé sur lambris ou Isoroof (toitures jusqu'à 30°)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1291-94",
+   "num": "129.1",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lés de sous-couverture",
+   "nom": "Plus-value lé de sous-couverture pour pente supérieure à 30° ou 50°",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-130-95",
+   "num": "130",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lés de sous-couverture",
+   "nom": "Plus-value lé de sous-couverture pour joints collés",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1301-96",
+   "num": "130.1",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lés de sous-couverture",
+   "nom": "Plus-value lé de sous-couverture pour joint butylique",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-131-97",
+   "num": "131",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Lés de sous-couverture",
+   "nom": "Contre-lattage 50/50 préperçé avec taquet d'étanchéité",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-133-98",
+   "num": "133",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher brut rainé et crêté (24 ou 27 mm)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-134-99",
+   "num": "134",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher brut posé entre poutres, liteaux de support 27/35 compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-135-100",
+   "num": "135",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher en panneaux d'aggloméré standard à rainures et languettes collées V 20 (ou V 100)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-136-101",
+   "num": "136",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher en lames sapin rainées-crêtées rabotées sur 1 face visible, qualité IIB",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1361-102",
+   "num": "136.1",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher en lames sapin raboté 2 faces visibles, qualité IIB",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-137-103",
+   "num": "137",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher de balcon, galerie ou deck en lames rabotées 2 faces (sapin, mélèze ou chêne), pose ajourée",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-138-104",
+   "num": "138",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Plancher de balcon avec coupes biaises sur les chants",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-140-105",
+   "num": "140",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Lambourdage simple 27/60 à 50 cm d'écartement, cloué sur bois, nivellement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-141-106",
+   "num": "141",
+   "cat": "331 Lambrissages, sous-couvertures, planchers",
+   "sub": "Planchers",
+   "nom": "Lambourdage double 27/60 à 50 cm d'écartement, pose libre, nivellement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-143bis-107",
+   "num": "143bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Cornier de corniche en sapin à peindre, jusqu'à 10 cm de hauteur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-144-108",
+   "num": "144",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Larmiers rabotés cloués aux extrémités des chevrons, 23 mm d'épaisseur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-144bis-109",
+   "num": "144bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Chanlattes trapézoïdales 55/140",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-145-110",
+   "num": "145",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Tablettes brutes avec coins de supports (27/150 ou 27 mm jusqu'à 200 mm de largeur)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-145bis-111",
+   "num": "145bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Moulures gorges sous chéneaux 45/55 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-146-112",
+   "num": "146",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Plus-value pour moulures poussées sur les chants des larmiers",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-147-113",
+   "num": "147",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Plus-value pour rainures pour recevoir le plafond",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-148-114",
+   "num": "148",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Blochets jusqu'à 10 cm de largeur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-1481-115",
+   "num": "148.1",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Blochets d'angles",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-149-116",
+   "num": "149",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Plus-value pour blochets cintrés, forme courante",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-150-117",
+   "num": "150",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Berceaux sous blochets en lames de sapin à chanfrein ou Canada 13 mm, choix IIA",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-150b-118",
+   "num": "150b",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Plus-value pour pose de berceaux sous chevrons",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-150c-119",
+   "num": "150c",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Plus-value pour tympans en panneaux sapin 3 plis à blindés",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-151-120",
+   "num": "151",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Couvre-joints sapin 8/40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-152-121",
+   "num": "152",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Quarts-de-rond de sapin",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-153-122",
+   "num": "153",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Moulures (jusqu'à 6 cm, de 6 à 10 cm ou au cm de développement)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-154-123",
+   "num": "154",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Virevents droits en sapin, 22 mm d'épaisseur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-155-124",
+   "num": "155",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Virevents sapin à crémaillères jusqu'à 22 mm (tuiles mécaniques ou petites tuiles)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-156-125",
+   "num": "156",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Plus-value pour tête de virevent découpage courant",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-158-126",
+   "num": "158",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Fonds de chéneaux encaissés bruts 27 mm, tasseaux de calage pour pentes compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-1581-127",
+   "num": "158.1",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Faux larmiers 27 mm pour chéneaux, hauteur max. 20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-1582-128",
+   "num": "158.2",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Corniches de bâtiments",
+   "nom": "Percement de chéneau pour EP",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-160-129",
+   "num": "160",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Paroi en planches brutes à joints plats, toutes largeurs, pose horizontale",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-161-130",
+   "num": "161",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Paroi en planches échantillonnées, largeurs fixes",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-162-131",
+   "num": "162",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Paroi en planches crêtées, toutes largeurs",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-163-132",
+   "num": "163",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Paroi en planches brutes à recouvrement 3 cm, largeur fixe 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-164-133",
+   "num": "164",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour parois rabotées 1 face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-165-134",
+   "num": "165",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour parois rabotées 2 faces",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-166-135",
+   "num": "166",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour coupes droites ou biaises et découpes autour des vides",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-166bis-136",
+   "num": "166bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour pose des lames verticalement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-166ter-137",
+   "num": "166ter",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Joues de lucarnes en lames rainées-crêtées ou panneaux 3 plis 27 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-167-138",
+   "num": "167",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Couvre-joints 15/40 mm bruts ou rabotés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-168-139",
+   "num": "168",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Paroi pour revêtement extérieur en lames échantillonnées type chalet, 21 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1681-140",
+   "num": "168.1",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Encadrement de portes et fenêtres en sapin raboté (montants et couvert), largeur 200 mm, épaisseur 30 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-1682-141",
+   "num": "168.2",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Tablette massive à biais et goutte pendante en sapin, largeur 220 mm, épaisseur 40 mm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-1683-142",
+   "num": "168.3",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Tablette massive en mélèze",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-169-143",
+   "num": "169",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Revêtement intérieur en lames à chanfrein ou Canada 15 mm, qualité IIIA, pour parois ou plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-1691-144",
+   "num": "169.1",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Revêtement intérieur en lames de 13 mm pour parois ou plafonds",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-170-145",
+   "num": "170",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour coupes droites ou biaises, joints creux et découpes de revêtement intérieur",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-171-146",
+   "num": "171",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Encadrement de fenêtre de toiture type Velux en panneaux 19 mm à peindre, isolation et 4 côtés d'équerre compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-172-147",
+   "num": "172",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Encadrement de fenêtre de toiture type Velux, côtés d'équerre, haut de niveau, bas d'aplomb",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-173-148",
+   "num": "173",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour lames de moins de 113 mm de largeur",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-174-149",
+   "num": "174",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Revêtement de châssis à tabatière en planches, min. 25 cm de largeur, vide 40/60",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-175-150",
+   "num": "175",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour arrêt des lames en joint ouvert contre les parois, carrelet compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-176-151",
+   "num": "176",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Parois à jalousies (taquets et crémaillères non compris)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-177-152",
+   "num": "177",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Parois à jalousies rabotées 1 face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-178-153",
+   "num": "178",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Parois à jalousies rabotées 4 faces",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-179-154",
+   "num": "179",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Crémaillères pour parois à jalousies brutes",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-180-155",
+   "num": "180",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Taquets pour parois à jalousies",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-181-156",
+   "num": "181",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Filières et montants bruts pour parois",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-182-157",
+   "num": "182",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Filières et montants rabotés pour parois",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-183-158",
+   "num": "183",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Paroi à claire-voie en damettes de 27/60 (caves ou combles), traverses et montants compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-184-159",
+   "num": "184",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour paroi à claire-voie rabotée 2 faces",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-185-160",
+   "num": "185",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Plus-value pour porte dans paroi à claire-voie (ferrures, gonds, serrure compris, 80×200 max.)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-186-161",
+   "num": "186",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Porte à claire-voie hors parois, posée sur mur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-189-162",
+   "num": "189",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Parois, plafonds en sapin",
+   "nom": "Parois provisoires pour séparation de locaux en transformation (bâti, planches ou panneaux, location 2 mois, dépose)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-190-163",
+   "num": "190",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Revêtements, lambourdages",
+   "nom": "Lambourdage 27/60 calibré à 50-70 cm pour revêtements, dressé à la règle, calage jusqu'à 3 cm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-190b-164",
+   "num": "190b",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Revêtements, lambourdages",
+   "nom": "Plus-value pour calage de lambourdage de 5 à 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-191-165",
+   "num": "191",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Revêtements, lambourdages",
+   "nom": "Revêtement posé jointif (Pavaplan, Perfecta ou bois aggloméré), lambourdage non compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-192-166",
+   "num": "192",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Revêtements, lambourdages",
+   "nom": "Plus-value pour joints négatifs, carrelets compris",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-199-167",
+   "num": "199",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Porte doublée en sapin, lames verticales ou horizontales de 23 mm sur panneaux de 27 mm, sans encadrement",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-200-168",
+   "num": "200",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour doublage encadré en sapin et socle en chêne",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-201-169",
+   "num": "201",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour pose de lames en fougères",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-202-170",
+   "num": "202",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour porte à 1 vantail en 2 parties sur la hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-203-171",
+   "num": "203",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Ferrure de porte doublée (à 1 vantail avec ou sans cadre, épars, gonds, serrure)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-204-172",
+   "num": "204",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Ferrure de porte de garage à 2 vantaux (épars, gonds, crémone, serrure renforcée)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-205-173",
+   "num": "205",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour serrure à entaillée avec cylindre, sans mise en passe",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-206-174",
+   "num": "206",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Porte de grange avec bâti 5/14, montants 8/14, revêtement raîné crêté 24 mm raboté 2 faces",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-206bis-175",
+   "num": "206bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour porte de grange à couverte cintrée",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-207-176",
+   "num": "207",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Porte d'homme 80/200 avec ferrure courante (2 épars, 2 gonds, 1 péclet)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-208-177",
+   "num": "208",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour doublage en 23 mm crêté à chanfrein, encadrement compris",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-209-178",
+   "num": "209",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour doublage posé en fougère",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-210-179",
+   "num": "210",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Porte d'écurie posée sur cadre de 36 mm, bâti assemblé 40 mm, double revêtement 24 mm (ferrures non comprises)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-211-180",
+   "num": "211",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour porte d'écurie en 2 parties sur la hauteur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-212-181",
+   "num": "212",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Ferrure de porte d'écurie en 1 partie (épars, gonds, péclet, serrure galvanisée)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-213-182",
+   "num": "213",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Ferrure de porte d'écurie en 2 parties",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-214-183",
+   "num": "214",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Porte roulante (bâti 6/15, revêtement 24 mm raîné crêté), sans ferrure",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-215-184",
+   "num": "215",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Ferrure de porte roulante à 1 vantail (rail, galets, pattes à sceller)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-215bis-185",
+   "num": "215bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Portes",
+   "nom": "Plus-value pour portes en mélèze ou chêne (complètes ou doublage seul)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-216-186",
+   "num": "216",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers",
+   "nom": "Échelle de meunier en sapin, pente min. 75°, marches de 20 cm, sans contremarches (limons et marches 32 ou 38 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-218-187",
+   "num": "218",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers",
+   "nom": "Escalier escamotable se rabattant dans le plafond, en sapin, hauteur jusqu'à 300 cm, treuil à ressort, 1 main courante",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-219-188",
+   "num": "219",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers",
+   "nom": "Escalier escamotable système accordéon métal léger, sans main courante",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-219bis-189",
+   "num": "219bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers",
+   "nom": "Plus-value escalier escamotable pour ouverture non normalisée ou couvercle thermo-isolé",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-220-190",
+   "num": "220",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Escalier droit qualité ébénisterie, 2 limons 55 mm, marches à nez 40 mm, contremarches 18 mm, selon largeur (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-222-191",
+   "num": "222",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour escalier sur limon à crémaillère avec marches retournées",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-222bis-192",
+   "num": "222bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Moins-value pour limon à crémaillère sans contre-marche",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-223-193",
+   "num": "223",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour marches tournantes à rives droites sur limon rectiligne (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-224-194",
+   "num": "224",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour noyau ¼ tournant, par marche balancée (massif ou lamellé-collé) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-225-195",
+   "num": "225",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour nez de marche en bois dur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-226-196",
+   "num": "226",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Vernis incolore 2 couches sur marche d'escalier, ponçage intermédiaire compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-227-197",
+   "num": "227",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour teintage de marche d'escalier",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-228-198",
+   "num": "228",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Protection de marches en pavatex dur",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-229-199",
+   "num": "229",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Couvre-joints droits posés sur ou sous limons, tablettes contre murs (droits, en retrait, cintrés)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-229bis-200",
+   "num": "229bis",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Profil antidérapant encastré dans marche ou nez de marche",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-230-201",
+   "num": "230",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Escalier sans contremarches (marches de 45 mm jusqu'à 1 m de large)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-233-202",
+   "num": "233",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Frise palière jusqu'à 15 cm de largeur, même épaisseur que les marches (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-234-203",
+   "num": "234",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Revêtement sous frise palière propre d'une face, 20 mm d'épaisseur, selon largeur (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-235-204",
+   "num": "235",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Fixation de frises sur béton par scellement",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-205",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type I (main courante moulurée 55/70, balustres carrés 26/26) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-206",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type II (balustres posés en diagonale ajustés dans limon) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-207",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type III (balustres en damettes 24/60 unies) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-208",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type IV (damettes moulurées ou cannelées) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-209",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type V (damettes chantournées sur 2 champs) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-210",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type VI (balustres tournés) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-211",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type VII (balustres tournés Ø 40 mm avec socle carré) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-212",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type VIII (potelets carrés et 3 filières rampantes 40/80) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-238-213",
+   "num": "238",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Balustrade d'escalier qualité ébénisterie type IX (2 filières intermédiaires 40/80) (sapin, hêtre, chêne, mélèze, frêne, acajou)",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-247-214",
+   "num": "247",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour parties de balustrade cintrées en élévation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-249-215",
+   "num": "249",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Poteau de balustrade avec tête simple, assemblé avec limon, longueur max. 140 cm, section 100 ou 150 cm²",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-250-216",
+   "num": "250",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Poteau d'angle remplaçant un noyau pour escalier ¼ tournant, jusqu'à 150 cm²",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-251-217",
+   "num": "251",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Plus-value pour poteau tourné, sans boule",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-255-218",
+   "num": "255",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Vernis incolore 2 couches sur balustrade, ponçage intermédiaire compris, par face",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-256-219",
+   "num": "256",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Escaliers ébénisterie, balustrades",
+   "nom": "Protection des balustrades par carton ondulé et plastique scotchés",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-258-220",
+   "num": "258",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Boulon de charpente Ø 16 mm avec 2 rondelles, posé (selon longueur 200 à 500 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-258-221",
+   "num": "258",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Boulon de charpente Ø 18 mm avec 2 rondelles, posé (selon longueur 200 à 500 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-258-222",
+   "num": "258",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Boulon de charpente Ø 20 mm avec 2 rondelles, posé (selon longueur 200 à 500 mm)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-259-223",
+   "num": "259",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Tampon à sec acier Ø 12 mm, longueur 220 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-260-224",
+   "num": "260",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Tirants pour charpente, étriers, fers d'ancrage, ferrure courante et contre-plaques, couche antirouille ou galvanisé",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-261-225",
+   "num": "261",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Anneau de charpente Rigling posé, selon diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-262-226",
+   "num": "262",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Crampon Bull-dogg, demi-crampon rond ou carré, selon diamètre",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-263-227",
+   "num": "263",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Sabot de solive H.V.V. 80/120 mm, clous compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-263-228",
+   "num": "263",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Sabot de solive H.V.V. 120/160 mm, clous compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-263-229",
+   "num": "263",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Sabot de solive H.V.V. 160/200 mm, clous compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-264-230",
+   "num": "264",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Ferrure pour pied de poteau, tige enchâssée 24/300, plaque carrée zinguée (sans scellement)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-265-231",
+   "num": "265",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Cheville acier zinguée 10/135 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-265-232",
+   "num": "265",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Cheville acier zinguée 12/165 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-265-233",
+   "num": "265",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Cheville acier zinguée 12/205 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-266-234",
+   "num": "266",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Ferrure de porte, 2 épars droits 40/4 mm, gonds sur plaques Ø 12 mm, boulons et vis compris",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-267-235",
+   "num": "267",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Ferrure de porte, épars en fer de 45/5 mm avec gonds sur plaques Ø 14 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-268-236",
+   "num": "268",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Ferrure de porte, épars en fer de 50/5 mm avec gonds sur plaques Ø 14 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-269-237",
+   "num": "269",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Ferrures",
+   "nom": "Plus-value pour ferrures de portes posées sur maçonnerie (2 gonds, 1 gâche)",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-270-238",
+   "num": "270",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Serrure de cave 95/80 mm à clé, posée",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-271-239",
+   "num": "271",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Serrure appliquée à loquet avec poignée standard, posée",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-272-240",
+   "num": "272",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Péclet de porte (loquet) standard, posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-273-241",
+   "num": "273",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Péclet de porte standard à boucle tournante et tombante, posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-274-242",
+   "num": "274",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Verrou d'écurie, pêne rond 21 cm à pattes, posé",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-275-243",
+   "num": "275",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Serrure d'écurie à bec de cane standard, posée",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-276-244",
+   "num": "276",
+   "cat": "331 Corniches, parois, portes, escaliers",
+   "sub": "Serrures",
+   "nom": "Tampon à sec plastique ou métal Ø 8 mm",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-285-245",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 60 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-246",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 80 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-247",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 100 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-248",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 120 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-249",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 140 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-250",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 160 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-251",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 180 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-252",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 200 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-285-253",
+   "num": "285",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en rouleau de laine minérale (16 à 20 kg/m³), épaisseur 220 mm (entre poutres, pans de bois, chevrons ou sur dalle)",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-254",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 40 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-255",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 60 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-256",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 80 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-257",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 100 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-258",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 120 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-259",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 140 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-260",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 160 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-261",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 180 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-262",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 200 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-286-263",
+   "num": "286",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Isolation en panneaux de fibre de verre ou de pierre (18 à 32 kg/m³), épaisseur 220 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-287-264",
+   "num": "287",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Plus-value pour coupe biaise d'isolation",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-288a-265",
+   "num": "288a",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Panneaux Sol (env. 80 kg/m³) posés sur planchers, épaisseur 12 à 30 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-288b-266",
+   "num": "288b",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Panneaux Sol posés sur poutres, largeur 10-20 cm",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-289-267",
+   "num": "289",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Feuille de polyéthylène blanc pare-vapeur (type Flamex N) agrafée sous chevrons ou poutraisons, joints scotchés, 0,20 mm",
+   "metre": "surface"
+  },
+  {
+   "id": "ch8-290-268",
+   "num": "290",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Isolation",
+   "nom": "Plus-value pour joint butylique contre parois ou pièce de charpente",
+   "metre": "coupe"
+  },
+  {
+   "id": "ch8-rgie-269",
+   "num": "Régie",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Régie",
+   "nom": "Technicien / ingénieur HES/MC (charpente), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-rgie-270",
+   "num": "Régie",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Régie",
+   "nom": "Contremaître, chef d'équipe (charpente), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-rgie-271",
+   "num": "Régie",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Régie",
+   "nom": "Charpentier qualifié (charpente), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-rgie-272",
+   "num": "Régie",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Régie",
+   "nom": "Machiniste (charpente), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-rgie-273",
+   "num": "Régie",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Régie",
+   "nom": "Aide-charpentier (charpente), heure en régie",
+   "metre": "none"
+  },
+  {
+   "id": "ch8-rgie-274",
+   "num": "Régie",
+   "cat": "331 Isolation (charpente)",
+   "sub": "Régie",
+   "nom": "Machine à commandes numériques (sans opérateur), heure en régie",
+   "metre": "none"
+  }
+ ]
+}
