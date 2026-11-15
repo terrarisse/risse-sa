@@ -1,0 +1,2827 @@
+{
+ "id": "m-platrerie",
+ "titre": "Plâtrerie et isolation — carreaux, enduits, isolants, plaques",
+ "note": "Marchandises pour régie du chapitre Plâtrerie (CAN 643/651) et isolation périphérique",
+ "materiaux": [
+  {
+   "id": "mx-m-platrerie-0",
+   "cat": "Plâtrerie",
+   "sub": "Baguettes et bandes",
+   "nom": "Baguette d'angle épaisse",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-1",
+   "cat": "Plâtrerie",
+   "sub": "Baguettes et bandes",
+   "nom": "Bande composite Pronouvo A 6",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-2",
+   "cat": "Plâtrerie",
+   "sub": "Baguettes et bandes",
+   "nom": "Bande composite Pronouvo A 8",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-3",
+   "cat": "Plâtrerie",
+   "sub": "Baguettes et bandes",
+   "nom": "Bande de liège comprimé Pronouvo 004",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-4",
+   "cat": "Plâtrerie",
+   "sub": "Baguettes et bandes",
+   "nom": "Bande de liège comprimé Pronouvo 008",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-5",
+   "cat": "Plâtrerie",
+   "sub": "Baguettes et bandes",
+   "nom": "Bande de liège comprimé Pronouvo 010",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-6",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Brique creuse TC pour galandage et doublage C6, 6 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-7",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Brique creuse TC pour galandage et doublage C8, 8 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-8",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre 2,5 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-9",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre hydrofuge 2,5 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-10",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre 4 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-11",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre hydrofuge 4 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-12",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre 6 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-13",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre hydrofuge 6 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-14",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre 8 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-15",
+   "cat": "Plâtrerie",
+   "sub": "Briques et carreaux",
+   "nom": "Carreau de plâtre hydrofuge 8 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-16",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Colle/lissage hydrofuge pour carreau de plâtre",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-17",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Colle/lissage pour carreau de plâtre",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-18",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Enduit plafond plâtre/chaux 110 (LD)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-19",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Enduit à projeter (machine) 160 LM",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-20",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Enduit de fond chaux/ciment 610 (LZ)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-21",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Enduit de fond plâtre/chaux 190 (LG)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-22",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Enduit lisse 140 LW",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-23",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Lissage plâtre 400 (LGS)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-24",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Mortier plâtre hydrofuge pour rhabillage",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-25",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Mortier plâtre pour rhabillage",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-26",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Multifix colle plâtre 405",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-27",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Multi-lissage plâtre 143 (LGM)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-28",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre à mouler 0",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-29",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre à mouler 201",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-30",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre de lissage LGM (Fixit 143)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-31",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre de lissage fin LGS (Fixit 400)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-32",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre plâtrier 100",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-33",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre sculpteur 105",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-34",
+   "cat": "Plâtrerie",
+   "sub": "Plâtres, colles et enduits",
+   "nom": "Plâtre liquide autonivelant ép. 5 à 15 mm (Rigiplan RPFS)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-35",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Feuille de polyéthylène",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-36",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Feuille plastique armée pour échafaudage",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-37",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Feuille PVC fine pour meubles, murs et divers",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-38",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Papier de protection brut 300 g/m²",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-39",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Papier de protection imprégné 150 g/m² brut 300 g/m³",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-40",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Pare-vapeur Insulex 714, 0,08 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-41",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Pare-vapeur Insulex 716, 0 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-42",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Pare-vapeur Insulex 718, 0,01 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-43",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Papier pour appareil à couvrir à la main, 15 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-44",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Papier pour appareil à couvrir à la main, 20 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-45",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Papier pour appareil à couvrir à la main, 30 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-46",
+   "cat": "Plâtrerie",
+   "sub": "Feuilles et pare-vapeur",
+   "nom": "Papier pour appareil à couvrir à la main, 60 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-47",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Feutre en bande autocollante 2 faces FS2 100, 93×3 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-48",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Feutre en bande autocollante 2 faces FS2 30, 25×3 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-49",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Feutre en bande autocollante 2 faces FS2 50, 43×3 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-50",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Feutre en bande autocollante 2 faces FS2 60, 53×3 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-51",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Feutre en bande autocollante 2 faces FS2 75, 68×3 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-52",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type F (laine de pierre) RIF 30, 30 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-53",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type F (laine de pierre) RIF 50, 50 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-54",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type F (laine de pierre) RSP 40, 50 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-55",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type S (laine de verre) RIS 30, 30 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-56",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type S (laine de verre) RIS 45, 45 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-57",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type S (laine de verre) RIS 60, 60 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-58",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation type S (laine de verre) RIS 80, 80 mm, 63×101 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-59",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 12/10 mm 50/125 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-60",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 15/12 mm 50/125 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-61",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 20/17 mm 50/125 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-62",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 25/22 mm 50/125 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-63",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 30/27 mm 50/125 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-64",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isover Flammex N 0,2 mm largeur 200 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-65",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isover Flammex SR 0,25 mm largeur 200 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-66",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isover PS 81 20 mm 62,5×250 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-67",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isover Uniroll 100 mm × 120 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-68",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isover Uniroll 120 mm × 120 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-69",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isover Uniroll 80 mm × 120 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-70",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 largeur 14 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-71",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 12/10 mm largeur 10 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-72",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 12/10 mm largeur 6 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-73",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Isolation PS 81 12/10 mm largeur 8 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-74",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Panneau isolation rigide polystyrène extrudé (Styrofoam IB) 20 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-75",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Panneau isolation rigide polystyrène extrudé (Styrofoam IB) 30 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-76",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Panneau isolation rigide polystyrène extrudé (Styrofoam IB) 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-77",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Panneau isolation rigide polystyrène extrudé (Styrofoam IB) 50 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-78",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Panneau isolation rigide polystyrène extrudé (Styrofoam IB) 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-79",
+   "cat": "Plâtrerie",
+   "sub": "Isolants",
+   "nom": "Panneau isolation rigide polystyrène extrudé (Styrofoam IB) 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-80",
+   "cat": "Plâtrerie",
+   "sub": "Bois et panneaux",
+   "nom": "Lambourde 27/60",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-81",
+   "cat": "Plâtrerie",
+   "sub": "Bois et panneaux",
+   "nom": "Lambourde 27/80",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-82",
+   "cat": "Plâtrerie",
+   "sub": "Bois et panneaux",
+   "nom": "Latte bois triangulaire rabotée DKHL 75×75 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-83",
+   "cat": "Plâtrerie",
+   "sub": "Bois et panneaux",
+   "nom": "Pavatex dur",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-84",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque acoustique RL 6/18 mm 8,7 %",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-85",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque acoustique RL 8/18 mm 15,5 %",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-86",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque antifeu spéciale sans sous-construction 15 mm (Ridurit) 20/200",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-87",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque antifeu spéciale sans sous-construction 20 mm (Ridurit) 120/200",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-88",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque de plâtre",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-89",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque Poresta 25 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-90",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque Poresta 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-91",
+   "cat": "Plâtrerie",
+   "sub": "Plaques",
+   "nom": "Plaque Poresta 50 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-92",
+   "cat": "Plâtrerie",
+   "sub": "Treillis",
+   "nom": "Treillis synthétique largeur 33 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-93",
+   "cat": "Plâtrerie",
+   "sub": "Treillis",
+   "nom": "Treillis synthétique largeur 100 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-94",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 sans isolation h. 30 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-95",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 sans isolation h. 60 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-96",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 14 cm, isol. 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-97",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 14 cm, isol. 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-98",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 14 cm, isol. 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-99",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 14 cm, isol. 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-100",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 14 cm, isol. 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-101",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 20 cm, isol. 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-102",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 20 cm, isol. 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-103",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 20 cm, isol. 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-104",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 20 cm, isol. 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-105",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 20 cm, isol. 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-106",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 30 cm, isol. 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-107",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 30 cm, isol. 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-108",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 30 cm, isol. 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-109",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 30 cm, isol. 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-110",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 30 cm, isol. 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-111",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 40 cm, isol. 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-112",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 40 cm, isol. 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-113",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 40 cm, isol. 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-114",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 40 cm, isol. 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-115",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 40 cm, isol. 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-116",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 50 cm, isol. 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-117",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 50 cm, isol. 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-118",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 50 cm, isol. 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-119",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 50 cm, isol. 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-120",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 50 cm, isol. 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-121",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 60 cm, isol. 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-122",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 60 cm, isol. 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-123",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 60 cm, isol. 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-124",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 60 cm, isol. 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-125",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Angle en fibrobéton 30×30 avec isolation h. 60 cm, isol. 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-126",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Baguette d'angle alu",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-127",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Bande adhésive Sicrall 20×0,5 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-128",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Bande autocollante en alu",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-129",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Bande de papier pour joints",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-130",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Bande PVC autocollante",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-131",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Angles et baguettes",
+   "nom": "Bande butyl autocollante",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-132",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Carreau de montage en mousse dure EPS 180 kg/m³, isolation 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-133",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Carreau de montage en mousse dure EPS 180 kg/m³, isolation 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-134",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Carreau de montage en mousse dure EPS 180 kg/m³, isolation 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-135",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Carreau de montage en mousse dure PU 200 kg/m³, isolation 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-136",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Carreau de montage en mousse dure PU 200 kg/m³, isolation 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-137",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Carreau de montage en mousse dure PU 200 kg/m³, isolation 180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-138",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville isolante thermo 8/60 pour isolation 60 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-139",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville isolante thermo 8/60 pour isolation 80 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-140",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville isolante thermo 8/60 pour isolation 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-141",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville isolante thermo 8/60 pour isolation 120 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-142",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville isolante thermo 8/60 pour isolation 140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-143",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville isolante thermo 8/60 pour isolation 160 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-144",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Fixations",
+   "nom": "Cheville de scellement pour élargissement de tablette",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-145",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Bitume spécial à la spatule",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-146",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Colle plâtre Fixit 410",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-147",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Colle PU 300 ml",
+   "unite": "carton",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-148",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Colle spéciale avec accélérateur pour fond peu absorbant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-149",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Colle de construction pour isolation KK71",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-150",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Crépi de finition ribé organique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-151",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Crépi de finition ribé silicate",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-152",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Crépi de finition ribé silicone",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-153",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Crépi de finition ribé minéral",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-154",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Crépi de fond",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-155",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Crépi d'égalisation",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-156",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Fond isolant acrylique blanc",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-157",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Fond pénétrant isolant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-158",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Fond pour crépi minéral",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-159",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Fond pour crépi silicate",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-160",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Fond pour crépi silicone",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-161",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Mastic acrylique antifissure",
+   "unite": "cartouche",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-162",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Mastic à base de MS polymère hybride",
+   "unite": "cartouche",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-163",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Colles, crépis, fonds",
+   "nom": "Masse bitumineuse",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-164",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élargissement de tablette h. 6 à 12 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-165",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément de cadre GFEA",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-166",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément de linteau creux GMFH/GOFH B 90",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-167",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément de meneau à double battue GMFL",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-168",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément d'embrasure Alu-IB 3 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-169",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément d'embrasure Alu-IB pour niche à store",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-170",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément d'encadrement GMFA/GMFD/GMFL B 90",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-171",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément d'encadrement GOFA/GOFD/GOFL B 90",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-172",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément pour fixation des gonds XPS",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-173",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Élément pour fixation du taquet XPS",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-174",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Équerre d'appui AW-EP",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-175",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Équerre de finition pour plinthe",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-176",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Lambrequin MA-TAB",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-177",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Garniture en béton pour montage de gonds",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-178",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Garniture en bois pour montage de gonds",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-179",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Éléments préfabriqués",
+   "nom": "Garniture de montage pour lambrequin MA-TAB",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-180",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 15, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-181",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 15, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-182",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-183",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-184",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-185",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-186",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-187",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-188",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-189",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé PS 20, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-190",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé F 15, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-191",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé F 15, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-192",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé F 20, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-193",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé F 20, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-194",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé F 30, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-195",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène expansé F 30, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-196",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 protection phonique incorporée, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-197",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 protection phonique incorporée, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-198",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 protection phonique incorporée, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-199",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 protection phonique incorporée, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-200",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 protection phonique incorporée, 200 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-201",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène densément expansé pour soubassement, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-202",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène densément expansé pour soubassement, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-203",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène densément expansé pour soubassement, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-204",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène densément expansé pour soubassement, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-205",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène densément expansé pour soubassement, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-206",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante polystyrène densément expansé pour soubassement, 200 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-207",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 arrondie pour murs ronds, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-208",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 arrondie pour murs ronds, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-209",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 arrondie pour murs ronds, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-210",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Plaque isolante PS 20 arrondie pour murs ronds, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-211",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2 Kraft, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-212",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2 Kraft, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-213",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2 Kraft, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-214",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2 Kraft, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-215",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB MR, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-216",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB MR, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-217",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB MR, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-218",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB MR, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-219",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB MR, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-220",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB MR, 200 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-221",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-222",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-223",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-224",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-225",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-226",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-227",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-228",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB F Extra, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-229",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-230",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-231",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-232",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-233",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-234",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-235",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-236",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M 2, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-237",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M Extra, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-238",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M Extra, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-239",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M Extra, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-240",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M Extra, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-241",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M Extra, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-242",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant PB M Extra, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-243",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant en laine de pierre Type 1, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-244",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant en laine de pierre Type 1, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-245",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant en laine de pierre Type 1, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-246",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Matelas en laine de pierre antifeu FMI 500, 30 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-247",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Matelas en laine de pierre antifeu FMI 500, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-248",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Matelas en laine de pierre antifeu FMI 500, 50 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-249",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Matelas en laine de pierre antifeu FMI 500, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-250",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Matelas en laine de pierre antifeu FMI 500, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-251",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant entre chevrons, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-252",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant entre chevrons, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-253",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant entre chevrons, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-254",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau isolant entre chevrons, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-255",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isophen, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-256",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isophen, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-257",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isophen, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-258",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isophen, 200 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-259",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isophen, 220 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-260",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isovox pour paroi légère, 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-261",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isovox pour paroi légère, 60 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-262",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isovox pour paroi légère, 80 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-263",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isofix 035, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-264",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isofix 035, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-265",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Isofix 035, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-266",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau chevrons, 100 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-267",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau chevrons, 120 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-268",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau chevrons, 140 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-269",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau chevrons, 160 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-270",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Plaques isolantes",
+   "nom": "Panneau chevrons, 180 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-271",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Flammex Extra",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-272",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Flammex N",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-273",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Flammex SR",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-274",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Pare-vapeur alu grille de verre",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-275",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Pare-vapeur Kraft alu",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-276",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Pare-vapeur papier Kraft",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-277",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Pièce d'angle pour goutte pendante",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-278",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Laine Triv",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-279",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Lambourde bois 27/40",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-280",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Languette de réparation pour garnissage",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-platrerie-281",
+   "cat": "Isolation périphérique (crépi sur isolant)",
+   "sub": "Divers",
+   "nom": "Équerre isolante pour raccords d'acrotères PS 20",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  }
+ ]
+}

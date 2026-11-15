@@ -1,0 +1,1307 @@
+{
+ "id": "m-toiture",
+ "titre": "Couverture et étanchéité — tuiles, ardoises, lés, isolants",
+ "note": "Tarifs fournitures des chapitres Couverture (CAN 361/363) et Étanchéité (CAN 364)",
+ "materiaux": [
+  {
+   "id": "mx-m-toiture-0",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles plates du pays, rouges",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-1",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles plates du pays, vieillies",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-2",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles 1½ plates, rouges",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-3",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles 1½ plates, vieillies",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-4",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles à double emboîtement Petrin-Jura, rouges",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-5",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles à double emboîtement Petrin-Jura, vieillies",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-6",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles flamandes, rouges",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-7",
+   "cat": "Couverture",
+   "sub": "Tuiles",
+   "nom": "Tuiles flamandes, vieillies",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-8",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Tuile de bord",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-9",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Créneau ou faîtière",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-10",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "About de faîtière",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-11",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Tuile arrêt de neige",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-12",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Cabochon",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-13",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Tuile chatière plate avec treillis",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-14",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Tuile chatière à emboîtement avec treillis",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-15",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Tuile en verre plate",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-16",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Tuile en verre à emboîtement",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-17",
+   "cat": "Couverture",
+   "sub": "Tuiles accessoires",
+   "nom": "Briques pleines 27/10/5 cm",
+   "unite": "100 pièces",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-18",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Mitron en terre cuite, 18 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-19",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Mitron en terre cuite, 21 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-20",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Mitron en terre cuite, 24 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-21",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Cape de cheminée complète, 18 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-22",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Cape de cheminée complète, 21 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-23",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Cape de cheminée complète, 24 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-24",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Lanterne seule, 18 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-25",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Lanterne seule, 21 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-26",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Lanterne seule, 24 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-27",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Rallonge seule, 18 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-28",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Rallonge seule, 21 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-29",
+   "cat": "Couverture",
+   "sub": "Cheminées",
+   "nom": "Rallonge seule, 24 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-30",
+   "cat": "Couverture",
+   "sub": "Fibrociment",
+   "nom": "Ardoise Eternit 30/60",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-31",
+   "cat": "Couverture",
+   "sub": "Fibrociment",
+   "nom": "Ardoise Eternit 40/40",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-32",
+   "cat": "Couverture",
+   "sub": "Fibrociment",
+   "nom": "Ardoise Eternit 40/30",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-33",
+   "cat": "Couverture",
+   "sub": "Fibrociment",
+   "nom": "Ardoise Eternit 60/40",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-34",
+   "cat": "Couverture",
+   "sub": "Fibrociment et plaques",
+   "nom": "Faîtière Eternit 40/18",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-35",
+   "cat": "Couverture",
+   "sub": "Fibrociment et plaques",
+   "nom": "About Eternit",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-36",
+   "cat": "Couverture",
+   "sub": "Fibrociment et plaques",
+   "nom": "Faîtière ondulée Eternit 0A21",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-37",
+   "cat": "Couverture",
+   "sub": "Fibrociment et plaques",
+   "nom": "Plaque Eternit ondulée grandes ondes 200/92 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-38",
+   "cat": "Couverture",
+   "sub": "Fibrociment et plaques",
+   "nom": "Plaque ondulée translucide grandes ondes",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-39",
+   "cat": "Couverture",
+   "sub": "Fibrociment et plaques",
+   "nom": "Tôle ondulée galvanisée épaisseur 0,75",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-40",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Crochet à ardoises à planter",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-41",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Crochet à ardoises à agrafer",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-42",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Pointes à ardoises 17/32 ordinaires",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-43",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Pointes à ardoises 17/32 galvanisées",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-44",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Clous forgés",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-45",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Clous forgés (pièce)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-46",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Brides galvanisées pour créneaux",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-47",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Agrafe pour tuile de rive en fil de fer galvanisé",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-48",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Agrafe pour tuile de rive en feuillard galvanisé",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-49",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Agrafe pour tuile de rive en cuivre",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-50",
+   "cat": "Couverture",
+   "sub": "Fixations",
+   "nom": "Fil de fer galvanisé",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-51",
+   "cat": "Couverture",
+   "sub": "Lattes",
+   "nom": "Latte de toiture 16/60",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-52",
+   "cat": "Couverture",
+   "sub": "Lattes",
+   "nom": "Latte de toiture 17/70",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-53",
+   "cat": "Couverture",
+   "sub": "Lattes",
+   "nom": "Latte de toiture 18/80",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-54",
+   "cat": "Couverture",
+   "sub": "Lattes",
+   "nom": "Latte de toiture 19/90",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-55",
+   "cat": "Couverture",
+   "sub": "Lattes",
+   "nom": "Latte de toiture 20/100",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-56",
+   "cat": "Couverture",
+   "sub": "Lattes",
+   "nom": "Latte de toiture 22/120",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-57",
+   "cat": "Couverture",
+   "sub": "Bâches",
+   "nom": "Bâche de location 6×4 m",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-58",
+   "cat": "Couverture",
+   "sub": "Bâches",
+   "nom": "Bâche de location 6×8 m",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-59",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Ciment Portland, sac 50 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-60",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Ciment prompt, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-61",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Sakret, sac 40 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-62",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Sciure",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-63",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Sable lavé 0-3/08",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-64",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Gravier lavé 8-16/16-30",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-65",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Boulets 30/50",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-66",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Gravillon concassé 3-6/8-15",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-67",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Mortier dosage CP 350",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-68",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Mortier dosage CP 400",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-69",
+   "cat": "Étanchéité",
+   "sub": "Matériaux de base",
+   "nom": "Sable de quartz",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-70",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Apprêt bitumineux à froid",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-71",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Bitume",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-72",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Bitume élastomère",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-73",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Gaz propane (kg)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-74",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Gaz propane, bouteille 10,5 kg",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-75",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Asphalte coulé départ centrale, qualité GA, LE, NE",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-76",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Asphalte coulé départ centrale, qualité GA, I",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-77",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Mastic d'asphalte départ centrale",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-78",
+   "cat": "Étanchéité",
+   "sub": "Bitumes et asphaltes",
+   "nom": "Masse à niveler",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-79",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux V 60",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-80",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux alu 80",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-81",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux J 3",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-82",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EGV 3",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-83",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EV 3",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-84",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EP 3",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-85",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EP 3 S",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-86",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EP 4",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-87",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EP 4 WF",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-88",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EP 5",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-89",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EP 5 S",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-90",
+   "cat": "Étanchéité",
+   "sub": "Lés bitumineux",
+   "nom": "Lé bitumineux EPA, GA 55",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-91",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Profil bitumineux Igas",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-92",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Profil triangulaire Elastomère Elabit 25/25 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-93",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Paxalphacuivre",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-94",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Paxaluminium",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-95",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnavap 1000",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-96",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnavap 2000",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-97",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Lé d'étanchéité PVC 1,5 mm (G 410-12)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-98",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Lé d'étanchéité PVC 1,8 mm (G 410-18)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-99",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Lé d'étanchéité PVC 2,0 mm (G 476-15)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-100",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Lé de protection PVC 1,3 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-101",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnacol 2170",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-102",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnacol 2115",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-103",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnacol T660",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-104",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnafil TG-66-16",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-105",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnafil TG-66-18",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-106",
+   "cat": "Étanchéité",
+   "sub": "Lés synthétiques",
+   "nom": "Sarnafil TG-66-20",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-107",
+   "cat": "Étanchéité",
+   "sub": "Isolants",
+   "nom": "Panneau polystyrène extrudé, classe incendie V1, 30-35 kg/m³",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-108",
+   "cat": "Étanchéité",
+   "sub": "Isolants",
+   "nom": "Panneau polyuréthane, classe incendie V1, 30-35 kg/m³",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-109",
+   "cat": "Étanchéité",
+   "sub": "Isolants",
+   "nom": "Panneau verre cellulaire, classe incendie V6, 125 kg/m³",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-110",
+   "cat": "Étanchéité",
+   "sub": "Isolants",
+   "nom": "Panneau polystyrène expansé, classe incendie V1, 27-30 kg/m³",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-111",
+   "cat": "Étanchéité",
+   "sub": "Dallettes",
+   "nom": "Dallette ciment lisse",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-112",
+   "cat": "Étanchéité",
+   "sub": "Dallettes",
+   "nom": "Dallette béton lavé gris Rhôna",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-113",
+   "cat": "Étanchéité",
+   "sub": "Dallettes",
+   "nom": "Dallette béton lavé Bressane",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-114",
+   "cat": "Étanchéité",
+   "sub": "Dallettes",
+   "nom": "Dallette acrylique",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-115",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Taquet mousse PU et croix en mousse synthétique",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-116",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Mastic silicone ou acrylique",
+   "unite": "carton",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-117",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Primaire pour mastic silicone",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-118",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Adéroplast",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-119",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Bande de serrage alu 4/35 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-120",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Bande de serrage cuivre 65 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-121",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Bande de serrage cuivre 135 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-122",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Bande de serrage inox 65 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-123",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Bande de serrage inox 135 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-124",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Natte Beka ou similaire, 8 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-125",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Géotextile 150 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-126",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Géotextile 280 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-127",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Bande autocollante largeur 10 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-128",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Mastic bitumineux type Texas",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-toiture-129",
+   "cat": "Étanchéité",
+   "sub": "Accessoires",
+   "nom": "Mastic bitumineux type Hyraflex",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  }
+ ]
+}

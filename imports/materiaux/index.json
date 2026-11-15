@@ -1,0 +1,52 @@
+{
+ "listes": [
+  {
+   "id": "m-maconnerie",
+   "titre": "Maçonnerie — graves, liants, briques, bois, armatures",
+   "fichier": "m-maconnerie.json",
+   "n": 137,
+   "note": "Tarif fournitures du chapitre Maçonnerie (CAN 314)",
+   "ordre": 4
+  },
+  {
+   "id": "m-charpente",
+   "titre": "Charpente métallique et bois — profilés, bois, panneaux, ferrures",
+   "fichier": "m-charpente.json",
+   "n": 98,
+   "note": "Tarifs fournitures des chapitres Charpente métallique (CAN 321) et Charpente (CAN 331)",
+   "ordre": 7
+  },
+  {
+   "id": "m-toiture",
+   "titre": "Couverture et étanchéité — tuiles, ardoises, lés, isolants",
+   "fichier": "m-toiture.json",
+   "n": 130,
+   "note": "Tarifs fournitures des chapitres Couverture (CAN 361/363) et Étanchéité (CAN 364)",
+   "ordre": 11
+  },
+  {
+   "id": "m-platrerie",
+   "titre": "Plâtrerie et isolation — carreaux, enduits, isolants, plaques",
+   "fichier": "m-platrerie.json",
+   "n": 282,
+   "note": "Marchandises pour régie du chapitre Plâtrerie (CAN 643/651) et isolation périphérique",
+   "ordre": 13
+  },
+  {
+   "id": "m-peinture",
+   "titre": "Peinture — apprêts, peintures, crépis, vernis, consommables",
+   "fichier": "m-peinture.json",
+   "n": 193,
+   "note": "Marchandises pour régie du chapitre Peinture (CAN 672)",
+   "ordre": 16
+  },
+  {
+   "id": "m-genie-civil",
+   "titre": "Génie civil, aménagements et clôtures — graves, bétons, enrobés, grillages",
+   "fichier": "m-genie-civil.json",
+   "n": 161,
+   "note": "Tarifs fournitures des chapitres Génie civil (VSS), Aménagements extérieurs et Clôtures",
+   "ordre": 17
+  }
+ ]
+}

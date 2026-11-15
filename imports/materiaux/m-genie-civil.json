@@ -1,0 +1,1617 @@
+{
+ "id": "m-genie-civil",
+ "titre": "Génie civil, aménagements et clôtures — graves, bétons, enrobés, grillages",
+ "note": "Tarifs fournitures des chapitres Génie civil (VSS), Aménagements extérieurs et Clôtures",
+ "materiaux": [
+  {
+   "id": "mx-m-genie-civil-0",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier à béton mélangé 0-16 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-16 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-1",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier à béton mélangé 0-32 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-2",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Sable lavé 0-4 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-4 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-3",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Sable lavé 0-8 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-8 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-4",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier fin rond 4-8 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "4-8 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-5",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier fin rond 8-16 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "8-16 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-6",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier moyen 16-32 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "16-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-7",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gros gravier 32-45 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "32-45 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-8",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Galets supérieurs à 45 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "à 45 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-9",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravillon 11-16 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "11-16 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-10",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravillon 16-22 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "16-22 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-11",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Tout-venant trié classe I 0-63 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-63 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-12",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Sable de fouille",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-13",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Grave I",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-14",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Grave II",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-15",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Grave tout-venant classe I",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-16",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Grave tout-venant classe II",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-17",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier de route 0/16",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-18",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier de route 0/32",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-19",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Gravier concassé 22/32",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-20",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Granulat de stabilisation recyclé",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-21",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Granulat de béton recyclé",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-22",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Granulat non trié recyclé",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-23",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Génie civil",
+   "nom": "Grave de recyclage",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-24",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Bétons",
+   "nom": "Béton de centrale CEM I 42.5 100 kg/m³, 0-32 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5 — 100 kg",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-25",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Bétons",
+   "nom": "Béton de centrale CEM I 42.5 150 kg/m³, 0-32 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5 — 150 kg",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-26",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Bétons",
+   "nom": "Béton de centrale CEM I 42.5 200 kg/m³, 0-32 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5 — 200 kg",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-27",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Bétons",
+   "nom": "Béton de centrale CEM I 42.5 250 kg/m³, 0-32 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5 — 250 kg",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-28",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Bétons",
+   "nom": "Béton de centrale CEM I 42.5 300 kg/m³, 0-32 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5 — 300 kg",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-29",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de ciment CEM I 42.5 300 kg/m³, 0-4 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5",
+   "granulo": "0-4 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-30",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de ciment CEM I 42.5 400 kg/m³, 0-4 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5",
+   "granulo": "0-4 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-31",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de ciment CEM I 42.5 500 kg/m³, 0-4 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5",
+   "granulo": "0-4 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-32",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier bâtard CH 100/200",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-33",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier bâtard CH 150/200",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-34",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de chaux hydraulique CH 300",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-35",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de chaux hydraulique CH 400",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-36",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de base",
+   "nom": "Enrobé de base ACT 11 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-37",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de base",
+   "nom": "Enrobé de base ACT 16 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-38",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de base",
+   "nom": "Enrobé de base ACT 22 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-39",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de base",
+   "nom": "Enrobé de base ACT 11 N",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-40",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de base",
+   "nom": "Enrobé de base ACT 16 N",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-41",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de base",
+   "nom": "Enrobé de base ACT 22 N",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-42",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de liaison",
+   "nom": "Enrobé de liaison ACB 11 S",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-43",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de liaison",
+   "nom": "Enrobé de liaison ACB 16 S",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-44",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de liaison",
+   "nom": "Enrobé de liaison ACB 22 S",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-45",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de liaison",
+   "nom": "Enrobé de liaison ACB 16 H",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-46",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de liaison",
+   "nom": "Enrobé de liaison ACB 22 H",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-47",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 4 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-48",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 8 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-49",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 11 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-50",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 16 L",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-51",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 8 N",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-52",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 11 N",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-53",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 16 N",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-54",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 8 S",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-55",
+   "cat": "Enrobés bitumineux",
+   "sub": "Couches de roulement",
+   "nom": "Enrobé de roulement AC 11 S",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-56",
+   "cat": "Enrobés bitumineux",
+   "sub": "Revêtements spéciaux",
+   "nom": "Tapis froid 0-6 mm",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-57",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Perche d'échafaudage sur mesure",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-58",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Bois ronds tous diamètres",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-59",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Pieu de bois 100 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-60",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Pieu de bois 150 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-61",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Pieu de bois 200 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-62",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Bois équarri sapin 8/12 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-63",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Bois équarri sapin 10/12 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-64",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Bois équarri sapin 12/16 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-65",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin coffrage 18 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-66",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin coffrage 24 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-67",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin coffrage 30 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-68",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin coffrage 36 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-69",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin coffrage 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-70",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 18 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-71",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 24 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-72",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 30 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-73",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 36 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-74",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 40 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-75",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 45 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-76",
+   "cat": "Bois de chantier",
+   "sub": "Bois",
+   "nom": "Planche brute sapin largeur fixe 50 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-77",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordurette béton SB 6, 60×250 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-78",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordurette béton SB 8, 80×250 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-79",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure béton SB 10, 100×250 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-80",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure béton SB 12, 120×250 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-81",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure béton RB 15, 150×190 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-82",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure béton RB 15, 150×250 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-83",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure de trottoir gneiss RN 12",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-84",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure de trottoir gneiss RN 15",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-85",
+   "cat": "Pavés et bordures",
+   "sub": "Bordures",
+   "nom": "Bordure de trottoir gneiss RN 25",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-86",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé granit 4/6",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-87",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé porphyre 4/6",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-88",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé granit 6/8",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-89",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé porphyre 6/8",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-90",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé granit 8/11",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-91",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé porphyre 8/11",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-92",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé granit 11/13",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-93",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé porphyre 11/13",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-94",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé granit 14/16",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-95",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé porphyre 14/16",
+   "unite": "tonne (t)",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-96",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé béton autobloquant",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-97",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Pavé béton 25/12,5/8 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-98",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Dalle béton 400×400×40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-99",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Dalle béton 500×500 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-100",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Dalle granite",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-101",
+   "cat": "Pavés et bordures",
+   "sub": "Pavés",
+   "nom": "Grille-gazon béton 58/47 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-102",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PVC-U SN 2 DN 110",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-103",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PVC-U SN 2 DN 125",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-104",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PVC-U SN 2 DN 160",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-105",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PVC-U SN 2 DN 200",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-106",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PVC-U SN 2 DN 250",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-107",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PVC-U SN 2 DN 315",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-108",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 110",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-109",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 125",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-110",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 160",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-111",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 200",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-112",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 250",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-113",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 315",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-114",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PP SN 4 DN 400",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-115",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PE DN 110",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-116",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PE DN 125",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-117",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PE DN 160",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-118",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PE DN 200",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-119",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PE DN 250",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-120",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tube PE DN 315",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-121",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau grès DN 100",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-122",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau grès DN 125",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-123",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau grès DN 150",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-124",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau grès DN 200",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-125",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau grès DN 250",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-126",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau grès DN 300",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-127",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau béton T-B DN 250",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-128",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau béton T-B DN 300",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-129",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau béton T-B DN 400",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-130",
+   "cat": "Canalisations",
+   "sub": "Tubes",
+   "nom": "Tuyau béton T-B DN 500",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-131",
+   "cat": "Canalisations",
+   "sub": "Regards",
+   "nom": "Élément de regard béton préfabriqué DN 600",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-132",
+   "cat": "Canalisations",
+   "sub": "Regards",
+   "nom": "Élément de regard béton préfabriqué DN 800",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-133",
+   "cat": "Canalisations",
+   "sub": "Regards",
+   "nom": "Élément de regard béton préfabriqué DN 1000",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-134",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Grillage simple torsion maille 50×50, fil Ø 2,5, hauteur 100 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-135",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Grillage simple torsion maille 50×50, fil Ø 2,5, hauteur 120 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-136",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Grillage simple torsion plastifié vert",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-137",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Montant galvanisé départ avec 1 jambe de force",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-138",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Montant galvanisé départ avec tringle soudée",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-139",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Montant galvanisé d'angle avec 2 jambes de force",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-140",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Montant galvanisé intermédiaire",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-141",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Fil de tension Ø 3 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-142",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Fil d'attache Ø 1,2 et 1,5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-143",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Régulateur n° 2",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-144",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Piquet de châtaignier 150 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-145",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Piquet de châtaignier 170 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-146",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Piquet de châtaignier 200 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-147",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Panneau Chabaury mélèze 100 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-148",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Panneau Chabaury mélèze 120 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-149",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Panneau Chabaury mélèze 150 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-150",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Carrelet mélèze appointi 7×7",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-151",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Clôture réticulée type FIX",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-152",
+   "cat": "Clôtures",
+   "sub": "Grillages et montants",
+   "nom": "Clôture réticulée type Ursus",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-153",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Terre végétale",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-154",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Matériaux terreux",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-155",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Semences gazon standard",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-156",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Semences prairie fleurie",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-157",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Engrais spécial gazon",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-158",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Gazon en rouleau",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-159",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Mur en éléments préfabriqués (L)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-genie-civil-160",
+   "cat": "Aménagements extérieurs",
+   "sub": "Jardins",
+   "nom": "Marche d'escalier en L béton",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  }
+ ]
+}

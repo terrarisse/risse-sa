@@ -1,0 +1,1377 @@
+{
+ "id": "m-maconnerie",
+ "titre": "Maçonnerie — graves, liants, briques, bois, armatures",
+ "note": "Tarif fournitures du chapitre Maçonnerie (CAN 314)",
+ "materiaux": [
+  {
+   "id": "mx-m-maconnerie-0",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Gravier à béton mélangé 0-16 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-16 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-1",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Gravier à béton mélangé 0-32 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-2",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Sable lavé 0-4 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-4 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-3",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Sable lavé 0-8 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-8 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-4",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Sable de fouille",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-5",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Gravier moyen 16-32 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "16-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-6",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Gravillons",
+   "nom": "Gravillon 4-8 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "4-8 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-7",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Gravillons",
+   "nom": "Gravillon 8-11 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "8-11 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-8",
+   "cat": "Graves, sables, gravillons",
+   "sub": "Graves et sables",
+   "nom": "Tout-venant trié classe I 0-63 mm",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "0-63 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-9",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Bétons",
+   "nom": "Béton de centrale CEM II 42.5 300 kg/m³, 0-32 mm",
+   "unite": "m³",
+   "classe": "CEM II 42.5 — 300 kg",
+   "granulo": "0-32 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-10",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de ciment CEM I 42.5 300 kg/m³, 0-4 mm",
+   "unite": "m³",
+   "classe": "CEM I 42.5",
+   "granulo": "0-4 mm",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-11",
+   "cat": "Bétons et mortiers de centrale",
+   "sub": "Mortiers",
+   "nom": "Mortier de chaux hydraulique CH 300",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-12",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment Portland Normo 5R CEM I 52.5R, sac 25 kg",
+   "unite": "sac",
+   "classe": "CEM I 52.5R",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-13",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment Portland Provato 3R CEM II/A-S 32.5R, sac 25 kg",
+   "unite": "sac",
+   "classe": "CEM II/A-S 32.5R",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-14",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment Portland Protego 4 CEM I 42.5N HS, sac 25 kg",
+   "unite": "sac",
+   "classe": "CEM I 42.5N HS",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-15",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment blanc Dyckerhoff, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-16",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment gris CPA CEM I 52.5, sac 35 kg",
+   "unite": "sac",
+   "classe": "CEM I 52.5",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-17",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment fondu Lafarge, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-18",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment Grenoble, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-19",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment prompt Vicat, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-20",
+   "cat": "Liants et plâtres",
+   "sub": "Ciments",
+   "nom": "Ciment Fluvio 4 CEM II/A, sac 25 kg",
+   "unite": "sac",
+   "classe": "CEM II/A",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-21",
+   "cat": "Liants et plâtres",
+   "sub": "Chaux",
+   "nom": "Chaux hydraulique, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-22",
+   "cat": "Liants et plâtres",
+   "sub": "Plâtres",
+   "nom": "Plâtre blanc Fixit 100, sac 30 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-23",
+   "cat": "Liants et plâtres",
+   "sub": "Plâtres",
+   "nom": "Plâtre dur à mouler, sac 40 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-24",
+   "cat": "Liants et plâtres",
+   "sub": "Plâtres",
+   "nom": "Plâtre dur n° 1, sac 25 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-25",
+   "cat": "Liants et plâtres",
+   "sub": "Plâtres",
+   "nom": "Plâtre structure Almod, sac 40 kg",
+   "unite": "sac",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-26",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite BL (isolantes)",
+   "nom": "Brique terre cuite BL 15/19 OPTI",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-27",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite BL (isolantes)",
+   "nom": "Brique terre cuite BL 15/19 OPTI (compensation)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-28",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite BL (isolantes)",
+   "nom": "Brique terre cuite BL 22,5/19 OPTI",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-29",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite BL (isolantes)",
+   "nom": "Brique terre cuite BL 22,5/14 OPTI",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-30",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 7,5/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-31",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 10/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-32",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 12,5/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-33",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 15/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-34",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 17,5/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-35",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 20/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-36",
+   "cat": "Briques et blocs",
+   "sub": "Briques Swiss-Modul",
+   "nom": "Brique Swiss-Modul SM B 25/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-37",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite pleines (cheminée)",
+   "nom": "Brique terre cuite BV 30/9/6 pleine",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-38",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite pleines (cheminée)",
+   "nom": "Brique terre cuite BV 25/12/6 pleine",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-39",
+   "cat": "Briques et blocs",
+   "sub": "Briques terre cuite pleines (cheminée)",
+   "nom": "Brique terre cuite BV 32/12/6 pleine",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-40",
+   "cat": "Briques et blocs",
+   "sub": "Briques creuses terre cuite",
+   "nom": "Brique creuse terre cuite BN-H 6/15/30",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-41",
+   "cat": "Briques et blocs",
+   "sub": "Briques creuses terre cuite",
+   "nom": "Brique creuse terre cuite BN-H 8/15/30",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-42",
+   "cat": "Briques et blocs",
+   "sub": "Briques creuses terre cuite",
+   "nom": "Brique creuse terre cuite BN-H 10/15/30",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-43",
+   "cat": "Briques et blocs",
+   "sub": "Briques creuses terre cuite",
+   "nom": "Brique creuse terre cuite C4",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-44",
+   "cat": "Briques et blocs",
+   "sub": "Briques creuses terre cuite",
+   "nom": "Brique creuse terre cuite C6",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-45",
+   "cat": "Briques et blocs",
+   "sub": "Briques creuses terre cuite",
+   "nom": "Brique creuse terre cuite C8",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-46",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique creuse universelle Bürer Z 12",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-47",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique creuse universelle Bürer Z 15",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-48",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique creuse universelle Bürer Z 18",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-49",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment dB pleine 24/12/13,5 dB",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-50",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment dB pleine 24/15/13,5 dB",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-51",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment dB pleine 24/18/13,5 dB",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-52",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment creuse ELGE 50/10/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-53",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment creuse ELGE 50/12/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-54",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment creuse ELGE 50/15/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-55",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment creuse ELGE 50/18/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-56",
+   "cat": "Briques et blocs",
+   "sub": "Briques de ciment",
+   "nom": "Brique ciment creuse ELGE 40/20/19",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-57",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 10/14",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-58",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 10/6,5",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-59",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 12/14",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-60",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 12/9",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-61",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 12/6,5",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-62",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 15/14",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-63",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 15/9",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-64",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 15/6,5",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-65",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 18/14",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-66",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 18/14 1/2",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-67",
+   "cat": "Briques et blocs",
+   "sub": "Briques silico-calcaires",
+   "nom": "Brique silico-calcaire K 18/6,5",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-68",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton normal TBN L=100 cm, Ø 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-69",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton normal TBN L=100 cm, Ø 150 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-70",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton normal TBN L=100 cm, Ø 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-71",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton normal TBN L=100 cm, Ø 250 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-72",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton normal TBN L=100 cm, Ø 300 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-73",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton normal TBN L=100 cm, Ø 400 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-74",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton perforé TBP L=100 cm, Ø 100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-75",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton perforé TBP L=100 cm, Ø 150 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-76",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton perforé TBP L=100 cm, Ø 200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-77",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton perforé TBP L=100 cm, Ø 250 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-78",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton perforé TBP L=100 cm, Ø 300 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-79",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton perforé TBP L=100 cm, Ø 400 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-80",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton avec fond TBN L=1 m, Ø 300 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-81",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton avec fond TBN L=1 m, Ø 400 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-82",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton avec fond TBN L=1 m, Ø 500 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-83",
+   "cat": "Tuyaux et drainage",
+   "sub": "Tuyaux béton",
+   "nom": "Tuyau béton avec fond TBN L=1 m, Ø 600 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-84",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 100/100",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-85",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 125/110",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-86",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 125/125",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-87",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 160/110",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-88",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 160/125",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-89",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 160/160",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-90",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 200/110",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-91",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 200/125",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-92",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 200/160",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-93",
+   "cat": "Tuyaux et drainage",
+   "sub": "Embranchements PVC",
+   "nom": "Embranchement PVC dur 45° S25/S40/S16, 200/200",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-94",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 4 perforé, 5 m, Ø 110",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-95",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 4 perforé, 5 m, Ø 125",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-96",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 2 perforé, 5 m, Ø 160",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-97",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 2 perforé, 5 m, Ø 200",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-98",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 2 perforé, 5 m, Ø 250",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-99",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 2 perforé, 5 m, Ø 315",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-100",
+   "cat": "Tuyaux et drainage",
+   "sub": "Drains PVC",
+   "nom": "Drain PVC-U SN 2 perforé, 5 m, Ø 400",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-101",
+   "cat": "Bois et panneaux",
+   "sub": "Bois ronds",
+   "nom": "Perche d'échafaudage sur mesure",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-102",
+   "cat": "Bois et panneaux",
+   "sub": "Bois ronds",
+   "nom": "Bois ronds tous diamètres",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-103",
+   "cat": "Bois et panneaux",
+   "sub": "Bois ronds",
+   "nom": "Pieu de bois 100 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-104",
+   "cat": "Bois et panneaux",
+   "sub": "Bois ronds",
+   "nom": "Pieu de bois 150 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-105",
+   "cat": "Bois et panneaux",
+   "sub": "Bois ronds",
+   "nom": "Pieu de bois 200 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-106",
+   "cat": "Bois et panneaux",
+   "sub": "Bois équarri",
+   "nom": "Bois équarri sapin 8/12 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-107",
+   "cat": "Bois et panneaux",
+   "sub": "Bois équarri",
+   "nom": "Bois équarri sapin 10/12 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-108",
+   "cat": "Bois et panneaux",
+   "sub": "Bois équarri",
+   "nom": "Bois équarri sapin 12/16 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-109",
+   "cat": "Bois et panneaux",
+   "sub": "Planches",
+   "nom": "Planche brute sapin de coffrage, largeur 10-24 cm, épaisseur 18 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-110",
+   "cat": "Bois et panneaux",
+   "sub": "Planches",
+   "nom": "Planche brute sapin de coffrage, largeur 10-24 cm, épaisseur 24 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-111",
+   "cat": "Bois et panneaux",
+   "sub": "Planches",
+   "nom": "Planche brute sapin de coffrage, largeur 10-24 cm, épaisseur 30 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-112",
+   "cat": "Bois et panneaux",
+   "sub": "Planches",
+   "nom": "Planche brute sapin de coffrage, largeur 10-24 cm, épaisseur 36 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-113",
+   "cat": "Bois et panneaux",
+   "sub": "Planches",
+   "nom": "Planche brute sapin de coffrage, largeur 10-24 cm, épaisseur 40 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-114",
+   "cat": "Bois et panneaux",
+   "sub": "Lattes",
+   "nom": "Liteau plafond sur mesure 24/48 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-115",
+   "cat": "Bois et panneaux",
+   "sub": "Panneaux",
+   "nom": "Panneau de coffrage 3 plis 27 mm, 50×100 cm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-116",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 8 mm (0,395 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-117",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 8 mm (0,395 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-118",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 10 mm (0,617 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-119",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 10 mm (0,617 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-120",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 12 mm (0,888 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-121",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 12 mm (0,888 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-122",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 14 mm (1,210 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-123",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 14 mm (1,210 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-124",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 16 mm (1,580 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-125",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 16 mm (1,580 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-126",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 18 mm (2,000 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-127",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 18 mm (2,000 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-128",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 20 mm (2,470 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-129",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 20 mm (2,470 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-130",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 22 mm (2,980 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-131",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 22 mm (2,980 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-132",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 26 mm (4,170 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-133",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 26 mm (4,170 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-134",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 longueurs fixes",
+   "nom": "Acier d'armature S 500, Ø 30 mm (5,550 kg/m), longueurs fixes",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-135",
+   "cat": "Aciers d'armature",
+   "sub": "Aciers S 500 façonnés",
+   "nom": "Acier d'armature S 500, Ø 30 mm (5,550 kg/m), façonnage simple",
+   "unite": "kg",
+   "classe": "S 500",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-maconnerie-136",
+   "cat": "Aciers d'armature",
+   "sub": "Treillis",
+   "nom": "Treillis d'armature S 550 de stock",
+   "unite": "kg",
+   "classe": "S 550",
+   "granulo": "",
+   "notes": ""
+  }
+ ]
+}

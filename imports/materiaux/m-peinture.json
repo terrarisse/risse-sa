@@ -1,0 +1,1937 @@
+{
+ "id": "m-peinture",
+ "titre": "Peinture — apprêts, peintures, crépis, vernis, consommables",
+ "note": "Marchandises pour régie du chapitre Peinture (CAN 672)",
+ "materiaux": [
+  {
+   "id": "mx-m-peinture-0",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Acide phosphorique 20 %",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-1",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Ammoniaque 24 %",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-2",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Dégraissant (diluant régénéré)",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-3",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Diluant universel",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-4",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Décapant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-5",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Éclaircisseur pour bois",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-6",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Lessive en poudre",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-7",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Nettoyant de pierre",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-8",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Produit de mouillage",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-9",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Produit pour mordançage",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-10",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Produit pour teintage chimique en deux phases",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-11",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Toluol",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-12",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Sangajol (succédané d'essence de térébenthine)",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-13",
+   "cat": "Peinture",
+   "sub": "Préparation et nettoyage",
+   "nom": "Fluat (poudre)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-14",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Apprêt synthétique blanc pour l'extérieur (Vorlack)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-15",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Apprêt synthétique blanc pour l'intérieur (Vorlack)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-16",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Apprêt synthétique teinte moyenne (Vorlack)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-17",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Antirouille diluable à l'eau",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-18",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Antirouille synthétique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-19",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Couche de fond acrylique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-20",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Couche de fond pour crépi minéral",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-21",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Couche de fond pour papier peint Blancol",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-22",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Couche de fond pour crépi (avec adjonction de sable)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-23",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Fond de trempage",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-24",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Fond pénétrant à base de solvants",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-25",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Fond pénétrant diluable à l'eau",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-26",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Fond dur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-27",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond à deux composants à l'eau",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-28",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond à deux composants au solvant (Wash-Primer)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-29",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond au caoutchouc chloré",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-30",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond au silicate",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-31",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond organosilicatée",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-32",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond siliconique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-33",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Peinture de fond (impression)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-34",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Primer à 2 composants",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-35",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Primer antifeu",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-36",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Primer au chromate de zinc",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-37",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Primer incolore (pour silicone)",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-38",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Phosphatant",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-39",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Imprégnation au silicone",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-40",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Imprégnation pour le bois, incolore",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-41",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Glacis à imprégner le bois",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-42",
+   "cat": "Peinture",
+   "sub": "Apprêts et fonds",
+   "nom": "Glacis à imprégner le bois, microporeux",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-43",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à base de résine époxy",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-44",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à deux composants (couche épaisse)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-45",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à deux composants à l'eau",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-46",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à deux composants au solvant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-47",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à la chaux",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-48",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à l'huile",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-49",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture acrylique brillante/satinée",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-50",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture antifeu",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-51",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture antigraffiti 1 composant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-52",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture antigraffiti 2 composants",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-53",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture au caoutchouc chloré",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-54",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture au fer micacé",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-55",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture au fer micacé (couche épaisse)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-56",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture au silicate (minérale), blanche",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-57",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture au silicate (minérale), colorée",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-58",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture de signalisation routière (blanc/jaune)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-59",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion armée",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-60",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion pour bois",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-61",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion satinée, blanche",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-62",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion teinte vive",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-63",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion anti-moisissure",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-64",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion blanche pour l'extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-65",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion blanche pour l'intérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-66",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion colorée pour l'extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-67",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture dispersion colorée pour l'intérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-68",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture émail pour radiateurs",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-69",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture émail synthétique brillante, blanche",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-70",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture émail synthétique pour l'extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-71",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture émail synthétique satinée teinte vive",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-72",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture émail synthétique satinée, blanche",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-73",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture émail synthétique teinte vive pour l'extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-74",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture mate au solvant teinte vive",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-75",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture Multiton au solvant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-76",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture organosilicatée, blanche",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-77",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture organosilicatée, colorée",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-78",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture à base de copolymère au solvant pour l'intérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-79",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture pour sols à base de dispersion",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-80",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture pour sols à base de solvants",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-81",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture pour sols à deux composants",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-82",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture siliconique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-83",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture siliconique teinte vive",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-84",
+   "cat": "Peinture",
+   "sub": "Peintures",
+   "nom": "Peinture synthétique mate blanche (pour plafond)",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-85",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Glacis pour patine",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-86",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Glacis-béton à base de copolymère",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-87",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Glacis-béton à base de dispersion",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-88",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Glacis-béton à base de silicate",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-89",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis à deux composants, transparent",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-90",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis acrylique pour l'extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-91",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis de protection pelable",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-92",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis isolant pigmenté",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-93",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis nitrocellulosique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-94",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis synthétique transparent, brillant",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-95",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis synthétique transparent, extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-96",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Vernis synthétique transparent, satiné intérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-97",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Cire au nitro",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-98",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Cire au nitro (pour giclage)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-99",
+   "cat": "Peinture",
+   "sub": "Vernis et glacis",
+   "nom": "Huile de lin",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-100",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi antique fibreux",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-101",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi léger pour giclage",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-102",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi minéral extérieur grain 1 à 5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-103",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi minéral grain 1 à 5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-104",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi minéral monocouche",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-105",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi mosaïque",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-106",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi pour façades à base de liant synthétique, grain 1 à 5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-107",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi synthétique ingrain",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-108",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi synthétique pour giclage extérieur, grain 1 à 5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-109",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi synthétique pour giclage intérieur, grain 1 à 5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-110",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi synthétique ribé intérieur, grain 1 à 5 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-111",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi synthétique Styropor",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-112",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Crépi synthétique intérieur 3,0 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-113",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Enduit (Toupret)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-114",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Enduit à deux composants",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-115",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Enduit à gicler (garnissant sur MDF)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-116",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Enduit à l'émulsion",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-117",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Enduit synthétique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-118",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Toupret décor",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-119",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Mastic synthétique en poudre (Toupret)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-120",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Masse anti-fissure",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-121",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Masse fibreuse-structure ingrain",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-122",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Matière de remplissage pour l'extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-123",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Matière de remplissage pour l'intérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-124",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Mortier hydraulique de finition",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-125",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Mortier hydraulique de fond",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-126",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Plâtre",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-127",
+   "cat": "Peinture",
+   "sub": "Crépis et enduits",
+   "nom": "Badigeon à la colle",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-128",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle cellulosique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-129",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle d'amidon (Le poisson)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-130",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle de contact",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-131",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle pour feuille de plomb",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-132",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle pour treillis extérieur",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-133",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle synthétique (Ovalit T / Assil F)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-134",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle synthétique en tubes (Assil D)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-135",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle synthétique pour polystyrène (Assil P)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-136",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Colle synthétique pour Scandatex (Elotex)",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-137",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Mastic à l'huile",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-138",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Mastic à l'huile teinté",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-139",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Mastic acrylique en cartouche",
+   "unite": "cartouche",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-140",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Mastic élastique pour joints (cartouche)",
+   "unite": "cartouche",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-141",
+   "cat": "Peinture",
+   "sub": "Colles et mastics",
+   "nom": "Mastic silicone en cartouche",
+   "unite": "cartouche",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-142",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Bordure simple pour papier peint",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-143",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Calicot",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-144",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Carton de protection 110×80 cm (1 kg)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-145",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Carton ondulé",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-146",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Cordon de mousse 1 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-147",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Cordon de mousse 2 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-148",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Cordon de mousse 5 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-149",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Feuille de plomb sur papier",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-150",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Feuille PVC fine pour meubles, murs et divers",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-151",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Feuille de polyéthylène",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-152",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Feuille plastique armée pour échafaudage",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-153",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Fibre de verre (Trevira)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-154",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Fibre de verre fine",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-155",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Jute",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-156",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Maculature (papier de fond) 80 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-157",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier de protection brut 300 g/m²",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-158",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier de protection imprégné 150 g/m²",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-159",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier ingrain avec couche de fond 125 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-160",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier ingrain naturel 125 g/m²",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-161",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier pour appareil à couvrir à la main 15 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-162",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier pour appareil à couvrir à la main 20 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-163",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier pour appareil à couvrir à la main 30 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-164",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Papier pour appareil à couvrir à la main 60 cm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-165",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Pavatex dur",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-166",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Peau de daim",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-167",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Plaque isolante polystyrène décorative (Poron)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-168",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Plaque isolante polystyrène expansé 10 mm cartonné 2 faces",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-169",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Plaque isolante polystyrène expansé 6 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-170",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Plastic de protection gris 0,3 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-171",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Revêtement isolant Sempatap 10 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-172",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Revêtement isolant Sempatap 5 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-173",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Tissu de fibre de verre (Scandatex)",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-174",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Treillis blanc mailles fines pour extérieur",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-175",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Voile de fibre de verre",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-176",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Voile de fibre de verre / tissu pour armer",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-177",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Ruban adhésif aluminium 50 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-178",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Ruban adhésif PVC jaune 50 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-179",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Ruban adhésif 19 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-180",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Ruban adhésif 25 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-181",
+   "cat": "Peinture",
+   "sub": "Papiers, toiles, protections",
+   "nom": "Ruban adhésif 50 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-182",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Disque abrasif pour ponceuse à disques",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-183",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Éponge naturelle",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-184",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Éponge synthétique",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-185",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Étamine",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-186",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Étoupe / chiffons",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-187",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Laine d'acier 04",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-188",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Papier abrasif (pour poncer à l'eau)",
+   "unite": "feuille",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-189",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Papier abrasif (pour poncer à sec)",
+   "unite": "feuille",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-190",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Gaz propane (bouteille 10,5 kg)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-191",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Mazout",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-peinture-192",
+   "cat": "Peinture",
+   "sub": "Consommables",
+   "nom": "Matériaux divers",
+   "unite": "unité",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  }
+ ]
+}

@@ -1,0 +1,987 @@
+{
+ "id": "m-charpente",
+ "titre": "Charpente métallique et bois — profilés, bois, panneaux, ferrures",
+ "note": "Tarifs fournitures des chapitres Charpente métallique (CAN 321) et Charpente (CAN 331)",
+ "materiaux": [
+  {
+   "id": "mx-m-charpente-0",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Fers marchands normaux",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-1",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Fers marchands spéciaux",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-2",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Poutrelles à larges ailes HEA/HEB/HEM",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-3",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Profilés I-PE",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-4",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Profilés IPN",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-5",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Profilés UPN",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-6",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Profilés UAP",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-7",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Tôles moyennes et fortes",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-8",
+   "cat": "Acier de construction",
+   "sub": "Profilés et tôles",
+   "nom": "Larges-plats",
+   "unite": "tonne (t)",
+   "classe": "S235/S355",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-9",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 50×50×4 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-10",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 100×100×8 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-11",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 150×150×6 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-12",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 200×200×10 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-13",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 250×250×12,5 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-14",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 300×300×10 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-15",
+   "cat": "Acier de construction",
+   "sub": "Tubes de charpente",
+   "nom": "Tube de charpente carré 350×350×16 mm (FE 430)",
+   "unite": "ml",
+   "classe": "FE 430",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-16",
+   "cat": "Acier de construction",
+   "sub": "Consommables",
+   "nom": "Électrodes de soudure Ø 3,25 et 4 mm",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-17",
+   "cat": "Acier de construction",
+   "sub": "Consommables",
+   "nom": "Disques pour meulage et ponçage",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-18",
+   "cat": "Acier de construction",
+   "sub": "Consommables",
+   "nom": "Minium de plomb synthétique",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-19",
+   "cat": "Acier de construction",
+   "sub": "Consommables",
+   "nom": "Peinture à base de poudre de zinc",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-20",
+   "cat": "Bois de charpente",
+   "sub": "Lamellé-collé",
+   "nom": "Bois lamellé-collé GL 24, droit",
+   "unite": "m³",
+   "classe": "GL 24",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-21",
+   "cat": "Bois de charpente",
+   "sub": "Lamellé-collé",
+   "nom": "Bois lamellé-collé qualité industrielle",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-22",
+   "cat": "Bois de charpente",
+   "sub": "Bois massif",
+   "nom": "Bois de sapin équarri 10 à 20 cm de côté, jusqu'à 8 m",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-23",
+   "cat": "Bois de charpente",
+   "sub": "Bois massif",
+   "nom": "Plateaux sapin 3e choix",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-24",
+   "cat": "Bois de charpente",
+   "sub": "Planches",
+   "nom": "Planches parallèles séchées à l'air, choix II, 18 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-25",
+   "cat": "Bois de charpente",
+   "sub": "Planches",
+   "nom": "Planches parallèles séchées à l'air, choix II, 24 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-26",
+   "cat": "Bois de charpente",
+   "sub": "Planches",
+   "nom": "Planches parallèles séchées à l'air, choix II, 27 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-27",
+   "cat": "Bois de charpente",
+   "sub": "Planches",
+   "nom": "Planches parallèles séchées à l'air, choix II/B, 18 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-28",
+   "cat": "Bois de charpente",
+   "sub": "Planches",
+   "nom": "Planches parallèles séchées à l'air, choix II/B, 24 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-29",
+   "cat": "Bois de charpente",
+   "sub": "Planches",
+   "nom": "Planches parallèles séchées à l'air, choix II/B, 27 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-30",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à plancher sapin du pays II/B, 23 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-31",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à plancher sapin du pays II/III, 23 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-32",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à plancher sapin II/B, 27 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-33",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à plancher sapin II/III, 27 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-34",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à plancher sapin du Nord A/B, 21 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-35",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames chalet sapin du pays AB, 21 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-36",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à chanfrein sapin du pays 14 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-37",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à chanfrein bois du Nord III/A, 13 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-38",
+   "cat": "Bois de charpente",
+   "sub": "Lames",
+   "nom": "Lames à chanfrein bois du Nord II/B, 13 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-39",
+   "cat": "Bois de charpente",
+   "sub": "Carrelets, lambourdes, lattes",
+   "nom": "Carrelets bruts 45/50",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-40",
+   "cat": "Bois de charpente",
+   "sub": "Carrelets, lambourdes, lattes",
+   "nom": "Carrelets bruts 60/60",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-41",
+   "cat": "Bois de charpente",
+   "sub": "Carrelets, lambourdes, lattes",
+   "nom": "Carrelets rabotés 60/60 secs à l'air",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-42",
+   "cat": "Bois de charpente",
+   "sub": "Carrelets, lambourdes, lattes",
+   "nom": "Lambourdes brutes 27/60 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-43",
+   "cat": "Bois de charpente",
+   "sub": "Carrelets, lambourdes, lattes",
+   "nom": "Lambourdes rabotées 23/55 mm",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-44",
+   "cat": "Bois de charpente",
+   "sub": "Carrelets, lambourdes, lattes",
+   "nom": "Gorges de charpente 45/55",
+   "unite": "ml",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-45",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau 3 plis sapin B/C+ collage extérieur, poncé, 27 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-46",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau 3 plis sapin C/C, 27 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-47",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau aggloméré standard 25 mm PP",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-48",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau MDF 19 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-49",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau MDF 22 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-50",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau OSB 3, 15 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-51",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau OSB 4, 15 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-52",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau OSB 3, 18 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-53",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau OSB 4, 18 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-54",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau Kerto Q blocs collés 25 mm, poncés",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-55",
+   "cat": "Panneaux bois",
+   "sub": "Panneaux",
+   "nom": "Panneau Kerto Q",
+   "unite": "m³",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-56",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Produit préventif contre insectes et bleuissement",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-57",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Produit préventif champignons pour extérieur",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-58",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Produit curatif destruction mérule",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-59",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Produit curatif compatible construction agricole",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-60",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Lasure pour façades extérieures",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-61",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Fond pour imprégnation",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-62",
+   "cat": "Traitement du bois",
+   "sub": "Produits d'imprégnation",
+   "nom": "Vernis vitrocellulosique incolore pour matinages",
+   "unite": "litre",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-63",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Ferrures (étriers, fers d'ancrage, contre-plaques), galvanisées",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-64",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Sabot de solive standard 80/120 mm (sans clous)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-65",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Sabot de solive standard 100/140 mm (sans clous)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-66",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Sabot de solive standard 140/180 mm (sans clous)",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-67",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Apponce type Gerber 100/140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-68",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Apponce type Gerber 140/200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-69",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Apponce type Gerber 140/240 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-70",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Ferrures",
+   "nom": "Pied de poteau du commerce, section moyenne 10/10 cm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-71",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Boulon avec écrou et plaques, 16-200",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-72",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Boulon avec écrou et plaques, 16-300",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-73",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Boulon avec écrou et plaques, 16-400",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-74",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Boulon avec écrou et plaques, 16-500",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-75",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Crosses ordinaires",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-76",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Pointes diverses",
+   "unite": "kg",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-77",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Vis à bois autoperçante zinguée 6×100 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-78",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Vis à bois autoperçante zinguée 6×140 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-79",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Vis à bois autoperçante zinguée 6×180 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-80",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Vis à bois autoperçante zinguée 8×200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-81",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Vis à bois autoperçante zinguée 8×260 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-82",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Vis à bois autoperçante zinguée 8×300 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-83",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Tirefond avec rondelle zingué 12×120 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-84",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Tirefond avec rondelle zingué 12×160 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-85",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Tirefond avec rondelle zingué 12×200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-86",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Tirefond avec rondelle zingué 16×200 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-87",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Tirefond avec rondelle zingué 16×240 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-88",
+   "cat": "Ferrures et quincaillerie",
+   "sub": "Boulons et vis",
+   "nom": "Tirefond avec rondelle zingué 16×300 mm",
+   "unite": "pièce",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-89",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 100 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-90",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 120 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-91",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 140 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-92",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 160 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-93",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 180 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-94",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 200 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-95",
+   "cat": "Isolation et étanchéité",
+   "sub": "Matelas isolants",
+   "nom": "Matelas isolant laine de verre ou de pierre, nu, 220 mm, 16-32 kg/m³",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-96",
+   "cat": "Isolation et étanchéité",
+   "sub": "Pare-vapeur",
+   "nom": "Frein vapeur polyéthylène blanc 0,2 mm",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  },
+  {
+   "id": "mx-m-charpente-97",
+   "cat": "Isolation et étanchéité",
+   "sub": "Pare-vapeur",
+   "nom": "Frein vapeur Vario KM Duplex",
+   "unite": "m²",
+   "classe": "",
+   "granulo": "",
+   "notes": ""
+  }
+ ]
+}

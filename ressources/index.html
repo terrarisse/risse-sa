@@ -309,7 +309,9 @@ body.mat-dragging *{cursor:grabbing!important;}
   <div class="page" id="page-machines"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('machines',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('machines')">＋</button></div><div id="content-machines"></div></div>
   <div class="page" id="page-vehicules"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('vehicules',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('vehicules')">＋</button></div><div id="content-vehicules"></div></div>
   <div class="page" id="page-materiel"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiel',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiel')">＋</button></div><div id="content-materiel"></div></div>
-  <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div><div id="content-materiaux"></div></div>
+  <div class="page" id="page-materiaux"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('materiaux',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('materiaux')">＋</button></div>
+    <div class="pst-info" style="background:#F5F0EB;">🪨 Listes de matériaux préparées (tarifs fournisseurs numérisés) : tu choisis ce que tu veux garder avant d'importer.
+      <div style="margin-top:8px;"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="importMatListe()">📥 Importer une liste de matériaux</button></div></div><div id="content-materiaux"></div></div>
   <div class="page" id="page-evacuations"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher…" oninput="filterPage('evacuations',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('evacuations')">＋</button></div><div id="content-evacuations"></div></div>
   <div class="page" id="page-postes"><div class="toolbar"><input class="search-input" type="search" placeholder="🔍  Rechercher un poste…" oninput="filterPage('postes',this.value)" autocomplete="off"><button class="add-fab" onclick="openAdd('postes')">＋</button></div>
     <div class="pst-info">📋 Postes proposés dans le <b>Rapport</b> quand tu écris les travaux. Catégories et sous-catégories : bouton <b>⊞ Catégories</b> en haut. <b>Appui long</b> sur un poste puis glisse-le sur une catégorie (ou entre deux postes) pour le déplacer.
@@ -2459,26 +2461,39 @@ Object.assign(window,{importPostesDevis,importPostesDe,closePst2,dropItemOn});
 // sous-catégories, choisir le métré ; postes déjà importés et doublons signalés.
 let _impListes = [], _imp = null;
 const IMP_METRES = [['auto','Auto'],['none','Aucun'],['coupe','ml'],['surface','m²'],['volume','m³']];
-async function importPostesListe(){
+let _impKind = 'postes';
+const IMP_DIR = { postes:'../imports/', materiaux:'../imports/materiaux/' };
+const IMP_UNITES = ['m³','tonne (t)','kg','m²','ml','pièce','sac','litre','100 pièces','cartouche','carton','feuille','unité'];
+function importMatListe(){ return importPostesListe('materiaux'); }
+async function importPostesListe(kind){
+  _impKind = kind==='materiaux' ? 'materiaux' : 'postes';
   showToast('⏳ Recherche des listes…');
   let idx = null;
-  try { idx = await fetch('../imports/index.json?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()); } catch(e){ console.warn('Listes', e); }
+  try { idx = await fetch(IMP_DIR[_impKind]+'index.json?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()); } catch(e){ console.warn('Listes', e); }
   _impListes = (idx && idx.listes) || [];
   if(!_impListes.length){ showToast('Aucune liste prête pour le moment'); return; }
-  const ids = new Set(load('postes').map(p=>p.id));
-  pstSheet('📥 Importer une liste', `<div style="font-size:12px;color:var(--text2);margin-bottom:10px;">Listes préparées (par ex. chapitres du CAN). Tu pourras trier avant d'importer.</div>`
-    + _impListes.map((l,i)=>`<div class="pst-item" onclick="openImportListe(${i})"><b>${pEsc(l.titre||l.id)}</b><div style="font-size:11px;color:var(--text3);margin-top:2px;">${l.n?l.n+' postes':''}${l.note?' · '+pEsc(l.note):''}</div></div>`).join(''));
+  const mat = _impKind==='materiaux';
+  pstSheet(mat?'📥 Importer des matériaux':'📥 Importer une liste', `<div style="font-size:12px;color:var(--text2);margin-bottom:10px;">${mat?'Listes tirées des tarifs fournisseurs du classeur. Tu pourras trier et corriger avant d\'importer.':'Listes préparées (par ex. chapitres du CAN). Tu pourras trier avant d\'importer.'}</div>`
+    + _impListes.map((l,i)=>`<div class="pst-item" onclick="openImportListe(${i})"><b>${pEsc(l.titre||l.id)}</b><div style="font-size:11px;color:var(--text3);margin-top:2px;">${l.n?l.n+(mat?' matériaux':' postes'):''}${l.note?' · '+pEsc(l.note):''}</div></div>`).join(''));
 }
 async function openImportListe(i){
   const l = _impListes[i]; if(!l) return;
   let d = null;
-  try { d = await fetch('../imports/'+l.fichier+'?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()); } catch(e){ showToast('⚠ Liste illisible'); return; }
+  try { d = await fetch(IMP_DIR[_impKind]+l.fichier+'?v='+Date.now(), {cache:'no-store'}).then(r=>r.json()); } catch(e){ showToast('⚠ Liste illisible'); return; }
   closePst2();
+  if(_impKind==='materiaux'){
+    const cur = load('materiaux'), ids = new Set(cur.map(m=>m.id)), noms = {};
+    cur.forEach(m=>{ noms[RPostes.norm(m.nom)] = m.nom; });
+    const rows = (d.materiaux||[]).map(m=>{ const deja = ids.has(m.id), dbl = !deja && noms[RPostes.norm(m.nom)];
+      return { ...m, cat:m.cat||'', sub:m.sub||'', unite:m.unite||'', deja, dbl: dbl||'', on: !deja && !dbl }; });
+    _imp = { kind:'materiaux', titre: d.titre||l.titre||l.id, src: d.id||l.id, rows, q:'', ouverts:{} };
+    return renderImport();
+  }
   const rows = (d.postes||[]).map(p=>{
     const deja = RPostes.existe(p.id), dbl = !deja && RPostes.doublon(p.nom);
     return { ...p, cat:p.cat||'', sub:p.sub||'', metre:p.metre||'auto', deja, dbl: dbl ? dbl.nom : '', on: !deja && !dbl };
   });
-  _imp = { titre: d.titre||l.titre||l.id, src: d.id||l.id, rows, q:'', ouverts:{} };
+  _imp = { kind:'postes', titre: d.titre||l.titre||l.id, src: d.id||l.id, rows, q:'', ouverts:{} };
   renderImport();
 }
 function impGroups(){
@@ -2514,15 +2529,15 @@ function renderImport(){
         <input type="checkbox" ${r.on?'checked':''} ${r.deja?'disabled':''} onchange="impCheck(${i},this.checked)">
         <div class="imp-txt"><div class="imp-ed" contenteditable="true" spellcheck="true" oninput="impTxt(${i},this)" onblur="impTxtEnd(${i},this)">${pEsc(r.nom)}</div>
           ${r.deja?'<div class="imp-flag">✓ déjà importé</div>':''}${r.dbl?`<div class="imp-flag">≈ ressemble à : ${pEsc(r.dbl.slice(0,80))}</div>`:''}</div>
-        <button class="imp-m" onclick="impMetre(${i})">${(IMP_METRES.find(m=>m[0]===r.metre)||IMP_METRES[0])[1]}</button></div>`; }).join('');
+        ${_imp.kind==='materiaux' ? `<button class="imp-m" onclick="impUnite(${i})">${pEsc(r.unite||'unité ?')}</button>` : `<button class="imp-m" onclick="impMetre(${i})">${(IMP_METRES.find(m=>m[0]===r.metre)||IMP_METRES[0])[1]}</button>`}</div>`; }).join('');
     html += `</div>`;
   });
   ov.innerHTML = `<div class="imp-sh">
     <div class="imp-hd"><div style="display:flex;align-items:center;gap:8px;"><div style="flex:1;font-size:16px;font-weight:700;color:var(--navy);">📥 ${pEsc(_imp.titre)}</div><button class="modal-close" onclick="closeImport()">✕</button></div>
-      <div style="font-size:12px;color:var(--text2);margin:4px 0 8px;">${nOn} coché${nOn>1?'s':''} sur ${_imp.rows.length}${nDeja?' · '+nDeja+' déjà importé'+(nDeja>1?'s':''):''}. Touche un texte pour le modifier directement, ✏️ pour renommer une catégorie, le bouton de droite pour le métré.</div>
+      <div style="font-size:12px;color:var(--text2);margin:4px 0 8px;">${nOn} coché${nOn>1?'s':''} sur ${_imp.rows.length}${nDeja?' · '+nDeja+' déjà importé'+(nDeja>1?'s':''):''}. Touche un texte pour le modifier directement, ✏️ pour renommer une catégorie, le bouton de droite pour ${_imp.kind==='materiaux'?'l\'unité':'le métré'}.</div>
       <div style="display:flex;gap:6px;"><input class="search-input" style="flex:1;min-width:0;" type="search" placeholder="🔍 Filtrer…" value="${pEsc(_imp.q)}" oninput="impFilter(this.value)"><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="impAll(true)">Tout</button><button class="btn btn-ghost btn-sm" style="width:auto;" onclick="impAll(false)">Rien</button></div></div>
     <div class="imp-body">${html||'<div class="acc-empty">Rien à afficher</div>'}</div>
-    <div class="imp-ft"><button class="btn btn-ghost" style="width:auto;padding:0 16px;" onclick="closeImport()">Annuler</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="doImport()" ${nOn?'':'disabled'}>Importer ${nOn} poste${nOn>1?'s':''}</button></div></div>`;
+    <div class="imp-ft"><button class="btn btn-ghost" style="width:auto;padding:0 16px;" onclick="closeImport()">Annuler</button><button class="btn btn-navy" style="flex:1;width:auto;" onclick="doImport()" ${nOn?'':'disabled'}>Importer ${nOn} ${_imp.kind==='materiaux'?'matériau'+(nOn>1?'x':''):'poste'+(nOn>1?'s':'')}</button></div></div>`;
   ov.querySelectorAll('input[data-mid]').forEach(c=>c.indeterminate=true);
   const _nb = ov.querySelector('.imp-body'); if(_nb) _nb.scrollTop = _scroll;
 }
@@ -2531,6 +2546,7 @@ function impCheck(i,v){ _imp.rows[i].on=v; renderImport(); }
 function impCheckGroup(gi,v){ impGroups()[gi].items.forEach(i=>{ if(!_imp.rows[i].deja) _imp.rows[i].on=v; }); renderImport(); }
 function impAll(v){ _imp.rows.forEach(r=>{ if(!r.deja) r.on=v; }); renderImport(); }
 function impFilter(v){ _imp.q=v; renderImport(); const s=document.querySelector('#imp-ov .search-input'); if(s){ s.focus(); s.setSelectionRange(v.length,v.length); } }
+function impUnite(i){ const r=_imp.rows[i]; const k=IMP_UNITES.indexOf(r.unite); r.unite=IMP_UNITES[(k+1)%IMP_UNITES.length]; renderImport(); }
 function impMetre(i){ const r=_imp.rows[i]; const k=IMP_METRES.findIndex(m=>m[0]===r.metre); r.metre=IMP_METRES[(k+1)%IMP_METRES.length][0]; renderImport(); }
 // Texte modifiable directement dans la liste (pas de ré-affichage pendant la saisie)
 function impTxt(i,el){ const v=el.innerText.replace(/\s+/g,' ').trim(); if(v) _imp.rows[i].nom=v; }
@@ -2548,7 +2564,31 @@ function impRename(kind, gi){
   renderImport();
 }
 function closeImport(){ const ov=document.getElementById('imp-ov'); if(ov) ov.remove(); _imp=null; }
+function doImportMat(){
+  const cats = loadCats(); cats.materiaux = cats.materiaux || [];
+  const t = cats.materiaux, PAL = ['#1A4A8A','#2E7D32','#C62828','#6A1B9A','#EF6C00','#00838F','#5D4037','#455A64'];
+  const ens = (cn, sn) => {
+    if(!cn) return { catId:'', subCatId:'' };
+    let c = t.find(x=>(x.name||'').toLowerCase()===cn.toLowerCase());
+    if(!c){ c = { id:'cat'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), name:cn, color:PAL[t.length%PAL.length], emoji:'', image:'', children:[] }; t.push(c); }
+    if(!sn) return { catId:c.id, subCatId:'' };
+    c.children = c.children || [];
+    let su = c.children.find(x=>(x.name||'').toLowerCase()===sn.toLowerCase());
+    if(!su){ su = { id:'sub'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), name:sn }; c.children.push(su); }
+    return { catId:c.id, subCatId:su.id };
+  };
+  const cur = load('materiaux'), ids = new Set(cur.map(m=>m.id)); let n = 0;
+  _imp.rows.filter(r=>r.on && !r.deja && !ids.has(r.id)).forEach(r=>{
+    cur.push({ id:r.id, nom:r.nom, unite:r.unite||'', classe:r.classe||'', granulo:r.granulo||'', notes:r.notes||'', fournisseur:'', prix:'', densite:null, masse_volumique:null, photo:'', icon:'', src:_imp.src, ...ens(r.cat, r.sub) });
+    n++;
+  });
+  saveCats(cats); save('materiaux', cur);
+  closeImport();
+  renderContent('materiaux', searchFilters.materiaux||''); updateBadges(); populateCatSelects('materiaux');
+  showToast(`✅ ${n} matériau${n>1?'x':''} importé${n>1?'s':''}`);
+}
 async function doImport(){
+  if(_imp && _imp.kind==='materiaux') return doImportMat();
   const rows=_imp.rows.filter(r=>r.on && !r.deja).map(r=>({ id:r.id, nom:r.nom, cat: r.cat + (r.sub ? ' › '+r.sub : ''), metre:r.metre, src:_imp.src }));
   const n = await RPostes.importer(rows);
   closeImport();
@@ -2627,13 +2667,13 @@ async function catAdd(lid, pid){
   showToast(n ? '✅ Ajouté aux Postes' : 'Déjà dans les Postes');
 }
 async function catImportChapitre(lid){
-  _impListes = _cat.listes;
+  _impListes = _cat.listes; _impKind = 'postes';
   const i = _cat.listes.findIndex(x=>x.id===lid);
   await openImportListe(i);
 }
 Object.assign(window,{renderCatalogue,catOpen,catToggle,catFilter,catAdd,catImportChapitre});
 
-Object.assign(window,{impTxt,impTxtEnd,importPostesListe,openImportListe,impToggleOpen,impCheck,impCheckGroup,impAll,impFilter,impMetre,impEdit,impRename,closeImport,doImport});
+Object.assign(window,{importMatListe,impUnite,impTxt,impTxtEnd,importPostesListe,openImportListe,impToggleOpen,impCheck,impCheckGroup,impAll,impFilter,impMetre,impEdit,impRename,closeImport,doImport});
 
 
 window.switchTab         = switchTab;
