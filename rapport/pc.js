@@ -16,7 +16,7 @@
   var built = false, descMark = null, viewing = null;
   var archive = {};          // cid → rapports archivés dans le module Chantiers
   var lastFetch = {};        // cid → horodatage du dernier chargement Firestore
-  var liveTimer = null, daysTimer = null;
+  var liveTimer = null, daysTimer = null, dvxKey = '';
 
   function $(id) { return document.getElementById(id); }
   function on() { return root.classList.contains('dk'); }
@@ -51,9 +51,12 @@
     card.parentNode.insertBefore(descMark, card);
     card.classList.add('dk-desc-card');
     $('dk-desc-slot').appendChild(card);
+    var dv = document.createElement('div');
+    dv.id = 'dk-dvx';
+    var s3 = $('sec-3'); s3.insertBefore(dv, s3.firstChild);
     built = true;
-    viewing = null;
-    renderDays(); renderDoc(); fetchArchive(false);
+    viewing = null; dvxKey = '';
+    renderDays(); renderDoc(); fetchArchive(false); renderDvxPanel(true);
     if (typeof autoGrowTravaux === 'function') autoGrowTravaux();
   }
 
@@ -64,6 +67,7 @@
     card.classList.remove('dk-desc-card');
     wrap.parentNode.insertBefore(ms, wrap);
     wrap.remove();
+    var dv = $('dk-dvx'); if (dv) dv.remove();
     built = false; viewing = null;
     if (typeof autoGrowTravaux === 'function') autoGrowTravaux();
   }
@@ -246,6 +250,56 @@
     }
   }
 
+  /* ── Onglet Travaux : positions du devis ouvertes en permanence ──
+     Même fonctionnement que la fenêtre « Depuis le devis » du téléphone
+     (mêmes fonctions dvxTap / dvxPick / addDvx…), mais affichée dans la page. */
+  function renderDvxPanel(force) {
+    var el = $('dk-dvx'); if (!built || !el) return;
+    var cid = typeof dvxChantierId === 'function' ? dvxChantierId() : null;
+    var d = cid && window.RDevis ? RDevis.get(cid) : null;
+    var pos = d ? RDevis.travaux(d) : [];
+    var deja = (typeof devisLignes !== 'undefined' ? devisLignes : []).map(function (l) { return l.id; });
+    var key = (cid || '') + '|' + pos.length + '|' + deja.join(',');
+    if (!force && key === dvxKey) return;
+    // Ne pas effacer une sélection en cours
+    if (!force && document.querySelector('#dk-dvx .dvx-list') && Object.keys(window.dvxSel || {}).length) return;
+    dvxKey = key;
+    if (!pos.length) {
+      el.className = 'dk-dvx-empty';
+      el.innerHTML = cid ? '📄 Aucun devis lu pour ce chantier (à importer depuis la fiche du chantier).' : '📄 Choisis un chantier pour voir les positions de son devis.';
+      return;
+    }
+    try { dvxSel = {}; } catch (e) {}
+    if (!window._dvxMemSync && RDevis.syncMemoire) { window._dvxMemSync = 1; RDevis.syncMemoire(); }
+    var q = ($('dvx-q') || {}).value || '';
+    el.className = 'dvx-sh dk-dvx';
+    el.innerHTML = '<div class="dvx-hd"><h3>📄 Positions du devis</h3><span class="dk-dvx-src">' + pos.length + ' positions' + (d.src ? ' · ' + esc(d.src) : '') + '</span></div>' +
+      '<input class="dvx-q" id="dvx-q" type="search" placeholder="Rechercher (ex. carrelage, container…)" oninput="dvxFilter()" value="' + esc(q) + '">' +
+      '<div class="dvx-list" id="dk-dvx-list"></div>' +
+      '<div class="dvx-ft"><button class="dvx-go" id="dvx-go" disabled onclick="addDvx()">Choisis une ou plusieurs positions</button></div>';
+    var set = {}; deja.forEach(function (i) { set[i] = 1; });
+    var h = '', last = null;
+    pos.forEach(function (p) {
+      if (p.chT !== last) { last = p.chT; h += '<div class="dvx-ch" data-ch>' + esc(p.chT) + '</div>'; }
+      var dq = p.q != null ? RDevis.fmtQ(p.q) + ' ' + esc(p.u || '') : esc(p.u || '');
+      h += '<div class="dvx-it" data-id="' + esc(p.id) + '" data-s="' + esc((p.id + ' ' + p.t).toLowerCase()) + '" onclick="dvxTap(this)" title="Double-clic : ajouter directement">' +
+        '<div class="dvx-top"><span>' + esc(p.t) + (set[p.id] ? ' <b style="color:var(--teal)">✓</b>' : '') + '</span><span class="dvx-dq">' + (dq ? 'devis ' + dq : '') + '</span></div>' +
+        '<div class="dvx-tk" onclick="event.stopPropagation()"></div>' +
+        '<div class="dvx-qty" onclick="event.stopPropagation()">Fait aujourd\'hui <input type="text" inputmode="decimal" placeholder="—" oninput="dvxQty(this)"> ' + esc(p.u || '') + '</div></div>';
+    });
+    // dvxFilter / dvxTaches cherchent #dvx-list : on lui donne cet id
+    var list = $('dk-dvx-list'); list.id = 'dvx-list'; list.innerHTML = h;
+    if (q) dvxFilter();
+  }
+  // Double-clic sur une position = ajout direct avec la tâche proposée
+  function onDvxDbl(e) {
+    var it = e.target.closest && e.target.closest('#dk-dvx .dvx-it'); if (!it) return;
+    if (e.target.closest('.dvx-tk, .dvx-qty')) return;
+    var id = it.dataset.id;
+    if (!(window.dvxSel || {})[id]) dvxTap(it);
+    addDvx();
+  }
+
   /* ── Mises à jour automatiques ─────────────────────────────── */
   function queueLive() {
     if (!built || viewing) return;
@@ -283,8 +337,18 @@
     document.addEventListener('change', function (e) { if (e.target && (e.target.id === 'rj-chantier' || e.target.id === 'rj-date')) queueDays(); }, true);
 
     wrap('renderHistoriqueInline', function () { if (built) { renderDays(); renderDoc(); } });
-    wrap('resetRapport', function () { if (built) { viewing = null; renderDays(); renderDoc(); } });
+    wrap('resetRapport', function () { if (built) { viewing = null; renderDays(); renderDoc(); renderDvxPanel(true); } });
     wrap('updateHeader', queueDays);
+    wrap('renderDvBar', function () { renderDvxPanel(false); });
+    wrap('addDvx', function () { renderDvxPanel(true); });
+    wrap('delDvx', function () { renderDvxPanel(true); });
+    document.addEventListener('dblclick', function (e) { if (built) onDvxDbl(e); });
+    // Sur PC, « Depuis le devis » mène au panneau de l'onglet Travaux
+    var od = window.openDvx;
+    if (typeof od === 'function') window.openDvx = function () {
+      if (!built) return od.apply(this, arguments);
+      goSection(3); renderDvxPanel(true); var q = $('dvx-q'); if (q) q.focus();
+    };
 
     // Les rapports archivés arrivent après la connexion
     if (typeof _auth !== 'undefined') _auth.onAuthStateChanged(function (u) { if (u && built) { renderDays(); renderDoc(); fetchArchive(true); } });

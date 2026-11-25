@@ -295,6 +295,22 @@ html.dk .dkr-act > button[data-a] { flex: 1; min-width: 110px; border: 1.5px sol
 html.dk .dkr-act > button[data-a]:hover { border-color: #1B3A6B; }
 html.dk .dkr-act > button[data-a="edit"] { background: #1A7F72; border-color: #1A7F72; color: #fff; }
 
+/* Onglet Travaux : positions du devis ouvertes en permanence */
+html.dk #dk-dvx.dk-dvx {
+  height: calc(100dvh - 160px); min-height: 420px; margin-bottom: 14px; border-radius: 12px;
+  background: #fff; box-shadow: 0 1px 4px rgba(27,58,107,.1); overflow: hidden; max-height: none;
+}
+html.dk #dk-dvx .dvx-hd { padding: 12px 14px 8px; }
+html.dk #dk-dvx .dk-dvx-src { font-size: 11.5px; color: #64748b; font-weight: 600; }
+html.dk #dk-dvx .dvx-list { background: #F7F9FC; padding-top: 4px; border-top: 1px solid #EAECF4; }
+html.dk #dk-dvx .dvx-it { padding: 8px 11px; margin-bottom: 4px; }
+html.dk #dk-dvx .dvx-it:hover:not(.on) { border-color: #1B3A6B; }
+html.dk #dk-dvx .dvx-t { padding: 8px 11px; font-size: 13px; }
+html.dk #dk-dvx .dvx-go { padding: 12px; }
+html.dk .dk-dvx-empty { background: #fff; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 16px; margin-bottom: 14px; font-size: 13px; color: #64748b; }
+/* Le raccourci du menu « Ajouter au rapport » fait doublon avec le panneau */
+html.dk #dvx-menu-row { display: none !important; }
+
 /* Écran moins large : colonne des jours réduite aux dates */
 @media (max-width: 1480px) {
   html.dk #dk-rap { --dkd: 66px; --dkr: clamp(330px, 34vw, 440px); }
