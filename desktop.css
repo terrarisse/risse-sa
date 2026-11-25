@@ -223,6 +223,86 @@ html.dk .edit-page .scroll-area,
 html.dk .histo-scroll { padding: 24px max(28px, calc((100% - 1000px) / 2)) 48px !important; }
 html.dk .step-bar { display: none; }  /* redondant avec les onglets visibles en haut */
 
+/* Rapport façon Sorba : jours | saisie | description + aperçu (rapport/pc.js) */
+html.dk #dk-rap {
+  --dkd: 210px; --dkr: clamp(360px, 32vw, 520px);
+  flex: 1; min-height: 0; display: grid; grid-template-columns: var(--dkd) minmax(0, 1fr) var(--dkr);
+}
+html.dk #dk-mid { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+html.dk #dk-mid > #main-scroll { flex: 1; min-height: 0; padding: 20px 24px 48px !important; }
+
+/* Colonne des jours */
+html.dk #dk-days { background: #fff; border-right: 1px solid #E0E4EF; display: flex; flex-direction: column; min-height: 0; }
+html.dk .dkd-hd { padding: 14px 14px 10px; border-bottom: 1px solid #EAECF4; }
+html.dk .dkd-hd b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: #64748b; }
+html.dk .dkd-hd span { display: block; font-size: 13.5px; font-weight: 700; color: #1B3A6B; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html.dk #dkd-list { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 3px; }
+html.dk .dkd-item {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 1.5px solid transparent;
+  background: none; border-radius: 9px; padding: 7px 8px; font-family: inherit; color: #1a2340;
+}
+html.dk .dkd-item:hover { background: #F4F6FB; }
+html.dk .dkd-item.on { background: #EAF0FA; border-color: #1B3A6B; }
+html.dk .dkd-item.draft { margin-bottom: 6px; background: #FFF8E6; }
+html.dk .dkd-item.draft.on { border-color: #F0A500; background: #FFF3D6; }
+html.dk .dkd-date {
+  width: 42px; flex-shrink: 0; text-align: center; background: #1B3A6B; color: #fff; border-radius: 7px; padding: 4px 0 3px; line-height: 1;
+}
+html.dk .dkd-item.trx .dkd-date { background: #E2622C; }
+html.dk .dkd-item.draft .dkd-date { background: #F0A500; color: #1B3A6B; }
+html.dk .dkd-date b { display: block; font-size: 16px; }
+html.dk .dkd-date small { display: block; font-size: 9.5px; text-transform: uppercase; margin-top: 2px; opacity: .85; }
+html.dk .dkd-meta { min-width: 0; flex: 1; }
+html.dk .dkd-meta b { display: block; font-size: 12.5px; font-weight: 700; text-transform: capitalize; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html.dk .dkd-meta small { display: block; font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+html.dk .dkd-empty { font-size: 12px; color: #94a3b8; padding: 10px 6px; line-height: 1.45; }
+
+/* Colonne de droite : description toujours visible + rapport mis en page */
+html.dk #dk-right { background: #E9EDF4; border-left: 1px solid #E0E4EF; display: flex; flex-direction: column; min-height: 0; padding: 14px; gap: 12px; }
+html.dk #dk-desc-slot .card { margin: 0; flex-shrink: 0; }
+html.dk #dk-desc-slot #tx-travaux { max-height: 30vh !important; min-height: 120px; overflow-y: auto !important; }
+html.dk #dk-desc-slot .pst-sugg { max-height: 26vh; overflow-y: auto; }
+html.dk #dk-desc-slot #pst-fourn { max-height: 22vh; overflow-y: auto; }
+html.dk #dk-doc-box { flex: 1; min-height: 0; display: flex; flex-direction: column; background: #fff; border-radius: 12px; box-shadow: 0 1px 4px rgba(27,58,107,.1); overflow: hidden; }
+html.dk #dk-doc-bar { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: #1B3A6B; color: #fff; flex-shrink: 0; }
+html.dk #dk-doc-bar.past { background: #4A5878; }
+html.dk #dk-doc-bar > span { flex: 1; min-width: 0; }
+html.dk #dk-doc-bar b { display: block; font-size: 13px; text-transform: none; }
+html.dk #dk-doc-bar small { display: block; font-size: 10.5px; opacity: .65; }
+html.dk .dkb-ok { background: #1A7F72; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-family: inherit; font-weight: 700; font-size: 12.5px; }
+html.dk .dkb-ok:hover { filter: brightness(1.1); }
+html.dk .dkb-x { background: rgba(255,255,255,.15); color: #fff; border: none; border-radius: 8px; width: 30px; height: 30px; font-size: 14px; }
+html.dk .dkb-x:hover { background: rgba(255,255,255,.28); }
+html.dk #dk-doc-scroll { flex: 1; overflow-y: auto; }
+html.dk #dk-doc { padding: 18px 20px 22px; font-size: 13px; color: #1a2340; }
+html.dk .dkr-hd { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 2px solid #1B3A6B; margin-bottom: 4px; }
+html.dk .dkr-hd b { display: block; font-size: 15px; color: #1B3A6B; text-transform: uppercase; letter-spacing: .3px; }
+html.dk .dkr-hd small { font-size: 11px; color: #64748b; }
+html.dk .dkr-hd-r { text-align: right; font-size: 12px; color: #4A5878; }
+html.dk .dkr-hd-r b { font-size: 13px; text-transform: none; letter-spacing: 0; }
+html.dk .dkr-hd-r span { display: block; margin-top: 2px; }
+html.dk .dkr-s { padding: 10px 0 8px; border-bottom: 1px solid #EAECF4; }
+html.dk .dkr-s h5 { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #64748b; margin-bottom: 6px; }
+html.dk .dkr-t { width: 100%; border-collapse: collapse; }
+html.dk .dkr-t td { padding: 3px 0; vertical-align: top; }
+html.dk .dkr-t td:last-child { text-align: right; font-weight: 600; color: #1B3A6B; white-space: nowrap; padding-left: 12px; }
+html.dk .dkr-t tr.tot td { border-top: 1.5px solid #E0E4EF; padding-top: 6px; font-weight: 700; }
+html.dk .dkr-t tr.tot td:last-child { color: #1A7F72; }
+html.dk .dkr-txt { white-space: pre-wrap; line-height: 1.55; }
+html.dk .dkr-none { color: #94a3b8; font-style: italic; }
+html.dk .dkr-act { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; }
+html.dk .dkr-act > button[data-a] { flex: 1; min-width: 110px; border: 1.5px solid #E0E4EF; background: #F4F6FB; color: #1B3A6B; border-radius: 8px; padding: 9px 10px; font-family: inherit; font-weight: 700; font-size: 12.5px; }
+html.dk .dkr-act > button[data-a]:hover { border-color: #1B3A6B; }
+html.dk .dkr-act > button[data-a="edit"] { background: #1A7F72; border-color: #1A7F72; color: #fff; }
+
+/* Écran moins large : colonne des jours réduite aux dates */
+@media (max-width: 1480px) {
+  html.dk #dk-rap { --dkd: 66px; --dkr: clamp(330px, 34vw, 440px); }
+  html.dk .dkd-meta, html.dk .dkd-hd span, html.dk .dkd-empty { display: none; }
+  html.dk .dkd-hd { padding: 12px 6px 8px; text-align: center; }
+  html.dk .dkd-item { justify-content: center; padding: 5px 4px; }
+}
+
 /* ══════════════════════════════════════════════════════════════
    MACHINES
    ══════════════════════════════════════════════════════════════ */
