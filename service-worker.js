@@ -1,4 +1,4 @@
-const CACHE_NAME = 'risse-app-v46';
+const CACHE_NAME = 'risse-app-v47';
 const URLS = [
   './',
   './index.html',

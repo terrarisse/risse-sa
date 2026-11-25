@@ -56,7 +56,7 @@
     var s3 = $('sec-3'); s3.insertBefore(dv, s3.firstChild);
     built = true;
     viewing = null; dvxKey = '';
-    renderDays(); renderDoc(); fetchArchive(false); renderDvxPanel(true);
+    renderDays(); renderDoc(); fetchArchive(false); renderDvxPanel(true); markTab();
     if (typeof autoGrowTravaux === 'function') autoGrowTravaux();
   }
 
@@ -70,6 +70,12 @@
     var dv = $('dk-dvx'); if (dv) dv.remove();
     built = false; viewing = null;
     if (typeof autoGrowTravaux === 'function') autoGrowTravaux();
+  }
+
+  // Onglet Travaux : la colonne de droite (description + rapport) s'élargit jusqu'au panneau du devis
+  function markTab() {
+    var w = $('dk-rap'), s3 = $('sec-3');
+    if (w) w.classList.toggle('dk-tx', !!(s3 && s3.classList.contains('active')));
   }
 
   function sync() { if (on()) build(); else unbuild(); }
@@ -339,6 +345,7 @@
     wrap('renderHistoriqueInline', function () { if (built) { renderDays(); renderDoc(); } });
     wrap('resetRapport', function () { if (built) { viewing = null; renderDays(); renderDoc(); renderDvxPanel(true); } });
     wrap('updateHeader', queueDays);
+    wrap('goSection', markTab);
     wrap('renderDvBar', function () { renderDvxPanel(false); });
     wrap('addDvx', function () { renderDvxPanel(true); });
     wrap('delDvx', function () { renderDvxPanel(true); });
