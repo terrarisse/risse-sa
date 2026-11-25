@@ -297,7 +297,7 @@ html.dk .dkr-act > button[data-a="edit"] { background: #1A7F72; border-color: #1
 
 /* Onglet Travaux : positions du devis ouvertes en permanence */
 html.dk #dk-dvx.dk-dvx {
-  height: calc(100dvh - 160px); min-height: 420px; margin-bottom: 14px; border-radius: 12px;
+  height: min(62vh, 600px); min-height: 340px; max-width: 760px; margin-bottom: 14px; border-radius: 12px;
   background: #fff; box-shadow: 0 1px 4px rgba(27,58,107,.1); overflow: hidden; max-height: none;
 }
 html.dk #dk-dvx .dvx-hd { padding: 12px 14px 8px; }
@@ -307,6 +307,15 @@ html.dk #dk-dvx .dvx-it { padding: 8px 11px; margin-bottom: 4px; }
 html.dk #dk-dvx .dvx-it:hover:not(.on) { border-color: #1B3A6B; }
 html.dk #dk-dvx .dvx-t { padding: 8px 11px; font-size: 13px; }
 html.dk #dk-dvx .dvx-go { padding: 12px; }
+/* Sans quantité ni chiffres du devis, couleurs bleues de l'app */
+html.dk #dk-dvx .dvx-qty, html.dk #dk-dvx .dvx-dq { display: none !important; }
+html.dk #dk-dvx .dvx-it.on { border-color: #1B3A6B; background: #EEF3FB; }
+html.dk #dk-dvx .dvx-tl { color: #1B3A6B; }
+html.dk #dk-dvx .dvx-t.on { border-color: #1B3A6B; background: #EEF3FB; }
+html.dk #dk-dvx .dvx-t.on .dvx-r { border-color: #1B3A6B; }
+html.dk #dk-dvx .dvx-top b { color: #1B3A6B !important; }
+html.dk #dk-dvx .dvx-go { background: #1B3A6B; }
+html.dk #dk-dvx .dvx-go:not(:disabled):hover { background: #2a4f8a; }
 html.dk .dk-dvx-empty { background: #fff; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 16px; margin-bottom: 14px; font-size: 13px; color: #64748b; }
 /* Le raccourci du menu « Ajouter au rapport » fait doublon avec le panneau */
 html.dk #dvx-menu-row { display: none !important; }

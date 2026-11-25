@@ -6399,14 +6399,15 @@ function addDvx() {
     devisLignes.push({ id: p.id, t: tache, u: p.u || '', q: qOk ? q : null, l: line });
   });
   if (!add.length) return;
-  ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n' : '') + add.join('\n');
+  // Une ligne vide entre chaque tâche
+  ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + add.join('\n\n');
   autoGrowTravaux(); closeDvx(); renderDvBar(false); autoSaveDraft();
   showToast(`📄 ${add.length} ligne${add.length > 1 ? 's' : ''} ajoutée${add.length > 1 ? 's' : ''}`);
 }
 function delDvx(i) {
   const l = devisLignes[i]; if (!l) return;
   const ta = document.getElementById('tx-travaux');
-  if (l.l) { const lines = ta.value.split('\n'); const k = lines.indexOf(l.l); if (k >= 0) { lines.splice(k, 1); ta.value = lines.join('\n'); autoGrowTravaux(); } }
+  if (l.l) { const lines = ta.value.split('\n'); const k = lines.indexOf(l.l); if (k >= 0) { lines.splice(k, 1); ta.value = lines.join('\n').replace(/\n{3,}/g, '\n\n').replace(/^\n+/, ''); autoGrowTravaux(); } }
   devisLignes.splice(i, 1); renderDvBar(false); autoSaveDraft();
 }
 
